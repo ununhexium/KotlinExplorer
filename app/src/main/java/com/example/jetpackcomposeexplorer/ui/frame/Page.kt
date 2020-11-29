@@ -3,20 +3,24 @@ package  com.example.jetpackcomposeexplorer.ui.frame
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.model.homePage
+import com.example.jetpackcomposeexplorer.model.notFoundPage
 
 @Composable
-fun ExplorerTitle(modifier: Modifier = Modifier) {
-
+fun Page(pageId: String) {
+  when (pageId) {
+    homePage -> HomePage()
+    else -> PageNotFound(pageId)
+  }
 }
 
 @Preview
 @Composable
-fun PreviewExplorerTitle() {
+fun PreviewPage() {
   MaterialTheme {
     Surface {
-      ExplorerTitle()
+      Page(pageId = notFoundPage)
     }
   }
 }
