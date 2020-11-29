@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
 import com.example.jetpackcomposeexplorer.model.homePage
+import com.example.jetpackcomposeexplorer.model.tutorialHomePage
+import com.example.jetpackcomposeexplorer.model.tutorialIntroductionPage
 
 @Composable
 fun ExploreDrawer(
@@ -31,7 +33,7 @@ fun PreviewExploreDrawer() {
       Column {
         ExploreDrawer(
             onTutorialSelection = {
-              ServiceLocator.state.goToPage(homePage)
+              ServiceLocator.viewModel.goToPage(tutorialIntroductionPage)
             }
         )
       }

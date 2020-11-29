@@ -13,11 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.model.PageID
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
 import com.example.jetpackcomposeexplorer.model.homePage
 
 @Composable
-fun PageNotFound(notFound: String) {
+fun PageNotFound(notFound: PageID) {
   Column {
     val modifier = Modifier.align(Alignment.CenterHorizontally)
     Text(
@@ -39,7 +40,10 @@ fun PageNotFound(notFound: String) {
 
         )
     Spacer(modifier = Modifier.height(30.dp))
-    Button(onClick = { ServiceLocator.state.goToPage(homePage) }, modifier) {
+    Button(
+        onClick = { ServiceLocator.viewModel.goToPage(homePage) },
+        modifier
+    ) {
       Text("Go home or go drunk!")
     }
     Spacer(modifier = Modifier.height(30.dp))
@@ -56,7 +60,7 @@ fun PageNotFound(notFound: String) {
 fun PreviewPageNotFound() {
   MaterialTheme {
     Surface {
-      PageNotFound("somePageId")
+      PageNotFound(PageID("somePageId", PageID("parent")))
     }
   }
 }

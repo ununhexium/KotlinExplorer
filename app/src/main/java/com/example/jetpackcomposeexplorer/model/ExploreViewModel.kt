@@ -9,7 +9,9 @@ class ExploreViewModel : ViewModel() {
   var page by mutableStateOf(homePage)
     private set
 
-  fun goToPage(pageId: String) {
-    page = pageId
+  var name by mutableStateOf("World")
+
+  fun goToPage(pageId: PageID) {
+    this.page = pageId
   }
 }

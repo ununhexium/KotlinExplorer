@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -40,10 +41,8 @@ fun CodeBlock(sourceCode: String) {
             )
             Box(
                 Modifier.border(
-                    BorderStroke(
-                        2.dp,
-                        SolidColor(MaterialTheme.colors.primary)
-                    )
+                    BorderStroke(2.dp, MaterialTheme.colors.primary),
+                    RoundedCornerShape(20)
                 )
             ) {
               // placeholder to have the right size

@@ -7,7 +7,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
-import com.example.jetpackcomposeexplorer.model.tutorialPage
+import com.example.jetpackcomposeexplorer.model.tutorialPage1
 import com.example.jetpackcomposeexplorer.ui.JetpackComposeExplorerTheme
 
 
@@ -24,12 +24,12 @@ fun Body() {
             ExploreDrawer(
                 onTutorialSelection = {
                   state.drawerState.close()
-                  ServiceLocator.state.goToPage(tutorialPage)
+                  ServiceLocator.viewModel.goToPage(tutorialPage1)
                 }
             )
           }
       ) {
-        Page(ServiceLocator.state.page)
+        Page(ServiceLocator.viewModel.page)
       }
     }
   }
