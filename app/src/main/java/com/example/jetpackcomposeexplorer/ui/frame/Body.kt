@@ -1,42 +1,37 @@
 package com.example.jetpackcomposeexplorer.ui.frame
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.model.ServiceLocator
-import com.example.jetpackcomposeexplorer.model.tutorialPage1
-import com.example.jetpackcomposeexplorer.ui.JetpackComposeExplorerTheme
-
+import com.example.jetpackcomposeexplorer.ui.tutorial.TutorialHomePage
 
 @Composable
 fun Body() {
-  val state = rememberScaffoldState()
+    SimpleNav()
+}
 
-  JetpackComposeExplorerTheme {
-    Surface(color = MaterialTheme.colors.background) {
-      Scaffold(
-          scaffoldState = state,
-          topBar = { ExploreTopAppBar(state) },
-          drawerContent = {
-            ExploreDrawer(
-                onTutorialSelection = {
-                  state.drawerState.close()
-                  ServiceLocator.viewModel.goToPage(tutorialPage1)
-                }
-            )
-          }
-      ) {
-        Page(ServiceLocator.viewModel.page)
-      }
+/**
+ * The navController is created automatically by
+ * the NavHost composable and is only available
+ * inside the NavGraph using AmbientNavController.current
+ */
+@Composable
+fun SimpleNav() {
+    val nav = rememberNavController()
+    NavHost(nav, startDestination = "home") {
+        composable("home") {
+            HomePage(nav)
+        }
+        composable("tutorial") {
+            TutorialHomePage(nav)
+        }
     }
-  }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewBody() {
-  Body()
+    Body()
 }

@@ -5,46 +5,53 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
-import com.example.jetpackcomposeexplorer.model.tutorialCorrectNamePage
-import com.example.jetpackcomposeexplorer.model.tutorialIntroductionPage
-import com.example.jetpackcomposeexplorer.model.tutorialPage1
-import com.example.jetpackcomposeexplorer.model.tutorialPage2
-import com.example.jetpackcomposeexplorer.model.tutorialWrongNamePage
 
 @Composable
-fun TutorialHomePage(modifier: Modifier = Modifier) {
-  val (name, setName) = remember { mutableStateOf(ServiceLocator.viewModel.name) }
-  val (page, setPage) = remember { mutableStateOf(tutorialIntroductionPage) }
+fun TutorialHomePage(nav: NavHostController) {
+  val tutoNav = rememberNavController()
 
-  when (page) {
-    tutorialIntroductionPage -> TutorialIntroduction { setPage(tutorialPage1) }
-    tutorialPage1 -> TutorialPage1(
-        name,
-        setName,
-        {
-          with(ServiceLocator.viewModel) {
-            this.name = it
+  NavHost(tutoNav, startDestination = "introduction") {
+    composable("introduction") {
+      TutorialIntroduction { tutoNav.navigate("page1") }
+    }
+    composable("page1") {
+      val (name, setName) = remember { mutableStateOf(ServiceLocator.viewModel.name) }
+      TutorialPage1(
+          name,
+          setName,
+          {
+            ServiceLocator.viewModel.name = it
+            tutoNav.navigate("page2")
           }
-          setPage(tutorialPage2)
+      )
+    }
+    composable("page2") {
+      TutorialPage2(ServiceLocator.viewModel.name) {
+        if (it) {
+          tutoNav.navigate("correct")
+        } else {
+          tutoNav.navigate("wrong")
         }
-    )
-    tutorialPage2 -> TutorialPage2(name) {
-      if (it) {
-        setPage(tutorialCorrectNamePage)
-      } else {
-        setPage(tutorialWrongNamePage)
       }
     }
-    tutorialWrongNamePage -> TutorialWrongNamePage(
-        name = name,
-        userAnswer = {
-          setPage(tutorialCorrectNamePage)
-        }
-    )
-    tutorialCorrectNamePage -> TutorialCorrectNamePage(name)
+    composable("wrong") {
+      TutorialWrongNamePage(
+          name = ServiceLocator.viewModel.name,
+          userAnswer = { tutoNav.navigate("correct") }
+      )
+    }
+    composable("correct") {
+      TutorialCorrectNamePage(name = ServiceLocator.viewModel.name) {
+        nav.navigate("home")
+      }
+    }
   }
 }
 
@@ -53,7 +60,7 @@ fun TutorialHomePage(modifier: Modifier = Modifier) {
 fun PreviewTutorialHomePage() {
   MaterialTheme {
     Surface {
-      TutorialHomePage()
+      TutorialHomePage(rememberNavController())
     }
   }
 }

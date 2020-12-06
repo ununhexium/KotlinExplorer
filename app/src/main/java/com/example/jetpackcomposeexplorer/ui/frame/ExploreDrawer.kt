@@ -33,7 +33,7 @@ fun PreviewExploreDrawer() {
       Column {
         ExploreDrawer(
             onTutorialSelection = {
-              ServiceLocator.viewModel.goToPage(tutorialIntroductionPage)
+
             }
         )
       }

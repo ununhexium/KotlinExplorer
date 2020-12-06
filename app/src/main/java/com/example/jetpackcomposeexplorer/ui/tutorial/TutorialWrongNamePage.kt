@@ -37,7 +37,6 @@ fun TutorialWrongNamePage(name:String, userAnswer: () -> Unit) {
       CodeButton(
           text = name,
           onClick = userAnswer
-
       )
     }
   }

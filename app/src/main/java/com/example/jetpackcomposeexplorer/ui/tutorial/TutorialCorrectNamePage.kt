@@ -12,11 +12,11 @@ import com.example.jetpackcomposeexplorer.model.homePage
 import com.example.jetpackcomposeexplorer.ui.frame.BigVerticalSpacer
 
 @Composable
-fun TutorialCorrectNamePage(name: String) {
+fun TutorialCorrectNamePage(name: String, onClickHome: () -> Unit) {
   Column {
     Text("That's it $name")
     BigVerticalSpacer()
-    Button(onClick = { ServiceLocator.viewModel.goToPage(homePage) }) {
+    Button(onClick = onClickHome) {
       Text("Home")
     }
   }
@@ -27,7 +27,7 @@ fun TutorialCorrectNamePage(name: String) {
 fun PreviewTutorialCorrectNamePage() {
   MaterialTheme {
     Surface {
-      TutorialCorrectNamePage("Foo")
+      TutorialCorrectNamePage("Foo"){}
     }
   }
 }
