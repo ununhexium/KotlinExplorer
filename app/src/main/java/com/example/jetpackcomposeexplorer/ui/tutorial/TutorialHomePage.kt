@@ -17,37 +17,44 @@ import com.example.jetpackcomposeexplorer.model.ServiceLocator
 fun TutorialHomePage(nav: NavHostController) {
   val tutoNav = rememberNavController()
 
-  NavHost(tutoNav, startDestination = "introduction") {
-    composable("introduction") {
-      TutorialIntroduction { tutoNav.navigate("page1") }
+  // pages
+  val startDestination = "introduction"
+  val page1 = "page1"
+  val page2 = "page2"
+  val correct = "correct"
+  val wrong = "wrong"
+
+  NavHost(tutoNav, startDestination = startDestination) {
+    composable(startDestination) {
+      TutorialIntroduction { tutoNav.navigate(page1) }
     }
-    composable("page1") {
+    composable(page1) {
       val (name, setName) = remember { mutableStateOf(ServiceLocator.viewModel.name) }
       TutorialPage1(
           name,
           setName,
           {
             ServiceLocator.viewModel.name = it
-            tutoNav.navigate("page2")
+            tutoNav.navigate(page2)
           }
       )
     }
-    composable("page2") {
+    composable(page2) {
       TutorialPage2(ServiceLocator.viewModel.name) {
         if (it) {
-          tutoNav.navigate("correct")
+          tutoNav.navigate(correct)
         } else {
-          tutoNav.navigate("wrong")
+          tutoNav.navigate(wrong)
         }
       }
     }
-    composable("wrong") {
+    composable(wrong) {
       TutorialWrongNamePage(
           name = ServiceLocator.viewModel.name,
-          userAnswer = { tutoNav.navigate("correct") }
+          userAnswer = { tutoNav.navigate(correct) }
       )
     }
-    composable("correct") {
+    composable(correct) {
       TutorialCorrectNamePage(name = ServiceLocator.viewModel.name) {
         nav.navigate("home")
       }

@@ -8,14 +8,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.model.ServiceLocator
-import com.example.jetpackcomposeexplorer.model.homePage
-import com.example.jetpackcomposeexplorer.model.tutorialHomePage
-import com.example.jetpackcomposeexplorer.model.tutorialIntroductionPage
 
 @Composable
 fun ExploreDrawer(
-    modifier: Modifier = Modifier,
     onTutorialSelection: () -> Unit
 ) {
   Text(
