@@ -4,14 +4,15 @@ import com.example.jetpackcomposeexplorer.code.Highlights.Spot
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.ANNOTATION
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_DECLARATION
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_IDENTIFIER
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_MODIFIER
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_PARAMETER
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.COMMA
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.FUNCTION_DECLARATION
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.KEYWORD
+import com.example.jetpackcomposeexplorer.code.KotlinHighlight.MODIFIER
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.STRING
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.VAL
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.VAR
+import com.example.jetpackcomposeexplorer.code.KotlinHighlight.VISIBILITY_MODIFIER
 import com.google.common.truth.Truth.assertThat
 import net.lab0.grammar.kotlin.parseKotlin
 import org.antlr.v4.runtime.tree.ParseTreeWalker
@@ -71,7 +72,7 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(spots).containsAtLeast(
-        Spot(CLASS_MODIFIER, 0, 3),
+        Spot(MODIFIER, 0, 3),
         Spot(CLASS_DECLARATION, 5, 9),
         Spot(CLASS_IDENTIFIER, 11, 14),
         Spot(VAL, 16, 18),
@@ -93,7 +94,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(spots).containsAtLeast(
         Spot(ANNOTATION, 0, 1),
-        Spot(CLASS_MODIFIER, 3, 6),
+        Spot(MODIFIER, 3, 6),
         Spot(CLASS_DECLARATION, 8, 12),
         Spot(CLASS_IDENTIFIER, 14, 14),
     )
@@ -102,17 +103,19 @@ class KotlinSyntaxHighlighterVisitorTest {
   @Test
   fun `can extract functions`() {
     // given
-    val code = ""
+    val code = "private override fun f(){}"
 
     // when
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsAtLeast(
-        Spot(ANNOTATION, 0, 1),
-        Spot(CLASS_MODIFIER, 3, 6),
-        Spot(CLASS_DECLARATION, 8, 12),
-        Spot(CLASS_IDENTIFIER, 14, 14),
+    assertThat(spots.sortedBy { it.start }).containsAtLeastElementsIn(
+        listOf(
+            Spot(MODIFIER, 0, 6),
+            Spot(MODIFIER, 8, 15),
+            Spot(KEYWORD, 17, 19),
+            Spot(FUNCTION_DECLARATION, 21, 21),
+        ).sortedBy { it.start }
     )
   }
 }

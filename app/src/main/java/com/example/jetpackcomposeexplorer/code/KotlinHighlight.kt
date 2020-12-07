@@ -4,7 +4,7 @@ enum class KotlinHighlight {
     ANNOTATION,
     CLASS_DECLARATION,
     CLASS_IDENTIFIER,
-    CLASS_MODIFIER,
+    MODIFIER,
     CLASS_PARAMETER,
     COMMA,
     FUNCTION_DECLARATION,
@@ -13,5 +13,6 @@ enum class KotlinHighlight {
     STRING,
     VAL,
     VAR,
+    VISIBILITY_MODIFIER
     ;
 }

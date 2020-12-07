@@ -1,5 +1,6 @@
 package com.example.jetpackcomposeexplorer.ui.frame
 
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -42,12 +43,36 @@ fun PreviewKotlinCode() {
             |
             |@Annotated
             |data class Foo(val a:String, var b:Int)
+            |
+            |//34567890123456789012345678901234567890
+            |
+            |fun fizzBuzz(
+            |    range: IntRange,
+            |    config: Map<Int, String> =
+            |        mapOf(3 to "Fizz", 5 to "Buzz")
+            |): List<String> {
+            |  return range.map { i ->
+            |    var out = ""
+            |
+            |    config.keys.mapNotNull { k ->
+            |      if(i % k == 0) {
+            |        out += config[k]
+            |      }else null
+            |    }.joinToString("")
+            |
+            |    if(out == "") out = i.toString()
+            |
+            |    out
+            |  }
+            |}
           """.trimMargin()
 
-      Text(
-          extractHighlightsAndAnnotate(code, ijStyle),
-          fontFamily = FontFamily.Monospace
-      )
+      ScrollableColumn {
+        Text(
+            extractHighlightsAndAnnotate(code, ijStyle),
+            fontFamily = FontFamily.Monospace
+        )
+      }
     }
   }
 }
