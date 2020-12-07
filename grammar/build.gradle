@@ -1,0 +1,26 @@
+plugins {
+    id 'antlr'
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    antlr "org.antlr:antlr4:4.7"
+}
+
+
+generateGrammarSource {
+    arguments += [
+            "-visitor",
+            "-long-messages",
+            "-package", "net.lab0.grammar.kotlin",
+            "-lib", "src/main/antlr/net/lab0/grammar/kotlin"
+    ]
+}
+

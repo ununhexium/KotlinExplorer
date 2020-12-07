@@ -4,8 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.Row
@@ -13,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
@@ -37,11 +34,10 @@ import com.example.jetpackcomposeexplorer.R
 import com.example.jetpackcomposeexplorer.ui.frame.preview.PreviewTopBar
 
 @Composable
-fun Question(
+fun QuestionAnswer(
     question: @Composable () -> Unit,
-    vararg answers: @Composable () -> Unit = arrayOf() // TODO rm default, must be min 1 answer
+    answers: @Composable () -> Unit
 ) {
-
   Column(
       modifier = Modifier
           .fillMaxWidth()
@@ -74,7 +70,7 @@ fun Question(
             .fillMaxHeight()
             .border(BorderStroke(2.dp, Color.Green))
     ) {
-      Answers(answers = answers)
+      Slider(visibleIndex = 0f, children = answers)
     }
 
     Button(onClick = {}) {
@@ -89,7 +85,7 @@ fun PreviewQuestion() {
   MaterialTheme {
     Scaffold(
         bodyContent = {
-          Question(
+          QuestionAnswer(
               question = {
                 Row {
                   Image(
@@ -109,12 +105,12 @@ fun PreviewQuestion() {
                   )
                 }
               },
-              answers = arrayOf(
-                  { Text("Hello") },
-                  { Icon(Icons.Default.Check) },
-                  { Text("3") },
-                  { Icon(Icons.Default.ArrowDropDown) },
-              )
+              answers = {
+                Text("Hello")
+                Icon(Icons.Default.Check)
+                Text("3")
+                Icon(Icons.Default.ArrowDropDown)
+              },
           )
         },
         topBar = { PreviewTopBar() },

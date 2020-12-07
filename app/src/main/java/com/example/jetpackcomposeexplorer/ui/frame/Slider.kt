@@ -1,12 +1,14 @@
 package com.example.jetpackcomposeexplorer.ui.frame
 
 import androidx.compose.foundation.Image
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -17,6 +19,11 @@ import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.R
 import kotlin.math.floor
 
+/**
+ * @param visibleIndex The index of the visible index.
+ * Works similarly to the index in a list but accepts floats to
+ * show the transition from one item to the next.
+ */
 @Composable
 fun Slider(
     modifier: Modifier = Modifier,
