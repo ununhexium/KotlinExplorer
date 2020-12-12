@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.code.extractHighlightsAndAnnotate
@@ -16,8 +17,15 @@ import net.lab0.grammar.kotlin.Highlights
 import net.lab0.grammar.kotlin.KotlinHighlight
 
 @Composable
-fun KotlinCode(code: String, highlights: Highlights<KotlinHighlight>) {
-
+fun KotlinCode(code: AnnotatedString) {
+  ScrollableColumn {
+    val parts = code.text.split(placeholder)
+    
+    Text(
+        code,
+        fontFamily = FontFamily.Monospace
+    )
+  }
 }
 
 @Preview
@@ -35,7 +43,18 @@ fun PreviewKotlinCode() {
             |
             |interface Interface<I> where I:Interface<I> {
             |  val i: I
+            |  $placeholder
             |}
+            |
+            |class C(override val i:I): 
+            |    Interface<I> where I: Interface<I> {
+            |  fun foo() {
+            |    println("Hello ${'$'}i")
+            |    println("$placeholder")
+            |  }
+            |}
+            |
+            |$placeholder
             |
             |fun main() {
             |  println("Hello, World!")
@@ -45,6 +64,7 @@ fun PreviewKotlinCode() {
             |data class Foo(val a:String, var b:Int)
             |
             |//34567890123456789012345678901234567890
+            |//$placeholder
             |
             |fun fizzBuzz(
             |  range: IntRange,
@@ -54,6 +74,7 @@ fun PreviewKotlinCode() {
             |  return range.map { i ->
             |    var out = ""
             |
+            |    $placeholder
             |    config.keys.mapNotNull { k ->
             |      if(i % k == 0) {
             |        out += config[k]
@@ -67,12 +88,7 @@ fun PreviewKotlinCode() {
             |}
           """.trimMargin()
 
-      ScrollableColumn {
-        Text(
-            extractHighlightsAndAnnotate(code, ijStyle),
-            fontFamily = FontFamily.Monospace
-        )
-      }
+      KotlinCode(code = extractHighlightsAndAnnotate(code, ijStyle))
     }
   }
 }

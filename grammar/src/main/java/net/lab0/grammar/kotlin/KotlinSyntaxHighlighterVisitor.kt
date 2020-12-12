@@ -96,7 +96,7 @@ class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<Kotlin
 
       add(visitChildren(ctx))
     }
-  
+
   override fun visitTerminal(node: TerminalNode) =
     hl {
       when (node.symbol.type) {
