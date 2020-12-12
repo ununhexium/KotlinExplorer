@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.code
+package net.lab0.grammar.kotlin
 
 class Highlights<H> {
 

@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.code
+package net.lab0.grammar.kotlin
 
 enum class KotlinHighlight {
     ANNOTATION,
@@ -8,11 +8,10 @@ enum class KotlinHighlight {
     CLASS_PARAMETER,
     COMMA,
     COMMENT,
-    DECIMAL_INTEGER,
     FUNCTION_DECLARATION,
-    HEXADECIMAL_INTEGER,
     INSTANCE_PROPERTY,
     KEYWORD,
+    NUMBER,
     SIMPLE_IDENTIFIER,
     STRING,
     VISIBILITY_MODIFIER

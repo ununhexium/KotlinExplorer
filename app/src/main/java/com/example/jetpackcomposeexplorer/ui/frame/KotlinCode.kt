@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.code.Highlights
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight
+import net.lab0.grammar.kotlin.Highlights
+import net.lab0.grammar.kotlin.KotlinHighlight
 import com.example.jetpackcomposeexplorer.code.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.code.ijStyle
 

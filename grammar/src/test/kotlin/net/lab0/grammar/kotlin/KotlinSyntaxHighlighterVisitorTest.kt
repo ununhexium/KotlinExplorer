@@ -1,19 +1,14 @@
-package com.example.jetpackcomposeexplorer.code
+package net.lab0.grammar.kotlin
 
-import com.example.jetpackcomposeexplorer.code.Highlights.Spot
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.ANNOTATION
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_DECLARATION
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_IDENTIFIER
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.CLASS_PARAMETER
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.COMMA
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.COMMENT
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.DECIMAL_INTEGER
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.FUNCTION_DECLARATION
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.HEXADECIMAL_INTEGER
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.KEYWORD
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.MODIFIER
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.STRING
-import com.google.common.truth.Truth.assertThat
+import net.lab0.grammar.kotlin.Highlights.Spot
+import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
+import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
+import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
+import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
+import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
+import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
+import net.lab0.grammar.kotlin.KotlinHighlight.STRING
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Ignore
 import org.junit.Test
 
@@ -29,11 +24,9 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots.sortedBy { it.start }).containsExactlyElementsIn(
-      listOf(
+    assertThat(spots).containsExactly(
         Spot(KEYWORD, 0, 2),
-        Spot(DECIMAL_INTEGER, 8, 9),
-      ).sortedBy { it.start }
+        Spot(NUMBER, 8, 9),
     )
   }
 
@@ -46,11 +39,9 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots.sortedBy { it.start }).containsExactlyElementsIn(
-      listOf(
+    assertThat(spots).containsExactly(
         Spot(KEYWORD, 0, 2),
-        Spot(HEXADECIMAL_INTEGER, 8, 11),
-      ).sortedBy { it.start }
+        Spot(NUMBER, 8, 11),
     )
   }
 
@@ -64,9 +55,9 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(spots).containsExactly(
-      Spot(ANNOTATION, 0, 1),
-      Spot(MODIFIER, 3, 6),
-      Spot(KEYWORD, 8, 12),
+        Spot(ANNOTATION, 0, 1),
+        Spot(MODIFIER, 3, 6),
+        Spot(KEYWORD, 8, 12),
     )
   }
 
@@ -79,12 +70,10 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots.sortedBy { it.start }).containsExactlyElementsIn(
-      listOf(
+    assertThat(spots).containsExactly(
         Spot(MODIFIER, 0, 6),
         Spot(MODIFIER, 8, 15),
         Spot(KEYWORD, 17, 19),
-      ).sortedBy { it.start }
     )
   }
 
@@ -97,11 +86,9 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactlyElementsIn(
-      listOf(
+    assertThat(spots).containsExactly(
         Spot(KEYWORD, 0, 2),
         Spot(STRING, 8, 14),
-      )
     )
   }
 
@@ -115,11 +102,11 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(spots).containsExactly(
-      Spot(KEYWORD, 0,2),
-      Spot(DECIMAL_INTEGER, 14, 14),
-      Spot(STRING, 19, 24),
-      Spot(HEXADECIMAL_INTEGER, 27, 29),
-      Spot(STRING, 34, 39),
+        Spot(KEYWORD, 0, 2),
+        Spot(NUMBER, 14, 14),
+        Spot(STRING, 19, 24),
+        Spot(NUMBER, 27, 29),
+        Spot(STRING, 34, 39),
     )
   }
 
@@ -133,7 +120,7 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(spots).containsExactly(
-      Spot(KEYWORD, 0, 6)
+        Spot(KEYWORD, 0, 6)
     )
   }
 
@@ -147,12 +134,12 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(spots).containsExactly(
-      Spot(MODIFIER, 0, 3),
-      Spot(KEYWORD, 5, 9),
-      Spot(KEYWORD, 16, 18),
-      Spot(COMMA, 25, 25),
-      Spot(KEYWORD, 27, 29),
-    ).inOrder()
+        Spot(MODIFIER, 0, 3),
+        Spot(KEYWORD, 5, 9),
+        Spot(KEYWORD, 16, 18),
+        Spot(COMMA, 25, 25),
+        Spot(KEYWORD, 27, 29),
+    )
   }
 
   @Test
@@ -165,11 +152,11 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(spots).containsExactly(
-      Spot(MODIFIER, 0, 3),
-      Spot(KEYWORD, 5, 9),
-      Spot(MODIFIER, 16, 21),
-      Spot(MODIFIER, 23,30),
-      Spot(KEYWORD, 32,34),
+        Spot(MODIFIER, 0, 3),
+        Spot(KEYWORD, 5, 9),
+        Spot(MODIFIER, 16, 21),
+        Spot(MODIFIER, 23, 30),
+        Spot(KEYWORD, 32, 34),
     )
   }
 
@@ -183,10 +170,25 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactlyElementsIn(
-      listOf(
+    assertThat(spots).containsExactly(
         Spot(COMMENT, 0, 8),
-      )
+    )
+  }
+
+  @Test
+  fun `can highlight function declaration params and return body`() {
+    // given
+    val code = "fun fizzBuzz(i: Int = 0): Int { return 0 }"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(spots).containsExactly(
+        Spot(KEYWORD, 0, 2),
+        Spot(NUMBER, 22, 22),
+        Spot(KEYWORD, 32, 37),
+        Spot(NUMBER, 39, 39)
     )
   }
 
@@ -205,13 +207,29 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactlyElementsIn(
-      listOf(
+    assertThat(spots).containsExactly(
         Spot(KEYWORD, 0, 6),
         Spot(KEYWORD, 29, 31),
-        Spot(COMMA, 29, 31),
         Spot(STRING, 54, 68),
-      )
+    )
+  }
+
+  @Test
+  fun `can highlight if else true false null`() {
+    // given
+    val code = "val foo = if (true) false else null"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(spots).containsExactly(
+        Spot(KEYWORD, 0, 2),
+        Spot(KEYWORD, 10, 11),
+        Spot(KEYWORD, 14, 17),
+        Spot(KEYWORD, 20, 24),
+        Spot(KEYWORD, 26, 29),
+        Spot(KEYWORD, 31, 34),
     )
   }
 }

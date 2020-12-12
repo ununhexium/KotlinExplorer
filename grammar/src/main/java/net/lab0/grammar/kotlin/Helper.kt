@@ -4,6 +4,8 @@ import org.antlr.v4.runtime.BaseErrorListener
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.ConsoleErrorListener
+import org.antlr.v4.runtime.ParserRuleContext
+import org.antlr.v4.runtime.tree.TerminalNode
 
 
 fun parseKotlin(code: String): KotlinParser {
@@ -15,3 +17,26 @@ fun parseKotlin(code: String): KotlinParser {
     parser.removeErrorListener(ConsoleErrorListener.INSTANCE)
     return parser
 }
+
+
+fun extractSpots(code: String): List<Highlights.Spot<KotlinHighlight>> {
+    val parser = parseKotlin(code)
+
+    val kotlinListener = KotlinSyntaxHighlighterVisitor()
+    val highlights =kotlinListener.visit(parser.kotlinFile())
+
+    return highlights.spots.sortedBy { it.start }
+}
+
+
+val KotlinParser.IdentifierContext.range: IntRange
+    get() =
+        this.start.startIndex..this.stop.stopIndex
+
+val TerminalNode.range: IntRange
+    get() =
+        this.symbol.startIndex..this.symbol.stopIndex
+
+val ParserRuleContext.range: IntRange
+    get() =
+        this.start.startIndex..this.stop.stopIndex
