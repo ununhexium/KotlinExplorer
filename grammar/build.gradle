@@ -10,8 +10,13 @@ java {
 }
 
 dependencies {
+    implementation 'junit:junit:4.13.1'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     antlr "org.antlr:antlr4:4.7"
+
+    testImplementation 'org.assertj:assertj-core:3.18.1'
 }
 
 

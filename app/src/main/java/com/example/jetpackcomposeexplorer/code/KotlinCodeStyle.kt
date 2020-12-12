@@ -8,13 +8,12 @@ import com.example.jetpackcomposeexplorer.code.KotlinHighlight.MODIFIER
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.FUNCTION_DECLARATION
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.KEYWORD
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight.STRING
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.VAL
-import com.example.jetpackcomposeexplorer.code.KotlinHighlight.VAR
 
-val keywordStyle = SpanStyle(Color(0xffCC7832))
-val stringStyle = SpanStyle(Color(0xff87664F))
-val functionDeclarationStyle = SpanStyle(Color(0xffFFC66D))
 val annotationStyle = SpanStyle(Color(0xffBBB529))
+val functionDeclarationStyle = SpanStyle(Color(0xffFFC66D))
+val keywordStyle = SpanStyle(Color(0xffCC7832))
+val normalStyle = SpanStyle(color = Color(0xffA9B7C6))
+val stringStyle = SpanStyle(Color(0xff87664F))
 
 val ijStyle = { it: KotlinHighlight ->
   when (it) {
@@ -24,8 +23,6 @@ val ijStyle = { it: KotlinHighlight ->
     FUNCTION_DECLARATION -> functionDeclarationStyle
     KEYWORD -> keywordStyle
     STRING -> stringStyle
-    VAL -> keywordStyle
-    VAR -> keywordStyle
-    else -> SpanStyle(color = Color(0xffA9B7C6))
+    else -> normalStyle
   }
 }

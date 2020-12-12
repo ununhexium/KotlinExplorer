@@ -1,20 +1,24 @@
 package com.example.jetpackcomposeexplorer.code
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import net.lab0.grammar.kotlin.KotlinParser
 import net.lab0.grammar.kotlin.parseKotlin
 import org.antlr.v4.runtime.ParserRuleContext
-import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.antlr.v4.runtime.tree.TerminalNode
 
-fun extractHighlightsAndAnnotate(kotlinCode: String, styler: (KotlinHighlight) -> SpanStyle ): AnnotatedString {
-  val parser = parseKotlin(kotlinCode)
-  val walker = ParseTreeWalker()
+
+fun extractSpots(code: String): List<Highlights.Spot<KotlinHighlight>> {
+  val parser = parseKotlin(code)
+
   val kotlinListener = KotlinSyntaxHighlighterVisitor()
-  walker.walk(kotlinListener, parser.kotlinFile())
-  val spots = kotlinListener.highlights.spots
+  val highlights =kotlinListener.visit(parser.kotlinFile())
+
+  return highlights.spots.sortedBy { it.start }
+}
+
+fun extractHighlightsAndAnnotate(kotlinCode: String, styler: (KotlinHighlight) -> SpanStyle ): AnnotatedString {
+  val spots = extractSpots(kotlinCode)
 
   val builder = AnnotatedString.Builder(kotlinCode)
 

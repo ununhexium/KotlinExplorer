@@ -6,18 +6,22 @@ class Highlights<H> {
 
   val spots = mutableListOf<Spot<H>>()
 
-  fun addHighlight(type: H, start: Int, end: Int) {
+  fun add(type: H, start: Int, end: Int) {
     spots.add(Spot(type, start, end))
   }
 
-  fun addHighlight(type: H, range: IntRange) {
-    spots.add(Spot(type, range.first, range.last))
+  fun add(type: H, range: IntRange) {
+    add(type, range.first, range.last)
+  }
+
+  fun add(highlights: Highlights<H>) {
+    this.spots.addAll(highlights.spots)
   }
 
   fun nextHighlightAtOrAfter(index: Int): Spot<H>? {
     return spots
-        .sortedBy { it.start }
-        .dropWhile { it.start < index }
-        .firstOrNull()
+      .sortedBy { it.start }
+      .dropWhile { it.start < index }
+      .firstOrNull()
   }
 }

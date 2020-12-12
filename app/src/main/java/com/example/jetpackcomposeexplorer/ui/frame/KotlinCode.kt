@@ -8,16 +8,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.code.Highlights
 import com.example.jetpackcomposeexplorer.code.KotlinHighlight
 import com.example.jetpackcomposeexplorer.code.extractHighlightsAndAnnotate
-import com.example.jetpackcomposeexplorer.code.functionDeclarationStyle
 import com.example.jetpackcomposeexplorer.code.ijStyle
-import com.example.jetpackcomposeexplorer.code.keywordStyle
-import com.example.jetpackcomposeexplorer.code.stringStyle
 
 @Composable
 fun KotlinCode(code: String, highlights: Highlights<KotlinHighlight>) {
