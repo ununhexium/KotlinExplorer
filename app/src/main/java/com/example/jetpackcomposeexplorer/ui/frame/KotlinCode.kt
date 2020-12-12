@@ -34,7 +34,7 @@ fun PreviewKotlinCode() {
             |package org.kotlinlang.play
             |
             |fun main() {
-            |    println("Hello, World!")
+            |  println("Hello, World!")
             |}
             |
             |@Annotated
@@ -43,9 +43,9 @@ fun PreviewKotlinCode() {
             |//34567890123456789012345678901234567890
             |
             |fun fizzBuzz(
-            |    range: IntRange,
-            |    config: Map<Int, String> =
-            |        mapOf(3 to "Fizz", 5 to "Buzz")
+            |  range: IntRange,
+            |  config: Map<Int, String> =
+            |      mapOf(3 to "Fizz", 5 to "Buzz")
             |): List<String> {
             |  return range.map { i ->
             |    var out = ""

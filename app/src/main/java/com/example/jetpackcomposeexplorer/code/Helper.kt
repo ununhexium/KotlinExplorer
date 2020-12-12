@@ -3,11 +3,7 @@ package com.example.jetpackcomposeexplorer.code
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import net.lab0.grammar.kotlin.KotlinHighlight
-import net.lab0.grammar.kotlin.KotlinParser
 import net.lab0.grammar.kotlin.extractSpots
-import net.lab0.grammar.kotlin.parseKotlin
-import org.antlr.v4.runtime.ParserRuleContext
-import org.antlr.v4.runtime.tree.TerminalNode
 
 fun extractHighlightsAndAnnotate(kotlinCode: String, styler: (KotlinHighlight) -> SpanStyle ): AnnotatedString {
   val spots = extractSpots(kotlinCode)

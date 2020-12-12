@@ -2,13 +2,15 @@ package net.lab0.grammar.kotlin
 
 import net.lab0.grammar.kotlin.Highlights.Spot
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
+import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
+import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION_DECLARATION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
-import org.assertj.core.api.Assertions.assertThat
+import net.lab0.grammar.kotlin.SpotsAssert.Companion.assertThat
 import org.junit.Ignore
 import org.junit.Test
 
@@ -24,7 +26,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 9),
     )
@@ -39,7 +41,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 11),
     )
@@ -54,7 +56,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(ANNOTATION, 0, 1),
         Spot(MODIFIER, 3, 6),
         Spot(KEYWORD, 8, 12),
@@ -70,10 +72,11 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(MODIFIER, 0, 6),
         Spot(MODIFIER, 8, 15),
         Spot(KEYWORD, 17, 19),
+        Spot(FUNCTION_DECLARATION, 21, 21),
     )
   }
 
@@ -86,7 +89,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(STRING, 8, 14),
     )
@@ -101,7 +104,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 14, 14),
         Spot(STRING, 19, 24),
@@ -119,7 +122,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 6)
     )
   }
@@ -133,7 +136,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(MODIFIER, 0, 3),
         Spot(KEYWORD, 5, 9),
         Spot(KEYWORD, 16, 18),
@@ -151,7 +154,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(MODIFIER, 0, 3),
         Spot(KEYWORD, 5, 9),
         Spot(MODIFIER, 16, 21),
@@ -170,7 +173,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(COMMENT, 0, 8),
     )
   }
@@ -184,7 +187,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 22, 22),
         Spot(KEYWORD, 32, 37),
@@ -207,7 +210,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 6),
         Spot(KEYWORD, 29, 31),
         Spot(STRING, 54, 68),
@@ -223,13 +226,67 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(spots).containsExactly(
+    assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(KEYWORD, 10, 11),
         Spot(KEYWORD, 14, 17),
         Spot(KEYWORD, 20, 24),
         Spot(KEYWORD, 26, 29),
         Spot(KEYWORD, 31, 34),
+    )
+  }
+
+  @Test
+  fun `can highlight parenthesis and square brackets`() {
+    // given
+    val code = "val x = (a[0])"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 0, 2),
+        Spot(BRACKET, 8, 8),
+        Spot(BRACKET, 10, 10),
+        Spot(NUMBER, 11, 11),
+        Spot(BRACKET, 12, 12),
+        Spot(BRACKET, 13, 13),
+    )
+  }
+
+  @Test
+  fun `can highlight parenthesis in if`() {
+    // given
+    val code = "val foo = (true)"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(BRACKET, 10, 10),
+        Spot(BRACKET, 15, 15),
+    )
+  }
+
+  @Test
+  fun `can highlight angle and curly brackets`() {
+    // given
+    val code = "fun <X> foo(){ return 0 }"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 0, 2),
+        Spot(BRACKET, 4, 4),
+        Spot(BRACKET, 6, 6),
+        Spot(BRACKET, 11, 11),
+        Spot(BRACKET, 12, 12),
+        Spot(BRACKET, 13, 13),
+        Spot(BRACKET, 24, 24),
     )
   }
 }

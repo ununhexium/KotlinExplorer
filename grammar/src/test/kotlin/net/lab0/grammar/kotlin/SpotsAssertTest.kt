@@ -1,0 +1,63 @@
+package net.lab0.grammar.kotlin
+
+import net.lab0.grammar.kotlin.Highlights.Spot
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Assert.assertThrows
+import org.junit.Test
+
+class SpotsAssertTest {
+  @Test
+  fun `can show spots`() {
+    // given
+    val asserter = SpotsAssert<String>(
+        "abcdefghijklmnopqrstuvwxyzABCD",
+        listOf()
+    )
+
+    // when
+    val error = assertThrows(AssertionError::class.java) {
+      asserter.hasSpots(
+          Spot("one", 1, 1),
+          Spot("two", 3, 4),
+          Spot("four", 6, 11),
+          Spot("ten", 13, 23),
+      )
+    }
+
+    // then
+    assertThat(error).hasMessage("""
+      |Missing spots:
+      |  Spot(highlight=one, start=1, end=1)
+      |  Spot(highlight=two, start=3, end=4)
+      |  Spot(highlight=four, start=6, end=11)
+      |  Spot(highlight=ten, start=13, end=23)
+      |012345678901234567890123456789
+      |abcdefghijklmnopqrstuvwxyzABCD
+      | x <> <four> <ten------>
+    """.trimMargin())
+  }
+
+  @Test
+  fun `dont write after the end of the code`() {
+    val asserter = SpotsAssert<String>(
+        "",
+        listOf()
+    )
+
+    // when
+    val error = assertThrows(AssertionError::class.java) {
+      asserter.hasSpots(
+          Spot("one", 1, 1),
+      )
+    }
+
+    // then
+    assertThat(error).hasMessage("""
+      |Missing spots:
+      |  Spot(highlight=one, start=1, end=1)
+      |
+      |
+      |
+    """.trimMargin())
+  }
+}

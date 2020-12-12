@@ -1,8 +1,10 @@
 package net.lab0.grammar.kotlin
 
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
+import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
+import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION_DECLARATION
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
@@ -61,7 +63,7 @@ class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<Kotlin
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
     hl {
       add(KEYWORD, ctx.FUN().range)
-      // TODO: visit children
+      add(FUNCTION_DECLARATION, ctx.identifier().range)
 
       add(visitChildren(ctx))
     }
@@ -106,11 +108,14 @@ class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<Kotlin
         KotlinParser.ELSE -> add(KEYWORD, node.range)
         KotlinParser.BooleanLiteral -> add(KEYWORD, node.range)
         KotlinParser.NullLiteral -> add(KEYWORD, node.range)
+        KotlinParser.LPAREN -> add(BRACKET, node.range)
+        KotlinParser.RPAREN -> add(BRACKET, node.range)
+        KotlinParser.LSQUARE -> add(BRACKET, node.range)
+        KotlinParser.RSQUARE -> add(BRACKET, node.range)
+        KotlinParser.LANGLE -> add(BRACKET, node.range)
+        KotlinParser.RANGLE -> add(BRACKET, node.range)
+        KotlinParser.LCURL -> add(BRACKET, node.range)
+        KotlinParser.RCURL -> add(BRACKET, node.range)
       }
     }
-
-  override fun visitIfExpression(ctx: KotlinParser.IfExpressionContext) =
-      hl {
-        add(visitChildren(ctx))
-      }
 }

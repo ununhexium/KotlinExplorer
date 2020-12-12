@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
+import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.CLASS_DECLARATION
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION_DECLARATION
@@ -21,12 +22,13 @@ val stringStyle = SpanStyle(Color(0xff87664F))
 val ijStyle = { it: KotlinHighlight ->
   when (it) {
     ANNOTATION -> annotationStyle
+    BRACKET -> functionDeclarationStyle
     CLASS_DECLARATION -> keywordStyle
-    MODIFIER -> keywordStyle
     FUNCTION_DECLARATION -> functionDeclarationStyle
     KEYWORD -> keywordStyle
-    STRING -> stringStyle
+    MODIFIER -> keywordStyle
     NUMBER -> numberStyle
+    STRING -> stringStyle
     else -> normalStyle
   }
 }
