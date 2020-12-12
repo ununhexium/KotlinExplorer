@@ -43,13 +43,16 @@ public class SpotsAssert<H>(
               missingMarks[i] = '-'
             }
           }
-          if(s.start < code.length) missingMarks[s.start] = '<'
-          if(s.end < code.length) missingMarks[s.end] = '>'
+          if (s.start < code.length) missingMarks[s.start] = '<'
+          if (s.end < code.length) missingMarks[s.end] = '>'
         }
       }
       failWithMessage(
           "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
-              (code.indices).joinToString("") { (it % 10).toString() } + "\n" +
+              (code.indices).joinToString("") {
+                val i = it % 10
+                if (i == 0) " " else i.toString()
+              } + "\n" +
               code + "\n" +
               missingMarks.joinToString("").trimEnd()
       )

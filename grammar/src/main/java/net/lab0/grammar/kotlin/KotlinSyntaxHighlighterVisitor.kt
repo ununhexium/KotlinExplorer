@@ -96,18 +96,21 @@ class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<Kotlin
 
       add(visitChildren(ctx))
     }
-
+  
   override fun visitTerminal(node: TerminalNode) =
     hl {
       when (node.symbol.type) {
+        KotlinParser.BooleanLiteral -> add(KEYWORD, node.range)
+        KotlinParser.ELSE -> add(KEYWORD, node.range)
         KotlinParser.HexLiteral -> add(NUMBER, node.range)
+        KotlinParser.IF -> add(KEYWORD, node.range)
         KotlinParser.IntegerLiteral -> add(NUMBER, node.range)
         KotlinParser.LineComment -> add(COMMENT, node.range)
-        KotlinParser.RETURN -> add(KEYWORD, node.range)
-        KotlinParser.IF -> add(KEYWORD, node.range)
-        KotlinParser.ELSE -> add(KEYWORD, node.range)
-        KotlinParser.BooleanLiteral -> add(KEYWORD, node.range)
         KotlinParser.NullLiteral -> add(KEYWORD, node.range)
+        KotlinParser.RETURN -> add(KEYWORD, node.range)
+        KotlinParser.WHERE -> add(KEYWORD, node.range)
+
+        // brackets, parent, ...
         KotlinParser.LPAREN -> add(BRACKET, node.range)
         KotlinParser.RPAREN -> add(BRACKET, node.range)
         KotlinParser.LSQUARE -> add(BRACKET, node.range)

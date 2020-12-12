@@ -289,4 +289,18 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(BRACKET, 24, 24),
     )
   }
+
+  @Test
+  fun `highlight where`() {
+    // given
+    val code = "interface Interface<I> where I:Interface<I>"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 23, 27),
+    )
+  }
 }

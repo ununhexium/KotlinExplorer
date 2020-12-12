@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.ui.tooling.preview.Preview
-import net.lab0.grammar.kotlin.Highlights
-import net.lab0.grammar.kotlin.KotlinHighlight
 import com.example.jetpackcomposeexplorer.code.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.code.ijStyle
+import net.lab0.grammar.kotlin.Highlights
+import net.lab0.grammar.kotlin.KotlinHighlight
 
 @Composable
 fun KotlinCode(code: String, highlights: Highlights<KotlinHighlight>) {
@@ -32,6 +32,10 @@ fun PreviewKotlinCode() {
       val code =
           """
             |package org.kotlinlang.play
+            |
+            |interface Interface<I> where I:Interface<I> {
+            |  val i: I
+            |}
             |
             |fun main() {
             |  println("Hello, World!")
@@ -53,7 +57,7 @@ fun PreviewKotlinCode() {
             |    config.keys.mapNotNull { k ->
             |      if(i % k == 0) {
             |        out += config[k]
-            |      }else null
+            |      } else null
             |    }.joinToString("")
             |
             |    if(out == "") out = i.toString()

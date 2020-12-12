@@ -31,7 +31,7 @@ class SpotsAssertTest {
       |  Spot(highlight=two, start=3, end=4)
       |  Spot(highlight=four, start=6, end=11)
       |  Spot(highlight=ten, start=13, end=23)
-      |012345678901234567890123456789
+      | 123456789 123456789 123456789
       |abcdefghijklmnopqrstuvwxyzABCD
       | x <> <four> <ten------>
     """.trimMargin())
