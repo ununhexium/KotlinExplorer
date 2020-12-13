@@ -33,7 +33,7 @@ class SpotsAssertTest {
       |  Spot(highlight=ten, start=13, end=23)
       |A_23456789B_23456789C_23456789
       |abcdefghijklmnopqrstuvwxyzABCD
-      | x <> <four> <ten------>
+      | o <> <four> <ten------>
     """.trimMargin())
   }
 
@@ -76,7 +76,7 @@ class SpotsAssertTest {
     // when
     val error = assertThrows(AssertionError::class.java) {
       asserter.hasSpots(
-          Spot("one", 1, 1),
+          Spot("x", 1, 1),
           Spot("two", 3, 4),
           Spot("four", 6, 11),
           Spot("ten", 13, 23),
@@ -86,7 +86,7 @@ class SpotsAssertTest {
     // then
     assertThat(error).hasMessage("""
       |Missing spots:
-      |  Spot(highlight=one, start=1, end=1)
+      |  Spot(highlight=x, start=1, end=1)
       |  Spot(highlight=two, start=3, end=4)
       |  Spot(highlight=four, start=6, end=11)
       |  Spot(highlight=ten, start=13, end=23)

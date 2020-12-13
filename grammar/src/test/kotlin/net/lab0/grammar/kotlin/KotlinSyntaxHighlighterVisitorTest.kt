@@ -304,7 +304,6 @@ class KotlinSyntaxHighlighterVisitorTest {
     )
   }
 
-  @Ignore
   @Test
   fun `can highlight main`() {
     // given
@@ -324,10 +323,35 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(BRACKET, 8, 8),
         Spot(BRACKET, 9, 9),
         Spot(BRACKET, 11, 11),
-        Spot(FUNCTION, 15, 21),
         Spot(BRACKET, 22, 22),
         Spot(STRING, 23, 37),
-        Spot(BRACKET, 39,39),
+        Spot(BRACKET, 40,40),
+    )
+  }
+
+  @Test
+  fun `can highlight main with comment`() {
+    // given
+    val code = """
+        |fun main() {
+        |  /*****/
+        |  println("Hello, World!")
+        |}
+      """.trimMargin()
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 0, 2),
+        Spot(FUNCTION, 4, 7),
+        Spot(BRACKET, 8, 8),
+        Spot(BRACKET, 9, 9),
+        Spot(BRACKET, 11, 11),
+        Spot(BRACKET, 32, 32),
+        Spot(STRING, 33, 47),
+        Spot(BRACKET, 50,50),
     )
   }
 }

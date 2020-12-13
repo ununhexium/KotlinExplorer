@@ -22,10 +22,12 @@ ShebangLine
 
 DelimitedComment
     : '/*' ( DelimitedComment | . )*? '*/'
+      -> channel(HIDDEN)
     ;
 
 LineComment
     : '//' ~[\u000A\u000D]*
+      -> channel(HIDDEN)
     ;
 
 WS

@@ -32,7 +32,7 @@ public class SpotsAssert<H>(
       missing.forEach { s ->
         val range = s.end - s.start
         if (range == 0 && s.start < code.length) {
-          missingMarks[s.start] = 'x'
+          missingMarks[s.start] = s.highlight.toString()[0]
         } else {
           val highlightText = s.highlight.toString()
           ((s.start + 1)..min(s.end - 1, code.length)).forEach { i ->
