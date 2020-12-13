@@ -9,7 +9,7 @@ enum class KotlinHighlight {
     CLASS_PARAMETER,
     COMMA,
     COMMENT,
-    FUNCTION_DECLARATION,
+    FUNCTION,
     INSTANCE_PROPERTY,
     KEYWORD,
     NUMBER,

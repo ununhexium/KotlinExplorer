@@ -5,7 +5,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
-import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION_DECLARATION
+import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
@@ -18,7 +18,7 @@ import org.junit.Test
 class KotlinSyntaxHighlighterVisitorTest {
 
   @Test
-  fun `can extract decimal numbers in val declarations`() {
+  fun `can highlight decimal numbers in val declarations`() {
     // given
     val code = """val i = 10"""
 
@@ -33,7 +33,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract hexadecimal numbers in var declarations`() {
+  fun `can highlight hexadecimal numbers in var declarations`() {
     // given
     val code = """var i = 0xff"""
 
@@ -48,7 +48,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract annotation`() {
+  fun `can highlight annotation`() {
     // given
     val code = "@A enum class E"
 
@@ -64,7 +64,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract functions`() {
+  fun `can highlight functions`() {
     // given
     val code = "private override fun f(){}"
 
@@ -76,12 +76,12 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(MODIFIER, 0, 6),
         Spot(MODIFIER, 8, 15),
         Spot(KEYWORD, 17, 19),
-        Spot(FUNCTION_DECLARATION, 21, 21),
+        Spot(FUNCTION, 21, 21),
     )
   }
 
   @Test
-  fun `can extract string declaration`() {
+  fun `can highlight string declaration`() {
     // given
     val code = """val s = "hello""""
 
@@ -96,7 +96,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract numbers in a map declaration`() {
+  fun `can highlight numbers in a map declaration`() {
     // given
     val code = """val m = mapOf(3 to "Fizz", 0x5 to "Buzz")"""
 
@@ -114,7 +114,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract package`() {
+  fun `can highlight package`() {
     // given
     val code = """package com.example"""
 
@@ -128,7 +128,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract data class`() {
+  fun `can highlight data class`() {
     // given
     val code = "data class Data(val a:Int, var b:String)"
 
@@ -146,7 +146,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can extract data class with modifiers`() {
+  fun `can highlight data class with modifiers`() {
     // given
     val code = "data class Data(public override val a:Int)"
 
@@ -165,7 +165,7 @@ class KotlinSyntaxHighlighterVisitorTest {
 
   @Ignore("Seems not implemented")
   @Test
-  fun `can extract comments`() {
+  fun `can highlight comments`() {
     // given
     val code = "//comment"
 
@@ -291,7 +291,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `highlight where`() {
+  fun `can highlight where`() {
     // given
     val code = "interface Interface<I> where I:Interface<I>"
 
@@ -301,6 +301,33 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 23, 27),
+    )
+  }
+
+  @Ignore
+  @Test
+  fun `can highlight main`() {
+    // given
+    val code = """
+        |fun main() {
+        |  println("Hello, World!")
+        |}
+      """.trimMargin()
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 0, 2),
+        Spot(FUNCTION, 4, 7),
+        Spot(BRACKET, 8, 8),
+        Spot(BRACKET, 9, 9),
+        Spot(BRACKET, 11, 11),
+        Spot(FUNCTION, 15, 21),
+        Spot(BRACKET, 22, 22),
+        Spot(STRING, 23, 37),
+        Spot(BRACKET, 39,39),
     )
   }
 }

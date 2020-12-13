@@ -4,7 +4,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
-import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION_DECLARATION
+import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
@@ -63,7 +63,7 @@ class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<Kotlin
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
     hl {
       add(KEYWORD, ctx.FUN().range)
-      add(FUNCTION_DECLARATION, ctx.identifier().range)
+      add(FUNCTION, ctx.identifier().range)
 
       add(visitChildren(ctx))
     }

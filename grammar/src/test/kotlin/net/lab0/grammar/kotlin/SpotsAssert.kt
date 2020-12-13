@@ -51,9 +51,13 @@ public class SpotsAssert<H>(
           "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
               (code.indices).joinToString("") {
                 val i = it % 10
-                if (i == 0) " " else i.toString()
+                when (i) {
+                  0 -> "${('A'..'Z').toList()[it/10]}"
+                  1 -> "_"
+                  else -> "$i"
+                }
               } + "\n" +
-              code + "\n" +
+              code.split('\n').joinToString("\u21B5") + "\n" +
               missingMarks.joinToString("").trimEnd()
       )
     }

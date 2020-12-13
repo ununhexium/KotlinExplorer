@@ -17,3 +17,7 @@ val colors = listOf(
 
 fun randomColor() =
     colors[Random.nextInt(colors.size)]
+
+val IntRange.length: Int
+  get() = this.last - this.first + 1
+
