@@ -7,31 +7,52 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.ui.navigation.Destinations
 
 @Composable
 fun ExploreDrawer(
-    onTutorialSelection: () -> Unit
+    nav: NavHostController,
+    onSelection: () -> Unit
 ) {
-  Text(
-      "Tutorial",
-      modifier = Modifier.clickable(onClick = onTutorialSelection),
-      style = MaterialTheme.typography.h2
-  )
+    Column {
+        Text(
+            "Tutorial",
+            modifier = Modifier.clickable(
+                onClick = {
+                    onSelection()
+                    nav.navigate(Destinations.tutorial)
+                }
+            ),
+            style = MaterialTheme.typography.h2
+        )
+        Text(
+            "Markdown",
+            modifier = Modifier.clickable(
+                onClick = {
+                    onSelection()
+                    nav.navigate(Destinations.markdownSample)
+                }
+            ),
+            style = MaterialTheme.typography.h2
+        )
+    }
 }
 
 @Preview
 @Composable
 fun PreviewExploreDrawer() {
-  MaterialTheme {
-    Surface {
-      Column {
-        ExploreDrawer(
-            onTutorialSelection = {
-
+    MaterialTheme {
+        Surface {
+            Column {
+                ExploreDrawer(
+                    rememberNavController(),
+                    onSelection = { }
+                )
             }
-        )
-      }
+        }
     }
-  }
 }

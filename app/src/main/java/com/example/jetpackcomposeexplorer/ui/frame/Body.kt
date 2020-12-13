@@ -13,44 +13,45 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.ui.markdown.MarkdownSample
 import com.example.jetpackcomposeexplorer.ui.navigation.Destinations.home
+import com.example.jetpackcomposeexplorer.ui.navigation.Destinations.markdownSample
 import com.example.jetpackcomposeexplorer.ui.navigation.Destinations.tutorial
 import com.example.jetpackcomposeexplorer.ui.tutorial.TutorialHomePage
 
 @Composable
 fun Body() {
-  val state = rememberScaffoldState()
-  val nav = rememberNavController()
+    val state = rememberScaffoldState()
+    val nav = rememberNavController()
 
-  Scaffold(
-      scaffoldState = state,
-      bodyContent = { SimpleNav(nav) },
-      topBar = {
-        TopAppBar(
-            title = {
-              Row {
-                Button(
-                    onClick = { state.drawerState.open() }
-                ) {
-                  Icon(Icons.Default.Menu)
+    Scaffold(
+        scaffoldState = state,
+        bodyContent = { SimpleNav(nav) },
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row {
+                        Button(
+                            onClick = { state.drawerState.open() }
+                        ) {
+                            Icon(Icons.Default.Menu)
+                        }
+                        Text(text = "Jetpack Explorer")
+                    }
                 }
-                Text(text = "Jetpack Explorer")
-              }
-            }
-        )
-      },
-      drawerContent = {
-        ExploreDrawer(
-            onTutorialSelection = {
-              nav.navigate(tutorial)
-              state.drawerState.close()
-            }
-        )
-      }
-  )
+            )
+        },
+        drawerContent = {
+            ExploreDrawer(
+                nav,
+                onSelection = {
+                    state.drawerState.close()
+                }
+            )
+        }
+    )
 }
 
 /**
@@ -60,18 +61,21 @@ fun Body() {
  */
 @Composable
 fun SimpleNav(nav: NavHostController) {
-  NavHost(nav, startDestination = home) {
-    composable(home) {
-      HomePage(nav)
+    NavHost(nav, startDestination = home) {
+        composable(home) {
+            HomePage(nav)
+        }
+        composable(tutorial) {
+            TutorialHomePage(nav)
+        }
+        composable(markdownSample) {
+            MarkdownSample(nav)
+        }
     }
-    composable(tutorial) {
-      TutorialHomePage(nav)
-    }
-  }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewBody() {
-  Body()
+    Body()
 }

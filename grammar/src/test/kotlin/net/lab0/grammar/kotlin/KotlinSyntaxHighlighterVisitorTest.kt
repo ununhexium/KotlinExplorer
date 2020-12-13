@@ -163,9 +163,8 @@ class KotlinSyntaxHighlighterVisitorTest {
     )
   }
 
-  @Ignore("Seems not implemented")
   @Test
-  fun `can highlight comments`() {
+  fun `can highlight line comments`() {
     // given
     val code = "//comment"
 
@@ -175,6 +174,20 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(code, spots).hasSpots(
         Spot(COMMENT, 0, 8),
+    )
+  }
+
+  @Test
+  fun `can highlight delimited comments`() {
+    // given
+    val code = "/* hey! */"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(COMMENT, 0, 9),
     )
   }
 
