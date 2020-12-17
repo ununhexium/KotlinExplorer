@@ -1,5 +1,6 @@
 package com.example.jetpackcomposeexplorer.ui.tutorial
 
+import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.model.ExploreViewModel
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
 
 @Composable

@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.model.ExploreViewModel
 import com.example.jetpackcomposeexplorer.ui.markdown.MarkdownSample
 import com.example.jetpackcomposeexplorer.ui.navigation.Destinations.home
 import com.example.jetpackcomposeexplorer.ui.navigation.Destinations.markdownSample

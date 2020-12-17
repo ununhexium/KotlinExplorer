@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.ui
+package com.example.jetpackcomposeexplorer.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

@@ -26,7 +26,7 @@ import com.example.jetpackcomposeexplorer.code.functionStyle
 import com.example.jetpackcomposeexplorer.code.ijStyle
 import com.example.jetpackcomposeexplorer.code.keywordStyle
 import com.example.jetpackcomposeexplorer.code.numberStyle
-import com.example.jetpackcomposeexplorer.ui.length
+import com.example.jetpackcomposeexplorer.ui.theme.length
 import net.lab0.grammar.kotlin.KotlinHighlight
 
 

@@ -1,21 +1,26 @@
-package com.example.jetpackcomposeexplorer.ui
+package com.example.jetpackcomposeexplorer.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import com.example.jetpackcomposeexplorer.ui.theme.Theme.DARK_DEFAULT
+import com.example.jetpackcomposeexplorer.ui.theme.Theme.LIGHT_DEFAULT
 
 private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
+    primary = Red500,
+    primaryVariant = Red500,
+    secondary = Green500,
+    background = Gray200,
+    surface = Gray200,
+    onBackground = Teal200
 )
 
 private val LightColorPalette = lightColors(
     primary = purple500,
     primaryVariant = purple700,
-    secondary = teal200
+    secondary = Teal200
 
     /* Other default colors to override
     background = Color.White,
@@ -27,16 +32,21 @@ private val LightColorPalette = lightColors(
     */
 )
 
+enum class Theme {
+  DARK_DEFAULT,
+  LIGHT_DEFAULT
+}
+
 @Composable
 fun JetpackComposeExplorerTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    theme: Theme = if (isSystemInDarkTheme()) DARK_DEFAULT else LIGHT_DEFAULT,
     content: @Composable() () -> Unit
 ) {
-  val colors = if (darkTheme) {
-    DarkColorPalette
-  } else {
-    LightColorPalette
-  }
+  val colors =
+      when (theme) {
+        DARK_DEFAULT -> darkColors()
+        LIGHT_DEFAULT -> lightColors()
+      }
 
   MaterialTheme(
       colors = colors,
