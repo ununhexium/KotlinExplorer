@@ -20,7 +20,7 @@ abstract class ExplorerDatabase : RoomDatabase() {
           )
           .build()
 
-      if (db.getUserDao().getProfile() == null) {
+      if (db.getUserDao().getAll().isEmpty()) {
         db.getUserDao().insert(UserProfile("World"))
       }
     }

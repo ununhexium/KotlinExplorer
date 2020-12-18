@@ -10,8 +10,8 @@ interface UserProfileDao {
   @Insert
   fun insert(userProfile: UserProfile)
 
-  @Query("SELECT * FROM userprofile WHERE id == -1")
-  fun getProfile(): List<UserProfile>
+  @Query("SELECT * FROM userprofile")
+  fun getAll(): List<UserProfile>
 
   @Update
   fun update(vararg userProfiles: UserProfile)

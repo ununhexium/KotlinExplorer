@@ -1,6 +1,5 @@
 package com.example.jetpackcomposeexplorer.ui.tutorial
 
-import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -12,7 +11,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.model.ExploreViewModel
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
 
 @Composable
@@ -31,18 +29,18 @@ fun TutorialHomePage(nav: NavHostController) {
       TutorialIntroduction { tutoNav.navigate(page1) }
     }
     composable(page1) {
-      val (name, setName) = remember { mutableStateOf(ServiceLocator.viewModel.name) }
+      val (name, setName) = remember { mutableStateOf(ServiceLocator.viewModel.alias) }
       TutorialPage1(
           name,
           setName,
           {
-            ServiceLocator.viewModel.name = it
+            ServiceLocator.viewModel.setAlias(it)
             tutoNav.navigate(page2)
           }
       )
     }
     composable(page2) {
-      TutorialPage2(ServiceLocator.viewModel.name) {
+      TutorialPage2(ServiceLocator.viewModel.alias) {
         if (it) {
           tutoNav.navigate(correct)
         } else {
@@ -52,12 +50,12 @@ fun TutorialHomePage(nav: NavHostController) {
     }
     composable(wrong) {
       TutorialWrongNamePage(
-          name = ServiceLocator.viewModel.name,
+          name = ServiceLocator.viewModel.alias,
           userAnswer = { tutoNav.navigate(correct) }
       )
     }
     composable(correct) {
-      TutorialCorrectNamePage(name = ServiceLocator.viewModel.name) {
+      TutorialCorrectNamePage(name = ServiceLocator.viewModel.alias) {
         nav.navigate("home")
       }
     }

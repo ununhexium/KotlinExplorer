@@ -1,10 +1,12 @@
 package com.example.jetpackcomposeexplorer.model
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.jetpackcomposeexplorer.repository.ExploreRepository
 
 class ExploreViewModel : ViewModel() {
-  var name by mutableStateOf("World")
+  val alias = ExploreRepository.getProfileAlias()
+
+  fun setAlias(value: String) {
+    ExploreRepository.setProfileAlias(value)
+  }
 }

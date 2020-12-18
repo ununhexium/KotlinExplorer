@@ -35,10 +35,10 @@ class ExplorerDatabaseTest {
   @Test
   @Throws(Exception::class)
   fun writeUserAndReadInList() {
-    val user = UserProfile( "george")
+    val user = UserProfile( "george", -1)
 
     userProfileDao.insert(user)
-    val byName = userProfileDao.getProfile()
-    assertThat(byName?.alias).isEqualTo("george")
+    val byName = userProfileDao.getAll().first()
+    assertThat(byName.alias).isEqualTo("george")
   }
 }
