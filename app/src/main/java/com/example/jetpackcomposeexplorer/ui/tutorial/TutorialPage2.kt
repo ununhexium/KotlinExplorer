@@ -6,6 +6,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.ui.tooling.preview.Preview
@@ -18,9 +20,9 @@ import java.util.Locale
 import kotlin.random.Random
 
 @Composable
-fun TutorialPage2(name: String, userAnswer: (Boolean) -> Unit) {
+fun TutorialPage2(name: String?, userAnswer: (Boolean) -> Unit) {
   val sourceCode = """
-      |println("Hello $placeholder!");
+      |println("Hello ${placeholder(0)}!");
     """.trimMargin()
 
   Column {
@@ -35,7 +37,7 @@ fun TutorialPage2(name: String, userAnswer: (Boolean) -> Unit) {
 
     Row(Modifier.align(Alignment.CenterHorizontally)) {
       CodeButton(
-          text = name,
+          text = name ?: "",
           onClick = {
             userAnswer(true)
           }

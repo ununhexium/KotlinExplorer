@@ -20,7 +20,7 @@ import com.example.jetpackcomposeexplorer.ui.frame.SmallHorizontalSpacer
 
 @Composable
 fun TutorialPage1(
-    name: String,
+    name: String?,
     setName: (String) -> Unit,
     onNameSubmit: (String) -> Unit
 ) {
@@ -29,10 +29,10 @@ fun TutorialPage1(
       Text("Hello, what's your name?")
       BigVerticalSpacer()
       Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-        TextField(value = name, onValueChange = setName)
+        TextField(value = name ?: "", onValueChange = setName)
         SmallHorizontalSpacer()
         Button(
-            onClick = { onNameSubmit(name) },
+            onClick = { onNameSubmit(name ?: "") },
             modifier = Modifier.align(Alignment.CenterVertically)
         ) {
           Text("Ok")

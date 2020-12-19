@@ -10,7 +10,7 @@ import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.ui.frame.BigVerticalSpacer
 
 @Composable
-fun TutorialCorrectNamePage(name: String, onClickHome: () -> Unit) {
+fun TutorialCorrectNamePage(name: String?, onClickHome: () -> Unit) {
   Column {
     Text("That's it $name")
     BigVerticalSpacer()

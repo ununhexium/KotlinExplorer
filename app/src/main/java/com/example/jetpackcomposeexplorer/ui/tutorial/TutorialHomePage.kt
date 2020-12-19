@@ -3,6 +3,7 @@ package com.example.jetpackcomposeexplorer.ui.tutorial
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -12,6 +13,8 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 
 @Composable
 fun TutorialHomePage(nav: NavHostController) {
@@ -24,14 +27,16 @@ fun TutorialHomePage(nav: NavHostController) {
   val correct = "correct"
   val wrong = "wrong"
 
+  val name by ServiceLocator.viewModel.alias.observeAsState(ServiceLocator.viewModel.alias.value)
+
   NavHost(tutoNav, startDestination = startDestination) {
     composable(startDestination) {
       TutorialIntroduction { tutoNav.navigate(page1) }
     }
     composable(page1) {
-      val (name, setName) = remember { mutableStateOf(ServiceLocator.viewModel.alias) }
+      val (getName, setName) = remember { mutableStateOf(ServiceLocator.viewModel.alias.value) }
       TutorialPage1(
-          name,
+          getName,
           setName,
           {
             ServiceLocator.viewModel.setAlias(it)
@@ -40,7 +45,7 @@ fun TutorialHomePage(nav: NavHostController) {
       )
     }
     composable(page2) {
-      TutorialPage2(ServiceLocator.viewModel.alias) {
+      TutorialPage2(name) {
         if (it) {
           tutoNav.navigate(correct)
         } else {
@@ -50,12 +55,12 @@ fun TutorialHomePage(nav: NavHostController) {
     }
     composable(wrong) {
       TutorialWrongNamePage(
-          name = ServiceLocator.viewModel.alias,
+          name = name,
           userAnswer = { tutoNav.navigate(correct) }
       )
     }
     composable(correct) {
-      TutorialCorrectNamePage(name = ServiceLocator.viewModel.alias) {
+      TutorialCorrectNamePage(name = name) {
         nav.navigate("home")
       }
     }

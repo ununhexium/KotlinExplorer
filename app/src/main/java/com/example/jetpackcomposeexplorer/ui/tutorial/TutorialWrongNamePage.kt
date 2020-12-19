@@ -9,33 +9,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.ui.frame.CodeBlock
-import com.example.jetpackcomposeexplorer.ui.frame.CodeButton
-import com.example.jetpackcomposeexplorer.ui.frame.DefaultHorizontalSpacer
-import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
-import com.example.jetpackcomposeexplorer.ui.frame.placeholder
+import com.example.jetpackcomposeexplorer.ui.frame.*
 import java.util.Locale
 import kotlin.random.Random
 
 @Composable
-fun TutorialWrongNamePage(name:String, userAnswer: () -> Unit) {
-  val sourceCode = """
-      |println("Hello $placeholder!");
-    """.trimMargin()
+fun TutorialWrongNamePage(name: String?, userAnswer: () -> Unit) {
+  val sourceCode = """println("Hello $placeholder!")""".trimMargin()
 
   Column {
     Text("Ok, mistakes can happen, let's try again:")
     DefaultVerticalSpacer()
-    CodeBlock(
-        sourceCode = sourceCode
-    )
+    CodeBlock(sourceCode)
     DefaultVerticalSpacer()
     Text(text = "Now select your name:")
     DefaultVerticalSpacer()
 
     Row(Modifier.align(Alignment.CenterHorizontally)) {
       CodeButton(
-          text = name,
+          text = name ?: "",
           onClick = userAnswer
       )
     }
@@ -47,7 +39,7 @@ fun TutorialWrongNamePage(name:String, userAnswer: () -> Unit) {
 fun PreviewTutorialWrongNamePage() {
   MaterialTheme {
     Surface {
-      TutorialWrongNamePage("Foo"){}
+      TutorialWrongNamePage("Foo") {}
     }
   }
 }
