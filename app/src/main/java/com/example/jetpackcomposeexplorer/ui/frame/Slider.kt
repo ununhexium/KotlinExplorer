@@ -1,21 +1,19 @@
 package com.example.jetpackcomposeexplorer.ui.frame
 
 import androidx.compose.foundation.Image
-import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.imageResource
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.R
 import kotlin.math.floor
 
@@ -28,7 +26,7 @@ import kotlin.math.floor
 fun Slider(
     modifier: Modifier = Modifier,
     visibleIndex: Float = 0f,
-    children: @Composable () -> Unit
+    children: @Composable () -> Unit,
 ) {
   Layout(children, modifier) { measurables, constraints ->
 
@@ -79,7 +77,7 @@ fun PreviewSlider() {
         Text("A")
         Text("B")
         Icon(Icons.Default.Phone, tint = Color.Red)
-        Image(asset = imageResource(R.drawable.beach))
+        Image(bitmap = imageResource(id = R.drawable.beach))
       }
     }
   }

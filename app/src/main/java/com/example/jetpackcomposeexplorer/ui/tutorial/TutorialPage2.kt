@@ -10,12 +10,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.ui.frame.CodeBlock
-import com.example.jetpackcomposeexplorer.ui.frame.CodeButton
-import com.example.jetpackcomposeexplorer.ui.frame.DefaultHorizontalSpacer
-import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
-import com.example.jetpackcomposeexplorer.ui.frame.placeholder
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.ui.frame.*
 import java.util.Locale
 import kotlin.random.Random
 
@@ -28,9 +24,7 @@ fun TutorialPage2(name: String?, userAnswer: (Boolean) -> Unit) {
   Column {
     Text("In this app, you will answer code-related questions. Here is an example:")
     DefaultVerticalSpacer()
-    CodeBlock(
-        sourceCode = sourceCode
-    )
+    KotlinCode(sourceCode)
     DefaultVerticalSpacer()
     Text(text = "Now select your name:")
     DefaultVerticalSpacer()

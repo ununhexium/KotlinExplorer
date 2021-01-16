@@ -120,7 +120,7 @@ fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
 
 @Composable
 fun MDImage(image: Image, modifier: Modifier = Modifier) {
-  Box(modifier = modifier.fillMaxWidth(), alignment = Alignment.Center) {
+  Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
     // TODO image
   }
 }

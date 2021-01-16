@@ -8,10 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.ui.frame.*
-import java.util.Locale
-import kotlin.random.Random
 
 @Composable
 fun TutorialWrongNamePage(name: String?, userAnswer: () -> Unit) {

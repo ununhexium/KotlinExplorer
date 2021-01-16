@@ -5,14 +5,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.ui.frame.MDDocument
 import org.commonmark.parser.Parser
 
 
 @Composable
-fun MarkdownSample(nav: NavHostController, modifier: Modifier = Modifier) {
+fun MarkdownSample(modifier: Modifier = Modifier) {
   val md =
       """
         |# Title
@@ -44,7 +43,7 @@ fun MarkdownSample(nav: NavHostController, modifier: Modifier = Modifier) {
 fun PreviewMarkdownSample() {
   MaterialTheme {
     ScrollableColumn {
-      MarkdownSample(rememberNavController())
+      MarkdownSample()
     }
   }
 }

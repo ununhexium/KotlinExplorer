@@ -56,6 +56,7 @@ topLevelObject
     | functionDeclaration
     | propertyDeclaration
     | typeAlias
+    | statement
     ;
 
 classDeclaration

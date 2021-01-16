@@ -49,7 +49,7 @@ fun ButtonContent() {
     ) {
       Icon(
           tint = purple500,
-          asset = Icons.Default.FavoriteBorder,
+          imageVector = Icons.Default.FavoriteBorder,
           modifier = Modifier.size(24.dp)
       )
     }

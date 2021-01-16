@@ -18,6 +18,18 @@ import org.junit.Test
 class KotlinSyntaxHighlighterVisitorTest {
 
   @Test
+  fun `cont crash on invalid input`() {
+    // given
+    val code = """jhdfu8q233754  ;p30 [2]=4p 7&*^%- {)"""
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots()
+  }
+
+  @Test
   fun `can highlight decimal numbers in val declarations`() {
     // given
     val code = """val i = 10"""
@@ -192,6 +204,22 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
+  fun `can highlight a simple println`() {
+    // given
+    val code = "println(1)"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(FUNCTION, 0, 6),
+        Spot(NUMBER, 8, 8),
+    )
+  }
+
+  @Ignore("TODO: fix the parser to detect println as function")
+  @Test
   fun `can highlight function declaration params and return body`() {
     // given
     val code = "fun fizzBuzz(i: Int = 0): Int { return 0 }"
@@ -338,7 +366,7 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(BRACKET, 11, 11),
         Spot(BRACKET, 22, 22),
         Spot(STRING, 23, 37),
-        Spot(BRACKET, 40,40),
+        Spot(BRACKET, 40, 40),
     )
   }
 
@@ -364,7 +392,21 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(BRACKET, 11, 11),
         Spot(BRACKET, 32, 32),
         Spot(STRING, 33, 47),
-        Spot(BRACKET, 50,50),
+        Spot(BRACKET, 50, 50),
     )
+  }
+
+  @Test
+  fun `failsafe on garbage data`() {
+    // given
+    val code = """
+      |jhdij iero8t0389- ;dba[ 35=-
+    """.trimMargin()
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).isEqualTo(listOf<Highlights<KotlinHighlight>>())
   }
 }

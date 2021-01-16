@@ -8,14 +8,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
-import androidx.navigation.compose.rememberNavController
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.ui.navigation.Destinations
 
 @Composable
 fun ExploreDrawer(
-    nav: NavHostController,
+//    nav: NavHostController,
     onSelection: () -> Unit
 ) {
     Column {
@@ -24,7 +22,7 @@ fun ExploreDrawer(
             modifier = Modifier.clickable(
                 onClick = {
                     onSelection()
-                    nav.navigate(Destinations.tutorial)
+//                    nav.navigate(Destinations.tutorial)
                 }
             ),
             style = MaterialTheme.typography.h2
@@ -34,7 +32,7 @@ fun ExploreDrawer(
             modifier = Modifier.clickable(
                 onClick = {
                     onSelection()
-                    nav.navigate(Destinations.markdownSample)
+//                    nav.navigate(Destinations.markdownSample)
                 }
             ),
             style = MaterialTheme.typography.h2
@@ -49,7 +47,7 @@ fun PreviewExploreDrawer() {
         Surface {
             Column {
                 ExploreDrawer(
-                    rememberNavController(),
+//                    rememberNavController(),
                     onSelection = { }
                 )
             }
