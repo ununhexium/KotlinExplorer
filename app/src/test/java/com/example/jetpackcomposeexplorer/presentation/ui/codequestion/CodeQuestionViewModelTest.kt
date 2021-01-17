@@ -2,24 +2,14 @@ package com.example.jetpackcomposeexplorer.presentation.ui.codequestion
 
 import com.example.jetpackcomposeexplorer.presentation.components.Answer
 import com.google.common.truth.Truth.assertThat
-import org.junit.Before
 import org.junit.Test
-import java.lang.IllegalStateException
 
 class CodeQuestionViewModelTest {
-
-  lateinit var vm: CodeQuestionViewModel
-
-  @Before
-  fun before() {
-    vm = CodeQuestionViewModel()
-  }
-
   @Test
   fun `can add an answer`() {
     // given
     val foo = Answer(0, "Foo", false)
-    vm.setChoices(1, foo)
+    val vm = CodeQuestionViewModel("", "", 1, foo) { false }
 
     // then
     assertThat(vm.answers.value.first()).isEqualTo(foo)
@@ -28,7 +18,7 @@ class CodeQuestionViewModelTest {
   @Test
   fun `can add answers by string`() {
     // given
-    vm.setChoices(1, "a", "b", "c")
+    val vm = CodeQuestionViewModel("", "",1, "a", "b", "c") { false }
 
     // then
     assertThat(vm.answers.value).isEqualTo(
@@ -44,7 +34,7 @@ class CodeQuestionViewModelTest {
   fun `can select an answer when it is present`() {
     // given
     val foo = Answer(0, "Foo", false)
-    vm.setChoices(1, foo)
+    val vm = CodeQuestionViewModel("", "",1, foo) { false }
 
     // when
     vm.select(foo)
@@ -59,7 +49,7 @@ class CodeQuestionViewModelTest {
   fun `ignore double selection requests`() {
     // given
     val foo = Answer(0, "Foo", false)
-    vm.setChoices(1, foo)
+    val vm = CodeQuestionViewModel("", "",1, foo) { false }
     vm.select(foo)
 
     // when
@@ -69,24 +59,11 @@ class CodeQuestionViewModelTest {
     assertThat(vm.selected.value).hasSize(1)
   }
 
-  @Test(expected = IllegalStateException::class)
-  fun `can only set the choices once and for all`() {
-    // given
-    val foo = Answer(0, "Foo", false)
-    val bar = Answer(0, "Bar", false)
-    vm.setChoices(1, foo)
-
-    // when
-    vm.setChoices(1, bar)
-
-    // then exception
-  }
-
   @Test
   fun `can undo selection`() {
     // given
     val foo = Answer(0, "Foo", false)
-    vm.setChoices(1, foo)
+    val vm = CodeQuestionViewModel("", "",1, foo) { false }
     vm.select(foo)
 
     // when
@@ -102,7 +79,7 @@ class CodeQuestionViewModelTest {
     // given
     val foo = Answer(0, "Foo", false)
     val bar = Answer(0, "Bar", false)
-    vm.setChoices(1, foo)
+    val vm = CodeQuestionViewModel("", "",1, foo) { false }
     vm.select(foo)
 
     // when
@@ -118,7 +95,7 @@ class CodeQuestionViewModelTest {
     // given
     val foo = Answer(0, "Foo", false)
     val bar = Answer(0, "Bar", false)
-    vm.setChoices(2, foo)
+    val vm = CodeQuestionViewModel("", "",2, foo) { false }
 
     // no selection
     assertThat(vm.canValidate.value).isEqualTo(false)
@@ -139,9 +116,25 @@ class CodeQuestionViewModelTest {
   @Test
   fun `silly 0 selection case`() {
     // given
-    vm.setChoices(0, "a")
+    val vm = CodeQuestionViewModel("", "",0, "a") { false }
 
     // then
     assertThat(vm.canValidate.value).isEqualTo(true)
+  }
+
+  @Test
+  fun `can validate the answer`() {
+    // given
+    val foo = Answer(0, "Foo", false)
+    val vm = CodeQuestionViewModel("", "",1, foo) {
+      it.size == 1 && it.first().text == "Foo"
+    }
+    vm.select(foo)
+
+    // when
+    val validated = vm.isCorrectAnswer()
+
+    // then
+    assertThat(validated).isTrue()
   }
 }

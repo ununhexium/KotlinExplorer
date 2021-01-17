@@ -1,13 +1,9 @@
 package com.example.jetpackcomposeexplorer.ui.frame
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -18,7 +14,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyleRange
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.subSequence
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.code.CodeStyle
 import com.example.jetpackcomposeexplorer.code.DefaultCodeStyle
@@ -45,15 +40,6 @@ fun Monospace(text: AnnotatedString) {
 }
 
 @Composable
-fun Monospace(text: String) {
-  Text(
-      text,
-      fontFamily = FontFamily.Monospace,
-      softWrap = false
-  )
-}
-
-@Composable
 fun KotlinCode(
     code: String,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle
@@ -61,7 +47,7 @@ fun KotlinCode(
   KotlinCode(
       AnnotatedString(code),
       codeStyle.foregroundColor,
-      codeStyle.backgroundColor
+      codeStyle.backgroundColor,
   )
 }
 

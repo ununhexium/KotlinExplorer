@@ -4,36 +4,62 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.presentation.components.Answer
+import com.example.jetpackcomposeexplorer.ui.frame.KotlinCode
 
-class CodeQuestionViewModel {
-  private var choicesSet = false
-  private var maxAnswers = 0
-  val answers: MutableState<List<Answer>> = mutableStateOf(listOf())
+class CodeQuestionViewModel(
+    val question: String,
+    val initialCodeSample: String,
+    val maxAnswers: Int,
+    choices: List<Answer>,
+    val answerValidator: (List<Answer>) -> Boolean = { false },
+) {
+  constructor(
+      question: String,
+      codeSample: String,
+      maxAnswers: Int,
+      vararg choices: String,
+      answerValidator: (List<Answer>) -> Boolean,
+  ) : this(
+      question,
+      codeSample,
+      maxAnswers,
+      choices.mapIndexed { index, s -> Answer(index, s, false) },
+      answerValidator
+  )
+
+  constructor(
+      question: String,
+      codeSample: String,
+      maxAnswers: Int,
+      vararg choices: Answer,
+      answerValidator: (List<Answer>) -> Boolean,
+  ) : this(
+      question,
+      codeSample,
+      maxAnswers,
+      choices.toList(),
+      answerValidator
+  )
+
+  val answers: MutableState<List<Answer>> = mutableStateOf(choices)
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())
   val canValidate: MutableState<Boolean> = mutableStateOf(false)
 
-  fun setChoices(maxAnswers: Int, choices: List<Answer>) {
-    if (choicesSet) throw IllegalStateException("Can't only set the choices once.")
+  val codeSample: String
+    get() =
+      if (selected.value.isNotEmpty()) {
+        // TODO: find a way to automatically replace the placeholder with the selected answers
+        """println("${selected.value.first().text}")"""
+      } else {
+        initialCodeSample
+      }
 
-    val mutableAnswers = answers.value.toMutableList()
-    mutableAnswers.addAll(choices.toList())
-    answers.value = mutableAnswers
-    this.maxAnswers = maxAnswers
+  init {
     refreshValidate()
-
-    this.choicesSet = true
-  }
-
-  fun setChoices(maxAnswers: Int, vararg choices: String) {
-    setChoices(maxAnswers, choices.mapIndexed { index, s -> Answer(index, s, false) })
-  }
-
-  fun setChoices(maxAnswers: Int, vararg choices: Answer) {
-    setChoices(maxAnswers, choices.toList())
   }
 
   fun select(answer: Answer) {
-    if(selected.value.size >= maxAnswers) return // can't select more
+    if (selected.value.size >= maxAnswers) return // can't select more
 
     answers.findAndEdit(answer) {
       it.copy(used = true)
@@ -61,5 +87,9 @@ class CodeQuestionViewModel {
 
   private fun refreshValidate() {
     canValidate.value = selected.value.size == maxAnswers
+  }
+
+  fun isCorrectAnswer(): Boolean {
+    return answerValidator(selected.value.toList())
   }
 }

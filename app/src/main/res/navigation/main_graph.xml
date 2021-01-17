@@ -2,10 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/codeQuestionFragment">
-
+    app:startDestination="@id/quizzFragment">
     <fragment
-        android:id="@+id/codeQuestionFragment"
-        android:name="com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionFragment"
-        android:label="CodeQuestionFragment" />
+        android:id="@+id/quizzFragment"
+        android:name="com.example.jetpackcomposeexplorer.presentation.ui.codequestion.QuizzFragment"
+        android:label="QuizzFragment" />
 </navigation>
