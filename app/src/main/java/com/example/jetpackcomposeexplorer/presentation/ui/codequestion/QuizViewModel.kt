@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 class QuizViewModel(val pages: List<CodeQuestionViewModel>) : ViewModel() {
   val page: MutableState<CodeQuestionViewModel?> = mutableStateOf(pages.first())
   val progress = mutableStateOf(pages.indexOf(page.value) / pages.size.toFloat())
+  val showAnswer = mutableStateOf(false)
 
   fun goToNextPage() {
     page.value = pages.dropWhile { it != page.value }.drop(1).firstOrNull()
+    showAnswer.value = false
   }
 }

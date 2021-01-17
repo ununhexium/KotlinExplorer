@@ -4,11 +4,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.presentation.components.Answer
-import com.example.jetpackcomposeexplorer.ui.frame.KotlinCode
 
 class CodeQuestionViewModel(
     val question: String,
     val initialCodeSample: String,
+    val explanation: String,
     val maxAnswers: Int,
     choices: List<Answer>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
@@ -16,12 +16,14 @@ class CodeQuestionViewModel(
   constructor(
       question: String,
       codeSample: String,
+      answer: String,
       maxAnswers: Int,
       vararg choices: String,
       answerValidator: (List<Answer>) -> Boolean,
   ) : this(
       question,
       codeSample,
+      answer,
       maxAnswers,
       choices.mapIndexed { index, s -> Answer(index, s, false) },
       answerValidator
@@ -30,12 +32,14 @@ class CodeQuestionViewModel(
   constructor(
       question: String,
       codeSample: String,
+      answer: String,
       maxAnswers: Int,
       vararg choices: Answer,
       answerValidator: (List<Answer>) -> Boolean,
   ) : this(
       question,
       codeSample,
+      answer,
       maxAnswers,
       choices.toList(),
       answerValidator
@@ -43,7 +47,13 @@ class CodeQuestionViewModel(
 
   val answers: MutableState<List<Answer>> = mutableStateOf(choices)
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())
-  val canValidate: MutableState<Boolean> = mutableStateOf(false)
+  val showAnswer = mutableStateOf(false)
+
+  val canUndoOrReset
+    get() = selected.value.isNotEmpty() && !showAnswer.value
+
+  val canValidate
+    get() = selected.value.size == maxAnswers
 
   val codeSample: String
     get() =
@@ -54,10 +64,6 @@ class CodeQuestionViewModel(
         initialCodeSample
       }
 
-  init {
-    refreshValidate()
-  }
-
   fun select(answer: Answer) {
     if (selected.value.size >= maxAnswers) return // can't select more
 
@@ -67,29 +73,28 @@ class CodeQuestionViewModel(
     selected.value = selected.value.toMutableSet().also {
       it.add(answer.copy(used = true))
     }
-    refreshValidate()
   }
 
   fun undo() {
+    if (!canUndoOrReset) return
+
     val last = selected.value.last()
     selected.value = selected.value.toMutableSet().also { it.remove(last) }
     answers.findAndEdit(last) {
       it.copy(used = false)
     }
-    refreshValidate()
   }
 
   fun reset() {
     selected.value = mutableSetOf()
     answers.value = answers.value.map { it.copy(used = false) }
-    refreshValidate()
-  }
-
-  private fun refreshValidate() {
-    canValidate.value = selected.value.size == maxAnswers
   }
 
   fun isCorrectAnswer(): Boolean {
     return answerValidator(selected.value.toList())
+  }
+
+  fun validate() {
+    showAnswer.value = true
   }
 }

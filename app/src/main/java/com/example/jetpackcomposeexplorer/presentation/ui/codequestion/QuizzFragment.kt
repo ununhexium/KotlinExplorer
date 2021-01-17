@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.example.jetpackcomposeexplorer.presentation.components.CodeAnswerInput
-import com.example.jetpackcomposeexplorer.presentation.components.CodeQuestion
-import com.example.jetpackcomposeexplorer.presentation.components.QuizPage
+import com.example.jetpackcomposeexplorer.presentation.components.CodeQuizPage
 import com.example.jetpackcomposeexplorer.presentation.components.Quiz
 import com.example.jetpackcomposeexplorer.ui.frame.placeholder
 
@@ -25,6 +23,7 @@ class QuizzFragment : Fragment() {
               CodeQuestionViewModel(
                   "What is the first letter of the greek alphabet",
                   """println("${placeholder(0)}")""",
+                  "α Alpha, β beta, γ gamma, ...",
                   1,
                   "alpha", "beta", "gamma"
               ) {
@@ -36,6 +35,7 @@ class QuizzFragment : Fragment() {
                     |println("${placeholder(0)}")
                     |println("${placeholder(1)}")
                   """.trimMargin(),
+                  "Album: white, disco: I teach",
                   2,
                   "album", "tree", "disco", "wheel"
               ) {
@@ -46,32 +46,9 @@ class QuizzFragment : Fragment() {
 
       setContent {
         Quiz(progress = viewModel.progress.value) {
-
           val page = viewModel.page.value
-
           if (page != null) {
-            QuizPage(
-                question = {
-                  CodeQuestion(
-                      question = page.question,
-                      code = page.codeSample,
-                  )
-                },
-                answerInput = {
-                  CodeAnswerInput(onReset = page::reset,
-                      onUndo = page::undo,
-                      onValidate = {
-                        if (page.isCorrectAnswer()) {
-                          viewModel.goToNextPage()
-                        }
-                      },
-                      onSelect = page::select,
-                      canValidate = page.canValidate.value,
-                      canUndoOrReset = page.selected.value.isNotEmpty(),
-                      answers = page.answers.value
-                  )
-                }
-            )
+            CodeQuizPage(model = page, nextQuestion = viewModel::goToNextPage)
           } else {
             Text("Finished")
           }

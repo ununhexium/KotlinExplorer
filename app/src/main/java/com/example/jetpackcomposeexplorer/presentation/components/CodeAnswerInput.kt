@@ -6,8 +6,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Replay
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Undo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,6 +25,7 @@ fun CodeAnswerInput(
     onSelect: (Answer) -> Unit,
     canValidate: Boolean,
     canUndoOrReset: Boolean,
+    canDoNext: Boolean,
     answers: List<Answer>,
 ) {
   Column {
@@ -47,7 +50,11 @@ fun CodeAnswerInput(
       }
       Row {
         Icon(
-            imageVector = Icons.Default.Done,
+            imageVector = if (canDoNext) {
+              Icons.Default.ArrowForward
+            } else {
+              Icons.Default.Done
+            },
             tint = if (canValidate) MaterialTheme.colors.primary else Color.Gray,
             modifier = Modifier.clickable(onClick = onValidate),
         )
@@ -92,9 +99,10 @@ fun CodeAnswerInputPreview() {
             {},
             {},
             {},
-            false,
-            false,
-            listOf(
+            canValidate = false,
+            canUndoOrReset = true,
+            canDoNext = false,
+            answers = listOf(
                 Answer(0, "alpha", false),
                 Answer(1, "beta", true),
                 Answer(2, "gamma", false),
@@ -116,9 +124,10 @@ fun CodeAnswerInputPreview_manyChipsCanValidate() {
             {},
             {},
             {},
-            true,
-            true,
-            listOf(
+            canValidate = true,
+            canUndoOrReset = false,
+            canDoNext = true,
+            answers = listOf(
                 Answer(0, "alpha", false),
                 Answer(1, "beta", true),
                 Answer(2, "gamma", false),
