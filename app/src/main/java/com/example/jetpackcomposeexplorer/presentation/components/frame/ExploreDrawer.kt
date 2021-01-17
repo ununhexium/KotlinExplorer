@@ -14,7 +14,6 @@ import com.example.jetpackcomposeexplorer.R
 
 @Composable
 fun ExploreDrawer(
-    nav: NavController,
     onSelection: () -> Unit,
 ) {
   Column {
@@ -23,7 +22,7 @@ fun ExploreDrawer(
         modifier = Modifier.clickable(
             onClick = {
               onSelection()
-//                    nav.navigate(Destinations.tutorial)
+//            nav.navigate(Destinations.tutorial)
             }
         ),
         style = MaterialTheme.typography.h2
@@ -33,7 +32,7 @@ fun ExploreDrawer(
         modifier = Modifier.clickable(
             onClick = {
               onSelection()
-//                    nav.navigate(Destinations.markdownSample)
+//            nav.navigate(Destinations.markdownSample)
             }
         ),
         style = MaterialTheme.typography.h2
@@ -48,7 +47,7 @@ fun PreviewExploreDrawer() {
     Surface {
       Column {
         ExploreDrawer(
-//                    rememberNavController(),
+//          rememberNavController(),
             onSelection = { }
         )
       }

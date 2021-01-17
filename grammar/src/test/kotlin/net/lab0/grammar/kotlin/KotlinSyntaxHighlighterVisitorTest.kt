@@ -204,7 +204,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can highlight a simple println`() {
+  fun `can highlight a simple println of a number`() {
     // given
     val code = "println(1)"
 
@@ -218,7 +218,21 @@ class KotlinSyntaxHighlighterVisitorTest {
     )
   }
 
-  @Ignore("TODO: fix the parser to detect println as function")
+  @Test
+  fun `can highlight a simple println of a string`() {
+    // given
+    val code = """println("foo")"""
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(FUNCTION, 0, 6),
+        Spot(STRING, 8, 12),
+    )
+  }
+
   @Test
   fun `can highlight function declaration params and return body`() {
     // given
