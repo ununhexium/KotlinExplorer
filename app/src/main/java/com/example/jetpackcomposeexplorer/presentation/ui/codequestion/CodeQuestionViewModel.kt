@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanksImpl
-import com.example.jetpackcomposeexplorer.presentation.components.Answer
+import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
 
 class CodeQuestionViewModel(
     val question: String,

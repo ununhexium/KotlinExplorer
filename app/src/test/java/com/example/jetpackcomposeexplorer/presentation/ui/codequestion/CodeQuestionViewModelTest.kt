@@ -1,6 +1,6 @@
 package com.example.jetpackcomposeexplorer.presentation.ui.codequestion
 
-import com.example.jetpackcomposeexplorer.presentation.components.Answer
+import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 

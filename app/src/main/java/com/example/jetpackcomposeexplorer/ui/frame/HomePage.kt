@@ -1,20 +1,14 @@
 package  com.example.jetpackcomposeexplorer.ui.frame
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.navigation.NavHostController
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.ServiceLocator
-import com.example.jetpackcomposeexplorer.ui.navigation.Destinations
 
 
 @Composable

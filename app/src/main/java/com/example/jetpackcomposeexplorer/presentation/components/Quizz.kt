@@ -25,7 +25,7 @@ fun Quiz(
 
 @Preview
 @Composable
-fun QuizzPreview() {
+fun QuizPreview() {
   MaterialTheme {
     Surface {
       Column {

@@ -12,7 +12,7 @@ import com.example.jetpackcomposeexplorer.presentation.components.CodeQuizPage
 import com.example.jetpackcomposeexplorer.presentation.components.Quiz
 import com.example.jetpackcomposeexplorer.ui.frame.placeholder
 
-class QuizzFragment : Fragment() {
+class QuizFragment : Fragment() {
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,

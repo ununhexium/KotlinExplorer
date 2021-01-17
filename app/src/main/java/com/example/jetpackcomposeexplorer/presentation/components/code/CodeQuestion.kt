@@ -8,10 +8,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
-import com.example.jetpackcomposeexplorer.model.code.ijStyle
+import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 
 
@@ -20,7 +19,11 @@ fun CodeQuestion(question: String, code: String) {
   Column(modifier = Modifier.fillMaxWidth()) {
     Text(question)
     DefaultVerticalSpacer()
-    KotlinCode(code = code, codeStyle = DefaultCodeStyle)
+    KotlinCode(
+        code = extractHighlightsAndAnnotate(code, DefaultCodeStyle.textStyler),
+        foregroundColor = DefaultCodeStyle.foregroundColor,
+        backgroundColor = DefaultCodeStyle.backgroundColor
+    )
   }
 }
 
@@ -32,7 +35,11 @@ fun CodeQuestionPreview() {
       Column {
         CodeQuestion(
             question = "Why did the chicken cross the road?",
-            code = """println("${placeholder()}")""",
+            code = """
+              |fun main(){
+              |  println("${placeholder()}")
+              |}
+            """.trimMargin(),
         )
       }
     }
