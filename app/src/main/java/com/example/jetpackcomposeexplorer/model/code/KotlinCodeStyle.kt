@@ -1,6 +1,5 @@
-package com.example.jetpackcomposeexplorer.code
+package com.example.jetpackcomposeexplorer.model.code
 
-import android.text.style.StyleSpan
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle

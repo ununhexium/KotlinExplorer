@@ -4,9 +4,8 @@ import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.ui.frame.MDDocument
+import com.example.jetpackcomposeexplorer.presentation.components.markdown.MDDocument
 import org.commonmark.parser.Parser
 
 

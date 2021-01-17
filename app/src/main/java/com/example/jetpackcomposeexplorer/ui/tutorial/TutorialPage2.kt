@@ -6,12 +6,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
+import com.example.jetpackcomposeexplorer.presentation.components.KotlinCode
 import com.example.jetpackcomposeexplorer.ui.frame.*
 import java.util.Locale
 import kotlin.random.Random

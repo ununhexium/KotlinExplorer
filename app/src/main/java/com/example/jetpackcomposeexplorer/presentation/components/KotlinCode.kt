@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.ui.frame
+package com.example.jetpackcomposeexplorer.presentation.components
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
@@ -15,13 +15,13 @@ import androidx.compose.ui.text.SpanStyleRange
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.subSequence
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.code.CodeStyle
-import com.example.jetpackcomposeexplorer.code.DefaultCodeStyle
-import com.example.jetpackcomposeexplorer.code.extractHighlightsAndAnnotate
-import com.example.jetpackcomposeexplorer.code.functionStyle
-import com.example.jetpackcomposeexplorer.code.ijStyle
-import com.example.jetpackcomposeexplorer.code.keywordStyle
-import com.example.jetpackcomposeexplorer.code.numberStyle
+import com.example.jetpackcomposeexplorer.model.code.CodeStyle
+import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
+import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
+import com.example.jetpackcomposeexplorer.model.code.functionStyle
+import com.example.jetpackcomposeexplorer.model.code.ijStyle
+import com.example.jetpackcomposeexplorer.model.code.keywordStyle
+import com.example.jetpackcomposeexplorer.model.code.numberStyle
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.ANSWER_REGEX
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.ui.theme.length

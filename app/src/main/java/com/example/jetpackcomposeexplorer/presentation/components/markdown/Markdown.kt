@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.ui.frame
+package com.example.jetpackcomposeexplorer.presentation.components.markdown
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,22 +13,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawBehind
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.gesture.tapGestureFilter
-import androidx.compose.ui.platform.UriHandlerAmbient
+import androidx.compose.ui.platform.AmbientUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.annotatedString
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.example.jetpackcomposeexplorer.presentation.components.KotlinCode
 import org.commonmark.node.BlockQuote
 import org.commonmark.node.BulletList
 import org.commonmark.node.Code
@@ -93,7 +94,7 @@ fun MDHeading(heading: Heading, modifier: Modifier = Modifier) {
 
   val padding = if (heading.parent is Document) 8.dp else 0.dp
   Box(modifier = modifier.padding(bottom = padding)) {
-    val text = annotatedString {
+    val text = buildAnnotatedString {
       appendMarkdownChildren(heading, MaterialTheme.colors)
     }
     MarkdownText(text, style)
@@ -108,7 +109,7 @@ fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
   } else {
     val padding = if (paragraph.parent is Document) 8.dp else 0.dp
     Box(modifier = modifier.padding(bottom = padding)) {
-      val styledText = annotatedString {
+      val styledText = buildAnnotatedString {
         pushStyle(MaterialTheme.typography.body1.toSpanStyle())
         appendMarkdownChildren(paragraph, MaterialTheme.colors)
         pop()
@@ -129,7 +130,7 @@ fun MDImage(image: Image, modifier: Modifier = Modifier) {
 fun MDBulletList(bulletList: BulletList, modifier: Modifier = Modifier) {
   val marker = bulletList.bulletMarker
   MDListItems(bulletList, modifier = modifier) {
-    val text = annotatedString {
+    val text = buildAnnotatedString {
       pushStyle(MaterialTheme.typography.body1.toSpanStyle())
       append("$marker ")
       appendMarkdownChildren(it, MaterialTheme.colors)
@@ -144,7 +145,7 @@ fun MDOrderedList(orderedList: OrderedList, modifier: Modifier = Modifier) {
   var number = orderedList.startNumber
   val delimiter = orderedList.delimiter
   MDListItems(orderedList, modifier) {
-    val text = annotatedString {
+    val text = buildAnnotatedString {
       pushStyle(MaterialTheme.typography.body1.toSpanStyle())
       append("${number++}$delimiter ")
       appendMarkdownChildren(it, MaterialTheme.colors)
@@ -192,7 +193,7 @@ fun MDBlockQuote(blockQuote: BlockQuote, modifier: Modifier = Modifier) {
           )
       }.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
   ) {
-    val text = annotatedString {
+    val text = buildAnnotatedString {
       pushStyle(
           MaterialTheme.typography.body1.toSpanStyle()
               .plus(SpanStyle(fontStyle = FontStyle.Italic))
@@ -307,7 +308,7 @@ fun MarkdownText(
     style: TextStyle,
     modifier: Modifier = Modifier
 ) {
-  val uriHandler = UriHandlerAmbient.current
+  val uriHandler = AmbientUriHandler.current
   val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
   Text(

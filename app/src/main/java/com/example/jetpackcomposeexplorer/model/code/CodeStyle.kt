@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.code
+package com.example.jetpackcomposeexplorer.model.code
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
