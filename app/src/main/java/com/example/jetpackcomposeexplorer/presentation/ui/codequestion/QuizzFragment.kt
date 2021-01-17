@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.presentation.components.CodeQuizPage
 import com.example.jetpackcomposeexplorer.presentation.components.Quiz
 import com.example.jetpackcomposeexplorer.ui.frame.placeholder

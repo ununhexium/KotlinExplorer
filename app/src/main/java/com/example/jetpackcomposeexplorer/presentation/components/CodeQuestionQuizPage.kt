@@ -16,7 +16,7 @@ fun CodeQuizPage(
       question = {
         CodeQuestion(
             question = model.question,
-            code = model.codeSample,
+            code = model.snippet,
         )
       },
       answer = if (model.showAnswer.value) {

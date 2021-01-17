@@ -110,19 +110,19 @@ class CodeQuestionViewModelTest {
     val vm = CodeQuestionViewModel("", "", "", 2, foo) { false }
 
     // no selection
-    assertThat(vm.canValidate.value).isEqualTo(false)
+    assertThat(vm.canValidate).isEqualTo(false)
 
     // not enough selections
     vm.select(foo)
-    assertThat(vm.canValidate.value).isEqualTo(false)
+    assertThat(vm.canValidate).isEqualTo(false)
 
     // when select one more
     vm.select(bar)
-    assertThat(vm.canValidate.value).isEqualTo(true)
+    assertThat(vm.canValidate).isEqualTo(true)
 
     // when unselecting
     vm.undo()
-    assertThat(vm.canValidate.value).isEqualTo(false)
+    assertThat(vm.canValidate).isEqualTo(false)
   }
 
   @Test
@@ -131,7 +131,7 @@ class CodeQuestionViewModelTest {
     val vm = CodeQuestionViewModel("", "", "", 0, "a") { false }
 
     // then
-    assertThat(vm.canValidate.value).isEqualTo(true)
+    assertThat(vm.canValidate).isEqualTo(true)
   }
 
   @Test

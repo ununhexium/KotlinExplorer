@@ -22,13 +22,10 @@ import com.example.jetpackcomposeexplorer.code.functionStyle
 import com.example.jetpackcomposeexplorer.code.ijStyle
 import com.example.jetpackcomposeexplorer.code.keywordStyle
 import com.example.jetpackcomposeexplorer.code.numberStyle
+import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.ANSWER_REGEX
+import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.ui.theme.length
 import net.lab0.grammar.kotlin.KotlinHighlight
-
-
-fun placeholder(index: Int = 0) = "/**ANSWER($index)**/"
-
-val ANSWER_REGEX = Regex("""/\*\*ANSWER\([0-9]{1,2}\)\*\*/""")
 
 @Composable
 fun Monospace(text: AnnotatedString) {

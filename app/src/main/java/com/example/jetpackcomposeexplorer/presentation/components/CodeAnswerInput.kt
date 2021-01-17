@@ -66,7 +66,6 @@ fun CodeAnswerInput(
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-      // TODO: layout based on chips size instead of arbitrary splitting
       answers
           .toList()
           .chunked(3)

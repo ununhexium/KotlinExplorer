@@ -3,11 +3,12 @@ package com.example.jetpackcomposeexplorer.presentation.ui.codequestion
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
+import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanksImpl
 import com.example.jetpackcomposeexplorer.presentation.components.Answer
 
 class CodeQuestionViewModel(
     val question: String,
-    val initialCodeSample: String,
+    initialSnippet: String,
     val explanation: String,
     val maxAnswers: Int,
     choices: List<Answer>,
@@ -49,20 +50,20 @@ class CodeQuestionViewModel(
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())
   val showAnswer = mutableStateOf(false)
 
+  private val withBlanks = KotlinCodeWithBlanksImpl(initialSnippet)
+
   val canUndoOrReset
     get() = selected.value.isNotEmpty() && !showAnswer.value
 
   val canValidate
     get() = selected.value.size == maxAnswers
 
-  val codeSample: String
-    get() =
-      if (selected.value.isNotEmpty()) {
-        // TODO: find a way to automatically replace the placeholder with the selected answers
-        """println("${selected.value.first().text}")"""
-      } else {
-        initialCodeSample
-      }
+  val snippet: String
+    get() = withBlanks.fill(
+        selected.value.mapIndexed { index, answer ->
+          index to answer.text
+        }.toMap()
+    )
 
   fun select(answer: Answer) {
     if (selected.value.size >= maxAnswers) return // can't select more

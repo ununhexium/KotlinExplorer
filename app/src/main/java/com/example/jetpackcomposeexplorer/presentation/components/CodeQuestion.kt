@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 import com.example.jetpackcomposeexplorer.ui.frame.KotlinCode
 import com.example.jetpackcomposeexplorer.ui.frame.placeholder
