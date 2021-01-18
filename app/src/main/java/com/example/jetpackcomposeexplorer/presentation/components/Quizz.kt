@@ -1,7 +1,6 @@
 package com.example.jetpackcomposeexplorer.presentation.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.LinearProgressIndicator
@@ -13,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun Quiz(
+fun Lesson(
     progress: Float,
     page: @Composable () -> Unit,
 ) {
@@ -29,7 +28,7 @@ fun QuizPreview() {
   MaterialTheme {
     Surface {
       Column {
-        Quiz(
+        Lesson(
             0.116f,
         ) {
           Surface(modifier = Modifier.fillMaxSize(), color = Color.Gray) {

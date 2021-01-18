@@ -8,9 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
-import com.example.jetpackcomposeexplorer.presentation.components.CodeQuizPage
-import com.example.jetpackcomposeexplorer.presentation.components.Quiz
-import com.example.jetpackcomposeexplorer.ui.frame.placeholder
+import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuizPage
+import com.example.jetpackcomposeexplorer.presentation.components.Lesson
 
 class QuizFragment : Fragment() {
   override fun onCreateView(
@@ -21,7 +20,7 @@ class QuizFragment : Fragment() {
     return ComposeView(requireContext()).apply {
       val viewModel = QuizViewModel(
           listOf(
-              CodeQuestionViewModel(
+              CodeQuestionPage(
                   "What is the first letter of the greek alphabet",
                   """println("${placeholder(0)}")""",
                   "α Alpha, β beta, γ gamma, ...",
@@ -30,7 +29,7 @@ class QuizFragment : Fragment() {
               ) {
                 it.first().text == "alpha"
               },
-              CodeQuestionViewModel(
+              CodeQuestionPage(
                   "Which of these words are latin words?",
                   """
                     |println("${placeholder(0)}")
@@ -46,7 +45,7 @@ class QuizFragment : Fragment() {
       )
 
       setContent {
-        Quiz(progress = viewModel.progress.value) {
+        Lesson(progress = viewModel.progress.value) {
           val page = viewModel.page.value
           if (page != null) {
             CodeQuizPage(model = page, nextQuestion = viewModel::goToNextPage)

@@ -12,9 +12,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.presentation.components.code.Monospace
 
 @Deprecated("Prototype")
 val placeholder = "/**ANSWER**/"
@@ -35,11 +35,7 @@ fun CodeBlock(sourceCode: String) {
           if (answerIndex != -1) {
             val before = line.substring(0, answerIndex)
             val after = line.substring(answerIndex + placeholder.length)
-            Text(
-                before,
-                fontFamily = FontFamily.Monospace,
-                softWrap = false
-            )
+            Monospace(before)
             Box(
                 Modifier.border(
                     BorderStroke(2.dp, MaterialTheme.colors.primary),
@@ -47,23 +43,11 @@ fun CodeBlock(sourceCode: String) {
                 )
             ) {
               // placeholder to have the right size
-              Text(
-                  " ".repeat(placeholder.length),
-                  fontFamily = FontFamily.Monospace,
-                  softWrap = false
-              )
+              Monospace(" ".repeat(placeholder.length))
             }
-            Text(
-                after,
-                fontFamily = FontFamily.Monospace,
-                softWrap = false
-            )
+            Monospace(after)
           } else {
-            Text(
-                line,
-                fontFamily = FontFamily.Monospace,
-                softWrap = false
-            )
+            Monospace(line)
           }
         }
       }

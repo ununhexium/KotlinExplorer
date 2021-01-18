@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyleRange
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.subSequence
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.code.CodeStyle
@@ -24,17 +23,11 @@ import com.example.jetpackcomposeexplorer.model.code.keywordStyle
 import com.example.jetpackcomposeexplorer.model.code.numberStyle
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.ANSWER_REGEX
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
+import com.example.jetpackcomposeexplorer.presentation.components.code.Monospace
+import com.example.jetpackcomposeexplorer.presentation.theme.sourceCodeFontFamily
 import com.example.jetpackcomposeexplorer.ui.theme.length
 import net.lab0.grammar.kotlin.KotlinHighlight
 
-@Composable
-fun Monospace(text: AnnotatedString) {
-  Text(
-      text,
-      fontFamily = FontFamily.Monospace,
-      softWrap = false
-  )
-}
 
 @Composable
 fun KotlinCode(
@@ -89,11 +82,7 @@ fun KotlinCode(
                 color = MaterialTheme.colors.primaryVariant,
             ) {
               // placeholder to have the right size
-              Text(
-                  " ".repeat(placeholderLength),
-                  fontFamily = FontFamily.Monospace,
-                  softWrap = false,
-              )
+              Monospace(" ".repeat(placeholderLength))
             }
             Monospace(code.subSequence(realStartOfAfter, realEndOfAfter))
           } else {

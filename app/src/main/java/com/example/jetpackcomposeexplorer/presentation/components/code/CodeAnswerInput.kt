@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
+import com.example.jetpackcomposeexplorer.presentation.components.code.AnswerChip
 
 @Composable
 fun CodeAnswerInput(

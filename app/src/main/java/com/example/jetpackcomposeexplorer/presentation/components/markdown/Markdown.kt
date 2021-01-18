@@ -24,12 +24,13 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.presentation.components.KotlinCode
+import com.example.jetpackcomposeexplorer.presentation.components.code.Monospace
+import com.example.jetpackcomposeexplorer.presentation.theme.sourceCodeFontFamily
 import org.commonmark.node.BlockQuote
 import org.commonmark.node.BulletList
 import org.commonmark.node.Code
@@ -215,10 +216,9 @@ fun MDFencedCodeBlock(
     if (fencedCodeBlock.info.equals("kotlin", true)) {
       KotlinCode(fencedCodeBlock.literal)
     } else {
-      Text(
+      Monospace(
           text = fencedCodeBlock.literal,
-          style = TextStyle(fontFamily = FontFamily.Monospace),
-          modifier = modifier
+          modifier = modifier,
       )
     }
   }
@@ -279,7 +279,7 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
             pop()
         }
         is Code -> {
-            pushStyle(TextStyle(fontFamily = FontFamily.Monospace).toSpanStyle())
+            pushStyle(TextStyle(fontFamily = sourceCodeFontFamily).toSpanStyle())
             append(child.literal)
             pop()
         }

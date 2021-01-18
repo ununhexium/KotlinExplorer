@@ -4,8 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
-class QuizViewModel(val pages: List<CodeQuestionViewModel>) : ViewModel() {
-  val page: MutableState<CodeQuestionViewModel?> = mutableStateOf(pages.first())
+class QuizViewModel(val pages: List<CodeQuestionPage>) : ViewModel() {
+  val page: MutableState<CodeQuestionPage?> = mutableStateOf(pages.first())
   val progress = mutableStateOf(pages.indexOf(page.value) / pages.size.toFloat())
   val showAnswer = mutableStateOf(false)
 

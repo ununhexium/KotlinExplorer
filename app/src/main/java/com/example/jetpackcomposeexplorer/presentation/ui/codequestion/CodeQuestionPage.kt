@@ -6,7 +6,7 @@ import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanksImpl
 import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
 
-class CodeQuestionViewModel(
+class CodeQuestionPage(
     val question: String,
     initialSnippet: String,
     val explanation: String,

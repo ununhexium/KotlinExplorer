@@ -1,4 +1,4 @@
-package  com.example.jetpackcomposeexplorer.ui.frame
+package  com.example.jetpackcomposeexplorer.presentation.components.frame
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import com.example.jetpackcomposeexplorer.R
 
 @Composable
 fun ExploreDrawer(
+//    nav:NavController,
     onSelection: () -> Unit,
 ) {
   Column {
@@ -22,7 +22,7 @@ fun ExploreDrawer(
         modifier = Modifier.clickable(
             onClick = {
               onSelection()
-//            nav.navigate(Destinations.tutorial)
+//            nav.navigate(R.id.action_homeFragment_to_quizFragment)
             }
         ),
         style = MaterialTheme.typography.h2

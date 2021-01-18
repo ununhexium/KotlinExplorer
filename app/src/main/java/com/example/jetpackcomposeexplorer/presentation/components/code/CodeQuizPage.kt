@@ -1,15 +1,20 @@
-package com.example.jetpackcomposeexplorer.presentation.components
+package com.example.jetpackcomposeexplorer.presentation.components.code
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionViewModel
+import com.example.jetpackcomposeexplorer.presentation.components.CodeAnswerInput
+import com.example.jetpackcomposeexplorer.presentation.components.CodeQuestion
+import com.example.jetpackcomposeexplorer.presentation.components.CorrectAnswer
+import com.example.jetpackcomposeexplorer.presentation.components.QuizPage
+import com.example.jetpackcomposeexplorer.presentation.components.WrongAnswer
+import com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionPage
 
 @Composable
 fun CodeQuizPage(
-    model: CodeQuestionViewModel,
+    model: CodeQuestionPage,
     nextQuestion: () -> Unit,
 ) {
   QuizPage(
@@ -54,7 +59,7 @@ fun CodeQuestionQuizPagePreview_selectedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            CodeQuestionViewModel(
+            CodeQuestionPage(
                 "Why?",
                 "val i = 0",
                 "Because",
@@ -78,7 +83,7 @@ fun CodeQuestionQuizPagePreview_validatedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            CodeQuestionViewModel(
+            CodeQuestionPage(
                 "Why?",
                 "val i = 0",
                 "Because",

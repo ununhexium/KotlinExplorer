@@ -9,8 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.jetpackcomposeexplorer.ui.frame.ExploreDrawer
+import com.example.jetpackcomposeexplorer.presentation.components.frame.ExploreDrawer
 
 class HomeFragment : Fragment() {
   override fun onCreateView(
@@ -25,9 +24,10 @@ class HomeFragment : Fragment() {
         Scaffold(
             drawerContent = {
               ExploreDrawer(
+//                  nav = findNavController(),
                   onSelection = {
                     scaffoldState.drawerState.close()
-                  }
+                  },
               )
             }
         ) {

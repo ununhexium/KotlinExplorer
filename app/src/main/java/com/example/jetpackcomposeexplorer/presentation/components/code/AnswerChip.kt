@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.presentation.components
+package com.example.jetpackcomposeexplorer.presentation.components.code
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
@@ -20,7 +20,7 @@ fun AnswerChip(
         shape = MaterialTheme.shapes.medium,
     ) {
         Button(onClick = onClick, enabled = enabled) {
-            CodeText(code = text)
+            Monospace(text)
         }
     }
 }
