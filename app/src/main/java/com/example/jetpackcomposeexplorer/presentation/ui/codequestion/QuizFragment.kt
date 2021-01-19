@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.example.jetpackcomposeexplorer.model.course.LessonPage
-import com.example.jetpackcomposeexplorer.model.course.data.introduction
+import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
+import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPage
+import com.example.jetpackcomposeexplorer.model.course.data.basics.introduction
 import com.example.jetpackcomposeexplorer.presentation.components.InfoLessonPage
-import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuizPage
 import com.example.jetpackcomposeexplorer.presentation.components.LessonPage
+import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuizPage
 import org.commonmark.parser.Parser
 
 class QuizFragment : Fragment() {
@@ -22,20 +23,20 @@ class QuizFragment : Fragment() {
   ): View {
     return ComposeView(requireContext()).apply {
       val viewModel = QuizViewModel(
-          introduction
+          introduction.pages
       )
 
       setContent {
-        LessonPage(progress = viewModel.progress.value) {
+        LessonPage(progress = viewModel.progress.value, viewModel.page.value?.title ?: "Finished") {
           val page = viewModel.page.value
           if (page != null) {
             when (page) {
-              is LessonPage.InfoPage ->
+              is InfoPage ->
                 InfoLessonPage(
                     Parser.builder().build().parse(page.markdown),
                     nextPage = viewModel::goToNextPage,
                 )
-              is LessonPage.CodeQuestionPage ->
+              is CodeQuestionPage ->
                 CodeQuizPage(
                     model = CodeQuestionPageViewModel(page),
                     nextQuestion = viewModel::goToNextPage,

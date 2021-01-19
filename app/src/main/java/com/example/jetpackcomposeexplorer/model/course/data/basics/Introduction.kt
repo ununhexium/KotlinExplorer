@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.model.course.data
+package com.example.jetpackcomposeexplorer.model.course.data.basics
 
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.model.course.LessonData
@@ -12,7 +12,9 @@ val introduction = LessonData(
             title = "Introduction",
             // TODO: fix MD display when a paragraph span over several lines
             markdown = """
-# Kotlin
+# Introduction
+
+## Kotlin
 
 Kotlin is a programming language widely used for Android development, for server-side and tooling development.
 
