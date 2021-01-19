@@ -2,6 +2,11 @@ package com.example.jetpackcomposeexplorer.model.course
 
 interface Lesson {
   /**
+   * The identifier for this lesson. Must be unique.
+   */
+  val id: String
+
+  /**
    * The pages of this lesson
    */
   val pages: List<LessonPage>

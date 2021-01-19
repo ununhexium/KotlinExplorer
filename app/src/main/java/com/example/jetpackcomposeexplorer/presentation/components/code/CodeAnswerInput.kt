@@ -1,10 +1,12 @@
 package com.example.jetpackcomposeexplorer.presentation.components.code
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Done
@@ -12,7 +14,6 @@ import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.filled.Undo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -35,28 +36,43 @@ fun CodeAnswerInput(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
       Row {
-        Icon(
-            imageVector = Icons.Default.Undo,
-            tint = if (canUndoOrReset) MaterialTheme.colors.secondary else Color.Gray,
-            modifier = Modifier.clickable(onClick = onUndo)
+        val secondaryButtonColors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.secondaryVariant,
+            contentColor = MaterialTheme.colors.surface
         )
+        Button(
+            onClick = onUndo,
+            enabled = canUndoOrReset,
+            colors = secondaryButtonColors
+        ) {
+          Icon(C
+              imageVector = Icons.Default.Undo,
+          )
+        }
         Spacer(modifier = Modifier.padding(8.dp))
-        Icon(
-            imageVector = Icons.Default.Replay,
-            tint = if (canUndoOrReset) MaterialTheme.colors.secondary else Color.Gray,
-            modifier = Modifier.clickable(onClick = onReset)
-        )
+        Button(
+            onClick = onReset,
+            enabled = canUndoOrReset,
+            colors = secondaryButtonColors
+        ) {
+          Icon(
+              imageVector = Icons.Default.Replay,
+          )
+        }
       }
       Row {
-        Icon(
-            imageVector = if (canDoNext) {
-              Icons.Default.ArrowForward
-            } else {
-              Icons.Default.Done
-            },
-            tint = if (canValidate) MaterialTheme.colors.primary else Color.Gray,
-            modifier = Modifier.clickable(onClick = onValidate),
-        )
+        Button(
+            onClick = onValidate,
+            enabled = canValidate,
+        ) {
+          Icon(
+              imageVector = if (canDoNext) {
+                Icons.Default.ArrowForward
+              } else {
+                Icons.Default.Done
+              },
+          )
+        }
       }
     }
 

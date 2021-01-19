@@ -42,7 +42,7 @@ and ends with a double quote `"`.
 
         CodeQuestionPage(
             title = "Try to print",
-            question = """Call the print function""",
+            question = """Call the `print` function""",
             snippet = """${placeholder(0)}("Kotlin")""",
             answer = """
 The function name is case sensitive, 
@@ -59,7 +59,7 @@ you must the name exactly as it is declared: `print`.
             question = """Print `Kotlin`""",
             snippet = """print(${placeholder(0)})""",
             answer = """
-When printing a string, the content of the string must be between double quotes.
+When printing a string, the content of the string must be between double quotes `"`.
 """,
             // TODO: randomise answer's order
             choices = listOf(""""Kotlin"""", "Kotlin", "'Kotlin'"),
