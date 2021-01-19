@@ -2,8 +2,9 @@ package com.example.jetpackcomposeexplorer.model.course
 
 open class ChapterImpl(
     override val id: String,
+    override val title: String,
     override val description: String,
-    override val lessons: List<Prerequisite>,
+    override val lessons: List<Lesson>,
 ) : Chapter {
   override fun equals(other: Any?): Boolean {
     if (this === other) return true

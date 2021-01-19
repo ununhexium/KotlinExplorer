@@ -17,8 +17,6 @@ open class LessonImpl(
   }
 
   override fun hashCode(): Int {
-    return id
+    return id.hashCode()
   }
-
-
 }

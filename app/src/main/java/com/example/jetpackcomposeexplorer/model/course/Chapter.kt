@@ -7,6 +7,11 @@ interface Chapter: Prerequisite {
   override val id: String
 
   /**
+   * Title of the chapter
+   */
+  val title: String
+
+  /**
    * A preview of this chapter's content
    */
   val description: String
