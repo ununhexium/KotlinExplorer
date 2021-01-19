@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import com.example.jetpackcomposeexplorer.R
 import kotlin.math.floor
 
@@ -44,24 +45,24 @@ fun Slider(
       val placeable0 = placeables[0]
       val emptySpaceX0 = constraints.maxWidth - placeable0.width
       val emptySpaceY0 = constraints.maxHeight - placeable0.height
-      val xOffset0 = constraints.maxWidth * currentRatio
+      val xOffset0 = (constraints.maxWidth * currentRatio).toInt()
 
       placeable0.placeRelative(
-          Offset(
-              (emptySpaceX0 / 2f) - xOffset0,
-              emptySpaceY0 / 2f
+          IntOffset(
+              (emptySpaceX0 / 2) - xOffset0,
+              emptySpaceY0 / 2
           )
       )
 
       val placeable1 = placeables[1]
       val emptySpaceX1 = constraints.maxWidth - placeable1.width
       val emptySpaceY1 = constraints.maxHeight - placeable1.height
-      val xOffset1 = xOffset0 + constraints.maxWidth * (1f - currentRatio)
+      val xOffset1 = (xOffset0 + constraints.maxWidth * (1f - currentRatio)).toInt()
 
       placeable1.placeRelative(
-          Offset(
-              (emptySpaceX1 / 2f) - xOffset0 + xOffset1,
-              emptySpaceY1 / 2f
+          IntOffset(
+              (emptySpaceX1 / 2) - xOffset0 + xOffset1,
+              emptySpaceY1 / 2
           )
       )
     }

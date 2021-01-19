@@ -40,7 +40,7 @@ enum class Theme {
 @Composable
 fun JetpackComposeExplorerTheme(
     theme: Theme = if (isSystemInDarkTheme()) DARK_DEFAULT else LIGHT_DEFAULT,
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
   val colors =
       when (theme) {

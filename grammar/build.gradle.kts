@@ -17,7 +17,7 @@ dependencies {
     val kotlinVersion: String by project
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
 
-    antlr("org.antlr:antlr4:4.7")
+    antlr("org.antlr:antlr4:4.7.1")
 
     testImplementation("org.assertj:assertj-core:3.18.1")
 }

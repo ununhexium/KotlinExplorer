@@ -5,8 +5,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.presentation.components.CodeAnswerInput
-import com.example.jetpackcomposeexplorer.presentation.components.CodeQuestion
 import com.example.jetpackcomposeexplorer.presentation.components.CorrectAnswer
 import com.example.jetpackcomposeexplorer.presentation.components.QuizPage
 import com.example.jetpackcomposeexplorer.presentation.components.WrongAnswer

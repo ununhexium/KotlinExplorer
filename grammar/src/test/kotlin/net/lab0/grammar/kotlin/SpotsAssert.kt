@@ -4,9 +4,9 @@ import net.lab0.grammar.kotlin.Highlights.Spot
 import org.assertj.core.api.AbstractAssert
 import kotlin.math.min
 
-public class SpotsAssert<H>(
+class SpotsAssert<H>(
     private val code: String,
-    private val actual: List<Spot<H>>
+    actual: List<Spot<H>>
 ) :
     AbstractAssert<SpotsAssert<H>, List<Spot<H>>>(
         actual.toList(),
@@ -19,8 +19,8 @@ public class SpotsAssert<H>(
     }
   }
 
-  fun hasSpots(vararg spots: Spot<H>): SpotsAssert<H>? {
-    isNotNull()
+  fun hasSpots(vararg spots: Spot<H>): SpotsAssert<H> {
+    isNotNull
 
     val a = actual.toList()
 
@@ -50,8 +50,7 @@ public class SpotsAssert<H>(
       failWithMessage(
           "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
               (code.indices).joinToString("") {
-                val i = it % 10
-                when (i) {
+                when (val i = it % 10) {
                   0 -> "${('A'..'Z').toList()[it/10]}"
                   1 -> "_"
                   else -> "$i"

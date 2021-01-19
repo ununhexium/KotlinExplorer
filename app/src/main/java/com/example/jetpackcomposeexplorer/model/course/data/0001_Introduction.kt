@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.model.course
+package com.example.jetpackcomposeexplorer.model.course.data
 
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionPage

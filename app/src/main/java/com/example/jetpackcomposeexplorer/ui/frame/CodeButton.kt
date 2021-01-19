@@ -35,7 +35,7 @@ fun CodeButton(text: String, onClick: () -> Unit) {
 fun PreviewCodeButton() {
   MaterialTheme {
     Surface {
-      CodeButton("Answer", {})
+      CodeButton("Answer") {}
     }
   }
 }

@@ -12,6 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
+import com.example.jetpackcomposeexplorer.presentation.components.code.CodeAnswerInput
+import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuestion
 import com.example.jetpackcomposeexplorer.ui.frame.preview.PreviewTopBar
 
 @Composable

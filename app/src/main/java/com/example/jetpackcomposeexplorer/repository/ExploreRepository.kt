@@ -7,7 +7,7 @@ object ExploreRepository {
     var alias = ""
     val t = Thread {
       val firstProfile = ExplorerDatabase.db.getUserDao().getAll().first()
-      alias = firstProfile.alias;
+      alias = firstProfile.alias
     }
     t.start()
     t.join()

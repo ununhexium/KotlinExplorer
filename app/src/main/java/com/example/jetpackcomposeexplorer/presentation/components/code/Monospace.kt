@@ -12,6 +12,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import com.example.jetpackcomposeexplorer.presentation.theme.sourceCodeFontFamily
 import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 
@@ -24,7 +25,8 @@ fun Monospace(
       text,
       modifier = modifier,
       fontFamily = sourceCodeFontFamily,
-      softWrap = false
+      fontSize = TextUnit.Companion.Sp(14),
+      softWrap = false,
   )
 }
 
@@ -33,12 +35,7 @@ fun Monospace(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-  Text(
-      text,
-      modifier = modifier,
-      fontFamily = sourceCodeFontFamily,
-      softWrap = false
-  )
+  Monospace(AnnotatedString(text), modifier)
 }
 
 @Preview

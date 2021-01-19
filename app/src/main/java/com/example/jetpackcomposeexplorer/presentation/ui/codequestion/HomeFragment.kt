@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
         Scaffold(
             drawerContent = {
               ExploreDrawer(
-//                  nav = findNavController(),
+//                nav = findNavController(),
                   onSelection = {
                     scaffoldState.drawerState.close()
                   },

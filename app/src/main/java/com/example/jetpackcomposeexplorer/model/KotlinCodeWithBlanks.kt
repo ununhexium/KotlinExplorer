@@ -1,6 +1,5 @@
 package com.example.jetpackcomposeexplorer.model
 
-import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 
 interface KotlinCodeWithBlanks {

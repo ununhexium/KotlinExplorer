@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.presentation.components
+package com.example.jetpackcomposeexplorer.presentation.components.code
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,8 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
-import com.example.jetpackcomposeexplorer.presentation.components.code.AnswerChip
 
 @Composable
 fun CodeAnswerInput(
