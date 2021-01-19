@@ -16,12 +16,14 @@ class CodeQuestionPageViewModel(
     choices: List<Answer>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
 ) {
-  constructor(page: LessonPage.CodeQuestionPage) : this(
+  constructor(page: LessonPage.CodeQuestionPage, shuffleAnswers: Boolean = true) : this(
       page.question,
       page.snippet,
       page.answer,
       KotlinCodeWithBlanksImpl(page.snippet).placeholderIds.size,
-      page.choices.mapIndexed { index, s -> Answer(index, s, false) },
+      page.choices
+          .mapIndexed { index, s -> Answer(index, s, false) }
+          .let { if (shuffleAnswers) it.shuffled() else it },
       { answers -> page.answerValidator(answers.map { it.text }) }
   )
 

@@ -5,12 +5,10 @@ import com.example.jetpackcomposeexplorer.model.course.LessonData
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPage
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 
-val introduction = LessonData(
+val introduction = LessonData.new(
     pages = listOf(
-        // TODO: feature to skip to the test part
         InfoPage(
             title = "Introduction",
-            // TODO: fix MD display when a paragraph span over several lines
             markdown = """
 # Introduction
 
@@ -48,7 +46,6 @@ and ends with a double quote `"`.
 The function name is case sensitive, 
 you must the name exactly as it is declared: `print`.
 """,
-            // TODO: randomise answer's order
             choices = listOf("printLn", "print", "println", "Print", "PrintLn"),
         ) {
           it == listOf("print")
@@ -61,7 +58,6 @@ you must the name exactly as it is declared: `print`.
             answer = """
 When printing a string, the content of the string must be between double quotes `"`.
 """,
-            // TODO: randomise answer's order
             choices = listOf(""""Kotlin"""", "Kotlin", "'Kotlin'"),
         ) {
           it == listOf(""""Kotlin"""")

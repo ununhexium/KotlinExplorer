@@ -4,7 +4,7 @@ interface Lesson {
   /**
    * The identifier for this lesson. Must be unique.
    */
-  val id: String
+  val id: Int
 
   /**
    * The pages of this lesson

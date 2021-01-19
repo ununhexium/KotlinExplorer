@@ -101,7 +101,7 @@ fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
 @Composable
 fun MDImage(image: Image, modifier: Modifier = Modifier) {
   Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-    // TODO image
+    // not implemented
   }
 }
 
@@ -282,7 +282,7 @@ fun MarkdownText(
                   PlaceholderVerticalAlign.Bottom
               )
           ) {
-            // TODO image
+            // image not implmented
           }
       ),
       onTextLayout = { layoutResult.value = it }

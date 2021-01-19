@@ -6,7 +6,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Done
@@ -45,7 +44,7 @@ fun CodeAnswerInput(
             enabled = canUndoOrReset,
             colors = secondaryButtonColors
         ) {
-          Icon(C
+          Icon(
               imageVector = Icons.Default.Undo,
           )
         }
