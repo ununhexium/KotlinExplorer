@@ -1,11 +1,12 @@
-package com.example.jetpackcomposeexplorer.model.course.data.basics
+package com.example.jetpackcomposeexplorer.model.course.data.kotlin.basics
 
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
-import com.example.jetpackcomposeexplorer.model.course.LessonData
+import com.example.jetpackcomposeexplorer.model.course.LessonImpl
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPage
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 
-val introduction = LessonData.new(
+object HelloWorld : LessonImpl(
+    id = "kotlin.basics.HelloWorld",
     pages = listOf(
         InfoPage(
             title = "Introduction",
@@ -21,7 +22,7 @@ In this app, you will learn `Kotlin` using the fast path to become an Android de
         ),
 
         InfoPage(
-            title = "Hello, world",
+            title = "Hello, World!",
             markdown = """
 A basic operation in a program is to display text, or `print` text.
 

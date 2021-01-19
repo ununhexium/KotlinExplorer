@@ -20,5 +20,23 @@ sealed class LessonPage(
       val answerValidator: (List<String>) -> Boolean,
   ) : LessonPage(
       title
-  )
+  ) {
+    companion object {
+      fun singleChoice(
+          title: String,
+          question: String,
+          snippet: String,
+          answer: String,
+          choice: String,
+      ) = CodeQuestionPage(
+          title = title,
+          question = question,
+          snippet = snippet,
+          answer = answer,
+          choices = listOf(choice)
+      ) {
+        true
+      }
+    }
+  }
 }

@@ -282,7 +282,7 @@ fun MarkdownText(
                   PlaceholderVerticalAlign.Bottom
               )
           ) {
-            // image not implmented
+            // image not implemented
           }
       ),
       onTextLayout = { layoutResult.value = it }

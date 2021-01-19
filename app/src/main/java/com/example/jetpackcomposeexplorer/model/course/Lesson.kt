@@ -1,10 +1,10 @@
 package com.example.jetpackcomposeexplorer.model.course
 
-interface Lesson {
+interface Lesson: Prerequisite {
   /**
    * The identifier for this lesson. Must be unique.
    */
-  val id: Int
+  override val id: String
 
   /**
    * The pages of this lesson
@@ -14,5 +14,5 @@ interface Lesson {
   /**
    * The lessons required to understand this one.
    */
-  val dependencies: List<Lesson>
+  val dependencies: List<Prerequisite>
 }

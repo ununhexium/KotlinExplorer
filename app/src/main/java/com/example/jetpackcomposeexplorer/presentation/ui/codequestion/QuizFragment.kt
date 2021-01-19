@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPage
-import com.example.jetpackcomposeexplorer.model.course.data.basics.introduction
+import com.example.jetpackcomposeexplorer.model.course.data.kotlin.basics.HelloWorld
 import com.example.jetpackcomposeexplorer.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuizPage
@@ -23,7 +23,7 @@ class QuizFragment : Fragment() {
   ): View {
     return ComposeView(requireContext()).apply {
       val viewModel = QuizViewModel(
-          introduction.pages
+          HelloWorld.pages
       )
 
       setContent {
