@@ -3,9 +3,10 @@ package com.example.jetpackcomposeexplorer.presentation.ui.codequestion
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.jetpackcomposeexplorer.model.course.LessonPage
 
-class QuizViewModel(private val pages: List<CodeQuestionPage>) : ViewModel() {
-  val page: MutableState<CodeQuestionPage?> = mutableStateOf(pages.first())
+class QuizViewModel<P : LessonPage>(private val pages: List<P>) : ViewModel() {
+  val page: MutableState<P?> = mutableStateOf(pages.first())
   val progress = mutableStateOf(pages.indexOf(page.value) / pages.size.toFloat())
 
   fun goToNextPage() {

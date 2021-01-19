@@ -4,16 +4,27 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanksImpl
+import com.example.jetpackcomposeexplorer.model.course.LessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
+import org.commonmark.parser.Parser
 
-class CodeQuestionPage(
-    val question: String,
+class CodeQuestionPageViewModel(
+    question: String,
     initialSnippet: String,
     val explanation: String,
     val maxAnswers: Int,
     choices: List<Answer>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
 ) {
+  constructor(page: LessonPage.CodeQuestionPage) : this(
+      page.question,
+      page.snippet,
+      page.answer,
+      KotlinCodeWithBlanksImpl(page.snippet).placeholderIds.size,
+      page.choices.mapIndexed { index, s -> Answer(index, s, false) },
+      { answers -> page.answerValidator(answers.map { it.text }) }
+  )
+
   constructor(
       question: String,
       codeSample: String,
@@ -45,6 +56,8 @@ class CodeQuestionPage(
       choices.toList(),
       answerValidator
   )
+
+  val questionMarkdown = Parser.builder().build().parse(question)
 
   val answers: MutableState<List<Answer>> = mutableStateOf(choices)
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())

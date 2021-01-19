@@ -13,7 +13,9 @@ import net.lab0.grammar.kotlin.KotlinParser.PostfixUnaryExpressionContext
 import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
 
-class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<KotlinHighlight>>() {
+class KotlinSyntaxHighlighterVisitor(
+    val wellKnownFunctions: List<String> = listOf("println", "print"),
+) : KotlinParserBaseVisitor<Highlights<KotlinHighlight>>() {
   private fun hl(l: Highlights<KotlinHighlight>.() -> Unit): Highlights<KotlinHighlight> {
     val h = Highlights<KotlinHighlight>()
     l(h)
@@ -99,7 +101,7 @@ class KotlinSyntaxHighlighterVisitor : KotlinParserBaseVisitor<Highlights<Kotlin
 
   override fun visitPostfixUnaryExpression(ctx: PostfixUnaryExpressionContext) =
       hl {
-        if (ctx.atomicExpression().text == "println") {
+        if (ctx.atomicExpression().text in wellKnownFunctions) {
           add(FUNCTION, ctx.atomicExpression().range)
         }
 

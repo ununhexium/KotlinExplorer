@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.jetpackcomposeexplorer.presentation.components.frame.ExploreDrawer
 
 class HomeFragment : Fragment() {
@@ -20,6 +21,9 @@ class HomeFragment : Fragment() {
     return ComposeView(requireContext()).apply {
       setContent {
         val scaffoldState = rememberScaffoldState()
+
+//      val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment("foo")
+//      findNavController().navigate(action)
 
         Scaffold(
             drawerContent = {

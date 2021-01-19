@@ -18,7 +18,8 @@ interface KotlinCodeWithBlanks {
   val raw: String
 
   /**
-   * The number of placeholders in the raw input
+   * The number of placeholders in the raw input.
+   * If 2 place holders have the same identifier, they count as 2.
    */
   val placeholdersCount: Int
 

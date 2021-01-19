@@ -1,11 +1,12 @@
 package com.example.jetpackcomposeexplorer.presentation.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,7 +14,8 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
 import com.example.jetpackcomposeexplorer.presentation.components.code.CodeAnswerInput
-import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuestion
+import com.example.jetpackcomposeexplorer.presentation.components.code.KotlinCode
+import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 import com.example.jetpackcomposeexplorer.ui.frame.preview.PreviewTopBar
 
 @Composable
@@ -27,7 +29,7 @@ fun QuizPage(
   ) {
     val (questionRef, answerRef, answerInputRef) = createRefs()
 
-    Surface(
+    Column(
         modifier = Modifier
             .padding(8.dp)
             .constrainAs(questionRef) {
@@ -36,24 +38,26 @@ fun QuizPage(
               end.linkTo(parent.end)
             }
     ) {
-      question()
+          question()
     }
 
     answer?.let {
-      Surface(
+      Column(
           modifier = Modifier
               .padding(8.dp)
               .constrainAs(answerRef) {
-            top.linkTo(questionRef.bottom)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
-          }
+                top.linkTo(questionRef.bottom)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+              }
       ) {
-        answer()
+        Column {
+          answer()
+        }
       }
     }
 
-    Surface(
+    Column(
         modifier = Modifier.constrainAs(answerInputRef) {
           bottom.linkTo(parent.bottom, margin = 8.dp)
           start.linkTo(parent.start, margin = 8.dp)
@@ -73,8 +77,9 @@ fun QuizPagePreview() {
         bodyContent = {
           QuizPage(
               question = {
-                CodeQuestion(
-                    question = "Why?",
+                Text("Why?")
+                DefaultVerticalSpacer()
+                KotlinCode(
                     code = """println("Because ${placeholder(0)}!")"""
                 )
               },

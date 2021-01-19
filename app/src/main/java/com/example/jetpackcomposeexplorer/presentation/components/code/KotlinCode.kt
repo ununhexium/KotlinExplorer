@@ -4,15 +4,18 @@ import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyleRange
 import androidx.compose.ui.text.subSequence
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.model.code.CodeStyle
 import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
 import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
@@ -22,6 +25,7 @@ import com.example.jetpackcomposeexplorer.model.code.keywordStyle
 import com.example.jetpackcomposeexplorer.model.code.numberStyle
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.ANSWER_REGEX
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
+import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 import com.example.jetpackcomposeexplorer.ui.theme.length
 import net.lab0.grammar.kotlin.KotlinHighlight
 
@@ -29,12 +33,14 @@ import net.lab0.grammar.kotlin.KotlinHighlight
 @Composable
 fun KotlinCode(
     code: String,
-    codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle
+    codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
+    showLineNumbers: Boolean = false,
 ) {
   KotlinCode(
       AnnotatedString(code),
       codeStyle.foregroundColor,
       codeStyle.backgroundColor,
+      showLineNumbers
   )
 }
 
@@ -42,7 +48,8 @@ fun KotlinCode(
 fun KotlinCode(
     code: AnnotatedString,
     foregroundColor: Color,
-    backgroundColor: Color
+    backgroundColor: Color,
+    showLineNumbers: Boolean = false,
 ) {
   val lines = code.text.split("\n")
 
@@ -51,45 +58,73 @@ fun KotlinCode(
       color = backgroundColor,
       contentColor = foregroundColor
   ) {
-    Column {
-      lines.forEachIndexed { index, line ->
-        val realStartIndex =
-            lines.take(index).fold(0) { acc, e -> acc + e.length + 1 }
+    Row {
+      if (showLineNumbers) {
+        GutterPart(lines = lines)
+      }
+      CodePart(lines = lines, code = code)
+    }
+  }
+}
 
-        Row {
-          val answerMatch = ANSWER_REGEX.find(line)
+@Composable
+fun GutterPart(lines: List<String>) {
+  Surface(
+      modifier = Modifier.padding(end = 8.dp),
+      color = MaterialTheme.colors.surface,
+      contentColor = MaterialTheme.colors.onSurface
+  ) {
+    Column(horizontalAlignment = Alignment.End) {
+      lines.forEachIndexed { index, _ ->
+        Monospace(text = (index + 1).toString())
+      }
+    }
+  }
+}
 
-          if (answerMatch != null) {
-            val matchGroup = answerMatch.groups[0]
-            val answerIndex = matchGroup!!.range.first
+@Composable
+private fun CodePart(
+    lines: List<String>,
+    code: AnnotatedString,
+) {
+  Column {
+    lines.forEachIndexed { index, line ->
+      val realStartIndex =
+          lines.take(index).fold(0) { acc, e -> acc + e.length + 1 }
 
-            val placeholderLength = matchGroup.range.length
+      Row {
+        val answerMatch = ANSWER_REGEX.find(line)
 
-            val before = line.substring(0, answerIndex)
-            val after = line.substring(answerIndex + placeholderLength)
+        if (answerMatch != null) {
+          val matchGroup = answerMatch.groups[0]
+          val answerIndex = matchGroup!!.range.first
 
-            val realStartOfBefore = realStartIndex
-            val realEndOfBefore = realStartIndex + before.length
-            val realStartOfAfter = realEndOfBefore + placeholderLength
-            val realEndOfAfter = realStartOfAfter + after.length
+          val placeholderLength = matchGroup.range.length
 
-            Monospace(code.subSequence(realStartOfBefore, realEndOfBefore))
-            Surface(
-                shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colors.primaryVariant,
-            ) {
-              // placeholder to have the right size
-              Monospace(" ".repeat(placeholderLength))
-            }
-            Monospace(code.subSequence(realStartOfAfter, realEndOfAfter))
-          } else {
-            Monospace(
-                code.subSequence(
-                    realStartIndex,
-                    realStartIndex + line.length
-                )
-            )
+          val before = line.substring(0, answerIndex)
+          val after = line.substring(answerIndex + placeholderLength)
+
+          val realStartOfBefore = realStartIndex
+          val realEndOfBefore = realStartIndex + before.length
+          val realStartOfAfter = realEndOfBefore + placeholderLength
+          val realEndOfAfter = realStartOfAfter + after.length
+
+          Monospace(code.subSequence(realStartOfBefore, realEndOfBefore))
+          Surface(
+              shape = MaterialTheme.shapes.medium,
+              color = MaterialTheme.colors.primaryVariant,
+          ) {
+            // placeholder to have the right size
+            Monospace(" ".repeat(placeholderLength))
           }
+          Monospace(code.subSequence(realStartOfAfter, realEndOfAfter))
+        } else {
+          Monospace(
+              code.subSequence(
+                  realStartIndex,
+                  realStartIndex + line.length
+              )
+          )
         }
       }
     }
@@ -198,19 +233,24 @@ fun PreviewKotlinCode_Multiline() {
 
 @Preview
 @Composable
-fun PreviewKotlinCode_MultilineRef() {
+fun PreviewKotlinCode_WithLineNumbers() {
   MaterialTheme {
     val code = AnnotatedString(
         """
-            |fun foo() {
-            |  val bar = /**ANSWER(XX)**/ - 1234567
-            |  val i = 0
-            |}
-          """.trimMargin(),
-        multilineColorSpans
+          |fun foo() {
+          |  val bar = /**ANSWER(XX)**/ - 1234567
+          |  val i = 0
+          |}
+        """.trimMargin(),
+        multilineColorSpans,
     )
     ScrollableColumn {
-      KotlinCode(code, previewForegroundColor, previewBackgroundColor)
+      KotlinCode(
+          code = code,
+          foregroundColor = previewForegroundColor,
+          backgroundColor = previewBackgroundColor,
+          showLineNumbers = true
+      )
     }
   }
 }

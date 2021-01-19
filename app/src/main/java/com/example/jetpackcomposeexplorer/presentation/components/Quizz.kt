@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun Lesson(
+fun LessonPage(
     progress: Float,
     page: @Composable () -> Unit,
 ) {
@@ -28,7 +28,7 @@ fun QuizPreview() {
   MaterialTheme {
     Surface {
       Column {
-        Lesson(
+        LessonPage(
             0.116f,
         ) {
           Surface(modifier = Modifier.fillMaxSize(), color = Color.Gray) {

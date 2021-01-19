@@ -4,22 +4,35 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
+import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.presentation.components.CorrectAnswer
 import com.example.jetpackcomposeexplorer.presentation.components.QuizPage
 import com.example.jetpackcomposeexplorer.presentation.components.WrongAnswer
-import com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionPage
+import com.example.jetpackcomposeexplorer.presentation.components.markdown.MDDocument
+import com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionPageViewModel
+import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 
 @Composable
 fun CodeQuizPage(
-    model: CodeQuestionPage,
+    model: CodeQuestionPageViewModel,
+    codeColoration: Boolean = true,
     nextQuestion: () -> Unit,
 ) {
   QuizPage(
       question = {
-        CodeQuestion(
-            question = model.question,
-            code = model.snippet,
+        MDDocument(model.questionMarkdown)
+        DefaultVerticalSpacer()
+        KotlinCode(
+            code = if (codeColoration) {
+              extractHighlightsAndAnnotate(model.snippet, DefaultCodeStyle.textStyler)
+            } else {
+              AnnotatedString(model.snippet)
+            },
+            foregroundColor = DefaultCodeStyle.foregroundColor,
+            backgroundColor = DefaultCodeStyle.backgroundColor
         )
       },
       answer = if (model.showAnswer.value) {
@@ -57,7 +70,7 @@ fun CodeQuestionQuizPagePreview_selectedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            CodeQuestionPage(
+            CodeQuestionPageViewModel(
                 "Why?",
                 "val i = 0",
                 "Because",
@@ -67,7 +80,8 @@ fun CodeQuestionQuizPagePreview_selectedAnswer() {
               false
             }.also {
               it.select(it.answers.value.first())
-            }
+            },
+            codeColoration = false,
         ) {}
       }
     }
@@ -81,7 +95,7 @@ fun CodeQuestionQuizPagePreview_validatedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            CodeQuestionPage(
+            CodeQuestionPageViewModel(
                 "Why?",
                 "val i = 0",
                 "Because",
@@ -92,7 +106,8 @@ fun CodeQuestionQuizPagePreview_validatedAnswer() {
             }.also {
               it.select(it.answers.value.first())
               it.validate()
-            }
+            },
+            codeColoration = false,
         ) {}
       }
     }

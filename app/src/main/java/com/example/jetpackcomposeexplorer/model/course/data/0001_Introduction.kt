@@ -1,17 +1,68 @@
 package com.example.jetpackcomposeexplorer.model.course.data
 
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
-import com.example.jetpackcomposeexplorer.presentation.ui.codequestion.CodeQuestionPage
+import com.example.jetpackcomposeexplorer.model.course.LessonData
+import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPage
+import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 
-val steps = listOf(
-    CodeQuestionPage(
-        "",
-        """println("${placeholder(0)}")""",
-        "α Alpha, β beta, γ gamma, ...",
-        1,
-        "alpha", "beta", "gamma"
-    ) {
-      it.first().text == "alpha"
-    }
+val introduction = LessonData(
+    pages = listOf(
+        // TODO: feature to skip to the test part
+        InfoPage(
+            title = "Introduction",
+            // TODO: fix MD display when a paragraph span over several lines
+            markdown = """
+# Kotlin
+
+Kotlin is a programming language widely used for Android development, for server-side and tooling development.
+
+In this app, you will learn `Kotlin` using the fast path to become an Android developer.
+"""
+        ),
+
+        InfoPage(
+            title = "Hello, world",
+            markdown = """
+A basic operation in a program is to display text, or `print` text.
+
+```kotlin
+print("Hello, World!")
+```
+
+`print` is a function, taking one parameter: 
+`"Hello, World!"`, a string.
+
+A string starts with double quotes `"`, 
+followed by several characters,
+and ends with a double quote `"`.
+"""
+        ),
+
+        CodeQuestionPage(
+            title = "Try to print",
+            question = """Call the print function""",
+            snippet = """${placeholder(0)}("Kotlin")""",
+            answer = """
+The function name is case sensitive, 
+you must the name exactly as it is declared: `print`.
+""",
+            // TODO: randomise answer's order
+            choices = listOf("printLn", "print", "println", "Print", "PrintLn"),
+        ) {
+          it == listOf("print")
+        },
+
+        CodeQuestionPage(
+            title = "Try to print Kotlin",
+            question = """Print `Kotlin`""",
+            snippet = """print(${placeholder(0)})""",
+            answer = """
+When printing a string, the content of the string must be between double quotes.
+""",
+            // TODO: randomise answer's order
+            choices = listOf(""""Kotlin"""", "Kotlin", "'Kotlin'"),
+        ) {
+          it == listOf(""""Kotlin"""")
+        },
+    )
 )
-

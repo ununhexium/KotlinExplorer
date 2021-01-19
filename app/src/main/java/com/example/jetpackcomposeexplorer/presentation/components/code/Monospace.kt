@@ -1,6 +1,9 @@
 package com.example.jetpackcomposeexplorer.presentation.components.code
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -13,6 +16,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.presentation.theme.sourceCodeFontFamily
 import com.example.jetpackcomposeexplorer.ui.frame.DefaultVerticalSpacer
 
@@ -35,7 +39,10 @@ fun Monospace(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-  Monospace(AnnotatedString(text), modifier)
+  Monospace(
+      AnnotatedString(text),
+      modifier
+  )
 }
 
 @Preview

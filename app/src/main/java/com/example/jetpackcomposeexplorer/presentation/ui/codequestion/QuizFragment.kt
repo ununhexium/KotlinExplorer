@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
+import com.example.jetpackcomposeexplorer.model.course.LessonPage
+import com.example.jetpackcomposeexplorer.model.course.data.introduction
+import com.example.jetpackcomposeexplorer.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuizPage
-import com.example.jetpackcomposeexplorer.presentation.components.Lesson
+import com.example.jetpackcomposeexplorer.presentation.components.LessonPage
+import org.commonmark.parser.Parser
 
 class QuizFragment : Fragment() {
   override fun onCreateView(
@@ -19,36 +22,26 @@ class QuizFragment : Fragment() {
   ): View {
     return ComposeView(requireContext()).apply {
       val viewModel = QuizViewModel(
-          listOf(
-              CodeQuestionPage(
-                  "What is the first letter of the greek alphabet",
-                  """println("${placeholder(0)}")""",
-                  "α Alpha, β beta, γ gamma, ...",
-                  1,
-                  "alpha", "beta", "gamma"
-              ) {
-                it.first().text == "alpha"
-              },
-              CodeQuestionPage(
-                  "Which of these words are latin words?",
-                  """
-                    |println("${placeholder(0)}")
-                    |println("${placeholder(1)}")
-                  """.trimMargin(),
-                  "Album: white, disco: I teach",
-                  2,
-                  "album", "tree", "disco", "wheel"
-              ) {
-                it.map { it.text }.containsAll(listOf("album", "disco"))
-              },
-          )
+          introduction
       )
 
       setContent {
-        Lesson(progress = viewModel.progress.value) {
+        LessonPage(progress = viewModel.progress.value) {
           val page = viewModel.page.value
           if (page != null) {
-            CodeQuizPage(model = page, nextQuestion = viewModel::goToNextPage)
+            when (page) {
+              is LessonPage.InfoPage ->
+                InfoLessonPage(
+                    Parser.builder().build().parse(page.markdown),
+                    nextPage = viewModel::goToNextPage,
+                )
+              is LessonPage.CodeQuestionPage ->
+                CodeQuizPage(
+                    model = CodeQuestionPageViewModel(page),
+                    nextQuestion = viewModel::goToNextPage,
+                )
+            }
+
           } else {
             Text("Finished")
           }

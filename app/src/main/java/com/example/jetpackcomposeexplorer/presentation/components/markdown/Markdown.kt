@@ -1,12 +1,15 @@
 package com.example.jetpackcomposeexplorer.presentation.components.markdown
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -16,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.gesture.tapGestureFilter
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.AmbientUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.Placeholder
@@ -28,8 +32,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.example.jetpackcomposeexplorer.presentation.components.code.KotlinCode
-import com.example.jetpackcomposeexplorer.presentation.components.code.Monospace
 import com.example.jetpackcomposeexplorer.presentation.theme.sourceCodeFontFamily
 import org.commonmark.node.BlockQuote
 import org.commonmark.node.BulletList
@@ -77,30 +79,6 @@ fun MDDocument(document: Node) {
   MDBlockChildren(document)
 }
 
-@Composable
-fun MDHeading(heading: Heading, modifier: Modifier = Modifier) {
-  val style = when (heading.level) {
-      1 -> MaterialTheme.typography.h1
-      2 -> MaterialTheme.typography.h2
-      3 -> MaterialTheme.typography.h3
-      4 -> MaterialTheme.typography.h4
-      5 -> MaterialTheme.typography.h5
-      6 -> MaterialTheme.typography.h6
-    else -> {
-      // Invalid header...
-      MDBlockChildren(heading)
-      return
-    }
-  }
-
-  val padding = if (heading.parent is Document) 8.dp else 0.dp
-  Box(modifier = modifier.padding(bottom = padding)) {
-    val text = buildAnnotatedString {
-      appendMarkdownChildren(heading, MaterialTheme.colors)
-    }
-    MarkdownText(text, style)
-  }
-}
 
 @Composable
 fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
@@ -141,37 +119,23 @@ fun MDBulletList(bulletList: BulletList, modifier: Modifier = Modifier) {
   }
 }
 
-@Composable
-fun MDOrderedList(orderedList: OrderedList, modifier: Modifier = Modifier) {
-  var number = orderedList.startNumber
-  val delimiter = orderedList.delimiter
-  MDListItems(orderedList, modifier) {
-    val text = buildAnnotatedString {
-      pushStyle(MaterialTheme.typography.body1.toSpanStyle())
-      append("${number++}$delimiter ")
-      appendMarkdownChildren(it, MaterialTheme.colors)
-      pop()
-    }
-    MarkdownText(text, MaterialTheme.typography.body1, modifier)
-  }
-}
 
 @Composable
 fun MDListItems(
     listBlock: ListBlock,
     modifier: Modifier = Modifier,
-    item: @Composable (node: Node) -> Unit
+    item: @Composable (node: Node) -> Unit,
 ) {
   val bottom = if (listBlock.parent is Document) 8.dp else 0.dp
   val start = if (listBlock.parent is Document) 0.dp else 8.dp
-  Box(modifier = modifier.padding(bottom = bottom, start = start)) {
+  Column(modifier = modifier.padding(bottom = bottom, start = start)) {
     var listItem = listBlock.firstChild
     while (listItem != null) {
       var child = listItem.firstChild
       while (child != null) {
         when (child) {
-            is BulletList -> MDBulletList(child, modifier)
-            is OrderedList -> MDOrderedList(child, modifier)
+          is BulletList -> MDBulletList(child, modifier)
+          is OrderedList -> MDOrderedList(child, modifier)
           else -> item(child)
         }
         child = child.next
@@ -185,14 +149,16 @@ fun MDListItems(
 fun MDBlockQuote(blockQuote: BlockQuote, modifier: Modifier = Modifier) {
   val color = MaterialTheme.colors.onBackground
   Box(
-      modifier = modifier.drawBehind {
-          drawLine(
-              color = color,
-              strokeWidth = 2f,
-              start = Offset(12.dp.value, 0f),
-              end = Offset(12.dp.value, size.height)
-          )
-      }.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+      modifier = modifier
+          .drawBehind {
+            drawLine(
+                color = color,
+                strokeWidth = 2f,
+                start = Offset(12.dp.value, 0f),
+                end = Offset(12.dp.value, size.height)
+            )
+          }
+          .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
   ) {
     val text = buildAnnotatedString {
       pushStyle(
@@ -207,27 +173,9 @@ fun MDBlockQuote(blockQuote: BlockQuote, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun MDFencedCodeBlock(
-    fencedCodeBlock: FencedCodeBlock,
-    modifier: Modifier = Modifier
-) {
-  val padding = if (fencedCodeBlock.parent is Document) 8.dp else 0.dp
-  Box(modifier = modifier.padding(bottom = padding, start = 8.dp)) {
-    if (fencedCodeBlock.info.equals("kotlin", true)) {
-      KotlinCode(fencedCodeBlock.literal)
-    } else {
-      Monospace(
-          text = fencedCodeBlock.literal,
-          modifier = modifier,
-      )
-    }
-  }
-}
-
-@Composable
 fun MDIndentedCodeBlock(
     indentedCodeBlock: IndentedCodeBlock,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
   // Ignored
 }
@@ -235,7 +183,7 @@ fun MDIndentedCodeBlock(
 @Composable
 fun MDThematicBreak(
     thematicBreak: ThematicBreak,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
   //Ignored
 }
@@ -245,58 +193,58 @@ fun MDBlockChildren(parent: Node) {
   var child = parent.firstChild
   while (child != null) {
     when (child) {
-        is BlockQuote -> MDBlockQuote(child)
-        is ThematicBreak -> MDThematicBreak(child)
-        is Heading -> MDHeading(child)
-        is Paragraph -> MDParagraph(child)
-        is FencedCodeBlock -> MDFencedCodeBlock(child)
-        is IndentedCodeBlock -> MDIndentedCodeBlock(child)
-        is Image -> MDImage(child)
-        is BulletList -> MDBulletList(child)
-        is OrderedList -> MDOrderedList(child)
+      is BlockQuote -> MDBlockQuote(child)
+      is ThematicBreak -> MDThematicBreak(child)
+      is Heading -> MDHeading(child)
+      is Paragraph -> MDParagraph(child)
+      is FencedCodeBlock -> MDFencedCodeBlock(child)
+      is IndentedCodeBlock -> MDIndentedCodeBlock(child)
+      is Image -> MDImage(child)
+      is BulletList -> MDBulletList(child)
+      is OrderedList -> MDOrderedList(child)
     }
     child = child.next
   }
 }
 
 fun AnnotatedString.Builder.appendMarkdownChildren(
-    parent: Node, colors: Colors
+    parent: Node, colors: Colors,
 ) {
   var child = parent.firstChild
   while (child != null) {
     when (child) {
-        is Paragraph -> appendMarkdownChildren(child, colors)
-        is Text -> append(child.literal)
-        is Image -> appendInlineContent(TAG_IMAGE_URL, child.destination)
-        is Emphasis -> {
-            pushStyle(SpanStyle(fontStyle = FontStyle.Italic))
-            appendMarkdownChildren(child, colors)
-            pop()
-        }
-        is StrongEmphasis -> {
-            pushStyle(SpanStyle(fontWeight = FontWeight.Bold))
-            appendMarkdownChildren(child, colors)
-            pop()
-        }
-        is Code -> {
-            pushStyle(TextStyle(fontFamily = sourceCodeFontFamily).toSpanStyle())
-            append(child.literal)
-            pop()
-        }
-        is HardLineBreak -> {
-            append("\n")
-        }
-        is Link -> {
-            val underline = SpanStyle(
-                colors.primary,
-                textDecoration = TextDecoration.Underline
-            )
-            pushStyle(underline)
-            pushStringAnnotation(TAG_URL, child.destination)
-            appendMarkdownChildren(child, colors)
-            pop()
-            pop()
-        }
+      is Paragraph -> appendMarkdownChildren(child, colors)
+      is Text -> append(child.literal)
+      is Image -> appendInlineContent(TAG_IMAGE_URL, child.destination)
+      is Emphasis -> {
+        pushStyle(SpanStyle(fontStyle = FontStyle.Italic))
+        appendMarkdownChildren(child, colors)
+        pop()
+      }
+      is StrongEmphasis -> {
+        pushStyle(SpanStyle(fontWeight = FontWeight.Bold))
+        appendMarkdownChildren(child, colors)
+        pop()
+      }
+      is Code -> {
+        pushStyle(TextStyle(fontFamily = sourceCodeFontFamily, background = Color.LightGray).toSpanStyle())
+        append(child.literal)
+        pop()
+      }
+      is HardLineBreak -> {
+        append("\n")
+      }
+      is Link -> {
+        val underline = SpanStyle(
+            colors.primary,
+            textDecoration = TextDecoration.Underline
+        )
+        pushStyle(underline)
+        pushStringAnnotation(TAG_URL, child.destination)
+        appendMarkdownChildren(child, colors)
+        pop()
+        pop()
+      }
     }
     child = child.next
   }
@@ -306,7 +254,7 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
 fun MarkdownText(
     text: AnnotatedString,
     style: TextStyle,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
   val uriHandler = AmbientUriHandler.current
   val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
@@ -314,16 +262,16 @@ fun MarkdownText(
   Text(
       text = text,
       modifier = modifier.tapGestureFilter { pos ->
-          layoutResult.value?.let { layoutResult ->
-              val position = layoutResult.getOffsetForPosition(pos)
-              text.getStringAnnotations(position, position)
-                  .firstOrNull()
-                  ?.let { sa ->
-                      if (sa.tag == TAG_URL) {
-                          uriHandler.openUri(sa.item)
-                      }
-                  }
-          }
+        layoutResult.value?.let { layoutResult ->
+          val position = layoutResult.getOffsetForPosition(pos)
+          text.getStringAnnotations(position, position)
+              .firstOrNull()
+              ?.let { sa ->
+                if (sa.tag == TAG_URL) {
+                  uriHandler.openUri(sa.item)
+                }
+              }
+        }
       },
       style = style,
       inlineContent = mapOf(
@@ -334,7 +282,7 @@ fun MarkdownText(
                   PlaceholderVerticalAlign.Bottom
               )
           ) {
-              // TODO image
+            // TODO image
           }
       ),
       onTextLayout = { layoutResult.value = it }
