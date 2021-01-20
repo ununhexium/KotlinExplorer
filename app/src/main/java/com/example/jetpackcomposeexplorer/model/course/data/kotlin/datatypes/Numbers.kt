@@ -19,11 +19,11 @@ object Numbers : LessonImpl(
 The numbers in Kotlin can use different representations 
 depending on the *precision* and *type* of number.
 
-## Integers
+### Integers
 
 Whole numbers like 1, 2, 42, -1.
 
-## Floating point
+### Floating point
 
 Floating point numbers are numbers like `1.234e^89`, an approximation of pi (3.1415...).
 """

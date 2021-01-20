@@ -119,6 +119,8 @@ class KotlinSyntaxHighlighterVisitor(
       hl {
         when (node.symbol.type) {
           KotlinParser.BooleanLiteral -> add(KEYWORD, node.range)
+          KotlinParser.FloatLiteral -> add(NUMBER, node.range)
+          KotlinParser.RealLiteral -> add(NUMBER, node.range)
           KotlinParser.ELSE -> add(KEYWORD, node.range)
           KotlinParser.HexLiteral -> add(NUMBER, node.range)
           KotlinParser.IF -> add(KEYWORD, node.range)

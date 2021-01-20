@@ -12,9 +12,9 @@ object HelloWorld : LessonImpl(
         InfoPage(
             title = "Introduction",
             markdown = """
-# Introduction
+### Introduction
 
-## Kotlin
+#### Kotlin
 
 Kotlin is a programming language widely used for Android development, for server-side and tooling development.
 

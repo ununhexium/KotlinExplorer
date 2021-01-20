@@ -11,7 +11,7 @@ import org.commonmark.parser.Parser
 class CodeQuestionPageViewModel(
     question: String,
     initialSnippet: String,
-    val explanation: String,
+    explanation: String,
     val maxAnswers: Int,
     choices: List<Answer>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
@@ -60,6 +60,7 @@ class CodeQuestionPageViewModel(
   )
 
   val questionMarkdown = Parser.builder().build().parse(question)
+  val explanationMarkdown = Parser.builder().build().parse(explanation)
 
   val answers: MutableState<List<Answer>> = mutableStateOf(choices)
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())

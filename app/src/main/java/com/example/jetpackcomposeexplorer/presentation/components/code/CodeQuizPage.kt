@@ -38,9 +38,17 @@ fun CodeQuizPage(
       answer = if (model.showAnswer.value) {
         {
           if (model.isCorrectAnswer()) {
-            CorrectAnswer(explanation = model.explanation)
+            CorrectAnswer(
+                explanation = {
+                  MDDocument(document = model.explanationMarkdown)
+                }
+            )
           } else {
-            WrongAnswer(explanation = model.explanation)
+            WrongAnswer(
+                explanation = {
+                  MDDocument(document = model.explanationMarkdown)
+                }
+            )
           }
         }
       } else null,

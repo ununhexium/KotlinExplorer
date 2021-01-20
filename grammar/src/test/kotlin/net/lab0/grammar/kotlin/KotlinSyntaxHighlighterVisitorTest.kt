@@ -422,4 +422,34 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(code, spots).isEqualTo(listOf<Highlights<KotlinHighlight>>())
   }
+
+  @Test
+  fun `can highlight floats`() {
+    // given
+    val code = "val f = 3.1415f"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 0, 2),
+        Spot(NUMBER, 8, 14),
+    )
+  }
+  
+  @Test
+  fun `can highlight doubles`() {
+    // given
+    val code = "val d = 3.1415"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(KEYWORD, 0, 2),
+        Spot(NUMBER, 8, 13),
+    )
+  }
 }

@@ -38,7 +38,7 @@ fun QuizPage(
               end.linkTo(parent.end)
             }
     ) {
-          question()
+      question()
     }
 
     answer?.let {
@@ -84,7 +84,7 @@ fun QuizPagePreview() {
                 )
               },
               answer = {
-                CorrectAnswer(explanation = "That's why")
+                CorrectAnswer(explanation = { Text("That's why") })
               },
               answerInput = {
                 CodeAnswerInput(
