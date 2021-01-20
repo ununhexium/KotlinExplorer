@@ -7,6 +7,11 @@ interface Lesson: Prerequisite {
   override val id: String
 
   /**
+   * The human name for this lesson
+   */
+  val title: String
+
+  /**
    * The pages of this lesson
    */
   val pages: List<LessonPage>

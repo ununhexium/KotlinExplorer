@@ -6,7 +6,8 @@ import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPa
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 
 object Numbers : LessonImpl(
-    "kotlin.datatypes.numbers",
+    id = "kotlin.datatypes.numbers",
+    title = "Numbers",
     dependencies = listOf(
         Introduction
     ),
@@ -86,7 +87,7 @@ val infinity:Float = ${placeholder(0)}
 An `Int`'s max value is around 2^31 (${Int.MAX_VALUE})
 """,
             """
-val tooBigForInt: ${placeholder()} = 9876543210
+val tooBigForInt: ${placeholder(0)} = 9876543210
 """,
             """
 Use a long integer (`Long`) to store a number in the range (${Long.MIN_VALUE}, ${Long.MAX_VALUE}), that is (2^63, 2^63-1).
@@ -102,7 +103,7 @@ Use a long integer (`Long`) to store a number in the range (${Long.MIN_VALUE}, $
 A `Float`'s max value is around 3e38 (${Float.MAX_VALUE})
 """,
             """
-val tooBigForFloat: ${placeholder()} = 1e99
+val tooBigForFloat: ${placeholder(0)} = 1e99
 """,
             """
 Use a double precision floating point number (`Double`) to store a number in the range (${Double.MIN_VALUE}, ${Double.MAX_VALUE}).

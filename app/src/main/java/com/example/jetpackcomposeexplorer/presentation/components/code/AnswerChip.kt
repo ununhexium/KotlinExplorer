@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +25,8 @@ fun AnswerChip(
       elevation = 4.dp,
       shape = MaterialTheme.shapes.medium,
   ) {
-    Button(onClick = onClick,
+    Button(
+        onClick = onClick,
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MaterialTheme.colors.secondary

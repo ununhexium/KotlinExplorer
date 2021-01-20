@@ -158,3 +158,34 @@ fun CodeAnswerInputPreview_manyChipsCanValidate() {
     }
   }
 }
+
+
+@Preview
+@Composable
+fun CodeAnswerInputPreview_longChips() {
+  MaterialTheme {
+    Surface {
+      Column {
+        CodeAnswerInput(
+            {},
+            {},
+            {},
+            {},
+            canValidate = true,
+            canUndoOrReset = false,
+            canDoNext = true,
+            answers = listOf(
+                Answer(0, "Float.POSITIVE_INFINITY", false),
+                Answer(1, "Float.NEGATIVE_INFINITY", true),
+                Answer(2, "a", false),
+                Answer(3, "b", true),
+                Answer(4, "c", false),
+                Answer(5, "d", false),
+                Answer(6, "e", false),
+                Answer(7, "f", false),
+            )
+        )
+      }
+    }
+  }
+}

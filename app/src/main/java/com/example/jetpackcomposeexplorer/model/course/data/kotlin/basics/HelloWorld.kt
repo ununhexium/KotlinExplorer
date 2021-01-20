@@ -7,6 +7,7 @@ import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 
 object HelloWorld : LessonImpl(
     id = "kotlin.basics.HelloWorld",
+    title = "Hello, World!",
     pages = listOf(
         InfoPage(
             title = "Introduction",

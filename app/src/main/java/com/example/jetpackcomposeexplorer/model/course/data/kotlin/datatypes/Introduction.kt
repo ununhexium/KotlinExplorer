@@ -1,12 +1,12 @@
 package com.example.jetpackcomposeexplorer.model.course.data.kotlin.datatypes
 
 import com.example.jetpackcomposeexplorer.model.course.LessonImpl
-import com.example.jetpackcomposeexplorer.model.course.LessonPage
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 import com.example.jetpackcomposeexplorer.model.course.data.kotlin.basics.Basics
 
 object Introduction : LessonImpl(
     id = "kotlin.datatypes.introduction",
+    title = "Data types",
     dependencies = listOf(
         Basics
     ),

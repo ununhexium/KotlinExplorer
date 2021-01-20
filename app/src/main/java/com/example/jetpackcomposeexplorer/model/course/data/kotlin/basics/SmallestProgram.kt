@@ -7,6 +7,7 @@ import com.example.jetpackcomposeexplorer.model.course.data.kotlin.basics.HelloW
 
 object SmallestProgram : LessonImpl(
     id = "kotlin.basics.SmallestProgram",
+    title = "The smallest program",
     dependencies = listOf(HelloWorld),
     pages = listOf(
         LessonPage.InfoPage(

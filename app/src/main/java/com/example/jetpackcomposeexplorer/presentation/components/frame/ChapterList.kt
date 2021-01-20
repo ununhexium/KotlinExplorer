@@ -16,9 +16,9 @@ import com.example.jetpackcomposeexplorer.ui.frame.MediumVerticalSpacer
 fun ChapterList(
     chapters: List<ChapterCardData>,
     /**
-     * Play the selected lesson
+     * Play the selected (chapter, lesson)
      */
-    onPlay: (String) -> Unit,
+    onPlay: (String, String) -> Unit,
 ) {
   LazyColumn {
     itemsIndexed(chapters) { _, chapter ->
@@ -30,7 +30,7 @@ fun ChapterList(
             chapter.lessons.forEach { lesson ->
               LessonListItem(
                   lesson = lesson,
-                  onPlay = { onPlay(lesson.id) }
+                  onPlay = { onPlay(chapter.id, lesson.id) }
               )
             }
           }
@@ -52,7 +52,7 @@ fun ChapterListPreview() {
       ) {
         ChapterList(
             chapters = listOf(dummyChapter1, dummyChapter2),
-            onPlay = {}
+            onPlay = { _: String, _: String -> }
         )
       }
     }

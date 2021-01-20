@@ -2,6 +2,7 @@ package com.example.jetpackcomposeexplorer.model.course
 
 open class LessonImpl(
     override val id:String,
+    override val title:String,
     override val pages: List<LessonPage>,
     override val dependencies: List<Prerequisite> = listOf(),
 ) : Lesson {

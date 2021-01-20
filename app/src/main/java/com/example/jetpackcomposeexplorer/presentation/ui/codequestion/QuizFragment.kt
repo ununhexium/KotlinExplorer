@@ -7,15 +7,20 @@ import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.InfoPage
 import com.example.jetpackcomposeexplorer.model.course.LessonPage.CodeQuestionPage
 import com.example.jetpackcomposeexplorer.model.course.data.kotlin.basics.HelloWorld
+import com.example.jetpackcomposeexplorer.model.course.data.kotlin.kotlin
 import com.example.jetpackcomposeexplorer.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.code.CodeQuizPage
 import org.commonmark.parser.Parser
 
 class QuizFragment : Fragment() {
+
+  val args: QuizFragmentArgs by navArgs()
+
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -23,7 +28,7 @@ class QuizFragment : Fragment() {
   ): View {
     return ComposeView(requireContext()).apply {
       val viewModel = QuizViewModel(
-          HelloWorld.pages
+          kotlin.first { it.id == args.chapterId }.lessons.first { it.id == args.lessonId }.pages
       )
 
       setContent {
@@ -42,7 +47,6 @@ class QuizFragment : Fragment() {
                     nextQuestion = viewModel::goToNextPage,
                 )
             }
-
           } else {
             Text("Finished")
           }

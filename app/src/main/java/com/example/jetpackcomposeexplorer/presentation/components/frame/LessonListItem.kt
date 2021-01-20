@@ -88,12 +88,7 @@ fun LessonListItemPreview_completed() {
       Column(
           modifier = Modifier.padding(20.dp)
       ) {
-        LessonListItem(
-            LessonListItemData(
-                "Lesson 1",
-                true
-            )
-        )
+        LessonListItem(lesson1)
       }
     }
   }
@@ -109,12 +104,7 @@ fun LessonListItemPreview_todo() {
       Column(
           modifier = Modifier.padding(20.dp)
       ) {
-        LessonListItem(
-            LessonListItemData(
-                "Lesson 2",
-                false
-            )
-        ){}
+        LessonListItem(lesson2) {}
       }
     }
   }
