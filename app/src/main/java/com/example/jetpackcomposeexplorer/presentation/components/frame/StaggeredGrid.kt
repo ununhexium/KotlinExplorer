@@ -29,6 +29,10 @@ fun StaggeredGrid(
     // cut items by width
     val groupedPlaceables = mutableListOf(mutableListOf<Placeable>())
 
+    if (measurables.isEmpty()) {
+      return@Layout layout(constraints.minWidth, constraints.minHeight) {}
+    }
+
     measurables.mapIndexed { index, measurable ->
       measurable.measure(constraints)
     }.forEach { placeable ->
@@ -43,21 +47,25 @@ fun StaggeredGrid(
       groupedPlaceables.last().add(placeable)
     }
 
+
     val widths = groupedPlaceables.map {
       it.sumBy { it.width }
     }
+
 
     val targetWidth = widths.maxByOrNull { it }
     val targetHeight = groupedPlaceables.sumOf {
       it.maxOf { it.height }
     }
 
+
     val actualWidth = targetWidth
         ?.coerceIn(constraints.minWidth..constraints.maxWidth)
         ?: constraints.minWidth
-    val actualHeight = (targetHeight
-        ?.coerceIn(constraints.minHeight..constraints.maxHeight)
-        ?: constraints.minHeight)
+
+    val actualHeight = targetHeight
+        .coerceIn(constraints.minHeight..constraints.maxHeight)
+
 
     layout(
         width = actualWidth,
@@ -85,6 +93,26 @@ fun StaggeredGrid(
   }
 }
 
+
+@Preview
+@Composable
+fun StaggeredGridPreview_empty() {
+  MaterialTheme {
+    Surface(
+        color = Color(0xFF4CAF50)
+    ) {
+      Column(
+          modifier = Modifier.padding(20.dp)
+      ) {
+        Surface(
+            color = MaterialTheme.colors.surface
+        ) {
+          StaggeredGrid {}
+        }
+      }
+    }
+  }
+}
 
 @Preview
 @Composable
