@@ -60,7 +60,7 @@ Note the `f` letter in the end of the number. This is to specify that the number
         CodeQuestionPage(
             "Infinity ∞",
             """
-Assign the value +∞ (infinity) to the value `inf`.
+Assign +∞ (infinity) to the value `inf`.
 """,
             """
 val infinity:Float = ${placeholder(0)}

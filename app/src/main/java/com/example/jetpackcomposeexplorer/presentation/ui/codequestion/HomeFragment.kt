@@ -9,6 +9,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.jetpackcomposeexplorer.model.course.Chapter
 import com.example.jetpackcomposeexplorer.model.course.data.kotlin.kotlin
 import com.example.jetpackcomposeexplorer.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.presentation.components.frame.ChapterList
@@ -37,17 +38,18 @@ class HomeFragment : Fragment() {
         ) {
           ChapterList(
               chapters = kotlin.map {
-                ChapterCardData(it.id,
+                ChapterCardData(
+                    it.id,
                     it.title,
                     0f,
-                    it.lessons.map {
-                      // TODO: save lesson completion
-                      LessonListItemData(it.id, it.title, false)
+                    it.lessons.map { lesson ->
+                      LessonListItemData(lesson.id, lesson.title, false)
                     }
                 )
               },
               onPlay = { chapterId, lessonId ->
-                val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(chapterId, lessonId)
+                val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(chapterId,
+                    lessonId)
                 findNavController().navigate(action)
               }
           )
@@ -56,3 +58,4 @@ class HomeFragment : Fragment() {
     }
   }
 }
+
