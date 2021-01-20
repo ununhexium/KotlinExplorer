@@ -81,41 +81,9 @@ fun MDDocument(document: Node) {
 
 
 @Composable
-fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
-  if (paragraph.firstChild is Image && paragraph.firstChild == paragraph.lastChild) {
-    // Paragraph with single image
-    MDImage(paragraph.firstChild as Image, modifier)
-  } else {
-    val padding = if (paragraph.parent is Document) 8.dp else 0.dp
-    Box(modifier = modifier.padding(bottom = padding)) {
-      val styledText = buildAnnotatedString {
-        pushStyle(MaterialTheme.typography.body1.toSpanStyle())
-        appendMarkdownChildren(paragraph, MaterialTheme.colors)
-        pop()
-      }
-      MarkdownText(styledText, MaterialTheme.typography.body1)
-    }
-  }
-}
-
-@Composable
 fun MDImage(image: Image, modifier: Modifier = Modifier) {
   Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
     // not implemented
-  }
-}
-
-@Composable
-fun MDBulletList(bulletList: BulletList, modifier: Modifier = Modifier) {
-  val marker = bulletList.bulletMarker
-  MDListItems(bulletList, modifier = modifier) {
-    val text = buildAnnotatedString {
-      pushStyle(MaterialTheme.typography.body1.toSpanStyle())
-      append("$marker ")
-      appendMarkdownChildren(it, MaterialTheme.colors)
-      pop()
-    }
-    MarkdownText(text, MaterialTheme.typography.body1, modifier)
   }
 }
 
@@ -214,7 +182,13 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
   while (child != null) {
     when (child) {
       is Paragraph -> appendMarkdownChildren(child, colors)
-      is Text -> append(child.literal)
+      is Text -> {
+        if(parent is Paragraph && child != parent.lastChild){
+          append(child.literal + " ")
+        }else{
+          append(child.literal)
+        }
+      }
       is Image -> appendInlineContent(TAG_IMAGE_URL, child.destination)
       is Emphasis -> {
         pushStyle(SpanStyle(fontStyle = FontStyle.Italic))
