@@ -81,7 +81,7 @@ fun CodeQuestionQuizPagePreview_selectedAnswer() {
             CodeQuestionPageViewModel(
                 "Why?",
                 "val i = 0",
-                "Because",
+                {"Because"},
                 1,
                 "a", "b", "c"
             ) {
@@ -106,7 +106,7 @@ fun CodeQuestionQuizPagePreview_validatedAnswer() {
             CodeQuestionPageViewModel(
                 "Why?",
                 "val i = 0",
-                "Because",
+                {"Because"},
                 1,
                 "a", "b", "c"
             ) {

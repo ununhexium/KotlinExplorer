@@ -3,6 +3,7 @@ package com.example.jetpackcomposeexplorer.presentation.ui.codequestion
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
+import com.example.jetpackcomposeexplorer.kotlin.cached
 import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanksImpl
 import com.example.jetpackcomposeexplorer.model.course.LessonPage
 import com.example.jetpackcomposeexplorer.presentation.components.code.Answer
@@ -11,7 +12,7 @@ import org.commonmark.parser.Parser
 class CodeQuestionPageViewModel(
     question: String,
     initialSnippet: String,
-    explanation: String,
+    val explanation: (List<String>) -> String,
     val maxAnswers: Int,
     choices: List<Answer>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
@@ -30,14 +31,14 @@ class CodeQuestionPageViewModel(
   constructor(
       question: String,
       codeSample: String,
-      answer: String,
+      explanation: (List<String>) -> String,
       maxAnswers: Int,
       vararg choices: String,
       answerValidator: (List<Answer>) -> Boolean,
   ) : this(
       question,
       codeSample,
-      answer,
+      explanation,
       maxAnswers,
       choices.mapIndexed { index, s -> Answer(index, s, false) },
       answerValidator
@@ -46,21 +47,28 @@ class CodeQuestionPageViewModel(
   constructor(
       question: String,
       codeSample: String,
-      answer: String,
+      explanation: (List<String>) -> String,
       maxAnswers: Int,
       vararg choices: Answer,
       answerValidator: (List<Answer>) -> Boolean,
   ) : this(
       question,
       codeSample,
-      answer,
+      explanation,
       maxAnswers,
       choices.toList(),
       answerValidator
   )
 
   val questionMarkdown = Parser.builder().build().parse(question)
-  val explanationMarkdown = Parser.builder().build().parse(explanation)
+  val explanationMarkdown by cached(
+      input = { selected.value },
+      transform = {
+        Parser.builder().build().parse(
+            explanation(selected.value.map { it.text })
+        )
+      }
+  )
 
   val answers: MutableState<List<Answer>> = mutableStateOf(choices)
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())

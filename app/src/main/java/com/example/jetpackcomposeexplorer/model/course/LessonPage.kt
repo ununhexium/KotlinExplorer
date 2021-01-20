@@ -15,7 +15,7 @@ sealed class LessonPage(
       title: String,
       val question: String,
       val snippet: String,
-      val answer: String,
+      val answer: (List<String>) -> String,
       val choices: List<String>,
       val answerValidator: (List<String>) -> Boolean,
   ) : LessonPage(
@@ -26,7 +26,7 @@ sealed class LessonPage(
           title: String,
           question: String,
           snippet: String,
-          answer: String,
+          answer: (List<String>) -> String,
           choice: String,
       ) = CodeQuestionPage(
           title = title,
