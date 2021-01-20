@@ -33,7 +33,7 @@ fun StaggeredGrid(
       return@Layout layout(constraints.minWidth, constraints.minHeight) {}
     }
 
-    measurables.mapIndexed { index, measurable ->
+    measurables.map { measurable ->
       measurable.measure(constraints)
     }.forEach { placeable ->
       /*
@@ -57,7 +57,6 @@ fun StaggeredGrid(
     val targetHeight = groupedPlaceables.sumOf {
       it.maxOf { it.height }
     }
-
 
     val actualWidth = targetWidth
         ?.coerceIn(constraints.minWidth..constraints.maxWidth)

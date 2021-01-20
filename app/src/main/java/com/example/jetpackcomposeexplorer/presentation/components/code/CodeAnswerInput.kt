@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpackcomposeexplorer.presentation.components.frame.StaggeredGrid
 
 @Composable
 fun CodeAnswerInput(
@@ -75,28 +76,23 @@ fun CodeAnswerInput(
       }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
     ) {
-      answers
-          .toList()
-          .chunked(3)
-          .forEach { chunk ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-              chunk.forEach { answer ->
+      StaggeredGrid {
+        answers
+            .toList()
+            .forEach { answer ->
+              Row(
+                  modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+              ) {
                 AnswerChip(text = answer.text, !answer.used && !canValidate) {
                   onSelect(answer)
                 }
               }
             }
-          }
+      }
     }
   }
 }
