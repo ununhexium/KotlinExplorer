@@ -21,7 +21,7 @@ import java.text.NumberFormat
 
 @Composable
 fun ChapterCard(
-    data: ChapterCardData,
+    chapter: ChapterCardData,
 ) {
   Surface {
     Row(
@@ -33,13 +33,13 @@ fun ChapterCard(
           contentAlignment = Alignment.Center,
       ) {
         CircularProgressIndicator(
-            progress = data.completion,
+            progress = chapter.completion,
             modifier = Modifier
                 .padding(8.dp)
                 .preferredSize(64.dp)
         )
         Text(
-            NumberFormat.getPercentInstance().format(data.completion),
+            NumberFormat.getPercentInstance().format(chapter.completion),
             color = MaterialTheme.colors.primary,
             style = MaterialTheme.typography.body1,
         )
@@ -48,11 +48,11 @@ fun ChapterCard(
           verticalArrangement = Arrangement.Center,
       ) {
         Text(
-            text = data.title,
+            text = chapter.title,
             style = MaterialTheme.typography.h6,
         )
         Text(
-            text = "${data.lessons.size} LESSONS",
+            text = "${chapter.lessons.size} LESSONS",
             style = MaterialTheme.typography.body1,
             color = Color.Gray,
         )
@@ -72,7 +72,7 @@ fun ChapterCardPreview() {
           modifier = Modifier.padding(20.dp)
       ) {
         ChapterCard(
-            dummyChapter
+            dummyChapter1
         )
       }
     }

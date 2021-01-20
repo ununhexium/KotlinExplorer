@@ -89,7 +89,7 @@ fun ChaptersListPreview() {
         CardWithExpansion(
             card = {
               ChapterCard(
-                  dummyChapter
+                  dummyChapter1
               )
             }
         ) {

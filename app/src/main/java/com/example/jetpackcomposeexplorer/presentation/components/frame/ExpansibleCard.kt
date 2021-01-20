@@ -6,10 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -79,7 +77,7 @@ fun ExpansibleCardPreview_collapsed() {
           modifier = Modifier.padding(20.dp)
       ) {
         ExpansibleCard(
-            { ChapterCard(data = dummyChapter) },
+            { ChapterCard(chapter = dummyChapter1) },
             {
               LessonListItem(lesson = lesson1)
               LessonListItem(lesson = lesson2)
@@ -104,7 +102,7 @@ fun ExpansibleCardPreview_expanded() {
           modifier = Modifier.padding(20.dp)
       ) {
         ExpansibleCard(
-            { ChapterCard(data = dummyChapter) },
+            { ChapterCard(chapter = dummyChapter1) },
             {
               LessonListItem(lesson = lesson1)
               LessonListItem(lesson = lesson2)
