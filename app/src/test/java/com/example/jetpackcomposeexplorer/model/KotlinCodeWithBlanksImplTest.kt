@@ -1,6 +1,7 @@
 package com.example.jetpackcomposeexplorer.model
 
-import com.example.jetpackcomposeexplorer.model.KotlinCodeWithBlanks.Companion.placeholder
+import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
+import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -13,6 +14,7 @@ class KotlinCodeWithBlanksImplTest {
         1 to "val ${placeholder()}",
         2 to "val ${placeholder(0)} = ${placeholder(1)}",
         3 to "val ${placeholder(0)} = ${placeholder(1)} + ${placeholder(2)}",
+        2 to "${placeholder(0)}${placeholder(0)}"
     )
 
     // then
