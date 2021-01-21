@@ -6,7 +6,7 @@ import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
 import com.example.jetpackcomposeexplorer.business.domain.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.Answer
-import com.example.jetpackcomposeexplorer.utils.kotlin.cached
+import com.example.jetpackcomposeexplorer.utils.cached
 import org.commonmark.parser.Parser
 
 class CodeQuestionPageViewModel(
