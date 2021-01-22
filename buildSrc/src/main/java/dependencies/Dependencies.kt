@@ -1,86 +1,30 @@
 package dependencies
 
 object Dependencies {
-  object AppCompat {
-    val version = Versions.app_compat
+  val app_compat = "androidx.appcompat:appcompat:${Versions.app_compat}"
 
-    val app_compat = "androidx.appcompat:appcompat:$version"
-  }
+  val compose_foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
 
-  object Atlassian {
-    val version = Versions.commonMark
-    val commonMark = "com.atlassian.commonmark:commonmark:$version"
-  }
+  val compose_material = "androidx.compose.material:material:${Versions.compose}"
+  val compose_materialIconsCore = "androidx.compose.material:material-icons-core:${Versions.compose}"
+  val compose_materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
 
-  object Compose {
+  val compose_livedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+  val compose_rxJava2 = "androidx.compose.runtime:runtime-rxjava2:${Versions.compose}"
 
-    val version = Versions.compose
+  val compose_ui = "androidx.compose.ui:ui:${Versions.compose}"
+  val compose_uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
 
+  val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 
-    val foundation = "androidx.compose.foundation:foundation:$version"
+  val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
+  val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
 
-    val material = "androidx.compose.material:material:$version"
-    val materialIconsCore = "androidx.compose.material:material-icons-core:$version"
-    val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
-
-    val livedata = "androidx.compose.runtime:runtime-livedata:$version"
-    val rxJava2 = "androidx.compose.runtime:runtime-rxjava2:$version"
-
-    val ui = "androidx.compose.ui:ui:$version"
-    val uiTooling = "androidx.compose.ui:ui-tooling:$version"
-  }
-
-  object ConstraintLayout {
-    val version = Versions.constraintLayout
-
-    val constraintLayout = "androidx.constraintlayout:constraintlayout:$version"
-  }
-
-  object Espresso {
-    val version = Versions.espresso_core
-
-    val core = "androidx.test.espresso:espresso-core:$version"
-    val contrib = "androidx.test.espresso:espresso-contrib:$version"
-  }
-
-  object JUnit4 {
-    val version = Versions.junit_4
-
-    val junit = "junit:junit:${Versions.junit_4}"
-  }
-
-  object JUnit5 {
-    val version = Versions.jupiter
-
-    val api = "org.junit.jupiter:junit-jupiter-api:$version"
-    val params = "org.junit.jupiter:junit-jupiter-params:$version"
-    val engine = "org.junit.jupiter:junit-jupiter-engine:$version"
-  }
-
-  object Material {
-    val version = Versions.material
-
-    val material = "com.google.android.material:material:$version"
-  }
-
-  object Navigation {
-    val version = Versions.nav
-
-    val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
-    val ui = "androidx.navigation:navigation-ui-ktx:$version"
-  }
-
-  object Room {
-    val version = Versions.room
-
-    val runtime = "androidx.room:room-runtime:$version"
-    val room = "androidx.room:room-ktx:$version"
-  }
+  val room_runtime = "androidx.room:room-runtime:${Versions.room}"
+  val room = "androidx.room:room-ktx:${Versions.room}"
 
 
-  object Truth {
-    val version = Versions.truth
+  val atlassian_commonMark = "com.atlassian.commonmark:commonmark:${Versions.commonMark}"
 
-    val truth = "com.google.truth:truth:$version"
-  }
+  val material = "com.google.android.material:material:${Versions.material}"
 }

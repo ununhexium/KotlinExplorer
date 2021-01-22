@@ -8,11 +8,11 @@ import androidx.room.Update
 @Dao
 interface UserProfileDao {
   @Insert
-  fun insert(userProfile: UserProfile)
+  fun insert(userProfile: UserProfileEntity)
 
-  @Query("SELECT * FROM userprofile")
-  fun getAll(): List<UserProfile>
+  @Query("SELECT * FROM user_profile")
+  fun getAll(): List<UserProfileEntity>
 
   @Update
-  fun update(vararg userProfiles: UserProfile)
+  fun update(vararg userProfiles: UserProfileEntity)
 }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [UserProfile::class], version = 1)
+@Database(entities = [UserProfileEntity::class], version = 1)
 abstract class ExplorerDatabase : RoomDatabase() {
   companion object {
     lateinit var db: ExplorerDatabase
@@ -21,7 +21,7 @@ abstract class ExplorerDatabase : RoomDatabase() {
           .build()
 
       if (db.getUserDao().getAll().isEmpty()) {
-        db.getUserDao().insert(UserProfile("World"))
+        db.getUserDao().insert(UserProfileEntity("World"))
       }
     }
   }

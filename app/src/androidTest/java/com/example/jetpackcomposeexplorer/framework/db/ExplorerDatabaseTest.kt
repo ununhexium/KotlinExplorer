@@ -2,7 +2,6 @@ package com.example.jetpackcomposeexplorer.framework.db
 
 import android.content.Context
 import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
@@ -35,7 +34,7 @@ class ExplorerDatabaseTest {
   @Test
   @Throws(Exception::class)
   fun writeUserAndReadInList() {
-    val user = UserProfile( "george", -1)
+    val user = UserProfileEntity( "george", -1)
 
     userProfileDao.insert(user)
     val byName = userProfileDao.getAll().first()

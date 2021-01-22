@@ -1,6 +1,7 @@
 import dependencies.AnnotationProcessing
 import dependencies.Dependencies
 import dependencies.Application
+import dependencies.TestDependencies
 
 plugins {
     id 'com.android.application'
@@ -54,37 +55,35 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
 }
 
 dependencies {
-    implementation Dependencies.AppCompat.app_compat
+    implementation Dependencies.app_compat
 
-    implementation Dependencies.Material.material
+    implementation Dependencies.constraintLayout
 
-    implementation Dependencies.ConstraintLayout.constraintLayout
+    implementation Dependencies.compose_ui
+    implementation Dependencies.compose_uiTooling
+    implementation Dependencies.compose_foundation
+    implementation Dependencies.compose_livedata
+    implementation Dependencies.compose_rxJava2
+    implementation Dependencies.compose_material
+    implementation Dependencies.compose_materialIconsCore
+    implementation Dependencies.compose_materialIconsExtended
 
-    implementation Dependencies.Compose.ui
-    implementation Dependencies.Compose.uiTooling
-    implementation Dependencies.Compose.foundation
-    implementation Dependencies.Compose.livedata
-    implementation Dependencies.Compose.rxJava2
-    implementation Dependencies.Compose.material
-    implementation Dependencies.Compose.materialIconsCore
-    implementation Dependencies.Compose.materialIconsExtended
-
-    implementation Dependencies.Navigation.fragment
-    implementation Dependencies.Navigation.ui
+    implementation Dependencies.navigation_fragment
+    implementation Dependencies.navigation_ui
 
 //    def nav_compose = "1.0.0-SNAPSHOT"
 //    implementation "androidx.navigation:navigation-compose:$nav_compose"
 
-    implementation Dependencies.Room.room
-    implementation Dependencies.Room.runtime
-    kapt AnnotationProcessing.Room.compiler
+    implementation Dependencies.room
+    implementation Dependencies.room_runtime
+    kapt AnnotationProcessing.room_compiler
 
 
-    implementation Dependencies.Atlassian.commonMark
+    implementation Dependencies.atlassian_commonMark
 
-    implementation Dependencies.Material.material
+    implementation Dependencies.material
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$Versions.kotlin"
 
 
     // add scripting to show the result to the user
@@ -99,11 +98,12 @@ dependencies {
 
     // TEST
 
-    testImplementation Dependencies.JUnit4.junit
-    testImplementation Dependencies.Truth.truth
+    testImplementation TestDependencies.junit4_junit
+    testImplementation TestDependencies.truth
+    testImplementation TestDependencies.androidx_test_ext
 
-    androidTestImplementation Dependencies.JUnit5.api
-    androidTestImplementation Dependencies.Espresso.core
-    androidTestImplementation Dependencies.Espresso.contrib
-    androidTestImplementation Dependencies.Truth.truth
+    androidTestImplementation TestDependencies.junit5_api
+    androidTestImplementation TestDependencies.espresso_core
+    androidTestImplementation TestDependencies.espresso_contrib
+    androidTestImplementation TestDependencies.truth
 }
