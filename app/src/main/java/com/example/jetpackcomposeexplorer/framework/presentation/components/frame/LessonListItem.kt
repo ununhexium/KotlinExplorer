@@ -27,7 +27,7 @@ fun LessonListItem(
     onPlay: (() -> Unit)? = null,
 ) {
   Row(
-      modifier = Modifier.fillMaxWidth(),
+      modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
       horizontalArrangement = Arrangement.SpaceBetween
   ) {
 
@@ -104,7 +104,25 @@ fun LessonListItemPreview_todo() {
       Column(
           modifier = Modifier.padding(20.dp)
       ) {
+        LessonListItem(lesson1) {}
+      }
+    }
+  }
+}
+
+@Preview
+@Composable
+fun LessonListItemPreview_list() {
+  MaterialTheme {
+    Surface(
+        color = Color(0xFFeeeeee)
+    ) {
+      Column(
+          modifier = Modifier.padding(20.dp)
+      ) {
+        LessonListItem(lesson1) {}
         LessonListItem(lesson2) {}
+        LessonListItem(lesson3) {}
       }
     }
   }

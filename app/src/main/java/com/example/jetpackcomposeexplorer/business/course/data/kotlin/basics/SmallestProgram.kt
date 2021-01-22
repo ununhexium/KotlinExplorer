@@ -34,7 +34,7 @@ The function starts at `{` and ends at `}`.
 Print `Hello, World!`.
 """,
             """
-int main() {
+fun main() {
   ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
 }
 """,

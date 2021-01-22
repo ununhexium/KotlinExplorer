@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

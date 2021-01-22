@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.HomeFragment"
+        android:name="com.example.jetpackcomposeexplorer.framework.presentation.fragment.home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_quizFragment"
