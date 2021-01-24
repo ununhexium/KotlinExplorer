@@ -45,6 +45,20 @@ android {
         kotlinCompilerVersion Versions.kotlin
         kotlinCompilerExtensionVersion Versions.compose
     }
+    packagingOptions {
+        /**
+         *    > 2 files found with path 'META-INF/LICENSE.md' from inputs:
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.6.0/b0a75795cf03841d4f9cc54099557baffc11c727/junit-platform-commons-1.6.0.jar
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.6.0/f29e6318333d2303ce4965c9819cfad08de7d1e5/junit-jupiter-api-5.6.0.jar
+         */
+        exclude "META-INF/LICENSE.md"
+        /**
+         *    > 2 files found with path 'META-INF/LICENSE-notice.md' from inputs:
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.6.0/b0a75795cf03841d4f9cc54099557baffc11c727/junit-platform-commons-1.6.0.jar
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.6.0/f29e6318333d2303ce4965c9819cfad08de7d1e5/junit-jupiter-api-5.6.0.jar
+         */
+        exclude "META-INF/LICENSE-notice.md"
+    }
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
@@ -84,6 +98,9 @@ dependencies {
     implementation Dependencies.material
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$Versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$Versions.kotlin"
+
+    implementation Dependencies.reflections
 
 
     // add scripting to show the result to the user
@@ -101,9 +118,12 @@ dependencies {
     testImplementation TestDependencies.junit4_junit
     testImplementation TestDependencies.truth
     testImplementation TestDependencies.androidx_test_ext
+    testImplementation TestDependencies.mockk
 
+    androidTestImplementation TestDependencies.androidx_test_ext
     androidTestImplementation TestDependencies.junit5_api
     androidTestImplementation TestDependencies.espresso_core
     androidTestImplementation TestDependencies.espresso_contrib
+    androidTestImplementation TestDependencies.mockk_android
     androidTestImplementation TestDependencies.truth
 }

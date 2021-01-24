@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.model.code
+package com.example.jetpackcomposeexplorer.business.domain
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle

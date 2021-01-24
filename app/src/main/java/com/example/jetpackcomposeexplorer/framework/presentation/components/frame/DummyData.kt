@@ -10,7 +10,6 @@ val lesson6 = LessonListItemData("lesson6","Lesson 6", false)
 
 val dummyChapter1 =
     ChapterCardData(
-        "chapter1",
         "Chapter 1",
         0.33f,
         listOf(
@@ -22,7 +21,6 @@ val dummyChapter1 =
 
 val dummyChapter2 =
     ChapterCardData(
-        "chapter2",
         "Chapter 2",
         0.66f,
         listOf(

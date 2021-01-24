@@ -9,9 +9,10 @@ import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.jetpackcomposeexplorer.business.domain.LessonPage.InfoPage
-import com.example.jetpackcomposeexplorer.business.domain.LessonPage.CodeQuestionPage
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.kotlin
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinderImpl
+import com.example.jetpackcomposeexplorer.business.course.LessonPage.InfoPage
+import com.example.jetpackcomposeexplorer.business.course.LessonPage.CodeQuestionPage
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinder
 import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
@@ -27,9 +28,9 @@ class QuizFragment : Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?,
   ): View {
+    val lessonFinder:LessonFinder = LessonFinderImpl()
     return ComposeView(requireContext()).apply {
-      val chapter = kotlin.first { it.id == args.chapterId }
-      val lesson = chapter.lessons.first { it.id == args.lessonId }
+      val lesson = lessonFinder.findLessonById(args.lessonId)
 
       val viewModel = QuizViewModel(lesson.pages)
 
@@ -37,7 +38,7 @@ class QuizFragment : Fragment() {
         Scaffold(
             drawerContent = {
               LessonDrawer(
-                  chapter = chapter.title,
+                  chapter = lesson.chapter.title,
                   lesson = lesson.title,
                   lessonPages = lesson.pages.map { it.title },
                   currentPage = viewModel.page.value?.title

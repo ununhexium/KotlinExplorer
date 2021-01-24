@@ -9,7 +9,9 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.kotlin
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinder
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinderImpl
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
@@ -21,6 +23,9 @@ class HomeFragment : Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?,
   ): View {
+    // TODO: di
+    val lessonFinder: LessonFinder = LessonFinderImpl()
+
     return ComposeView(requireContext()).apply {
       setContent {
         val scaffoldState = rememberScaffoldState()
@@ -36,19 +41,17 @@ class HomeFragment : Fragment() {
             }
         ) {
           ChapterList(
-              chapters = kotlin.map {
+              chapters = lessonFinder.findChaptersInModule(Module1).map {
                 ChapterCardData(
-                    it.id,
                     it.title,
                     0f,
-                    it.lessons.map { lesson ->
+                    lessonFinder.findLessonsInChapter(it).map { lesson ->
                       LessonListItemData(lesson.id, lesson.title, false)
                     }
                 )
               },
-              onPlay = { chapterId, lessonId ->
-                val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(chapterId,
-                    lessonId)
+              onPlay = { lessonId ->
+                val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(lessonId)
                 findNavController().navigate(action)
               }
           )
@@ -57,4 +60,3 @@ class HomeFragment : Fragment() {
     }
   }
 }
-

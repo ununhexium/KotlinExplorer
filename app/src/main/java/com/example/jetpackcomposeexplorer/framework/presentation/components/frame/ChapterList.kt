@@ -12,13 +12,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.framework.ui.frame.MediumVerticalSpacer
 
+typealias PlayLessonById = (String) -> Unit
+
 @Composable
 fun ChapterList(
     chapters: List<ChapterCardData>,
     /**
-     * Play the selected (chapter, lesson)
+     * Play the selected (lesson)
      */
-    onPlay: (String, String) -> Unit,
+    onPlay: PlayLessonById,
 ) {
   LazyColumn {
     itemsIndexed(chapters) { _, chapter ->
@@ -30,7 +32,7 @@ fun ChapterList(
             chapter.lessons.forEach { lesson ->
               LessonListItem(
                   lesson = lesson,
-                  onPlay = { onPlay(chapter.id, lesson.id) }
+                  onPlay = { onPlay(lesson.id) }
               )
             }
           }
@@ -52,7 +54,7 @@ fun ChapterListPreview() {
       ) {
         ChapterList(
             chapters = listOf(dummyChapter1, dummyChapter2),
-            onPlay = { _: String, _: String -> }
+            onPlay = { }
         )
       }
     }

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.ANSWER_REGEX
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
-import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
+import com.example.jetpackcomposeexplorer.business.domain.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.model.code.functionStyle
 import com.example.jetpackcomposeexplorer.model.code.ijStyle
 import com.example.jetpackcomposeexplorer.model.code.keywordStyle

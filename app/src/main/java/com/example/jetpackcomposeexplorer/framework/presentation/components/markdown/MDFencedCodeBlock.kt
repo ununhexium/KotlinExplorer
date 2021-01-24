@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
-import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
+import com.example.jetpackcomposeexplorer.business.domain.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.KotlinCode
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.Monospace
 import org.commonmark.node.Document

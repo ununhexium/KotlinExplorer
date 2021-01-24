@@ -27,4 +27,6 @@ object Dependencies {
   val atlassian_commonMark = "com.atlassian.commonmark:commonmark:${Versions.commonMark}"
 
   val material = "com.google.android.material:material:${Versions.material}"
+
+  val reflections = "org.reflections:reflections:${Versions.reflections}"
 }

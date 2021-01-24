@@ -8,9 +8,6 @@
         android:name="com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragment"
         android:label="QuizFragment" >
         <argument
-            android:name="chapterId"
-            app:argType="string" />
-        <argument
             android:name="lessonId"
             app:argType="string" />
     </fragment>

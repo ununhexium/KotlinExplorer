@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
-import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
+import com.example.jetpackcomposeexplorer.business.domain.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.framework.presentation.components.CorrectAnswer
 import com.example.jetpackcomposeexplorer.framework.presentation.components.QuizPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.WrongAnswer
