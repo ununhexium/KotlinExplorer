@@ -8,6 +8,7 @@ import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
 import com.example.jetpackcomposeexplorer.business.course.ModuleImpl
 import com.example.jetpackcomposeexplorer.business.course.ThemeImpl
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinder
+import com.example.jetpackcomposeexplorer.business.domain.Lesson
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
@@ -33,12 +34,12 @@ class LessonDaoServiceImplTest {
 
   @Before
   fun before() {
+    clearAllMocks()
+
     val context = ApplicationProvider.getApplicationContext<Context>()
     db = Room
         .inMemoryDatabaseBuilder(context, ExplorerDatabase::class.java)
         .build()
-
-    clearAllMocks()
 
     every { lessonFinder.findLessonById(any()) } answers {
       val theme = ThemeImpl("themeId", "Theme Title")
@@ -54,7 +55,7 @@ class LessonDaoServiceImplTest {
 
     lessonDao = spyk(db.lessonDao())
     lessonDaoService = LessonDaoServiceImpl(
-        db.lessonDao(),
+        lessonDao,
         LessonMapper(lessonFinder)
     )
   }
@@ -84,6 +85,8 @@ class LessonDaoServiceImplTest {
   fun canGetALesson_WhenItAlreadyExistsInTheDatabase() = runBlocking {
     // given
     val id = "116"
+    // not using the mock so this creation doesn't count
+    db.lessonDao().insert(LessonEntity(id, false))
 
     // when
     val lesson = lessonDaoService.getOrCreateLesson(id)
@@ -92,6 +95,22 @@ class LessonDaoServiceImplTest {
     assertThat(lesson.id).isEqualTo(id)
     verify(exactly = 0) {
       lessonDao.insert(any())
+    }
+  }
+
+  @Test
+  fun canMarkALessonAsDone() = runBlocking {
+    // given
+    val id = "116"
+    val lesson = lessonDaoService.getOrCreateLesson(id)
+
+    // when
+    val doneLesson = lessonDaoService.markAsDone(lesson)
+
+    // then
+    assertThat(doneLesson).isEqualTo(Lesson(id, "title", true))
+    verify(exactly = 1) {
+      lessonDao.update(LessonEntity(id, true))
     }
   }
 }

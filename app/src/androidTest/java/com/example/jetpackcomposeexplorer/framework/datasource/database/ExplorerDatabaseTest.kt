@@ -11,7 +11,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 
-@Suppress("IllegalIdentifier")
 @RunWith(AndroidJUnit4::class)
 class ExplorerDatabaseTest {
 
@@ -46,7 +45,7 @@ class ExplorerDatabaseTest {
   }
 
   @Test
-  fun `can tell if a lesson doesnt exists`() {
+  fun canTellIfALessonDoesntExists() {
     // given
     val id = "foo"
 
@@ -55,7 +54,7 @@ class ExplorerDatabaseTest {
   }
 
   @Test
-  fun `can tell if a lesson exists`() {
+  fun canTellIfALessonExists() {
     // given
     val id = "foo"
     lessonDao.insert(LessonEntity(id))

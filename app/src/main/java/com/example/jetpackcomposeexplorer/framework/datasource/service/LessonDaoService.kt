@@ -9,7 +9,7 @@ interface LessonDaoService {
   suspend fun getOrCreateLesson(id: String): Lesson
 
   /**
-   * Mark the given lesson as done
+   * Mark the given lesson as done and returns the updated lesson
    */
-  suspend fun markAsDone(lesson: Lesson)
+  suspend fun markAsDone(lesson: Lesson): Lesson
 }
