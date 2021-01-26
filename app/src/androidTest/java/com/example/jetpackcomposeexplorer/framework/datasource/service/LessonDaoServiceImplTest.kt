@@ -3,12 +3,8 @@ package com.example.jetpackcomposeexplorer.framework.datasource.service
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.example.jetpackcomposeexplorer.business.course.ChapterImpl
-import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
-import com.example.jetpackcomposeexplorer.business.course.ModuleImpl
-import com.example.jetpackcomposeexplorer.business.course.ThemeImpl
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinder
-import com.example.jetpackcomposeexplorer.business.domain.Lesson
+import com.example.jetpackcomposeexplorer.framework.datasource.FakeGenerator
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
@@ -42,15 +38,7 @@ class LessonDaoServiceImplTest {
         .build()
 
     every { lessonFinder.findLessonById(any()) } answers {
-      val theme = ThemeImpl("themeId", "Theme Title")
-      val module = ModuleImpl("moduleId", "Module Title", theme)
-      val chapter = ChapterImpl("chapterId", "Chapter Title", "Chapter's description", module)
-      LessonDataImpl(firstArg(),
-          "title",
-          chapter,
-          listOf(),
-          listOf()
-      )
+      FakeGenerator.generateFakeLessonData(firstArg())
     }
 
     lessonDao = spyk(db.lessonDao())
@@ -75,7 +63,7 @@ class LessonDaoServiceImplTest {
     val lesson = lessonDaoService.getOrCreateLesson(id)
 
     // then
-    assertThat(lesson.id).isEqualTo(id)
+    assertThat(lesson.lessonData.id).isEqualTo(id)
     verify(exactly = 1) {
       lessonDao.insert(LessonEntity(id, false))
     }
@@ -92,7 +80,7 @@ class LessonDaoServiceImplTest {
     val lesson = lessonDaoService.getOrCreateLesson(id)
 
     // then
-    assertThat(lesson.id).isEqualTo(id)
+    assertThat(lesson.lessonData.id).isEqualTo(id)
     verify(exactly = 0) {
       lessonDao.insert(any())
     }
@@ -108,7 +96,7 @@ class LessonDaoServiceImplTest {
     val doneLesson = lessonDaoService.markAsDone(lesson)
 
     // then
-    assertThat(doneLesson).isEqualTo(Lesson(id, "title", true))
+    assertThat(doneLesson).isEqualTo(FakeGenerator.generateFakeLessonData(id))
     verify(exactly = 1) {
       lessonDao.update(LessonEntity(id, true))
     }

@@ -58,6 +58,18 @@ android {
          *       - /home/uuh/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.6.0/f29e6318333d2303ce4965c9819cfad08de7d1e5/junit-jupiter-api-5.6.0.jar
          */
         exclude "META-INF/LICENSE-notice.md"
+        /**
+         *    > 2 files found with path 'META-INF/AL2.0' from inputs:
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna-platform/5.5.0/af38e7c4d0fc73c23ecd785443705bfdee5b90bf/jna-platform-5.5.0.jar
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.5.0/e0845217c4907822403912ad6828d8e0b256208/jna-5.5.0.jar
+         */
+        exclude "META-INF/AL2.0"
+        /**
+         *    > 2 files found with path 'META-INF/LGPL2.1' from inputs:
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna-platform/5.5.0/af38e7c4d0fc73c23ecd785443705bfdee5b90bf/jna-platform-5.5.0.jar
+         *       - /home/uuh/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.5.0/e0845217c4907822403912ad6828d8e0b256208/jna-5.5.0.jar
+         */
+        exclude "META-INF/LGPL2.1"
     }
 }
 
@@ -113,6 +125,9 @@ dependencies {
 
     implementation project(":grammar")
 
+    // DEBUG
+    debugImplementation Dependencies.canary_leak
+
     // TEST
 
     testImplementation TestDependencies.junit4_junit
@@ -121,9 +136,10 @@ dependencies {
     testImplementation TestDependencies.mockk
 
     androidTestImplementation TestDependencies.androidx_test_ext
-    androidTestImplementation TestDependencies.junit5_api
     androidTestImplementation TestDependencies.espresso_core
     androidTestImplementation TestDependencies.espresso_contrib
+    androidTestImplementation TestDependencies.junit5_api
+    androidTestImplementation TestDependencies.kotlinx_coroutines
     androidTestImplementation TestDependencies.mockk_android
     androidTestImplementation TestDependencies.truth
 }

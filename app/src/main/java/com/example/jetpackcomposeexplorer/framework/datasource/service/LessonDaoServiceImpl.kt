@@ -19,9 +19,17 @@ class LessonDaoServiceImpl constructor(
 
   override suspend fun markAsDone(lesson: Lesson): Lesson {
     if (!lesson.completed) {
-      lessonDao.update(lessonMapper.toEntity(lesson.copy(completed = true)))
+      if (!lessonDao.exists(lesson.lessonData.id)) {
+        lessonDao.insert(
+            lessonMapper.toEntity(lesson.copy(completed = true))
+        )
+      } else {
+        lessonDao.update(lessonMapper.toEntity(lesson.copy(completed = true)))
+      }
     }
 
-    return lessonMapper.fromEntity(lessonDao.read(lesson.id))
+    return lessonMapper.fromEntity(
+        lessonDao.read(lesson.lessonData.id)
+    )
   }
 }

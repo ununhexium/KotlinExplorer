@@ -1,6 +1,7 @@
 object Versions {
   // android SDK
   val minSdk = 24
+
   // FIXME: revert to 30 after mockk 1.10.6 is available
   val targetSdk = 29
   val compileSdk = 29
@@ -23,10 +24,14 @@ object Versions {
   val commonMark = "0.16.1"
 
   // test
+  val coroutines = "1.4.2"
   val junit_4 = "4.13.1"
   val jupiter = "5.6.0"
   val mockk = "1.10.5"
   val truth = "1.1"
+
+  // debug
+  val leak_canary = "2.0-alpha-3"
 
   // others
   val reflections = "0.9.12"

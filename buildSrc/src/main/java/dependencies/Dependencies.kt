@@ -28,5 +28,7 @@ object Dependencies {
 
   val material = "com.google.android.material:material:${Versions.material}"
 
+  val canary_leak = "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
+
   val reflections = "org.reflections:reflections:${Versions.reflections}"
 }

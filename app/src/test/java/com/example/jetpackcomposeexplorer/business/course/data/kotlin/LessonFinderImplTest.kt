@@ -15,7 +15,7 @@ class LessonFinderImplTest {
     val id = HelloWorld.id
 
     // when
-    val lesson = LessonFinderImpl.findLessonById(id)
+    val lesson = LessonFinderImpl().findLessonById(id)
 
     // then
     assertThat(lesson).isSameInstanceAs(HelloWorld)
@@ -27,7 +27,7 @@ class LessonFinderImplTest {
     val chapter= Basics
 
     // when
-    val lessons = LessonFinderImpl.findLessonsInChapter(chapter)
+    val lessons = LessonFinderImpl().findLessonsInChapter(chapter)
 
     // then
     assertThat(lessons).containsAtLeast(HelloWorld, SmallestProgram)
@@ -39,7 +39,7 @@ class LessonFinderImplTest {
     val module = Module1
 
     // when
-    val chapters = LessonFinderImpl.findChaptersInModule(module)
+    val chapters = LessonFinderImpl().findChaptersInModule(module)
 
     // then
     assertThat(chapters).containsAtLeast(Basics, DataTypes)
