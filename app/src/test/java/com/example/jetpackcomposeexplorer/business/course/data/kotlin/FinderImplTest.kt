@@ -1,5 +1,6 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin
 
+import com.example.jetpackcomposeexplorer.business.course.FinderImpl
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics.Basics
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics.HelloWorld
@@ -8,14 +9,14 @@ import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.da
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class LessonFinderImplTest {
+class FinderImplTest {
   @Test
   fun `can list an existing lesson`() {
     // given
     val id = HelloWorld.id
 
     // when
-    val lesson = LessonFinderImpl().findLessonById(id)
+    val lesson = FinderImpl().findLessonById(id)
 
     // then
     assertThat(lesson).isSameInstanceAs(HelloWorld)
@@ -27,7 +28,7 @@ class LessonFinderImplTest {
     val chapter= Basics
 
     // when
-    val lessons = LessonFinderImpl().findLessonsInChapter(chapter)
+    val lessons = FinderImpl().findLessonsInChapter(chapter)
 
     // then
     assertThat(lessons).containsAtLeast(HelloWorld, SmallestProgram)
@@ -39,7 +40,7 @@ class LessonFinderImplTest {
     val module = Module1
 
     // when
-    val chapters = LessonFinderImpl().findChaptersInModule(module)
+    val chapters = FinderImpl().findChaptersInModule(module)
 
     // then
     assertThat(chapters).containsAtLeast(Basics, DataTypes)

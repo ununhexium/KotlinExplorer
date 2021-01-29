@@ -10,9 +10,11 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.jetpackcomposeexplorer.business.course.Finder
+import com.example.jetpackcomposeexplorer.business.course.FinderImpl
 import com.example.jetpackcomposeexplorer.business.course.LessonPage.CodeQuestionPage
 import com.example.jetpackcomposeexplorer.business.course.LessonPage.InfoPage
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinderImpl
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KotlinTheme
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
 import com.example.jetpackcomposeexplorer.framework.datasource.mapper.LessonMapper
@@ -22,10 +24,15 @@ import com.example.jetpackcomposeexplorer.framework.presentation.components.Info
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonDrawer
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.commonmark.parser.Parser
 
-class QuizFragment : Fragment() {
+@AndroidEntryPoint
+class QuizFragment(
+    private val lessonFinder: Finder,
+    private val lessonDaoService: LessonDaoService,
+) : Fragment() {
 
   val args: QuizFragmentArgs by navArgs()
 
@@ -34,33 +41,6 @@ class QuizFragment : Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?,
   ): View {
-    val lessonDaoService: LessonDaoService = LessonDaoServiceImpl(
-        // TODO replace with injection
-        object: LessonDao{
-          override fun insert(lesson: LessonEntity) {
-            TODO("Not yet implemented")
-          }
-
-          override fun exists(id: String): Boolean {
-            TODO("Not yet implemented")
-          }
-
-          override fun readAll(): List<LessonEntity> {
-            TODO("Not yet implemented")
-          }
-
-          override fun read(id: String): LessonEntity {
-            TODO("Not yet implemented")
-          }
-
-          override fun update(vararg lessons: LessonEntity) {
-            TODO("Not yet implemented")
-          }
-        },
-        LessonMapper(
-            LessonFinderImpl()
-        )
-    )
 
     return ComposeView(requireContext()).apply {
       lifecycleScope.launch {
@@ -72,7 +52,7 @@ class QuizFragment : Fragment() {
           Scaffold(
               drawerContent = {
                 LessonDrawer(
-                    chapter = lesson.lessonData.chapter.title,
+                    chapter = lessonFinder.findChapterOf(lesson.lessonData).title,
                     lesson = lesson.lessonData.title,
                     lessonPages = lesson.lessonData.pages.map { it.title },
                     currentPage = viewModel.page.value?.title

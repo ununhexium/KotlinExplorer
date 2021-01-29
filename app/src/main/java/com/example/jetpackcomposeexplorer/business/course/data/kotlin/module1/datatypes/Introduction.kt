@@ -1,13 +1,12 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.datatypes
 
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics.Basics
 import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
 import com.example.jetpackcomposeexplorer.business.course.LessonPage
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics.Basics
 
-object Introduction : LessonDataImpl(
-    id = DataTypes.id + ".introduction",
+val Introduction = LessonDataImpl(
+    id = "kotlin.module1.datatypes.introduction",
     title = "Data types",
-    chapter = DataTypes,
 
     dependencies = listOf(
         Basics

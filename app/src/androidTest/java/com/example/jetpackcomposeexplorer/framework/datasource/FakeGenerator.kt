@@ -10,13 +10,13 @@ import com.example.jetpackcomposeexplorer.business.course.ModuleImpl
 import com.example.jetpackcomposeexplorer.business.course.Prerequisite
 import com.example.jetpackcomposeexplorer.business.course.Theme
 import com.example.jetpackcomposeexplorer.business.course.ThemeImpl
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.LessonFinder
+import com.example.jetpackcomposeexplorer.business.course.Finder
 import com.example.jetpackcomposeexplorer.business.domain.Lesson
 
 // TODO: the fake generator should remmeber the returned data for consistency
 class FakeGenerator {
   companion object {
-    val fakeLessonFinder = object : LessonFinder {
+    val fakeLessonFinder = object : Finder {
       override fun findLessonById(id: String): LessonData {
         return generateFakeLessonData(id = id)
       }

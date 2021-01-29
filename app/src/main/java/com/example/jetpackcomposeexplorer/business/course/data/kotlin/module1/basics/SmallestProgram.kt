@@ -4,10 +4,9 @@ import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks
 import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
 import com.example.jetpackcomposeexplorer.business.course.LessonPage
 
-object SmallestProgram : LessonDataImpl(
-    id = Basics.id + ".smallest_program",
+val SmallestProgram = LessonDataImpl(
+    id = "kotlin.module1.basics.smallest_program",
     title = "The smallest program",
-    chapter = Basics,
 
     dependencies = listOf(HelloWorld),
     pages = listOf(

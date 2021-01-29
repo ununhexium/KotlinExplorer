@@ -1,9 +1,8 @@
 package com.example.jetpackcomposeexplorer.business.course
 
-open class LessonDataImpl(
-    override val id:String,
-    override val title:String,
-    override val chapter: Chapter,
+class LessonDataImpl(
+    override val id: String,
+    override val title: String,
     override val pages: List<LessonPage>,
     override val dependencies: List<Prerequisite> = listOf(),
 ) : LessonData {

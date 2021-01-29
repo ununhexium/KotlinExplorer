@@ -11,10 +11,7 @@ interface Chapter: Prerequisite {
    */
   override val title: String
 
-  /**
-   * The module this chapter belongs to
-   */
-  val module: Module
+  val lessons: List<LessonData>
 
   /**
    * A preview of this chapter's content

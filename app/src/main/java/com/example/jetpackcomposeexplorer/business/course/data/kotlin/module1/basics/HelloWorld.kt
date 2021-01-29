@@ -1,13 +1,12 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics
 
-import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks
 import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
 import com.example.jetpackcomposeexplorer.business.course.LessonPage
+import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks
 
-object HelloWorld : LessonDataImpl(
-    id = Basics.id + ".hello_world",
+val HelloWorld = LessonDataImpl(
+    id = "hello_world",
     title = "Hello, World!",
-    chapter = Basics,
 
     pages = listOf(
         LessonPage.InfoPage(

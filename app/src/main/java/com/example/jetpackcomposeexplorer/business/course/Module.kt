@@ -12,7 +12,7 @@ interface Module: Prerequisite {
   override val title:String
 
   /**
-   * The theme this Module belongs to.
+   * The chapters in this module
    */
-  val theme: Theme
+  val chapters: List<Chapter>
 }

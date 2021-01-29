@@ -4,10 +4,9 @@ import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks
 import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
 import com.example.jetpackcomposeexplorer.business.course.LessonPage
 
-object Numbers : LessonDataImpl(
-    id = DataTypes.id + ".numbers",
+val Numbers = LessonDataImpl(
+    id = "kotlin.module1.datatypes.numbers",
     title = "Numbers",
-    chapter = DataTypes,
 
     dependencies = listOf(
         Introduction

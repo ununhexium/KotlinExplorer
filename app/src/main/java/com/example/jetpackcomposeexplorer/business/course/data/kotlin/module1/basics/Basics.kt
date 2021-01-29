@@ -1,11 +1,15 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics
 
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
 import com.example.jetpackcomposeexplorer.business.course.ChapterImpl
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
 
-object Basics : ChapterImpl(
-    Module1.id + ".basics",
+
+val Basics = ChapterImpl(
+    id = "kotlin.module1.basics",
     title = "Basics",
     description = "Printing, smallest program, variables",
-    module = Module1,
+    lessons = listOf(
+        HelloWorld,
+        SmallestProgram,
+    )
 )

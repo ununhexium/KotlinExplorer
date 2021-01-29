@@ -12,11 +12,6 @@ interface LessonData: Prerequisite {
   override val title: String
 
   /**
-   * The chapter this lesson belongs to.
-   */
-  val chapter: Chapter
-
-  /**
    * The pages of this lesson
    */
   val pages: List<LessonPage>

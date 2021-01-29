@@ -4,5 +4,5 @@ open class ChapterImpl(
     override val id: String,
     override val title: String,
     override val description: String,
-    override val module: Module,
+    override val lessons: List<LessonData>,
 ) : Chapter

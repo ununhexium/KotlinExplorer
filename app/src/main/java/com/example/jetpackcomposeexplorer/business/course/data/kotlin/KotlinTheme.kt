@@ -1,10 +1,12 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin
 
-import com.example.jetpackcomposeexplorer.business.course.Theme
 import com.example.jetpackcomposeexplorer.business.course.ThemeImpl
+import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
 
-// TODO: this hierarchy could be put in the database
 object KotlinTheme : ThemeImpl(
     "kotlin",
-    "Kotlin"
+    "Kotlin",
+    listOf(
+        Module1,
+    )
 )
