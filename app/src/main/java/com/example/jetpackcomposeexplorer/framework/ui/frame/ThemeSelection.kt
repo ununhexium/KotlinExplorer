@@ -12,8 +12,6 @@ import com.example.jetpackcomposeexplorer.framework.ui.theme.Theme
 @Composable
 fun ThemeSelection(modifier: Modifier = Modifier) {
   val (theme, setTheme) = remember { mutableStateOf(Theme.LIGHT_DEFAULT) }
-
-
 }
 
 @Preview

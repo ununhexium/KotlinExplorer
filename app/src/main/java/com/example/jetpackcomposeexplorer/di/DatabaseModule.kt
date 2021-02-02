@@ -2,13 +2,10 @@ package com.example.jetpackcomposeexplorer.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.jetpackcomposeexplorer.business.course.Finder
-import com.example.jetpackcomposeexplorer.business.course.FinderImpl
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KotlinTheme
-import com.example.jetpackcomposeexplorer.business.domain.Lesson
+import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.business.util.EntityMapper
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
-import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase_Impl
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
 import com.example.jetpackcomposeexplorer.framework.datasource.mapper.LessonMapper
@@ -27,8 +24,8 @@ object DatabaseModule {
 
   @Singleton
   @Provides
-  fun provideLessonMapper(finder: Finder): EntityMapper<LessonEntity, Lesson> {
-    return LessonMapper(finder)
+  fun provideLessonMapper(courseRepository: CourseRepository): EntityMapper<LessonEntity, Exercise> {
+    return LessonMapper(courseRepository)
   }
 
   @Singleton

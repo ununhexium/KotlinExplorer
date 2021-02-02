@@ -24,6 +24,13 @@ android {
     versionName(Application.versionName)
 
     testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments += mapOf("room.schemaLocation" to "$projectDir/schemas")
+      }
+    }
+
   }
 
   buildTypes {
@@ -74,6 +81,11 @@ android {
      *       - /home/uuh/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.5.0/e0845217c4907822403912ad6828d8e0b256208/jna-5.5.0.jar
      */
     exclude("META-INF/LGPL2.1")
+  }
+
+  sourceSets {
+    getByName("test").java.srcDirs("$projectDir/src/testShared/java")
+    getByName("androidTest").java.srcDirs("$projectDir/src/testShared/java")
   }
 }
 
@@ -139,5 +151,6 @@ dependencies {
   androidTestImplementation(TestDependencies.junit5_api)
   androidTestImplementation(TestDependencies.kotlinx_coroutines)
   androidTestImplementation(TestDependencies.mockk_android)
+  androidTestImplementation(TestDependencies.room)
   androidTestImplementation(TestDependencies.truth)
 }

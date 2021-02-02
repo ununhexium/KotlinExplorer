@@ -1,6 +1,6 @@
 package com.example.jetpackcomposeexplorer.framework.datasource.service
 
-import com.example.jetpackcomposeexplorer.business.domain.Lesson
+import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
 import com.example.jetpackcomposeexplorer.framework.datasource.mapper.LessonMapper
@@ -15,7 +15,7 @@ constructor(
     private val lessonMapper: LessonMapper,
 ) : LessonDaoService {
 
-  override suspend fun getOrCreateLesson(id: String): Lesson {
+  override suspend fun getOrCreateLesson(id: String): Exercise {
     if (!lessonDao.exists(id)) {
       lessonDao.insert(LessonEntity(id, false))
     }
@@ -23,17 +23,17 @@ constructor(
     return lessonMapper.fromEntity(lessonDao.read(id))
   }
 
-  override suspend fun markAsDone(lesson: Lesson): Lesson {
-    if (!lesson.completed) {
-      if (!lessonDao.exists(lesson.lessonData.id)) {
-        lessonDao.insert(lessonMapper.toEntity(lesson.copy(completed = true)))
+  override suspend fun markAsDone(exercise: Exercise): Exercise {
+    if (!exercise.completed) {
+      if (!lessonDao.exists(exercise.lessonData.id)) {
+        lessonDao.insert(lessonMapper.toEntity(exercise.copy(completed = true)))
       } else {
-        lessonDao.update(lessonMapper.toEntity(lesson.copy(completed = true)))
+        lessonDao.update(lessonMapper.toEntity(exercise.copy(completed = true)))
       }
     }
 
     return lessonMapper.fromEntity(
-        lessonDao.read(lesson.lessonData.id)
+        lessonDao.read(exercise.lessonData.id)
     )
   }
 }

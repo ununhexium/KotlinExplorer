@@ -1,4 +1,7 @@
-package com.example.jetpackcomposeexplorer.business.course
+package com.example.jetpackcomposeexplorer.business.course.implementation
+
+import com.example.jetpackcomposeexplorer.business.course.abstraction.LessonData
+import com.example.jetpackcomposeexplorer.business.course.abstraction.Prerequisite
 
 class LessonDataImpl(
     override val id: String,

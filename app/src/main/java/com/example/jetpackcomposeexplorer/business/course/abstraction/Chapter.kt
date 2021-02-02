@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.business.course
+package com.example.jetpackcomposeexplorer.business.course.abstraction
 
 interface Chapter: Prerequisite {
   /**

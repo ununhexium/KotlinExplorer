@@ -2,7 +2,6 @@ package com.example.jetpackcomposeexplorer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragment
 import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragmentFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -18,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     supportFragmentManager.fragmentFactory = fragmentFactory
-    supportFragmentManager.beginTransaction()
-        .replace(R.id.main_container, QuizFragment::class.java, null)
-        .commit()
+//    supportFragmentManager.beginTransaction()
+//        .replace(R.id.main_container, HomeFragment::class.java, null)
+//        .commit()
   }
 }

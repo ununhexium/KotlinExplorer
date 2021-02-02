@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.business.course
+package com.example.jetpackcomposeexplorer.business.course.implementation
 
 sealed class LessonPage(
     val title: String,

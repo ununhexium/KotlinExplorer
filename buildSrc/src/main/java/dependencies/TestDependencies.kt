@@ -17,5 +17,7 @@ object TestDependencies {
   val mockk = "io.mockk:mockk:${Versions.mockk}"
   val mockk_android = "io.mockk:mockk-android:${Versions.mockk}"
 
+  val room = "androidx.room:room-testing:${Versions.room}"
+
   val truth = "com.google.truth:truth:${Versions.truth}"
 }

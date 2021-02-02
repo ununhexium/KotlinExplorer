@@ -1,7 +1,6 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1
 
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KotlinTheme
-import com.example.jetpackcomposeexplorer.business.course.ModuleImpl
+import com.example.jetpackcomposeexplorer.business.course.implementation.ModuleImpl
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics.Basics
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.datatypes.DataTypes
 

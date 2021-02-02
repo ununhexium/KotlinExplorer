@@ -1,8 +1,8 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics
 
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks
-import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
-import com.example.jetpackcomposeexplorer.business.course.LessonPage
+import com.example.jetpackcomposeexplorer.business.course.implementation.LessonDataImpl
+import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage
 
 val SmallestProgram = LessonDataImpl(
     id = "kotlin.module1.basics.smallest_program",

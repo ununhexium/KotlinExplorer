@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 
-@Database(entities = [UserProfileEntity::class, LessonEntity::class], version = 1)
+@Database(entities = [UserProfileEntity::class, LessonEntity::class], version = 2)
 abstract class ExplorerDatabase : RoomDatabase() {
   companion object {
     lateinit var db: ExplorerDatabase
@@ -17,6 +18,9 @@ abstract class ExplorerDatabase : RoomDatabase() {
               applicationContext,
               ExplorerDatabase::class.java,
               "jetpack-explorer"
+          )
+          .addMigrations(
+
           )
           .build()
 

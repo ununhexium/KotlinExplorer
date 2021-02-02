@@ -1,7 +1,7 @@
 package com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.datatypes
 
-import com.example.jetpackcomposeexplorer.business.course.LessonDataImpl
-import com.example.jetpackcomposeexplorer.business.course.LessonPage
+import com.example.jetpackcomposeexplorer.business.course.implementation.LessonDataImpl
+import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.basics.Basics
 
 val Introduction = LessonDataImpl(

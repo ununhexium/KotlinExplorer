@@ -9,8 +9,8 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.jetpackcomposeexplorer.business.course.Finder
-import com.example.jetpackcomposeexplorer.business.course.FinderImpl
+import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.course.implementation.CourseRepositoryImpl
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KotlinTheme
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
       savedInstanceState: Bundle?,
   ): View {
     // TODO: di
-    val lessonFinder: Finder = FinderImpl(KotlinTheme)
+    val courseRepository: CourseRepository = CourseRepositoryImpl()
 
     return ComposeView(requireContext()).apply {
       setContent {
@@ -42,11 +42,11 @@ class HomeFragment : Fragment() {
             }
         ) {
           ChapterList(
-              chapters = lessonFinder.findChaptersInModule(Module1).map {
+              chapters = Module1.chapters.map {
                 ChapterCardData(
                     it.title,
                     0f,
-                    lessonFinder.findLessonsInChapter(it).map { lesson ->
+                    it.lessons.map { lesson ->
                       LessonListItemData(lesson.id, lesson.title, false)
                     }
                 )

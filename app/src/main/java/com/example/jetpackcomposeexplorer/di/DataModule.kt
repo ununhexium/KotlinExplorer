@@ -1,7 +1,7 @@
 package com.example.jetpackcomposeexplorer.di
 
-import com.example.jetpackcomposeexplorer.business.course.Finder
-import com.example.jetpackcomposeexplorer.business.course.FinderImpl
+import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.course.implementation.CourseRepositoryImpl
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KotlinTheme
 import dagger.Module
 import dagger.Provides
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object DataModule {
   @Singleton
   @Provides
-  fun provideFinder(): Finder {
-    return FinderImpl(KotlinTheme)
+  fun provideFinder(): CourseRepository {
+    return CourseRepositoryImpl()
   }
 }

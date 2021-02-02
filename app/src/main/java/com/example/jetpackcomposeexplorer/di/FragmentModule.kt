@@ -1,7 +1,7 @@
 package com.example.jetpackcomposeexplorer.di
 
 import androidx.fragment.app.FragmentFactory
-import com.example.jetpackcomposeexplorer.business.course.Finder
+import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
 import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDaoService
 import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragmentFactory
 import dagger.Module
@@ -19,10 +19,10 @@ object FragmentModule {
   @Singleton
   @Provides
   fun provideQuizFragmentFactory(
-      finder: Finder,
+      courseRepository: CourseRepository,
       lessonDaoService: LessonDaoService,
   ): FragmentFactory {
-    return QuizFragmentFactory(finder, lessonDaoService)
+    return QuizFragmentFactory(courseRepository, lessonDaoService)
   }
 }
 

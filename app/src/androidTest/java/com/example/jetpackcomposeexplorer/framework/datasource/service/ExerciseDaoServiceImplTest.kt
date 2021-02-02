@@ -3,8 +3,8 @@ package com.example.jetpackcomposeexplorer.framework.datasource.service
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.example.jetpackcomposeexplorer.business.course.Finder
-import com.example.jetpackcomposeexplorer.framework.datasource.FakeGenerator
+import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.course.data.FakeGenerator
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
@@ -21,8 +21,8 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class LessonDaoServiceImplTest {
-  private val lessonFinder: Finder = mockk()
+class ExerciseDaoServiceImplTest {
+  private val courseRepository: CourseRepository = mockk()
 
   private lateinit var db: ExplorerDatabase
   private lateinit var lessonDao: LessonDao
@@ -37,14 +37,14 @@ class LessonDaoServiceImplTest {
         .inMemoryDatabaseBuilder(context, ExplorerDatabase::class.java)
         .build()
 
-    every { lessonFinder.findLessonById(any()) } answers {
+    every { courseRepository.findLessonById(any()) } answers {
       FakeGenerator.generateFakeLessonData(firstArg())
     }
 
     lessonDao = spyk(db.lessonDao())
     lessonDaoService = LessonDaoServiceImpl(
         lessonDao,
-        LessonMapper(lessonFinder)
+        LessonMapper(courseRepository)
     )
   }
 

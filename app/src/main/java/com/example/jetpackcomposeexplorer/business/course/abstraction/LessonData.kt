@@ -1,4 +1,6 @@
-package com.example.jetpackcomposeexplorer.business.course
+package com.example.jetpackcomposeexplorer.business.course.abstraction
+
+import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage
 
 interface LessonData: Prerequisite {
   /**

@@ -3,8 +3,10 @@ package com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestio
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.example.jetpackcomposeexplorer.business.course.implementation.CourseRepositoryImpl
+import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.framework.CoroutineTestRule
-import com.example.jetpackcomposeexplorer.framework.datasource.FakeGenerator
+import com.example.jetpackcomposeexplorer.business.course.data.FakeGenerator
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity
@@ -13,11 +15,9 @@ import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDaoServiceImpl
 import com.google.common.truth.Truth.assertThat
 import io.mockk.clearAllMocks
-import io.mockk.every
 import io.mockk.spyk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
@@ -25,15 +25,12 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.io.IOException
 
 @ExperimentalCoroutinesApi
 class QuizViewModelTest {
 
   @get:Rule
   var coroutinesTestRule = CoroutineTestRule()
-
-  private val lessonFinder = FakeGenerator.fakeLessonFinder
 
   private lateinit var db: ExplorerDatabase
   private lateinit var lessonDao: LessonDao
@@ -57,7 +54,7 @@ class QuizViewModelTest {
     lessonDao = spyk(db.lessonDao())
     lessonDaoService = LessonDaoServiceImpl(
         lessonDao,
-        LessonMapper(lessonFinder)
+        LessonMapper(CourseRepositoryImpl())
     )
   }
 
@@ -69,7 +66,10 @@ class QuizViewModelTest {
   @Test
   fun canSaveTheLessonsStatus_whenReachingTheEndOfTheQuiz() = testScope.runBlockingTest {
     // given
-    val lesson = FakeGenerator.generateFakeLesson(pagesCount = 2)
+    val lesson = Exercise(
+        FakeGenerator.generateFakeLessonData(pagesCount = 2),
+        false
+    )
     val vm = QuizViewModel(lesson, lessonDaoService)
 
     // when go to the next page
