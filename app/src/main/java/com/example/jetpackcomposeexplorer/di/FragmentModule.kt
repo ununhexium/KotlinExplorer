@@ -1,7 +1,7 @@
 package com.example.jetpackcomposeexplorer.di
 
 import androidx.fragment.app.FragmentFactory
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
 import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDaoService
 import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragmentFactory
 import dagger.Module

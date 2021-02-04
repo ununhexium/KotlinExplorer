@@ -3,8 +3,8 @@ package com.example.jetpackcomposeexplorer.framework.datasource.service
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
-import com.example.jetpackcomposeexplorer.business.course.data.FakeGenerator
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.FakeGenerator
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity

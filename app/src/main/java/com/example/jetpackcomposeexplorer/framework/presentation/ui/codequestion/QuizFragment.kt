@@ -10,9 +10,9 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
-import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage.CodeQuestionPage
-import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage.InfoPage
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.implementation.LessonPage.CodeQuestionPage
+import com.example.jetpackcomposeexplorer.business.data.course.implementation.LessonPage.InfoPage
 import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDaoService
 import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage

@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage
+import com.example.jetpackcomposeexplorer.business.data.course.implementation.LessonPage
 import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDaoService
 import kotlinx.coroutines.launch

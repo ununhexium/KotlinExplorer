@@ -9,10 +9,9 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
-import com.example.jetpackcomposeexplorer.business.course.implementation.CourseRepositoryImpl
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KotlinTheme
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.module1.Module1
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.implementation.CourseRepositoryImpl
+import com.example.jetpackcomposeexplorer.business.data.course.kotlin.module1.Module1
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer

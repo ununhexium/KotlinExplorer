@@ -2,7 +2,7 @@ package com.example.jetpackcomposeexplorer.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
 import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.business.util.EntityMapper
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase

@@ -1,6 +1,6 @@
 package com.example.jetpackcomposeexplorer.framework.datasource.mapper
 
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
 import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.business.util.EntityMapper
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity

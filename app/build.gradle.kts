@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
   id("com.android.application")
+//  id("com.google.firebase.crashlytics")
   id("dagger.hilt.android.plugin")
   id("kotlin-android")
   id("kotlin-android-extensions")
@@ -124,8 +125,15 @@ dependencies {
   implementation(Dependencies.hilt)
   kapt(AnnotationProcessing.hilt_compiler)
 
+  implementation(Dependencies.firebase_firestore)
+  implementation(Dependencies.firebase_auth)
+  implementation(Dependencies.kotlin_coroutines_play_services)
+  implementation(Dependencies.firebase_analytics)
+  implementation(Dependencies.firebase_crashlytics)
 
-  // add scripting to show the result to the user
+
+
+      // add scripting to show the result to the user
 //    def kotlin_version = kotlinVersion
 //    implementation("org.jetbrains.kotlin:kotlin-script-util:$kotlin_version")
 //    implementation("org.jetbrains.kotlin:kotlin-script-runtime:$kotlin_version")

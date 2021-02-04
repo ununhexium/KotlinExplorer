@@ -2,7 +2,7 @@ package com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestio
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.example.jetpackcomposeexplorer.business.course.abstraction.CourseRepository
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.CourseRepository
 import com.example.jetpackcomposeexplorer.framework.datasource.service.LessonDaoService
 import javax.inject.Inject
 

@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.example.jetpackcomposeexplorer.findAndEdit
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
-import com.example.jetpackcomposeexplorer.business.course.implementation.LessonPage
+import com.example.jetpackcomposeexplorer.business.data.course.implementation.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.Answer
 import com.example.jetpackcomposeexplorer.utils.cached
 import org.commonmark.parser.Parser

@@ -3,10 +3,10 @@ package com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestio
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.example.jetpackcomposeexplorer.business.course.implementation.CourseRepositoryImpl
+import com.example.jetpackcomposeexplorer.business.data.course.implementation.CourseRepositoryImpl
 import com.example.jetpackcomposeexplorer.business.domain.Exercise
 import com.example.jetpackcomposeexplorer.framework.CoroutineTestRule
-import com.example.jetpackcomposeexplorer.business.course.data.FakeGenerator
+import com.example.jetpackcomposeexplorer.business.data.course.FakeGenerator
 import com.example.jetpackcomposeexplorer.framework.datasource.database.ExplorerDatabase
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonDao
 import com.example.jetpackcomposeexplorer.framework.datasource.database.LessonEntity

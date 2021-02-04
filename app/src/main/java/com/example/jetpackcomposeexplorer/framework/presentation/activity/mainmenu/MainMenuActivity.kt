@@ -1,12 +1,12 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.activity.mainmenu
 
-import android.app.Activity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
-class MainMenuActivity : Activity() {
+@AndroidEntryPoint
+class MainMenuActivity : AppCompatActivity() {
   lateinit var viewModel: MainMenuViewModel
 
   override fun onCreate(savedInstanceState: Bundle?) {

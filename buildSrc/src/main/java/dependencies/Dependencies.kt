@@ -17,7 +17,14 @@ object Dependencies {
 
   val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 
+  val firebase_firestore = "com.google.firebase:firebase-firestore-ktx:${Versions.firebase_firestore}"
+  val firebase_auth = "com.google.firebase:firebase-auth:${Versions.firebase_auth}"
+  val firebase_analytics = "com.google.firebase:firebase-analytics-ktx:${Versions.firebase_analytics}"
+  val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:${Versions.firebase_crashlytics}"
+
   val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+
+  val kotlin_coroutines_play_services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines_play_services}"
 
   val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
   val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"

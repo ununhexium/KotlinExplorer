@@ -1,8 +1,7 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.activity.mainmenu.state
 
-import com.example.jetpackcomposeexplorer.business.course.abstraction.Chapter
-import com.example.jetpackcomposeexplorer.business.course.implementation.ChapterImpl
+import com.example.jetpackcomposeexplorer.business.data.course.abstraction.Chapter
 
 data class MainMenuViewState(
-    var chapter: Chapter = ChapterImpl("", "", "", listOf()),
+    var chapter: Chapter,
 )
