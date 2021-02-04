@@ -7,7 +7,7 @@ buildscript {
   dependencies {
     val navVersion = Versions.nav
     classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
-    classpath("com.android.tools.build:gradle:7.0.0-alpha04")
+    classpath("com.android.tools.build:gradle:7.0.0-alpha05")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
   }
 }

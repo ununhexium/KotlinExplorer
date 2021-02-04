@@ -22,6 +22,17 @@ android {
         versionName Application.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation":
+                                      "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildFeatures {
+        compose true
     }
 
     buildTypes {
@@ -30,20 +41,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility Versions.java
         targetCompatibility Versions.java
     }
-    kotlinOptions {
-        jvmTarget = Versions.java
-        useIR = true
-    }
-    buildFeatures {
-        compose true
-    }
+
     composeOptions {
         kotlinCompilerVersion Versions.kotlin
         kotlinCompilerExtensionVersion Versions.compose
+    }
+
+    kotlinOptions {
+        jvmTarget = Versions.java
+        useIR = true
     }
 }
 
