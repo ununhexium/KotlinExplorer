@@ -24,5 +24,6 @@ object Versions {
   // test
   val junit_4 = "4.13.1"
   val jupiter = "5.6.0"
+  val mockk = "1.10.5"
   val truth = "1.1"
 }

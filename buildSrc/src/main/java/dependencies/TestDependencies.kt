@@ -12,5 +12,7 @@ object TestDependencies {
   val junit5_params = "org.junit.jupiter:junit-jupiter-params:${Versions.jupiter}"
   val junit5_engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.jupiter}"
 
+  val mockk = "io.mockk:mockk:${Versions.mockk}"
+
   val truth = "com.google.truth:truth:${Versions.truth}"
 }

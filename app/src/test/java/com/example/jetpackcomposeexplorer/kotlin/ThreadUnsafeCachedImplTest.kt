@@ -1,5 +1,6 @@
 package com.example.jetpackcomposeexplorer.kotlin
 
+import com.example.jetpackcomposeexplorer.utils.cached
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test

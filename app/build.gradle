@@ -56,6 +56,12 @@ android {
         jvmTarget = Versions.java
         useIR = true
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
@@ -64,6 +70,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         freeCompilerArgs += ["-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check"]
     }
 }
+
 
 dependencies {
     implementation Dependencies.app_compat
@@ -109,12 +116,17 @@ dependencies {
 
     // TEST
 
-    testImplementation TestDependencies.junit4_junit
-    testImplementation TestDependencies.truth
     testImplementation TestDependencies.androidx_test_ext
+    testImplementation TestDependencies.junit4_junit
+    testImplementation TestDependencies.junit5_api
+    testImplementation TestDependencies.junit5_params
+    testImplementation TestDependencies.mockk
+    testImplementation TestDependencies.truth
+    testRuntimeOnly TestDependencies.junit5_engine
 
-    androidTestImplementation TestDependencies.junit5_api
     androidTestImplementation TestDependencies.espresso_core
     androidTestImplementation TestDependencies.espresso_contrib
+    androidTestImplementation TestDependencies.junit5_api
+    androidTestImplementation TestDependencies.mockk
     androidTestImplementation TestDependencies.truth
 }
