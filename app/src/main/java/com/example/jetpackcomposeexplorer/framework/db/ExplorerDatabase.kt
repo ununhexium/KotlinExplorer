@@ -11,20 +11,23 @@ abstract class ExplorerDatabase : RoomDatabase() {
     lateinit var db: ExplorerDatabase
       private set
 
+    const val DATABASE_NAME: String = "jetpack-explorer"
+
     fun init(applicationContext: Context) {
       db = Room
           .databaseBuilder(
               applicationContext,
               ExplorerDatabase::class.java,
-              "jetpack-explorer"
+              DATABASE_NAME
           )
           .build()
 
-      if (db.getUserDao().getAll().isEmpty()) {
-        db.getUserDao().insert(UserProfileEntity("World"))
+      if (db.getUserProfileDao().getAll().isEmpty()) {
+        db.getUserProfileDao().insert(UserProfileEntity("World"))
       }
     }
   }
 
-  abstract fun getUserDao(): UserProfileDao
+  abstract fun getUserProfileDao(): UserProfileDao
+  abstract fun getLessonProgressDao(): LessonProgressDao
 }

@@ -13,9 +13,11 @@ object Versions {
   val app_compat = "1.2.0"
   val compose = "1.0.0-alpha10"
   val constraintLayout = "2.0.4"
+  val dagger = "2.28-alpha"
   val espresso_core = "3.3.0"
   val material = "1.2.1"
   val nav = "2.3.2"
+  val hilt = "1.0.0-alpha02"
   val room = "2.2.6"
 
   // atlassian

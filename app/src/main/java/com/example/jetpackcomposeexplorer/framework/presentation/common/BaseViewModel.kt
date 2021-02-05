@@ -17,90 +17,87 @@ import kotlinx.coroutines.flow.flow
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-abstract class BaseViewModel<ViewState> : ViewModel()
-{
-    private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
+abstract class BaseViewModel<ViewState, StateEventImpl> : ViewModel() where StateEventImpl : StateEvent {
+  private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
 
-    val dataChannelManager: DataChannelManager<ViewState>
-            = object: DataChannelManager<ViewState>(){
+  val dataChannelManager: DataChannelManager<ViewState> = object : DataChannelManager<ViewState>() {
 
-        override fun handleNewData(data: ViewState) {
-            this@BaseViewModel.handleNewData(data)
-        }
+    override fun handleNewData(data: ViewState) {
+      this@BaseViewModel.handleNewData(data)
     }
+  }
 
-    val viewState: LiveData<ViewState>
-        get() = _viewState
+  val viewState: LiveData<ViewState>
+    get() = _viewState
 
-    val shouldDisplayProgressBar: LiveData<Boolean>
-            = dataChannelManager.shouldDisplayProgressBar
+  val shouldDisplayProgressBar: LiveData<Boolean> = dataChannelManager.shouldDisplayProgressBar
 
-    val stateMessage: LiveData<StateMessage?>
-        get() = dataChannelManager.messageStack.stateMessage
+  val stateMessage: LiveData<StateMessage?>
+    get() = dataChannelManager.messageStack.stateMessage
 
-    // FOR DEBUGGING
-    fun getMessageStackSize(): Int{
-        return dataChannelManager.messageStack.size
-    }
+  // FOR DEBUGGING
+  fun getMessageStackSize(): Int {
+    return dataChannelManager.messageStack.size
+  }
 
-    fun setupChannel() = dataChannelManager.setupChannel()
+  fun setupChannel() = dataChannelManager.setupChannel()
 
-    abstract fun handleNewData(data: ViewState)
+  abstract fun handleNewData(data: ViewState)
 
-    abstract fun setStateEvent(stateEvent: StateEvent)
+  abstract fun setStateEvent(stateEvent: StateEventImpl)
 
-    fun emitStateMessageEvent(
-        stateMessage: StateMessage,
-        stateEvent: StateEvent
-    ) = flow{
-        emit(
-            DataState.error<ViewState>(
-                response = stateMessage.response,
-                stateEvent = stateEvent
-            )
+  fun emitStateMessageEvent(
+      stateMessage: StateMessage,
+      stateEvent: StateEventImpl,
+  ) = flow {
+    emit(
+        DataState.error<ViewState>(
+            response = stateMessage.response,
+            stateEvent = stateEvent
         )
-    }
+    )
+  }
 
-    fun emitInvalidStateEvent(stateEvent: StateEvent) = flow {
-        emit(
-            DataState.error<ViewState>(
-                response = Response(
-                    message = GenericErrors.INVALID_STATE_EVENT,
-                    uiComponentType = UIComponentType.None,
-                    messageType = MessageType.Error
-                ),
-                stateEvent = stateEvent
-            )
+  fun emitInvalidStateEvent(stateEvent: StateEventImpl) = flow {
+    emit(
+        DataState.error<ViewState>(
+            response = Response(
+                message = GenericErrors.INVALID_STATE_EVENT,
+                uiComponentType = UIComponentType.None,
+                messageType = MessageType.Error
+            ),
+            stateEvent = stateEvent
         )
-    }
+    )
+  }
 
-    fun launchJob(
-        stateEvent: StateEvent,
-        jobFunction: Flow<DataState<ViewState>?>
-    ) = dataChannelManager.launchJob(stateEvent, jobFunction)
+  fun launchJob(
+      stateEvent: StateEventImpl,
+      jobFunction: Flow<DataState<ViewState>?>,
+  ) = dataChannelManager.launchJob(stateEvent, jobFunction)
 
-    fun getCurrentViewStateOrNew(): ViewState{
-        return viewState.value ?: initNewViewState()
-    }
+  fun getCurrentViewStateOrNew(): ViewState {
+    return viewState.value ?: initNewViewState()
+  }
 
-    fun setViewState(viewState: ViewState){
-        _viewState.value = viewState
-    }
+  fun setViewState(viewState: ViewState) {
+    _viewState.value = viewState
+  }
 
-    fun clearStateMessage(index: Int = 0){
-        printLogD("BaseViewModel", "clearStateMessage")
-        dataChannelManager.clearStateMessage(index)
-    }
+  fun clearStateMessage(index: Int = 0) {
+    printLogD("BaseViewModel", "clearStateMessage")
+    dataChannelManager.clearStateMessage(index)
+  }
 
-    fun clearActiveStateEvents() = dataChannelManager.clearActiveStateEventCounter()
+  fun clearActiveStateEvents() = dataChannelManager.clearActiveStateEventCounter()
 
-    fun clearAllStateMessages() = dataChannelManager.clearAllStateMessages()
+  fun clearAllStateMessages() = dataChannelManager.clearAllStateMessages()
 
-    fun printStateMessages() = dataChannelManager.printStateMessages()
+  fun printStateMessages() = dataChannelManager.printStateMessages()
 
-    fun cancelActiveJobs() = dataChannelManager.cancelJobs()
+  fun cancelActiveJobs() = dataChannelManager.cancelJobs()
 
-    abstract fun initNewViewState(): ViewState
+  abstract fun initNewViewState(): ViewState
 
 }
 

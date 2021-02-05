@@ -35,23 +35,23 @@ class HomeFragment : Fragment() {
               )
             }
         ) {
-          ChapterList(
-              chapters = kotlin.map {
-                ChapterCardData(
-                    it.id,
-                    it.title,
-                    0f,
-                    it.lessons.map { lesson ->
-                      LessonListItemData(lesson.id, lesson.title, false)
-                    }
-                )
-              },
-              onPlay = { chapterId, lessonId ->
-                val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(chapterId,
-                    lessonId)
-                findNavController().navigate(action)
-              }
-          )
+//          ChapterList(
+//              chapters = kotlin.map {
+//                ChapterCardData(
+//                    it.id,
+//                    it.title,
+//                    0f,
+//                    it.lessons.map { lesson ->
+//                      LessonListItemData(lesson.id, lesson.title, false)
+//                    }
+//                )
+//              },
+//              onPlay = { chapterId, lessonId ->
+//                val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(chapterId,
+//                    lessonId)
+//                findNavController().navigate(action)
+//              }
+//          )
         }
       }
     }

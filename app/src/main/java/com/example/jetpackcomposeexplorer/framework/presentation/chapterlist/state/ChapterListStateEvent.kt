@@ -3,14 +3,10 @@ package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.st
 import com.example.jetpackcomposeexplorer.business.domain.state.StateEvent
 
 sealed class ChapterListStateEvent : StateEvent {
-  class ReviewLesson(
-      lessonId: String,
-  ) : ChapterListStateEvent() {
-    override val errorInfo = "Error reviewing lesson with id $lessonId"
+  object ListLessonsInProgress: ChapterListStateEvent() {
+    override val errorInfo = "Can't list lessons in progress"
     override val shouldDisplayProgressBar = true
   }
-
-  class SelectChapter
 
   // TODO: search in chapters and lesson
 }

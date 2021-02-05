@@ -5,6 +5,7 @@ import dependencies.TestDependencies
 
 plugins {
     id 'com.android.application'
+    id "dagger.hilt.android.plugin"
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
@@ -88,6 +89,11 @@ dependencies {
 
     implementation Dependencies.navigation_fragment
     implementation Dependencies.navigation_ui
+
+    implementation Dependencies.hilt_android
+    implementation Dependencies.hilt_lifecycle_viewmodel
+    kapt AnnotationProcessing.hilt_android_compiler
+    kapt AnnotationProcessing.hilt_compiler
 
 //    def nav_compose = "1.0.0-SNAPSHOT"
 //    implementation "androidx.navigation:navigation-compose:$nav_compose"

@@ -22,7 +22,7 @@ class ExplorerDatabaseTest {
     db = Room
         .inMemoryDatabaseBuilder(context, ExplorerDatabase::class.java)
         .build()
-    userProfileDao = db.getUserDao()
+    userProfileDao = db.getUserProfileDao()
   }
 
   @After

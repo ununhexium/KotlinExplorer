@@ -1,6 +1,6 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.model
 
-data class Chapter(
+data class ChapterUi(
     val title: String,
-    val lessons: List<Lesson>
+    val lessons: List<LessonUi>
 )
