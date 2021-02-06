@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.jetpackcomposeexplorer.R
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
 import com.example.jetpackcomposeexplorer.business.domain.LessonPage
+import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListFragmentDirections
 import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
@@ -60,10 +64,17 @@ class QuizFragment : Fragment() {
                   )
               }
             } else {
-              Text("Finished")
+              Button(
+                  onClick = {
+                    findNavController().navigate(
+                        R.id.action_quizFragment_to_chapterListFragment
+                    )
+                  }
+              ) {
+                Text("Finished")
+              }
             }
           }
-
         }
       }
     }

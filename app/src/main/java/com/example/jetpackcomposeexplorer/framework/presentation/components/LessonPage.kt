@@ -1,9 +1,11 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,7 +21,7 @@ import androidx.compose.ui.unit.dp
 fun LessonPage(
     progress: Float,
     title: String,
-    page: @Composable () -> Unit,
+    page: @Composable ColumnScope.() -> Unit,
 ) {
   Column(modifier = Modifier.fillMaxSize()) {
     Text(
@@ -30,13 +32,16 @@ fun LessonPage(
         style = MaterialTheme.typography.body2
     )
     page()
-    LinearProgressIndicator(progress = progress, modifier = Modifier.fillMaxWidth())
+    LinearProgressIndicator(
+        progress = progress,
+        modifier = Modifier.fillMaxWidth()
+    )
   }
 }
 
 @Preview
 @Composable
-fun QuizPreview() {
+fun LessonPagePreview() {
   MaterialTheme {
     Surface {
       Column {
@@ -44,8 +49,38 @@ fun QuizPreview() {
             0.116f,
             "Somewhere over the rainbow"
         ) {
-          Surface(modifier = Modifier.fillMaxSize(), color = Color.Gray) {
+          Surface(
+              modifier = Modifier.fillMaxSize(),
+              color = Color.Gray
+          ) {
 
+          }
+        }
+      }
+    }
+  }
+}
+
+@Preview
+@Composable
+fun LessonPagePreview_singleButton() {
+  MaterialTheme {
+    Surface(
+        color = Color(0xFF4CAF50)
+    ) {
+      Column(
+          modifier = Modifier.padding(20.dp)
+      ) {
+        Surface(
+            color = MaterialTheme.colors.surface
+        ) {
+          LessonPage(progress = 1.0f, title = "Foo") {
+            Button(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            ) {
+              Text("Finished")
+            }
           }
         }
       }
