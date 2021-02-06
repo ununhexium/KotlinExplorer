@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.flow
 abstract class BaseViewModel<ViewState, StateEventImpl> : ViewModel() where StateEventImpl : StateEvent {
   private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
 
-  val dataChannelManager: DataChannelManager<ViewState> = object : DataChannelManager<ViewState>() {
+  private val dataChannelManager: DataChannelManager<ViewState> = object : DataChannelManager<ViewState>() {
 
     override fun handleNewData(data: ViewState) {
       this@BaseViewModel.handleNewData(data)

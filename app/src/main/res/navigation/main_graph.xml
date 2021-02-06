@@ -6,5 +6,17 @@
     <fragment
         android:id="@+id/chapterListFragment"
         android:name="com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListFragment"
-        android:label="ChapterListFragment" />
+        android:label="ChapterListFragment" >
+        <action
+            android:id="@+id/action_chapterListFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragment"
+        android:label="QuizFragment" >
+        <argument
+            android:name="lessonId"
+            app:argType="string" />
+    </fragment>
 </navigation>

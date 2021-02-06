@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +22,10 @@ import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
+import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
+import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
+import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonListItemData
 import com.example.jetpackcomposeexplorer.utils.printLogD
 
 @FlowPreview
@@ -56,11 +60,14 @@ class ChapterListFragment
       printLogD(this::class.simpleName, "Updated State $it")
     }
 
-    return ComposeView(requireContext()).apply {
-      setContent {
-        Test(viewModel, viewLifecycleOwner)
-      }
+    val view = ComposeView(requireContext())
+    view.setContent {
+      Content(viewModel, viewLifecycleOwner)
     }
+
+    viewModel.loadChapters()
+
+    return view
   }
 
   private fun restoreInstanceState(savedInstanceState: Bundle?) {
@@ -70,27 +77,45 @@ class ChapterListFragment
       }
     }
   }
-}
 
-@FlowPreview
-@ExperimentalCoroutinesApi
-@Composable
-fun Test(viewModel: ChapterListViewModel, owner: LifecycleOwner) {
-  MaterialTheme {
-    Scaffold {
-      val state by viewModel.viewState.observeAsState()
+  @Composable
+  fun Content(viewModel: ChapterListViewModel, owner: LifecycleOwner) {
+    MaterialTheme {
+      val scaffoldState = rememberScaffoldState()
 
-      Column {
-        if(state == null) {
-          Text("No state")
-        }
-        if(state?.chapters == null) {
-          Text("No chapters")
-        }
-        Text(text = state?.chapters?.size.toString())
+      Scaffold(
+          drawerContent = {
+            ExploreDrawer(
+//                nav = findNavController(),
+                onSelection = {
+                  scaffoldState.drawerState.close()
+                },
+            )
+          },
+          topBar = {
+            Text("KotlinExplorer")
+          },
+      ) {
+        val state by viewModel.viewState.observeAsState()
 
-        Button(onClick = { viewModel.loadChapters() }) {
-          Text("Update")
+        state?.chapters?.let { chapters ->
+          ChapterList(
+              chapters = chapters.map {
+                ChapterCardData(
+                    it.id,
+                    it.title,
+                    0f,
+                    it.lessons.map { lesson ->
+                      LessonListItemData(lesson.id, lesson.title, false)
+                    }
+                )
+              },
+              onPlay = { _, lessonId ->
+                val action = ChapterListFragmentDirections.actionChapterListFragmentToQuizFragment(
+                    lessonId)
+                findNavController().navigate(action)
+              }
+          )
         }
       }
     }
