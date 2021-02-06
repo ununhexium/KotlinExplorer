@@ -34,15 +34,15 @@ abstract class DataChannelManager<ViewState> {
             addStateEvent(stateEvent)
             jobFunction
                 .onEach { dataState ->
-                    dataState?.let { dState ->
+                    dataState?.let {
                         withContext(Main){
-                            dataState.data?.let { data ->
+                            it.data?.let { data ->
                                 handleNewData(data)
                             }
-                            dataState.stateMessage?.let { stateMessage ->
+                            it.stateMessage?.let { stateMessage ->
                                 handleNewStateMessage(stateMessage)
                             }
-                            dataState.stateEvent?.let { stateEvent ->
+                            it.stateEvent?.let { stateEvent ->
                                 removeStateEvent(stateEvent)
                             }
                         }
@@ -77,7 +77,7 @@ abstract class DataChannelManager<ViewState> {
     }
 
     fun clearStateMessage(index: Int = 0){
-        printLogD("DataChannelManager", "clear state message")
+        printLogD("DCM", "clear state message")
         messageStack.removeAt(index)
     }
 

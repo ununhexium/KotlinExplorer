@@ -1,22 +1,6 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.example.jetpackcomposeexplorer.business.domain.LessonPage.InfoPage
-import com.example.jetpackcomposeexplorer.business.domain.LessonPage.CodeQuestionPage
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.kotlin
-import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
-import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
-import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
-import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonDrawer
-import org.commonmark.parser.Parser
 
 class QuizFragment : Fragment() {
 

@@ -8,12 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.kotlin
-import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
-import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
-import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonListItemData
 
 class HomeFragment : Fragment() {
   override fun onCreateView(

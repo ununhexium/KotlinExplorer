@@ -3,6 +3,7 @@ package com.example.jetpackcomposeexplorer.framework.presentation.common
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,6 +17,7 @@ class JetpackExplorerViewModelFactory
 @Inject
 constructor(
     private val getLessonsInProgress: GetLessonsInProgress,
+    private val getAllChapters: GetAllChapters,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -23,7 +25,8 @@ constructor(
 
             ChapterListViewModel::class.java -> {
                 ChapterListViewModel(
-                    getLessonsInProgress
+                    getLessonsInProgress,
+                    getAllChapters
                 ) as T
             }
 

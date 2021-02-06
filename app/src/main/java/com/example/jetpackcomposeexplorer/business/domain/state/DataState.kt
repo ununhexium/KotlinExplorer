@@ -23,9 +23,9 @@ data class DataState<T>(
     }
 
     fun <T> data(
-        response: Response?,
+        response: Response? = null,
         data: T? = null,
-        stateEvent: StateEvent?,
+        stateEvent: StateEvent? = null,
     ): DataState<T> {
       return DataState(
           stateMessage = response?.let {

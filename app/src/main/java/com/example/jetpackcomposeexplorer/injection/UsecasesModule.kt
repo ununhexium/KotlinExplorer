@@ -1,6 +1,8 @@
 package com.example.jetpackcomposeexplorer.injection
 
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
+import com.example.jetpackcomposeexplorer.business.interactor.implementation.GetAllChaptersImpl
 import com.example.jetpackcomposeexplorer.business.interactor.implementation.GetLessonsInProgressImpl
 import com.example.jetpackcomposeexplorer.business.persistence.abstraction.LessonProgressDataSource
 import dagger.Module
@@ -20,5 +22,10 @@ object UsecasesModule {
   @Provides
   fun provideGetLessonsInProgress(dao: LessonProgressDataSource): GetLessonsInProgress {
     return GetLessonsInProgressImpl(dao)
+  }
+  @Singleton
+  @Provides
+  fun provideGetAllChapters(): GetAllChapters {
+    return GetAllChaptersImpl()
   }
 }
