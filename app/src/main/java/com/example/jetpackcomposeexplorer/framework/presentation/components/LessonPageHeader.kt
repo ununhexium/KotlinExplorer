@@ -45,6 +45,7 @@ fun LessonPageHeader(
         text = title,
         style = MaterialTheme.typography.h6,
         modifier = Modifier.align(Alignment.CenterVertically),
+        color = MaterialTheme.colors.primary
     )
     Button(
         onClick = reportMistakeAction,
@@ -53,6 +54,7 @@ fun LessonPageHeader(
             topRight = CornerSize(0),
             bottomRight = CornerSize(0),
         ),
+        enabled = false,
     ) {
       Icon(imageVector = Icons.Default.Flag)
     }

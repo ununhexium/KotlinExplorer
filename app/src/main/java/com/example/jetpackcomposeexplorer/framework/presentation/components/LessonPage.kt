@@ -1,9 +1,12 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
@@ -23,18 +26,19 @@ fun LessonPage(
     title: String,
     page: @Composable ColumnScope.() -> Unit,
 ) {
-  Column(modifier = Modifier.fillMaxSize()) {
-    Text(
-        title,
-        modifier = Modifier
-            .padding(8.dp)
-            .align(Alignment.CenterHorizontally),
-        style = MaterialTheme.typography.body2
+  Column(
+      modifier = Modifier.fillMaxHeight(),
+      verticalArrangement = Arrangement.SpaceBetween
+  ) {
+    LessonPageHeader(
+        title = title,
+        backAction = { /*TODO: back action to previous page (but no second chance for the test)*/ },
+        reportMistakeAction = { /*TODO report mistake*/ }
     )
     page()
     LinearProgressIndicator(
         progress = progress,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().height(4.dp)
     )
   }
 }
@@ -76,7 +80,7 @@ fun LessonPagePreview_singleButton() {
         ) {
           LessonPage(progress = 1.0f, title = "Foo") {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {},
                 modifier = Modifier.align(Alignment.CenterHorizontally),
             ) {
               Text("Finished")
