@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -22,6 +24,7 @@ import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
 import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
@@ -94,7 +97,12 @@ class ChapterListFragment
             )
           },
           topBar = {
-            Text("KotlinExplorer")
+            Row(horizontalArrangement = Arrangement.SpaceAround) {
+              Text("KotlinExplorer",
+                  style = MaterialTheme.typography.h4,
+                  color = MaterialTheme.colors.primary
+              )
+            }
           },
       ) {
         val state by viewModel.viewState.observeAsState()
@@ -112,8 +120,9 @@ class ChapterListFragment
                 )
               },
               onPlay = { _, lessonId ->
-                val action = ChapterListFragmentDirections.actionChapterListFragmentToQuizFragment(
-                    lessonId)
+                val action = ChapterListFragmentDirections
+                    .actionChapterListFragmentToQuizFragment(lessonId)
+
                 ActiveElements.activeLessonId = lessonId
                 findNavController().navigate(action)
               }

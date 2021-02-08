@@ -30,7 +30,7 @@ abstract class DataChannelManager<ViewState> {
         jobFunction: Flow<DataState<ViewState>?>
     ){
         if(canExecuteNewStateEvent(stateEvent)){
-            printLogD("DCM", "launching job: ${stateEvent.eventName}")
+            printLogD("DataChannelManager", "launching job: ${stateEvent.eventName}")
             addStateEvent(stateEvent)
             jobFunction
                 .onEach { dataState ->
@@ -77,7 +77,7 @@ abstract class DataChannelManager<ViewState> {
     }
 
     fun clearStateMessage(index: Int = 0){
-        printLogD("DCM", "clear state message")
+        printLogD("DataChannelManager", "clear state message")
         messageStack.removeAt(index)
     }
 
@@ -85,7 +85,7 @@ abstract class DataChannelManager<ViewState> {
 
     fun printStateMessages(){
         for(message in messageStack){
-            printLogD("DCM", "${message.response.message}")
+            printLogD("DataChannelManager", "${message.response.message}")
         }
     }
 

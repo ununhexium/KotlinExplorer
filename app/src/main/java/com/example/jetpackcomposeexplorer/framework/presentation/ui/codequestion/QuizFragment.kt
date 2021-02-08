@@ -16,7 +16,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.jetpackcomposeexplorer.R
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
 import com.example.jetpackcomposeexplorer.business.domain.LessonPage
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListFragmentDirections
 import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
@@ -24,7 +23,11 @@ import com.example.jetpackcomposeexplorer.framework.presentation.components.fram
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.commonmark.parser.Parser
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.getValue
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class QuizFragment(
     private val viewModelFactory: ViewModelProvider.Factory,
 ) : Fragment() {
@@ -32,8 +35,6 @@ class QuizFragment(
   val args: QuizFragmentArgs by navArgs()
   val viewModel: QuizViewModel by viewModels { viewModelFactory }
 
-  @FlowPreview
-  @ExperimentalCoroutinesApi
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -44,19 +45,21 @@ class QuizFragment(
       val chapter = KOTLIN.first { it.lessons.any { it.id == args.lessonId } }
 
       setContent {
+        val state  by viewModel.viewState.observeAsState()
+
         Scaffold(
             drawerContent = {
               LessonDrawer(
                   chapter = chapter.title,
                   lesson = lesson.title,
                   lessonPages = lesson.pages.map { it.title },
-                  currentPage = viewModel.viewState.value?.currentPage?.title
+                  currentPage = state?.currentPage?.title ?: ""
               )
             }
         ) {
-          LessonPage(progress = viewModel.viewState.value?.progress ?: 0f,
-              viewModel.viewState.value?.currentPage?.title ?: "Finished") {
-            val page = viewModel.viewState.value?.currentPage
+          LessonPage(progress = state?.progress ?: 0f,
+              state?.currentPage?.title ?: "Finished") {
+            val page = state?.currentPage
             if (page != null) {
               when (page) {
                 is LessonPage.InfoPage ->
