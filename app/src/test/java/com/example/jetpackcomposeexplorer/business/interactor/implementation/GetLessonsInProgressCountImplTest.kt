@@ -1,16 +1,21 @@
 package com.example.jetpackcomposeexplorer.business.interactor.implementation
 
 import com.example.jetpackcomposeexplorer.business.domain.LessonProgress
+import com.example.jetpackcomposeexplorer.business.domain.state.DataState
 import com.example.jetpackcomposeexplorer.business.persistence.abstraction.LessonProgressDataSource
 import com.google.common.truth.Truth.assertThat
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
+import java.util.concurrent.atomic.AtomicReference
 
-internal class GetLessonsInProgressImplTest {
+internal class GetLessonsInProgressCountImplTest {
   companion object {
     val dao = mockk<LessonProgressDataSource>()
   }
@@ -32,12 +37,14 @@ internal class GetLessonsInProgressImplTest {
       dao.getLessonsInProgress()
     } returns inProgress
 
-    val action = GetLessonsInProgressImpl(dao)
+    val action = GetLessonsInProgressCountImpl(dao)
 
     // when
-    val result = action()
-
-    // then
-    assertThat(result).isEqualTo(inProgress)
+    action {
+      it
+    }.collect {
+      // then
+      assertThat(it.data).isEqualTo(inProgress.size)
+    }
   }
 }

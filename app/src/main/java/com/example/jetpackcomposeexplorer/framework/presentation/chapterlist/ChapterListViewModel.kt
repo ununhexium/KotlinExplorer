@@ -1,11 +1,10 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist
 
-import androidx.lifecycle.MutableLiveData
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
 import com.example.jetpackcomposeexplorer.business.domain.Chapter
 import com.example.jetpackcomposeexplorer.business.domain.state.DataState
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
-import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.ListAllChapters
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.ListLessonsInProgress
@@ -23,7 +22,7 @@ import javax.inject.Singleton
 class ChapterListViewModel
 @Inject
 constructor(
-    val getLessonsInProgress: GetLessonsInProgress,
+    val getLessonsInProgressCount: GetLessonsInProgressCount,
     val getAllChapters: GetAllChapters,
 ) : BaseViewModel<ChapterListViewState, ChapterListStateEvent>() {
 
@@ -54,7 +53,7 @@ constructor(
     val job: Flow<DataState<ChapterListViewState>?> = when (stateEvent) {
 
       is ListLessonsInProgress -> {
-        getLessonsInProgress {
+        getLessonsInProgressCount {
           ChapterListViewState(chaptersInProgress = it)
         }
       }
@@ -67,6 +66,7 @@ constructor(
         }
       }
     }
+
     launchJob(stateEvent, job)
   }
 

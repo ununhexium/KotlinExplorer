@@ -1,9 +1,8 @@
 package com.example.jetpackcomposeexplorer.injection
 
-import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
-import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
 import com.example.jetpackcomposeexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
 import dagger.Module
@@ -22,10 +21,11 @@ object MainModule {
   @Singleton
   @Provides
   fun provideViewModelFactory(
-      getLessonsInProgress: GetLessonsInProgress,
       getAllChapters: GetAllChapters,
+      getLessonsInProgressCount: GetLessonsInProgressCount,
+      saveLessonProgress: SaveLessonProgress,
   ): JetpackExplorerViewModelFactory =
-      JetpackExplorerViewModelFactory(getLessonsInProgress, getAllChapters)
+      JetpackExplorerViewModelFactory(getAllChapters, getLessonsInProgressCount, saveLessonProgress)
 
   @Singleton
   @Provides

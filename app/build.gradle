@@ -26,8 +26,9 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += ["room.schemaLocation":
-                                      "$projectDir/schemas".toString()]
+                arguments += [
+                        "room.schemaLocation": "$projectDir/schemas".toString()
+                ]
             }
         }
     }
@@ -56,6 +57,12 @@ android {
     kotlinOptions {
         jvmTarget = Versions.java
         useIR = true
+    }
+
+
+    packagingOptions {
+        exclude "META-INF/LICENSE.md"
+        exclude "META-INF/LICENSE-notice.md"
     }
 
     testOptions {
@@ -130,6 +137,7 @@ dependencies {
     testImplementation TestDependencies.truth
     testRuntimeOnly TestDependencies.junit5_engine
 
+    androidTestImplementation TestDependencies.androidx_test_ext
     androidTestImplementation TestDependencies.espresso_core
     androidTestImplementation TestDependencies.espresso_contrib
     androidTestImplementation TestDependencies.junit5_api

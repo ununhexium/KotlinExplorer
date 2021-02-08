@@ -8,19 +8,19 @@ import com.example.jetpackcomposeexplorer.framework.util.FromEntity
 import com.example.jetpackcomposeexplorer.framework.util.ToEntity
 
 class LessonProgressDataSourceImpl(
-    val dao: LessonProgressDao,
-    val fromEntityMapper: FromEntity<LessonProgressEntity, LessonProgress>,
-    val toEntityMapper: ToEntity<LessonProgressEntity, LessonProgress>,
+    private val dao: LessonProgressDao,
+    private val fromEntityMapper: FromEntity<LessonProgressEntity, LessonProgress>,
+    private val toEntityMapper: ToEntity<LessonProgressEntity, LessonProgress>,
 ) : LessonProgressDataSource {
   override suspend fun getLessonProgress(id: String): LessonProgress {
     return fromEntityMapper(dao.getLesson(id))
   }
 
-  override suspend fun saveLessonProgress(lessonProgress: LessonProgress): Int {
-    return dao.updateLesson(toEntityMapper(lessonProgress))
+  override suspend fun saveLessonProgress(lessonProgress: LessonProgress): Long {
+    return dao.insertLesson(toEntityMapper(lessonProgress))
   }
 
   override suspend fun getLessonsInProgress(): List<LessonProgress> {
-    TODO("Not yet implemented")
+    return dao.getLessons().map { fromEntityMapper(it) }
   }
 }

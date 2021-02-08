@@ -11,5 +11,3 @@ object Basics : ChapterImpl(
         SmallestProgram
     )
 )
-
-// TODO: compiler / validation

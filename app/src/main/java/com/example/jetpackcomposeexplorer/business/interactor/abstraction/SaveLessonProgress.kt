@@ -4,6 +4,8 @@ import com.example.jetpackcomposeexplorer.business.domain.LessonProgress
 import com.example.jetpackcomposeexplorer.business.domain.state.DataState
 import kotlinx.coroutines.flow.Flow
 
-interface GetLessonsInProgress {
-  operator fun <Model> invoke(modelBuilder: (List<LessonProgress>) -> Model): Flow<DataState<Model>>
+interface SaveLessonProgress {
+  operator fun invoke(
+      lessonProgress: LessonProgress,
+  ): Flow<DataState<*>>
 }

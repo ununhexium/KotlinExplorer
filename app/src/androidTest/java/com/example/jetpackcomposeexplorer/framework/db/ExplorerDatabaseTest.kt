@@ -11,26 +11,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class ExplorerDatabaseTest {
-
-  private lateinit var userProfileDao: UserProfileDao
-  private lateinit var db: ExplorerDatabase
-
-  @Before
-  fun before() {
-    val context = ApplicationProvider.getApplicationContext<Context>()
-    db = Room
-        .inMemoryDatabaseBuilder(context, ExplorerDatabase::class.java)
-        .build()
-    userProfileDao = db.getUserProfileDao()
-  }
-
-  @After
-  @Throws(IOException::class)
-  fun closeDb() {
-    db.close()
-  }
-
+class ExplorerDatabaseTest: DatabaseTest() {
   @Test
   @Throws(Exception::class)
   fun writeUserAndReadInList() {

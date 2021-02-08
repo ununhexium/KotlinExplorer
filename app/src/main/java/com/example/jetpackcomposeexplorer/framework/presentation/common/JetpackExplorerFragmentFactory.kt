@@ -3,6 +3,7 @@ package com.example.jetpackcomposeexplorer.framework.presentation.common
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListFragment
+import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -20,6 +21,10 @@ constructor(
       when (className) {
         ChapterListFragment::class.java.name -> {
           ChapterListFragment(viewModelFactory)
+        }
+
+        QuizFragment::class.java.name -> {
+          QuizFragment(viewModelFactory)
         }
 
         else -> {

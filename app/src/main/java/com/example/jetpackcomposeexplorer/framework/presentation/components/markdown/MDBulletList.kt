@@ -15,7 +15,7 @@ import org.commonmark.node.BulletList
 
 @Composable
 fun MDBulletList(bulletList: BulletList, modifier: Modifier = Modifier) {
-  val marker = "•" // • TODO escape \U...
+  val marker = "\u2022" // middle point '•'
   MDListItems(bulletList, modifier = modifier) {
     val text = buildAnnotatedString {
       pushStyle(MaterialTheme.typography.body1.toSpanStyle())

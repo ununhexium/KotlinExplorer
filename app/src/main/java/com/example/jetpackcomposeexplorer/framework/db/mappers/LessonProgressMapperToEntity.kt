@@ -10,6 +10,6 @@ class LessonProgressMapperToEntity : ToEntity<LessonProgressEntity, LessonProgre
       LessonProgressEntity(
           domain.lessonId,
           domain.successCount,
-          domain.failuresCount,
+          domain.failureCount,
       )
 }

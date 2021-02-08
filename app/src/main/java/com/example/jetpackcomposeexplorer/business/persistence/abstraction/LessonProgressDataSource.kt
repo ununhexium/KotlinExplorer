@@ -6,7 +6,7 @@ interface LessonProgressDataSource {
 
   suspend fun getLessonProgress(id: String): LessonProgress
 
-  suspend fun saveLessonProgress(lessonProgress: LessonProgress): Int
+  suspend fun saveLessonProgress(lessonProgress: LessonProgress): Long
 
   suspend fun getLessonsInProgress(): List<LessonProgress>
 }

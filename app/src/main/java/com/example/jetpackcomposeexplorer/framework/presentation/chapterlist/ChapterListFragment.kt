@@ -22,6 +22,7 @@ import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
@@ -113,6 +114,7 @@ class ChapterListFragment
               onPlay = { _, lessonId ->
                 val action = ChapterListFragmentDirections.actionChapterListFragmentToQuizFragment(
                     lessonId)
+                ActiveElements.activeLessonId = lessonId
                 findNavController().navigate(action)
               }
           )

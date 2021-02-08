@@ -12,6 +12,4 @@ sealed class ChapterListStateEvent : StateEvent {
     override val errorInfo = "Can't list lessons"
     override val shouldDisplayProgressBar = true
   }
-
-  // TODO: search in chapters and lesson
 }
