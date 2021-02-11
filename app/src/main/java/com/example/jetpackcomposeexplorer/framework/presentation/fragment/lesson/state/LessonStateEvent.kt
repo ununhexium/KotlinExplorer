@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.lesson.state
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.state
 
 import com.example.jetpackcomposeexplorer.business.domain.state.StateEvent
 

@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state
 
 import com.example.jetpackcomposeexplorer.mvi.UiEvent
 

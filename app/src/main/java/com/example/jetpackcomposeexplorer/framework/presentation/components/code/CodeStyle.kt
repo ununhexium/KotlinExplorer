@@ -5,6 +5,8 @@ import androidx.compose.ui.text.SpanStyle
 
 interface CodeStyle<H> {
   val backgroundColor: Color
+  val gutterBackgroundColor: Color
   val foregroundColor: Color
+  val gutterForegroundColor: Color
   val textStyler: (H) -> SpanStyle
 }

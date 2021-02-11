@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.lesson
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +20,7 @@ import com.example.jetpackcomposeexplorer.framework.presentation.components.Info
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonDrawer
-import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.CodeAnswerState
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.state.CodeAnswerState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.commonmark.parser.Parser
 

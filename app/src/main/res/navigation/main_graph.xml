@@ -6,7 +6,7 @@
     app:startDestination="@id/chapterListFragment">
     <fragment
         android:id="@+id/chapterListFragment"
-        android:name="com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListFragment"
+        android:name="com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment"
         android:label="ChapterListFragment" >
         <action
             android:id="@+id/action_chapterListFragment_to_lessonFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/lessonFragment"
-        android:name="com.example.jetpackcomposeexplorer.framework.presentation.lesson.LessonFragment"
+        android:name="com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.LessonFragment"
         android:label="LessonFragment" >
         <argument
             android:name="lessonId"

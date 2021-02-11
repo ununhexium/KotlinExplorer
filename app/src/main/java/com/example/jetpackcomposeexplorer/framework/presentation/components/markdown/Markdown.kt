@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.example.jetpackcomposeexplorer.framework.presentation.theme.sourceCodeFontFamily
+import com.example.jetpackcomposeexplorer.framework.ui.theme.sourceCodeFontFamily
 import org.commonmark.node.BlockQuote
 import org.commonmark.node.BulletList
 import org.commonmark.node.Code

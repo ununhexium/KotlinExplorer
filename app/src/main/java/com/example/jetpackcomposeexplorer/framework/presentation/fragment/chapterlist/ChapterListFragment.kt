@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,8 +18,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListViewState
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
@@ -39,7 +39,7 @@ class ChapterListFragment
 ) : BaseFragment<ChapterListStateEvent, ChapterListViewState>() {
 
   private val NOTE_LIST_STATE_BUNDLE_KEY =
-      "com.example.jetpackcomposeexplorer.framework.presentation.chapterlist"
+      "com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist"
 
   override val viewModel: ChapterListViewModel by viewModels { viewModelFactory }
 
@@ -83,10 +83,12 @@ class ChapterListFragment
 
         ChapterList(
             chapters = state.chapters.map { chapter ->
+              val completion = state.getChapterCompletion(chapter)
+
               ChapterCardData(
                   chapter.id,
                   chapter.title,
-                  0f,
+                  completion,
                   chapter.lessons.map { lesson ->
                     LessonListItemData(
                         lesson.id,

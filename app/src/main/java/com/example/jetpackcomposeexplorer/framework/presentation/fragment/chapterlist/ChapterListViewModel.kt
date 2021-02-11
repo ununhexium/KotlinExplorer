@@ -1,12 +1,12 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist
 
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.LoadAllChapters
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.LoadLessonsInProgress
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListViewState
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.LoadAllChapters
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.LoadLessonsInProgress
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
 import com.example.jetpackcomposeexplorer.mvi.BaseViewModel
 import com.example.jetpackcomposeexplorer.utils.Do
 import kotlinx.coroutines.ExperimentalCoroutinesApi

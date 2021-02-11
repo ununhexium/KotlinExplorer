@@ -25,6 +25,7 @@ import com.example.jetpackcomposeexplorer.model.code.ijStyle
 import com.example.jetpackcomposeexplorer.model.code.keywordStyle
 import com.example.jetpackcomposeexplorer.model.code.numberStyle
 import com.example.jetpackcomposeexplorer.framework.ui.theme.length
+import com.example.jetpackcomposeexplorer.model.code.normalStyle
 import net.lab0.grammar.kotlin.KotlinHighlight
 
 
@@ -69,8 +70,8 @@ fun KotlinCode(
 fun GutterPart(lines: List<String>) {
   Surface(
       modifier = Modifier.padding(end = 8.dp),
-      color = MaterialTheme.colors.surface,
-      contentColor = MaterialTheme.colors.onSurface
+      color = DefaultCodeStyle.gutterBackgroundColor,
+      contentColor = DefaultCodeStyle.gutterForegroundColor
   ) {
     Column(horizontalAlignment = Alignment.End) {
       lines.forEachIndexed { index, _ ->

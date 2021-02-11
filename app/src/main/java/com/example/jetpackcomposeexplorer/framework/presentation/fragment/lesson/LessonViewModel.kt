@@ -1,13 +1,13 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.lesson
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson
 
 import android.util.Log
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
 import com.example.jetpackcomposeexplorer.business.domain.Lesson
 import com.example.jetpackcomposeexplorer.business.domain.LessonProgress
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
-import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.CodeAnswerState
-import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.LessonStateEvent
-import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.LessonViewState
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.state.CodeAnswerState
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.state.LessonStateEvent
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.state.LessonViewState
 import com.example.jetpackcomposeexplorer.mvi.BaseViewModel
 import com.example.jetpackcomposeexplorer.utils.Do
 

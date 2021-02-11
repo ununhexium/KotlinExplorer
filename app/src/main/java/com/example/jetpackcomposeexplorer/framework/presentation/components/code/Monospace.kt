@@ -13,8 +13,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
-import com.example.jetpackcomposeexplorer.framework.presentation.theme.sourceCodeFontFamily
 import com.example.jetpackcomposeexplorer.framework.ui.frame.DefaultVerticalSpacer
+import com.example.jetpackcomposeexplorer.framework.ui.theme.sourceCodeFontFamily
 
 @Composable
 fun Monospace(

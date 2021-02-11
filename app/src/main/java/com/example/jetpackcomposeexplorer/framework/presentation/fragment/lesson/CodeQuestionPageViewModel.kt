@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeexplorer.framework.presentation.lesson
+package com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

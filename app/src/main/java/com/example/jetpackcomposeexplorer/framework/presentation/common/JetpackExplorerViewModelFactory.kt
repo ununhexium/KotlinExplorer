@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListViewModel
-import com.example.jetpackcomposeexplorer.framework.presentation.lesson.LessonViewModel
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.ChapterListViewModel
+import com.example.jetpackcomposeexplorer.framework.presentation.fragment.lesson.LessonViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
