@@ -7,9 +7,9 @@ import com.example.jetpackcomposeexplorer.business.domain.state.DataState
 import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.common.BaseViewModel
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.state.LessonStateEvent
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.state.LessonStateEvent.GoToNextPage
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.state.LessonViewState
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.LessonStateEvent
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.LessonStateEvent.GoToNextPage
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.LessonViewState
 import com.example.jetpackcomposeexplorer.utils.printLogD
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -60,6 +60,7 @@ class QuizViewModel(
       GoToNextPage -> {
         goToNextPageFlow(stateEvent)
       }
+      else -> TODO()
     }
 
     launchJob(stateEvent, job)

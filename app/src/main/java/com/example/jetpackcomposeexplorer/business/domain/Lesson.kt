@@ -1,6 +1,15 @@
 package com.example.jetpackcomposeexplorer.business.domain
 
-interface Lesson: Prerequisite {
+interface Lesson : Prerequisite {
+  companion object {
+    val EMPTY = object : Lesson {
+      override val id = ""
+      override val title = ""
+      override val pages = listOf<LessonPage>()
+      override val dependencies = listOf<Prerequisite>()
+    }
+  }
+
   /**
    * The identifier for this lesson. Must be unique.
    */

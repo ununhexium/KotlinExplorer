@@ -25,6 +25,7 @@ import javax.inject.Inject
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import com.example.jetpackcomposeexplorer.R
 import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
@@ -121,7 +122,7 @@ class ChapterListFragment
               },
               onPlay = { _, lessonId ->
                 val action = ChapterListFragmentDirections
-                    .actionChapterListFragmentToQuizFragment(lessonId)
+                    .actionChapterListFragmentToLessonFragment(lessonId)
 
                 ActiveElements.activeLessonId = lessonId
                 findNavController().navigate(action)
