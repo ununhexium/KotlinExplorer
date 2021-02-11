@@ -6,7 +6,7 @@ import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAll
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListViewModel
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.QuizViewModel
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.LessonViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -33,8 +33,8 @@ constructor(
                 ) as T
             }
 
-            QuizViewModel::class.java -> {
-                QuizViewModel(
+            LessonViewModel::class.java -> {
+                LessonViewModel(
                     saveLessonProgress
                 ) as T
             }

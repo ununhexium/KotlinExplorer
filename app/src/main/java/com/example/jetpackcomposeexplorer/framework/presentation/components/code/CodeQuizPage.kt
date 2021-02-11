@@ -12,7 +12,7 @@ import com.example.jetpackcomposeexplorer.framework.presentation.components.Corr
 import com.example.jetpackcomposeexplorer.framework.presentation.components.QuizPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.WrongAnswer
 import com.example.jetpackcomposeexplorer.framework.presentation.components.markdown.MDDocument
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.CodeQuestionPageViewModel
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.CodeQuestionPageViewModel
 import com.example.jetpackcomposeexplorer.framework.ui.frame.DefaultVerticalSpacer
 
 @Composable

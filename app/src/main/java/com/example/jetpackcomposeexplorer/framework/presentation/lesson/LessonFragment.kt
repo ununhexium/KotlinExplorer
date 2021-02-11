@@ -11,24 +11,25 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jetpackcomposeexplorer.R
-import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
 import com.example.jetpackcomposeexplorer.business.domain.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.CodeQuizPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonDrawer
-import com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion.CodeQuestionPageViewModel
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.state.CodeAnswerState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.commonmark.parser.Parser
 
 @ExperimentalCoroutinesApi
-class LessonFragment : Fragment(
-) {
-  val args: LessonFragmentArgs by navArgs()
-  val viewModel: LessonViewModel by viewModels()
+class LessonFragment(
+    private val viewModelFactory: ViewModelProvider.Factory,
+) : Fragment() {
+  private val args: LessonFragmentArgs by navArgs()
+  private val viewModel: LessonViewModel by viewModels { viewModelFactory }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -69,21 +70,29 @@ class LessonFragment : Fragment(
                       Parser.builder().build().parse(page.markdown),
                       nextPage = viewModel::nextPage,
                   )
-                is LessonPage.CodeQuestionPage ->
+                is LessonPage.CodeQuestionPage -> {
+                  val model = CodeQuestionPageViewModel(page)
                   CodeQuizPage(
-                      model = CodeQuestionPageViewModel(page),
-                      nextQuestion = viewModel::nextPage,
+                      model = model,
+                      nextQuestion = {
+                        viewModel.nextPage(
+                            if (model.isCorrectAnswer()) CodeAnswerState.SUCCESS
+                            else CodeAnswerState.FAILURE
+                        )
+                      },
                   )
+                }
               }
             } else {
               Button(
                   onClick = {
+                    viewModel.saveLesson()
                     findNavController().navigate(
                         R.id.action_lessonFragment_to_chapterListFragment
                     )
                   }
               ) {
-                Text("Finished")
+                Text("Next")
               }
             }
           }

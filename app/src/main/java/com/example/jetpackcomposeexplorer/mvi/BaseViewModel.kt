@@ -3,6 +3,7 @@ package com.example.jetpackcomposeexplorer.mvi
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetpackcomposeexplorer.utils.Do
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -35,12 +36,21 @@ abstract class BaseViewModel<Event, State>(
 
   suspend fun <T> processResource(flow: Flow<Resource<T>>, handleResult: (T) -> Unit) {
     flow.collect { resource ->
-      when (resource) {
+      Do exhaustive when (resource) {
+        Resource.EmptyLoadedResource -> Unit
         is Resource.LoadedResource -> handleResult(resource.resource)
         is Resource.FailedResource -> {
           _errors.value = ObserveOnce(resource.message)
           Log.d(TAG, "page: ${resource.message}")
         }
+        is Resource.EmptyLoadedResourceWithMessage -> {
+          _errors.value = ObserveOnce(resource.message)
+        }
+        is Resource.LoadedResourceWithMessage -> {
+          handleResult(resource.resource)
+          _errors.value = ObserveOnce(resource.message)
+        }
+        Resource.Empty -> Unit
       }
     }
   }
@@ -57,7 +67,7 @@ abstract class BaseViewModel<Event, State>(
       viewModelScope.launch {
         _loading.value = true
         withContext(Dispatchers.IO) {
-          getJobForEvent(event)
+          doJobForEvent(event)
           jobsQueue.remove(event)
           _loading.value = jobsQueue.isNotEmpty()
           Log.d(TAG, "emitSlowEvent: ${_loading.value}")
@@ -70,12 +80,12 @@ abstract class BaseViewModel<Event, State>(
     jobsQueue.computeIfAbsent(event) {
       viewModelScope.launch {
         withContext(Dispatchers.IO) {
-          getJobForEvent(event)
+          doJobForEvent(event)
           jobsQueue.remove(event)
         }
       }
     }
   }
 
-  abstract suspend fun getJobForEvent(event: Event)
+  abstract suspend fun doJobForEvent(event: Event)
 }

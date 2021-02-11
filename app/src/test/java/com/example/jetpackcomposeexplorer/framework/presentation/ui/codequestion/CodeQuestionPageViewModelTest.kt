@@ -1,6 +1,7 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.ui.codequestion
 
 import com.example.jetpackcomposeexplorer.framework.presentation.components.code.Answer
+import com.example.jetpackcomposeexplorer.framework.presentation.lesson.CodeQuestionPageViewModel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 

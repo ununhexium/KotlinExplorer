@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(version = 2, entities = [UserProfileEntity::class, LessonProgressEntity::class])
+@Database(version = 3, entities = [UserProfileEntity::class, LessonProgressEntity::class])
 abstract class ExplorerDatabase : RoomDatabase() {
   companion object {
     lateinit var db: ExplorerDatabase
