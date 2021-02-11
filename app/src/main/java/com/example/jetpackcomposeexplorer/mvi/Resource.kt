@@ -1,6 +1,6 @@
 package com.example.jetpackcomposeexplorer.mvi
 
-sealed class Resource<T> {
+sealed class Resource<out T> {
   object EmptyLoadedResource : Resource<Nothing>()
   data class EmptyLoadedResourceWithMessage(val message: String) : Resource<Nothing>()
   class LoadedResource<T>(val resource: T) : Resource<T>()

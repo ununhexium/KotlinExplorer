@@ -1,18 +1,16 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist
 
 import com.example.jetpackcomposeexplorer.business.course.data.kotlin.KOTLIN
-import com.example.jetpackcomposeexplorer.business.domain.Chapter
-import com.example.jetpackcomposeexplorer.business.domain.state.DataState
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
-import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.ListAllChapters
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.ListLessonsInProgress
+import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.LoadAllChapters
+import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent.LoadLessonsInProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListViewState
-import com.example.jetpackcomposeexplorer.framework.presentation.common.BaseViewModel
+import com.example.jetpackcomposeexplorer.mvi.BaseViewModel
+import com.example.jetpackcomposeexplorer.utils.Do
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,55 +20,40 @@ import javax.inject.Singleton
 class ChapterListViewModel
 @Inject
 constructor(
-    val getLessonsInProgressCount: GetLessonsInProgressCount,
+    val getLessonsInProgressCount: GetLessonsInProgress,
     val getAllChapters: GetAllChapters,
-) : BaseViewModel<ChapterListViewState, ChapterListStateEvent>() {
+) : BaseViewModel<ChapterListStateEvent, ChapterListViewState>(
+    ChapterListStateEvent.Empty,
+    ChapterListViewState(KOTLIN, listOf())
+) {
 
-  override fun handleNewData(data: ChapterListViewState) {
-    data.let { state ->
-
-      state.chapters?.let {
-        setChaptersData(it)
-      }
-
-    }
-  }
-
-  private fun setChaptersData(chapters: List<Chapter>) {
-    val update = getCurrentViewStateOrNew()
-    update.chapters = chapters
-    setViewState(update)
-  }
-
-  override fun initNewViewState(): ChapterListViewState {
-    return ChapterListViewState(
-        chapters = KOTLIN
-    )
-  }
-
-  override fun setStateEvent(stateEvent: ChapterListStateEvent) {
-
-    val job: Flow<DataState<ChapterListViewState>?> = when (stateEvent) {
-
-      is ListLessonsInProgress -> {
-        getLessonsInProgressCount {
-          ChapterListViewState(chaptersInProgress = it)
+  override suspend fun doJobForEvent(event: ChapterListStateEvent) {
+    Do exhaustive when (event) {
+      LoadLessonsInProgress -> {
+        processResource(
+            getLessonsInProgressCount()
+        ) { chapters ->
+          updateUi {
+            it.copy(lessonsInProgress = chapters)
+          }
         }
       }
 
-      is ListAllChapters -> {
-        getAllChapters { list ->
-          ChapterListViewState(
-              chapters = list
-          )
+      LoadAllChapters -> {
+        processResource(
+            getAllChapters()
+        ) { chapters ->
+          updateUi {
+            it.copy(chapters = chapters)
+          }
         }
       }
+
+      ChapterListStateEvent.Empty -> Unit
     }
-
-    launchJob(stateEvent, job)
   }
 
-  fun loadChapters() {
-    setStateEvent(ListAllChapters)
-  }
+  fun loadChapters() = emitFastEvent(LoadAllChapters)
+
+  fun loadLessonsInProgress() = emitFastEvent(LoadLessonsInProgress)
 }

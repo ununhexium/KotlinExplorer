@@ -3,7 +3,7 @@ package com.example.jetpackcomposeexplorer.framework.presentation.common
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
-import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.ChapterListViewModel
 import com.example.jetpackcomposeexplorer.framework.presentation.lesson.LessonViewModel
@@ -18,7 +18,7 @@ class JetpackExplorerViewModelFactory
 @Inject
 constructor(
     private val getAllChapters: GetAllChapters,
-    private val getLessonsInProgressCount: GetLessonsInProgressCount,
+    private val getLessonsInProgress: GetLessonsInProgress,
     private val saveLessonProgress: SaveLessonProgress,
 ) : ViewModelProvider.Factory {
 
@@ -28,7 +28,7 @@ constructor(
 
             ChapterListViewModel::class.java -> {
                 ChapterListViewModel(
-                    getLessonsInProgressCount,
+                    getLessonsInProgress,
                     getAllChapters
                 ) as T
             }

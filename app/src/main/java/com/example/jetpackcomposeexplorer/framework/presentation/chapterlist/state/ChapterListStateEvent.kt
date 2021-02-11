@@ -1,15 +1,9 @@
 package com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state
 
-import com.example.jetpackcomposeexplorer.business.domain.state.StateEvent
+import com.example.jetpackcomposeexplorer.mvi.UiEvent
 
-sealed class ChapterListStateEvent : StateEvent {
-  object ListLessonsInProgress: ChapterListStateEvent() {
-    override val errorInfo = "Can't list lessons in progress"
-    override val shouldDisplayProgressBar = true
-  }
-
-  object ListAllChapters: ChapterListStateEvent() {
-    override val errorInfo = "Can't list lessons"
-    override val shouldDisplayProgressBar = true
-  }
+sealed class ChapterListStateEvent : UiEvent {
+  object Empty: ChapterListStateEvent()
+  object LoadLessonsInProgress: ChapterListStateEvent()
+  object LoadAllChapters: ChapterListStateEvent()
 }

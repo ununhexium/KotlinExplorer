@@ -101,7 +101,7 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitPostfixUnaryExpression(ctx: PostfixUnaryExpressionContext) =
       hl {
-        if (ctx.atomicExpression().text in wellKnownFunctions) {
+        if (ctx.atomicExpression()?.text in wellKnownFunctions) {
           add(FUNCTION, ctx.atomicExpression().range)
         }
 

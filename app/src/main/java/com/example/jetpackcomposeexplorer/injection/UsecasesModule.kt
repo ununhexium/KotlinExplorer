@@ -1,12 +1,15 @@
 package com.example.jetpackcomposeexplorer.injection
 
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
 import com.example.jetpackcomposeexplorer.business.interactor.implementation.SaveLessonProgressImpl
 import com.example.jetpackcomposeexplorer.business.interactor.implementation.GetAllChaptersImpl
 import com.example.jetpackcomposeexplorer.business.interactor.implementation.GetLessonsInProgressCountImpl
+import com.example.jetpackcomposeexplorer.business.interactor.implementation.GetLessonsInProgressImpl
 import com.example.jetpackcomposeexplorer.business.persistence.abstraction.LessonProgressDataSource
+import com.example.jetpackcomposeexplorer.framework.db.mappers.LessonProgressMapperFromEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +25,7 @@ import javax.inject.Singleton
 object UsecasesModule {
   @Singleton
   @Provides
-  fun provideGetLessonsInProgress(dataSource: LessonProgressDataSource): GetLessonsInProgressCount {
+  fun provideGetLessonsInProgressCount(dataSource: LessonProgressDataSource): GetLessonsInProgressCount {
     return GetLessonsInProgressCountImpl(dataSource)
   }
 
@@ -36,4 +39,9 @@ object UsecasesModule {
   @Provides
   fun provideSaveLessonProgress(dataSource: LessonProgressDataSource): SaveLessonProgress =
       SaveLessonProgressImpl(dataSource)
+
+  @Singleton
+  @Provides
+  fun provideGetLessonsInProgress(dataSource: LessonProgressDataSource): GetLessonsInProgress =
+    GetLessonsInProgressImpl(dataSource)
 }

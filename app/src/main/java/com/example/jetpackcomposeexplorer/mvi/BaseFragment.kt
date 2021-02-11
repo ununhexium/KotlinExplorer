@@ -11,8 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.collect
 
-abstract class BaseFragment<Event, Data>
-  : Fragment()
+abstract class BaseFragment<Event, Data> : Fragment()
     where Data : UiData, Event : UiEvent {
 
   val TAG = this::class.java.canonicalName

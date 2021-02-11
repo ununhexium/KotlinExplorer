@@ -1,7 +1,7 @@
 package com.example.jetpackcomposeexplorer.injection
 
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetAllChapters
-import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgressCount
+import com.example.jetpackcomposeexplorer.business.interactor.abstraction.GetLessonsInProgress
 import com.example.jetpackcomposeexplorer.business.interactor.abstraction.SaveLessonProgress
 import com.example.jetpackcomposeexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
 import com.example.jetpackcomposeexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
@@ -22,10 +22,10 @@ object MainModule {
   @Provides
   fun provideViewModelFactory(
       getAllChapters: GetAllChapters,
-      getLessonsInProgressCount: GetLessonsInProgressCount,
+      getLessonsInProgress: GetLessonsInProgress,
       saveLessonProgress: SaveLessonProgress,
   ): JetpackExplorerViewModelFactory =
-      JetpackExplorerViewModelFactory(getAllChapters, getLessonsInProgressCount, saveLessonProgress)
+      JetpackExplorerViewModelFactory(getAllChapters, getLessonsInProgress, saveLessonProgress)
 
   @Singleton
   @Provides

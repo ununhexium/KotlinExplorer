@@ -11,27 +11,24 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListViewState
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
-import javax.inject.Inject
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Modifier
-import com.example.jetpackcomposeexplorer.R
+import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
+import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListStateEvent
+import com.example.jetpackcomposeexplorer.framework.presentation.chapterlist.state.ChapterListViewState
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.LessonListItemData
-import com.example.jetpackcomposeexplorer.utils.printLogD
+import com.example.jetpackcomposeexplorer.mvi.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import javax.inject.Inject
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -39,59 +36,34 @@ import com.example.jetpackcomposeexplorer.utils.printLogD
 class ChapterListFragment
 @Inject constructor(
     private val viewModelFactory: ViewModelProvider.Factory,
-) : Fragment() {
+) : BaseFragment<ChapterListStateEvent, ChapterListViewState>() {
 
   private val NOTE_LIST_STATE_BUNDLE_KEY =
       "com.example.jetpackcomposeexplorer.framework.presentation.chapterlist"
 
-  private val viewModel: ChapterListViewModel by viewModels {
-    viewModelFactory
-  }
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel.setupChannel()
-  }
+  override val viewModel: ChapterListViewModel by viewModels { viewModelFactory }
 
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?,
   ): View {
-
-    restoreInstanceState(savedInstanceState)
-
-    viewModel.viewState.observe(viewLifecycleOwner) {
-      printLogD(this::class.simpleName, "Updated State $it")
-    }
-
     val view = ComposeView(requireContext())
-    view.setContent {
-      Content(viewModel, viewLifecycleOwner)
-    }
 
-    viewModel.loadChapters()
+    view.setContent { Content() }
+    viewModel.loadLessonsInProgress()
 
     return view
   }
 
-  private fun restoreInstanceState(savedInstanceState: Bundle?) {
-    savedInstanceState?.let { inState ->
-      (inState[NOTE_LIST_STATE_BUNDLE_KEY] as ChapterListViewState?)?.let { viewState ->
-        viewModel.setViewState(viewState)
-      }
-    }
-  }
-
   @Composable
-  fun Content(viewModel: ChapterListViewModel, owner: LifecycleOwner) {
+  fun Content() {
     MaterialTheme {
       val scaffoldState = rememberScaffoldState()
 
       Scaffold(
           drawerContent = {
             ExploreDrawer(
-//                nav = findNavController(),
                 onSelection = {
                   scaffoldState.drawerState.close()
                 },
@@ -99,36 +71,39 @@ class ChapterListFragment
           },
           topBar = {
             Row(horizontalArrangement = Arrangement.SpaceAround) {
-              Text("KotlinExplorer",
+              Text(
+                  "KotlinExplorer",
                   style = MaterialTheme.typography.h4,
                   color = MaterialTheme.colors.primary
               )
             }
           },
       ) {
-        val state by viewModel.viewState.observeAsState()
+        val state by viewModel.uiDataState.collectAsState()
 
-        state?.chapters?.let { chapters ->
-          ChapterList(
-              chapters = chapters.map {
-                ChapterCardData(
-                    it.id,
-                    it.title,
-                    0f,
-                    it.lessons.map { lesson ->
-                      LessonListItemData(lesson.id, lesson.title, false)
-                    }
-                )
-              },
-              onPlay = { _, lessonId ->
-                val action = ChapterListFragmentDirections
-                    .actionChapterListFragmentToLessonFragment(lessonId)
+        ChapterList(
+            chapters = state.chapters.map { chapter ->
+              ChapterCardData(
+                  chapter.id,
+                  chapter.title,
+                  0f,
+                  chapter.lessons.map { lesson ->
+                    LessonListItemData(
+                        lesson.id,
+                        lesson.title,
+                        lesson.id in state.lessonsInProgress.map { it.lessonId }
+                    )
+                  }
+              )
+            },
+            onPlay = { _, lessonId ->
+              val action = ChapterListFragmentDirections
+                  .actionChapterListFragmentToLessonFragment(lessonId)
 
-                ActiveElements.activeLessonId = lessonId
-                findNavController().navigate(action)
-              }
-          )
-        }
+              ActiveElements.activeLessonId = lessonId
+              findNavController().navigate(action)
+            }
+        )
       }
     }
   }
