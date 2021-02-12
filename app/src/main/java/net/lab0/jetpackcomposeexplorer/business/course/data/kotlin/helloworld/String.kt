@@ -55,5 +55,14 @@ The escape character is backslash `\`.
             choices = listOf(""""""", """\""""),
             answer = listOf(""""""", """\""""),
         ),
+
+        LessonPage.InfoPage(
+            "Summary",
+            """
+Strings are an ubiquitous data type.
+
+There are many other things to learn about them but they are not needed for the "Hello World" project.
+"""
+        )
     )
 )

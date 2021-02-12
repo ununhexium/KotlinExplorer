@@ -9,5 +9,6 @@ object HelloWorld: ChapterImpl(
     lessons = listOf(
         String,
         Print,
+        Main,
     )
 )

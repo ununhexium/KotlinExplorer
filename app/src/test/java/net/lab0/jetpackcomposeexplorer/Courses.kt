@@ -39,9 +39,9 @@ class Courses {
   @Test
   fun `list kotlin courses`() {
     // Hello world
+    val strings = course("String")
     val print = course("Print", "print, output, stdout, show")
     val main = course("Main", "main, start, entry point")
-    val strings = course("String")
 
     val helloWorld = project(
         "Hello World",
