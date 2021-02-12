@@ -78,10 +78,9 @@ val infinity:Float = ${placeholder(0)}
             choices = listOf(
                 "Float.POSITIVE_INFINITY",
                 "Float.NEGATIVE_INFINITY"
-            )
-        ) {
-          it == listOf("Float.POSITIVE_INFINITY")
-        },
+            ),
+            answer = listOf("Float.POSITIVE_INFINITY"),
+        ),
 
         // Long
         CodeQuestionPage.singleChoice(
@@ -121,5 +120,3 @@ Just like `Float`s, `Double`s also have +∞ and special values -∞.
         ),
     )
 )
-
-// TODO: NaN for floats and duplicated 0

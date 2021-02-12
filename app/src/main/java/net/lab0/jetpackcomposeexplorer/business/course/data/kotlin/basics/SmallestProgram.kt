@@ -50,9 +50,8 @@ fun main() {
             ,
             listOf(
                 "'", "\"", "Print", "print", "Hello, World!"
-            )
-        ) {
-          it == listOf("print", "\"", "Hello, World!")
-        },
+            ),
+            listOf("print", "\"", "Hello, World!"),
+        ),
     ),
 )

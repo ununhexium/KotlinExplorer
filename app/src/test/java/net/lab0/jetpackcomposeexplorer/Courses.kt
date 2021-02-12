@@ -53,6 +53,7 @@ class Courses {
     val boolean = course("Boolean", basics)
     val floatingPointNotation = course("Floating point notation")
     val floatingPoint = course("Floats", basics, floatingPointNotation)
+    val floatingPointBehaviour= course("Floating point behaviour", floatingPoint)
     val characters = course("Characters", basics)
     val strings = course("String", basics)
 

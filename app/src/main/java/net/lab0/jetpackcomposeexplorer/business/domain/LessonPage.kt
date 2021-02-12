@@ -14,9 +14,9 @@ sealed class LessonPage(
       title: String,
       val question: String,
       val snippet: String,
-      val answer: String,
+      val explanation: String,
       val choices: List<String>,
-      val answerValidator: (List<String>) -> Boolean,
+      val answer: List<String>,
   ) : LessonPage(
       title
   ) {
@@ -31,11 +31,10 @@ sealed class LessonPage(
           title = title,
           question = question,
           snippet = snippet,
-          answer = answer,
-          choices = listOf(choice)
-      ) {
-        true
-      }
+          explanation = answer,
+          choices = listOf(choice),
+          answer = listOf(choice),
+      )
     }
   }
 }

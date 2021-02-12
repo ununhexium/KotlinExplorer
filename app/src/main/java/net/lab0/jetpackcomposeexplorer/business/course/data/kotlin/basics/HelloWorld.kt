@@ -45,29 +45,27 @@ and ends with a double quote `"`.
             title = "Try to print",
             question = """Call the `print` function""",
             snippet = """${placeholder(0)}("Kotlin")""",
-            answer =
+            explanation =
               """
 The function name is case sensitive, 
 you must the name exactly as it is declared: `print`.
 """,
             choices = listOf("printLn", "print", "println", "Print", "PrintLn"),
-        ) {
-          it == listOf("print")
-        },
+            answer = listOf("print"),
+        ),
 
         CodeQuestionPage(
             title = "Try to print Kotlin",
             question = """Print `Kotlin`""",
             snippet = """print(${placeholder(0)})""",
-            answer =
+            explanation =
               """
 When printing a string, the content of the string must be between double quotes `"`.
 """
             ,
             choices = listOf(""""Kotlin"""", "Kotlin", "'Kotlin'"),
-        ) {
-          it == listOf(""""Kotlin"""")
-        },
+            answer = listOf(""""Kotlin""""),
+        ),
     )
 )
 
