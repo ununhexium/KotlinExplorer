@@ -16,14 +16,13 @@ class Courses {
       val dependencies: List<Dep> = listOf()
   ) : Dep
 
-  data class Group(
+  data class Project(
       override val name: String,
       val dependencies: List<Dep> = listOf()
-  ) : Dep {
-    constructor(name: String, vararg deps: Dep) : this(name, deps.toList())
-  }
+  ) : Dep
 
   val courses = mutableListOf<Course>()
+  val groups = mutableListOf<Project>()
 
   fun course(name: String, vararg dependencies: Dep) =
       Course(name, "", dependencies.toList()).also { courses.add(it) }
@@ -31,33 +30,70 @@ class Courses {
   fun course(name: String, description: String, vararg dependencies: Dep) =
       Course(name, description, dependencies.toList()).also { courses.add(it) }
 
+  fun project(name: String, vararg dependencies: Dep) =
+      Project(name, dependencies.toList()).also { groups.add(it) }
+
   // TODO: also add projects as soon as possible
   // TODO: quick test to gage the level of the student
 
   @Test
   fun `list kotlin courses`() {
-    // Basics
+    // Hello world
+    val print = course("Print", "print, output, stdout, show")
+    val main = course("Main", "main, start, entry point")
+    val strings = course("String")
+
+    val helloWorld = project(
+        "Hello World",
+        print,
+        main,
+        strings,
+    )
+
     val value = course("Value", "val, value, constant")
+    val integers = course("Integers")
+    val comparison = course("Comparison of integers", "greater than, less than, equal")
+    val ifElse = course("If else", "if, else")
+    val stringConcatenation = course("String concatenation", strings)
+
+    val oddEven = project(
+        "Odd or even",
+        helloWorld,
+        ifElse,
+        value,
+        comparison,
+        stringConcatenation,
+    )
+
+    // how to import and use an object
+    val random = course("Random basics", "random")
+    val importKw = course("Import")
+
     val variable = course("Variables", "var, variable, assignment")
+    val whileLoop = course("While", ifElse)
+
+    val plusOrMinus = project(
+        "Basics",
+        helloWorld,
+        value,
+        variable,
+        ifElse,
+        whileLoop,
+    )
+
     val nullable = course("Null", "null, nullable, ?", value, variable)
-    val print = course("Print", "print, println, output, stdout")
+    val functionCalls = course("Function")
     val comment = course("Comments", "comment, //, /**/")
     val nestedBlockComments = course("Nested comments", "comment, //, /*/**/*/")
-    val functionCalls = course("Function")
-    val main = course("Main", "main, start, entry point", functionCalls)
-
-    val basics = Group("Basics", value, variable, nullable, print, comment, main)
 
     // data types
-    val integers = course("Integers", basics)
-    val boolean = course("Boolean", basics)
+    val boolean = course("Boolean", plusOrMinus)
     val floatingPointNotation = course("Floating point notation")
-    val floatingPoint = course("Floats", basics, floatingPointNotation)
-    val floatingPointBehaviour= course("Floating point behaviour", floatingPoint)
-    val characters = course("Characters", basics)
-    val strings = course("String", basics)
+    val floatingPoint = course("Floats", plusOrMinus, floatingPointNotation)
+    val floatingPointBehaviour = course("Floating point behaviour", floatingPoint)
+    val characters = course("Characters", plusOrMinus)
 
-    val dataTypes = Group(
+    val dataTypes = project(
         "Data types",
         integers,
         boolean,
@@ -66,7 +102,6 @@ class Courses {
         strings,
     )
 
-    val stringOperators = course("String concatenation, split, ...", strings)
     val stringTemplates = course("String templates", "dollar, $, \${}, string template", strings)
 
     val deferredAssignment = course("Deferred assignment", "deferred, assign later", dataTypes)
@@ -77,7 +112,7 @@ class Courses {
     val unaryMinus = course("Unary minus", integers)
     val operatorPriorities = course("Operator priorities", integers)
 
-    val operators = Group(
+    val operators = project(
         "Operators",
         unaryPlus
     )
@@ -103,17 +138,14 @@ class Courses {
     val escapeSequences = course("Escape sequence", comment)
 
 
-    // conditionals
-    val conditionals = course("If else", "if, else", boolean)
-    val switchCase = course("When", conditionals)
+    val switchCase = course("When", ifElse)
 
     // expressions
-    val expressions = course("Expression assignment", "expressions", conditionals)
+    val expressions = course("Expression assignment", "expressions", ifElse)
 
     // loops
-    val whileLoop = course("While", conditionals)
-    val doWhileLoop = course("Do while", conditionals)
-    val continues = course("Continue", whileLoop, conditionals)
+    val doWhileLoop = course("Do while", ifElse)
+    val continues = course("Continue", whileLoop, ifElse)
 
     // Math
     val mathLib = course("Math", "min, max, square root", functionCalls)
@@ -129,7 +161,6 @@ class Courses {
 
     // structure
     val packageKw = course("Package")
-    val importKw = course("Import", packageKw)
 
     val classes = course("Classes", "class", functionCalls)
 
@@ -147,7 +178,6 @@ class Courses {
 
     val delegatePattern = course("Delegate pattern", "by, delegate", classes, interfaces)
     val delegatedProperties = course("As operator", classes)
-
 
     // then build tree
 
