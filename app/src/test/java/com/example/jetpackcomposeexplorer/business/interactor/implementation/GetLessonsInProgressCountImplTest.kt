@@ -3,6 +3,7 @@ package com.example.jetpackcomposeexplorer.business.interactor.implementation
 import com.example.jetpackcomposeexplorer.business.domain.LessonProgress
 import com.example.jetpackcomposeexplorer.business.domain.state.DataState
 import com.example.jetpackcomposeexplorer.business.persistence.abstraction.LessonProgressDataSource
+import com.example.jetpackcomposeexplorer.mvi.Resource
 import com.google.common.truth.Truth.assertThat
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
@@ -42,7 +43,9 @@ internal class GetLessonsInProgressCountImplTest {
     // when
     action().collect {
       // then
-      assertThat(it).isEqualTo(inProgress.size)
+      assertThat(it).isInstanceOf(Resource.LoadedResource::class.java)
+      it as Resource.LoadedResource<Int>
+      assertThat(it.resource).isEqualTo(inProgress.size)
     }
   }
 }

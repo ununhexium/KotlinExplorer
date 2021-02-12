@@ -10,6 +10,7 @@ digraph g {
 "Main"
 "Integers"
 "Boolean"
+"Floating point notation"
 "Floats"
 "Characters"
 "String"
@@ -19,6 +20,7 @@ digraph g {
 "Type inference for variables"
 "Unary plus"
 "Unary minus"
+"Operator priorities"
 "Operators overload"
 "Type inference for functions"
 "Top level declaration"
@@ -65,17 +67,20 @@ digraph g {
 
 
 "Main" -> "Function"
-"Integers" -> "Value"
-"Boolean" -> "Value"
-"Floats" -> "Value"
-"Characters" -> "Value"
-"String" -> "Value"
+"Integers" -> "Basics"
+"Boolean" -> "Basics"
+
+"Floats" -> "Basics"
+"Floats" -> "Floating point notation"
+"Characters" -> "Basics"
+"String" -> "Basics"
 "String concatenation, split, ..." -> "String"
 "String templates" -> "String"
 "Deferred assignment" -> "Data types"
 
 "Unary plus" -> "Integers"
 "Unary minus" -> "Integers"
+"Operator priorities" -> "Integers"
 
 "Type inference for functions" -> "Value"
 "Type inference for functions" -> "Variables"
@@ -121,4 +126,3 @@ digraph g {
 "Delegate pattern" -> "Classes"
 "Delegate pattern" -> "Interface"
 "As operator" -> "Classes"
-}
