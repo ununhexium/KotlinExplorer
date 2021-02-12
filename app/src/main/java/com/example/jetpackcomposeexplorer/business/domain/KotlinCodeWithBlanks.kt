@@ -1,14 +1,14 @@
 package com.example.jetpackcomposeexplorer.business.domain
 
-import androidx.annotation.IntRange
-
 interface KotlinCodeWithBlanks {
 
   companion object {
     /**
      * @param index Must be in the range [0,1000]
      */
-    fun placeholder(@IntRange(from = -1, to = 999) index: Int = -1) = "/**ANSWER($index)**/"
+    fun placeholder(@androidx.annotation.IntRange(from = -1, to = 999) index: Int = -1) =
+        "/**ANSWER($index)**/"
+
     val ANSWER_REGEX = Regex("""/\*\*ANSWER\((-?[0-9]{1,3})\)\*\*/""")
   }
 
@@ -37,4 +37,14 @@ interface KotlinCodeWithBlanks {
    * @return The raw input with placeholders replaced by the values contained in the map.
    */
   fun fill(fillings: Map<Int, String>): String
+
+  /**
+   * @return a list of strings. When the string is null, it's a placeholder, otherwise, it's the input.
+   */
+  fun split(): List<Pair<CodeType, IntRange>>
+
+  enum class CodeType {
+    PLACEHOLDER,
+    CODE,
+  }
 }

@@ -1,9 +1,10 @@
 package com.example.jetpackcomposeexplorer.model
 
+import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
 import com.google.common.truth.Truth.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class KotlinCodeWithBlanksImplTest {
   @Test
@@ -101,6 +102,104 @@ class KotlinCodeWithBlanksImplTest {
         filled
     ).isEqualTo(
         "if(true == true)"
+    )
+  }
+
+  @Test
+  fun `can split the raw by placeholders and code, placeholders outside`() {
+    // given
+    //          /**ANSWER(0)**/a/**ANSWER(1)**/
+    //          0123456789012345678901234567890
+    val code = "${placeholder(0)}a${placeholder(1)}"
+
+    // when
+    val split = KotlinCodeWithBlanksImpl(code).split()
+
+    // then
+    val phl = placeholder(0).length
+    assertThat(split).isEqualTo(
+        listOf(
+            KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (0 until phl),
+            KotlinCodeWithBlanks.CodeType.CODE to (phl .. phl),
+            KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (phl + 1 until phl + 1 + phl),
+        )
+    )
+  }
+
+  @Test
+  fun `can split the raw by placeholders and code, code outside`() {
+    // given
+    //          a/**ANSWER(0)**/b
+    //          01234567890123456
+    val code = "a${placeholder(0)}b"
+
+    // when
+    val split = KotlinCodeWithBlanksImpl(code).split()
+
+    // then
+    val phl = placeholder(0).length
+    assertThat(split).isEqualTo(
+        listOf(
+            KotlinCodeWithBlanks.CodeType.CODE to (0 .. 0),
+            KotlinCodeWithBlanks.CodeType.PLACEHOLDER to ((1) until (1 + phl)),
+            KotlinCodeWithBlanks.CodeType.CODE to ((1 + phl) until (1 + phl + 1)),
+        )
+    )
+  }
+
+  @Test
+  fun `can split the raw by placeholders and code, consecutive placeholder`() {
+    // given
+
+    //          a/**ANSWER(0)**//**ANSWER(1)**/b
+    //          01234567890123456789012345678901
+    val code = "a${placeholder(0)}${placeholder(1)}b"
+
+    // when
+    val split = KotlinCodeWithBlanksImpl(code).split()
+
+    // then
+    val phl = placeholder(0).length
+    assertThat(split).isEqualTo(
+        listOf(
+            KotlinCodeWithBlanks.CodeType.CODE to (0 until 1),
+            KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (1 until phl + 1),
+            KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (phl + 1 until phl + 1 + phl),
+            KotlinCodeWithBlanks.CodeType.CODE to (phl + 1 + phl until phl + 1 + phl + 1),
+        )
+    )
+  }
+
+  @Test
+  fun `can split the raw by placeholders and code, no placeholder`() {
+    // given
+    val code = "a"
+
+    // when
+    val split = KotlinCodeWithBlanksImpl(code).split()
+
+    // then
+    assertThat(split).isEqualTo(
+        listOf(
+            KotlinCodeWithBlanks.CodeType.CODE to (0 .. 0),
+        )
+    )
+  }
+
+  @Test
+  fun `can split the raw by placeholders and code, only one placeholder`() {
+    // given
+    val code = placeholder(0)
+
+    // when
+    val split = KotlinCodeWithBlanksImpl(code).split()
+
+    // then
+    val phl = placeholder(0).length
+    assertThat(split).isEqualTo(
+        listOf(
+            KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (0 until phl),
+        )
     )
   }
 }

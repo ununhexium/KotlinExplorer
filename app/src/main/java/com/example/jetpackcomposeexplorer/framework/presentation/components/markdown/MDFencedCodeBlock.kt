@@ -34,8 +34,7 @@ fun MDFencedCodeBlock(
                 fencedCodeBlock.literal.trim(),
                 DefaultCodeStyle.textStyler
             ),
-            DefaultCodeStyle.foregroundColor,
-            DefaultCodeStyle.backgroundColor,
+            codeStyle = DefaultCodeStyle,
         )
       "kotlin_lines" ->
         KotlinCode(
@@ -43,8 +42,7 @@ fun MDFencedCodeBlock(
                 fencedCodeBlock.literal.trim(),
                 DefaultCodeStyle.textStyler
             ),
-            DefaultCodeStyle.foregroundColor,
-            DefaultCodeStyle.backgroundColor,
+            codeStyle = DefaultCodeStyle,
             showLineNumbers = true,
         )
       else ->

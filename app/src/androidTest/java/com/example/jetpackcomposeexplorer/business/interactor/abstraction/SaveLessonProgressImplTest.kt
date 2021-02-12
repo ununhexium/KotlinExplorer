@@ -43,7 +43,7 @@ internal class SaveLessonProgressImplTest : DatabaseTest() {
     val saveLessonProgress = SaveLessonProgressImpl(dataSource)
 
     // when
-    saveLessonProgress(lessonProgress) { }.collect {
+    saveLessonProgress(lessonProgress).collect {
       // then we don't expect any returned value
     }
 

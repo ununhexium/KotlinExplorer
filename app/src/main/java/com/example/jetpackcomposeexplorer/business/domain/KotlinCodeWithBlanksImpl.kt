@@ -18,7 +18,33 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
       placeholderIds
           .filter { it in fillings.keys }
           .fold(raw) { code, index ->
-            code.replace(placeholder(index),
-                fillings[index] ?: error("Expected id $index to be present in the fillings map."))
+            code.replace(
+                placeholder(index),
+                fillings[index] ?: error("Expected id $index to be present in the fillings map.")
+            )
           }
+
+  override fun split(): List<Pair<KotlinCodeWithBlanks.CodeType, IntRange>> {
+    return split(0)
+  }
+
+  private fun split(
+      offset: Int
+  ): List<Pair<KotlinCodeWithBlanks.CodeType, IntRange>> {
+    if (offset >= raw.length) return listOf()
+
+    val placeholder = ANSWER_REGEX.find(raw, offset)
+        ?: return listOf(KotlinCodeWithBlanks.CodeType.CODE to (offset until raw.length))
+
+    return if (placeholder.range.first == offset) {
+      listOf(KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (placeholder.range.first .. placeholder.range.last))
+    } else {
+      listOf(
+          KotlinCodeWithBlanks.CodeType.CODE to (offset until placeholder.range.first),
+          KotlinCodeWithBlanks.CodeType.PLACEHOLDER to (placeholder.range.first .. placeholder.range.last),
+      )
+    } + split(
+        placeholder.range.last + 1,
+    )
+  }
 }

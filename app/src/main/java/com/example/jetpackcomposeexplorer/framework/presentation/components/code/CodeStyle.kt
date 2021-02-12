@@ -8,5 +8,6 @@ interface CodeStyle<H> {
   val gutterBackgroundColor: Color
   val foregroundColor: Color
   val gutterForegroundColor: Color
+  val placeholderForegroundColor: Color
   val textStyler: (H) -> SpanStyle
 }

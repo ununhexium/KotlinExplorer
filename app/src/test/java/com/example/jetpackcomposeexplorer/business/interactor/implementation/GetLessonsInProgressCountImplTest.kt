@@ -40,11 +40,9 @@ internal class GetLessonsInProgressCountImplTest {
     val action = GetLessonsInProgressCountImpl(dao)
 
     // when
-    action {
-      it
-    }.collect {
+    action().collect {
       // then
-      assertThat(it.data).isEqualTo(inProgress.size)
+      assertThat(it).isEqualTo(inProgress.size)
     }
   }
 }

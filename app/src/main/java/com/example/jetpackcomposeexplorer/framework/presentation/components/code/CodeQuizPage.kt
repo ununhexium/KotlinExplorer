@@ -31,8 +31,7 @@ fun CodeQuizPage(
             } else {
               AnnotatedString(model.snippet)
             },
-            foregroundColor = DefaultCodeStyle.foregroundColor,
-            backgroundColor = DefaultCodeStyle.backgroundColor
+            codeStyle = DefaultCodeStyle,
         )
       },
       answer = if (model.showAnswer.value) {
