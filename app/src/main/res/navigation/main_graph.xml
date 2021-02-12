@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
     app:startDestination="@id/chapterListFragment">
     <fragment
         android:id="@+id/chapterListFragment"
         android:name="net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment"
-        android:label="ChapterListFragment" >
+        android:label="ChapterListFragment">
         <action
             android:id="@+id/action_chapterListFragment_to_lessonFragment"
             app:destination="@id/lessonFragment" />
@@ -15,7 +14,7 @@
     <fragment
         android:id="@+id/lessonFragment"
         android:name="net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson.LessonFragment"
-        android:label="LessonFragment" >
+        android:label="LessonFragment">
         <argument
             android:name="lessonId"
             app:argType="string" />
