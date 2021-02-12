@@ -12,7 +12,7 @@ import org.commonmark.parser.Parser
 class CodeQuestionPageViewModel(
     question: String,
     initialSnippet: String,
-    val explanation: (List<String>) -> String,
+    val explanation: String,
     val maxAnswers: Int,
     choices: List<Answer>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
@@ -31,7 +31,7 @@ class CodeQuestionPageViewModel(
   constructor(
       question: String,
       codeSample: String,
-      explanation: (List<String>) -> String,
+      explanation: String,
       maxAnswers: Int,
       vararg choices: String,
       answerValidator: (List<Answer>) -> Boolean,
@@ -47,7 +47,7 @@ class CodeQuestionPageViewModel(
   constructor(
       question: String,
       codeSample: String,
-      explanation: (List<String>) -> String,
+      explanation: String,
       maxAnswers: Int,
       vararg choices: Answer,
       answerValidator: (List<Answer>) -> Boolean,
@@ -65,7 +65,7 @@ class CodeQuestionPageViewModel(
       input = { selected.value },
       transform = {
         Parser.builder().build().parse(
-            explanation(selected.value.map { it.text })
+            explanation
         )
       }
   )
