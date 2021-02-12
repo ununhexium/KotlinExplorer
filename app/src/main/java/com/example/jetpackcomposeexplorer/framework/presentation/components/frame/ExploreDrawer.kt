@@ -25,16 +25,6 @@ fun ExploreDrawer(
         ),
         style = MaterialTheme.typography.h2
     )
-    Text(
-        "Markdown",
-        modifier = Modifier.clickable(
-            onClick = {
-              onSelection()
-//            nav.navigate(Destinations.markdownSample)
-            }
-        ),
-        style = MaterialTheme.typography.h2
-    )
   }
 }
 

@@ -49,11 +49,12 @@ class Courses {
     val basics = Group("Basics", value, variable, nullable, print, comment, main)
 
     // data types
-    val integers = course("Integers", value)
-    val boolean = course("Boolean", value)
-    val floatingPoint = course("Floats", value)
-    val characters = course("Characters", value)
-    val strings = course("String", value)
+    val integers = course("Integers", basics)
+    val boolean = course("Boolean", basics)
+    val floatingPointNotation = course("Floating point notation")
+    val floatingPoint = course("Floats", basics, floatingPointNotation)
+    val characters = course("Characters", basics)
+    val strings = course("String", basics)
 
     val dataTypes = Group(
         "Data types",
