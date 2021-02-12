@@ -9,7 +9,7 @@ object HelloWorldProject: ChapterImpl(
     lessons = listOf(
         String,
         Print,
-        // TODO: comments
+        Comment,
         Main,
         HelloWorld,
     )
