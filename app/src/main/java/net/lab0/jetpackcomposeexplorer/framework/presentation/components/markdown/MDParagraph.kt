@@ -35,7 +35,7 @@ fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun MDParagraphPreview() {
+fun MDParagraphPreview_SplitLine() {
   MaterialTheme {
     Surface(
         color = Color(0xFF4CAF50)
@@ -59,6 +59,38 @@ fun MDParagraphPreview() {
                   """.trimMargin()
               )
           )
+        }
+      }
+    }
+  }
+}
+
+@Preview
+@Composable
+fun MDParagraphPreview_Multiline() {
+  MaterialTheme {
+    Surface(
+        color = Color(0xFF4CAF50)
+    ) {
+      Column(
+          modifier = Modifier.padding(20.dp)
+      ) {
+        Surface(
+            color = MaterialTheme.colors.surface
+        ) {
+          Column {
+            MDDocument(
+                parseMD(
+                    """
+`print` to show the value on the terminal.
+
+`"` to quote the string.
+
+`Hello, World!` for the content.
+"""
+                )
+            )
+          }
         }
       }
     }

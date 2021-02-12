@@ -1,6 +1,7 @@
 package net.lab0.jetpackcomposeexplorer.framework.presentation.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,13 +20,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.jetpackcomposeexplorer.framework.presentation.components.markdown.MDDocument
+import net.lab0.jetpackcomposeexplorer.framework.presentation.components.markdown.parseMD
 
 @Composable
 private fun Answer(
     header: String,
     color: Color,
     icon: ImageVector,
-    content: @Composable RowScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(modifier = Modifier.fillMaxWidth()) {
     Row(
@@ -35,7 +38,7 @@ private fun Answer(
       Icon(
           imageVector = icon,
           modifier = Modifier
-              .padding(start = 8.dp,end = 8.dp)
+              .padding(start = 8.dp, end = 8.dp)
               .align(Alignment.CenterVertically),
           tint = color,
       )
@@ -48,7 +51,7 @@ private fun Answer(
       )
     }
 
-    Row(
+    Column(
         content = content,
     )
   }
@@ -56,7 +59,7 @@ private fun Answer(
 
 @Composable
 fun CorrectAnswer(
-    explanation: @Composable RowScope.() -> Unit,
+    explanation: @Composable ColumnScope.() -> Unit,
 ) {
   Answer(
       "Correct",
@@ -68,7 +71,7 @@ fun CorrectAnswer(
 
 @Composable
 fun WrongAnswer(
-    explanation: @Composable RowScope.() -> Unit,
+    explanation: @Composable ColumnScope.() -> Unit,
 ) {
   Answer(
       "Incorrect",
@@ -146,3 +149,36 @@ fun WrongAnswerPreview() {
   }
 }
 
+@Preview
+@Composable
+fun CorrectAnswerPreview_Markdown() {
+  MaterialTheme {
+    Surface(
+        color = Color(0xFF4CAF50)
+    ) {
+      Column(
+          modifier = Modifier.padding(20.dp)
+      ) {
+        Surface(
+            color = MaterialTheme.colors.surface
+        ) {
+          CorrectAnswer(
+              explanation = {
+                MDDocument(
+                    document = parseMD(
+                        """
+`print` to show the value on the terminal.
+
+`"` to quote the string.
+
+`Hello, World!` for the content.
+"""
+                    )
+                )
+              }
+          )
+        }
+      }
+    }
+  }
+}

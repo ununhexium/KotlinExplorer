@@ -40,14 +40,13 @@ fun main() {
 """,
             // TODO: answer must be shown as markdown
 
-              """
+            """
 `print` to show the value on the terminal.
 
 `"` to quote the string.
 
 `Hello, World!` for the content.
-"""
-            ,
+""",
             listOf(
                 "'", "\"", "Print", "print", "Hello, World!"
             ),

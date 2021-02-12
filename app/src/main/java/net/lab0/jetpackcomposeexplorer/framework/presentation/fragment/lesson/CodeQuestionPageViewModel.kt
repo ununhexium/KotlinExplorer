@@ -21,7 +21,7 @@ class CodeQuestionPageViewModel(
       page.question,
       page.snippet,
       page.explanation,
-      KotlinCodeWithBlanksImpl(page.snippet).placeholderIds.size,
+      KotlinCodeWithBlanksImpl(page.snippet).placeholderIds.distinct().size,
       page.choices
           .mapIndexed { index, s -> Answer(index, s, false) }
           .let { if (shuffleAnswers) it.shuffled() else it },
