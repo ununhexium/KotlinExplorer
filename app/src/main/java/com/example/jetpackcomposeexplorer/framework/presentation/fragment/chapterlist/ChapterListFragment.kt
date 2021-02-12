@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.jetpackcomposeexplorer.business.interactor.ActiveElements
 import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import com.example.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
 import com.example.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
@@ -102,7 +101,6 @@ class ChapterListFragment
               val action = ChapterListFragmentDirections
                   .actionChapterListFragmentToLessonFragment(lessonId)
 
-              ActiveElements.activeLessonId = lessonId
               findNavController().navigate(action)
             }
         )

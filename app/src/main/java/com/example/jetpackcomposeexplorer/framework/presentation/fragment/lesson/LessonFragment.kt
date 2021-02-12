@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.jetpackcomposeexplorer.R
+import com.example.jetpackcomposeexplorer.business.domain.LessonBrowser
 import com.example.jetpackcomposeexplorer.business.domain.LessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.InfoLessonPage
 import com.example.jetpackcomposeexplorer.framework.presentation.components.LessonPage
@@ -51,7 +52,7 @@ class LessonFragment(
         Scaffold(
             drawerContent = {
               LessonDrawer(
-                  chapter = "", //chapter.title,
+                  chapter = state.chapter?.title ?: "",
                   lesson = state.lesson.title,
                   lessonPages = state.lesson.pages.map { it.title },
                   currentPage = state.currentPage?.title ?: ""

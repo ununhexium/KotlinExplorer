@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -21,13 +22,15 @@ fun LessonDrawer(
   Column {
     Text(
         text = chapter,
-        style = MaterialTheme.typography.h3
+        style = MaterialTheme.typography.h5,
     )
 
     Indent {
       Text(
-          text = lesson,
-          style = MaterialTheme.typography.h4,
+          text = lesson.toUpperCase(),
+          style = MaterialTheme.typography.h6.copy(),
+          color = Color.Gray,
+          fontWeight = FontWeight.Bold,
       )
     }
 
@@ -36,7 +39,7 @@ fun LessonDrawer(
         Indent(2) {
           Text(
               text = lesson,
-              style = MaterialTheme.typography.h4,
+              style = MaterialTheme.typography.h6,
           )
         }
       }
@@ -45,7 +48,7 @@ fun LessonDrawer(
         Indent(2){
           Text(
               text = page,
-              style = MaterialTheme.typography.h4,
+              style = MaterialTheme.typography.h6,
           )
         }
       }
@@ -54,7 +57,7 @@ fun LessonDrawer(
         Indent(2) {
           Text(
               text = page,
-              style = MaterialTheme.typography.h4,
+              style = MaterialTheme.typography.h6,
               color = MaterialTheme.colors.primary,
           )
         }
@@ -64,7 +67,7 @@ fun LessonDrawer(
         Indent(2) {
           Text(
               text = lesson,
-              style = MaterialTheme.typography.h4,
+              style = MaterialTheme.typography.h6,
               color = Color.Gray
           )
         }

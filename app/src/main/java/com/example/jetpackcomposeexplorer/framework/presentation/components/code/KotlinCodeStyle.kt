@@ -36,7 +36,7 @@ val ijStyle = { it: KotlinHighlight ->
 val DefaultCodeStyle = object: CodeStyle<KotlinHighlight> {
     override val backgroundColor = Color(0xff2B2B2B)
     override val gutterBackgroundColor = Color(0xFF313335)
-    override val placeholderBackgroundColor = Color(0xFF5C6164)
+    override val placeholderBackgroundColor = Color(0xFFA9B2B8)
 
     override val foregroundColor = Color(0xffA9B7C6)
     override val gutterForegroundColor = Color(0xFF5B6265)

@@ -111,7 +111,7 @@ private fun CodePart(
               ) {
                 // placeholder to have the right size
                 Text(
-                    text = "...",
+                    text = " ... ",
                     fontFamily = sourceCodeFontFamily,
                     fontSize = TextUnit.Companion.Sp(10)
                 )
