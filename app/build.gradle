@@ -5,6 +5,7 @@ import dependencies.TestDependencies
 
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
     id "dagger.hilt.android.plugin"
     id 'kotlin-android'
     id 'kotlin-android-extensions'
@@ -98,6 +99,11 @@ dependencies {
     implementation Dependencies.compose_material
     implementation Dependencies.compose_materialIconsCore
     implementation Dependencies.compose_materialIconsExtended
+
+    implementation platform(Dependencies.firebase)
+    implementation Dependencies.firebaseAnalytics
+    implementation Dependencies.firebaseFirestore
+
 
     implementation Dependencies.navigation_fragment
     implementation Dependencies.navigation_ui

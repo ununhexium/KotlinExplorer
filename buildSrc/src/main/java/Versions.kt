@@ -23,6 +23,10 @@ object Versions {
   // atlassian
   val commonMark = "0.16.1"
 
+  // services
+  val googleServices = "4.3.5"
+  val firebase = "26.4.0"
+
   // test
   val junit_4 = "4.13.1"
   val jupiter = "5.6.0"

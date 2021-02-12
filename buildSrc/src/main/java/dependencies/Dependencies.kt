@@ -17,6 +17,10 @@ object Dependencies {
 
   val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 
+  val firebase = "com.google.firebase:firebase-bom:${Versions.firebase}"
+  val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
+  val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx"
+
   val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
   val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
 
