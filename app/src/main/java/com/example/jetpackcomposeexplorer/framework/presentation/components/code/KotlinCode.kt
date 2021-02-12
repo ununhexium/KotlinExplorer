@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,11 +15,13 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyleRange
 import androidx.compose.ui.text.subSequence
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.CodeType.CODE
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.CodeType.PLACEHOLDER
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
 import com.example.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
+import com.example.jetpackcomposeexplorer.framework.ui.theme.sourceCodeFontFamily
 import com.example.jetpackcomposeexplorer.model.code.DefaultCodeStyle
 import com.example.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
 import com.example.jetpackcomposeexplorer.model.code.functionStyle
@@ -58,7 +61,11 @@ fun KotlinCode(
       if (showLineNumbers) {
         GutterPart(lines = lines, codeStyle)
       }
-      CodePart(lines = lines, code = code)
+      CodePart(
+          lines = lines,
+          code = code,
+          codeStyle = codeStyle
+      )
     }
   }
 }
@@ -85,6 +92,7 @@ fun GutterPart(
 private fun CodePart(
     lines: List<String>,
     code: AnnotatedString,
+    codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
 ) {
   Column {
     lines.forEachIndexed { index, line ->
@@ -96,11 +104,17 @@ private fun CodePart(
           when (it.first) {
             PLACEHOLDER ->
               Surface(
-                  shape = MaterialTheme.shapes.medium,
-                  color = MaterialTheme.colors.primaryVariant,
+                  modifier = Modifier.padding(horizontal = 2.dp).align(Alignment.CenterVertically),
+                  shape = MaterialTheme.shapes.small,
+                  color = codeStyle.placeholderBackgroundColor,
+                  contentColor = codeStyle.placeholderForegroundColor,
               ) {
                 // placeholder to have the right size
-                Monospace(" ".repeat(3))
+                Text(
+                    text = "...",
+                    fontFamily = sourceCodeFontFamily,
+                    fontSize = TextUnit.Companion.Sp(10)
+                )
               }
             CODE ->
               Monospace(
@@ -116,7 +130,7 @@ private fun CodePart(
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PreviewKotlinCode_Empty() {
   MaterialTheme {
@@ -128,7 +142,7 @@ fun PreviewKotlinCode_Empty() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PreviewKotlinCode_NoAnswer() {
   MaterialTheme {
@@ -150,7 +164,7 @@ fun PreviewKotlinCode_println() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PreviewKotlinCode_NewLine() {
   MaterialTheme {
@@ -168,7 +182,7 @@ fun PreviewKotlinCode_NewLine() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PreviewKotlinCode_AnswerOnly() {
   MaterialTheme {
@@ -241,7 +255,7 @@ fun PreviewKotlinCode_WithLineNumbers() {
 fun KotlinCodePreview_back2back() {
   MaterialTheme {
     val code = """
-        |int main() {
+        |fun main() {
         |  ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
         |}
       """.trimMargin()
