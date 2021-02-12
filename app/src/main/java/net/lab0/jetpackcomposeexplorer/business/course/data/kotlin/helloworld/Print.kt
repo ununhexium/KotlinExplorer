@@ -58,5 +58,13 @@ Remember this, it will be used a lot later ;).
             choices = listOf("print", "(", "\"", "Finished!", ")", "'"),
             answer = listOf("print", "(", "\"", "Finished!", ")"),
         ),
+
+        LessonPage.InfoPage(
+            "Summary",
+            """
+Printing is the most primitive way to communicate with the user,
+but that's the best way to start showing information.
+"""
+        )
     )
 )

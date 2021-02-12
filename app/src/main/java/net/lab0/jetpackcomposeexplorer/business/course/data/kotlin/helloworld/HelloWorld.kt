@@ -7,6 +7,7 @@ object HelloWorld: ChapterImpl(
     title = "Hello World",
     description = "The classic beginner's program",
     lessons = listOf(
+        String,
         Print,
     )
 )
