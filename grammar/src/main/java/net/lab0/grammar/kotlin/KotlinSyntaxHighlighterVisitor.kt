@@ -72,7 +72,9 @@ class KotlinSyntaxHighlighterVisitor(
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
       hl {
         add(KEYWORD, ctx.FUN().range)
-        add(FUNCTION, ctx.identifier().range)
+        ctx.identifier()?.let{
+          add(FUNCTION, ctx.identifier().range)
+        }
 
         add(visitChildren(ctx))
       }
