@@ -19,5 +19,5 @@ interface Chapter: Prerequisite {
   /**
    * The lessons contained in this chapter
    */
-  val lessons: List<Prerequisite>
+  val lessons: List<Lesson>
 }

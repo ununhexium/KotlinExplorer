@@ -47,7 +47,7 @@ To make the function more readable, the body inside the function is indented. Th
                 "(", ")", "{", """print("hello")""", "}", "[", "]"
             ),
             answer = listOf(
-                "(", ")", "{", """print("hello")""", "}"
+                "{", """print("hello")""", "}"
             )
         ),
 

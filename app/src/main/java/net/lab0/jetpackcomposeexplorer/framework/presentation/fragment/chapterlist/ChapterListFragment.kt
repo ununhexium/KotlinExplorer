@@ -17,16 +17,16 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
-import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterCardData
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame.ChapterList
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame.ExploreDrawer
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame.LessonListItemData
+import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
+import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
 import net.lab0.jetpackcomposeexplorer.mvi.BaseFragment
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 @FlowPreview
@@ -92,7 +92,8 @@ class ChapterListFragment
                     LessonListItemData(
                         lesson.id,
                         lesson.title,
-                        lesson.id in state.lessonsInProgress.map { it.lessonId }
+                        lesson.id in state.lessonsInProgress.map { it.lessonId },
+                        state.getLessonCompletion(lesson.id)
                     )
                   }
               )

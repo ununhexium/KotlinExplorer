@@ -1,11 +1,13 @@
 package net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -27,45 +29,72 @@ fun LessonListItem(
     onPlay: (() -> Unit)? = null,
 ) {
   Row(
-      modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+      modifier = Modifier
+          .fillMaxWidth()
+          .padding(vertical = 4.dp),
       horizontalArrangement = Arrangement.SpaceBetween
   ) {
-
-    val color = MaterialTheme.colors.primary
 
     Row(
         modifier = Modifier.align(Alignment.CenterVertically),
         horizontalArrangement = Arrangement.Start
     ) {
       if (lesson.completed) {
-        Icon(
-            modifier = Modifier
+        val color = when {
+          lesson.progress == null -> Color.Gray
+          lesson.progress < 1f -> Color.Gray
+          else -> MaterialTheme.colors.primary
+        }
+
+
+        Box(
+            Modifier
                 .padding(4.dp)
-                .align(Alignment.CenterVertically),
-            imageVector = Icons.Default.CheckCircle,
-            tint = color
-        )
+                .align(Alignment.CenterVertically)
+        ) {
+          lesson.progress?.let {
+            CircularProgressIndicator(
+                it,
+                modifier = Modifier.align(Alignment.Center),
+            )
+          }
+          Icon(
+              modifier = Modifier.align(Alignment.Center),
+              imageVector = Icons.Default.CheckCircle,
+              tint = color,
+          )
+        }
+
         Text(
             text = lesson.title,
             modifier = Modifier
                 .padding(4.dp)
                 .align(Alignment.CenterVertically),
-            color = color
+            color = MaterialTheme.colors.primary,
         )
       } else {
         val gray = Color.Gray
-        Icon(
-            modifier = Modifier
+        Box(
+            Modifier
                 .padding(4.dp)
-                .align(Alignment.CenterVertically),
-            imageVector = Icons.Default.CheckCircleOutline,
-            tint = gray
-        )
+                .align(Alignment.CenterVertically)
+        ) {
+          // always shows 0, jst a placeholder to align with the cases where progress is shown
+          CircularProgressIndicator(
+              0f,
+              modifier = Modifier.align(Alignment.Center),
+          )
+          Icon(
+              modifier = Modifier.align(Alignment.Center),
+              imageVector = Icons.Default.CheckCircleOutline,
+              tint = gray,
+          )
+        }
         Text(
             text = lesson.title,
             modifier = Modifier
                 .padding(4.dp)
-                .align(Alignment.CenterVertically)
+                .align(Alignment.CenterVertically),
         )
       }
     }

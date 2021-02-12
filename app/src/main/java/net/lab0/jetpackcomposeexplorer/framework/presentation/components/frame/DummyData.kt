@@ -1,7 +1,7 @@
 package net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame
 
-val lesson1 = LessonListItemData("lesson1","Lesson 1", true)
-val lesson2 = LessonListItemData("lesson2","Lesson 2", false)
+val lesson1 = LessonListItemData("lesson1","Lesson 1", true, 1f)
+val lesson2 = LessonListItemData("lesson2","Lesson 2", true, 0.7f)
 val lesson3 = LessonListItemData("lesson3","Lesson 3", false)
 
 val lesson4 = LessonListItemData("lesson4","Lesson 4", true)
