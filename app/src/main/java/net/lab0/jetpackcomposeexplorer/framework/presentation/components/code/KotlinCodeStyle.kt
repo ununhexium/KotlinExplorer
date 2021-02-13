@@ -16,7 +16,7 @@ val functionStyle = SpanStyle(Color(0xffFFC66D))
 val keywordStyle = SpanStyle(Color(0xffCC7832))
 val normalStyle = SpanStyle(Color(0xffA9B7C6))
 val numberStyle = SpanStyle(Color(0xff6897BB))
-val stringStyle = SpanStyle(Color(0xff87664F))
+val stringStyle = SpanStyle(Color(0xFFAC6CAF))
 
 val ijStyle = { it: KotlinHighlight ->
     when (it) {
