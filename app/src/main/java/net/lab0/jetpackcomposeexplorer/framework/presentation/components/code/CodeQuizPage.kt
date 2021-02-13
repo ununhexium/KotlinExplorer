@@ -32,6 +32,7 @@ fun CodeQuizPage(
               AnnotatedString(model.snippet)
             },
             codeStyle = DefaultCodeStyle,
+            activeHighlight = model.nextBlank,
         )
       },
       answer = if (model.showAnswer.value) {

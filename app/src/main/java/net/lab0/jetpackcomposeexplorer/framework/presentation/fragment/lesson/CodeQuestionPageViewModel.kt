@@ -89,6 +89,9 @@ class CodeQuestionPageViewModel(
         }.toMap()
     )
 
+  val nextBlank: Int?
+    get() = if(canValidate) null else selected.value.size
+
   fun select(answer: Answer) {
     if (selected.value.size >= maxAnswers) return // can't select more
 
