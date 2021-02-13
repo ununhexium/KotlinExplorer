@@ -5,7 +5,6 @@ import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlan
 import com.google.common.truth.Truth.assertThat
 import net.lab0.jetpackcomposeexplorer.business.domain.parser.Block
 import net.lab0.jetpackcomposeexplorer.business.domain.parser.CodeType
-import org.antlr.v4.codegen.model.decl.CodeBlock
 import org.junit.jupiter.api.Test
 
 class KotlinCodeWithBlanksImplTest {

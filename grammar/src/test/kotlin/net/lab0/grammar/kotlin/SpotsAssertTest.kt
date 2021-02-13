@@ -3,7 +3,7 @@ package net.lab0.grammar.kotlin
 import net.lab0.grammar.kotlin.Highlights.Spot
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertThrows
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SpotsAssertTest {
   @Test

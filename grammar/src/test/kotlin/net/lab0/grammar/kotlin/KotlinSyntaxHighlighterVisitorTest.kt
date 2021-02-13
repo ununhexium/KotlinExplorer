@@ -11,7 +11,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.SpotsAssert.Companion.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 
 class KotlinSyntaxHighlighterVisitorTest {
