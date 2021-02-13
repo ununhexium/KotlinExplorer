@@ -17,10 +17,10 @@ import androidx.compose.ui.text.subSequence
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.CodeType.CODE
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.CodeType.PLACEHOLDER
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
+import net.lab0.grammar.kotlin.KotlinHighlight
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.Block
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.jetpackcomposeexplorer.framework.ui.theme.sourceCodeFontFamily
 import net.lab0.jetpackcomposeexplorer.model.code.DefaultCodeStyle
 import net.lab0.jetpackcomposeexplorer.model.code.extractHighlightsAndAnnotate
@@ -28,7 +28,7 @@ import net.lab0.jetpackcomposeexplorer.model.code.functionStyle
 import net.lab0.jetpackcomposeexplorer.model.code.ijStyle
 import net.lab0.jetpackcomposeexplorer.model.code.keywordStyle
 import net.lab0.jetpackcomposeexplorer.model.code.numberStyle
-import net.lab0.grammar.kotlin.KotlinHighlight
+import net.lab0.jetpackcomposeexplorer.utils.Do
 
 
 @Composable
@@ -36,19 +36,25 @@ fun KotlinCode(
     code: String,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     showLineNumbers: Boolean = false,
+    activeHighlight: Int? = null,
 ) {
   KotlinCode(
       AnnotatedString(code),
       codeStyle,
-      showLineNumbers
+      showLineNumbers,
+      activeHighlight,
   )
 }
 
+/**
+ * @param activeHighlight If not null, highlights the placeholder(s) at the gicen index.
+ */
 @Composable
 fun KotlinCode(
     code: AnnotatedString,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     showLineNumbers: Boolean = false,
+    activeHighlight: Int? = null,
 ) {
   val lines = code.text.split("\n")
 
@@ -64,7 +70,8 @@ fun KotlinCode(
       CodePart(
           lines = lines,
           code = code,
-          codeStyle = codeStyle
+          codeStyle = codeStyle,
+          activeHighlight = activeHighlight
       )
     }
   }
@@ -93,6 +100,7 @@ private fun CodePart(
     lines: List<String>,
     code: AnnotatedString,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
+    activeHighlight: Int? = null,
 ) {
   Column {
     lines.forEachIndexed { index, line ->
@@ -100,13 +108,18 @@ private fun CodePart(
           lines.take(index).fold(0) { acc, e -> acc + e.length + 1 }
 
       Row {
-        KotlinCodeWithBlanksImpl(line).split().forEach {
-          when (it.first) {
-            PLACEHOLDER ->
+        KotlinCodeWithBlanksImpl(line).parse().forEach { block ->
+          Do exhaustive when (block) {
+            is Block.PlaceholderBlock ->
               Surface(
-                  modifier = Modifier.padding(horizontal = 2.dp).align(Alignment.CenterVertically),
+                  modifier = Modifier
+                      .padding(horizontal = 2.dp)
+                      .align(Alignment.CenterVertically),
                   shape = MaterialTheme.shapes.small,
-                  color = codeStyle.placeholderBackgroundColor,
+                  color = when (activeHighlight) {
+                    block.index -> codeStyle.activePlaceholderBackgroundColor
+                    else -> codeStyle.placeholderBackgroundColor
+                  },
                   contentColor = codeStyle.placeholderForegroundColor,
               ) {
                 // placeholder to have the right size
@@ -116,11 +129,11 @@ private fun CodePart(
                     fontSize = TextUnit.Companion.Sp(10)
                 )
               }
-            CODE ->
+            is Block.CodeBlock ->
               Monospace(
                   code.subSequence(
-                      realStartIndex + it.second.first,
-                      realStartIndex + it.second.last + 1
+                      realStartIndex + block.range.first,
+                      realStartIndex + block.range.last + 1
                   )
               )
           }
@@ -261,6 +274,36 @@ fun KotlinCodePreview_back2back() {
       """.trimMargin()
     ScrollableColumn {
       KotlinCode(code = code)
+    }
+  }
+}
+
+@Preview
+@Composable
+fun KotlinCodePreview_highlight1() {
+  MaterialTheme {
+    val code = """
+        |${placeholder(3)} main() {
+        |  ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
+        |}
+      """.trimMargin()
+    ScrollableColumn {
+      KotlinCode(code = code, activeHighlight = 1)
+    }
+  }
+}
+
+@Preview
+@Composable
+fun KotlinCodePreview_highlight3() {
+  MaterialTheme {
+    val code = """
+        |${placeholder(3)} main() {
+        |  ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
+        |}
+      """.trimMargin()
+    ScrollableColumn {
+      KotlinCode(code = code, activeHighlight = 3)
     }
   }
 }

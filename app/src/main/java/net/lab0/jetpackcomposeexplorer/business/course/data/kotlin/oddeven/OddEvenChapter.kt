@@ -10,5 +10,6 @@ object OddEvenChapter: ChapterImpl(
         Value,
         Boolean,
         DataType,
+        Comparators,
     )
 )

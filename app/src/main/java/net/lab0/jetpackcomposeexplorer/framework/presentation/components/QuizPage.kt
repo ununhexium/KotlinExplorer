@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.Answer
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.CodeAnswerInput
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.KotlinCode

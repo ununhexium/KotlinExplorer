@@ -1,6 +1,6 @@
 package net.lab0.jetpackcomposeexplorer.business.course.data.kotlin.basics
 
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.jetpackcomposeexplorer.business.domain.LessonImpl
 import net.lab0.jetpackcomposeexplorer.business.domain.LessonPage
 

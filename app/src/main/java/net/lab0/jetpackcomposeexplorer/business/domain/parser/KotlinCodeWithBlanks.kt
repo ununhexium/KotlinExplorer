@@ -1,4 +1,4 @@
-package net.lab0.jetpackcomposeexplorer.business.domain
+package net.lab0.jetpackcomposeexplorer.business.domain.parser
 
 interface KotlinCodeWithBlanks {
 
@@ -41,10 +41,8 @@ interface KotlinCodeWithBlanks {
   /**
    * @return a list of strings. When the string is null, it's a placeholder, otherwise, it's the input.
    */
+  @Deprecated("Use parse")
   fun split(): List<Pair<CodeType, IntRange>>
 
-  enum class CodeType {
-    PLACEHOLDER,
-    CODE,
-  }
+  fun parse(): List<Block>
 }

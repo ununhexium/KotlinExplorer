@@ -3,7 +3,7 @@ package net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import net.lab0.jetpackcomposeexplorer.findAndEdit
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanksImpl
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.jetpackcomposeexplorer.business.domain.LessonPage
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.Answer
 import net.lab0.jetpackcomposeexplorer.utils.cached

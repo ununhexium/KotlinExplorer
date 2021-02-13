@@ -1,4 +1,4 @@
-package net.lab0.jetpackcomposeexplorer.framework.presentation.components.code
+package net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.InputFieldMainAction
+import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.Answer
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.InputFieldMainAction.DISABLED
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.InputFieldMainAction.NEXT
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.InputFieldMainAction.VALIDATE

@@ -3,7 +3,7 @@ package net.lab0.jetpackcomposeexplorer.business.course.data.kotlin.helloworld
 import net.lab0.jetpackcomposeexplorer.business.course.data.kotlin.allBrackets
 import net.lab0.jetpackcomposeexplorer.business.domain.LessonImpl
 import net.lab0.jetpackcomposeexplorer.business.domain.LessonPage
-import net.lab0.jetpackcomposeexplorer.business.domain.KotlinCodeWithBlanks.Companion.placeholder as p
+import net.lab0.jetpackcomposeexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object HelloWorld : LessonImpl(
     id = "kotlin.helloworld.helloworld",

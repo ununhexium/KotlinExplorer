@@ -10,6 +10,7 @@ import net.lab0.jetpackcomposeexplorer.framework.presentation.components.Correct
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.QuizPage
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.WrongAnswer
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.InputFieldMainAction
+import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.MultipleChoiceAnswerInput
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.markdown.MDDocument
 import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson.MultipleChoiceModel
 
