@@ -59,7 +59,7 @@ The commented block starts at `/*` and ends at `*/`.
         ),
         LessonPage.CodeQuestionPage(
             title = "Print nothing",
-            question = "Don't print `Something`",
+            question = "**Don't** print `Something`",
             snippet = """
 print(${p(0)}"Something"${p(1)})
 """,

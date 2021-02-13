@@ -5,6 +5,6 @@ fun main() {
   if (number > 0) {
     print("It's positive: " + number)
   } else {
-    print("It's negative: " + number)
+    print("It's negative: $number")
   }
 }
