@@ -3,7 +3,7 @@ package net.lab0.jetpackcomposeexplorer.kotlin
 import net.lab0.jetpackcomposeexplorer.utils.cached
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ThreadUnsafeCachedImplTest {
 
