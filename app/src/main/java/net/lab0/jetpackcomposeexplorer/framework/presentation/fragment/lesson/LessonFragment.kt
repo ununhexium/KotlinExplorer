@@ -88,7 +88,7 @@ class LessonFragment(
                   val model = MultipleChoiceModel(page)
                   MultipleChoicePage(
                       model = model,
-                      nextQuestion = {
+                      onNextPage = {
                         viewModel.nextPage(
                             if (model.isCorrectAnswer()) CodeAnswerState.SUCCESS
                             else CodeAnswerState.FAILURE

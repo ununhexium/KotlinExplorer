@@ -77,6 +77,23 @@ When no indication is given, Kotlin will infer the type of the value.
 
 ```kotlin
 val word = "hi"
+```
+
+Is exactly the same as
+ 
+ ```kotlin
+val word:String = "hi"
+```
+
+The same goes for the other data types.
+
+```kotlin
+val number = 42
+val number:Int = 42
+
+val yes = true
+val yes:Boolean = true
+```
 """
         )
         // TODO: multiple choice question: tell the type (like type inference) like to compiler would do

@@ -16,7 +16,7 @@ import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson.Mu
 @Composable
 fun MultipleChoicePage(
     model: MultipleChoiceModel,
-    nextQuestion: () -> Unit,
+    onNextPage: () -> Unit,
 ) {
   QuizPage(
       question = {
@@ -49,6 +49,7 @@ fun MultipleChoicePage(
               InputFieldMainAction.VALIDATE
             },
             onValidate = { model.validate() },
+            onNextPage = onNextPage
         )
       }
   )

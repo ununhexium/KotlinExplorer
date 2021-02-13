@@ -32,6 +32,7 @@ fun MultipleChoiceAnswerInput(
     answers: List<Answer>,
     inputFieldMainAction: InputFieldMainAction,
     onValidate: () -> Unit,
+    onNextPage: () -> Unit,
     toggle: (Answer) -> Unit,
 ) {
   Column {
@@ -43,7 +44,11 @@ fun MultipleChoiceAnswerInput(
     ) {
       Row {
         Button(
-            onClick = onValidate,
+            onClick = when (inputFieldMainAction) {
+              VALIDATE -> onValidate
+              NEXT -> onNextPage
+              else -> ({})
+            },
             enabled = inputFieldMainAction != DISABLED,
         ) {
           Icon(
@@ -111,7 +116,8 @@ fun MultipleChoiceAnswerInputPreview() {
               ),
               inputFieldMainAction = VALIDATE,
               onValidate = {},
-              toggle = {}
+              onNextPage = {},
+              toggle = {},
           )
         }
       }
