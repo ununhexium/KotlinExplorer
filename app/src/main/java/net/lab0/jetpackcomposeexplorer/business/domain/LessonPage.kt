@@ -37,4 +37,12 @@ sealed class LessonPage(
       )
     }
   }
+
+  class MultipleChoice(
+      title: String,
+      val question: String,
+      val explanation: String,
+      val choices: List<String>,
+      val answer: Set<Int>,
+  ) : LessonPage(title)
 }

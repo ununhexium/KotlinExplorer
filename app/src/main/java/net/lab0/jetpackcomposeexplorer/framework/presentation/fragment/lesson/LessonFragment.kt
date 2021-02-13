@@ -22,6 +22,8 @@ import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.Co
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.frame.LessonDrawer
 import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson.state.CodeAnswerState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.MultipleChoicePage
+import net.lab0.jetpackcomposeexplorer.utils.Do
 import org.commonmark.parser.Parser
 
 @ExperimentalCoroutinesApi
@@ -64,7 +66,7 @@ class LessonFragment(
           ) {
             val page = state.currentPage
             if (page != null) {
-              when (page) {
+              Do exhaustive when (page) {
                 is LessonPage.InfoPage ->
                   InfoLessonPage(
                       Parser.builder().build().parse(page.markdown),
@@ -73,6 +75,18 @@ class LessonFragment(
                 is LessonPage.CodeQuestionPage -> {
                   val model = CodeQuestionPageViewModel(page)
                   CodeQuizPage(
+                      model = model,
+                      nextQuestion = {
+                        viewModel.nextPage(
+                            if (model.isCorrectAnswer()) CodeAnswerState.SUCCESS
+                            else CodeAnswerState.FAILURE
+                        )
+                      },
+                  )
+                }
+                is LessonPage.MultipleChoice -> {
+                  val model = MultipleChoiceModel(page)
+                  MultipleChoicePage(
                       model = model,
                       nextQuestion = {
                         viewModel.nextPage(

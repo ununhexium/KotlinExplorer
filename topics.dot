@@ -1,20 +1,26 @@
 digraph g { 
 
-"Value"
-"Variables"
-"Null"
+"String"
 "Print"
+"Main"
+"Value"
+"Integers"
+"Comparison of integers"
+"If else"
+"String concatenation"
+"Random basics"
+"Import"
+"Variables"
+"While"
+"Null"
+"Function"
 "Comments"
 "Nested comments"
-"Function"
-"Main"
-"Integers"
 "Boolean"
 "Floating point notation"
 "Floats"
+"Floating point behaviour"
 "Characters"
-"String"
-"String concatenation, split, ..."
 "String templates"
 "Deferred assignment"
 "Type inference for variables"
@@ -32,10 +38,8 @@ digraph g {
 "Main cli args"
 "Constant"
 "Escape sequence"
-"If else"
 "When"
 "Expression assignment"
-"While"
 "Do while"
 "Continue"
 "Math"
@@ -45,7 +49,6 @@ digraph g {
 "x in a..b"
 "x !in a..b"
 "Package"
-"Import"
 "Classes"
 "Default constructor"
 "Class fields (in constructor)"
@@ -60,21 +63,27 @@ digraph g {
 
 
 
+
+
+
+
+
+"String concatenation" -> "String"
+
+
+
+"While" -> "If else"
 "Null" -> "Value"
 "Null" -> "Variables"
 
 
 
-
-"Main" -> "Function"
-"Integers" -> "Basics"
 "Boolean" -> "Basics"
 
 "Floats" -> "Basics"
 "Floats" -> "Floating point notation"
+"Floating point behaviour" -> "Floats"
 "Characters" -> "Basics"
-"String" -> "Basics"
-"String concatenation, split, ..." -> "String"
 "String templates" -> "String"
 "Deferred assignment" -> "Data types"
 
@@ -98,10 +107,8 @@ digraph g {
 "Main cli args" -> "Main"
 "Constant" -> "Value"
 "Escape sequence" -> "Comments"
-"If else" -> "Boolean"
 "When" -> "If else"
 "Expression assignment" -> "If else"
-"While" -> "If else"
 "Do while" -> "If else"
 "Continue" -> "While"
 "Continue" -> "If else"
@@ -112,7 +119,6 @@ digraph g {
 
 
 
-"Import" -> "Package"
 "Classes" -> "Function"
 "Default constructor" -> "Classes"
 "Class fields (in constructor)" -> "Classes"
