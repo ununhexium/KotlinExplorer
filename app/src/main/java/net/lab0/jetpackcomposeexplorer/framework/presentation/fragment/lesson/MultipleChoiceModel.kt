@@ -1,9 +1,9 @@
 package net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import net.lab0.jetpackcomposeexplorer.business.domain.LessonPage
-import net.lab0.jetpackcomposeexplorer.findAndEdit
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.Answer
 import org.commonmark.parser.Parser
 
@@ -29,13 +29,16 @@ class MultipleChoiceModel(
     )
   }
 
-  val answers: MutableState<List<Answer>> = mutableStateOf(choices)
+  private val _answers: MutableState<List<Answer>> = mutableStateOf(choices)
+  val answers: State<List<Answer>> = _answers
+
   val showAnswer = mutableStateOf(false)
 
-  fun toggle(answer: Answer) {
-    answers.findAndEdit(answer) {
-      println("Before: $it")
-      it.copy(used = !it.used).also { println("After: $it") }
+  fun toggle(changedAnswer: Answer) {
+    _answers.value = _answers.value.map { answer ->
+      if (answer == changedAnswer) {
+        answer.copy(used = !answer.used)
+      } else answer
     }
     println("After edit" + answers.value)
   }

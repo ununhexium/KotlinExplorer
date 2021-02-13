@@ -45,4 +45,5 @@ sealed class LessonPage(
       val choices: List<String>,
       val answer: Set<Int>,
   ) : LessonPage(title)
+
 }

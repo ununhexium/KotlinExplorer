@@ -42,13 +42,32 @@ val alphabet: ${p(0)} = "abcdef..."
 Tell the type of this value.
 """,
             snippet = """
-val theSkyIsBlue: ${p(0)} = true // more or less...
+val theSkyIsBlue: ${p(0)} = true // mostly...
 """,
             explanation = """
 `theSkyIsBlue` must now be a boolean.
 """,
             choices = listOf("Int", "String", "Boolean"),
             answer = listOf("Boolean"),
+        ),
+        LessonPage.MultipleChoice(
+            title = "Type inference",
+            question = """
+What is the type of `surprise`?
+
+```kotlin
+val surprise = "Mhhh 🤔"
+```
+""",
+            explanation = """
+When no type is specified, the type is inferred from the left part.
+
+The type of `surprise` will be the type that is the most specific.
+
+Here, `"Mhhh 🤔"` is a string. Therefore the type of `surprise` will also be a string.
+""",
+            choices = listOf("String", "It doesn't have a type", "Anything", "Nothing"),
+            answer = setOf(0)
         ),
         // TODO: summary page
         LessonPage.InfoPage(

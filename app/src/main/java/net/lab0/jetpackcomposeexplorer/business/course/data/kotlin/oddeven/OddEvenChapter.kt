@@ -9,5 +9,6 @@ object OddEvenChapter: ChapterImpl(
     lessons = listOf(
         Value,
         Boolean,
+        DataType,
     )
 )

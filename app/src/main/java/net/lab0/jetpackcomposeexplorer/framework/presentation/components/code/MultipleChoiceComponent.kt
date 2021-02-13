@@ -9,13 +9,13 @@ import net.lab0.jetpackcomposeexplorer.business.domain.LessonPage
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.CorrectAnswer
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.QuizPage
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.WrongAnswer
+import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.input.InputFieldMainAction
 import net.lab0.jetpackcomposeexplorer.framework.presentation.components.markdown.MDDocument
 import net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson.MultipleChoiceModel
 
 @Composable
 fun MultipleChoicePage(
     model: MultipleChoiceModel,
-    codeColoration: Boolean = true,
     nextQuestion: () -> Unit,
 ) {
   QuizPage(
@@ -41,12 +41,28 @@ fun MultipleChoicePage(
       } else null,
       answerInput = {
         MultipleChoiceAnswerInput(
-            answers = model.choices,
-            toggle = model::toggle
+            answers = model.answers.value,
+            toggle = model::toggle,
+            inputFieldMainAction = if (model.showAnswer.value) {
+              InputFieldMainAction.NEXT
+            } else {
+              InputFieldMainAction.VALIDATE
+            },
+            onValidate = { model.validate() },
         )
       }
   )
 }
+
+val multipleChoiceModel = MultipleChoiceModel(
+    LessonPage.MultipleChoice(
+        title = "Test",
+        question = "Why?",
+        "Because",
+        listOf("A", "B", "C"),
+        setOf(0, 2)
+    )
+)
 
 @Preview
 @Composable
@@ -55,22 +71,24 @@ fun MCCP_selectedAnswers() {
     Surface {
       Column {
         MultipleChoicePage(
-            MultipleChoiceModel(
-                LessonPage.MultipleChoice(
-                    title = "Test",
-                    question = "Why?",
-                    "Because",
-                    listOf("A", "B", "C"),
-                    setOf(0, 2)
-                )
-            ).also {
-              it.toggle(it.answers.value[1])
-            },
-            codeColoration = false,
-        ) {}
+            multipleChoiceModel,
+        ) { }
       }
     }
   }
+}
+
+val validatedModel = MultipleChoiceModel(
+    LessonPage.MultipleChoice(
+        title = "Test",
+        question = "Why?",
+        "Because",
+        listOf("Alpha", "Beta", "Gamma"),
+        setOf(0, 2)
+    )
+).also {
+  it.toggle(it.answers.value[1])
+  it.validate()
 }
 
 @Preview
@@ -80,19 +98,7 @@ fun MCCP_validatedAnswer() {
     Surface {
       Column {
         MultipleChoicePage(
-            MultipleChoiceModel(
-                LessonPage.MultipleChoice(
-                    title = "Test",
-                    question = "Why?",
-                    "Because",
-                    listOf("Alpha", "Beta", "Gamma"),
-                    setOf(0, 2)
-                )
-            ).also {
-              it.toggle(it.answers.value[1])
-              it.validate()
-            },
-            codeColoration = false,
+            validatedModel,
         ) {}
       }
     }
