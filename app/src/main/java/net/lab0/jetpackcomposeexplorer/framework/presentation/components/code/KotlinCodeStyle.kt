@@ -7,6 +7,10 @@ import net.lab0.jetpackcomposeexplorer.framework.presentation.components.code.Co
 import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.grammar.kotlin.KotlinHighlight.*
 
+
+val stringColor = Color(0xFFAC6CAF)
+val escapedStringColor = Color(0xFF6CADAF)
+
 val annotationStyle = SpanStyle(Color(0xffBBB529))
 val commentStyle = SpanStyle(
     color = Color(0xff929792),
@@ -16,7 +20,8 @@ val functionStyle = SpanStyle(Color(0xffFFC66D))
 val keywordStyle = SpanStyle(Color(0xffCC7832))
 val normalStyle = SpanStyle(Color(0xffA9B7C6))
 val numberStyle = SpanStyle(Color(0xff6897BB))
-val stringStyle = SpanStyle(Color(0xFFAC6CAF))
+val stringStyle = SpanStyle(stringColor)
+val escapedStringStyle = SpanStyle(escapedStringColor)
 
 val ijStyle = { it: KotlinHighlight ->
     when (it) {
@@ -29,6 +34,7 @@ val ijStyle = { it: KotlinHighlight ->
         MODIFIER -> keywordStyle
         NUMBER -> numberStyle
         STRING -> stringStyle
+        STRING_ESCAPED_CHARACTER -> escapedStringStyle
         else -> normalStyle
     }
 }

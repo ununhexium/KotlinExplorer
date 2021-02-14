@@ -5,6 +5,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
+import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
@@ -450,6 +451,21 @@ class KotlinSyntaxHighlighterVisitorTest {
     assertThat(code, spots).hasSpots(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 13),
+    )
+  }
+
+  @Test
+  fun `can highlight escaped chars in strings`() {
+    // given
+    val code = """ "quo\"ted" """
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(STRING, 1, 10),
+        Spot(STRING_ESCAPED_CHARACTER, 5, 6),
     )
   }
 }

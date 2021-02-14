@@ -263,7 +263,7 @@ fun PreviewKotlinCode_WithLineNumbers() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun KotlinCodePreview_back2back() {
   MaterialTheme {
@@ -293,7 +293,7 @@ fun KotlinCodePreview_highlight1() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun KotlinCodePreview_highlight3() {
   MaterialTheme {
@@ -308,7 +308,7 @@ fun KotlinCodePreview_highlight3() {
   }
 }
 
-//@Preview
+@Preview
 @Composable
 fun PreviewKotlinCode() {
   MaterialTheme {
@@ -333,7 +333,7 @@ fun PreviewKotlinCode() {
           |
           |fun main() {
           |  ${placeholder(20)}
-          |  println("Hello, World!")
+          |  println("Hello, \"World!\"")
           |}
           |
           |@Annotated

@@ -9,6 +9,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
+import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.KotlinParser.PostfixUnaryExpressionContext
 import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
@@ -131,6 +132,7 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.NullLiteral -> add(KEYWORD, node.range)
           KotlinParser.RETURN -> add(KEYWORD, node.range)
           KotlinParser.WHERE -> add(KEYWORD, node.range)
+          KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
 
           // brackets, parent, ...
           KotlinParser.LPAREN -> add(BRACKET, node.range)

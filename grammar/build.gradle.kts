@@ -16,8 +16,7 @@ java {
 dependencies {
   implementation("junit:junit:4.13.1")
 
-  val kotlinVersion: String by project
-  implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}")
 
   antlr("org.antlr:antlr4:4.7.1")
 

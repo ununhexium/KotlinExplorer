@@ -16,5 +16,6 @@ enum class KotlinHighlight {
     NUMBER,
     SIMPLE_IDENTIFIER,
     STRING,
+    STRING_ESCAPED_CHARACTER,
     ;
 }
