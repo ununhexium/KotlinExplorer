@@ -11,5 +11,6 @@ object OddEvenChapter: ChapterImpl(
         Boolean,
         DataType,
         Comparators,
+        StringConcatenation,
     )
 )
