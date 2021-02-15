@@ -5,7 +5,7 @@
     app:startDestination="@id/chapterListFragment">
     <fragment
         android:id="@+id/chapterListFragment"
-        android:name="net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment"
         android:label="ChapterListFragment">
         <action
             android:id="@+id/action_chapterListFragment_to_lessonFragment"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/lessonFragment"
-        android:name="net.lab0.jetpackcomposeexplorer.framework.presentation.fragment.lesson.LessonFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.LessonFragment"
         android:label="LessonFragment">
         <argument
             android:name="lessonId"
