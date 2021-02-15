@@ -18,6 +18,7 @@ object Dependencies {
   val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 
   val firebase = "com.google.firebase:firebase-bom:${Versions.firebase}"
+  val firebaseAuth = "com.google.firebase:firebase-auth"
   val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
   val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx"
 
