@@ -5,6 +5,7 @@ import java.io.File
 
 // https://kotlinlang.org/docs/basic-syntax.html#creating-classes-and-instances
 // https://developer.android.com/kotlin/learn
+@Suppress("UNUSED_VARIABLE")
 class Courses {
   interface Dep {
     val name: String
