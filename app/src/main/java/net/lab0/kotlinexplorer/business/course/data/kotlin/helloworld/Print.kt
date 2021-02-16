@@ -20,7 +20,7 @@ you must use the name exactly as it is declared: `print`.
 Printing allows you to show text to the user.
 """,
             answer = listOf("print"),
-            choices = listOf("print", "Print"),
+            confusion = listOf("Print", "PRINT"),
         ),
 
         LessonPage.CodeQuestionPage(
@@ -32,7 +32,7 @@ Printing allows you to show text to the user.
 When printing text, the text must be between double quotes `"`.
 """,
             answer = listOf(""""Kotlin""""),
-            choices = listOf(""""Kotlin"""", "Kotlin"),
+            confusion = listOf("Kotlin"),
         ),
 
         LessonPage.CodeQuestionPage(
@@ -44,7 +44,7 @@ When printing text, the text must be between double quotes `"`.
 To call the `print` function, you must use `(` and `)`. The other characters are reserved for other usages.
 """,
             answer = listOf("(", ")"),
-            choices = listOf("{", "}", "(", ")"),
+            confusion = listOf("{", "}"),
         ),
 
         LessonPage.CodeQuestionPage(
@@ -56,7 +56,7 @@ To call the `print` function, you must use `(` and `)`. The other characters are
 Remember this, it will be used a lot later ;).
 """,
             answer = listOf("print", "(", "\"", "Finished!", ")"),
-            choices = listOf("print", "(", "\"", "Finished!", ")", "'"),
+            confusion = listOf("'"),
         ),
 
         LessonPage.InfoPage(

@@ -50,8 +50,8 @@ and ends with a double quote `"`.
 The function name is case sensitive, 
 you must the name exactly as it is declared: `print`.
 """,
-            choices = listOf("printLn", "print", "println", "Print", "PrintLn"),
             answer = listOf("print"),
+            confusion = listOf("printLn", "println", "Print", "PrintLn"),
         ),
 
         CodeQuestionPage(
@@ -62,7 +62,7 @@ you must the name exactly as it is declared: `print`.
             """
 When printing a string, the content of the string must be between double quotes `"`.
 """,
-            choices = listOf(""""Kotlin"""", "Kotlin", "'Kotlin'"),
+            confusion = listOf(""""Kotlin"""", "Kotlin", "'Kotlin'"),
             answer = listOf(""""Kotlin""""),
         ),
     )

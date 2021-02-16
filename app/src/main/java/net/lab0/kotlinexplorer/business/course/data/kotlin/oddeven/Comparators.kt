@@ -44,8 +44,8 @@ Exists but does a different kind of comparison. More about that in another lesso
 1 == 2      // better. More readable
 ```
 """,
-            choices = listOf("==", "=", "===", "equals"),
             answer = listOf("=="),
+            confusion = listOf("=", "===", "equals"),
         ),
         // TODO: string lexicographical comparison: "a" < "b"
         CodeQuestionPage(
@@ -70,8 +70,8 @@ Exists but does a different kind of comparison. It works in pair with `===`. Mor
 Is not a Kotlin operator.
 
 """,
-            choices = listOf("!=", "<>", "!=="),
             answer = listOf("!="),
+            confusion = listOf("<>", "!=="),
         ),
         CodeQuestionPage(
             title = "Bigger",
@@ -91,8 +91,8 @@ Make the following comparison true.
 `x` is greater than `y`
 
 """,
-            choices = listOf(">", "<"),
             answer = listOf(">"),
+            confusion = listOf("<"),
         ),
         CodeQuestionPage(
             title = "Smaller",
@@ -112,8 +112,8 @@ Make the following comparison true.
 `x` is greater than `y`
 
 """,
-            choices = listOf(">", "<"),
             answer = listOf("<"),
+            confusion = listOf(">"),
         ),
         CodeQuestionPage(
             title = "Greater or equal",
@@ -133,8 +133,8 @@ Make the following comparisons true.
  
 `x` is greater than `y` or equal to `y`
 """,
-            choices = listOf(">=", "<="),
             answer = listOf(">="),
+            confusion = listOf("<="),
         ),
         CodeQuestionPage(
             title = "Smaller or equal",
@@ -154,8 +154,8 @@ Make the following comparisons true.
  
 `x` is greater than `y` or equal to `y`
 """,
-            choices = listOf(">=", "<="),
             answer = listOf("<="),
+            confusion = listOf(">="),
         ),
         CodeQuestionPage(
             title = "Result type",
@@ -187,8 +187,8 @@ true == true == true == true       // true
 (true == true) == (false == false) // true
 ```
 """,
-            choices = listOf("Boolean", "Int", "String", "Undefined"),
             answer = listOf("Boolean"),
+            confusion = listOf("Int", "String", "Undefined"),
         ),
         MultipleChoice(
             title = "Mhhh \uD83E\uDD14",
@@ -224,11 +224,11 @@ Comparisons must be between elements of the same type.
 ```kotlin
 "a" != "1" // true
  1  !=  1  // false
- "a" != 1  // error
+"a" !=  1  // error
 ```
 """,
-            answer = setOf(0),
             choices = listOf("Some error?", "true", "false"),
+            answer = setOf(0),
         ),
         InfoPage(
             title = "Summary",

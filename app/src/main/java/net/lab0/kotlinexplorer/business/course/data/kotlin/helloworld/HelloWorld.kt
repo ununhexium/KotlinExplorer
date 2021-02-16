@@ -21,7 +21,7 @@ ${p(4)}
 """,
             explanation = "",
             answer = listOf("fun", "(", ")", "{", "}"),
-            choices = listOf("fun", "(", ")", "{", "}", "[", "]"),
+            confusion = listOf("[", "]"),
         ),
         LessonPage.CodeQuestionPage(
             title = "Print",
@@ -34,8 +34,8 @@ fun main() {
 }
 """,
             explanation = "",
-            choices = listOf("print", "Print", *allBrackets),
-            answer = listOf("print", "(", ")")
+            answer = listOf("print", "(", ")"),
+            confusion = listOf("Print", "{", "}")
         ),
         LessonPage.CodeQuestionPage(
             title = "String",
@@ -49,7 +49,7 @@ print(
 """,
             explanation = "",
             answer = listOf("\"", "Hello ", """\"""", "World"),
-            choices = listOf("\"", "'", """\"""", "Hello ", "World"),
+            confusion = listOf("'"),
         ),
         // TODO: multiline code reordering
         LessonPage.InfoPage(

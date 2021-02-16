@@ -25,7 +25,7 @@ The name of the declared function in between `fun ` and the opening parenthesis 
 `Main` and `main` are two different identifiers.
 """,
             answer = listOf("fun", "main"),
-            choices = listOf("function", "fun", "main", "Main")
+            confusion = listOf("function", "Main")
         ),
 
         LessonPage.CodeQuestionPage(
@@ -44,7 +44,7 @@ The body of the function goes between curly brackets. It starts at `{` and ends 
 To make the function more readable, the body inside the function is indented. This is optional.
 """,
             answer = listOf("{", """print("hello")""", "}"),
-            choices = listOf("(", ")", "{", """print("hello")""", "}", "[", "]")
+            confusion = listOf("(", ")", "[", "]")
         ),
 
         LessonPage.InfoPage(

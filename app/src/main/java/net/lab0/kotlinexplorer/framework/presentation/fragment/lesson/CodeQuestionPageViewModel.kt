@@ -23,7 +23,7 @@ class CodeQuestionPageViewModel(
       page.snippet,
       page.explanation,
       KotlinCodeWithBlanksImpl(page.snippet).placeholderIds.distinct().size,
-      page.choices
+      (page.answer + page.confusion)
           .mapIndexed { index, s -> Answer(index, s, false) }
           .let { if (shuffleAnswers) it.shuffled() else it },
       page.answer,
@@ -37,14 +37,14 @@ class CodeQuestionPageViewModel(
       question: String,
       codeSample: String,
       explanation: String,
-      choices: List<String>,
       correctAnswer: List<String>,
+      confusion: List<String> = listOf(),
   ) : this(
       question,
       codeSample,
       explanation,
       correctAnswer.size,
-      choices.mapIndexed { index, s -> Answer(index, s, false) },
+      (correctAnswer + confusion).mapIndexed { index, s -> Answer(index, s, false) },
       correctAnswer,
       { answers -> correctAnswer == answers.map { it.text } }
   )

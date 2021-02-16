@@ -29,22 +29,22 @@ Floating point numbers are numbers like `1.234e^89`, an approximation of pi (3.1
 """
         ),
         // Int
-        CodeQuestionPage.singleChoice(
-            "Integer",
-            """
+        CodeQuestionPage(
+            title = "Integer",
+            question = """
 Declare a value with type integer.
 """,
-            """val one:${placeholder(0)} = 1""",
+            snippet = """val one:${placeholder(0)} = 1""",
 
-            """
+            explanation = """
 `Int` accepts integers in the range (${Int.MIN_VALUE}, ${Int.MAX_VALUE}), that is (2^31, 2^31-1).
 
 `0` is in the middle of this range.
 """,
-            "Int"
+            answer = listOf("Int")
         ),
         // Float
-        CodeQuestionPage.singleChoice(
+        CodeQuestionPage(
             "Floating point",
             """
 Declare a value with type float.
@@ -56,7 +56,7 @@ Declare a value with type float.
 
 Note the `f` letter in the end of the number. This is to specify that the number is a `f`loat.
 """,
-            "Float"
+            listOf("Float")
         ),
         // Infinity
         CodeQuestionPage(
@@ -72,7 +72,7 @@ val infinity:Float = ${placeholder(0)}
               * infinity
               * -infinity
             """,
-            choices = listOf(
+            confusion = listOf(
                 "Float.POSITIVE_INFINITY",
                 "Float.NEGATIVE_INFINITY"
             ),
@@ -80,7 +80,7 @@ val infinity:Float = ${placeholder(0)}
         ),
 
         // Long
-        CodeQuestionPage.singleChoice(
+        CodeQuestionPage(
             "Long integers",
             """
 9876543210 is too big to fit in an integer.
@@ -93,11 +93,11 @@ val tooBigForInt: ${placeholder(0)} = 9876543210
             """
 Use a long integer (`Long`) to store a number in the range (${Long.MIN_VALUE}, ${Long.MAX_VALUE}), that is (2^63, 2^63-1).
 """,
-            "Long"
+            listOf("Long")
         ),
 
         // Double
-        CodeQuestionPage.singleChoice(
+        CodeQuestionPage(
             "Double precision",
             """
 10^99 is too big to fit in an single precision floating point number.
@@ -111,7 +111,7 @@ Use a double precision floating point number (`Double`) to store a number in the
 
 Just like `Float`s, `Double`s also have +∞ and special values -∞.
 """,
-            "Double"
+            listOf("Double")
         ),
     )
 )

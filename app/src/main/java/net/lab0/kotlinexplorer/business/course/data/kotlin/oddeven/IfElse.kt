@@ -24,7 +24,7 @@ The value in the `if`'s condition `()` must be a `Boolean`.
 If that boolean is true, then the code in the if's block `{ ... }` is executed.
 """,
             answer = listOf("true"),
-            choices = listOf("true", """"true"""", "1"),
+            confusion = listOf(""""true"""", "1"),
         ),
         LessonPage.CodeQuestionPage(
             title = "Denied",
@@ -53,7 +53,7 @@ That value can be used in the `if`.
 Only the third option will avoid executing the `if` block.
 """,
             answer = listOf("=="),
-            choices = listOf("==", "!=", "<"),
+            confusion = listOf("!=", "<"),
         ),
         LessonPage.CodeQuestionPage(
             title = "Ignore that",
@@ -73,7 +73,7 @@ When the `if`'s condition is true, only the `if` block is executed.
 The part in the `else` block is executed only when the `if`'s condition is false.
 """,
             answer = listOf("<"),
-            choices = listOf("<", "==", ">="),
+            confusion = listOf("==", ">="),
         ),
         LessonPage.CodeQuestionPage(
             title = "Otherwise",
@@ -91,8 +91,44 @@ if ( ${p(0)} ) {
 When the `if`'s condition is false, only the part in the `else` is executed.
 """,
             answer = listOf("false"),
-            choices = listOf("false", "true"),
+            confusion = listOf("true"),
         ),
+        LessonPage.CodeQuestionPage(
+            title = "No no no",
+            question = """
+Don't lie.
+""",
+            snippet = """
+if ( ${p(0)} true ) {
+    print("I'm lying")       
+} else {
+    print("Good boi :3")
+}
+""",
+            explanation = """
+#####`!`
 
-        )
+negates a boolean.
+
+```kotlin
+!true   // false
+!false  // true
+```
+
+##### `!!`
+
+Exists, but is not for negation.
+
+##### `~`
+
+Is nothing special in Kotlin.
+
+##### `not`
+
+Is nothing special in Kotlin.
+""",
+            answer = listOf("!"),
+            confusion = listOf("not", "!!", "~"),
+        ),
+    )
 )

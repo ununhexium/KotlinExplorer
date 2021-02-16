@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage.CodeQuestionPage
+import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 // TODO: "A" + "B"
@@ -26,7 +27,7 @@ Between 2 strings, the `+` operator concatenates the strings together.
 ```
 """,
             answer = listOf("+"),
-            choices = listOf("+", ".", "~", "$$"),
+            confusion = listOf(".", "~", "$$"),
         ),
         CodeQuestionPage(
             title = "String Templates",
@@ -61,7 +62,7 @@ val hello = "Hello ${'$'}{s}"
 ```
 """,
             answer = listOf("$", "{", "}"),
-            choices = listOf("$", "{", "}", "(", ")", "&"),
+            confusion = listOf("(", ")", "&"),
         ),
         CodeQuestionPage(
             title = "Short Template",
@@ -94,7 +95,42 @@ val hello = "Hello ${'$'}s"
 ```
 """,
             answer = listOf("$"),
-            choices = listOf("$", "!", "&"),
+            confusion = listOf("!", "&"),
         ),
+CodeQuestionPage(
+            title = "Code in strings",
+            question = """
+Put "4" in `s`.
+""",
+            snippet = """
+val s = "${'$'}{ 2 ${p(0)} 2 }"
+""",
+            explanation = """
+`${'$'}{...}` can contain any Kotlin code.
+
+The code inside the curly brackets `{}` will be executed and 
+the result will be transformed to a string.
+""",
+            answer = listOf("+"),
+            confusion = listOf("==", ">", "4"),
+        ),
+        InfoPage(
+            "Summary",
+            """
+Strings can be concatenated either with `+` for simple cases or with `${'$'}{}` for more complex cases.
+
+All the Kotlin data types have a `String` representation.
+
+`${'$'}{}` can contain any Kotlin code.
+This code will be executed before it's transformed to a `String`.
+
+
+```kotlin
+println(
+  "${'$'}{ 1 + 2 } deep ${'$'}{ 3 + 2 } you."
+)
+```
+"""
+        )
     )
 )

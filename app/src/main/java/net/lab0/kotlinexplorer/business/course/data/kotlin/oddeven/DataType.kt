@@ -20,7 +20,7 @@ val number: ${p(0)} = 42
 `Int` (integer) indicates the data type of the value `number`.
 """,
             answer = listOf("Int"),
-            choices = listOf("Int", "String", "Boolean"),
+            confusion = listOf("String", "Boolean"),
         ),
         LessonPage.CodeQuestionPage(
             title = "It's a string",
@@ -34,7 +34,7 @@ val alphabet: ${p(0)} = "abcdef..."
 `String` indicates that alphabet is a string.
 """,
             answer = listOf("String"),
-            choices = listOf("Int", "String", "Boolean"),
+            confusion = listOf("Int", "Boolean"),
         ),
         LessonPage.CodeQuestionPage(
             title = "It's the truth",
@@ -48,7 +48,7 @@ val theSkyIsBlue: ${p(0)} = true // mostly...
 `theSkyIsBlue` must now be a boolean.
 """,
             answer = listOf("Boolean"),
-            choices = listOf("Int", "String", "Boolean"),
+            confusion = listOf("Int", "String"),
         ),
         LessonPage.MultipleChoice(
             title = "Type inference",

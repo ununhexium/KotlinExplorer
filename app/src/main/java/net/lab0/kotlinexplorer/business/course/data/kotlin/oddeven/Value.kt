@@ -25,7 +25,7 @@ The name of this value is `number`.
 A blank will not work. It's a syntax error.
 """,
             answer = listOf("val"),
-            choices = listOf("val", "let", "")
+            confusion = listOf("let", "")
         ),
         LessonPage.CodeQuestionPage(
             title = "Hello value",
@@ -41,7 +41,7 @@ val ${p(0)} = ${p(1)}
 `hello` is a value name, not a string.
 """,
             answer = listOf("word", """"hello""""),
-            choices = listOf("word", """"hello"""", """"word"""", "hello")
+            confusion = listOf(""""word"""", "hello")
         ),
         LessonPage.CodeQuestionPage(
             title = "Good names",
@@ -58,7 +58,7 @@ val ${p(0)} = 3
 When the program is longer, it's harder to remember what single letter values mean.
 """,
             answer = listOf("numberOfCatsInTheHouse"),
-            choices = listOf("n", "numberOfCatsInTheHouse")
+            confusion = listOf("n", "nCatHouse")
         ),
         LessonPage.CodeQuestionPage(
             title = "Camel case",
@@ -77,7 +77,7 @@ Following the naming conventions will make it easier to read code later.
 Looking at the naming will tell its nature (function, value, keyword, ...).
 """,
             answer = listOf("numberOfMiceInTheHouse"),
-            choices = listOf("numberOfMiceInTheHouse", "number_of_mice_in_the_house")
+            confusion = listOf("number_of_mice_in_the_house")
         ),
         LessonPage.InfoPage(
             title = "More value",

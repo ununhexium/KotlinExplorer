@@ -15,28 +15,11 @@ sealed class LessonPage(
       val question: String,
       val snippet: String,
       val explanation: String,
-      val choices: List<String>,
       val answer: List<String>,
+      val confusion: List<String> = listOf(),
   ) : LessonPage(
       title
-  ) {
-    companion object {
-      fun singleChoice(
-          title: String,
-          question: String,
-          snippet: String,
-          answer: String,
-          choice: String,
-      ) = CodeQuestionPage(
-          title = title,
-          question = question,
-          snippet = snippet,
-          explanation = answer,
-          choices = listOf(choice),
-          answer = listOf(choice),
-      )
-    }
-  }
+  )
 
   class MultipleChoice(
       title: String,

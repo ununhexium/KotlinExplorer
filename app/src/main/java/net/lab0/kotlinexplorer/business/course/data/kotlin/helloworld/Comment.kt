@@ -21,7 +21,7 @@ Double slash `//` starts a single line comment.
 The text after `//` will only be shown in the source code. If it's code, it will not be executed.
 """,
             answer = listOf("//"),
-            choices = listOf("//", "/*", "--", "!", "#")
+            confusion = listOf("/*", "--", "!", "#")
         ),
         LessonPage.CodeQuestionPage(
             title = "Ignore it",
@@ -34,7 +34,6 @@ ${p(1)} print("B")
 Commented code will not be executed.
 """,
             answer = listOf("//", "  "),
-            choices = listOf("//", "  "),
         ),
         LessonPage.CodeQuestionPage(
             title = "Talkative",
@@ -55,7 +54,7 @@ or a single multi line comment `/* */`.
 The commented block starts at `/*` and ends at `*/`.
 """,
             answer = listOf("/*", "*/"),
-            choices = listOf("/*", "*/", "//", "//", "(*", "*)")
+            confusion = listOf("//", "//", "(*", "*)")
         ),
         LessonPage.CodeQuestionPage(
             title = "Print nothing",
@@ -80,7 +79,7 @@ This is not commented
 ```
 """,
             answer = listOf("/*", "*/"),
-            choices = listOf("/*", "*/", "//", "//")
+            confusion = listOf("//", "//")
         ),
         LessonPage.InfoPage(
             title = "Comment squeeze",

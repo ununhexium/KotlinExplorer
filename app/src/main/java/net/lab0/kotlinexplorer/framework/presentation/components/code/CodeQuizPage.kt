@@ -94,8 +94,8 @@ val modelSelected = CodeQuestionPageViewModel(
     "Why?",
     "val i = 0",
     "Because",
-    listOf("a", "b", "c"),
-    listOf("a")
+    listOf("a"),
+    listOf("b", "c")
 ).also {
   it.select(it.possibleAnswers.value.first())
 }
@@ -119,7 +119,6 @@ val modelValidated = CodeQuestionPageViewModel(
     "Why?",
     "val i = 0",
     "Because",
-    listOf("a"),
     listOf("a"),
 ).also {
   it.select(it.possibleAnswers.value.first())

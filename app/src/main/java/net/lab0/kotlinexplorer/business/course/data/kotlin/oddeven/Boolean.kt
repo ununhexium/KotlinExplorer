@@ -11,7 +11,7 @@ object Boolean : LessonImpl(
         LessonPage.CodeQuestionPage(
             title = "Make it true",
             question = """
-Assign the value `true`.
+Assign the boolean value `true`.
 """,
             snippet = """
 val kotlinIsEasy = ${p(0)}
@@ -26,7 +26,7 @@ As with everything else, Kotlin is case sensitive, therefore `True` is not an eq
 `"true"` is a string, not the `true` keyword.
 """,
             answer = listOf("true"),
-            choices = listOf("true", "True", "1", """"true""""),
+            confusion = listOf("True", "1", """"true""""),
         ),
         LessonPage.CodeQuestionPage(
             title = "Nope",
@@ -42,7 +42,7 @@ The conventions logic of `true` also applies to `false`.
 The empty string `""` is not equivalent to false. It's a string, not a boolean.
 """,
             answer = listOf("false"),
-            choices = listOf("false", "False", "0", """"false"""", "\"\""),
+            confusion = listOf("False", "0", """"false"""", "\"\""),
         ),
         LessonPage.InfoPage(
             title = "That's it",
