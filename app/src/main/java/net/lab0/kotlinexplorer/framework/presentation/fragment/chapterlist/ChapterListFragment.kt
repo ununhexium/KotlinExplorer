@@ -76,7 +76,10 @@ class ChapterListFragment
             ExploreDrawer(
                 onProfile = {
                   scaffoldState.drawerState.close()
-                  requestSignIn()
+//                  requestSignIn()
+                  findNavController().navigate(
+                      ChapterListFragmentDirections.actionChapterListFragmentToUserProfile()
+                  )
                 },
             )
           },

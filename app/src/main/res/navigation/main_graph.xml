@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_chapterListFragment_to_lessonFragment"
             app:destination="@id/lessonFragment" />
+        <action
+            android:id="@+id/action_chapterListFragment_to_userProfile"
+            app:destination="@id/userProfile" />
     </fragment>
     <fragment
         android:id="@+id/lessonFragment"
@@ -22,4 +25,8 @@
             android:id="@+id/action_lessonFragment_to_chapterListFragment"
             app:destination="@id/chapterListFragment" />
     </fragment>
+    <activity
+        android:id="@+id/userProfile"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.profile.UserProfile"
+        android:label="UserProfile" />
 </navigation>
