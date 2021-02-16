@@ -25,6 +25,7 @@ fun TopLevelScaffold(
     title:String,
     scaffoldState: ScaffoldState,
     onProfileSelected: () -> Unit,
+    onLessonsSelected: () -> Unit,
     bodyContent: @Composable (PaddingValues) -> Unit,
 ) {
   Scaffold(
@@ -35,6 +36,10 @@ fun TopLevelScaffold(
               scaffoldState.drawerState.close()
               onProfileSelected()
             },
+            onLessonsSelected = {
+              scaffoldState.drawerState.close()
+              onLessonsSelected()
+            }
         )
       },
       topBar = {
@@ -80,6 +85,7 @@ fun TopLevelScaffoldPreview() {
           TopLevelScaffold(
               "The Section",
               state,
+              {},
               {},
           ){
             Text("Body")

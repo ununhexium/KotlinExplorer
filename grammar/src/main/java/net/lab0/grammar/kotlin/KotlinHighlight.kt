@@ -14,6 +14,7 @@ enum class KotlinHighlight {
     INSTANCE_PROPERTY,
     KEYWORD,
     NUMBER,
+    OPERATOR,
     SIMPLE_IDENTIFIER,
     STRING,
     STRING_ESCAPED_CHARACTER,

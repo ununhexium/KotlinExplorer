@@ -28,6 +28,7 @@ import net.lab0.kotlinexplorer.framework.presentation.components.frame.ChapterCa
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.ChapterList
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.ExploreDrawer
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.LessonListItemData
+import net.lab0.kotlinexplorer.framework.presentation.components.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
 import net.lab0.kotlinexplorer.mvi.BaseFragment
@@ -56,38 +57,17 @@ class ChapterListFragment
     MaterialTheme {
       val scaffoldState = rememberScaffoldState()
 
-      Scaffold(
+      TopLevelScaffold(
+          title = "Lessons",
           scaffoldState = scaffoldState,
-          drawerContent = {
-            ExploreDrawer(
-                onProfile = {
-                  scaffoldState.drawerState.close()
-                  findNavController().navigate(
-                      ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
-                  )
-                },
+          onProfileSelected = {
+            findNavController().navigate(
+                ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
             )
           },
-          topBar = {
-            TopAppBar(
-                title = {
-                  Text(
-                      text = "Kotlin Explorer",
-                      style = MaterialTheme.typography.h4,
-                  )
-                },
-                navigationIcon = {
-                  IconButton(
-                      onClick = {
-                        scaffoldState.drawerState.open()
-                      }
-                  ) {
-                    Icon(Icons.Default.Menu)
-                  }
-                },
-                elevation = 4.dp,
-            )
-          },
+          onLessonsSelected = {
+            // stay here
+          }
       ) {
         val state by viewModel.uiDataState.collectAsState()
 
@@ -116,6 +96,7 @@ class ChapterListFragment
               findNavController().navigate(action)
             }
         )
+
       }
     }
   }

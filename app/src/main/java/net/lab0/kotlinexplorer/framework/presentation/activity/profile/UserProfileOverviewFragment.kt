@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.loadVectorResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
@@ -42,7 +43,9 @@ class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileVi
     TopLevelScaffold(
         title = "Profile",
         scaffoldState = scaffoldState,
-        onProfileSelected = { /*Stay here*/ }) {
+        onProfileSelected = { /*Stay here*/ },
+        onLessonsSelected = { /*TODO: dont nagivate with drawer?*/ }
+    ) {
       val state by viewModel.uiDataState.collectAsState()
 
       printLogD(
@@ -54,8 +57,14 @@ class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileVi
           state.user?.email,
           placeholder,
           null,
-          { viewModel.logIn(fragment) },
-          { viewModel.logOut(fragment.requireContext()) }
+          {
+            viewModel.logIn(fragment)
+            findNavController().popBackStack()
+          },
+          {
+            viewModel.logOut(fragment.requireContext())
+            findNavController().popBackStack()
+          }
       )
     }
   }

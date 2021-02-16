@@ -181,7 +181,8 @@ Because `==` is an expression (outputs a value), its result can be assigned.
 
 ```kotlin
 true == true == true == true       // true
-
+```
+```kotlin
 //   true      ==       true
 (true == true) == (false == false) // true
 ```

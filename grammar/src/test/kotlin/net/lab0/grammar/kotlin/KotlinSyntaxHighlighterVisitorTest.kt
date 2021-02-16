@@ -5,14 +5,17 @@ import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
-import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
+import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.SpotsAssert.Companion.assertThat
+import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestFactory
 
 
 class KotlinSyntaxHighlighterVisitorTest {
@@ -438,7 +441,7 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(NUMBER, 8, 14),
     )
   }
-  
+
   @Test
   fun `can highlight doubles`() {
     // given
@@ -468,4 +471,54 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(STRING_ESCAPED_CHARACTER, 5, 6),
     )
   }
+
+  @TestFactory
+  fun `can highlight 1-char operators for ints`(): Iterable<DynamicTest> {
+    // TODO: "<", ">"
+    val operators = listOf("+", "-", "*", "/")
+
+    return operators.map { operator ->
+      DynamicTest.dynamicTest(operator) {
+        // given
+        val code = """val b = 1 $operator 2"""
+
+        // when
+        val spots = extractSpots(code)
+
+        // then
+        assertThat(code, spots).hasSpots(
+            Spot(KEYWORD, 0, 2),
+            Spot(OPERATOR, 6, 6),
+            Spot(NUMBER, 8, 8),
+            Spot(OPERATOR, 10, 10),
+            Spot(NUMBER, 12, 12),
+        )
+      }
+    }
+  }
+
+  @TestFactory
+  fun `can highlight 2-char operators for ints`(): Iterable<DynamicTest> {
+    val operators = listOf("==", "!=", ">=", "<=")
+
+    return operators.map { operator ->
+      DynamicTest.dynamicTest(operator) {
+        // given
+        val code = """val b = 1 $operator 2"""
+
+        // when
+        val spots = extractSpots(code)
+
+        // then
+        assertThat(code, spots).hasSpots(
+            Spot(KEYWORD, 0, 2),
+            Spot(OPERATOR, 6, 6),
+            Spot(NUMBER, 8, 8),
+            Spot(OPERATOR, 10, 11),
+            Spot(NUMBER, 13, 13),
+        )
+      }
+    }
+  }
+
 }

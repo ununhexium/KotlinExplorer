@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun ExploreDrawer(
     onProfile: () -> Unit,
+    onLessonsSelected: () -> Unit,
 ) {
   Column {
     Text(
@@ -23,6 +24,16 @@ fun ExploreDrawer(
         ),
         style = MaterialTheme.typography.h3
     )
+    Text(
+        "Lessons",
+        modifier = Modifier.clickable(
+            onClick = {
+              onLessonsSelected()
+            }
+        ),
+        style = MaterialTheme.typography.h3
+    )
+
   }
 }
 
@@ -32,9 +43,7 @@ fun PreviewExploreDrawer() {
   MaterialTheme {
     Surface {
       Column {
-        ExploreDrawer(
-            onProfile = { }
-        )
+        ExploreDrawer({ }, {})
       }
     }
   }

@@ -8,6 +8,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.KotlinParser.PostfixUnaryExpressionContext
@@ -143,6 +144,17 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.RANGLE -> add(BRACKET, node.range)
           KotlinParser.LCURL -> add(BRACKET, node.range)
           KotlinParser.RCURL -> add(BRACKET, node.range)
+
+          // operators
+          KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
+          KotlinParser.ADD -> add(OPERATOR, node.range)
+          KotlinParser.SUB -> add(OPERATOR, node.range)
+          KotlinParser.MULT -> add(OPERATOR, node.range)
+          KotlinParser.DIV -> add(OPERATOR, node.range)
+          KotlinParser.LE -> add(OPERATOR, node.range)
+          KotlinParser.GE -> add(OPERATOR, node.range)
+          KotlinParser.EQEQ -> add(OPERATOR, node.range)
+          KotlinParser.EXCL_EQ -> add(OPERATOR, node.range)
         }
       }
 }
