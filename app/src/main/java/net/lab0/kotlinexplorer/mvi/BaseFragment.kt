@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.collect
 
 abstract class BaseFragment<Event, Data> : Fragment()
-    where Data : UiData, Event : UiEvent {
+    where Data : UiState, Event : UiEvent {
 
   val TAG = this::class.java.canonicalName
 
@@ -44,6 +44,10 @@ abstract class BaseFragment<Event, Data> : Fragment()
 
     val view = ComposeView(requireContext())
 
+    onCreateComposeView(view)
+
     return view
   }
+
+  abstract fun onCreateComposeView(view: ComposeView)
 }

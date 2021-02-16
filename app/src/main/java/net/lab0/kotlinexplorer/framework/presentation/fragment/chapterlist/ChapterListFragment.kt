@@ -1,12 +1,9 @@
 package net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -24,8 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.firebase.ui.auth.AuthUI
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -35,7 +30,6 @@ import net.lab0.kotlinexplorer.framework.presentation.components.frame.ExploreDr
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.LessonListItemData
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
-import net.lab0.kotlinexplorer.framework.presentation.intent.requestSignIn
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 import javax.inject.Inject
 
@@ -52,17 +46,9 @@ class ChapterListFragment
 
   override val viewModel: ChapterListViewModel by viewModels { viewModelFactory }
 
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?,
-  ): View {
-    val view = ComposeView(requireContext())
-
+  override fun onCreateComposeView(view: ComposeView) {
     view.setContent { Content() }
     viewModel.loadLessonsInProgress()
-
-    return view
   }
 
   @Composable
@@ -76,9 +62,8 @@ class ChapterListFragment
             ExploreDrawer(
                 onProfile = {
                   scaffoldState.drawerState.close()
-//                  requestSignIn()
                   findNavController().navigate(
-                      ChapterListFragmentDirections.actionChapterListFragmentToUserProfile()
+                      ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
                   )
                 },
             )

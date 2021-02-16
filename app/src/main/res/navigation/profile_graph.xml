@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_graph"
+    app:startDestination="@id/userProfileOverviewFragment">
+    <fragment
+        android:id="@+id/userProfileOverviewFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.profile.UserProfileOverviewFragment"
+        android:label="UserProfileOverviewFragment" />
+</navigation>

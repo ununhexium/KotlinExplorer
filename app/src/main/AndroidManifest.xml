@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".framework.presentation.activity.profile.UserProfile"
+            android:name=".framework.presentation.activity.profile.UserProfileActivity"
             android:theme="@style/Theme.JetpackComposeExplorer.NoActionBar" />
     </application>
 

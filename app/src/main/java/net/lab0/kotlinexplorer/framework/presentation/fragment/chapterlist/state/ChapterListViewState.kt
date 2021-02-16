@@ -2,12 +2,12 @@ package net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.stat
 
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
-import net.lab0.kotlinexplorer.mvi.UiData
+import net.lab0.kotlinexplorer.mvi.UiState
 
 data class ChapterListViewState(
     val chapters: List<Chapter>,
     val lessonsInProgress: List<LessonProgress>,
-) : UiData {
+) : UiState {
   val completionCache = mutableMapOf<Chapter, Float>()
 
   fun getChapterCompletion(chapter: Chapter): Float =
