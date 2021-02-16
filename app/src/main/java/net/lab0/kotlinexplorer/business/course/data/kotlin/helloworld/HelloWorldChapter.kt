@@ -8,6 +8,7 @@ object HelloWorldChapter
     title = "Hello World",
     description = "The classic beginner's program",
     lessons = listOf(
+        Introduction,
         String,
         Print,
         Comment,

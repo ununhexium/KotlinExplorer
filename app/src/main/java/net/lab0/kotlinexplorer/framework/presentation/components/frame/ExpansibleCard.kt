@@ -79,9 +79,9 @@ fun ExpansibleCardPreview_collapsed() {
         ExpansibleCard(
             { ChapterCard(chapter = dummyChapter1) },
             {
-              LessonListItem(lesson = lesson1)
-              LessonListItem(lesson = lesson2)
-              LessonListItem(lesson = lesson3)
+              LessonListItem(lesson = lesson1, {})
+              LessonListItem(lesson = lesson2, {})
+              LessonListItem(lesson = lesson3, {})
             },
             false,
         )
@@ -104,9 +104,9 @@ fun ExpansibleCardPreview_expanded() {
         ExpansibleCard(
             { ChapterCard(chapter = dummyChapter1) },
             {
-              LessonListItem(lesson = lesson1)
-              LessonListItem(lesson = lesson2)
-              LessonListItem(lesson = lesson3)
+              LessonListItem(lesson = lesson1, {})
+              LessonListItem(lesson = lesson2, {})
+              LessonListItem(lesson = lesson3, {})
             },
             true,
         )

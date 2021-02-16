@@ -1,23 +1,11 @@
 package net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -26,7 +14,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.ChapterCardData
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.ChapterList
-import net.lab0.kotlinexplorer.framework.presentation.components.frame.ExploreDrawer
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.LessonListItemData
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
@@ -74,6 +61,8 @@ class ChapterListFragment
         ChapterList(
             chapters = state.chapters.map { chapter ->
               val completion = state.getChapterCompletion(chapter)
+              val lessonsInProgress = state.lessonsInProgress.map { it.lessonId }
+              val nextLesson = chapter.lessons.firstOrNull { it.id !in lessonsInProgress }
 
               ChapterCardData(
                   chapter.id,
@@ -81,10 +70,11 @@ class ChapterListFragment
                   completion,
                   chapter.lessons.map { lesson ->
                     LessonListItemData(
-                        lesson.id,
-                        lesson.title,
-                        lesson.id in state.lessonsInProgress.map { it.lessonId },
-                        state.getLessonCompletion(lesson.id)
+                        id = lesson.id,
+                        title = lesson.title,
+                        completed = lesson.id in lessonsInProgress,
+                        lesson == nextLesson,
+                        progress = state.getLessonCompletion(lesson.id)
                     )
                   }
               )

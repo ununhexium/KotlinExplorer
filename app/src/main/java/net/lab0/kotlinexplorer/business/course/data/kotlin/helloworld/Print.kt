@@ -43,7 +43,7 @@ When printing text, the text must be between double quotes `"`.
             """
 To call the `print` function, you must use `(` and `)`. The other characters are reserved for other usages.
 """,
-            choices = listOf("[", "]", "{", "}", "(", ")", "\"", "'", " "),
+            choices = listOf("{", "}", "(", ")"),
             answer = listOf("(", ")"),
         ),
 
