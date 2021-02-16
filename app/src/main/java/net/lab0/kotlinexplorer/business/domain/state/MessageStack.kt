@@ -7,8 +7,6 @@ import kotlinx.android.parcel.IgnoredOnParcel
 import java.lang.IndexOutOfBoundsException
 import java.util.*
 
-//const val MESSAGE_STACK_BUNDLE_KEY = "net.lab0.jetpackcomposeexplorer.business.domain.state.MessageStack"
-
 class MessageStack : ArrayList<StateMessage>() {
 
   @IgnoredOnParcel

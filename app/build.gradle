@@ -102,6 +102,7 @@ dependencies {
 
     implementation platform(Dependencies.firebase)
     implementation Dependencies.firebaseAuth
+    implementation Dependencies.firebaseAuthUi
     implementation Dependencies.firebaseAnalytics
     implementation Dependencies.firebaseFirestore
 

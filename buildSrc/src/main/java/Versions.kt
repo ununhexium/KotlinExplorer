@@ -26,6 +26,7 @@ object Versions {
   // services
   val googleServices = "4.3.5"
   val firebase = "26.4.0"
+  val firebaseUi = "6.4.0"
 
   // test
   val junit_4 = "4.13.1"

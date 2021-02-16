@@ -11,19 +11,17 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ExploreDrawer(
-//    nav:NavController,
-    onSelection: () -> Unit,
+    onProfile: () -> Unit,
 ) {
   Column {
     Text(
-        "Tutorial",
+        "Profile",
         modifier = Modifier.clickable(
             onClick = {
-              onSelection()
-//            nav.navigate(R.id.action_homeFragment_to_quizFragment)
+              onProfile()
             }
         ),
-        style = MaterialTheme.typography.h2
+        style = MaterialTheme.typography.h3
     )
   }
 }
@@ -35,8 +33,7 @@ fun PreviewExploreDrawer() {
     Surface {
       Column {
         ExploreDrawer(
-//          rememberNavController(),
-            onSelection = { }
+            onProfile = { }
         )
       }
     }

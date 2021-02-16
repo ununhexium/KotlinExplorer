@@ -19,6 +19,7 @@ object Dependencies {
 
   val firebase = "com.google.firebase:firebase-bom:${Versions.firebase}"
   val firebaseAuth = "com.google.firebase:firebase-auth"
+  val firebaseAuthUi = "com.firebaseui:firebase-ui-auth:${Versions.firebaseUi}"
   val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
   val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx"
 
