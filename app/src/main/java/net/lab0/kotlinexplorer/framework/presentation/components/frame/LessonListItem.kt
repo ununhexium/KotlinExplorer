@@ -76,7 +76,11 @@ fun LessonListItem(
           modifier = Modifier
               .padding(4.dp)
               .align(Alignment.CenterVertically),
-          color = if (lesson.highlighted) MaterialTheme.colors.primary else Color.Gray,
+          color = when {
+            lesson.highlighted -> MaterialTheme.colors.primary
+            lesson.completed -> MaterialTheme.colors.onSurface
+            else -> Color.Gray
+          },
       )
     }
 
