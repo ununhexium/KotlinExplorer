@@ -8,4 +8,11 @@ object LessonBrowser {
 
   fun getChapterForLesson(lessonId: String): Chapter? =
       KOTLIN.firstOrNull { it.lessons.any { it.id == lessonId } }
+
+  fun getNextLessonInChapter(lessonId: String): Lesson? =
+      getChapterForLesson(lessonId)
+          ?.lessons
+          ?.dropWhile { it.id != lessonId }
+          ?.drop(1)
+          ?.firstOrNull()
 }

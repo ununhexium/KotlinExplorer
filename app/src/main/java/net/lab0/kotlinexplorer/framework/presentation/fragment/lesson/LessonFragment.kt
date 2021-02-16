@@ -4,25 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
+import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.components.InfoLessonPage
 import net.lab0.kotlinexplorer.framework.presentation.components.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.components.code.CodeQuizPage
+import net.lab0.kotlinexplorer.framework.presentation.components.code.MultipleChoicePage
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.LessonDrawer
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.state.CodeAnswerState
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import net.lab0.kotlinexplorer.framework.presentation.components.code.MultipleChoicePage
+import net.lab0.kotlinexplorer.framework.ui.frame.BigVerticalSpacer
 import net.lab0.kotlinexplorer.utils.Do
 import org.commonmark.parser.Parser
 
@@ -98,15 +107,35 @@ class LessonFragment(
                 }
               }
             } else {
-              Button(
-                  onClick = {
-                    viewModel.saveLesson()
-                    findNavController().navigate(
-                        R.id.action_lessonFragment_to_chapterListFragment
-                    )
+              Column(modifier = Modifier.fillMaxSize(),verticalArrangement = Arrangement.Center) {
+                Button(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    onClick = {
+                      viewModel.saveLesson()
+                      findNavController().navigate(
+                          R.id.action_lessonFragment_to_chapterListFragment
+                      )
+                    }
+                ) {
+                  Text("Back to Chapters")
+                }
+
+                BigVerticalSpacer()
+
+                LessonBrowser.getNextLessonInChapter(args.lessonId)?.let { nextLessonInChapter ->
+                  Button(
+                      modifier = Modifier.align(Alignment.CenterHorizontally),
+                      onClick = {
+                        viewModel.saveLesson()
+                        val action = LessonFragmentDirections.actionLessonFragmentSelf(
+                            nextLessonInChapter.id
+                        )
+                        findNavController().navigate(action)
+                      }
+                  ) {
+                    Text("Next: ${nextLessonInChapter.title}")
                   }
-              ) {
-                Text("Next")
+                }
               }
             }
           }

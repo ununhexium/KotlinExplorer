@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_lessonFragment_to_chapterListFragment"
             app:destination="@id/chapterListFragment" />
+        <action
+            android:id="@+id/action_lessonFragment_self"
+            app:destination="@id/lessonFragment" />
     </fragment>
     <include app:graph="@navigation/profile_graph" />
 </navigation>
