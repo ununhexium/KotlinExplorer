@@ -15,6 +15,7 @@ class CodeQuestionPageViewModel(
     val explanation: String,
     val maxAnswers: Int,
     choices: List<Answer>,
+    val correctAnswer: List<String>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
 ) {
   constructor(page: LessonPage.CodeQuestionPage, shuffleAnswers: Boolean = true) : this(
@@ -25,39 +26,27 @@ class CodeQuestionPageViewModel(
       page.choices
           .mapIndexed { index, s -> Answer(index, s, false) }
           .let { if (shuffleAnswers) it.shuffled() else it },
-      { answers -> page.answer == answers.map { it.text } }
+      page.answer,
+      { answers -> page.answer == answers.map { it.text } },
   )
 
+  /**
+   * For tests and debug
+   */
   constructor(
       question: String,
       codeSample: String,
       explanation: String,
-      maxAnswers: Int,
-      vararg choices: String,
-      answerValidator: (List<Answer>) -> Boolean,
+      choices: List<String>,
+      correctAnswer: List<String>,
   ) : this(
       question,
       codeSample,
       explanation,
-      maxAnswers,
+      correctAnswer.size,
       choices.mapIndexed { index, s -> Answer(index, s, false) },
-      answerValidator
-  )
-
-  constructor(
-      question: String,
-      codeSample: String,
-      explanation: String,
-      maxAnswers: Int,
-      vararg choices: Answer,
-      answerValidator: (List<Answer>) -> Boolean,
-  ) : this(
-      question,
-      codeSample,
-      explanation,
-      maxAnswers,
-      choices.toList(),
-      answerValidator
+      correctAnswer,
+      { answers -> correctAnswer == answers.map { it.text } }
   )
 
   val questionMarkdown = Parser.builder().build().parse(question)
@@ -70,7 +59,7 @@ class CodeQuestionPageViewModel(
       }
   )
 
-  val answers: MutableState<List<Answer>> = mutableStateOf(choices)
+  val possibleAnswers: MutableState<List<Answer>> = mutableStateOf(choices)
   val selected: MutableState<Set<Answer>> = mutableStateOf(setOf())
   val showAnswer = mutableStateOf(false)
 
@@ -89,13 +78,20 @@ class CodeQuestionPageViewModel(
         }.toMap()
     )
 
+  val answerSnippet: String
+    get() = withBlanks.fill(
+        correctAnswer.mapIndexed { index, answer ->
+          index to answer
+        }.toMap()
+    )
+
   val nextBlank: Int?
     get() = if(canValidate) null else selected.value.size
 
   fun select(answer: Answer) {
     if (selected.value.size >= maxAnswers) return // can't select more
 
-    answers.findAndEdit(answer) {
+    possibleAnswers.findAndEdit(answer) {
       it.copy(used = true)
     }
     selected.value = selected.value.toMutableSet().also {
@@ -108,14 +104,14 @@ class CodeQuestionPageViewModel(
 
     val last = selected.value.last()
     selected.value = selected.value.toMutableSet().also { it.remove(last) }
-    answers.findAndEdit(last) {
+    possibleAnswers.findAndEdit(last) {
       it.copy(used = false)
     }
   }
 
   fun reset() {
     selected.value = mutableSetOf()
-    answers.value = answers.value.map { it.copy(used = false) }
+    possibleAnswers.value = possibleAnswers.value.map { it.copy(used = false) }
   }
 
   fun isCorrectAnswer(): Boolean {

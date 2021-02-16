@@ -6,23 +6,14 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
 
 class CodeQuestionPageViewModelTest {
-  @Test
-  fun `can add an answer`() {
-    // given
-    val foo = Answer(0, "Foo", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) { false }
-
-    // then
-    assertThat(vm.answers.value.first()).isEqualTo(foo)
-  }
 
   @Test
   fun `can add answers by string`() {
     // given
-    val vm = CodeQuestionPageViewModel("", "", "",1, "a", "b", "c") { false }
+    val vm = CodeQuestionPageViewModel("", "", "",listOf("a", "b", "c"), listOf())
 
     // then
-    assertThat(vm.answers.value).isEqualTo(
+    assertThat(vm.possibleAnswers.value).isEqualTo(
         listOf(
             Answer(0, "a", false),
             Answer(1, "b", false),
@@ -34,27 +25,26 @@ class CodeQuestionPageViewModelTest {
   @Test
   fun `can select an answer when it is present`() {
     // given
-    val foo = Answer(0, "Foo", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) { false }
+    val vm = CodeQuestionPageViewModel("", "", "", listOf("Foo"), listOf("Foo"))
 
     // when
-    vm.select(foo)
+    val selection = vm.possibleAnswers.value.first()
+    vm.select(selection)
 
     // then
-    val selectedFoo = foo.copy(used = true)
-    assertThat(vm.answers.value.first()).isEqualTo(selectedFoo)
-    assertThat(vm.selected.value.first()).isEqualTo(selectedFoo)
+    assertThat(vm.possibleAnswers.value.first()).isEqualTo(selection.copy(used = true))
+    assertThat(vm.selected.value.first()).isEqualTo(selection.copy(used = true))
   }
 
   @Test
   fun `ignore double selection requests`() {
     // given
-    val foo = Answer(0, "Foo", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) { false }
-    vm.select(foo)
+    val vm = CodeQuestionPageViewModel("", "", "", listOf("Foo"), listOf("Foo"))
+    val firstAnswer = vm.possibleAnswers.value.first()
+    vm.select(firstAnswer)
 
     // when
-    vm.select(foo)
+    vm.select(firstAnswer)
 
     // then
     assertThat(vm.selected.value).hasSize(1)
@@ -63,23 +53,22 @@ class CodeQuestionPageViewModelTest {
   @Test
   fun `can undo selection`() {
     // given
-    val foo = Answer(0, "Foo", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) { false }
-    vm.select(foo)
+    val vm = CodeQuestionPageViewModel("", "", "", listOf("Foo"), listOf("Foo"))
+    val firstAnswer = vm.possibleAnswers.value.first()
+    vm.select(firstAnswer)
 
     // when
     vm.undo()
 
     // then
-    assertThat(vm.answers.value).isEqualTo(listOf(foo))
-    assertThat(vm.selected.value).isEqualTo(setOf<Answer>())
+    assertThat(vm.possibleAnswers.value).hasSize(1)
+    assertThat(vm.selected.value).hasSize(0)
   }
 
   @Test
-  fun `failsafe when no selection do undo`() {
+  fun `failsafe when no selection to undo`() {
     // given
-    val foo = Answer(0, "Foo", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) { false }
+    val vm = CodeQuestionPageViewModel("", "", "", listOf("Foo"), listOf("Foo"))
 
     // when
     vm.undo()
@@ -88,37 +77,19 @@ class CodeQuestionPageViewModelTest {
   }
 
   @Test
-  fun `can limit the number of answers`() {
-    // given
-    val foo = Answer(0, "Foo", false)
-    val bar = Answer(0, "Bar", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) { false }
-    vm.select(foo)
-
-    // when
-    vm.select(bar)
-
-    // then bar is not selected
-    assertThat(vm.answers.value).isEqualTo(listOf(foo.copy(used = true)))
-    assertThat(vm.selected.value).isEqualTo(setOf(foo.copy(used = true)))
-  }
-
-  @Test
   fun `can tell when the answer can be validated`() {
     // given
-    val foo = Answer(0, "Foo", false)
-    val bar = Answer(0, "Bar", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 2, foo) { false }
+    val vm = CodeQuestionPageViewModel("", "", "", listOf("Foo", "Bar"), listOf("Foo", "Bar"))
 
     // no selection
     assertThat(vm.canValidate).isEqualTo(false)
 
     // not enough selections
-    vm.select(foo)
+    vm.select(vm.possibleAnswers.value[0])
     assertThat(vm.canValidate).isEqualTo(false)
 
     // when select one more
-    vm.select(bar)
+    vm.select(vm.possibleAnswers.value[1])
     assertThat(vm.canValidate).isEqualTo(true)
 
     // when unselecting
@@ -129,7 +100,7 @@ class CodeQuestionPageViewModelTest {
   @Test
   fun `silly 0 selection case`() {
     // given
-    val vm = CodeQuestionPageViewModel("", "", "", 0, "a") { false }
+    val vm = CodeQuestionPageViewModel("", "", "", listOf(), listOf())
 
     // then
     assertThat(vm.canValidate).isEqualTo(true)
@@ -138,11 +109,8 @@ class CodeQuestionPageViewModelTest {
   @Test
   fun `can validate the answer`() {
     // given
-    val foo = Answer(0, "Foo", false)
-    val vm = CodeQuestionPageViewModel("", "", "", 1, foo) {
-      it.size == 1 && it.first().text == "Foo"
-    }
-    vm.select(foo)
+    val vm = CodeQuestionPageViewModel("", "", "", listOf("Foo"), listOf("Foo"))
+    vm.select(vm.possibleAnswers.value.first())
 
     // when
     val validated = vm.isCorrectAnswer()

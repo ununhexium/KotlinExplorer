@@ -3,17 +3,19 @@ package net.lab0.kotlinexplorer.framework.presentation.components.code
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import net.lab0.kotlinexplorer.model.code.DefaultCodeStyle
-import net.lab0.kotlinexplorer.model.code.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.framework.presentation.components.CorrectAnswer
 import net.lab0.kotlinexplorer.framework.presentation.components.QuizPage
 import net.lab0.kotlinexplorer.framework.presentation.components.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.components.markdown.MDDocument
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.CodeQuestionPageViewModel
 import net.lab0.kotlinexplorer.framework.ui.frame.DefaultVerticalSpacer
+import net.lab0.kotlinexplorer.framework.ui.frame.SmallVerticalSpacer
+import net.lab0.kotlinexplorer.model.code.DefaultCodeStyle
+import net.lab0.kotlinexplorer.model.code.extractHighlightsAndAnnotate
 
 @Composable
 fun CodeQuizPage(
@@ -46,7 +48,24 @@ fun CodeQuizPage(
           } else {
             WrongAnswer(
                 explanation = {
-                  MDDocument(document = model.explanationMarkdown)
+                  Column {
+                    Text("Correct answer", style = MaterialTheme.typography.h6)
+                    DefaultVerticalSpacer()
+                    KotlinCode(
+                        code = if (codeColoration) {
+                          extractHighlightsAndAnnotate(
+                              model.answerSnippet,
+                              DefaultCodeStyle.textStyler
+                          )
+                        } else {
+                          AnnotatedString(model.answerSnippet)
+                        },
+                        codeStyle = DefaultCodeStyle,
+                        activeHighlight = model.nextBlank,
+                    )
+                    DefaultVerticalSpacer()
+                    MDDocument(document = model.explanationMarkdown)
+                  }
                 }
             )
           }
@@ -65,10 +84,20 @@ fun CodeQuizPage(
             canValidate = model.canValidate,
             canUndoOrReset = model.canUndoOrReset,
             canDoNext = model.showAnswer.value,
-            answers = model.answers.value,
+            answers = model.possibleAnswers.value,
         )
       }
   )
+}
+
+val modelSelected = CodeQuestionPageViewModel(
+    "Why?",
+    "val i = 0",
+    "Because",
+    listOf("a", "b", "c"),
+    listOf("a")
+).also {
+  it.select(it.possibleAnswers.value.first())
 }
 
 @Preview
@@ -78,23 +107,25 @@ fun CodeQuestionQuizPagePreview_selectedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            CodeQuestionPageViewModel(
-                "Why?",
-                "val i = 0",
-                "Because",
-                1,
-                "a", "b", "c"
-            ) {
-              false
-            }.also {
-              it.select(it.answers.value.first())
-            },
+            modelSelected,
             codeColoration = false,
         ) {}
       }
     }
   }
 }
+
+val modelValidated = CodeQuestionPageViewModel(
+    "Why?",
+    "val i = 0",
+    "Because",
+    listOf("a"),
+    listOf("a"),
+).also {
+  it.select(it.possibleAnswers.value.first())
+  it.validate()
+}
+
 
 @Preview
 @Composable
@@ -103,18 +134,7 @@ fun CodeQuestionQuizPagePreview_validatedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            CodeQuestionPageViewModel(
-                "Why?",
-                "val i = 0",
-                "Because",
-                1,
-                "a", "b", "c"
-            ) {
-              false
-            }.also {
-              it.select(it.answers.value.first())
-              it.validate()
-            },
+            modelValidated,
             codeColoration = false,
         ) {}
       }
