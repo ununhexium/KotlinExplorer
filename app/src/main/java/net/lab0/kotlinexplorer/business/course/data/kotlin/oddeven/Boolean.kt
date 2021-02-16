@@ -25,8 +25,8 @@ As with everything else, Kotlin is case sensitive, therefore `True` is not an eq
 
 `"true"` is a string, not the `true` keyword.
 """,
-            choices = listOf("true", "True", "1", """"true""""),
             answer = listOf("true"),
+            choices = listOf("true", "True", "1", """"true""""),
         ),
         LessonPage.CodeQuestionPage(
             title = "Nope",
@@ -41,8 +41,8 @@ The conventions logic of `true` also applies to `false`.
 
 The empty string `""` is not equivalent to false. It's a string, not a boolean.
 """,
-            choices = listOf("false", "False", "0", """"false"""", "\"\""),
             answer = listOf("false"),
+            choices = listOf("false", "False", "0", """"false"""", "\"\""),
         ),
         LessonPage.InfoPage(
             title = "That's it",

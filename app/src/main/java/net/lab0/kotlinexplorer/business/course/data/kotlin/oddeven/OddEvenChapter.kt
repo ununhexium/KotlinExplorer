@@ -2,7 +2,7 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
 
 import net.lab0.kotlinexplorer.business.domain.ChapterImpl
 
-object OddEvenChapter: ChapterImpl(
+object OddEvenChapter : ChapterImpl(
     id = "kotlin.oddeven",
     title = "Odd or Even",
     description = "Tell if a number is odd or even",
@@ -12,5 +12,6 @@ object OddEvenChapter: ChapterImpl(
         DataType,
         Comparators,
         StringConcatenation,
+        IfElse,
     )
 )

@@ -3,7 +3,7 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 
-object Introduction: LessonImpl(
+object Introduction : LessonImpl(
     id = "kotlin.helloworld.introduction",
     title = "Introduction",
     pages = listOf(

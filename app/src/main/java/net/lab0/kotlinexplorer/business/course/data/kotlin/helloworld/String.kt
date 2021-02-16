@@ -20,8 +20,8 @@ Double quotes `"` are for quoting strings.
 
 Simple quotes `'` are for quoting single characters.
 """,
-            choices = listOf("\"", "'"),
             answer = listOf("\""),
+            choices = listOf("\"", "'"),
         ),
 
         LessonPage.CodeQuestionPage(
@@ -36,8 +36,8 @@ Inside strings, double quotes `"` must be escaped.
 
 The escape character is backslash `\`.
 """,
-            choices = listOf("\"", "\"", """\"""", """\""""),
             answer = listOf("\"", """\"""", "\""),
+            choices = listOf("\"", "\"", """\"""", """\""""),
         ),
 
         LessonPage.CodeQuestionPage(
@@ -52,8 +52,8 @@ Inside strings, double quotes `"` must be escaped.
 
 The escape character is backslash `\`.
 """,
-            choices = listOf(""""""", """\""""),
             answer = listOf(""""""", """\""""),
+            choices = listOf(""""""", """\""""),
         ),
 
         LessonPage.InfoPage(

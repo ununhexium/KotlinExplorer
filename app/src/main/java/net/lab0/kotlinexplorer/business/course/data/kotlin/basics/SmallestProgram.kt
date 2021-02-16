@@ -1,8 +1,8 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.basics
 
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 
 object SmallestProgram : LessonImpl(
     id = "kotlin.basics.SmallestProgram",

@@ -1,8 +1,8 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.datatypes
 
+import net.lab0.kotlinexplorer.business.course.data.kotlin.basics.Basics
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
-import net.lab0.kotlinexplorer.business.course.data.kotlin.basics.Basics
 
 object Introduction : LessonImpl(
     id = "kotlin.datatypes.introduction",

@@ -19,8 +19,8 @@ val number: ${p(0)} = 42
             explanation = """
 `Int` (integer) indicates the data type of the value `number`.
 """,
-            choices = listOf("Int", "String", "Boolean"),
             answer = listOf("Int"),
+            choices = listOf("Int", "String", "Boolean"),
         ),
         LessonPage.CodeQuestionPage(
             title = "It's a string",
@@ -33,8 +33,8 @@ val alphabet: ${p(0)} = "abcdef..."
             explanation = """
 `String` indicates that alphabet is a string.
 """,
-            choices = listOf("Int", "String", "Boolean"),
             answer = listOf("String"),
+            choices = listOf("Int", "String", "Boolean"),
         ),
         LessonPage.CodeQuestionPage(
             title = "It's the truth",
@@ -47,8 +47,8 @@ val theSkyIsBlue: ${p(0)} = true // mostly...
             explanation = """
 `theSkyIsBlue` must now be a boolean.
 """,
-            choices = listOf("Int", "String", "Boolean"),
             answer = listOf("Boolean"),
+            choices = listOf("Int", "String", "Boolean"),
         ),
         LessonPage.MultipleChoice(
             title = "Type inference",
@@ -66,8 +66,8 @@ The type of `surprise` will be the type that is the most specific.
 
 Here, `"Mhhh 🤔"` is a string. Therefore the type of `surprise` will also be a string.
 """,
-            choices = listOf("String", "It doesn't have a type", "Anything", "Nothing"),
-            answer = setOf(0)
+            answer = setOf(0),
+            choices = listOf("String", "It doesn't have a type", "Anything", "Nothing")
         ),
         // TODO: summary page
         LessonPage.InfoPage(

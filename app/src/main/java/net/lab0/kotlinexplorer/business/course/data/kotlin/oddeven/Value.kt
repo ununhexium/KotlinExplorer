@@ -4,6 +4,7 @@ import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
+
 object Value : LessonImpl(
     id = "kotlin.oddeven.value",
     title = "Value",
@@ -23,10 +24,8 @@ The name of this value is `number`.
 
 A blank will not work. It's a syntax error.
 """,
-            choices = listOf(
-                "val", "let", ""
-            ),
-            answer = listOf("val")
+            answer = listOf("val"),
+            choices = listOf("val", "let", "")
         ),
         LessonPage.CodeQuestionPage(
             title = "Hello value",
@@ -41,8 +40,8 @@ val ${p(0)} = ${p(1)}
 
 `hello` is a value name, not a string.
 """,
-            choices = listOf("word", """"hello"""", """"word"""", "hello"),
-            answer = listOf("word", """"hello"""")
+            answer = listOf("word", """"hello""""),
+            choices = listOf("word", """"hello"""", """"word"""", "hello")
         ),
         LessonPage.CodeQuestionPage(
             title = "Good names",
@@ -58,8 +57,8 @@ val ${p(0)} = 3
 `n` is not a good name because it's too short.
 When the program is longer, it's harder to remember what single letter values mean.
 """,
-            choices = listOf("n", "numberOfCatsInTheHouse"),
-            answer = listOf("numberOfCatsInTheHouse")
+            answer = listOf("numberOfCatsInTheHouse"),
+            choices = listOf("n", "numberOfCatsInTheHouse")
         ),
         LessonPage.CodeQuestionPage(
             title = "Camel case",
@@ -77,8 +76,8 @@ val ${p(0)} = 20
 Following the naming conventions will make it easier to read code later.
 Looking at the naming will tell its nature (function, value, keyword, ...).
 """,
-            choices = listOf("numberOfMiceInTheHouse", "number_of_mice_in_the_house"),
-            answer = listOf("numberOfMiceInTheHouse")
+            answer = listOf("numberOfMiceInTheHouse"),
+            choices = listOf("numberOfMiceInTheHouse", "number_of_mice_in_the_house")
         ),
         LessonPage.InfoPage(
             title = "More value",

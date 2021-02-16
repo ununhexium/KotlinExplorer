@@ -1,9 +1,9 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.datatypes
 
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage.CodeQuestionPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 
 object Numbers : LessonImpl(
     id = "kotlin.datatypes.numbers",
@@ -36,12 +36,11 @@ Declare a value with type integer.
 """,
             """val one:${placeholder(0)} = 1""",
 
-              """
+            """
 `Int` accepts integers in the range (${Int.MIN_VALUE}, ${Int.MAX_VALUE}), that is (2^31, 2^31-1).
 
 `0` is in the middle of this range.
-"""
-            ,
+""",
             "Int"
         ),
         // Float
@@ -52,12 +51,11 @@ Declare a value with type float.
 """,
             """val pi:${placeholder(0)} = 3.1415f""",
 
-              """
+            """
 `Float` is for floating point numbers in the range (${Float.MIN_VALUE}, ${Float.MAX_VALUE}).
 
 Note the `f` letter in the end of the number. This is to specify that the number is a `f`loat.
-"""
-            ,
+""",
             "Float"
         ),
         // Infinity
@@ -69,12 +67,11 @@ Assign +∞ (infinity) to the value `inf`.
             """
 val infinity:Float = ${placeholder(0)}
 """,
-              """
+            """
               Floating point numbers have special values for 
               * infinity
               * -infinity
-            """
-            ,
+            """,
             choices = listOf(
                 "Float.POSITIVE_INFINITY",
                 "Float.NEGATIVE_INFINITY"
@@ -93,10 +90,9 @@ An `Int`'s max value is around 2^31 (${Int.MAX_VALUE})
             """
 val tooBigForInt: ${placeholder(0)} = 9876543210
 """,
-              """
+            """
 Use a long integer (`Long`) to store a number in the range (${Long.MIN_VALUE}, ${Long.MAX_VALUE}), that is (2^63, 2^63-1).
-"""
-            ,
+""",
             "Long"
         ),
 
@@ -110,12 +106,11 @@ A `Float`'s max value is around 3e38 (${Float.MAX_VALUE})
             """
 val tooBigForFloat: ${placeholder(0)} = 1e99
 """,
-              """
+            """
 Use a double precision floating point number (`Double`) to store a number in the range (${Double.MIN_VALUE}, ${Double.MAX_VALUE}).
 
 Just like `Float`s, `Double`s also have +∞ and special values -∞.
-"""
-            ,
+""",
             "Double"
         ),
     )

@@ -227,8 +227,8 @@ Comparisons must be between elements of the same type.
  "a" != 1  // error
 ```
 """,
-            choices = listOf("Some error?", "true", "false"),
             answer = setOf(0),
+            choices = listOf("Some error?", "true", "false"),
         ),
         InfoPage(
             title = "Summary",
