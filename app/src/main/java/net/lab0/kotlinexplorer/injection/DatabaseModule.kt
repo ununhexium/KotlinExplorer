@@ -6,10 +6,10 @@ import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.framework.db.ExplorerDatabase
 import net.lab0.kotlinexplorer.framework.db.LessonProgressDao
 import net.lab0.kotlinexplorer.framework.db.LessonProgressEntity
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToModel
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromModel
-import net.lab0.kotlinexplorer.framework.util.ToModel
-import net.lab0.kotlinexplorer.framework.util.FromModel
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromDomain
+import net.lab0.kotlinexplorer.framework.util.ToDomain
+import net.lab0.kotlinexplorer.framework.util.FromDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,11 +44,11 @@ object DatabaseModule {
 
   @Singleton
   @Provides
-  fun provideLessonProgressMapperFromEntity(): ToModel<LessonProgressEntity, LessonProgress> =
-      LessonProgressMapperToModel()
+  fun provideLessonProgressMapperFromEntity(): ToDomain<LessonProgressEntity, LessonProgress> =
+      LessonProgressMapperToDomain()
 
   @Singleton
   @Provides
-  fun provideLessonProgressMapperToEntity(): FromModel<LessonProgressEntity, LessonProgress> =
-      LessonProgressMapperFromModel()
+  fun provideLessonProgressMapperToEntity(): FromDomain<LessonProgressEntity, LessonProgress> =
+      LessonProgressMapperFromDomain()
 }

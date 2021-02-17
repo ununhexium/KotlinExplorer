@@ -2,9 +2,9 @@ package net.lab0.kotlinexplorer.framework.db.mappers
 
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.framework.db.LessonProgressEntity
-import net.lab0.kotlinexplorer.framework.util.ToModel
+import net.lab0.kotlinexplorer.framework.util.ToDomain
 
-class LessonProgressMapperToModel : ToModel<LessonProgressEntity, LessonProgress> {
+class LessonProgressMapperToDomain : ToDomain<LessonProgressEntity, LessonProgress> {
 
   override fun invoke(entity: LessonProgressEntity) =
       LessonProgress(

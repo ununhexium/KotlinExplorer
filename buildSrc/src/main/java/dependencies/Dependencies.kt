@@ -32,7 +32,6 @@ object Dependencies {
   val room_runtime = "androidx.room:room-runtime:${Versions.room}"
   val room = "androidx.room:room-ktx:${Versions.room}"
 
-
   val atlassian_commonMark = "com.atlassian.commonmark:commonmark:${Versions.commonMark}"
 
   val material = "com.google.android.material:material:${Versions.material}"

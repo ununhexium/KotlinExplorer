@@ -2,11 +2,12 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.business.domain.LessonPage.MultipleChoice
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object IfElse : LessonImpl(
     id = "kotlin.oddeven.ifelse",
-    title = "If this Else that",
+    title = "If Else",
     pages = listOf(
         LessonPage.CodeQuestionPage(
             title = "If it's true",
@@ -129,6 +130,20 @@ Is nothing special in Kotlin.
 """,
             answer = listOf("!"),
             confusion = listOf("not", "!!", "~"),
+        ),
+LessonPage.CodeQuestionPage(
+            title = "Short if",
+            question = """
+
+""",
+            snippet = """
+
+""",
+            explanation = """
+
+""",
+            answer = listOf(),
+            confusion = listOf(),
         ),
     )
 )
