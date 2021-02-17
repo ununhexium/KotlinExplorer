@@ -1,9 +1,7 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.profile
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -12,7 +10,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.loadVectorResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
@@ -20,6 +17,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.Use
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.UserProfileViewState
 import net.lab0.kotlinexplorer.framework.presentation.components.UserProfileUi
 import net.lab0.kotlinexplorer.framework.presentation.components.frame.TopLevelScaffold
+import net.lab0.kotlinexplorer.framework.presentation.intent.Auth
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 import net.lab0.kotlinexplorer.utils.printLogD
 
@@ -58,12 +56,25 @@ class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileVi
           placeholder,
           null,
           {
-            viewModel.logIn(fragment)
-            findNavController().popBackStack()
+            Auth.requestSignIn(
+                this,
+                {
+                  viewModel.refreshUserData()
+                  Toast.makeText(context, "Signed in", Toast.LENGTH_SHORT).show()
+                },
+                { result ->
+                  Toast.makeText(context, "Sign in failed", Toast.LENGTH_LONG).show()
+                }
+            )
           },
           {
-            viewModel.logOut(fragment.requireContext())
-            findNavController().popBackStack()
+            val task = Auth.logOut(requireContext())
+            task.addOnSuccessListener {
+              viewModel.refreshUserData()
+            }
+            task.addOnFailureListener {
+              Toast.makeText(context, "Failed to log out", Toast.LENGTH_LONG).show()
+            }
           }
       )
     }
