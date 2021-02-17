@@ -57,8 +57,8 @@ class Courses {
     val ifElse = course("If else", "if, else")
     val stringConcatenation = course("String concatenation", strings)
 
-    val oddEven = project(
-        "Odd or even",
+    val positivenegative = project(
+        "Positive or Negative",
         helloWorld,
         ifElse,
         value,

@@ -1,11 +1,11 @@
-package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
+package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object DataType : LessonImpl(
-    id = "kotlin.oddeven.datatype",
+    id = "kotlin.positivenegative.datatype",
     title = "Data type",
     pages = listOf(
         LessonPage.CodeQuestionPage(

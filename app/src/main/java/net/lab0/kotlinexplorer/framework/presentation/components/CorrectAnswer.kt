@@ -1,8 +1,10 @@
 package net.lab0.kotlinexplorer.framework.presentation.components
 
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -29,7 +31,7 @@ private fun Answer(
     icon: ImageVector,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-  Column(modifier = Modifier.fillMaxWidth()) {
+  Column(modifier = Modifier.fillMaxSize(1f)) {
     Row(
         modifier = Modifier
             .padding(bottom = 8.dp),
@@ -51,6 +53,7 @@ private fun Answer(
     }
 
     Column(
+        modifier = Modifier.fillMaxSize(),
         content = content,
     )
   }

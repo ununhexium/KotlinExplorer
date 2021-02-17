@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
+package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
@@ -6,7 +6,7 @@ import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Compa
 
 
 object Value : LessonImpl(
-    id = "kotlin.oddeven.value",
+    id = "kotlin.positivenegative.value",
     title = "Value",
     pages = listOf(
         LessonPage.CodeQuestionPage(

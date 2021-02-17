@@ -1,8 +1,11 @@
 package net.lab0.kotlinexplorer.framework.presentation.components
 
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ConstraintLayout
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -12,64 +15,88 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.kotlinexplorer.framework.presentation.components.code.Answer
-import net.lab0.kotlinexplorer.framework.presentation.components.code.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.components.code.KotlinCode
+import net.lab0.kotlinexplorer.framework.presentation.components.code.input.CodeAnswerInput
+import net.lab0.kotlinexplorer.framework.presentation.components.code.input.CodeInputControlBar
+import net.lab0.kotlinexplorer.framework.presentation.components.code.input.NextPageControlBar
 import net.lab0.kotlinexplorer.framework.ui.frame.DefaultVerticalSpacer
 
 @Composable
 fun QuizPage(
     question: @Composable () -> Unit,
     answer: (@Composable () -> Unit)? = null,
-    answerInput: @Composable () -> Unit,
+    input: (@Composable () -> Unit)? = null,
+    controlBar: @Composable () -> Unit,
 ) {
-  ConstraintLayout(
-      modifier = Modifier.fillMaxSize()
+  ScrollableColumn(
+      modifier = Modifier
+          .fillMaxSize()
+          .padding(8.dp),
+      verticalArrangement = Arrangement.SpaceBetween,
   ) {
-    val (questionRef, answerRef, answerInputRef) = createRefs()
-
-    Column(
-        modifier = Modifier
-            .padding(8.dp)
-            .constrainAs(questionRef) {
-              top.linkTo(parent.top)
-              start.linkTo(parent.start)
-              end.linkTo(parent.end)
-            }
-    ) {
+    Column(modifier = Modifier.fillMaxWidth()) {
       question()
-    }
-
-    answer?.let {
       Column(
-          modifier = Modifier
-              .padding(8.dp)
-              .constrainAs(answerRef) {
-                top.linkTo(questionRef.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-              }
+          modifier = Modifier.padding(vertical = 8.dp)
       ) {
-        Column {
-          answer()
-        }
+        answer?.invoke()
       }
     }
 
+
     Column(
-        modifier = Modifier.constrainAs(answerInputRef) {
-          bottom.linkTo(parent.bottom, margin = 8.dp)
-          start.linkTo(parent.start, margin = 8.dp)
-          end.linkTo(parent.end, margin = 8.dp)
-        }
+        modifier = Modifier.padding(vertical = 8.dp)
     ) {
-      answerInput()
+      input?.invoke()
+      controlBar()
     }
   }
 }
 
 @Preview
 @Composable
-fun QuizPagePreview() {
+fun QuizPagePreview_input() {
+  MaterialTheme {
+    QuizPage(
+        question = {
+          Text("Why?")
+          DefaultVerticalSpacer()
+          KotlinCode(
+              code = """println("Because ${placeholder(0)}!")"""
+          )
+        },
+        answer = {
+        },
+        input = {
+          CodeAnswerInput(
+              onSelect = { },
+              canValidate = true,
+              answers = listOf(
+                  Answer(0, "alpha", false),
+                  Answer(0, "beta", true),
+                  Answer(0, "gamma", false),
+              ),
+          )
+        },
+        controlBar = {
+          Row(Modifier.padding(8.dp)) {
+            CodeInputControlBar(
+                canUndoOrReset = true,
+                canValidate = true,
+                onUndo = {},
+                onReset = {},
+                onValidate = {},
+            )
+          }
+        }
+    )
+  }
+}
+
+
+@Preview
+@Composable
+fun QuizPagePreview_answer() {
   MaterialTheme {
     QuizPage(
         question = {
@@ -82,22 +109,36 @@ fun QuizPagePreview() {
         answer = {
           CorrectAnswer(explanation = { Text("That's why") })
         },
-        answerInput = {
-          CodeAnswerInput(
-              onReset = { },
-              onUndo = { },
-              onValidate = { },
-              onSelect = { },
-              canValidate = true,
-              canUndoOrReset = true,
-              canDoNext = true,
-              answers = listOf(
-                  Answer(0, "alpha", false),
-                  Answer(0, "beta", true),
-                  Answer(0, "gamma", false),
-              ),
+        controlBar = {
+          NextPageControlBar(onNext = { })
+        }
+    )
+  }
+}
+
+
+@Preview
+@Composable
+fun QuizPagePreview_longAnswer() {
+  MaterialTheme {
+    QuizPage(
+        question = {
+          Text("Why?")
+          DefaultVerticalSpacer()
+          KotlinCode(
+              code = """println("Because ${placeholder(0)}!")"""
           )
         },
+        answer = {
+          CorrectAnswer(
+              explanation = {
+                Text("That's why ".repeat(200))
+              }
+          )
+        },
+        controlBar = {
+          NextPageControlBar(onNext = { })
+        }
     )
   }
 }

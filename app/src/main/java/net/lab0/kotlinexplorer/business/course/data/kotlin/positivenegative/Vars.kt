@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
+package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
 import java.util.*
 

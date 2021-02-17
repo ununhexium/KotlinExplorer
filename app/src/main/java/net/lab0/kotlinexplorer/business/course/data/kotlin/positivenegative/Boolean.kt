@@ -1,11 +1,11 @@
-package net.lab0.kotlinexplorer.business.course.data.kotlin.oddeven
+package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Boolean : LessonImpl(
-    id = "kotlin.oddeven.boolean",
+    id = "kotlin.positivenegative.boolean",
     title = "Boolean",
     pages = listOf(
         LessonPage.CodeQuestionPage(

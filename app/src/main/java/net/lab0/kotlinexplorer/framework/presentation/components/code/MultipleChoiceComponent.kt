@@ -11,6 +11,7 @@ import net.lab0.kotlinexplorer.framework.presentation.components.QuizPage
 import net.lab0.kotlinexplorer.framework.presentation.components.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.InputFieldMainAction
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.MultipleChoiceAnswerInput
+import net.lab0.kotlinexplorer.framework.presentation.components.code.input.NextPageControlBar
 import net.lab0.kotlinexplorer.framework.presentation.components.markdown.MDDocument
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.MultipleChoiceModel
 
@@ -40,18 +41,25 @@ fun MultipleChoicePage(
           }
         }
       } else null,
-      answerInput = {
-        MultipleChoiceAnswerInput(
-            answers = model.answers.value,
-            toggle = model::toggle,
-            inputFieldMainAction = if (model.showAnswer.value) {
-              InputFieldMainAction.NEXT
-            } else {
-              InputFieldMainAction.VALIDATE
-            },
-            onValidate = { model.validate() },
-            onNextPage = onNextPage
-        )
+      input = if (model.showAnswer.value) {
+        {
+          MultipleChoiceAnswerInput(
+              answers = model.answers.value,
+              toggle = model::toggle,
+              inputFieldMainAction = if (model.showAnswer.value) {
+                InputFieldMainAction.NEXT
+              } else {
+                InputFieldMainAction.VALIDATE
+              },
+              onValidate = { model.validate() },
+              onNextPage = onNextPage
+          )
+        }
+      } else null,
+      controlBar = {
+        if (model.showAnswer.value) {
+          NextPageControlBar(onNext = onNextPage)
+        }
       }
   )
 }
