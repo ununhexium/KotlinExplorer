@@ -27,51 +27,53 @@ fun CardWithExpansion(
     expansion: @Composable RowScope.() -> Unit,
 ) {
   // TODO: the card should be above the expansion, in a box, with
-  ConstraintLayout(
-      modifier = Modifier.fillMaxWidth(),
-  ) {
-    val (above, below) = createRefs()
-
-    Row(
-        modifier = Modifier
-            .padding(start = 8.dp, end = 8.dp)
-            .fillMaxWidth()
-            .constrainAs(below) {
-              top.linkTo(above.bottom)
-            },
+  Row(modifier = Modifier.padding(4.dp),) {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxWidth(),
     ) {
+      val (above, below) = createRefs()
+
+      Row(
+          modifier = Modifier
+              .padding(start = 8.dp, end = 8.dp)
+              .fillMaxWidth()
+              .constrainAs(below) {
+                top.linkTo(above.bottom)
+              },
+      ) {
+        Card(
+            shape = MaterialTheme.shapes.medium.copy(
+                topLeft = CornerSize(0),
+                topRight = CornerSize(0),
+            ),
+            elevation = 4.dp,
+        ) {
+          Row(
+              modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(4.dp),
+              horizontalArrangement = Arrangement.SpaceAround,
+              content = expansion
+          )
+        }
+      }
+
       Card(
-          shape = MaterialTheme.shapes.medium.copy(
-              topLeft = CornerSize(0),
-              topRight = CornerSize(0),
-          ),
+          modifier = Modifier
+              .fillMaxWidth()
+              .constrainAs(above) {
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+              },
+          shape = MaterialTheme.shapes.medium,
           elevation = 4.dp,
       ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.SpaceAround,
-            content = expansion
+            verticalAlignment = Alignment.CenterVertically,
+            content = card
         )
       }
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .constrainAs(above) {
-              top.linkTo(parent.top)
-              start.linkTo(parent.start)
-              end.linkTo(parent.end)
-            },
-        shape = MaterialTheme.shapes.medium,
-        elevation = 4.dp,
-    ) {
-      Row(
-          verticalAlignment = Alignment.CenterVertically,
-          content = card
-      )
     }
   }
 }

@@ -14,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,26 +44,27 @@ fun ExpansibleCard(
       Column {
         expansion()
         DefaultVerticalSpacer()
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable(
-                    onClick = { setExpanded(!expanded) }
-                ),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-          Text("SHOW LESS", color = MaterialTheme.colors.secondary)
-        }
+        BottomText("SHOW LESS", setExpanded, expanded)
       }
     } else {
-      Row(
-          modifier = Modifier.clickable(
-              onClick = { setExpanded(!expanded) }
-          ),
-      ) {
-        Text("SHOW MORE", color = MaterialTheme.colors.secondary)
+      Column(modifier = Modifier.fillMaxWidth()) {
+        BottomText("SHOW MORE", setExpanded, expanded)
       }
     }
+  }
+}
+
+@Composable
+private fun BottomText(text:String, setExpanded: (Boolean) -> Unit, expanded: Boolean) {
+  Row(
+      modifier = Modifier
+          .fillMaxWidth()
+          .clickable(
+              onClick = { setExpanded(!expanded) }
+          ),
+      horizontalArrangement = Arrangement.Center,
+  ) {
+    Text(text, color = MaterialTheme.colors.secondary)
   }
 }
 
