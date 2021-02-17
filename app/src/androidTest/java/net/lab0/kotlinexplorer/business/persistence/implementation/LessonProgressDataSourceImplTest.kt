@@ -2,8 +2,8 @@ package net.lab0.kotlinexplorer.business.persistence.implementation
 
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.framework.db.DatabaseTest
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromEntity
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToEntity
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToModel
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromModel
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -18,8 +18,8 @@ internal class LessonProgressDataSourceImplTest : DatabaseTest() {
     super.configureDatabase()
     dataSource = LessonProgressDataSourceImpl(
         lessonProgressDao,
-        LessonProgressMapperFromEntity(),
-        LessonProgressMapperToEntity(),
+        LessonProgressMapperToModel(),
+        LessonProgressMapperFromModel(),
     )
   }
 

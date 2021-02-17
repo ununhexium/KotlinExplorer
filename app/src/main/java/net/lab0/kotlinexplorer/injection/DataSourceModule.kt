@@ -5,8 +5,8 @@ import net.lab0.kotlinexplorer.business.persistence.abstraction.LessonProgressDa
 import net.lab0.kotlinexplorer.business.persistence.implementation.LessonProgressDataSourceImpl
 import net.lab0.kotlinexplorer.framework.db.LessonProgressDao
 import net.lab0.kotlinexplorer.framework.db.LessonProgressEntity
-import net.lab0.kotlinexplorer.framework.util.FromEntity
-import net.lab0.kotlinexplorer.framework.util.ToEntity
+import net.lab0.kotlinexplorer.framework.util.ToModel
+import net.lab0.kotlinexplorer.framework.util.FromModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,9 +25,9 @@ object DataSourceModule {
   fun provideLessonProgressDataSource(
       dao: LessonProgressDao,
       // TODO mappers should go in a DaoService class
-      fromEntity: FromEntity<LessonProgressEntity, LessonProgress>,
-      toEntity: ToEntity<LessonProgressEntity, LessonProgress>,
+      toModel: ToModel<LessonProgressEntity, LessonProgress>,
+      fromModel: FromModel<LessonProgressEntity, LessonProgress>,
   ): LessonProgressDataSource {
-    return LessonProgressDataSourceImpl(dao, fromEntity, toEntity)
+    return LessonProgressDataSourceImpl(dao, toModel, fromModel)
   }
 }

@@ -4,8 +4,8 @@ import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.business.interactor.implementation.SaveLessonProgressImpl
 import net.lab0.kotlinexplorer.business.persistence.implementation.LessonProgressDataSourceImpl
 import net.lab0.kotlinexplorer.framework.db.DatabaseTest
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromEntity
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToEntity
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToModel
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromModel
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
@@ -36,8 +36,8 @@ internal class SaveLessonProgressImplTest : DatabaseTest() {
 
     val dataSource = LessonProgressDataSourceImpl(
         lessonProgressDao,
-        LessonProgressMapperFromEntity(),
-        LessonProgressMapperToEntity(),
+        LessonProgressMapperToModel(),
+        LessonProgressMapperFromModel(),
     )
 
     val saveLessonProgress = SaveLessonProgressImpl(dataSource)
