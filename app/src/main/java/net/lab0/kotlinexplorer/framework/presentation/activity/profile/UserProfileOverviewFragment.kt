@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.loadVectorResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
@@ -42,7 +43,7 @@ class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileVi
         title = "Profile",
         scaffoldState = scaffoldState,
         onProfileSelected = { /*Stay here*/ },
-        onLessonsSelected = { /*TODO: dont nagivate with drawer?*/ }
+        onLessonsSelected = { findNavController().popBackStack() }
     ) {
       val state by viewModel.uiDataState.collectAsState()
 

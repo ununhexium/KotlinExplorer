@@ -33,12 +33,10 @@ fun TopLevelScaffold(
       drawerContent = {
         ExploreDrawer(
             onProfile = {
-              scaffoldState.drawerState.close()
-              onProfileSelected()
+              scaffoldState.drawerState.close(onProfileSelected)
             },
             onLessonsSelected = {
-              scaffoldState.drawerState.close()
-              onLessonsSelected()
+              scaffoldState.drawerState.close(onLessonsSelected)
             }
         )
       },
