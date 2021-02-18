@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.framework.presentation.components.CorrectAnswer
-import net.lab0.kotlinexplorer.framework.presentation.components.QuizPage
+import net.lab0.kotlinexplorer.framework.presentation.components.LessonPageBody
 import net.lab0.kotlinexplorer.framework.presentation.components.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.CodeInputControlBar
@@ -25,7 +25,7 @@ fun CodeQuizPage(
     codeColoration: Boolean = true,
     nextQuestion: () -> Unit,
 ) {
-  QuizPage(
+  LessonPageBody(
       question = {
         CodeQuestionPart(model, codeColoration)
       },

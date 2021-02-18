@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.components.CorrectAnswer
-import net.lab0.kotlinexplorer.framework.presentation.components.QuizPage
+import net.lab0.kotlinexplorer.framework.presentation.components.LessonPageBody
 import net.lab0.kotlinexplorer.framework.presentation.components.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.ControlBar
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.MultipleChoiceAnswerInput
@@ -25,7 +25,7 @@ fun MultipleChoicePage(
     model: MultipleChoiceModel,
     onNextPage: () -> Unit,
 ) {
-  QuizPage(
+  LessonPageBody(
       question = {
         MDDocument(model.questionMarkdown)
       },

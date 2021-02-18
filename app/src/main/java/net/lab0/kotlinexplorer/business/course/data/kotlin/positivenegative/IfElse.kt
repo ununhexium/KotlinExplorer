@@ -6,7 +6,7 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.MultipleChoice
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
-// TODO: simpify and move some parts to if/else part 2?
+// TODO: simplify and move some parts to if/else part 2?
 object IfElse : LessonImpl(
     id = "kotlin.positivenegative.ifelse",
     title = "If Else",
@@ -270,14 +270,17 @@ if (number > 0) {
             answer = listOf(">", "0", "<", "0"),
             confusion = listOf("<=", ">="),
         ),
+        // TODO delay the part about 'Any' return type
         InfoPage(
             title = "Summary",
             """
-The syntax is
+#### Syntax
 
 ```kotlin
-if (true) { /* execute this */ } else { /* execute that */ }
+if (true) { /*this*/ } else { /*that*/ }
 ```
+
+##### Shortened
 
 If there is only 1 statement the `{}` can be removed. 
 In the beginning, prefer always using `{}` as it will help you find mistakes.
@@ -286,12 +289,16 @@ In the beginning, prefer always using `{}` as it will help you find mistakes.
 if (true) print("A") else print("B")
 ```
 
+##### `else` is optional
+
 If there is no statement, the `else` branch can be removed.
 
 ```kotlin
 val happy = true
 if (happy) print(":)")
 ```
+
+#### Expression
 
 `if else` is an *expression* and returns a *value*.
 To use it as an expression, you must declare both a `true` and a `false` branch.
@@ -300,7 +307,9 @@ To use it as an expression, you must declare both a `true` and a `false` branch.
 val hi = if (false) "bye" else "hi"
 ```
 
-⚠️ It's possible to mix the return types in the expression,
+##### Different types
+
+⚠️ It's possible to mix return types in the expression,
 but this creates complications that we will be explained later.
 
 ```kotlin

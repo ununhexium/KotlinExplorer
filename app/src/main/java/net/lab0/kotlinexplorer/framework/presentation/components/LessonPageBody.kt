@@ -22,7 +22,7 @@ import net.lab0.kotlinexplorer.framework.presentation.components.code.input.Next
 import net.lab0.kotlinexplorer.framework.ui.frame.DefaultVerticalSpacer
 
 @Composable
-fun QuizPage(
+fun LessonPageBody(
     question: @Composable () -> Unit,
     answer: (@Composable () -> Unit)? = null,
     input: (@Composable () -> Unit)? = null,
@@ -59,9 +59,9 @@ fun QuizPage(
 
 @Preview
 @Composable
-fun QuizPagePreview_input() {
+fun LessonPageBodyPreview_input() {
   MaterialTheme {
-    QuizPage(
+    LessonPageBody(
         question = {
           Text("Why?")
           DefaultVerticalSpacer()
@@ -100,9 +100,9 @@ fun QuizPagePreview_input() {
 
 @Preview
 @Composable
-fun QuizPagePreview_answer() {
+fun LessonPageBodyPreview_answer() {
   MaterialTheme {
-    QuizPage(
+    LessonPageBody(
         question = {
           Text("Why?")
           DefaultVerticalSpacer()
@@ -123,9 +123,9 @@ fun QuizPagePreview_answer() {
 
 @Preview
 @Composable
-fun QuizPagePreview_longAnswer() {
+fun LessonPageBodyPreview_longAnswer() {
   MaterialTheme {
-    QuizPage(
+    LessonPageBody(
         question = {
           Text("Why?")
           DefaultVerticalSpacer()
