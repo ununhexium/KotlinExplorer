@@ -7,7 +7,7 @@
 .externalNativeBuild
 .cxx
 local.properties
-
+*.log
 
 # ANTLR generated files
 /grammar/gen

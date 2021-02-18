@@ -24,7 +24,9 @@ android {
         versionCode = Application.versionCode
         versionName = Application.versionName
 
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+        testInstrumentationRunner(
+            "net.lab0.kotlinexplorer.inject.CustomTestRunner"
+        )
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -110,7 +112,6 @@ dependencies {
     implementation(Dependencies.firebaseAnalytics)
     implementation(Dependencies.firebaseFirestore)
 
-
     implementation(Dependencies.navigation_fragment)
     implementation(Dependencies.navigation_ui)
 
@@ -118,6 +119,9 @@ dependencies {
     implementation(Dependencies.hilt_lifecycle_viewmodel)
     kapt(AnnotationProcessing.hilt_android_compiler)
     kapt(AnnotationProcessing.hilt_compiler)
+
+    implementation(Dependencies.kotlinCoroutinesPlayServices)
+
 
 //    def nav_compose = "1.0.0-SNAPSHOT"
 //    implementation("androidx.navigation:navigation-compose:$nav_compose")
@@ -150,6 +154,7 @@ dependencies {
     testImplementation(TestDependencies.junit4_junit)
     testImplementation(TestDependencies.junit5_api)
     testImplementation(TestDependencies.junit5_params)
+    testImplementation(TestDependencies.hiltAndroidTesting)
     testImplementation(TestDependencies.mockk)
     testImplementation(TestDependencies.truth)
     testRuntimeOnly(TestDependencies.junit5_engine)
@@ -157,7 +162,11 @@ dependencies {
     androidTestImplementation(TestDependencies.androidx_test_ext)
     androidTestImplementation(TestDependencies.espresso_core)
     androidTestImplementation(TestDependencies.espresso_contrib)
+    androidTestImplementation(TestDependencies.hiltAndroidTesting)
     androidTestImplementation(TestDependencies.junit5_api)
     androidTestImplementation(TestDependencies.mockk)
     androidTestImplementation(TestDependencies.truth)
+
+    kaptTest(AnnotationProcessing.hilt_compiler)
+    kaptAndroidTest(AnnotationProcessing.hilt_android_compiler)
 }

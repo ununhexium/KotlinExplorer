@@ -6,6 +6,8 @@ object TestDependencies {
   val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
   val espresso_contrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso_core}"
 
+  val hiltAndroidTesting = "com.google.dagger:hilt-android-testing:${Versions.dagger}"
+
   val junit4_junit = "junit:junit:${Versions.junit_4}"
 
   val junit5_api = "org.junit.jupiter:junit-jupiter-api:${Versions.jupiter}"

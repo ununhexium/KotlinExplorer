@@ -29,6 +29,8 @@ object Dependencies {
   val hilt_android = "com.google.dagger:hilt-android:${Versions.dagger}"
   val hilt_lifecycle_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt}"
 
+  val kotlinCoroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesPlayServices}"
+
   val room_runtime = "androidx.room:room-runtime:${Versions.room}"
   val room = "androidx.room:room-ktx:${Versions.room}"
 

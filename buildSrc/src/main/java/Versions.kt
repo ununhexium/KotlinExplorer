@@ -7,6 +7,7 @@ object Versions {
   // java / kotlin
   val java = "1.8"
   val kotlin = "1.4.21"
+  val coroutinesPlayServices = "1.3.2"
 
   // android libs
   val androidx_test_ext = "1.1.2"
