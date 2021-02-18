@@ -29,7 +29,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots()
+    assertThat(code, spots).hasAtLeastSpotsH()
   }
 
   @Test
@@ -41,7 +41,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 9),
     )
@@ -56,7 +56,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 11),
     )
@@ -71,7 +71,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(ANNOTATION, 0, 1),
         Spot(MODIFIER, 3, 6),
         Spot(KEYWORD, 8, 12),
@@ -87,7 +87,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(MODIFIER, 0, 6),
         Spot(MODIFIER, 8, 15),
         Spot(KEYWORD, 17, 19),
@@ -104,7 +104,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(STRING, 8, 14),
     )
@@ -119,7 +119,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 14, 14),
         Spot(STRING, 19, 24),
@@ -137,7 +137,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 6)
     )
   }
@@ -151,7 +151,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(MODIFIER, 0, 3),
         Spot(KEYWORD, 5, 9),
         Spot(KEYWORD, 16, 18),
@@ -169,7 +169,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(MODIFIER, 0, 3),
         Spot(KEYWORD, 5, 9),
         Spot(MODIFIER, 16, 21),
@@ -187,7 +187,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(COMMENT, 0, 8),
     )
   }
@@ -201,7 +201,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(COMMENT, 0, 9),
     )
   }
@@ -215,7 +215,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(FUNCTION, 0, 6),
         Spot(NUMBER, 8, 8),
     )
@@ -230,7 +230,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(FUNCTION, 0, 6),
         Spot(STRING, 8, 12),
     )
@@ -245,7 +245,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 22, 22),
         Spot(KEYWORD, 32, 37),
@@ -268,7 +268,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 6),
         Spot(KEYWORD, 29, 31),
         Spot(STRING, 54, 68),
@@ -284,7 +284,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(KEYWORD, 10, 11),
         Spot(KEYWORD, 14, 17),
@@ -303,7 +303,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(BRACKET, 8, 8),
         Spot(BRACKET, 10, 10),
@@ -322,7 +322,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(BRACKET, 10, 10),
         Spot(BRACKET, 15, 15),
     )
@@ -337,7 +337,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(BRACKET, 4, 4),
         Spot(BRACKET, 6, 6),
@@ -357,7 +357,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 23, 27),
     )
   }
@@ -375,7 +375,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(FUNCTION, 4, 7),
         Spot(BRACKET, 8, 8),
@@ -401,7 +401,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(FUNCTION, 4, 7),
         Spot(BRACKET, 8, 8),
@@ -436,7 +436,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 14),
     )
@@ -451,7 +451,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 8, 13),
     )
@@ -466,7 +466,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(STRING, 1, 10),
         Spot(STRING_ESCAPED_CHARACTER, 5, 6),
     )
@@ -486,7 +486,7 @@ class KotlinSyntaxHighlighterVisitorTest {
         val spots = extractSpots(code)
 
         // then
-        assertThat(code, spots).hasSpots(
+        assertThat(code, spots).hasAtLeastSpotsH(
             Spot(KEYWORD, 0, 2),
             Spot(OPERATOR, 6, 6),
             Spot(NUMBER, 8, 8),
@@ -510,7 +510,7 @@ class KotlinSyntaxHighlighterVisitorTest {
         val spots = extractSpots(code)
 
         // then
-        assertThat(code, spots).hasSpots(
+        assertThat(code, spots).hasAtLeastSpotsH(
             Spot(KEYWORD, 0, 2),
             Spot(OPERATOR, 6, 6),
             Spot(NUMBER, 8, 8),
@@ -531,7 +531,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(STRING, 0, 0),
         Spot(STRING_ESCAPED_CHARACTER, 1, 2),
         Spot(NUMBER, 3, 3),
@@ -551,7 +551,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasSpots(
+    assertThat(code, spots).hasAtLeastSpotsH(
         Spot(STRING, 0, 2),
         Spot(STRING_ESCAPED_CHARACTER, 3, 4),
         Spot(NUMBER, 5, 5),
