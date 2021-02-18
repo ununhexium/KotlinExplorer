@@ -39,6 +39,11 @@ class KotlinSyntaxHighlighterVisitor(
     return super.visitChildren(node)
   }
 
+  override fun visitAdditiveOperator(ctx: KotlinParser.AdditiveOperatorContext) =
+      hl {
+        add(OPERATOR, ctx.range)
+      }
+
   override fun visitAnnotation(ctx: KotlinParser.AnnotationContext) =
       hl {
         add(ANNOTATION, ctx.LabelReference().range)
@@ -80,6 +85,11 @@ class KotlinSyntaxHighlighterVisitor(
       }
 
   override fun visitComparisonOperator(ctx: KotlinParser.ComparisonOperatorContext) =
+      hl {
+        add(OPERATOR, ctx.range)
+      }
+
+  override fun visitEqualityOperation(ctx: KotlinParser.EqualityOperationContext) =
       hl {
         add(OPERATOR, ctx.range)
       }
@@ -146,6 +156,11 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
+  override fun visitMultiplicativeOperation(ctx: KotlinParser.MultiplicativeOperationContext) =
+      hl {
+        add(OPERATOR, ctx.range)
+      }
+
   override fun visitPackageHeader(ctx: KotlinParser.PackageHeaderContext) =
       hl {
         ctx.PACKAGE()?.let { add(KEYWORD, it.range) }
@@ -197,10 +212,6 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.SUB -> add(OPERATOR, node.range)
           KotlinParser.MULT -> add(OPERATOR, node.range)
           KotlinParser.DIV -> add(OPERATOR, node.range)
-          KotlinParser.LE -> add(OPERATOR, node.range)
-          KotlinParser.GE -> add(OPERATOR, node.range)
-          KotlinParser.EQEQ -> add(OPERATOR, node.range)
-          KotlinParser.EXCL_EQ -> add(OPERATOR, node.range)
 
           // strings
           KotlinParser.MultiLineStringQuote -> add(STRING, node.range)
