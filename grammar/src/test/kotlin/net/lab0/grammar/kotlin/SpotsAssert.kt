@@ -35,7 +35,7 @@ class SpotsAssert<H>(
           missingMarks[s.start] = s.highlight.toString()[0]
         } else {
           val highlightText = s.highlight.toString()
-          ((s.start + 1)..min(s.end - 1, code.length)).forEach { i ->
+          ((s.start + 1) .. min(s.end - 1, code.length)).forEach { i ->
             val stringRelativeIndex = i - s.start - 1
             if (stringRelativeIndex < highlightText.length) {
               missingMarks[i] = highlightText[stringRelativeIndex]
@@ -51,13 +51,56 @@ class SpotsAssert<H>(
           "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
               (code.indices).joinToString("") {
                 when (val i = it % 10) {
-                  0 -> "${('A'..'Z').toList()[it/10]}"
+                  0 -> "${('A' .. 'Z').toList()[it / 10]}"
                   1 -> "_"
                   else -> "$i"
                 }
               } + "\n" +
               code.split('\n').joinToString("\u21B5") + "\n" +
               missingMarks.joinToString("").trimEnd()
+      )
+    }
+
+    // return the current assertion for method chaining
+    return this
+  }
+
+  fun hasAtLeastSpotsV(vararg spots: Spot<H>): SpotsAssert<H> {
+    isNotNull
+
+    val a = actual.toList()
+
+    val containsAtLeast = a.containsAll(spots.toList())
+
+    if (!containsAtLeast) {
+      val missing = spots.filter { it !in a }
+      val missingMarks = Array(code.length) { ' ' }
+      missing.forEach { s ->
+        val range = s.end - s.start
+        if (range == 0 && s.start < code.length) {
+          missingMarks[s.start] = '^'
+        } else {
+          ((s.start + 1) .. min(s.end - 1, code.length)).forEach { i ->
+            missingMarks[i] = '-'
+          }
+          if (s.start < code.length) missingMarks[s.start] = '<'
+          if (s.end < code.length) missingMarks[s.end] = '>'
+        }
+      }
+      failWithMessage(
+          "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
+              (code.indices).joinToString("") {
+                when (val i = it % 10) {
+                  0 -> "${('A' .. 'Z').toList()[it / 10]}"
+                  1 -> "_"
+                  else -> "$i"
+                }
+              } + "\n" +
+              code.split('\n').joinToString("\u21B5") + "\n" +
+              missingMarks.joinToString("").trimEnd() + "\n" +
+              verticalWriter(
+                  spots.map { ((it.end + it.start) / 2) to it.highlight.toString() }.toMap()
+              ).trimEnd()
       )
     }
 

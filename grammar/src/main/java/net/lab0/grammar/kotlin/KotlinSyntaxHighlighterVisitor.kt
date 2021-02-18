@@ -5,9 +5,9 @@ import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
-import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
+import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
@@ -74,9 +74,30 @@ class KotlinSyntaxHighlighterVisitor(
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
       hl {
         add(KEYWORD, ctx.FUN().range)
-        ctx.identifier()?.let{
+        ctx.identifier()?.let {
           add(FUNCTION, ctx.identifier().range)
         }
+
+        add(visitChildren(ctx))
+      }
+
+  override fun visitLineStringLiteral(ctx: KotlinParser.LineStringLiteralContext) =
+      hl {
+        add(STRING, ctx.QUOTE_OPEN().range)
+        add(STRING, ctx.QUOTE_CLOSE().range)
+
+        add(visitChildren(ctx))
+      }
+
+  override fun visitLineStringContent(ctx: KotlinParser.LineStringContentContext) =
+      hl {
+        add(visitChildren(ctx))
+      }
+
+  override fun visitLineStringExpression(ctx: KotlinParser.LineStringExpressionContext) =
+      hl {
+        add(STRING_ESCAPED_CHARACTER, ctx.LineStrExprStart().range)
+        add(STRING_ESCAPED_CHARACTER, ctx.RCURL().range)
 
         add(visitChildren(ctx))
       }
@@ -84,6 +105,30 @@ class KotlinSyntaxHighlighterVisitor(
   override fun visitModifier(ctx: KotlinParser.ModifierContext) =
       hl {
         add(MODIFIER, ctx.range)
+
+        add(visitChildren(ctx))
+      }
+
+  override fun visitMultiLineStringLiteral(ctx: KotlinParser.MultiLineStringLiteralContext) =
+      hl {
+        add(STRING, ctx.TRIPLE_QUOTE_OPEN().range)
+        add(STRING, ctx.TRIPLE_QUOTE_CLOSE().range)
+
+        add(visitChildren(ctx))
+      }
+
+  override fun visitMultiLineStringContent(ctx: KotlinParser.MultiLineStringContentContext) =
+      hl {
+        add(STRING, ctx.MultiLineStrText().range)
+        add(STRING_ESCAPED_CHARACTER, ctx.MultiLineStrEscapedChar().range)
+
+        add(visitChildren(ctx))
+      }
+
+  override fun visitMultiLineStringExpression(ctx: KotlinParser.MultiLineStringExpressionContext) =
+      hl {
+        add(STRING_ESCAPED_CHARACTER, ctx.MultiLineStrExprStart().range)
+        add(STRING_ESCAPED_CHARACTER, ctx.RCURL().range)
 
         add(visitChildren(ctx))
       }
@@ -133,7 +178,6 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.NullLiteral -> add(KEYWORD, node.range)
           KotlinParser.RETURN -> add(KEYWORD, node.range)
           KotlinParser.WHERE -> add(KEYWORD, node.range)
-          KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
 
           // brackets, parent, ...
           KotlinParser.LPAREN -> add(BRACKET, node.range)
@@ -155,6 +199,12 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.GE -> add(OPERATOR, node.range)
           KotlinParser.EQEQ -> add(OPERATOR, node.range)
           KotlinParser.EXCL_EQ -> add(OPERATOR, node.range)
+
+          // strings
+          KotlinParser.MultiLineStringQuote -> add(STRING, node.range)
+          KotlinParser.LineStrText -> add(STRING, node.range)
+          KotlinParser.LineStrExprStart -> add(STRING_ESCAPED_CHARACTER, node.range)
+          KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
         }
       }
 }

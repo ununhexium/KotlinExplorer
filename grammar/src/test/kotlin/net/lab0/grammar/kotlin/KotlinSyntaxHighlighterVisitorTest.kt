@@ -521,4 +521,44 @@ class KotlinSyntaxHighlighterVisitorTest {
     }
   }
 
+  @Test
+  fun `can highlight single line string expression`() {
+    // given
+    val code = "\"\${1+1}\""
+    /// TODO test "${"${"\"}"}"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(STRING, 0, 0),
+        Spot(STRING_ESCAPED_CHARACTER, 1, 2),
+        Spot(NUMBER, 3, 3),
+        Spot(OPERATOR, 4, 4),
+        Spot(NUMBER, 5, 5),
+        Spot(STRING_ESCAPED_CHARACTER, 6, 6),
+        Spot(STRING, 7, 7),
+    )
+  }
+
+  @Test
+  fun `can highlight multiline string expression`() {
+    // given
+    val code = "\"\"\"\${1+1}\"\"\""
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasSpots(
+        Spot(STRING, 0, 2),
+        Spot(STRING_ESCAPED_CHARACTER, 3, 4),
+        Spot(NUMBER, 5, 5),
+        Spot(OPERATOR, 6, 6),
+        Spot(NUMBER, 7, 7),
+        Spot(STRING_ESCAPED_CHARACTER, 8, 8),
+        Spot(STRING, 9, 11),
+    )
+  }
 }

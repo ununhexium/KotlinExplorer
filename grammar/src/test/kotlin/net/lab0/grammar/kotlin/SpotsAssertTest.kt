@@ -95,4 +95,43 @@ class SpotsAssertTest {
       | x <> <four> <ten------>
     """.trimMargin())
   }
+
+  @Test
+  fun `multiline assertion vertical display`() {
+    // given
+    val asserter = SpotsAssert<String>(
+        """
+          |fun main() {
+          |  println("Hello, World!")
+          |}
+        """.trimMargin(),
+        listOf()
+    )
+
+    // when
+    val error = assertThrows(AssertionError::class.java) {
+      asserter.hasAtLeastSpotsV(
+          Spot("x", 1, 1),
+          Spot("two", 3, 4),
+          Spot("four", 6, 11),
+          Spot("ten", 13, 23),
+      )
+    }
+
+    // then
+    assertThat(error).hasMessage("""
+      |Missing spots:
+      |  Spot(highlight=x, start=1, end=1)
+      |  Spot(highlight=two, start=3, end=4)
+      |  Spot(highlight=four, start=6, end=11)
+      |  Spot(highlight=ten, start=13, end=23)
+      |A_23456789B_23456789C_23456789D_23456789E
+      |fun main() {↵  println("Hello, World!")↵}
+      | ^ <> <----> <--------->
+      | x t    f         t
+      |   w    o         e
+      |   o    u         n
+      |        r
+    """.trimMargin())
+  }
 }
