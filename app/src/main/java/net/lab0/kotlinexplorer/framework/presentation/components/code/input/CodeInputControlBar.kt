@@ -1,10 +1,8 @@
 package net.lab0.kotlinexplorer.framework.presentation.components.code.input
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -15,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Backspace
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Replay
-import androidx.compose.material.icons.filled.Undo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,46 +27,47 @@ fun CodeInputControlBar(
     onReset: () -> Unit,
     onValidate: () -> Unit,
 ) {
-  Row(
-      modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween
-  ) {
-    Row {
-      val secondaryButtonColors = ButtonDefaults.buttonColors(
-          backgroundColor = MaterialTheme.colors.secondaryVariant,
-          contentColor = MaterialTheme.colors.surface
-      )
-      Button(
-          onClick = onUndo,
-          enabled = canUndoOrReset,
-          colors = secondaryButtonColors
-      ) {
-        Icon(
-            imageVector = Icons.Default.Backspace,
-        )
+  ControlBar(
+      startItems = {
+        Row {
+          val secondaryButtonColors = ButtonDefaults.buttonColors(
+              backgroundColor = MaterialTheme.colors.secondaryVariant,
+              contentColor = MaterialTheme.colors.surface
+          )
+          Button(
+              onClick = onUndo,
+              enabled = canUndoOrReset,
+              colors = secondaryButtonColors
+          ) {
+            Icon(
+                imageVector = Icons.Default.Backspace,
+            )
+          }
+          Spacer(modifier = Modifier.padding(8.dp))
+          Button(
+              onClick = onReset,
+              enabled = canUndoOrReset,
+              colors = secondaryButtonColors
+          ) {
+            Icon(
+                imageVector = Icons.Default.Replay,
+            )
+          }
+        }
+      },
+      endItems = {
+        Row {
+          Button(
+              onClick = onValidate,
+              enabled = canValidate,
+          ) {
+            Icon(
+                imageVector = Icons.Default.Done,
+            )
+          }
+        }
       }
-      Spacer(modifier = Modifier.padding(8.dp))
-      Button(
-          onClick = onReset,
-          enabled = canUndoOrReset,
-          colors = secondaryButtonColors
-      ) {
-        Icon(
-            imageVector = Icons.Default.Replay,
-        )
-      }
-    }
-    Row {
-      Button(
-          onClick = onValidate,
-          enabled = canValidate,
-      ) {
-        Icon(
-            imageVector = Icons.Default.Done,
-        )
-      }
-    }
-  }
+  )
 }
 
 @Preview

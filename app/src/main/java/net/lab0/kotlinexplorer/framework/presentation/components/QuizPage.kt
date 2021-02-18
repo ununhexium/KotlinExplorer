@@ -43,11 +43,15 @@ fun QuizPage(
       }
     }
 
-
     Column(
-        modifier = Modifier.padding(vertical = 8.dp)
+        modifier = Modifier.padding(vertical = 8.dp),
     ) {
-      input?.invoke()
+      Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceAround
+      ) {
+        input?.invoke()
+      }
       controlBar()
     }
   }

@@ -20,7 +20,7 @@ ${p(0)} ${p(1)}(){}
             explanation = """
 `fun` declares a function.
 
-The name of the declared function in between `fun ` and the opening parenthesis `(`.
+The name of the declared function in between `fun` and the opening parenthesis `(`.
 
 `Main` and `main` are two different identifiers.
 """,

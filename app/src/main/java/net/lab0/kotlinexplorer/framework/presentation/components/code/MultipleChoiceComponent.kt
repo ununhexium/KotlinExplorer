@@ -1,17 +1,22 @@
 package net.lab0.kotlinexplorer.framework.presentation.components.code
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.components.CorrectAnswer
 import net.lab0.kotlinexplorer.framework.presentation.components.QuizPage
 import net.lab0.kotlinexplorer.framework.presentation.components.WrongAnswer
-import net.lab0.kotlinexplorer.framework.presentation.components.code.input.InputFieldMainAction
+import net.lab0.kotlinexplorer.framework.presentation.components.code.input.ControlBar
 import net.lab0.kotlinexplorer.framework.presentation.components.code.input.MultipleChoiceAnswerInput
-import net.lab0.kotlinexplorer.framework.presentation.components.code.input.NextPageControlBar
 import net.lab0.kotlinexplorer.framework.presentation.components.markdown.MDDocument
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.MultipleChoiceModel
 
@@ -41,24 +46,43 @@ fun MultipleChoicePage(
           }
         }
       } else null,
-      input = if (model.showAnswer.value) {
+      input = if (!model.showAnswer.value) {
         {
           MultipleChoiceAnswerInput(
               answers = model.answers.value,
               toggle = model::toggle,
-              inputFieldMainAction = if (model.showAnswer.value) {
-                InputFieldMainAction.NEXT
-              } else {
-                InputFieldMainAction.VALIDATE
-              },
-              onValidate = { model.validate() },
-              onNextPage = onNextPage
           )
         }
       } else null,
       controlBar = {
-        if (model.showAnswer.value) {
-          NextPageControlBar(onNext = onNextPage)
+        if (!model.showAnswer.value) {
+          ControlBar(
+              endItems = {
+                Row {
+                  Button(
+                      onClick = model::validate,
+                  ) {
+                    Icon(
+                        imageVector = Icons.Default.Done,
+                    )
+                  }
+                }
+              }
+          )
+        } else {
+          ControlBar(
+              endItems = {
+                Row {
+                  Button(
+                      onClick = onNextPage,
+                  ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                    )
+                  }
+                }
+              }
+          )
         }
       }
   )
@@ -69,7 +93,7 @@ val multipleChoiceModel = MultipleChoiceModel(
         title = "Test",
         question = "Why?",
         "Because",
-        listOf("A", "B", "C"),
+        listOf("A", "BB", "CCCCC"),
         setOf(0, 2)
     )
 )

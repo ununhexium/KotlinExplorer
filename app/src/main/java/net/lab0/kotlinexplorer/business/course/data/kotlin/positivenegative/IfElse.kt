@@ -223,6 +223,7 @@ To use `if else` as an expression, there *must* be both a branch for `true` and 
             choices = listOf("It doesn't work", "Integer", "Something else"),
             answer = setOf(0),
         ),
+        // TODO: cut in 2 parts
         CodeQuestionPage(
             title = "Chains",
             question = """
@@ -234,7 +235,7 @@ The following code must tell if a number is positive, negative or equal to `0`.
 val number = 1
 if (number ${p(0)} ${p(1)}) {
     print("positive") // 1
-} else if (number ${p(2)} ${p(1)}) {
+} else if (number ${p(2)} ${p(3)}) {
     print("negative") // 2
 } else {
     print("zero!")    // 3
@@ -266,7 +267,7 @@ if (number > 0) {
 }
 ```
 """,
-            answer = listOf(">", "0", "<"),
+            answer = listOf(">", "0", "<", "0"),
             confusion = listOf("<=", ">="),
         ),
         InfoPage(
