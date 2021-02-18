@@ -106,7 +106,9 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
-        Spot(STRING, 8, 14),
+        Spot(STRING, 8, 8),
+        Spot(STRING, 9, 13),
+        Spot(STRING, 14, 14),
     )
   }
 
@@ -122,9 +124,13 @@ class KotlinSyntaxHighlighterVisitorTest {
     assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 2),
         Spot(NUMBER, 14, 14),
-        Spot(STRING, 19, 24),
+        Spot(STRING, 19, 19),
+        Spot(STRING, 20,23),
+        Spot(STRING, 24, 24),
         Spot(NUMBER, 27, 29),
-        Spot(STRING, 34, 39),
+        Spot(STRING, 34, 34),
+        Spot(STRING, 35, 38),
+        Spot(STRING, 39, 39),
     )
   }
 
@@ -232,7 +238,9 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(code, spots).hasAtLeastSpotsH(
         Spot(FUNCTION, 0, 6),
-        Spot(STRING, 8, 12),
+        Spot(STRING, 8, 8),
+        Spot(STRING, 9, 11),
+        Spot(STRING, 12, 12),
     )
   }
 
@@ -271,7 +279,9 @@ class KotlinSyntaxHighlighterVisitorTest {
     assertThat(code, spots).hasAtLeastSpotsH(
         Spot(KEYWORD, 0, 6),
         Spot(KEYWORD, 29, 31),
-        Spot(STRING, 54, 68),
+        Spot(STRING, 54, 54),
+        Spot(STRING, 55, 67),
+        Spot(STRING, 68, 68),
     )
   }
 
@@ -375,14 +385,19 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasAtLeastSpotsH(
+    assertThat(code, spots).hasExactlySpots(
         Spot(KEYWORD, 0, 2),
         Spot(FUNCTION, 4, 7),
         Spot(BRACKET, 8, 8),
         Spot(BRACKET, 9, 9),
         Spot(BRACKET, 11, 11),
+        Spot(FUNCTION, 15, 21),
         Spot(BRACKET, 22, 22),
-        Spot(STRING, 23, 37),
+        Spot(STRING, 23, 23),
+        Spot(STRING, 24, 36),
+        Spot(STRING, 37, 37),
+        Spot(BRACKET, 38, 38),
+
         Spot(BRACKET, 40, 40),
     )
   }
@@ -401,16 +416,22 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasAtLeastSpotsH(
+    assertThat(code, spots).hasExactlySpots(
         Spot(KEYWORD, 0, 2),
         Spot(FUNCTION, 4, 7),
         Spot(BRACKET, 8, 8),
         Spot(BRACKET, 9, 9),
         Spot(BRACKET, 11, 11),
+        Spot(COMMENT, 15, 21),
+        Spot(FUNCTION, 25, 31),
         Spot(BRACKET, 32, 32),
-        Spot(STRING, 33, 47),
+        Spot(STRING, 33, 33),
+        Spot(STRING, 34, 46),
+        Spot(STRING, 47, 47),
+        Spot(BRACKET, 48, 48),
         Spot(BRACKET, 50, 50),
-    )
+
+        )
   }
 
   @Test
@@ -467,15 +488,17 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(code, spots).hasAtLeastSpotsH(
-        Spot(STRING, 1, 10),
+        Spot(STRING, 1, 1),
+        Spot(STRING, 2, 4),
         Spot(STRING_ESCAPED_CHARACTER, 5, 6),
+        Spot(STRING, 7, 9),
+        Spot(STRING, 10, 10),
     )
   }
 
   @TestFactory
   fun `can highlight 1-char operators for ints`(): Iterable<DynamicTest> {
-    // TODO: "<", ">"
-    val operators = listOf("+", "-", "*", "/")
+    val operators = listOf("+", "-", "*", "/", "<", ">")
 
     return operators.map { operator ->
       DynamicTest.dynamicTest(operator) {
@@ -551,7 +574,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasAtLeastSpotsH(
+    assertThat(code, spots).hasExactlySpots(
         Spot(STRING, 0, 2),
         Spot(STRING_ESCAPED_CHARACTER, 3, 4),
         Spot(NUMBER, 5, 5),

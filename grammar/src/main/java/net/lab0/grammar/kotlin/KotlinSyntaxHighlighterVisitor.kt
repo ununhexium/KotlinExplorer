@@ -46,6 +46,14 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
+  override fun visitBlock(ctx: KotlinParser.BlockContext) =
+      hl {
+        add(BRACKET, ctx.LCURL().range)
+        add(BRACKET, ctx.RCURL().range)
+
+        add(visitChildren(ctx))
+      }
+
   override fun visitClassDeclaration(ctx: KotlinParser.ClassDeclarationContext) =
       hl {
         ctx.CLASS()?.let { add(KEYWORD, it.range) }
@@ -69,6 +77,11 @@ class KotlinSyntaxHighlighterVisitor(
         }
 
         add(visitChildren(ctx))
+      }
+
+  override fun visitComparisonOperator(ctx: KotlinParser.ComparisonOperatorContext) =
+      hl {
+        add(OPERATOR, ctx.range)
       }
 
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
@@ -157,13 +170,6 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
-  override fun visitStringLiteral(ctx: KotlinParser.StringLiteralContext) =
-      hl {
-        add(STRING, ctx.range)
-
-        add(visitChildren(ctx))
-      }
-
   override fun visitTerminal(node: TerminalNode) =
       hl {
         when (node.symbol.type) {
@@ -184,10 +190,6 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.RPAREN -> add(BRACKET, node.range)
           KotlinParser.LSQUARE -> add(BRACKET, node.range)
           KotlinParser.RSQUARE -> add(BRACKET, node.range)
-          KotlinParser.LANGLE -> add(BRACKET, node.range)
-          KotlinParser.RANGLE -> add(BRACKET, node.range)
-          KotlinParser.LCURL -> add(BRACKET, node.range)
-          KotlinParser.RCURL -> add(BRACKET, node.range)
 
           // operators
           KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
@@ -206,5 +208,13 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.LineStrExprStart -> add(STRING_ESCAPED_CHARACTER, node.range)
           KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
         }
+      }
+
+  override fun visitTypeParameters(ctx: KotlinParser.TypeParametersContext) =
+      hl {
+        add(BRACKET, ctx.LANGLE().range)
+        add(BRACKET, ctx.RANGLE().range)
+
+        add(visitChildren(ctx))
       }
 }
