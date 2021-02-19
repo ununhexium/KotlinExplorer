@@ -13,6 +13,7 @@ import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
+import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
 import org.junit.Before
@@ -66,7 +67,7 @@ internal class ProblemReportServiceImplTest {
 
     // then
     val reports = firestore
-        .feedbackCollection(firebaseAuth.uid!!)
+        .problemReportCollection(firebaseAuth.uid!!)
         .get()
         .await()
         .toObjects(ProblemReportDocument::class.java)

@@ -8,6 +8,7 @@ import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportServi
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.anonymousProblemReportCollection
 import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
+import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 
 class ProblemReportServiceImpl(
@@ -20,7 +21,7 @@ class ProblemReportServiceImpl(
     val document = fromDomain(problemReport)
 
     if (uid != null) {
-      firestore.feedbackCollection(firebaseAuth.uid!!).add(document)
+      firestore.problemReportCollection(firebaseAuth.uid!!).add(document)
     } else {
       firestore.anonymousProblemReportCollection().add(document)
     }
