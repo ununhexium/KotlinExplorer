@@ -9,8 +9,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
 import net.lab0.kotlinexplorer.business.domain.feedback.Feedback
-import net.lab0.kotlinexplorer.business.domain.feedback.LessonDifficulty
-import net.lab0.kotlinexplorer.business.domain.feedback.LessonDuration
+import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
+import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.FeedbackService
 import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
 import net.lab0.kotlinexplorer.framework.util.FromDomain
@@ -53,19 +53,19 @@ internal class FeedbackServiceImplTest {
   }
 
   @Test
-  fun createReadFeedback() = runBlocking {
+  fun createReadFeedback():Unit = runBlocking {
     // given
     val feedback = Feedback(
-        LessonDuration.BALANCED_DURATION,
-        LessonDifficulty.BALANCED_DIFFICULTY,
+        DurationRating.BALANCED,
+        DifficultyRating.BALANCED,
     )
     
     // when
     feedbackService.insertOrUpdateFeedback(feedback)
-    val allFeedbacks = feedbackService.readFeedbacks()
+    val allFeedbacks = feedbackService.readAllUserFeedbacks()
 
     // then
-    assertThat(allFeedbacks).contains(feedback)
+    assertThat(allFeedbacks).containsAtLeastElementsIn(listOf(feedback))
   }
 
 }

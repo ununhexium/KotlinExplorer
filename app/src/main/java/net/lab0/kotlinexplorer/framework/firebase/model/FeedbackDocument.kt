@@ -1,12 +1,12 @@
 package net.lab0.kotlinexplorer.framework.firebase.model
 
 import com.google.firebase.Timestamp
-import net.lab0.kotlinexplorer.business.domain.feedback.LessonDifficulty
-import net.lab0.kotlinexplorer.business.domain.feedback.LessonDuration
+import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
+import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 
 data class FeedbackDocument(
     val id: String = "",
-    val createdAt: Timestamp = Timestamp.now(),
-    val durationRating: String = LessonDuration.UNSET.code,
-    val difficultyRating: String = LessonDifficulty.UNSET.code,
+    val createdAt: Timestamp = Timestamp(0, 0),
+    val durationRating: String = DurationRating.UNSET.code,
+    val difficultyRating: String = DifficultyRating.UNSET.code,
 )

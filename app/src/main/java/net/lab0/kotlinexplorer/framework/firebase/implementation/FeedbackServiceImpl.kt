@@ -6,7 +6,7 @@ import kotlinx.coroutines.tasks.await
 import net.lab0.kotlinexplorer.business.domain.feedback.Feedback
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.FeedbackService
 import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
-import net.lab0.kotlinexplorer.framework.firebase.model.usersFeedbackCollection
+import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
 
@@ -19,15 +19,15 @@ class FeedbackServiceImpl(
 
   override suspend fun insertOrUpdateFeedback(feedback: Feedback) {
     firestore
-        .usersFeedbackCollection()
+        .feedbackCollection(firebaseAuth.uid!!)
         .document(feedback.id.toString())
         .set(fromDomain(feedback))
         .await()
   }
 
-  override suspend fun readFeedbacks(): List<Feedback> {
+  override suspend fun readAllUserFeedbacks(): List<Feedback> {
     return firestore
-        .usersFeedbackCollection()
+        .feedbackCollection(firebaseAuth.uid!!)
         .get()
         .await()
         .toObjects(FeedbackDocument::class.java)

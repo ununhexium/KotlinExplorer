@@ -1,8 +1,8 @@
 package net.lab0.kotlinexplorer.business.domain.feedback
 
-enum class LessonDuration(val code: String) {
+enum class DurationRating(val code: String) {
   TOO_SHORT("TOO_SHORT"),
-  BALANCED_DURATION("GOOD"),
+  BALANCED("BALANCED"),
   TOO_LONG("TOO_LONG"),
   UNSET("UNSET"),
 }

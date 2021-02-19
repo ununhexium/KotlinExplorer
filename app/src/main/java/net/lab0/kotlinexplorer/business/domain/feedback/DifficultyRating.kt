@@ -1,8 +1,8 @@
 package net.lab0.kotlinexplorer.business.domain.feedback
 
-enum class LessonDifficulty(val code: String) {
+enum class DifficultyRating(val code: String) {
   TOO_EASY("TOO_EASY"),
-  BALANCED_DIFFICULTY("GOOD"),
+  BALANCED("BALANCED"),
   TOO_HARD("TOO_HARD"),
   UNSET("UNSET"),
 }

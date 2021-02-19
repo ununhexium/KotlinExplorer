@@ -5,8 +5,20 @@ import com.google.firebase.firestore.FirebaseFirestore
 fun FirebaseFirestore.usersCollection() =
     this.collection("users")
 
-fun FirebaseFirestore.usersFeedbackCollection() =
+fun FirebaseFirestore.feedbackCollection(user:String) =
     this
         .collection("users")
-        .document("root") // TODO: no hardcoding
+        .document(user)
         .collection("feedbacks")
+
+fun FirebaseFirestore.problemReportCollection(user:String) =
+    this
+        .collection("users")
+        .document(user)
+        .collection("problemReports")
+
+fun FirebaseFirestore.anonymousProblemReportCollection() =
+    this
+        .collection("anonymousData")
+        .document("root")
+        .collection("problemReports")

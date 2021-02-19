@@ -4,5 +4,5 @@ import net.lab0.kotlinexplorer.business.domain.feedback.Feedback
 
 interface FeedbackService {
   suspend fun insertOrUpdateFeedback(feedback:Feedback)
-  suspend fun readFeedbacks(): List<Feedback>
+  suspend fun readAllUserFeedbacks(): List<Feedback>
 }
