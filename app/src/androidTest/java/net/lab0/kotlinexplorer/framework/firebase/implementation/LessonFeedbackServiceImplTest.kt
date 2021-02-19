@@ -8,10 +8,10 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
-import net.lab0.kotlinexplorer.business.domain.feedback.Feedback
+import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
-import net.lab0.kotlinexplorer.framework.firebase.abstraction.FeedbackService
+import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
 import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
@@ -23,8 +23,8 @@ import javax.inject.Inject
 @FlowPreview
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-internal class FeedbackServiceImplTest {
-  private lateinit var feedbackService: FeedbackService
+internal class LessonFeedbackServiceImplTest {
+  private lateinit var lessonFeedbackService: LessonFeedbackService
 
   @get:Rule(order = 0)
   var hiltRule = HiltAndroidRule(this)
@@ -36,15 +36,15 @@ internal class FeedbackServiceImplTest {
   lateinit var firestore: FirebaseFirestore
 
   @Inject
-  lateinit var fromDomain: FromDomain<FeedbackDocument, Feedback>
+  lateinit var fromDomain: FromDomain<FeedbackDocument, LessonFeedback>
 
   @Inject
-  lateinit var toDomain: ToDomain<FeedbackDocument, Feedback>
+  lateinit var toDomain: ToDomain<FeedbackDocument, LessonFeedback>
 
   @Before
   fun before() {
     hiltRule.inject()
-    feedbackService = FeedbackServiceImpl(
+    lessonFeedbackService = LessonFeedbackServiceImpl(
         firebaseAuth,
         firestore,
         fromDomain,
@@ -55,14 +55,15 @@ internal class FeedbackServiceImplTest {
   @Test
   fun createReadFeedback():Unit = runBlocking {
     // given
-    val feedback = Feedback(
+    val feedback = LessonFeedback(
+        "lessonId",
         DurationRating.BALANCED,
         DifficultyRating.BALANCED,
     )
     
     // when
-    feedbackService.insertOrUpdateFeedback(feedback)
-    val allFeedbacks = feedbackService.readAllUserFeedbacks()
+    lessonFeedbackService.insertOrUpdateFeedback(feedback)
+    val allFeedbacks = lessonFeedbackService.readAllUserFeedbacks()
 
     // then
     assertThat(allFeedbacks).containsAtLeastElementsIn(listOf(feedback))

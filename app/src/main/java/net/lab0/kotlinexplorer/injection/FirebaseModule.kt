@@ -1,12 +1,15 @@
 package net.lab0.kotlinexplorer.injection
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import net.lab0.kotlinexplorer.business.domain.feedback.Feedback
+import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
+import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
+import net.lab0.kotlinexplorer.framework.firebase.implementation.LessonFeedbackServiceImpl
 import net.lab0.kotlinexplorer.framework.firebase.mappers.FeedbackDocumentFromDomain
 import net.lab0.kotlinexplorer.framework.firebase.mappers.FeedbackDocumentToDomain
 import net.lab0.kotlinexplorer.framework.firebase.mappers.ProblemReportDocumentFromDomain
@@ -27,12 +30,12 @@ object FirebaseModule {
 
   @Singleton
   @Provides
-  fun provideFeedbackFromDomain(): FromDomain<FeedbackDocument, Feedback> =
+  fun provideFeedbackFromDomain(): FromDomain<FeedbackDocument, LessonFeedback> =
       FeedbackDocumentFromDomain()
 
   @Singleton
   @Provides
-  fun provideFeedbackToDomain(): ToDomain<FeedbackDocument, Feedback> =
+  fun provideFeedbackToDomain(): ToDomain<FeedbackDocument, LessonFeedback> =
       FeedbackDocumentToDomain()
 
   @Singleton
@@ -44,5 +47,20 @@ object FirebaseModule {
   @Provides
   fun provideProblemReportToDomain(): ToDomain<ProblemReportDocument, ProblemReport> =
       ProblemReportDocumentToDomain()
+
+  @Singleton
+  @Provides
+  fun provideLessonFeedbackService(
+      firebaseAuth: FirebaseAuth,
+      firestore: FirebaseFirestore,
+      fromDomain: FromDomain<FeedbackDocument, LessonFeedback>,
+      toDomain: ToDomain<FeedbackDocument, LessonFeedback>,
+  ): LessonFeedbackService =
+    LessonFeedbackServiceImpl(
+        firebaseAuth,
+            firestore,
+            fromDomain,
+            toDomain,
+    )
 
 }

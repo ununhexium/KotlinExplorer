@@ -7,6 +7,7 @@ import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 data class FeedbackDocument(
     val id: String = "",
     val createdAt: Timestamp = Timestamp(0, 0),
+    val lessonId:String = "",
     val durationRating: String = DurationRating.UNSET.code,
     val difficultyRating: String = DifficultyRating.UNSET.code,
 )

@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.mvi
 
+// TODO: wrap T do tell if the resturned data is clean (successful call) or dirty (failed somthing)
 sealed class Resource<out T> {
   object EmptyLoadedResource : Resource<Nothing>()
   data class EmptyLoadedResourceWithMessage(val message: String) : Resource<Nothing>()

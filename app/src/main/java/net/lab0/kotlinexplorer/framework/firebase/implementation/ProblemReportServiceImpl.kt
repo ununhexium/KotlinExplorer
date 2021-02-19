@@ -7,7 +7,6 @@ import net.lab0.kotlinexplorer.framework.firebase.WithUidMixin
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.anonymousProblemReportCollection
-import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
 import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 
