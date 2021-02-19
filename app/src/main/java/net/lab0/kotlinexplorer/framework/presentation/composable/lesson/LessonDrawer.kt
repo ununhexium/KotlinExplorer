@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.frame
+package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Indent
+import java.util.*
 
 @Composable
 fun LessonDrawer(

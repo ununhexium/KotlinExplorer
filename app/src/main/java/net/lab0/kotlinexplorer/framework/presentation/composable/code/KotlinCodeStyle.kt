@@ -1,9 +1,8 @@
-package net.lab0.kotlinexplorer.model.code
+package net.lab0.kotlinexplorer.framework.presentation.composable.code
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeStyle
 import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.grammar.kotlin.KotlinHighlight.*
 

@@ -22,12 +22,7 @@ import net.lab0.kotlinexplorer.business.domain.parser.Block
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.kotlinexplorer.framework.ui.theme.sourceCodeFontFamily
-import net.lab0.kotlinexplorer.model.code.DefaultCodeStyle
-import net.lab0.kotlinexplorer.model.code.extractHighlightsAndAnnotate
-import net.lab0.kotlinexplorer.model.code.functionStyle
-import net.lab0.kotlinexplorer.model.code.ijStyle
-import net.lab0.kotlinexplorer.model.code.keywordStyle
-import net.lab0.kotlinexplorer.model.code.numberStyle
+import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.utils.Do
 
 

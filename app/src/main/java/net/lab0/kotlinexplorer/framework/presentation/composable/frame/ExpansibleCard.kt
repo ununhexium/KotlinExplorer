@@ -18,7 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.lab0.kotlinexplorer.framework.ui.frame.DefaultVerticalSpacer
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterCard
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonListItem
+import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 
 @Composable
 fun ExpansibleCard(

@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable
+package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope

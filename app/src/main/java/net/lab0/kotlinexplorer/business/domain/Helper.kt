@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.model.code
+package net.lab0.kotlinexplorer.business.domain
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle

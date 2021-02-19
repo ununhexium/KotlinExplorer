@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable
+package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +19,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.code.KotlinCode
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeInputControlBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.NextPageControlBar
-import net.lab0.kotlinexplorer.framework.ui.frame.DefaultVerticalSpacer
+import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 
 @Composable
 fun LessonPageBody(

@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.frame
+package net.lab0.kotlinexplorer.framework.presentation.composable.chapter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -10,7 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.lab0.kotlinexplorer.framework.ui.frame.MediumVerticalSpacer
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ExpansibleCard
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonListItem
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.dummyChapter1
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.dummyChapter2
+import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 
 @Composable
 fun ChapterList(

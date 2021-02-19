@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.frame
+package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.LessonListItemData
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.lesson1
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.lesson2
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.lesson3
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.lesson3b
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.lesson3c
 
 @Composable
 fun LessonListItem(

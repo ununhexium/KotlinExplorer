@@ -1,5 +1,8 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.frame
 
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterCardData
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.LessonListItemData
+
 val lesson1 = LessonListItemData("lesson1", "Lesson 1", true, highlighted = false, 1f)
 val lesson2 = LessonListItemData("lesson2", "Lesson 2", true, highlighted = false, 0.7f)
 val lesson3 = LessonListItemData("lesson3", "Lesson 3", false, highlighted = true, 0.1f)

@@ -24,10 +24,6 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
             )
           }
 
-  override fun split(): List<Pair<CodeType, IntRange>> {
-    return split(0)
-  }
-
   private fun split(
       offset: Int
   ): List<Pair<CodeType, IntRange>> {

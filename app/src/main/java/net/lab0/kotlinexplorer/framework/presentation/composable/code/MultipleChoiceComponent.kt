@@ -12,9 +12,9 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.composable.CorrectAnswer
-import net.lab0.kotlinexplorer.framework.presentation.composable.LessonPageBody
-import net.lab0.kotlinexplorer.framework.presentation.composable.WrongAnswer
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.CorrectAnswer
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageBody
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.MultipleChoiceAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument

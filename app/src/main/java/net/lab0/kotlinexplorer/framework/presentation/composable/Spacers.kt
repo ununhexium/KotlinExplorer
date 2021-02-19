@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.ui.frame
+package net.lab0.kotlinexplorer.framework.presentation.composable
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

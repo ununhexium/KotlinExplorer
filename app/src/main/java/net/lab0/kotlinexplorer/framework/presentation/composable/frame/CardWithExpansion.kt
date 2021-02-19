@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterCard
 
 
 // design: https://www.designcrowd.de/design/15152008

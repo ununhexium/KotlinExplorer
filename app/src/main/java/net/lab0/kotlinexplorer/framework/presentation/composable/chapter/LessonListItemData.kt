@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.frame
+package net.lab0.kotlinexplorer.framework.presentation.composable.chapter
 
 data class LessonListItemData(
     val id:String,

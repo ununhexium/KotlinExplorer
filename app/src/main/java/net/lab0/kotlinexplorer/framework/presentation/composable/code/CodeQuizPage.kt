@@ -7,17 +7,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import net.lab0.kotlinexplorer.framework.presentation.composable.CorrectAnswer
-import net.lab0.kotlinexplorer.framework.presentation.composable.LessonPageBody
-import net.lab0.kotlinexplorer.framework.presentation.composable.WrongAnswer
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.CorrectAnswer
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageBody
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeInputControlBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.NextPageControlBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.CodeQuestionPageViewModel
-import net.lab0.kotlinexplorer.framework.ui.frame.DefaultVerticalSpacer
-import net.lab0.kotlinexplorer.model.code.DefaultCodeStyle
-import net.lab0.kotlinexplorer.model.code.extractHighlightsAndAnnotate
+import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
+import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 
 @Composable
 fun CodeQuizPage(

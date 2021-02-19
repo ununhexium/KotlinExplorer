@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ChapterCardData
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ChapterList
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.LessonListItemData
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterCardData
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterList
+import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.LessonListItemData
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
