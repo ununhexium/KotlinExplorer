@@ -566,7 +566,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `can highlight multiline string expression`() {
+  fun `can highlight verbatim string expression`() {
     // given
     val code = "\"\"\"\${1+1}\"\"\""
 
@@ -582,6 +582,28 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(NUMBER, 7, 7),
         Spot(STRING_ESCAPED_CHARACTER, 8, 8),
         Spot(STRING, 9, 11),
+    )
+  }
+
+  @Test
+  fun `can highlight multiline string expression`() {
+    // given
+    val code = "\"\"\"\n\${1+1}\n\"\"\""
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+        Spot(STRING, 0, 2),
+        Spot(STRING, 3, 3),
+        Spot(STRING_ESCAPED_CHARACTER, 4, 5),
+        Spot(NUMBER, 6, 6),
+        Spot(OPERATOR, 7, 7),
+        Spot(NUMBER, 8, 8),
+        Spot(STRING_ESCAPED_CHARACTER, 9, 9),
+        Spot(STRING, 10, 10),
+        Spot(STRING, 11, 13),
     )
   }
 

@@ -142,9 +142,6 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitMultiLineStringContent(ctx: KotlinParser.MultiLineStringContentContext) =
       hl {
-        add(STRING, ctx.MultiLineStrText().range)
-        add(STRING_ESCAPED_CHARACTER, ctx.MultiLineStrEscapedChar().range)
-
         add(visitChildren(ctx))
       }
 
@@ -221,10 +218,12 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.DIV -> add(OPERATOR, node.range)
 
           // strings
-          KotlinParser.MultiLineStringQuote -> add(STRING, node.range)
           KotlinParser.LineStrText -> add(STRING, node.range)
           KotlinParser.LineStrExprStart -> add(STRING_ESCAPED_CHARACTER, node.range)
           KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
+          KotlinParser.MultiLineStringQuote -> add(STRING, node.range)
+          KotlinParser.MultiLineStrText -> add(STRING, node.range)
+          KotlinParser.MultiLineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
         }
       }
 
