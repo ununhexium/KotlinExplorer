@@ -161,6 +161,13 @@ class KotlinSyntaxHighlighterVisitor(
         add(OPERATOR, ctx.range)
       }
 
+  override fun visitImportHeader(ctx: KotlinParser.ImportHeaderContext) =
+      hl {
+        add(KEYWORD, ctx.IMPORT().range)
+
+        add(visitChildren(ctx))
+      }
+
   override fun visitPackageHeader(ctx: KotlinParser.PackageHeaderContext) =
       hl {
         ctx.PACKAGE()?.let { add(KEYWORD, it.range) }

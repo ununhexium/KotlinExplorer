@@ -312,9 +312,28 @@ fun KotlinCodePreview_highlight3() {
 @Composable
 fun PreviewKotlinCode() {
   MaterialTheme {
+    val tripleQuote = "\"\"\""
+    val dollar = "$"
     val code =
         """
           |package org.kotlinlang.play
+          |
+          |import com.example.Class
+          |import com.example.Class; // semi
+          |
+          |val string = "Hello \"WORLD\""
+          |val tpl = "${'$'}{string + 1}"
+          |val multiline = $tripleQuote
+          |  Show $dollar{string + 1}"
+          |  $dollar{ if(true) 1 else 0 }
+          |$tripleQuote
+          |
+          |fun main() {
+          |  ${placeholder(20)}
+          |  println("Hello, \"World!\"")
+          |}
+          |
+          |// classes
           |
           |interface Interface<I> where I:Interface<I> {
           |  val i: I
@@ -330,11 +349,6 @@ fun PreviewKotlinCode() {
           |}
           |
           |${placeholder(2)}
-          |
-          |fun main() {
-          |  ${placeholder(20)}
-          |  println("Hello, \"World!\"")
-          |}
           |
           |@Annotated
           |data class Foo(val a:String, var b:Int)

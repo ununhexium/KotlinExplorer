@@ -584,4 +584,18 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(STRING, 9, 11),
     )
   }
+
+  @Test
+  fun `import is a keyword`() {
+    // given
+    val code = "import com.example.Class"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+        Spot(KEYWORD, 0, 5),
+    )
+  }
 }
