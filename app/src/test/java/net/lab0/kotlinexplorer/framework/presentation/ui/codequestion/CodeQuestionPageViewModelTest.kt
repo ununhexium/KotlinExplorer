@@ -1,6 +1,6 @@
 package net.lab0.kotlinexplorer.framework.presentation.ui.codequestion
 
-import net.lab0.kotlinexplorer.framework.presentation.components.code.Answer
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.CodeQuestionPageViewModel
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test

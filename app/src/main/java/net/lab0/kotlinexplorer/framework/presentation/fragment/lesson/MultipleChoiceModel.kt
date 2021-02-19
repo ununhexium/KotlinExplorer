@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.components.code.Answer
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 import org.commonmark.parser.Parser
 
 class MultipleChoiceModel(

@@ -23,11 +23,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.components.InfoLessonPage
-import net.lab0.kotlinexplorer.framework.presentation.components.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.components.code.CodeQuizPage
-import net.lab0.kotlinexplorer.framework.presentation.components.code.MultipleChoicePage
-import net.lab0.kotlinexplorer.framework.presentation.components.frame.LessonDrawer
+import net.lab0.kotlinexplorer.framework.presentation.composable.InfoLessonPage
+import net.lab0.kotlinexplorer.framework.presentation.composable.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.MultipleChoicePage
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.LessonDrawer
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.state.CodeAnswerState
 import net.lab0.kotlinexplorer.framework.ui.frame.BigVerticalSpacer
 import net.lab0.kotlinexplorer.utils.Do

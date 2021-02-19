@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.profile
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -16,8 +15,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.UserProfileEvent
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.UserProfileViewState
-import net.lab0.kotlinexplorer.framework.presentation.components.UserProfileUi
-import net.lab0.kotlinexplorer.framework.presentation.components.frame.TopLevelScaffold
+import net.lab0.kotlinexplorer.framework.presentation.composable.UserProfileUi
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.intent.Auth
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 import net.lab0.kotlinexplorer.utils.printLogD
