@@ -17,13 +17,13 @@ import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ThinButton
 
 @Composable
-fun RadioOptions(
+fun ThinRadioOptions(
     options: List<String>,
-    onSelection: (Int) -> Unit,
+    onSelection: (Int?) -> Unit,
 ) {
   Row(
       modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween
+      horizontalArrangement = Arrangement.SpaceEvenly
   ) {
     val (selectedIndex, setSelectedIndex) = remember { mutableStateOf(null as Int?) }
     options.forEachIndexed { index, it ->
@@ -49,7 +49,7 @@ fun RadioOptionsPreview() {
       Column(
           modifier = Modifier.padding(20.dp)
       ) {
-        RadioOptions(
+        ThinRadioOptions(
             listOf("Alpha", "Beta", "Gamma"),
         ) {}
       }

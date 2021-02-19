@@ -56,33 +56,29 @@ fun MultipleChoicePage(
       } else null,
       controlBar = {
         if (!model.showAnswer.value) {
-          ControlBar(
-              endItems = {
-                Row {
-                  Button(
-                      onClick = model::validate,
-                  ) {
-                    Icon(
-                        imageVector = Icons.Default.Done,
-                    )
-                  }
-                }
+          ControlBar {
+            Row {
+              Button(
+                  onClick = model::validate,
+              ) {
+                Icon(
+                    imageVector = Icons.Default.Done,
+                )
               }
-          )
+            }
+          }
         } else {
-          ControlBar(
-              endItems = {
-                Row {
-                  Button(
-                      onClick = onNextPage,
-                  ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowForward,
-                    )
-                  }
-                }
+          ControlBar {
+            Row {
+              Button(
+                  onClick = onNextPage,
+              ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                )
               }
-          )
+            }
+          }
         }
       }
   )
