@@ -12,20 +12,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import java.util.*
 
 @Composable
 fun ThinButton(
     text: String,
+    highlight: Boolean = true,
     onClick: () -> Unit,
 ) {
   Surface(color = MaterialTheme.colors.surface) {
+    val color = if (highlight) {
+      MaterialTheme.colors.primary
+    } else {
+      MaterialTheme.colors.onSurface
+    }
+
     Text(
         text.toUpperCase(Locale.getDefault()),
         modifier = Modifier
-            .border(1.dp, MaterialTheme.colors.primary)
-            .clickable { onClick() },
-        style = MaterialTheme.typography.body1
+            .border(1.dp, color)
+            .clickable { onClick() }
+            .padding(horizontal = 3.dp),
+        style = MaterialTheme.typography.body1,
+        color = color,
     )
   }
 }
@@ -40,10 +50,16 @@ fun ThinButtonPreview() {
       Column(
           modifier = Modifier.padding(20.dp)
       ) {
-        Surface(
-            color = MaterialTheme.colors.surface
-        ) {
-          ThinButton("Example")
+        Column {
+          ThinButton(
+              text = "Example",
+              highlight = true
+          ) {}
+          DefaultVerticalSpacer()
+          ThinButton(
+              text = "Example",
+              highlight = false
+          ) {}
         }
       }
     }
