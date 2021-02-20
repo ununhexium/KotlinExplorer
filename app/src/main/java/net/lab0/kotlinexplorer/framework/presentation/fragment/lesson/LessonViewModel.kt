@@ -29,6 +29,7 @@ class LessonViewModel(
                 answers = it.answers + event.correctness
             )
             else -> {
+              // TODO: save lesson when reaching the last page
               // stop changing the page, we're already in the end
               Log.w(TAG, "getJobForEvent: tried to go further than the last page")
               it

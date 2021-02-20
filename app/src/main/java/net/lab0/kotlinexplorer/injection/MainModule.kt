@@ -11,6 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -24,8 +25,14 @@ object MainModule {
       getAllChapters: GetAllChapters,
       getLessonsInProgress: GetLessonsInProgress,
       saveLessonProgress: SaveLessonProgress,
+      sendLessonFeedback: SendLessonFeedback
   ): JetpackExplorerViewModelFactory =
-      JetpackExplorerViewModelFactory(getAllChapters, getLessonsInProgress, saveLessonProgress)
+      JetpackExplorerViewModelFactory(
+          getAllChapters,
+          getLessonsInProgress,
+          saveLessonProgress,
+          sendLessonFeedback
+      )
 
   @Singleton
   @Provides

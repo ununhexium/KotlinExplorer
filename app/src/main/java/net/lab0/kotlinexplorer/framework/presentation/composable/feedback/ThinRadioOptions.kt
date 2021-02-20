@@ -17,24 +17,29 @@ import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ThinButton
 
 @Composable
-fun ThinRadioOptions(
-    options: List<String>,
+fun <T> ThinRadioOptions(
+    options: List<T>,
     onSelection: (Int?) -> Unit,
-) {
-  Row(
+) where T : Any {
+  Column(
       modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceEvenly
+      verticalArrangement = Arrangement.SpaceEvenly
   ) {
     val (selectedIndex, setSelectedIndex) = remember { mutableStateOf(null as Int?) }
     options.forEachIndexed { index, it ->
-      ThinButton(
-          text = it,
-          onClick = {
-            setSelectedIndex(index)
-            onSelection(index)
-          },
-          highlight = selectedIndex == index
-      )
+      Row(
+          modifier = Modifier.padding(vertical = 4.dp).fillMaxWidth(),
+          horizontalArrangement = Arrangement.Center,
+      ) {
+        ThinButton(
+            text = it.toString(),
+            onClick = {
+              setSelectedIndex(index)
+              onSelection(index)
+            },
+            highlight = selectedIndex == index
+        )
+      }
     }
   }
 }

@@ -9,6 +9,8 @@ import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.Chapt
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.LessonViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
+import net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackViewModel
 import javax.inject.Inject
 
 
@@ -20,6 +22,7 @@ constructor(
     private val getAllChapters: GetAllChapters,
     private val getLessonsInProgress: GetLessonsInProgress,
     private val saveLessonProgress: SaveLessonProgress,
+    private val sendLessonFeedback: SendLessonFeedback,
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -36,6 +39,12 @@ constructor(
             LessonViewModel::class.java -> {
                 LessonViewModel(
                     saveLessonProgress
+                ) as T
+            }
+
+            LessonFeedbackViewModel::class.java -> {
+                LessonFeedbackViewModel(
+                    sendLessonFeedback
                 ) as T
             }
 

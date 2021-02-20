@@ -14,11 +14,11 @@ import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.SmallVerticalSpacer
 
 @Composable
-fun RadioFeedbackTopic(
+fun <T> RadioFeedbackTopic(
     topic: String,
-    options: List<String>,
+    options: List<T>,
     onSelection: (Int?) -> Unit,
-) {
+) where T:Any {
   Column(
       modifier = Modifier.fillMaxWidth()
   ) {

@@ -21,20 +21,32 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpac
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
 
 @Composable
-fun LessonFeedbackPage(
-    evaluationTopics: List<EvaluationTopic>,
+fun <T> LessonFeedbackPage(
+    durationTopic: EvaluationTopic<T>,
+    difficultyTopic: EvaluationTopic<T>,
     onValidate: () -> Unit,
     onSkip: () -> Unit,
-) {
-  Column(modifier = Modifier.fillMaxSize().padding(8.dp), verticalArrangement = Arrangement.Bottom) {
-    evaluationTopics.forEach { evaluationTopic ->
-      RadioFeedbackTopic(
-          topic = evaluationTopic.topic,
-          options = evaluationTopic.options,
-          onSelection = { evaluationTopic.onSelection }
-      )
-      BigVerticalSpacer()
-    }
+) where T : Any {
+  Column(
+      modifier = Modifier
+          .fillMaxSize()
+          .padding(8.dp),
+      verticalArrangement = Arrangement.Bottom
+  ) {
+
+    RadioFeedbackTopic(
+        topic = durationTopic.topic,
+        options = durationTopic.options,
+        onSelection = { durationTopic.onSelection }
+    )
+    BigVerticalSpacer()
+
+    RadioFeedbackTopic(
+        topic = difficultyTopic.topic,
+        options = difficultyTopic.options,
+        onSelection = { difficultyTopic.onSelection }
+    )
+    BigVerticalSpacer()
 
     ControlBar(
         startItems = {
@@ -70,24 +82,24 @@ fun LessonFeedbackPagePreview() {
             color = MaterialTheme.colors.surface
         ) {
           LessonFeedbackPage(
-              listOf(
-                  EvaluationTopic(
-                      "Lesson duration",
-                      listOf(
-                          "Too short",
-                          "Balanced",
-                          "Too long",
-                      )
-                  ) {},
-                  EvaluationTopic(
-                      "Lesson difficulty",
-                      listOf(
-                          "Too easy",
-                          "Balanced",
-                          "Too hard",
-                      )
-                  ) {},
-              ),
+              EvaluationTopic(
+                  "Lesson duration",
+                  listOf(
+                      "Too short",
+                      "Balanced",
+                      "Too long",
+                      "No Answer",
+                  )
+              ) {},
+              EvaluationTopic(
+                  "Lesson difficulty",
+                  listOf(
+                      "Too easy",
+                      "Balanced",
+                      "Too hard",
+                      "No Answer",
+                  )
+              ) {},
               {},
               {},
           )

@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.state
+package net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.mvi
 
 import net.lab0.kotlinexplorer.mvi.UiEvent
 

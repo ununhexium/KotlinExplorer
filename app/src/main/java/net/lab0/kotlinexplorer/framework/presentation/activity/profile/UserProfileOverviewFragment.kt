@@ -29,12 +29,12 @@ class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileVi
 
   override fun onCreateComposeView(view: ComposeView) {
     view.setContent {
-      UserProfileComposable(viewModel, this@UserProfileOverviewFragment)
+      UserProfileComposable(viewModel)
     }
   }
 
   @Composable
-  fun UserProfileComposable(viewModel: UserProfileViewModel, fragment: Fragment) {
+  fun UserProfileComposable(viewModel: UserProfileViewModel) {
     val scaffoldState = rememberScaffoldState()
     val placeholder = loadVectorResource(id = R.drawable.ic_kotlin_logo)
 

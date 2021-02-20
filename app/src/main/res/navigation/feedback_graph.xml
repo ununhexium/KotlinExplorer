@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/feedback_graph.xml"
+    app:startDestination="@id/lessonFeedbackFragment2">
+
+    <fragment
+        android:id="@+id/lessonFeedbackFragment2"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment"
+        android:label="LessonFeedbackFragment" />
+</navigation>

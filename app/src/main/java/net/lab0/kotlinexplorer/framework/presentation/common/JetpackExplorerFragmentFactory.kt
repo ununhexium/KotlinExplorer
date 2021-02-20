@@ -6,6 +6,7 @@ import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.Chapt
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.LessonFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -25,6 +26,10 @@ constructor(
 
         LessonFragment::class.java.name -> {
           LessonFragment(viewModelFactory)
+        }
+
+        LessonFeedbackFragment::class.java.name -> {
+          LessonFeedbackFragment(viewModelFactory)
         }
 
         else -> {
