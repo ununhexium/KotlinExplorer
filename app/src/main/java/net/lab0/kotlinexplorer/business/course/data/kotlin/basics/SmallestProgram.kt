@@ -38,8 +38,6 @@ fun main() {
   ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
 }
 """,
-            // TODO: answer must be shown as markdown
-
             """
 `print` to show the value on the terminal.
 

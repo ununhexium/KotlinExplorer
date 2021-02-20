@@ -18,8 +18,10 @@ class NextLessonFragment : Fragment() {
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
-  ): View? {
+  ): View {
     return ComposeView(requireContext()).also {
+      val nextLessonInChapter = LessonBrowser.getNextLessonInChapter(args.lessonId)
+
       it.setContent {
         NextLessonPage(
             lessonId = args.lessonId,
@@ -28,9 +30,9 @@ class NextLessonFragment : Fragment() {
                   NextLessonFragmentDirections.actionNextLessonFragmentToChapterListFragment()
               )
             },
+            nextLesson = nextLessonInChapter,
             goToNextLesson = {
-              // TODO: ugly check here and in the component too. Must be checked only once.
-              LessonBrowser.getNextLessonInChapter(args.lessonId)?.let { lesson ->
+              nextLessonInChapter?.let { lesson ->
                 findNavController().navigate(
                     NextLessonFragmentDirections.actionNextLessonFragmentToLessonFragment(lesson.id)
                 )

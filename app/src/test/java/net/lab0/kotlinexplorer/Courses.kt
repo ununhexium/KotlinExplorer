@@ -53,6 +53,8 @@ class Courses {
 
     val value = course("Value", "val, value, constant")
     val integers = course("Integers")
+
+    // TO DO: string lexicographical comparison: "a" < "b"
     val comparison = course("Comparison of integers", "greater than, less than, equal")
     val ifElse = course("If else", "if, else")
     val stringConcatenation = course("String concatenation", strings)
@@ -65,6 +67,7 @@ class Courses {
         comparison,
         stringConcatenation,
     )
+
 
     // how to import and use an object
     val random = course("Random basics", "random")

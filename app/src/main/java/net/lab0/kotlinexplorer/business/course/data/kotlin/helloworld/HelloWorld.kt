@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld
 
-import net.lab0.kotlinexplorer.business.course.data.kotlin.allBrackets
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p

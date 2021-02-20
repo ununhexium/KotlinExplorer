@@ -47,7 +47,6 @@ Exists but does a different kind of comparison. More about that in another lesso
             answer = listOf("=="),
             confusion = listOf("=", "===", "equals"),
         ),
-        // TODO: string lexicographical comparison: "a" < "b"
         CodeQuestionPage(
             title = "Not so equal",
             question = """

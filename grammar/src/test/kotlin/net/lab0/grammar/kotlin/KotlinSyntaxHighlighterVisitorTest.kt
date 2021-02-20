@@ -548,7 +548,6 @@ class KotlinSyntaxHighlighterVisitorTest {
   fun `can highlight single line string expression`() {
     // given
     val code = "\"\${1+1}\""
-    /// TODO test "${"${"\"}"}"
 
     // when
     val spots = extractSpots(code)

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpacer
 
@@ -21,7 +22,8 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpac
 fun NextLessonPage(
     lessonId: String,
     goToChapters: () -> Unit,
-    goToNextLesson: () -> Unit,
+    nextLesson: Lesson?,
+    goToNextLesson: (() -> Unit)?,
 ) {
   Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
     Button(
@@ -33,12 +35,12 @@ fun NextLessonPage(
 
     BigVerticalSpacer()
 
-    LessonBrowser.getNextLessonInChapter(lessonId)?.let { nextLessonInChapter ->
+    if(nextLesson != null && goToNextLesson != null) {
       Button(
           modifier = Modifier.align(Alignment.CenterHorizontally),
           onClick = goToNextLesson,
       ) {
-        Text("Next: ${nextLessonInChapter.title}")
+        Text("Next: ${nextLesson.title}")
       }
     }
   }
@@ -60,7 +62,8 @@ fun NextLessonPagePreview() {
           NextLessonPage(
               "lessonId",
               {},
-              {},
+              null,
+              null
           )
         }
       }
