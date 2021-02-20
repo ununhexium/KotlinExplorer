@@ -51,6 +51,11 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
+  override fun visitAssignmentOperator(ctx: KotlinParser.AssignmentOperatorContext) =
+      hl {
+        add(OPERATOR, ctx.range)
+      }
+
   override fun visitBlock(ctx: KotlinParser.BlockContext) =
       hl {
         add(BRACKET, ctx.LCURL().range)
@@ -212,10 +217,6 @@ class KotlinSyntaxHighlighterVisitor(
 
           // operators
           KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
-          KotlinParser.ADD -> add(OPERATOR, node.range)
-          KotlinParser.SUB -> add(OPERATOR, node.range)
-          KotlinParser.MULT -> add(OPERATOR, node.range)
-          KotlinParser.DIV -> add(OPERATOR, node.range)
 
           // strings
           KotlinParser.LineStrText -> add(STRING, node.range)
