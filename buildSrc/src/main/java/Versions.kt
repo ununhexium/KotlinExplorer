@@ -7,7 +7,7 @@ object Versions {
   // java / kotlin
   val java = "1.8"
   val kotlin = "1.4.21"
-  val coroutinesPlayServices = "1.3.2"
+  val coroutines = "1.3.2"
 
   // android libs
   val androidx_test_ext = "1.1.2"
@@ -16,6 +16,7 @@ object Versions {
   val constraintLayout = "2.0.4"
   val dagger = "2.28-alpha"
   val espresso_core = "3.3.0"
+  val lifecycle = "2.2.0"
   val material = "1.2.1"
   val nav = "2.3.2"
   val hilt = "1.0.0-alpha02"

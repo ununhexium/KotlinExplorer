@@ -12,6 +12,8 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+
+    id("org.barfuin.gradle.taskinfo") version "1.0.5"
 }
 
 android {
@@ -122,6 +124,8 @@ dependencies {
 
     implementation(Dependencies.kotlinCoroutinesPlayServices)
 
+    implementation(Dependencies.lifecycleViewModel)
+
 
 //    def nav_compose = "1.0.0-SNAPSHOT"
 //    implementation("androidx.navigation:navigation-compose:$nav_compose")
@@ -135,7 +139,7 @@ dependencies {
 
     implementation(Dependencies.material)
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}")
+    implementation(kotlin("stdlib-jdk8"))
 
 
     // add scripting to show the result to the user
@@ -151,10 +155,11 @@ dependencies {
     // TEST
 
     testImplementation(TestDependencies.androidx_test_ext)
+    testImplementation(TestDependencies.hiltAndroidTesting)
     testImplementation(TestDependencies.junit4_junit)
     testImplementation(TestDependencies.junit5_api)
     testImplementation(TestDependencies.junit5_params)
-    testImplementation(TestDependencies.hiltAndroidTesting)
+    testImplementation(TestDependencies.kotlinCoroutinesTest)
     testImplementation(TestDependencies.mockk)
     testImplementation(TestDependencies.truth)
     testRuntimeOnly(TestDependencies.junit5_engine)
@@ -164,7 +169,8 @@ dependencies {
     androidTestImplementation(TestDependencies.espresso_contrib)
     androidTestImplementation(TestDependencies.hiltAndroidTesting)
     androidTestImplementation(TestDependencies.junit5_api)
-    androidTestImplementation(TestDependencies.mockk)
+    androidTestImplementation(TestDependencies.kotlinCoroutinesTest)
+    androidTestImplementation(TestDependencies.mockkAndroid)
     androidTestImplementation(TestDependencies.truth)
 
     kaptTest(AnnotationProcessing.hilt_compiler)

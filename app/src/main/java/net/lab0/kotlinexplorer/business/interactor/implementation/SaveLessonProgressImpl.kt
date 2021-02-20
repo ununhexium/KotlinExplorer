@@ -16,6 +16,5 @@ class SaveLessonProgressImpl(
   ): Flow<Resource<Nothing>> = flow {
     printLogD(this::class.java.simpleName, "Saving lesson progress: $lessonProgress")
     dataSource.saveLessonProgress(lessonProgress)
-    emit(Resource.Empty)
   }
 }

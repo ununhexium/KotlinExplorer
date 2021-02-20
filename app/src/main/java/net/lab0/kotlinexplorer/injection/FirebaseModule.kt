@@ -30,11 +30,6 @@ object FirebaseModule {
 
   @Singleton
   @Provides
-  fun provideFirebaseFirestore(): FirebaseFirestore =
-      FirebaseFirestore.getInstance()
-
-  @Singleton
-  @Provides
   fun provideFeedbackFromDomain(): FromDomain<FeedbackDocument, LessonFeedback> =
       FeedbackDocumentFromDomain()
 

@@ -17,7 +17,6 @@ internal class GetLessonsInProgressCountImplTest {
     val dao = mockk<LessonProgressDataSource>()
   }
 
-
   @BeforeEach
   fun beforeEach() {
     clearAllMocks()

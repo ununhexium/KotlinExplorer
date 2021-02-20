@@ -23,13 +23,15 @@ object Dependencies {
   val firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
   val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx"
 
-  val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
-  val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
-
   val hilt_android = "com.google.dagger:hilt-android:${Versions.dagger}"
   val hilt_lifecycle_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt}"
 
-  val kotlinCoroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutinesPlayServices}"
+  val kotlinCoroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines}"
+
+  val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+
+  val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
+  val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
 
   val room_runtime = "androidx.room:room-runtime:${Versions.room}"
   val room = "androidx.room:room-ktx:${Versions.room}"

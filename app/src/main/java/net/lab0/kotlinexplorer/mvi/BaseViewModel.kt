@@ -3,6 +3,7 @@ package net.lab0.kotlinexplorer.mvi
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
 import net.lab0.kotlinexplorer.utils.Do
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,6 +17,7 @@ import kotlinx.coroutines.withContext
 abstract class BaseViewModel<Event, State>(
     initialUiState: Event,
     initialDataState: State,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
   val TAG: String = this::class.java.canonicalName ?: "NoCanonicalName"
 
@@ -50,7 +52,6 @@ abstract class BaseViewModel<Event, State>(
           handleResult(resource.resource)
           _errors.value = ObserveOnce(resource.message)
         }
-        Resource.Empty -> Unit
       }
     }
   }
@@ -66,7 +67,7 @@ abstract class BaseViewModel<Event, State>(
     jobsQueue.computeIfAbsent(event) {
       viewModelScope.launch {
         _loading.value = true
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
           doJobForEvent(event)
           jobsQueue.remove(event)
           _loading.value = jobsQueue.isNotEmpty()
@@ -76,10 +77,10 @@ abstract class BaseViewModel<Event, State>(
     }
   }
 
-  fun emitFastEvent(event: Event) {
-    jobsQueue.computeIfAbsent(event) {
+  fun emitFastEvent(event: Event): Job {
+    return jobsQueue.computeIfAbsent(event) {
       viewModelScope.launch {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
           doJobForEvent(event)
           jobsQueue.remove(event)
         }
