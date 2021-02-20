@@ -27,7 +27,6 @@ fun CardWithExpansion(
     card: @Composable RowScope.() -> Unit,
     expansion: @Composable RowScope.() -> Unit,
 ) {
-  // TODO: the card should be above the expansion, in a box, with
   Row(modifier = Modifier.padding(4.dp),) {
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth(),

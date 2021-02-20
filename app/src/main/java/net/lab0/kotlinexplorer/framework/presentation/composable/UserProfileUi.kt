@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.DeferredResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ThinButton
 import java.util.*
 
 @Composable
@@ -81,16 +82,14 @@ fun UserProfileUi(
             text = email,
             style = MaterialTheme.typography.h6
         )
-        // TODO: flat button
-        Button(
+
+        DefaultVerticalSpacer()
+
+        ThinButton(
+            text = "Log out".toUpperCase(Locale.getDefault()),
             modifier = Modifier.align(Alignment.CenterHorizontally),
             onClick = logOut,
-        ) {
-          Text(
-              text = "Log out".toUpperCase(Locale.getDefault()),
-              style = MaterialTheme.typography.h6,
-          )
-        }
+        )
       } else {
         // TODO: flat button
         Button(

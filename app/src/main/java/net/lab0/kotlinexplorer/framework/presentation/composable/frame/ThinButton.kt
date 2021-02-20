@@ -18,10 +18,11 @@ import java.util.*
 @Composable
 fun ThinButton(
     text: String,
+    modifier: Modifier = Modifier,
     highlight: Boolean = true,
     onClick: () -> Unit,
 ) {
-  Surface(color = MaterialTheme.colors.surface) {
+  Surface(modifier, color = MaterialTheme.colors.surface) {
     val color = if (highlight) {
       MaterialTheme.colors.primary
     } else {

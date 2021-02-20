@@ -15,12 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.business.domain.Lesson
-import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpacer
 
 @Composable
 fun NextLessonPage(
-    lessonId: String,
     goToChapters: () -> Unit,
     nextLesson: Lesson?,
     goToNextLesson: (() -> Unit)?,
@@ -60,7 +58,6 @@ fun NextLessonPagePreview() {
             color = MaterialTheme.colors.surface
         ) {
           NextLessonPage(
-              "lessonId",
               {},
               null,
               null

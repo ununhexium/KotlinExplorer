@@ -24,21 +24,19 @@ class NextLessonFragment : Fragment() {
 
       it.setContent {
         NextLessonPage(
-            lessonId = args.lessonId,
             goToChapters = {
               findNavController().navigate(
                   NextLessonFragmentDirections.actionNextLessonFragmentToChapterListFragment()
               )
             },
-            nextLesson = nextLessonInChapter,
-            goToNextLesson = {
-              nextLessonInChapter?.let { lesson ->
-                findNavController().navigate(
-                    NextLessonFragmentDirections.actionNextLessonFragmentToLessonFragment(lesson.id)
-                )
-              }
-            }
-        )
+            nextLesson = nextLessonInChapter
+        ) {
+          nextLessonInChapter?.let { lesson ->
+            findNavController().navigate(
+                NextLessonFragmentDirections.actionNextLessonFragmentToLessonFragment(lesson.id)
+            )
+          }
+        }
       }
     }
   }
