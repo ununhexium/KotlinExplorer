@@ -11,4 +11,3 @@ local.properties
 
 # ANTLR generated files
 /grammar/gen
-*.tokens
