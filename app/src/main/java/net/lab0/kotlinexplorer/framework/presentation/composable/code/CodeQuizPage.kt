@@ -128,7 +128,7 @@ fun CodeQuestionQuizPagePreview_selectedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            modelSelected,
+            modelSelected2,
             codeColoration = false,
         ) {}
       }
@@ -154,7 +154,7 @@ fun CodeQuestionQuizPagePreview_validatedAnswer() {
     Surface {
       Column {
         CodeQuizPage(
-            modelValidated,
+            modelValidated2,
             codeColoration = false,
         ) {}
       }

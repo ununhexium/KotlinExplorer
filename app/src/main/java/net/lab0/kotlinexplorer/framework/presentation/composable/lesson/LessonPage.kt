@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 fun LessonPage(
     progress: Float,
     title: String,
+    onBack: () -> Unit,
     page: @Composable ColumnScope.() -> Unit,
 ) {
   Column(
@@ -32,7 +33,7 @@ fun LessonPage(
   ) {
     LessonPageHeader(
         title = title,
-        backAction = { /*TODO: back action to previous page (but no second chance for the test)*/ },
+        backAction = onBack,
         reportMistakeAction = { /*TODO report mistake*/ }
     )
     page()
@@ -51,7 +52,8 @@ fun LessonPagePreview() {
       Column {
         LessonPage(
             0.116f,
-            "Somewhere over the rainbow"
+            "Somewhere over the rainbow",
+            {}
         ) {
           Surface(
               modifier = Modifier.fillMaxSize(),
@@ -78,7 +80,11 @@ fun LessonPagePreview_singleButton() {
         Surface(
             color = MaterialTheme.colors.surface
         ) {
-          LessonPage(progress = 1.0f, title = "Foo") {
+          LessonPage(
+              progress = 1.0f,
+              title = "Foo",
+              onBack = {}
+          ) {
             Button(
                 onClick = {},
                 modifier = Modifier.align(Alignment.CenterHorizontally),

@@ -60,7 +60,8 @@ class LessonFragment(
         ) {
           LessonPage(
               progress = state.progress,
-              state.currentPage?.title ?: "Finished"
+              title = state.currentPage?.title ?: "Finished",
+              onBack = {},
           ) {
             val page = state.currentPage
             if (page != null) {

@@ -81,7 +81,7 @@ class ChapterListFragment
             },
             onPlay = { _, lessonId ->
               val action = ChapterListFragmentDirections
-                  .actionChapterListFragmentToLessonFragment(lessonId)
+                  .actionChapterListFragmentToLessonPageFragment(lessonId, 0)
 
               findNavController().navigate(action)
             }

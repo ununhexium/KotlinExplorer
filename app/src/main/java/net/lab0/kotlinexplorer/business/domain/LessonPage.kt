@@ -1,5 +1,7 @@
 package net.lab0.kotlinexplorer.business.domain
 
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
+
 sealed class LessonPage(
     val title: String,
 ) {
@@ -19,7 +21,24 @@ sealed class LessonPage(
       val confusion: List<String> = listOf(),
   ) : LessonPage(
       title
-  )
+  ) {
+    val answerSnippetanswerSnippet = KotlinCodeWithBlanksImpl(snippet).fill(
+        answer
+            .mapIndexed { index, it -> index to it }
+            .toMap()
+    )
+
+    companion object {
+      val EMPTY = CodeQuestionPage(
+          title = "",
+          question = "",
+          snippet = "",
+          explanation = "",
+          answer = listOf(),
+          confusion = listOf(),
+      )
+    }
+  }
 
   class MultipleChoice(
       title: String,

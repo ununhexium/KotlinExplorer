@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_chapterListFragment_to_profile_graph"
             app:destination="@id/profile_graph" />
+        <action
+            android:id="@+id/action_chapterListFragment_to_lessonPageFragment"
+            app:destination="@id/lessonPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/lessonFragment"
@@ -53,5 +56,25 @@
         <argument
             android:name="lessonId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessonPageFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.CodeQuestionPageFragment"
+        android:label="LessonPageFragment" >
+        <action
+            android:id="@+id/action_lessonPageFragment_self"
+            app:destination="@id/lessonPageFragment" />
+        <argument
+            android:name="lessonId"
+            app:argType="string" />
+        <argument
+            android:name="page"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_lessonPageFragment_to_lessonFeedbackFragment"
+            app:destination="@id/lessonFeedbackFragment" />
+        <action
+            android:id="@+id/action_lessonPageFragment_to_chapterListFragment"
+            app:destination="@id/chapterListFragment" />
     </fragment>
 </navigation>
