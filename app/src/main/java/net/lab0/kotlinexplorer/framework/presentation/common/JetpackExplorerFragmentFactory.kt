@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.InfoPageFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonFirstPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment
 import javax.inject.Inject
@@ -30,6 +32,14 @@ constructor(
 
         CodeQuestionPageFragment::class.java.name -> {
           CodeQuestionPageFragment(viewModelFactory)
+        }
+
+        InfoPageFragment::class.java.name -> {
+          InfoPageFragment(viewModelFactory)
+        }
+
+        LessonFirstPageFragment::class.java.name -> {
+          LessonFirstPageFragment(viewModelFactory)
         }
 
         else -> {

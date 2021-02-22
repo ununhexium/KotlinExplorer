@@ -8,6 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
@@ -18,9 +19,11 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDr
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
 import net.lab0.kotlinexplorer.utils.Do
 
-class InfoPageFragment : Fragment() {
-  val args: InfoPageFragmentArgs by navArgs()
-  val activityViewModel: LessonViewModel by activityViewModels()
+class InfoPageFragment(
+    private val viewModelFactory: ViewModelProvider.Factory,
+) : Fragment() {
+  private val args: InfoPageFragmentArgs by navArgs()
+  private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
 
   override fun onCreateView(
       inflater: LayoutInflater,

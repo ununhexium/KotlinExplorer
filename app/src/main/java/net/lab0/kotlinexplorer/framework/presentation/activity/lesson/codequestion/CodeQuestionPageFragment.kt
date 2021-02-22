@@ -27,7 +27,7 @@ class CodeQuestionPageFragment(
     private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<LessonPageUiEvent, LessonPageUiState>() {
   private val args: CodeQuestionPageFragmentArgs by navArgs()
-  val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
+  private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
   override val viewModel: CodeQuestionPageFragmentViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {

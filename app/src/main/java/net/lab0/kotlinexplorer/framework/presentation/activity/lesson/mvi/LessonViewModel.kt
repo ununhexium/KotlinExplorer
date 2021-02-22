@@ -18,7 +18,9 @@ class LessonViewModel(
 
   override suspend fun doJobForEvent(event: LessonStateEvent) {
     Do exhaustive when (event) {
+
       LessonStateEvent.Empty -> Unit
+
       LessonStateEvent.SaveLessonProgress ->
         processResource(
             saveLessonProgress(
@@ -28,9 +30,8 @@ class LessonViewModel(
                     uiDataState.value.answersCount(CodeAnswerState.FAILURE),
                 )
             )
-        ) {
+        ) {}
 
-        }
       is LessonStateEvent.CountMark ->
         updateUi {
           it.copy(
@@ -46,4 +47,9 @@ class LessonViewModel(
   fun countMark(lessonPage: LessonPage, correctness: CodeAnswerState) =
       emitFastEvent(LessonStateEvent.CountMark(lessonPage, correctness))
 
+  fun init(lesson:Lesson) {
+    updateUi {
+      it.copy(lesson = lesson)
+    }
+  }
 }
