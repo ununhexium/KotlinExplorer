@@ -33,7 +33,7 @@ class NextLessonFragment : Fragment() {
         ) {
           nextLessonInChapter?.let { lesson ->
             findNavController().navigate(
-                NextLessonFragmentDirections.actionNextLessonFragmentToLessonFragment(lesson.id)
+                NextLessonFragmentDirections.actionNextLessonFragmentToLessonFirstPage(lesson.id)
             )
           }
         }

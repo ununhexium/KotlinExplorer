@@ -8,20 +8,21 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument
-import org.commonmark.node.Node
-import org.commonmark.parser.Parser
+import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseMD
 
 @Composable
 fun InfoLessonPage(
-    node: Node,
+    markdownAsString: String,
     nextPage: () -> Unit,
 ) {
   LessonPageBody(
       question = {
-        MDDocument(document = node)
+        val markdown = remember(markdownAsString) { parseMD(markdownAsString) }
+        MDDocument(document = markdown)
       },
       controlBar = {
         ControlBar {
@@ -42,8 +43,7 @@ fun InfoLessonPagePreview() {
     Surface {
       Column {
         InfoLessonPage(
-            Parser.builder().build().parse(
-                """
+            """
                   |# Title
                   |
                   |1. One
@@ -52,7 +52,6 @@ fun InfoLessonPagePreview() {
                   |* true
                   |* false
                 """.trimMargin()
-            )
         ) {}
       }
     }

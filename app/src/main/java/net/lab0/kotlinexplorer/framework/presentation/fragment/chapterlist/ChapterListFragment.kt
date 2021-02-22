@@ -80,18 +80,14 @@ class ChapterListFragment
               )
             },
             onPlay = { _, lessonId ->
-              val action = ChapterListFragmentDirections
-                  .actionChapterListFragmentToLessonPageFragment(lessonId, 0)
-
-              findNavController().navigate(action)
+              findNavController().navigate(
+                  ChapterListFragmentDirections
+                      .actionChapterListFragmentToLessonGraph(lessonId)
+              )
             }
         )
 
       }
     }
-  }
-
-  companion object {
-    private const val RC_SIGN_IN = 123
   }
 }

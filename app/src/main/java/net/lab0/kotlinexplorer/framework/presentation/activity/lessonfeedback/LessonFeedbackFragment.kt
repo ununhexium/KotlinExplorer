@@ -14,13 +14,12 @@ import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.EvaluationTopic
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.LessonFeedbackPage
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.LessonFragmentArgs
 import net.lab0.kotlinexplorer.utils.Do
 
 class LessonFeedbackFragment(
     private val viewModelFactory: ViewModelProvider.Factory,
 ) : Fragment() {
-  private val args: LessonFragmentArgs by navArgs()
+  private val args: LessonFeedbackFragmentArgs by navArgs()
   val viewModel: LessonFeedbackViewModel by viewModels { viewModelFactory }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +68,7 @@ class LessonFeedbackFragment(
             },
             onSkip = {
               goToNextLessonFragment()
-            }
+            },
         )
       }
     }

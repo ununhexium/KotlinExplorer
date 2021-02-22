@@ -3,7 +3,6 @@ package net.lab0.kotlinexplorer.framework.presentation.common
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.LessonFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment
@@ -22,10 +21,6 @@ constructor(
       when (className) {
         ChapterListFragment::class.java.name -> {
           ChapterListFragment(viewModelFactory)
-        }
-
-        LessonFragment::class.java.name -> {
-          LessonFragment(viewModelFactory)
         }
 
         LessonFeedbackFragment::class.java.name -> {

@@ -8,73 +8,104 @@
         android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment"
         android:label="ChapterListFragment">
         <action
-            android:id="@+id/action_chapterListFragment_to_lessonFragment"
-            app:destination="@id/lessonFragment" />
-        <action
             android:id="@+id/action_chapterListFragment_to_profile_graph"
             app:destination="@id/profile_graph" />
         <action
-            android:id="@+id/action_chapterListFragment_to_lessonPageFragment"
-            app:destination="@id/lessonPageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/lessonFragment"
-        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.LessonFragment"
-        android:label="LessonFragment">
-        <argument
-            android:name="lessonId"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_lessonFragment_self"
-            app:destination="@id/lessonFragment" />
-        <action
-            android:id="@+id/action_lessonFragment_to_lessonFeedbackFragment"
-            app:destination="@id/lessonFeedbackFragment" />
+            android:id="@+id/action_chapterListFragment_to_lesson_graph"
+            app:destination="@id/lesson_graph" />
     </fragment>
     <include app:graph="@navigation/profile_graph" />
-    <fragment
-        android:id="@+id/lessonFeedbackFragment"
-        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment"
-        android:label="LessonFeedbackFragment" >
+    <navigation android:id="@+id/lesson_graph"
+        app:startDestination="@id/lessonFirstPage">
         <argument
             android:name="lessonId"
             app:argType="string" />
-        <action
-            android:id="@+id/action_lessonFeedbackFragment_to_nextLessonFragment"
-            app:destination="@id/nextLessonFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/nextLessonFragment"
-        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.NextLessonFragment"
-        android:label="NextLessonFragment" >
-        <action
-            android:id="@+id/action_nextLessonFragment_to_chapterListFragment"
-            app:destination="@id/chapterListFragment" />
-        <action
-            android:id="@+id/action_nextLessonFragment_to_lessonFragment"
-            app:destination="@id/lessonFragment" />
-        <argument
-            android:name="lessonId"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/lessonPageFragment"
-        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.CodeQuestionPageFragment"
-        android:label="LessonPageFragment" >
-        <action
-            android:id="@+id/action_lessonPageFragment_self"
-            app:destination="@id/lessonPageFragment" />
-        <argument
-            android:name="lessonId"
-            app:argType="string" />
-        <argument
-            android:name="page"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_lessonPageFragment_to_lessonFeedbackFragment"
-            app:destination="@id/lessonFeedbackFragment" />
-        <action
-            android:id="@+id/action_lessonPageFragment_to_chapterListFragment"
-            app:destination="@id/chapterListFragment" />
-    </fragment>
+        <fragment
+            android:id="@+id/lessonPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.CodeQuestionPageFragment"
+            android:label="LessonPageFragment">
+            <action
+                android:id="@+id/action_lessonPageFragment_self"
+                app:destination="@id/lessonPageFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <argument
+                android:name="page"
+                app:argType="integer" />
+            <action
+                android:id="@+id/action_lessonPageFragment_to_lessonFeedbackFragment"
+                app:destination="@id/lessonFeedbackFragment" />
+            <action
+                android:id="@+id/action_lessonPageFragment_pop"
+                app:popUpTo="@id/lessonPageFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_lessonPageFragment_to_lessonInfoPageFragment"
+                app:destination="@id/lessonInfoPageFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/lessonFeedbackFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment"
+            android:label="LessonFeedbackFragment">
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_lessonFeedbackFragment_to_nextLessonFragment"
+                app:destination="@id/nextLessonFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/nextLessonFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.NextLessonFragment"
+            android:label="NextLessonFragment">
+            <action
+                android:id="@+id/action_nextLessonFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_nextLessonFragment_to_lessonFirstPage"
+                app:destination="@id/lessonFirstPage" />
+        </fragment>
+        <fragment
+            android:id="@+id/lessonFirstPage"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonfirstpage.LessonFirstPageFragment"
+            android:label="LessonFirstPage" >
+            <action
+                android:id="@+id/action_lessonFirstPage_to_lessonPageFragment"
+                app:destination="@id/lessonPageFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_lessonFirstPage_to_lessonInfoPageFragment"
+                app:destination="@id/lessonInfoPageFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/lessonInfoPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessoninfopage.LessonInfoPageFragment"
+            android:label="LessonInfoPageFragment" >
+            <action
+                android:id="@+id/action_lessonInfoPageFragment_self"
+                app:destination="@id/lessonInfoPageFragment" />
+            <action
+                android:id="@+id/action_lessonInfoPageFragment_to_lessonPageFragment"
+                app:destination="@id/lessonPageFragment" />
+            <action
+                android:id="@+id/action_lessonInfoPageFragment_to_lessonFeedbackFragment"
+                app:destination="@id/lessonFeedbackFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <argument
+                android:name="page"
+                app:argType="integer" />
+            <action
+                android:id="@+id/action_lessonInfoPageFragment_pop"
+                app:popUpTo="@id/lessonInfoPageFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+    </navigation>
 </navigation>

@@ -13,6 +13,7 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonfirstpage.LessonFirstPageFragmentDirections
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi.LessonPageUiEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi.LessonPageUiState
 import net.lab0.kotlinexplorer.mvi.BaseFragment
@@ -52,7 +53,7 @@ class CodeQuestionPageFragment : BaseFragment<LessonPageUiEvent, LessonPageUiSta
             onBack = {
               findNavController().navigate(
                   CodeQuestionPageFragmentDirections
-                      .actionLessonPageFragmentToChapterListFragment()
+                      .actionLessonPageFragmentPop()
               )
             }
         ) {
@@ -66,7 +67,12 @@ class CodeQuestionPageFragment : BaseFragment<LessonPageUiEvent, LessonPageUiSta
                     .getOrNull(nextPageIndex)
 
                 Do exhaustive when (maybeNextPage) {
-                  is LessonPage.InfoPage -> TODO("Go to info page fragment")
+                  is LessonPage.InfoPage ->
+                    findNavController().navigate(
+                        CodeQuestionPageFragmentDirections
+                            .actionLessonPageFragmentToLessonInfoPageFragment(args.lessonId, nextPageIndex)
+                    )
+
                   is LessonPage.CodeQuestionPage ->
                     findNavController().navigate(
                         CodeQuestionPageFragmentDirections.actionLessonPageFragmentSelf(
