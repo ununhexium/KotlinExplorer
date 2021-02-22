@@ -54,13 +54,13 @@ class LessonFirstPageFragment : Fragment() {
                   is LessonPage.InfoPage ->
                     findNavController().navigate(
                         LessonFirstPageFragmentDirections
-                            .actionLessonFirstPageToLessonInfoPageFragment(args.lessonId, 0)
+                            .actionLessonFirstPageToInfoPageFragment(args.lessonId, 0)
                     )
 
                   is LessonPage.CodeQuestionPage ->
                     findNavController().navigate(
                         LessonFirstPageFragmentDirections
-                            .actionLessonFirstPageToLessonPageFragment(args.lessonId, 0)
+                            .actionLessonFirstPageToCodeQuestionPageFragment(args.lessonId, 0)
                     )
 
                   is LessonPage.MultipleChoice -> TODO("Multi choice page")

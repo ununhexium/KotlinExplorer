@@ -21,12 +21,12 @@
             android:name="lessonId"
             app:argType="string" />
         <fragment
-            android:id="@+id/lessonPageFragment"
+            android:id="@+id/codeQuestionPageFragment"
             android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.CodeQuestionPageFragment"
-            android:label="LessonPageFragment">
+            android:label="CodeQuestionPageFragment">
             <action
-                android:id="@+id/action_lessonPageFragment_self"
-                app:destination="@id/lessonPageFragment" />
+                android:id="@+id/action_lessonCodeQuestionPageFragment_self"
+                app:destination="@id/codeQuestionPageFragment" />
             <argument
                 android:name="lessonId"
                 app:argType="string" />
@@ -34,13 +34,13 @@
                 android:name="page"
                 app:argType="integer" />
             <action
-                android:id="@+id/action_lessonPageFragment_to_lessonFeedbackFragment"
+                android:id="@+id/action_codeQuestionPageFragment_to_lessonFeedbackFragment"
                 app:destination="@id/lessonFeedbackFragment" />
             <action
-                android:id="@+id/action_lessonPageFragment_to_lessonInfoPageFragment"
-                app:destination="@id/lessonInfoPageFragment" />
+                android:id="@+id/action_codeQuestionPageFragment_to_infoPageFragment"
+                app:destination="@id/infoPageFragment" />
             <action
-                android:id="@+id/action_lessonPageFragment_to_chapterListFragment"
+                android:id="@+id/action_codeQuestionPageFragment_to_chapterListFragment"
                 app:destination="@id/chapterListFragment" />
         </fragment>
         <fragment
@@ -73,27 +73,27 @@
             android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonfirstpage.LessonFirstPageFragment"
             android:label="LessonFirstPage" >
             <action
-                android:id="@+id/action_lessonFirstPage_to_lessonPageFragment"
-                app:destination="@id/lessonPageFragment" />
+                android:id="@+id/action_lessonFirstPage_to_codeQuestionPageFragment"
+                app:destination="@id/codeQuestionPageFragment" />
             <argument
                 android:name="lessonId"
                 app:argType="string" />
             <action
-                android:id="@+id/action_lessonFirstPage_to_lessonInfoPageFragment"
-                app:destination="@id/lessonInfoPageFragment" />
+                android:id="@+id/action_lessonFirstPage_to_infoPageFragment"
+                app:destination="@id/infoPageFragment" />
         </fragment>
         <fragment
-            android:id="@+id/lessonInfoPageFragment"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessoninfopage.LessonInfoPageFragment"
-            android:label="LessonInfoPageFragment" >
+            android:id="@+id/infoPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessoninfopage.InfoPageFragment"
+            android:label="InfoPageFragment">
             <action
-                android:id="@+id/action_lessonInfoPageFragment_self"
-                app:destination="@id/lessonInfoPageFragment" />
+                android:id="@+id/action_infoPageFragment_self"
+                app:destination="@id/infoPageFragment" />
             <action
-                android:id="@+id/action_lessonInfoPageFragment_to_lessonPageFragment"
-                app:destination="@id/lessonPageFragment" />
+                android:id="@+id/action_infoPageFragment_to_codeQuestionPageFragment"
+                app:destination="@id/codeQuestionPageFragment" />
             <action
-                android:id="@+id/action_lessonInfoPageFragment_to_lessonFeedbackFragment"
+                android:id="@+id/action_infoPageFragment_to_lessonFeedbackFragment"
                 app:destination="@id/lessonFeedbackFragment" />
             <argument
                 android:name="lessonId"

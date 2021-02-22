@@ -16,8 +16,8 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDr
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
 import net.lab0.kotlinexplorer.utils.Do
 
-class LessonInfoPageFragment : Fragment() {
-  val args: LessonInfoPageFragmentArgs by navArgs()
+class InfoPageFragment : Fragment() {
+  val args: InfoPageFragmentArgs by navArgs()
 
   override fun onCreateView(
       inflater: LayoutInflater,
@@ -44,7 +44,7 @@ class LessonInfoPageFragment : Fragment() {
               title = lesson.title,
               onBack = {
                 findNavController().navigate(
-                    LessonInfoPageFragmentDirections
+                    InfoPageFragmentDirections
                         .actionLessonInfoPageFragmentToChapterListFragment()
                 )
               }
@@ -56,21 +56,22 @@ class LessonInfoPageFragment : Fragment() {
                   val maybeNextPage = lesson.pages.getOrNull(nextPageIndex)
                   Do exhaustive when (maybeNextPage) {
                     null -> findNavController().navigate(
-                        LessonInfoPageFragmentDirections
-                            .actionLessonInfoPageFragmentToLessonFeedbackFragment(args.lessonId)
+                        InfoPageFragmentDirections
+                            .actionInfoPageFragmentToLessonFeedbackFragment(args.lessonId)
                     )
 
                     is LessonPage.InfoPage ->
                       findNavController().navigate(
-                          LessonInfoPageFragmentDirections
-                              .actionLessonInfoPageFragmentSelf(args.lessonId, nextPageIndex)
+                          InfoPageFragmentDirections
+                              .actionInfoPageFragmentSelf(args.lessonId, nextPageIndex)
                       )
 
                     is LessonPage.CodeQuestionPage ->
                       findNavController().navigate(
-                          LessonInfoPageFragmentDirections
-                              .actionLessonInfoPageFragmentToLessonPageFragment(args.lessonId, nextPageIndex)
+                          InfoPageFragmentDirections
+                              .actionInfoPageFragmentToCodeQuestionPageFragment(args.lessonId, nextPageIndex)
                       )
+
                     is LessonPage.MultipleChoice -> TODO("Multiple choice page")
                   }
                 }

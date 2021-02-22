@@ -53,7 +53,7 @@ class CodeQuestionPageFragment : BaseFragment<LessonPageUiEvent, LessonPageUiSta
             onBack = {
               findNavController().navigate(
                   CodeQuestionPageFragmentDirections
-                      .actionLessonPageFragmentToChapterListFragment()
+                      .actionCodeQuestionPageFragmentToChapterListFragment()
               )
             }
         ) {
@@ -70,12 +70,12 @@ class CodeQuestionPageFragment : BaseFragment<LessonPageUiEvent, LessonPageUiSta
                   is LessonPage.InfoPage ->
                     findNavController().navigate(
                         CodeQuestionPageFragmentDirections
-                            .actionLessonPageFragmentToLessonInfoPageFragment(args.lessonId, nextPageIndex)
+                            .actionCodeQuestionPageFragmentToInfoPageFragment(args.lessonId, nextPageIndex)
                     )
 
                   is LessonPage.CodeQuestionPage ->
                     findNavController().navigate(
-                        CodeQuestionPageFragmentDirections.actionLessonPageFragmentSelf(
+                        CodeQuestionPageFragmentDirections.actionLessonCodeQuestionPageFragmentSelf(
                             args.lessonId,
                             nextPageIndex
                         )
