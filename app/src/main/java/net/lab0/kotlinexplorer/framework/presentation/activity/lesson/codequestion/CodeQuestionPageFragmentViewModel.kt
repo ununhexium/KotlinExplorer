@@ -16,6 +16,7 @@ class CodeQuestionPageFragmentViewModel(
     LessonPageUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf()),
     ioDispatcher
 ) {
+
   override suspend fun doJobForEvent(event: LessonPageUiEvent) {
     Do exhaustive when (event) {
       LessonPageUiEvent.Empty -> Unit
@@ -35,7 +36,7 @@ class CodeQuestionPageFragmentViewModel(
         }
       }
       is LessonPageUiEvent.SelectAnswer -> {
-        if (event.answer in uiDataState.value.possibleChoices.indices) {
+        if (event.answer in uiDataState.value.choices.indices) {
           updateUi {
             it.lockableCopy(selectedAnswers = (it.selectedAnswers + event.answer))
           }
@@ -43,7 +44,6 @@ class CodeQuestionPageFragmentViewModel(
       }
     }
   }
-
 
   fun init(pageIndex:Int, lessonPage: LessonPage.CodeQuestionPage, chapter: Chapter) {
     updateUi {

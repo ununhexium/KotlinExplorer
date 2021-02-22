@@ -28,6 +28,8 @@ sealed class LessonPage(
             .toMap()
     )
 
+    val choices: List<String> = (answer + confusion).shuffled()
+
     companion object {
       val EMPTY = CodeQuestionPage(
           title = "",

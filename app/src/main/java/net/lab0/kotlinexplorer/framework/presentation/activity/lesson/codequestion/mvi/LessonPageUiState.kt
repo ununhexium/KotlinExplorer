@@ -19,29 +19,28 @@ data class LessonPageUiState(
       selectedAnswers: List<Int>? = null,
   ) = if (!locked) {
     LessonPageUiState(
-        this.pageIndex,
-        lessonPage ?: this.lessonPage,
-        this.chapter,
-        selectedAnswers ?: this.selectedAnswers,
+        pageIndex = this.pageIndex,
+        lessonPage = lessonPage ?: this.lessonPage,
+        chapter = this.chapter,
+        selectedAnswers = selectedAnswers ?: this.selectedAnswers,
+        locked = this.locked,
     )
   } else this
 
-  val possibleChoices = lessonPage.answer + lessonPage.confusion
-
   val choices: List<Answer> =
-      possibleChoices.mapIndexed { index, it ->
+      lessonPage.choices.mapIndexed { index, it ->
         Answer(index, it, index in selectedAnswers)
       }
 
   val canUndoOrReset = selectedAnswers.isNotEmpty()
   val canValidate = selectedAnswers.size == lessonPage.answer.size
-  val isCorrectAnswer = selectedAnswers.map { possibleChoices[it] } == lessonPage.answer
+  val isCorrectAnswer = selectedAnswers.map { lessonPage.choices[it] } == lessonPage.answer
   val showAnswer = locked
   val nextBlank: Int = selectedAnswers.size
   val progress: Float = 1f * pageIndex / chapter.lessons.size
   val snippet: String = KotlinCodeWithBlanksImpl(
       lessonPage.snippet
   ).fill(
-      selectedAnswers.mapIndexed { index, it -> index to possibleChoices[it] }.toMap()
+      selectedAnswers.mapIndexed { index, it -> index to lessonPage.choices[it] }.toMap()
   )
 }
