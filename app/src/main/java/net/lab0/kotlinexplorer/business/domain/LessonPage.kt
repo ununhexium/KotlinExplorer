@@ -19,6 +19,7 @@ sealed class LessonPage(
       val explanation: String,
       val answer: List<String>,
       val confusion: List<String> = listOf(),
+      val choices: List<String> = (answer + confusion).shuffled()
   ) : LessonPage(
       title
   ) {
@@ -27,8 +28,6 @@ sealed class LessonPage(
             .mapIndexed { index, it -> index to it }
             .toMap()
     )
-
-    val choices: List<String> = (answer + confusion).shuffled()
 
     companion object {
       val EMPTY = CodeQuestionPage(

@@ -10,11 +10,20 @@ internal class LessonPageUiStateTest {
   @Test
   fun `truth is computed based on the string content, not the chosen indices`() {
     // given
+    val page = LessonPage.CodeQuestionPage(
+        "",
+        "",
+        "",
+        "",
+        answer = listOf("A", "B"),
+        confusion = listOf("A"),
+        choices = listOf("A", "B", "A")
+    )
     val l = LessonPageUiState(
         pageIndex = 0,
-        lessonPage = LessonPage.CodeQuestionPage("", "", "", "", listOf("A", "B"), listOf("A")),
+        lessonPage = page,
         chapter = Chapter.EMPTY,
-        selectedAnswers = listOf(2, 1),
+        selectedAnswers = listOf(2,1),
     )
 
     // then
