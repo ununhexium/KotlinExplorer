@@ -18,7 +18,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.WrongAns
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.MultipleChoiceAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.MultipleChoiceModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.MultipleChoiceModel
 
 @Composable
 fun MultipleChoicePage(

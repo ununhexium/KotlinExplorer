@@ -3,6 +3,7 @@ package net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi
 import com.google.common.truth.Truth.assertThat
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.LessonPageUiState
 import org.junit.jupiter.api.Test
 
 internal class LessonPageUiStateTest {

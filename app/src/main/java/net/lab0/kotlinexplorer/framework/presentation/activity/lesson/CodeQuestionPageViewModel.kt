@@ -1,10 +1,9 @@
-package net.lab0.kotlinexplorer.framework.presentation.fragment.lesson
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import net.lab0.kotlinexplorer.findAndEdit
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
-import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.findAndEdit
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 import net.lab0.kotlinexplorer.utils.cached
 import org.commonmark.parser.Parser
@@ -18,18 +17,6 @@ class CodeQuestionPageViewModel(
     val correctAnswer: List<String>,
     val answerValidator: (List<Answer>) -> Boolean = { false },
 ) {
-  constructor(page: LessonPage.CodeQuestionPage, shuffleAnswers: Boolean = true) : this(
-      page.question,
-      page.snippet,
-      page.explanation,
-      KotlinCodeWithBlanksImpl(page.snippet).placeholderIds.distinct().size,
-      (page.answer + page.confusion)
-          .mapIndexed { index, s -> Answer(index, s, false) }
-          .let { if (shuffleAnswers) it.shuffled() else it },
-      page.answer,
-      { answers -> page.answer == answers.map { it.text } },
-  )
-
   /**
    * For tests and debug
    */

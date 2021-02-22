@@ -22,7 +22,7 @@
             app:argType="string" />
         <fragment
             android:id="@+id/codeQuestionPageFragment"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.CodeQuestionPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragment"
             android:label="CodeQuestionPageFragment">
             <action
                 android:id="@+id/action_lessonCodeQuestionPageFragment_self"
@@ -45,7 +45,7 @@
         </fragment>
         <fragment
             android:id="@+id/lessonFeedbackFragment"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment"
             android:label="LessonFeedbackFragment">
             <argument
                 android:name="lessonId"
@@ -56,7 +56,7 @@
         </fragment>
         <fragment
             android:id="@+id/nextLessonFragment"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.NextLessonFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.NextLessonFragment"
             android:label="NextLessonFragment">
             <action
                 android:id="@+id/action_nextLessonFragment_to_chapterListFragment"
@@ -70,7 +70,7 @@
         </fragment>
         <fragment
             android:id="@+id/lessonFirstPage"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessonfirstpage.LessonFirstPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonFirstPageFragment"
             android:label="LessonFirstPage" >
             <action
                 android:id="@+id/action_lessonFirstPage_to_codeQuestionPageFragment"
@@ -84,7 +84,7 @@
         </fragment>
         <fragment
             android:id="@+id/infoPageFragment"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.lessoninfopage.InfoPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.InfoPageFragment"
             android:label="InfoPageFragment">
             <action
                 android:id="@+id/action_infoPageFragment_self"

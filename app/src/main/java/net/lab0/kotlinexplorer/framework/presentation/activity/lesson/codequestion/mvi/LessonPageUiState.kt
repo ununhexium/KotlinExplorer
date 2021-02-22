@@ -1,10 +1,10 @@
-package net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi
 
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 import net.lab0.kotlinexplorer.mvi.UiState
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer as CompAnswer
 
 data class LessonPageUiState(
     val pageIndex: Int,
@@ -28,9 +28,9 @@ data class LessonPageUiState(
 
   val possibleChoices = lessonPage.answer + lessonPage.confusion
 
-  val choices: List<CompAnswer> =
+  val choices: List<Answer> =
       possibleChoices.mapIndexed { index, it ->
-        CompAnswer(index, it, index in selectedAnswers)
+        Answer(index, it, index in selectedAnswers)
       }
 
   val canUndoOrReset = selectedAnswers.isNotEmpty()

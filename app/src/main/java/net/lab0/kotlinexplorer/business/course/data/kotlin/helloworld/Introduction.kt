@@ -11,11 +11,11 @@ object Introduction : LessonImpl(
             title = "Introduction",
             """
 In this chapter, you'll learn how to write the smallest possible 
-program that prints `Hello World` to the user.
+program that prints `Hello "World"` to the user.
 
 ```kotlin
 fun main() {
-    println("Hello World")
+    println("Hello "World"")
 }
 ```
 

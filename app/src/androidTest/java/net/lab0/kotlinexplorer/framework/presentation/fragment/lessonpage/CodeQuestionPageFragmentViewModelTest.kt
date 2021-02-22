@@ -10,7 +10,8 @@ import kotlinx.coroutines.test.setMain
 import net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld.HelloWorldChapter
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi.LessonPageUiState
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragmentViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.LessonPageUiState
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

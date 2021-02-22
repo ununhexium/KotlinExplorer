@@ -11,7 +11,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeInputControlBar
@@ -21,8 +20,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPa
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseMD
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lesson.CodeQuestionPageViewModel
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.CodeQuestionPageFragmentViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragmentViewModel
 import org.commonmark.node.Node
 
 @Composable
@@ -140,14 +138,8 @@ private fun CodeQuestionPart2(
   )
 }
 
-val modelSelected2 = CodeQuestionPageViewModel(
-    "Why?",
-    "val i = 0",
-    "Because",
-    listOf("a"),
-    listOf("b", "c")
-).also {
-  it.select(it.possibleAnswers.value.first())
+val modelSelected2 = CodeQuestionPageFragmentViewModel().also {
+  it.select(0)
 }
 
 @Preview
@@ -156,25 +148,21 @@ fun CodeQuestionQuizPage2Preview_selectedAnswer() {
   MaterialTheme {
     Surface {
       Column {
-        CodeQuizPage(
-            modelSelected2,
-            codeColoration = false,
-        ) {}
+        CodeQuizPage2(
+            model = modelSelected2,
+            nextQuestion = {},
+            onSelect = {},
+            codeColoration = false
+        )
       }
     }
   }
 }
 
-val modelValidated2 = CodeQuestionPageViewModel(
-    "Why?",
-    "val i = 0",
-    "Because",
-    listOf("a"),
-).also {
-  it.select(it.possibleAnswers.value.first())
+val modelValidated2 = CodeQuestionPageFragmentViewModel().also {
+  it.select(0)
   it.validate()
 }
-
 
 @Preview
 @Composable
@@ -182,10 +170,12 @@ fun CodeQuestionQuizPage2Preview_validatedAnswer() {
   MaterialTheme {
     Surface {
       Column {
-        CodeQuizPage(
-            modelValidated2,
+        CodeQuizPage2(
+            model = modelValidated2,
+            nextQuestion = {},
+            onSelect = {},
             codeColoration = false,
-        ) {}
+        )
       }
     }
   }

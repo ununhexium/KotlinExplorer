@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.presentation.fragment.lesson
 
 import com.google.common.truth.Truth.assertThat
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.MultipleChoiceModel
 import org.junit.jupiter.api.Test
 
 internal class MultipleChoiceModelTest {

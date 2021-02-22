@@ -1,11 +1,11 @@
-package net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi.LessonPageUiEvent
-import net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi.LessonPageUiState
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.LessonPageUiEvent
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.LessonPageUiState
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
 

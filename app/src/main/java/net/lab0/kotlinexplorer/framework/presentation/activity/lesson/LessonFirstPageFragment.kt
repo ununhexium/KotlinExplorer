@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.fragment.lessonfirstpage
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback
 
 import android.os.Bundle
 import android.view.LayoutInflater

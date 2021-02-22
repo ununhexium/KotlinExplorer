@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.mvi
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi
 
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating

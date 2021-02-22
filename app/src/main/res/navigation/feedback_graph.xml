@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/lessonFeedbackFragment2"
-        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment"
         android:label="LessonFeedbackFragment" />
 </navigation>

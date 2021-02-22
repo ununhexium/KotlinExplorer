@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.fragment.lessonpage.mvi
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi
 
 import net.lab0.kotlinexplorer.mvi.UiEvent
 

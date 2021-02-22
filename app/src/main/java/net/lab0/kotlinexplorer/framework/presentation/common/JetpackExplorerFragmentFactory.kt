@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.LessonFeedbackFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -25,6 +26,10 @@ constructor(
 
         LessonFeedbackFragment::class.java.name -> {
           LessonFeedbackFragment(viewModelFactory)
+        }
+
+        CodeQuestionPageFragment::class.java.name -> {
+          CodeQuestionPageFragment(viewModelFactory)
         }
 
         else -> {

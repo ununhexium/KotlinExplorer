@@ -1,11 +1,11 @@
-package net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback
+package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback
 
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
-import net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.mvi.LessonFeedbackEvent
-import net.lab0.kotlinexplorer.framework.presentation.activity.lessonfeedback.mvi.LessonFeedbackState
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi.LessonFeedbackEvent
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi.LessonFeedbackState
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.EvaluationTopic
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
