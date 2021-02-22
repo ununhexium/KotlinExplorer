@@ -45,7 +45,7 @@ class LessonInfoPageFragment : Fragment() {
               onBack = {
                 findNavController().navigate(
                     LessonInfoPageFragmentDirections
-                        .actionLessonInfoPageFragmentPop()
+                        .actionLessonInfoPageFragmentToChapterListFragment()
                 )
               }
           ) {

@@ -37,12 +37,11 @@
                 android:id="@+id/action_lessonPageFragment_to_lessonFeedbackFragment"
                 app:destination="@id/lessonFeedbackFragment" />
             <action
-                android:id="@+id/action_lessonPageFragment_pop"
-                app:popUpTo="@id/lessonPageFragment"
-                app:popUpToInclusive="true" />
-            <action
                 android:id="@+id/action_lessonPageFragment_to_lessonInfoPageFragment"
                 app:destination="@id/lessonInfoPageFragment" />
+            <action
+                android:id="@+id/action_lessonPageFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
         </fragment>
         <fragment
             android:id="@+id/lessonFeedbackFragment"
@@ -103,9 +102,8 @@
                 android:name="page"
                 app:argType="integer" />
             <action
-                android:id="@+id/action_lessonInfoPageFragment_pop"
-                app:popUpTo="@id/lessonInfoPageFragment"
-                app:popUpToInclusive="true" />
+                android:id="@+id/action_lessonInfoPageFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
         </fragment>
     </navigation>
 </navigation>
