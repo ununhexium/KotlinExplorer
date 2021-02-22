@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.style.TextAlign
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -37,15 +39,18 @@ class LessonFirstPageFragment : Fragment() {
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
           Text(
-              modifier = Modifier.align(Alignment.CenterHorizontally),
+              modifier = Modifier
+                  .fillMaxWidth()
+                  .align(Alignment.CenterHorizontally),
               text = lesson.title,
-              style = MaterialTheme.typography.h3
+              textAlign = TextAlign.Center,
+              style = MaterialTheme.typography.h3,
           )
           Button(
               modifier = Modifier.align(Alignment.CenterHorizontally),
               onClick = {
                 val firstPage = lesson.pages.first()
-                Do exhaustive when(firstPage) {
+                Do exhaustive when (firstPage) {
                   is LessonPage.InfoPage ->
                     findNavController().navigate(
                         LessonFirstPageFragmentDirections
