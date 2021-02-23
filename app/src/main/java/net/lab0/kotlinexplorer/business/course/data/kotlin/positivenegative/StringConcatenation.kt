@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
+import net.lab0.kotlinexplorer.business.course.data.kotlin.dollar
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage.CodeQuestionPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
@@ -40,25 +41,25 @@ val s = "Kotlin is ${p(0)}${p(1)}age${p(2)} years old."
 // or $kotlinsV1Age since version 1.0
 """,
             explanation = """
-Each value in Kotlin can be converted to a `String`.
+Any value in Kotlin can be converted to a `String`.
 
-The easier way to do that the string template syntax. `${'$'}{}`
+The easy way is to use the string template syntax. `$dollar{}`
 
 ```kotlin
 val g: Boolean = true
-val gString = "${'$'}{g}"  // "true"
+val gString = "$dollar{g}"  // "true"
 ```
 
 ```kotlin
 val position: Int = 69
-val nice = "${'$'}{position}"  // "69"
+val nice = "$dollar{position}"  // "69"
 ```
 
 ```kotlin
 val s: String = "world"
 
 // "Hello world"
-val hello = "Hello ${'$'}{s}" 
+val hello = "Hello $dollar{s}" 
 ```
 """,
             answer = listOf("$", "{", "}"),
@@ -79,19 +80,19 @@ Later we'll see when and why it can fail. But we need to learn more to understan
  
 ```kotlin
 val g = true
-val gString = "${'$'}g"  // "true"
+val gString = "${dollar}g"  // "true"
 ```
 
 ```kotlin
 val position = 69
-val nice = "${'$'}position"  // "69"
+val nice = "${dollar}position"  // "69"
 ```
 
 ```kotlin
 val s = "world"
 
 // "Hello world"
-val hello = "Hello ${'$'}s" 
+val hello = "Hello ${dollar}s" 
 ```
 """,
             answer = listOf("$"),
@@ -103,10 +104,10 @@ CodeQuestionPage(
 Put "4" in `s`.
 """,
             snippet = """
-val s = "${'$'}{ 2 ${p(0)} 2 }"
+val s = "$dollar{ 2 ${p(0)} 2 }"
 """,
             explanation = """
-`${'$'}{...}` can contain any Kotlin code.
+`$dollar{...}` can contain any Kotlin code.
 
 The code inside the curly brackets `{}` will be executed and 
 the result will be transformed to a string.
@@ -117,17 +118,17 @@ the result will be transformed to a string.
         InfoPage(
             "Summary",
             """
-Strings can be concatenated either with `+` for simple cases or with `${'$'}{}` for more complex cases.
+Strings can be concatenated either with `+` for simple cases or with `$dollar{}` for more complex cases.
 
 All the Kotlin data types have a `String` representation.
 
-`${'$'}{}` can contain any Kotlin code.
+`$dollar{}` can contain any Kotlin code.
 This code will be executed before it's transformed to a `String`.
 
 
 ```kotlin
 println(
-  "${'$'}{ 1 + 2 } deep ${'$'}{ 3 + 2 } you."
+  "$dollar{ 1 + 2 } deep $dollar{ 3 + 2 } you."
 )
 ```
 """

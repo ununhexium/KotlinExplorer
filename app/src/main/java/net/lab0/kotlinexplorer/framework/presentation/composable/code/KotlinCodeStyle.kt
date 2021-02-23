@@ -49,7 +49,7 @@ val DefaultCodeStyle = object: CodeStyle<KotlinHighlight> {
     override val activePlaceholderBackgroundColor = Color(0xFFD9E73F)
 
     override val foregroundColor = Color(0xffA9B7C6)
-    override val gutterForegroundColor = Color(0xFF5B6265)
+    override val gutterForegroundColor = Color(0xFF9FACB2)
     override val placeholderForegroundColor = Color(0xFF000000)
     override val activePlaceholderForegroundColor = Color(0xFF000000)
 

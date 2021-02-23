@@ -1,7 +1,6 @@
 package net.lab0.kotlinexplorer.business.domain
 
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 
 sealed class LessonPage(
     val title: String,

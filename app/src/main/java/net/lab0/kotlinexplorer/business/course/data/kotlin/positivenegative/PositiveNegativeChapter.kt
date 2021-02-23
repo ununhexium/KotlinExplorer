@@ -4,7 +4,7 @@ import net.lab0.kotlinexplorer.business.domain.ChapterImpl
 
 object PositiveNegativeChapter : ChapterImpl(
     id = "kotlin.positivenegative",
-    title = "+ or -",
+    title = "Positive or negative",
     description = "Tell if a number is positive or negative",
     lessons = listOf(
         Introduction,

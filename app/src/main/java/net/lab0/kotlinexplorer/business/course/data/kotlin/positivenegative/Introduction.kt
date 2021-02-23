@@ -13,24 +13,32 @@ object Introduction: LessonImpl(
             """
 In this chapter you will see how to tell if a number is positive, negative or zero.
 
-```kotlin
+```kotlin_lines
 fun main() {
-  val number = 116 // any integer
+  val n = 116 // any integer
   print(
-      if (number > 0) "It's positive: " + number
-      else if(number < 0) "It's negative: ${dollar}number"
+      if (n > 0) "It's positive: " + n
+      else if(n < 0) "It's negative: ${dollar}n"
       else "It's 0"
   )
 }
 ```
 
+##### Line 2
+
 What does `val` do?
+
+##### Lines 4 to 6
 
 What is this `if ... else ...` series?
 
 Why is it inside the `print` function?
 
+##### Line 5
+
 What is that `$` variable thing?
+
+---
 
 All of this is explained in this chapter.
 
