@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
+import net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld.Indentation
 import net.lab0.kotlinexplorer.business.domain.ChapterImpl
 
 object PositiveNegativeChapter : ChapterImpl(
@@ -14,7 +15,8 @@ object PositiveNegativeChapter : ChapterImpl(
         Comparators,
         StringConcatenation,
         IfElse,
-        // continuation indent
-        // call print directly on the if else return1
+        Indentation,
+        PositiveNegativeProject
+        // call print directly on the if else return
     )
 )

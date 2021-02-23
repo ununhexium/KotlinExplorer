@@ -107,7 +107,7 @@ print("I shot 99 ${dollar}whats today.")
 """,
             explanation = """
 Kotlin doesn't know when the variable `what` ends and
-the rest of the string (`"s today."`) continues. It will not guess.
+the rest of the string `"s today."` continues. It will not guess.
 You must use the full notation `$dollar{what}s` to isolate the variable name
 from the rest of the string.
 
@@ -116,7 +116,7 @@ val what = "duck"
 print("I shot 99 ${dollar}{what}s today.")
 ```
 """,
-            choices = listOf("Some error", "I have 99 cats", "I have 99 whats"),
+            choices = listOf("Some error", "I shot 99 whats today.", "I shot 99 ducks today."),
             answer = setOf(0)
         ),
         CodeQuestionPage(
@@ -125,7 +125,8 @@ print("I shot 99 ${dollar}{what}s today.")
 Put the number `2` in `s`.
 """,
             snippet = """
-val s = "$dollar{ 1 ${p(0)} 1 }"
+val n = 1
+val s = "$dollar{ n ${p(0)} n }"
 """,
             explanation = """
 `$dollar{...}` can contain any Kotlin code.
