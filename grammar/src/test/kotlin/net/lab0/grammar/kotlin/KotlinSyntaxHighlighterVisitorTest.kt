@@ -668,5 +668,22 @@ class KotlinSyntaxHighlighterVisitorTest {
     )
   }
 
-  // TODO support !!
+  @Test
+  fun `support when keyword`() {
+    // given
+    val code = "when(true){}"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+        Spot(KEYWORD, 0, 3),
+        Spot(BRACKET, 4, 4),
+        Spot(KEYWORD, 5, 8),
+        Spot(BRACKET, 9, 9),
+        Spot(BRACKET, 10, 10),
+        Spot(BRACKET, 11, 11),
+    )
+  }
 }

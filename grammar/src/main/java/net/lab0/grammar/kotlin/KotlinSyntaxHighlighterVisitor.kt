@@ -255,6 +255,15 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
+  override fun visitWhenExpression(ctx: KotlinParser.WhenExpressionContext) =
+      hl {
+        add(KEYWORD, ctx.WHEN().range)
+        add(BRACKET, ctx.LCURL().range)
+        add(BRACKET, ctx.RCURL().range)
+
+        add(visitChildren(ctx))
+      }
+
   override fun visitWhileExpression(ctx: KotlinParser.WhileExpressionContext) =
       hl {
         add(KEYWORD, ctx.WHILE().range)
