@@ -638,4 +638,35 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(BRACKET, 12, 12),
     )
   }
+
+  @Test
+  fun `support ++ and -- postfix operators`() {
+    // given
+    val code = "a++;b--"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+        Spot(OPERATOR, 1, 2),
+        Spot(OPERATOR, 5, 6),
+    )
+  }
+
+  @Test
+  fun `support !! assertion`() {
+    // given
+    val code = "a!!"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+        Spot(OPERATOR, 1, 2),
+    )
+  }
+
+  // TODO support !!
 }

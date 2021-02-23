@@ -194,6 +194,25 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
+  override fun visitPostfixUnaryOperation(ctx: KotlinParser.PostfixUnaryOperationContext) =
+      hl {
+        ctx.INCR()?.let {
+          add(OPERATOR, it.range)
+        }
+
+        ctx.DECR()?.let {
+          add(OPERATOR, it.range)
+        }
+
+        ctx.EXCL()?.let {
+          if(it.size == 2){
+            add(OPERATOR, it.first().range.first, it.last().range.last)
+          }
+        }
+
+        add(visitChildren(ctx))
+      }
+
   override fun visitTerminal(node: TerminalNode) =
       hl {
         when (node.symbol.type) {
