@@ -13,6 +13,7 @@ object HelloWorldChapter
         Print,
         Comment,
         Main,
+        Indentation,
         HelloWorld,
     )
 )

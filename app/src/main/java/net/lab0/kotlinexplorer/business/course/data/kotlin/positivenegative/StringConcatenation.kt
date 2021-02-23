@@ -2,12 +2,11 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
 import net.lab0.kotlinexplorer.business.course.data.kotlin.dollar
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
+import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.CodeQuestionPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
-// TODO: "A" + "B"
-// TODO "$A $B"
 object StringConcatenation : LessonImpl(
     id = "kotlin.positivenegative.stringconcatenation",
     title = "String Concatenation",
@@ -75,8 +74,6 @@ val s1 = "Kotlin is ${p(0)}age years old."
 """,
             explanation = """
 For the moment it will work in most cases.
-
-Later we'll see when and why it can fail. But we need to learn more to understand why 🤓.
  
 ```kotlin
 val g = true
@@ -98,13 +95,37 @@ val hello = "Hello ${dollar}s"
             answer = listOf("$"),
             confusion = listOf("!", "&"),
         ),
-CodeQuestionPage(
+        LessonPage.MultipleChoice(
+            title = "Short problems",
+            question = """
+What will this print?
+
+```kotlin
+val what = "duck"
+print("I shot 99 ${dollar}whats today.")
+```
+""",
+            explanation = """
+Kotlin doesn't know when the variable `what` ends and
+the rest of the string (`"s today."`) continues. It will not guess.
+You must use the full notation `$dollar{what}s` to isolate the variable name
+from the rest of the string.
+
+```kotlin
+val what = "duck"
+print("I shot 99 ${dollar}{what}s today.")
+```
+""",
+            choices = listOf("Some error", "I have 99 cats", "I have 99 whats"),
+            answer = setOf(0)
+        ),
+        CodeQuestionPage(
             title = "Code in strings",
             question = """
-Put "4" in `s`.
+Put the number `2` in `s`.
 """,
             snippet = """
-val s = "$dollar{ 2 ${p(0)} 2 }"
+val s = "$dollar{ 1 ${p(0)} 1 }"
 """,
             explanation = """
 `$dollar{...}` can contain any Kotlin code.
@@ -114,6 +135,25 @@ the result will be transformed to a string.
 """,
             answer = listOf("+"),
             confusion = listOf("==", ">", "4"),
+        ),
+        LessonPage.MultipleChoice(
+            title = "1 + 1 =",
+            question = """
+What will this print?
+
+```kotlin
+val n = "1"
+print("1 + 1 = $dollar{ n + n }")
+```
+""",
+            explanation = """
+The content of the string doesn't matter when using `+` between them.
+
+`n` is a string. `+` between strings does a concatenation. Therefore `n + n` is `"1" + "1"`.
+Glue them together and you have `"11"`.
+""",
+            choices = listOf("\"11\"", "2"),
+            answer = setOf(0),
         ),
         InfoPage(
             "Summary",
