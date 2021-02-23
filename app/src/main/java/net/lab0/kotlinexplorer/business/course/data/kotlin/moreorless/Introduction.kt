@@ -21,23 +21,24 @@ is bigger or smaller than the proposed number.
 
 ```kotlin_lines
 import kotlin.random.Random
-
 fun main() {
   // generates a number between 0 and 99
   val target = Random.nextInt(100)
-
   var tries = 0
   var proposition:Int? = null
-
   while (proposition != target) {
     proposition = readLine()!!.toInt()
     tries++
-
     print(
         when {
-          proposition == target -> "You win in ${dollar}tries!"
-          proposition > target -> "Too big!"
-          else -> "Too small!"
+          proposition == target ->
+           "You win in ${dollar}tries!"
+           
+          proposition > target ->
+           "Too big!"
+           
+          else ->
+           "Too small!"
         }
     )
   }
@@ -50,35 +51,35 @@ In this project you will see.
 
 What is this `import` statement?
 
+##### Line 4
+
+What is `.nextInt()` doing there and why is it possible to write that?
+
 ##### Line 5
-
-What is `.nextInt()` there and why is it possible to write that?
-
-##### Line 7
 
 What is `var`?
 
-##### Line 8
+##### Line 6
 
 What is this question mark `?`
 
 What is `null`?
 
-##### Line 10
+##### Line 7
 
 How does `while` work?
 
-##### Line 10
+##### Line 8
 
 Where does `readLine()` come from?
 Why do we use `!!`?
 Why can we do `.toInt()` on the result? Where does it come from?
 
-##### Line 11
+##### Line 9
 
 `++` on a variable and nothing else?
 
-##### Line 14
+##### Line 11
 
 What does `when` do here? Why are we not using `if`/`else`?
 """

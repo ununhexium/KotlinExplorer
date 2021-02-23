@@ -235,4 +235,11 @@ class KotlinSyntaxHighlighterVisitor(
 
         add(visitChildren(ctx))
       }
+
+  override fun visitWhileExpression(ctx: KotlinParser.WhileExpressionContext) =
+      hl {
+        add(KEYWORD, ctx.WHILE().range)
+
+        add(visitChildren(ctx))
+      }
 }

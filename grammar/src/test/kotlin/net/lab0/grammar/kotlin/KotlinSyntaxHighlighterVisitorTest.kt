@@ -619,4 +619,23 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(KEYWORD, 0, 5),
     )
   }
+
+  @Test
+  fun `highlight while keyword`() {
+    // given
+    val code = "while(true){}"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+        Spot(KEYWORD, 0, 4),
+        Spot(BRACKET, 5, 5),
+        Spot(KEYWORD, 6, 9),
+        Spot(BRACKET, 10, 10),
+        Spot(BRACKET, 11, 11),
+        Spot(BRACKET, 12, 12),
+    )
+  }
 }
