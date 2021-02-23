@@ -7,6 +7,13 @@ object Introduction : LessonImpl(
     id = "kotlin.helloworld.introduction",
     title = "Introduction",
     pages = listOf(
+        LessonPage.MultipleChoice(
+            "title",
+            "Question?",
+            "Explanation.",
+            listOf("Alpha", "Beta", "Gamma"),
+            setOf(1),
+        ),
         LessonPage.InfoPage(
             title = "Introduction",
             """

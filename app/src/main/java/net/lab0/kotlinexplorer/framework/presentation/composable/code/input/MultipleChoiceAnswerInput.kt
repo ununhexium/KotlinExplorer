@@ -23,14 +23,14 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 @Composable
 fun MultipleChoiceAnswerInput(
     answers: List<Answer>,
-    toggle: (Answer) -> Unit,
+    toggle: (Int) -> Unit,
 ) {
   Column {
     answers.forEach { answer ->
       Row(
           modifier = Modifier
               .padding(4.dp)
-              .clickable(onClick = { toggle(answer) })
+              .clickable(onClick = { toggle(answer.id) })
               .padding(4.dp),
           horizontalArrangement = Arrangement.SpaceAround,
       ) {

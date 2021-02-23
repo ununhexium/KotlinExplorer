@@ -10,52 +10,65 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.mvi.MultipleChoiceUiState
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.MultipleChoiceAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.CorrectAnswer
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageBody
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.WrongAnswer
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.MultipleChoiceAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.MultipleChoiceModel
+import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseMD
 
 @Composable
 fun MultipleChoicePage(
-    model: MultipleChoiceModel,
+    model: MultipleChoiceViewModel,
+    state: MultipleChoiceUiState,
     onNextPage: () -> Unit,
 ) {
   LessonPageBody(
       question = {
-        MDDocument(model.questionMarkdown)
+        val markdown = remember(
+            state.lessonPage.question
+        ) {
+          parseMD(state.lessonPage.question)
+        }
+        MDDocument(markdown)
       },
-      answer = if (model.showAnswer.value) {
+      answer = if (state.showAnswer) {
         {
-          if (model.isCorrectAnswer()) {
+          val markdown = remember(state.lessonPage.explanation) {
+            parseMD(state.lessonPage.explanation)
+          }
+          if (state.isCorrectAnswer) {
             CorrectAnswer(
                 explanation = {
-                  MDDocument(document = model.explanationMarkdown)
+                  MDDocument(document = markdown)
                 }
             )
           } else {
             WrongAnswer(
                 explanation = {
-                  MDDocument(document = model.explanationMarkdown)
+                  MDDocument(document = markdown)
                 }
             )
           }
         }
       } else null,
-      input = if (!model.showAnswer.value) {
+      input = if (!state.showAnswer) {
         {
           MultipleChoiceAnswerInput(
-              answers = model.answers.value,
+              answers = state.choices,
               toggle = model::toggle,
           )
         }
       } else null,
       controlBar = {
-        if (!model.showAnswer.value) {
+        if (!state.showAnswer) {
           ControlBar {
             Row {
               Button(
@@ -84,15 +97,20 @@ fun MultipleChoicePage(
   )
 }
 
-val multipleChoiceModel = MultipleChoiceModel(
-    LessonPage.MultipleChoice(
-        title = "Test",
-        question = "Why?",
-        "Because",
-        listOf("A", "BB", "CCCCC"),
-        setOf(0, 2)
-    )
+val multipleChoiceSample = LessonPage.MultipleChoice(
+    title = "Test",
+    question = "Why?",
+    "Because",
+    listOf("A", "BB", "CCCCC"),
+    setOf(0, 2)
 )
+val multipleChoiceModel = MultipleChoiceViewModel().also {
+  it.init(
+      0,
+      multipleChoiceSample,
+      Chapter.EMPTY
+  )
+}
 
 @Preview
 @Composable
@@ -102,34 +120,8 @@ fun MCCP_selectedAnswers() {
       Column {
         MultipleChoicePage(
             multipleChoiceModel,
+            multipleChoiceModel.uiDataState.value,
         ) { }
-      }
-    }
-  }
-}
-
-val validatedModel = MultipleChoiceModel(
-    LessonPage.MultipleChoice(
-        title = "Test",
-        question = "Why?",
-        "Because",
-        listOf("Alpha", "Beta", "Gamma"),
-        setOf(0, 2)
-    )
-).also {
-  it.toggle(it.answers.value[1])
-  it.validate()
-}
-
-@Preview
-@Composable
-fun MCCP_validatedAnswer() {
-  MaterialTheme {
-    Surface {
-      Column {
-        MultipleChoicePage(
-            validatedModel,
-        ) {}
       }
     }
   }

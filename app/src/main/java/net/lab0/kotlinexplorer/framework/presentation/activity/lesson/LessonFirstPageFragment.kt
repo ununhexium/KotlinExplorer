@@ -29,7 +29,7 @@ import net.lab0.kotlinexplorer.utils.Do
 
 class LessonFirstPageFragment(
     private val viewModelFactory: ViewModelProvider.Factory,
-) : Fragment() {
+) : Fragment(), NextPageSelectorMixin {
   private val args: LessonFirstPageFragmentArgs by navArgs()
   private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
 
@@ -61,6 +61,7 @@ class LessonFirstPageFragment(
           Button(
               modifier = Modifier.align(Alignment.CenterHorizontally),
               onClick = {
+                // TODO: use NextPageMixin
                 val firstPage = lesson.pages.first()
                 Do exhaustive when (firstPage) {
                   is LessonPage.InfoPage ->
@@ -75,7 +76,11 @@ class LessonFirstPageFragment(
                             .actionLessonFirstPageToCodeQuestionPageFragment(args.lessonId, 0)
                     )
 
-                  is LessonPage.MultipleChoice -> TODO("Multi choice page")
+                  is LessonPage.MultipleChoice ->
+                    findNavController().navigate(
+                        LessonFirstPageFragmentDirections
+                            .actionLessonFirstPageToMultipleChoicePageFragment(args.lessonId, 0)
+                    )
                 }
               }
           ) {

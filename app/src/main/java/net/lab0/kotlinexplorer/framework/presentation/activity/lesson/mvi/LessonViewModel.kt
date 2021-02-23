@@ -4,7 +4,7 @@ import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.CodeAnswerState
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorrectness
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonViewState
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
@@ -26,8 +26,8 @@ class LessonViewModel(
             saveLessonProgress(
                 LessonProgress(
                     uiDataState.value.lesson.id,
-                    uiDataState.value.answersCount(CodeAnswerState.SUCCESS),
-                    uiDataState.value.answersCount(CodeAnswerState.FAILURE),
+                    uiDataState.value.answersCount(AnswerCorrectness.SUCCESS),
+                    uiDataState.value.answersCount(AnswerCorrectness.FAILURE),
                 )
             )
         ) {}
@@ -44,12 +44,12 @@ class LessonViewModel(
   fun saveLesson() =
       emitSlowEvent(LessonStateEvent.SaveLessonProgress)
 
-  fun countMark(lessonPage: LessonPage, correctness: CodeAnswerState) =
+  fun countMark(lessonPage: LessonPage, correctness: AnswerCorrectness) =
       emitFastEvent(LessonStateEvent.CountMark(lessonPage, correctness))
 
   fun init(lesson:Lesson) {
     updateUi {
-      it.copy(lesson = lesson)
+      it.copy(lesson = lesson, answers = mapOf())
     }
   }
 }

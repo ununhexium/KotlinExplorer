@@ -10,7 +10,6 @@ import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.await
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback

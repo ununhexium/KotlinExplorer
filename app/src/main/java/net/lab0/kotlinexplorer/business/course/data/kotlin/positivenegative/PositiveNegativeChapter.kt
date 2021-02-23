@@ -7,11 +7,14 @@ object PositiveNegativeChapter : ChapterImpl(
     title = "+ or -",
     description = "Tell if a number is positive or negative",
     lessons = listOf(
+        Introduction,
         Value,
         Boolean,
         DataType,
         Comparators,
         StringConcatenation,
         IfElse,
+        // continuation indent
+        // call print directly on the if else return1
     )
 )

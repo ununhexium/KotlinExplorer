@@ -1,10 +1,10 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
 fun main() {
-  val number = 116
+  val n = 116
   print(
-      if (number > 0) "It's positive: " + number
-      else if(number < 0) "It's negative: $number"
+      if (n > 0) "It's >0: " + n
+      else if (n < 0) "It's <0: $n"
       else "It's 0"
   )
 }

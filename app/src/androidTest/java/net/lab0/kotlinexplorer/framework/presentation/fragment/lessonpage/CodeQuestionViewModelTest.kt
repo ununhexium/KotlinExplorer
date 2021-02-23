@@ -10,14 +10,14 @@ import kotlinx.coroutines.test.setMain
 import net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld.HelloWorldChapter
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragmentViewModel
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.LessonPageUiState
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.CodeQuestionUiState
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-internal class CodeQuestionPageFragmentViewModelTest {
+internal class CodeQuestionViewModelTest {
 
   private val allAnswers = LessonPage.CodeQuestionPage(
       "",
@@ -30,7 +30,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
 
   private val testDispatcher = TestCoroutineDispatcher()
 
-  private fun getVm() = CodeQuestionPageFragmentViewModel(testDispatcher).also {
+  private fun getVm() = CodeQuestionViewModel(testDispatcher).also {
     it.init(0, allAnswers, Chapter.EMPTY)
   }
 
@@ -48,14 +48,14 @@ internal class CodeQuestionPageFragmentViewModelTest {
   @Test
   fun canInitializeWithData() {
     // given
-    val vm = CodeQuestionPageFragmentViewModel()
+    val vm = CodeQuestionViewModel()
 
     // when
     vm.init(116, allAnswers, HelloWorldChapter)
 
     // then
     assertThat(vm.uiDataState.value).isEqualTo(
-        LessonPageUiState(
+        CodeQuestionUiState(
             116,
             allAnswers,
             HelloWorldChapter
@@ -78,7 +78,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
     )
   }
 
@@ -97,7 +97,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf(3))
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(3))
     )
   }
 
@@ -117,7 +117,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
     )
   }
 
@@ -136,14 +136,14 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf())
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf())
     )
   }
 
   @Test
   fun undoHasNoEffect_WhenTheSelectionListIsEmpty() {
     // given
-    val vm = CodeQuestionPageFragmentViewModel()
+    val vm = CodeQuestionViewModel()
 
     // when
     vm.undo()
@@ -155,7 +155,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf())
+        CodeQuestionUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf())
     )
   }
 
@@ -176,7 +176,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
     )
   }
 
@@ -198,7 +198,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf())
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf())
     )
   }
 
@@ -222,7 +222,7 @@ internal class CodeQuestionPageFragmentViewModelTest {
     assertThat(
         vm.uiDataState.value
     ).isEqualTo(
-        LessonPageUiState(0, allAnswers, Chapter.EMPTY, listOf(0), locked = true)
+        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0), locked = true)
     )
   }
 }

@@ -1,6 +1,6 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.lesson
 
-enum class CodeAnswerState {
+enum class AnswerCorrectness {
   SUCCESS,
   FAILURE,
   NEUTRAL,

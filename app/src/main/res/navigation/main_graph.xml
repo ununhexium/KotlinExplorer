@@ -22,7 +22,7 @@
             app:argType="string" />
         <fragment
             android:id="@+id/codeQuestionPageFragment"
-            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionFragment"
             android:label="CodeQuestionPageFragment">
             <action
                 android:id="@+id/action_lessonCodeQuestionPageFragment_self"
@@ -42,6 +42,9 @@
             <action
                 android:id="@+id/action_codeQuestionPageFragment_to_chapterListFragment"
                 app:destination="@id/chapterListFragment" />
+            <action
+                android:id="@+id/action_codeQuestionPageFragment_to_multipleChoicePageFragment"
+                app:destination="@id/multipleChoicePageFragment" />
         </fragment>
         <fragment
             android:id="@+id/lessonFeedbackFragment"
@@ -81,6 +84,9 @@
             <action
                 android:id="@+id/action_lessonFirstPage_to_infoPageFragment"
                 app:destination="@id/infoPageFragment" />
+            <action
+                android:id="@+id/action_lessonFirstPage_to_multipleChoicePageFragment"
+                app:destination="@id/multipleChoicePageFragment" />
         </fragment>
         <fragment
             android:id="@+id/infoPageFragment"
@@ -104,6 +110,35 @@
             <action
                 android:id="@+id/action_lessonInfoPageFragment_to_chapterListFragment"
                 app:destination="@id/chapterListFragment" />
+            <action
+                android:id="@+id/action_infoPageFragment_to_multipleChoicePageFragment"
+                app:destination="@id/multipleChoicePageFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/multipleChoicePageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceFragment"
+            android:label="MultipleChoicePageFragment" >
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_self"
+                app:destination="@id/multipleChoicePageFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_codeQuestionPageFragment"
+                app:destination="@id/codeQuestionPageFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_infoPageFragment"
+                app:destination="@id/infoPageFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_lessonFeedbackFragment"
+                app:destination="@id/lessonFeedbackFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <argument
+                android:name="page"
+                app:argType="integer" />
         </fragment>
     </navigation>
 </navigation>

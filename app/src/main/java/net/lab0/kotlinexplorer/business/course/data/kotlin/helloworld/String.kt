@@ -26,7 +26,7 @@ Simple quotes `'` are for quoting single characters.
 
         LessonPage.CodeQuestionPage(
             title = "Double quotes",
-            question = """Declare a string containing just a double quote`"`""",
+            question = """Double quotes are delimiters for strings. Try to declare a string containing just a double quote`"`""",
             snippet =
             """
 ${p(0)}${p(1)}${p(2)}
@@ -34,7 +34,7 @@ ${p(0)}${p(1)}${p(2)}
             explanation = """
 Inside strings, double quotes `"` must be escaped.
 
-The escape character is backslash `\`.
+The escape character is backslash `\`. Remember it, it will come back often. 😉
 """,
             answer = listOf("\"", """\"""", "\""),
             confusion = listOf("""\"""",),

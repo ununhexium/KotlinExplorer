@@ -17,11 +17,10 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.Lesson
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.InfoLessonPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
-import net.lab0.kotlinexplorer.utils.Do
 
 class InfoPageFragment(
     private val viewModelFactory: ViewModelProvider.Factory,
-) : Fragment() {
+) : Fragment(), NextPageSelectorMixin {
   private val args: InfoPageFragmentArgs by navArgs()
   private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
 
@@ -57,36 +56,17 @@ class InfoPageFragment(
           ) {
             InfoLessonPage(
                 markdownAsString = page.markdown,
-                nextPage = {
-                  activityViewModel.countMark(page, CodeAnswerState.NEUTRAL)
-                  val nextPageIndex = args.page + 1
-                  val maybeNextPage = lesson.pages.getOrNull(nextPageIndex)
-                  Do exhaustive when (maybeNextPage) {
-                    null -> {
-                      activityViewModel.saveLesson()
-                      findNavController().navigate(
-                          InfoPageFragmentDirections
-                              .actionInfoPageFragmentToLessonFeedbackFragment(args.lessonId)
-                      )
-                    }
-                    is LessonPage.InfoPage ->
-                      findNavController().navigate(
-                          InfoPageFragmentDirections
-                              .actionInfoPageFragmentSelf(args.lessonId, nextPageIndex)
-                      )
-
-                    is LessonPage.CodeQuestionPage ->
-                      findNavController().navigate(
-                          InfoPageFragmentDirections
-                              .actionInfoPageFragmentToCodeQuestionPageFragment(
-                                  args.lessonId,
-                                  nextPageIndex
-                              )
-                      )
-
-                    is LessonPage.MultipleChoice -> TODO("Multiple choice page")
-                  }
-                }
+                nextPage = nextPage(
+                    activityViewModel,
+                    AnswerCorrectness.NEUTRAL,
+                    args.page,
+                    args.lessonId,
+                    findNavController(),
+                    navigationToFeedback = InfoPageFragmentDirections::actionInfoPageFragmentToLessonFeedbackFragment,
+                    navigationToInfo = InfoPageFragmentDirections::actionInfoPageFragmentSelf,
+                    navigationToMultipleChoice = InfoPageFragmentDirections::actionInfoPageFragmentToMultipleChoicePageFragment,
+                    navigationToCodeQuestion = InfoPageFragmentDirections::actionInfoPageFragmentToCodeQuestionPageFragment,
+                )
             )
           }
         }

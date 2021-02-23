@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeInputControlBar
@@ -20,12 +21,11 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPa
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.WrongAnswer
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.MDDocument
 import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseMD
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragmentViewModel
 import org.commonmark.node.Node
 
 @Composable
 fun CodeQuizPage2(
-    model: CodeQuestionPageFragmentViewModel,
+    model: CodeQuestionViewModel,
     nextQuestion: () -> Unit,
     onSelect: (Answer) -> Unit,
     codeColoration:Boolean = true
@@ -49,7 +49,7 @@ fun CodeQuizPage2(
           AnswerPart2(
               isCorrectAnswer = state.isCorrectAnswer,
               explanationMarkdown = state.lessonPage.explanation,
-              answerSnippet = state.lessonPage.answerSnippetanswerSnippet,
+              answerSnippet = state.lessonPage.answerSnippet,
               codeColoration = codeColoration
           )
         }
@@ -138,7 +138,7 @@ private fun CodeQuestionPart2(
   )
 }
 
-val modelSelected2 = CodeQuestionPageFragmentViewModel().also {
+val modelSelected2 = CodeQuestionViewModel().also {
   it.select(0)
 }
 
@@ -159,7 +159,7 @@ fun CodeQuestionQuizPage2Preview_selectedAnswer() {
   }
 }
 
-val modelValidated2 = CodeQuestionPageFragmentViewModel().also {
+val modelValidated2 = CodeQuestionViewModel().also {
   it.select(0)
   it.validate()
 }

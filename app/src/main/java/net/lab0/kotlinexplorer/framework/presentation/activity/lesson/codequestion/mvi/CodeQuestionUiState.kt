@@ -6,7 +6,7 @@ import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
 import net.lab0.kotlinexplorer.mvi.UiState
 
-data class LessonPageUiState(
+data class CodeQuestionUiState(
     val pageIndex: Int,
     val lessonPage: LessonPage.CodeQuestionPage,
     val chapter: Chapter,
@@ -18,7 +18,7 @@ data class LessonPageUiState(
       lessonPage: LessonPage.CodeQuestionPage? = null,
       selectedAnswers: List<Int>? = null,
   ) = if (!locked) {
-    LessonPageUiState(
+    CodeQuestionUiState(
         pageIndex = this.pageIndex,
         lessonPage = lessonPage ?: this.lessonPage,
         chapter = this.chapter,

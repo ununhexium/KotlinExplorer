@@ -7,7 +7,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.InfoPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonFirstPageFragment
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionPageFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment
 import javax.inject.Inject
 
@@ -30,8 +31,12 @@ constructor(
           LessonFeedbackFragment(viewModelFactory)
         }
 
-        CodeQuestionPageFragment::class.java.name -> {
-          CodeQuestionPageFragment(viewModelFactory)
+        CodeQuestionFragment::class.java.name -> {
+          CodeQuestionFragment(viewModelFactory)
+        }
+
+        MultipleChoiceFragment::class.java.name -> {
+          MultipleChoiceFragment(viewModelFactory)
         }
 
         InfoPageFragment::class.java.name -> {
