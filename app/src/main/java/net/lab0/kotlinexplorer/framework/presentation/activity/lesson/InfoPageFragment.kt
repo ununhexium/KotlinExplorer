@@ -45,6 +45,7 @@ class InfoPageFragment(
             }
         ) {
           LessonPage(
+              lessonId = args.lessonId,
               progress = 1f * args.page / lesson.pages.size,
               title = lesson.title,
               onBack = {
@@ -52,7 +53,8 @@ class InfoPageFragment(
                     InfoPageFragmentDirections
                         .actionLessonInfoPageFragmentToChapterListFragment()
                 )
-              }
+              },
+              onProblemReport = { /* TODO problem report */ }
           ) {
             InfoLessonPage(
                 markdownAsString = page.markdown,

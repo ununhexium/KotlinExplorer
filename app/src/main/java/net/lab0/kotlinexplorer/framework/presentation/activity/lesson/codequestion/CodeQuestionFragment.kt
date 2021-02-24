@@ -55,6 +55,7 @@ class CodeQuestionFragment(
           }
       ) {
         LessonPage(
+            lessonId = args.lessonId,
             progress = state.progress,
             title = state.lessonPage.title,
             onBack = {
@@ -62,7 +63,8 @@ class CodeQuestionFragment(
                   CodeQuestionFragmentDirections
                       .actionCodeQuestionPageFragmentToChapterListFragment()
               )
-            }
+            },
+            onProblemReport = { /* TODO problem report */}
         ) {
           CodeQuizPage2(
               model = viewModel,

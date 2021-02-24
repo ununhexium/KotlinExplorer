@@ -55,6 +55,7 @@ class MultipleChoiceFragment(
           }
       ) {
         LessonPage(
+            lessonId = args.lessonId,
             progress = state.progress,
             title = state.lessonPage.title,
             onBack = {
@@ -62,7 +63,8 @@ class MultipleChoiceFragment(
                   MultipleChoiceFragmentDirections
                       .actionMultipleChoicePageFragmentToChapterListFragment()
               )
-            }
+            },
+            onProblemReport = { /* TODO problem report */}
         ) {
           MultipleChoicePage(
               model = viewModel,
