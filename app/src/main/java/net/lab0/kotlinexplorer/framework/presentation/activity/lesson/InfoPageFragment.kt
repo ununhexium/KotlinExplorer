@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.InfoLessonPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
@@ -29,7 +30,7 @@ class InfoPageFragment(
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View {
-    return ComposeView(requireContext()).also {
+    return ComposeView(requireContext()).also { it ->
       val lesson = LessonBrowser.getLessonById(args.lessonId)
       val page = lesson.pages[args.page] as LessonPage.InfoPage
       val chapter = LessonBrowser.getChapterForLesson(args.lessonId)!!
@@ -54,7 +55,9 @@ class InfoPageFragment(
                         .actionLessonInfoPageFragmentToChapterListFragment()
                 )
               },
-              onProblemReport = { /* TODO problem report */ }
+              onProblemReport = {
+                activityViewModel.onProblemReport(it, this@InfoPageFragment.requireContext())
+              }
           ) {
             InfoLessonPage(
                 markdownAsString = page.markdown,

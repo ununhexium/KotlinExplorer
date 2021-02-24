@@ -64,7 +64,9 @@ class CodeQuestionFragment(
                       .actionCodeQuestionPageFragmentToChapterListFragment()
               )
             },
-            onProblemReport = { /* TODO problem report */}
+            onProblemReport = {
+              activityViewModel.onProblemReport(it, requireContext())
+            }
         ) {
           CodeQuizPage2(
               model = viewModel,

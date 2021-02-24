@@ -64,14 +64,16 @@ class MultipleChoiceFragment(
                       .actionMultipleChoicePageFragmentToChapterListFragment()
               )
             },
-            onProblemReport = { /* TODO problem report */}
+            onProblemReport = {
+              activityViewModel.onProblemReport(it, requireContext())
+            }
         ) {
           MultipleChoicePage(
               model = viewModel,
               state = state,
               onNextPage = nextPage(
                   activityViewModel,
-                  if(state.isCorrectAnswer) SUCCESS else FAILURE,
+                  if (state.isCorrectAnswer) SUCCESS else FAILURE,
                   args.page,
                   args.lessonId,
                   findNavController(),

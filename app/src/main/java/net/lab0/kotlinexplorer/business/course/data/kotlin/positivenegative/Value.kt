@@ -4,7 +4,6 @@ import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
-
 object Value : LessonImpl(
     id = "kotlin.positivenegative.value",
     title = "Value",
@@ -92,6 +91,7 @@ They can contain integers, strings, booleans and many other kinds of data that y
     )
 )
 
+// TODO: value can't contain some characters, add tests for that
 // TODO: values can be assigned from another value
 // TODO: copy/paste from one reference to another.
 // val a = 1; val b = a; // references to the same object. If the value pointed by a changes, then the value pointed by be changes too.

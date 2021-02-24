@@ -9,7 +9,9 @@ import dagger.hilt.android.components.ApplicationComponent
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
+import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
 import net.lab0.kotlinexplorer.framework.firebase.implementation.LessonFeedbackServiceImpl
+import net.lab0.kotlinexplorer.framework.firebase.implementation.ProblemReportServiceImpl
 import net.lab0.kotlinexplorer.framework.firebase.mappers.FeedbackDocumentFromDomain
 import net.lab0.kotlinexplorer.framework.firebase.mappers.FeedbackDocumentToDomain
 import net.lab0.kotlinexplorer.framework.firebase.mappers.ProblemReportDocumentFromDomain
@@ -61,6 +63,19 @@ object FirebaseModule {
             firestore,
             fromDomain,
             toDomain,
+    )
+
+  @Singleton
+  @Provides
+  fun provideProblemReportService(
+      firebaseAuth: FirebaseAuth,
+      firestore: FirebaseFirestore,
+      fromDomain: FromDomain<ProblemReportDocument, ProblemReport>,
+  ): ProblemReportService =
+    ProblemReportServiceImpl(
+        firebaseAuth,
+            firestore,
+            fromDomain,
     )
 
 }

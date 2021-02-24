@@ -13,6 +13,8 @@ object Introduction: LessonImpl(
             """
 In this chapter you will see how to tell if a number is positive, negative or zero.
 
+You will understand the code below.
+
 ```kotlin_lines
 fun main() {
   val n = 116 // any integer
@@ -23,6 +25,8 @@ fun main() {
   )
 }
 ```
+
+In particular, you will learn:
 
 ##### Line 2
 

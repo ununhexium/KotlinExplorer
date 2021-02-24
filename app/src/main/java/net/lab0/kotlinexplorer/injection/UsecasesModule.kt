@@ -12,6 +12,8 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgr
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgressCount
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReportImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.GetAllChaptersImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.GetLessonFeedbackImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.GetLessonsInProgressCountImpl
@@ -20,6 +22,7 @@ import net.lab0.kotlinexplorer.business.interactor.implementation.SaveLessonProg
 import net.lab0.kotlinexplorer.business.interactor.implementation.SendLessonFeedbackImpl
 import net.lab0.kotlinexplorer.business.persistence.abstraction.LessonProgressDataSource
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
+import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -58,5 +61,10 @@ object UsecasesModule {
   @Provides
   fun provideSendLessonFeedback(service: LessonFeedbackService): SendLessonFeedback =
       SendLessonFeedbackImpl(service)
+
+  @Singleton
+  @Provides
+  fun provideSendProblemReport(problemReportService: ProblemReportService): SendProblemReport =
+    SendProblemReportImpl(problemReportService)
 
 }

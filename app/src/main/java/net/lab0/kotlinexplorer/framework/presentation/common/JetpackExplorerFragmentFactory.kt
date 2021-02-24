@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.InfoPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonFirstPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionFragment
