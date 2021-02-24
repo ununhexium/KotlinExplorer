@@ -27,7 +27,7 @@ android {
         versionName = Application.versionName
 
         testInstrumentationRunner(
-            "net.lab0.kotlinexplorer.inject.CustomTestRunner"
+            "net.lab0.kotlinexplorer.injection.CustomTestRunner"
         )
 
         javaCompileOptions {
@@ -82,7 +82,7 @@ allprojects {
         withType<KotlinCompile> {
             kotlinOptions {
                 jvmTarget = "1.8"
-                freeCompilerArgs += listOf(
+                freeCompilerArgs = freeCompilerArgs + listOf(
                     "-Xallow-jvm-ir-dependencies",
                     "-Xskip-prerelease-check",
                     // to disable @ExperimentalCoroutinesApi warnings

@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.inject
+package net.lab0.kotlinexplorer.injection
 
 import android.app.Application
 import android.content.Context

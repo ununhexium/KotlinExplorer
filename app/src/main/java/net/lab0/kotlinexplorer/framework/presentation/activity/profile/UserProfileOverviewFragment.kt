@@ -10,6 +10,7 @@ import androidx.compose.ui.res.loadVectorResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
@@ -71,11 +72,13 @@ class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileVi
             val task = Auth.logOut(requireContext())
             task.addOnSuccessListener {
               viewModel.refreshUserData()
+              Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
             }
             task.addOnFailureListener {
               Toast.makeText(context, "Failed to log out", Toast.LENGTH_LONG).show()
             }
-          }
+          },
+          FirebaseAuth.getInstance().uid ?: "Nope"
       )
     }
   }

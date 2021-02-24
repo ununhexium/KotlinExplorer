@@ -1,5 +1,7 @@
-package net.lab0.kotlinexplorer.inject
+package net.lab0.kotlinexplorer.injection
 
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dagger.Module
@@ -31,5 +33,4 @@ object TestModule {
     firestore.firestoreSettings = firestoreSettings
     return firestore
   }
-
 }

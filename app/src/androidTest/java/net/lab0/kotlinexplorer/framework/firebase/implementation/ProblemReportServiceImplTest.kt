@@ -6,6 +6,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import io.mockk.clearAllMocks
+import io.mockk.every
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
@@ -13,16 +16,13 @@ import kotlinx.coroutines.tasks.await
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
-import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
 import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
 import net.lab0.kotlinexplorer.injection.FirestoreInstanceModule
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.Disabled
 import javax.inject.Inject
 
 @FlowPreview
@@ -35,8 +35,7 @@ internal class ProblemReportServiceImplTest {
   @get:Rule(order = 0)
   var hiltRule = HiltAndroidRule(this)
 
-  @Inject
-  lateinit var firebaseAuth: FirebaseAuth
+  val firebaseAuth: FirebaseAuth = mockk()
 
   @Inject
   lateinit var firestore: FirebaseFirestore
@@ -50,6 +49,8 @@ internal class ProblemReportServiceImplTest {
   @Before
   fun before() {
     hiltRule.inject()
+    clearAllMocks()
+    every { firebaseAuth.uid } returns "user1"
     problemReportService = ProblemReportServiceImpl(
         firebaseAuth,
         firestore,
@@ -58,9 +59,8 @@ internal class ProblemReportServiceImplTest {
   }
 
   // FIXME: use firebase auth in test
-  @Ignore
   @Test
-  fun canReportAProblem():Unit = runBlocking {
+  fun canReportAProblem(): Unit = runBlocking {
     // given
     val problemLocationDescription = "Lesson: x.y.z, page = Foo"
     val problemReport1 = ProblemReport(problemLocationDescription, "FUBAR!")

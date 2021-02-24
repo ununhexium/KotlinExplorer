@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.DeferredResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.BuildConfig
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ThinButton
 import java.util.*
 
@@ -32,6 +33,7 @@ fun UserProfileUi(
     profilePicture: ImageBitmap? = null,
     logIn: () -> Unit,
     logOut: () -> Unit,
+    uid: String,
 ) {
   Column(
       modifier = Modifier.fillMaxWidth(),
@@ -91,7 +93,6 @@ fun UserProfileUi(
             onClick = logOut,
         )
       } else {
-        // TODO: flat button
         Button(
             onClick = logIn,
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -101,6 +102,12 @@ fun UserProfileUi(
               style = MaterialTheme.typography.h6,
           )
         }
+      }
+    }
+
+    if (BuildConfig.DEBUG) {
+      Row {
+        Text("UID: $uid")
       }
     }
   }
@@ -125,6 +132,7 @@ fun UserProfileUiPreview() {
               profilePicture = null,
               logIn = {},
               logOut = {},
+              "uid0",
           )
         }
       }
