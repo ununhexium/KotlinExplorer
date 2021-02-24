@@ -13,7 +13,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.ReportProblem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,9 +54,9 @@ fun LessonPageHeader(
             topRight = CornerSize(0),
             bottomRight = CornerSize(0),
         ),
-        enabled = false,
+        enabled = true,
     ) {
-      Icon(imageVector = Icons.Default.Flag)
+      Icon(imageVector = Icons.Default.ReportProblem)
     }
   }
 }

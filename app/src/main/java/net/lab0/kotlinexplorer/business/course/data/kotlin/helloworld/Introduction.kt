@@ -15,11 +15,11 @@ program that prints `Hello "World"` to the user.
 
 ```kotlin
 fun main() {
-    println("Hello "World"")
+    println("Hello \"World\"")
 }
 ```
 
-Each of the concepts that you need are detailed on the following chapters.
+Each of the concepts that you need are detailed on the following sections.
 """
         )
     )
