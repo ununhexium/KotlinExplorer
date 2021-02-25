@@ -1,10 +1,13 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi
 
+import androidx.compose.ui.text.AnnotatedString
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.business.domain.parser.Block
+import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.DefaultCodeStyle
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.invertForegroundBackgroundColors
 import net.lab0.kotlinexplorer.mvi.UiState
 
 data class CodeQuestionUiState(
@@ -45,15 +48,15 @@ data class CodeQuestionUiState(
 
   val progress: Float = 1f * pageIndex / chapter.lessons.size
 
-  val snippet: String = KotlinCodeWithBlanksImpl(
+  val selectedAnswersSnippet: String = KotlinCodeWithBlanksImpl(
       lessonPage.snippet
   ).fill(
       selectedAnswers.mapIndexed { index, it -> index to lessonPage.choices[it] }.toMap()
   )
 
   /**
-   * The location of the right answers on the correct code
-   * answer where the wrong answer was given.
+   * The locations of the correct answers on the correct code
+   * where the wrong answer was given.
    */
   val correctedAnswersLocations: List<IntRange> by lazy {
     val correctAnswers = lessonPage.answer.mapIndexed { index, it -> index to it }
@@ -68,5 +71,16 @@ data class CodeQuestionUiState(
         .filterKeys { it in wrongAnswers }
         .values
         .toList()
+        .flatten()
+  }
+
+  val snippetWithFocusedMistakes: AnnotatedString by lazy {
+    val annotated = extractHighlightsAndAnnotate(
+        lessonPage.answerSnippet,
+        DefaultCodeStyle.textStyler
+    )
+    correctedAnswersLocations.fold(annotated) { acc, e ->
+      acc.invertForegroundBackgroundColors(e)
+    }
   }
 }

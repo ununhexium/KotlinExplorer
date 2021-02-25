@@ -59,8 +59,8 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
 
   override fun getRealStringIndices(
       fillings: Map<Int, String>
-  ): Map<Int, IntRange> {
-    val result = mutableMapOf<Int, IntRange>()
+  ): Map<Int, List<IntRange>> {
+    val result = mutableMapOf<Int, MutableList<IntRange>>()
 
     // complement the missing IDs with the placeholder's value
     val refillings = placeholderIds.map { id ->
@@ -81,9 +81,11 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
           )
           val end = placeholderStart + replacement.length
 
-          result[index] = (placeholderStart until end)
+          result.computeIfAbsent(index) {
+            mutableListOf()
+          }.add(placeholderStart until end)
 
-          code.replace(
+          code.replaceFirst(
               placeholder(index),
               replacement
           )

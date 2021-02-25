@@ -54,16 +54,10 @@ class KotlinCodeWithBlanksImplTest {
     val code = "val ${p(0)} = ${p(1)}"
 
     // when
-    val filled = KotlinCodeWithBlanksImpl(code).fill(
-        mapOf()
-    )
+    val filled = KotlinCodeWithBlanksImpl(code).fill(mapOf())
 
     // then
-    assertThat(
-        filled
-    ).isEqualTo(
-        code
-    )
+    assertThat(filled).isEqualTo(code)
   }
 
   @Test
@@ -223,10 +217,10 @@ class KotlinCodeWithBlanksImplTest {
     // val alpha /**ANSWER(1)**/ 116;
     assertThat(ranges).isEqualTo(
         mapOf(
-            0 to 4 .. 8,
-            1 to 10 .. 24,
-            2 to 26 .. 28,
-            3 to 29 .. 29,
+            0 to listOf(4 .. 8),
+            1 to listOf(10 .. 24),
+            2 to listOf(26 .. 28),
+            3 to listOf(29 .. 29),
         )
     )
   }
@@ -243,7 +237,7 @@ ${p(4)}
         1 to "{",
         2 to "}",
         3 to "[",
-        4 to "]"
+        4 to "]",
     )
     val withBlanks = KotlinCodeWithBlanksImpl(code)
 
@@ -256,11 +250,31 @@ ${p(4)}
     // fun main() {␤  // next steps␤}
     assertThat(ranges).isEqualTo(
         mapOf(
-            0 to 0 .. 2,
-            1 to 8 .. 8,
-            2 to 9 .. 9,
-            3 to 11 .. 11,
-            4 to 29 .. 29,
+            0 to listOf(0 .. 2),
+            1 to listOf(8 .. 8),
+            2 to listOf(9 .. 9),
+            3 to listOf(11 .. 11),
+            4 to listOf(29 .. 29),
+        )
+    )
+  }
+
+  @Test
+  fun `can give the real string indices with duplicated placeholder id`() {
+    // given
+    val code = """${p(0)}Hello${p(0)}"""
+    val fillings = mapOf(0 to "\"")
+    val withBlanks = KotlinCodeWithBlanksImpl(code)
+
+    // when
+    val ranges = withBlanks.getRealStringIndices(fillings)
+
+    // then
+    // 0123456
+    // "Hello"
+    assertThat(ranges).isEqualTo(
+        mapOf(
+            0 to listOf(0 .. 0, 6 .. 6),
         )
     )
   }

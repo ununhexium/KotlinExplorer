@@ -27,20 +27,20 @@ import net.lab0.kotlinexplorer.framework.util.isInRange
 import net.lab0.kotlinexplorer.utils.Do
 
 
+@Suppress("DeprecatedCallableAddReplaceWith")
+@Deprecated("Only for previews or tests. Use KotlinCode(AnnotatedString, ...)")
 @Composable
 fun KotlinCode(
     code: String,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     showLineNumbers: Boolean = false,
     activeHighlight: Int? = null,
-    focus: List<IntRange> = listOf(),
 ) {
   KotlinCode(
       AnnotatedString(code),
       codeStyle,
       showLineNumbers,
       activeHighlight,
-      focus,
   )
 }
 
@@ -53,7 +53,6 @@ fun KotlinCode(
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     showLineNumbers: Boolean = false,
     activeHighlight: Int? = null,
-    focus: List<IntRange> = listOf(),
 ) {
   val lines = code.text.split("\n")
 
@@ -71,7 +70,6 @@ fun KotlinCode(
           code = code,
           codeStyle = codeStyle,
           activeHighlight = activeHighlight,
-          focus = focus,
       )
     }
   }
@@ -101,7 +99,6 @@ private fun CodePart(
     code: AnnotatedString,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     activeHighlight: Int? = null,
-    focus: List<IntRange>,
 ) {
   Column {
     lines.forEachIndexed { index, line ->
@@ -133,24 +130,13 @@ private fun CodePart(
               }
 
             is Block.CodeBlock -> {
-              val intersectingRanges = focus
-                  .map {
-                    // map to local string indices
-                    (it.first - realStartIndex .. it.last - realStartIndex)
-                  }.filter { f ->
-                    block.range.isInRange(f)
-                  }
 
               val subSequence = code.subSequence(
                   realStartIndex + block.range.first,
                   realStartIndex + block.range.last + 1
               )
 
-              val focused = intersectingRanges.fold(subSequence) { acc, e ->
-                acc.invertForegroundBackgroundColors(e)
-              }
-
-              Monospace(focused)
+              Monospace(subSequence)
             }
 
           }
@@ -299,15 +285,16 @@ fun PreviewKotlinCode_WithLineNumbersAndFocus() {
     val focusEnd = focusStart + focus.length
     ScrollableColumn {
       KotlinCode(
-          code = annotated,
-          codeStyle = DefaultCodeStyle,
-          showLineNumbers = true,
-          focus = listOf(
+          code = listOf(
               2 .. 4,
               8 .. 10,
               45..47,
               focusStart..focusEnd
-          )
+          ).fold(annotated){acc, e ->
+            acc.invertForegroundBackgroundColors(e)
+          },
+          codeStyle = DefaultCodeStyle,
+          showLineNumbers = true,
       )
     }
   }

@@ -52,5 +52,5 @@ interface KotlinCodeWithBlanks {
    */
   fun getRealStringIndices(
       fillings: Map<Int, String>
-  ): Map<Int, IntRange>
+  ): Map<Int, List<IntRange>>
 }

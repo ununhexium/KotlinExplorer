@@ -97,4 +97,33 @@ ${p(4)}
         )
     )
   }
+
+  @Test
+  fun `can tell which spots to focus when wrong answer and duplicated ids`() {
+    // given
+    val page = LessonPage.CodeQuestionPage(
+        "",
+        "",
+        """${p(0)}Hello${p(0)}""",
+        "",
+        answer = listOf("\""),
+        confusion = listOf("'"),
+        choices = listOf("\"", "'")
+    )
+    val state = CodeQuestionUiState(
+        pageIndex = 0,
+        lessonPage = page,
+        chapter = Chapter.EMPTY,
+        selectedAnswers = listOf(1),
+    )
+
+    // when
+    val locations = state.correctedAnswersLocations
+
+    // then
+    // 0123456
+    // "Hello"
+    assertThat(locations).containsExactly(0 .. 0, 6 .. 6)
+  }
+
 }

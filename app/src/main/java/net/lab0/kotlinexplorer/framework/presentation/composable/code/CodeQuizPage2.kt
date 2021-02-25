@@ -39,7 +39,7 @@ fun CodeQuizPage2(
         }
         CodeQuestionPart2(
             questionMarkdown = markdown,
-            snippet = state.snippet,
+            snippet = state.selectedAnswersSnippet,
             nextBlank = state.nextBlank,
             codeColoration = codeColoration
         )
@@ -49,9 +49,8 @@ fun CodeQuizPage2(
           AnswerPart2(
               isCorrectAnswer = state.isCorrectAnswer,
               explanationMarkdown = state.lessonPage.explanation,
-              answerSnippet = state.lessonPage.answerSnippet,
+              answerSnippet = state.snippetWithFocusedMistakes,
               codeColoration = codeColoration,
-              focus = state.correctedAnswersLocations,
           )
         }
       } else null,
@@ -84,9 +83,8 @@ fun CodeQuizPage2(
 private fun AnswerPart2(
     isCorrectAnswer: Boolean,
     explanationMarkdown: String,
-    answerSnippet: String,
+    answerSnippet: AnnotatedString,
     codeColoration: Boolean,
-    focus: List<IntRange>,
 ) {
   val markdown = remember { mutableStateOf(parseMD(explanationMarkdown)) }
   if (isCorrectAnswer) {
@@ -102,16 +100,8 @@ private fun AnswerPart2(
             Text("Correct answer:", style = MaterialTheme.typography.body1)
             DefaultVerticalSpacer()
             KotlinCode(
-                code = if (codeColoration) {
-                  extractHighlightsAndAnnotate(
-                      answerSnippet,
-                      DefaultCodeStyle.textStyler
-                  )
-                } else {
-                  AnnotatedString(answerSnippet)
-                },
+                code = answerSnippet,
                 codeStyle = DefaultCodeStyle,
-                focus = focus,
             )
             DefaultVerticalSpacer()
             MDDocument(document = markdown.value)

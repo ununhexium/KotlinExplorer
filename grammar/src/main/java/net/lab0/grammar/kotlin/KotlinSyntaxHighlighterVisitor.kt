@@ -15,6 +15,11 @@ import net.lab0.grammar.kotlin.KotlinParser.PostfixUnaryExpressionContext
 import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
 
+/**
+ * TODO: test with random inputs
+ *
+ * This stuff sometimes breaks on unexpected inputs. Stuff that should not be null can be null and it crashes the app.
+ */
 class KotlinSyntaxHighlighterVisitor(
     val wellKnownFunctions: List<String> = listOf("println", "print"),
 ) : KotlinParserBaseVisitor<Highlights<KotlinHighlight>>() {
@@ -111,8 +116,8 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitLineStringLiteral(ctx: KotlinParser.LineStringLiteralContext) =
       hl {
-        add(STRING, ctx.QUOTE_OPEN().range)
-        add(STRING, ctx.QUOTE_CLOSE().range)
+        ctx.QUOTE_OPEN()?.let { add(STRING, it.range) }
+        ctx.QUOTE_CLOSE()?.let{ add(STRING, it.range) }
 
         add(visitChildren(ctx))
       }
