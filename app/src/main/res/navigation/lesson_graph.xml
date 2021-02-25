@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/chapterListFragment">
+    <fragment
+        android:id="@+id/chapterListFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment"
+        android:label="ChapterListFragment">
+        <action
+            android:id="@+id/action_chapterListFragment_to_profile_graph"
+            app:destination="@id/profile_graph" />
+        <action
+            android:id="@+id/action_chapterListFragment_to_lesson_graph"
+            app:destination="@id/lesson_graph" />
+    </fragment>
+    <include app:graph="@navigation/profile_graph" />
+    <navigation android:id="@+id/lesson_graph"
+        app:startDestination="@id/lessonFirstPage">
+        <argument
+            android:name="lessonId"
+            app:argType="string" />
+        <fragment
+            android:id="@+id/codeQuestionPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionFragment"
+            android:label="CodeQuestionPageFragment">
+            <action
+                android:id="@+id/action_lessonCodeQuestionPageFragment_self"
+                app:destination="@id/codeQuestionPageFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <argument
+                android:name="page"
+                app:argType="integer" />
+            <action
+                android:id="@+id/action_codeQuestionPageFragment_to_lessonFeedbackFragment"
+                app:destination="@id/lessonFeedbackFragment" />
+            <action
+                android:id="@+id/action_codeQuestionPageFragment_to_infoPageFragment"
+                app:destination="@id/infoPageFragment" />
+            <action
+                android:id="@+id/action_codeQuestionPageFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
+            <action
+                android:id="@+id/action_codeQuestionPageFragment_to_multipleChoicePageFragment"
+                app:destination="@id/multipleChoicePageFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/lessonFeedbackFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment"
+            android:label="LessonFeedbackFragment">
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_lessonFeedbackFragment_to_nextLessonFragment"
+                app:destination="@id/nextLessonFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/nextLessonFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.NextLessonFragment"
+            android:label="NextLessonFragment">
+            <action
+                android:id="@+id/action_nextLessonFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_nextLessonFragment_to_lessonFirstPage"
+                app:destination="@id/lessonFirstPage" />
+        </fragment>
+        <fragment
+            android:id="@+id/lessonFirstPage"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonFirstPageFragment"
+            android:label="LessonFirstPage" >
+            <action
+                android:id="@+id/action_lessonFirstPage_to_codeQuestionPageFragment"
+                app:destination="@id/codeQuestionPageFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_lessonFirstPage_to_infoPageFragment"
+                app:destination="@id/infoPageFragment" />
+            <action
+                android:id="@+id/action_lessonFirstPage_to_multipleChoicePageFragment"
+                app:destination="@id/multipleChoicePageFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/infoPageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.InfoPageFragment"
+            android:label="InfoPageFragment">
+            <action
+                android:id="@+id/action_infoPageFragment_self"
+                app:destination="@id/infoPageFragment" />
+            <action
+                android:id="@+id/action_infoPageFragment_to_codeQuestionPageFragment"
+                app:destination="@id/codeQuestionPageFragment" />
+            <action
+                android:id="@+id/action_infoPageFragment_to_lessonFeedbackFragment"
+                app:destination="@id/lessonFeedbackFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <argument
+                android:name="page"
+                app:argType="integer" />
+            <action
+                android:id="@+id/action_lessonInfoPageFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
+            <action
+                android:id="@+id/action_infoPageFragment_to_multipleChoicePageFragment"
+                app:destination="@id/multipleChoicePageFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/multipleChoicePageFragment"
+            android:name="net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceFragment"
+            android:label="MultipleChoicePageFragment" >
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_self"
+                app:destination="@id/multipleChoicePageFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_codeQuestionPageFragment"
+                app:destination="@id/codeQuestionPageFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_infoPageFragment"
+                app:destination="@id/infoPageFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_chapterListFragment"
+                app:destination="@id/chapterListFragment" />
+            <action
+                android:id="@+id/action_multipleChoicePageFragment_to_lessonFeedbackFragment"
+                app:destination="@id/lessonFeedbackFragment" />
+            <argument
+                android:name="lessonId"
+                app:argType="string" />
+            <argument
+                android:name="page"
+                app:argType="integer" />
+        </fragment>
+    </navigation>
+</navigation>
