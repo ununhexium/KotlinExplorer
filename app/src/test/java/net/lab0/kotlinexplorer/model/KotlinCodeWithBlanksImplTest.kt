@@ -1,11 +1,10 @@
 package net.lab0.kotlinexplorer.model
 
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import com.google.common.truth.Truth.assertThat
 import net.lab0.kotlinexplorer.business.domain.parser.Block
-import net.lab0.kotlinexplorer.business.domain.parser.CodeType
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import org.junit.jupiter.api.Test
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 class KotlinCodeWithBlanksImplTest {
   @Test
@@ -13,10 +12,10 @@ class KotlinCodeWithBlanksImplTest {
     // given
     val cases = listOf(
         0 to "example",
-        1 to "val ${placeholder()}",
-        2 to "val ${placeholder(0)} = ${placeholder(1)}",
-        3 to "val ${placeholder(0)} = ${placeholder(1)} + ${placeholder(2)}",
-        2 to "${placeholder(0)}${placeholder(0)}"
+        1 to "val ${p()}",
+        2 to "val ${p(0)} = ${p(1)}",
+        3 to "val ${p(0)} = ${p(1)} + ${p(2)}",
+        2 to "${p(0)}${p(0)}"
     )
 
     // then
@@ -34,9 +33,9 @@ class KotlinCodeWithBlanksImplTest {
     // given
     val cases = listOf(
         listOf<Int>() to "example",
-        listOf(-1) to "val ${placeholder()}",
-        listOf(0, 1) to "val ${placeholder(0)} = ${placeholder(1)}",
-        listOf(0, 116, 2) to "val ${placeholder(0)} = ${placeholder(116)} + ${placeholder(2)}",
+        listOf(-1) to "val ${p()}",
+        listOf(0, 1) to "val ${p(0)} = ${p(1)}",
+        listOf(0, 116, 2) to "val ${p(0)} = ${p(116)} + ${p(2)}",
     )
 
     // then
@@ -52,7 +51,7 @@ class KotlinCodeWithBlanksImplTest {
   @Test
   fun `can fill with an empty map (noop)`() {
     // given
-    val code = "val ${placeholder(0)} = ${placeholder(1)}"
+    val code = "val ${p(0)} = ${p(1)}"
 
     // when
     val filled = KotlinCodeWithBlanksImpl(code).fill(
@@ -70,7 +69,7 @@ class KotlinCodeWithBlanksImplTest {
   @Test
   fun `can fill the placeholders`() {
     // given
-    val code = "val ${placeholder(0)} = ${placeholder(1)}"
+    val code = "val ${p(0)} = ${p(1)}"
 
     // when
     val filled = KotlinCodeWithBlanksImpl(code).fill(
@@ -91,7 +90,7 @@ class KotlinCodeWithBlanksImplTest {
   @Test
   fun `can fill a duplicated placeholder`() {
     // given
-    val code = "if(${placeholder(0)} == ${placeholder(0)})"
+    val code = "if(${p(0)} == ${p(0)})"
 
     // when
     val filled = KotlinCodeWithBlanksImpl(code).fill(
@@ -111,13 +110,13 @@ class KotlinCodeWithBlanksImplTest {
     // given
     //          /**ANSWER(0)**/a/**ANSWER(1)**/
     //          0123456789012345678901234567890
-    val code = "${placeholder(0)}a${placeholder(1)}"
+    val code = "${p(0)}a${p(1)}"
 
     // when
     val parse = KotlinCodeWithBlanksImpl(code).parse()
 
     // then
-    val phl = placeholder(0).length
+    val phl = p(0).length
     assertThat(parse).isEqualTo(
         listOf(
             Block.PlaceholderBlock(0 until phl, 0),
@@ -132,13 +131,13 @@ class KotlinCodeWithBlanksImplTest {
     // given
     //          a/**ANSWER(0)**/b
     //          01234567890123456
-    val code = "a${placeholder(0)}b"
+    val code = "a${p(0)}b"
 
     // when
     val parse = KotlinCodeWithBlanksImpl(code).parse()
 
     // then
-    val phl = placeholder(0).length
+    val phl = p(0).length
     assertThat(parse).isEqualTo(
         listOf(
             Block.CodeBlock(0 .. 0),
@@ -154,13 +153,13 @@ class KotlinCodeWithBlanksImplTest {
 
     //          a/**ANSWER(0)**//**ANSWER(1)**/b
     //          01234567890123456789012345678901
-    val code = "a${placeholder(0)}${placeholder(1)}b"
+    val code = "a${p(0)}${p(1)}b"
 
     // when
     val parse = KotlinCodeWithBlanksImpl(code).parse()
 
     // then
-    val phl = placeholder(0).length
+    val phl = p(0).length
     assertThat(parse).isEqualTo(
         listOf(
             Block.CodeBlock(0 until 1),
@@ -190,16 +189,78 @@ class KotlinCodeWithBlanksImplTest {
   @Test
   fun `can parse the raw by placeholders and code, only one placeholder`() {
     // given
-    val code = placeholder(0)
+    val code = p(0)
 
     // when
     val parse = KotlinCodeWithBlanksImpl(code).parse()
 
     // then
-    val phl = placeholder(0).length
+    val phl = p(0).length
     assertThat(parse).isEqualTo(
         listOf(
             Block.PlaceholderBlock(0 until phl, 0),
+        )
+    )
+  }
+
+  @Test
+  fun `can give the real string indices after code replacement`() {
+    // given
+    val code = "val ${p(0)} ${p(1)} ${p(2)}${p(3)}"
+    val fillings = mapOf(
+        0 to "alpha",
+        2 to "116",
+        3 to ";",
+    )
+    val withBlanks = KotlinCodeWithBlanksImpl(code)
+
+    // when
+    val ranges = withBlanks.getRealStringIndices(fillings)
+
+    // then
+    // 0         10        20
+    // 012345678901234567890123456789
+    // val alpha /**ANSWER(1)**/ 116;
+    assertThat(ranges).isEqualTo(
+        mapOf(
+            0 to 4 .. 8,
+            1 to 10 .. 24,
+            2 to 26 .. 28,
+            3 to 29 .. 29,
+        )
+    )
+  }
+
+  @Test
+  fun `can give the real string indices after code replacement 2`() {
+    // given
+    val code = """${p(0)} main${p(1)}${p(2)} ${p(3)}
+  // next steps
+${p(4)}
+"""
+    val fillings = mapOf(
+        0 to "fun",
+        1 to "{",
+        2 to "}",
+        3 to "[",
+        4 to "]"
+    )
+    val withBlanks = KotlinCodeWithBlanksImpl(code)
+
+    // when
+    val ranges = withBlanks.getRealStringIndices(fillings)
+
+    // then
+    // 0         10        20
+    // 012345678901234567890123456789
+    // fun main() {␤  // next steps␤}
+    assertThat(ranges).isEqualTo(
+        mapOf(
+            0 to 0 .. 2,
+            1 to 8 .. 8,
+            2 to 9 .. 9,
+            3 to 11 .. 11,
+            4 to 29 .. 29,
         )
     )
   }

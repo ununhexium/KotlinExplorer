@@ -16,7 +16,6 @@ class CodeQuestionViewModel(
     CodeQuestionUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf()),
     ioDispatcher
 ) {
-
   override suspend fun doJobForEvent(event: CodeQuestionUiEvent) {
     Do exhaustive when (event) {
       CodeQuestionUiEvent.Empty -> Unit

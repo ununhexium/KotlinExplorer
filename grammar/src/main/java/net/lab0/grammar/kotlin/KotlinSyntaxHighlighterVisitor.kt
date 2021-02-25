@@ -205,7 +205,7 @@ class KotlinSyntaxHighlighterVisitor(
         }
 
         ctx.EXCL()?.let {
-          if(it.size == 2){
+          if (it.size == 2) {
             add(OPERATOR, it.first().range.first, it.last().range.last)
           }
         }
@@ -258,8 +258,8 @@ class KotlinSyntaxHighlighterVisitor(
   override fun visitWhenExpression(ctx: KotlinParser.WhenExpressionContext) =
       hl {
         add(KEYWORD, ctx.WHEN().range)
-        add(BRACKET, ctx.LCURL().range)
-        add(BRACKET, ctx.RCURL().range)
+        ctx.LCURL()?.let { add(BRACKET, it.range) }
+        ctx.RCURL()?.let { add(BRACKET, it.range) }
 
         add(visitChildren(ctx))
       }

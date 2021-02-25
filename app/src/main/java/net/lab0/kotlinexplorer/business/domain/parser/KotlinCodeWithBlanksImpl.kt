@@ -24,26 +24,6 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
             )
           }
 
-  private fun split(
-      offset: Int
-  ): List<Pair<CodeType, IntRange>> {
-    if (offset >= raw.length) return listOf()
-
-    val placeholder = ANSWER_REGEX.find(raw, offset)
-        ?: return listOf(CodeType.CODE to (offset until raw.length))
-
-    return if (placeholder.range.first == offset) {
-      listOf(CodeType.PLACEHOLDER to (placeholder.range.first .. placeholder.range.last))
-    } else {
-      listOf(
-          CodeType.CODE to (offset until placeholder.range.first),
-          CodeType.PLACEHOLDER to (placeholder.range.first .. placeholder.range.last),
-      )
-    } + split(
-        placeholder.range.last + 1,
-    )
-  }
-
   override fun parse() =
       parse(0)
 
@@ -75,5 +55,40 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
     } + parse(
         placeholder.range.last + 1,
     )
+  }
+
+  override fun getRealStringIndices(
+      fillings: Map<Int, String>
+  ): Map<Int, IntRange> {
+    val result = mutableMapOf<Int, IntRange>()
+
+    // complement the missing IDs with the placeholder's value
+    val refillings = placeholderIds.map { id ->
+      if (id in fillings.keys) {
+        id to (fillings[id] ?: throw IllegalStateException(
+            "Can't happen, was filtered 1 line above"
+        ))
+      } else {
+        id to placeholder(id)
+      }
+    }.toMap()
+
+    placeholderIds
+        .fold(raw) { code, index ->
+          val placeholderStart = code.indexOf(placeholder(index))
+          val replacement = refillings[index] ?: throw IllegalStateException(
+              "Must not happen because the indices have been re-filled."
+          )
+          val end = placeholderStart + replacement.length
+
+          result[index] = (placeholderStart until end)
+
+          code.replace(
+              placeholder(index),
+              replacement
+          )
+        }
+
+    return result
   }
 }

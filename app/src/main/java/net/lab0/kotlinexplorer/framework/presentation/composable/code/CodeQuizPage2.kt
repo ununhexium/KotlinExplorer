@@ -28,7 +28,7 @@ fun CodeQuizPage2(
     model: CodeQuestionViewModel,
     nextQuestion: () -> Unit,
     onSelect: (Answer) -> Unit,
-    codeColoration:Boolean = true
+    codeColoration: Boolean = true,
 ) {
   val state = model.uiDataState.value
 
@@ -50,7 +50,8 @@ fun CodeQuizPage2(
               isCorrectAnswer = state.isCorrectAnswer,
               explanationMarkdown = state.lessonPage.explanation,
               answerSnippet = state.lessonPage.answerSnippet,
-              codeColoration = codeColoration
+              codeColoration = codeColoration,
+              focus = state.correctedAnswersLocations,
           )
         }
       } else null,
@@ -84,7 +85,8 @@ private fun AnswerPart2(
     isCorrectAnswer: Boolean,
     explanationMarkdown: String,
     answerSnippet: String,
-    codeColoration: Boolean
+    codeColoration: Boolean,
+    focus: List<IntRange>,
 ) {
   val markdown = remember { mutableStateOf(parseMD(explanationMarkdown)) }
   if (isCorrectAnswer) {
@@ -109,6 +111,7 @@ private fun AnswerPart2(
                   AnnotatedString(answerSnippet)
                 },
                 codeStyle = DefaultCodeStyle,
+                focus = focus,
             )
             DefaultVerticalSpacer()
             MDDocument(document = markdown.value)

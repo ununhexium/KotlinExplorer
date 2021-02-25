@@ -39,4 +39,18 @@ interface KotlinCodeWithBlanks {
   fun fill(fillings: Map<Int, String>): String
 
   fun parse(): List<Block>
+
+  /**
+   * Fills the code with the given placeholders and returns the indices
+   * in the filled string where each placeholder is (after replacement or
+   * keeping its placeholder value).
+   *
+   * If the fillings map is not complete, the placeholder with be kept as is.
+   *
+   * @return The positions of the indices in the code after replacing
+   * the placeholders with the given fillings.
+   */
+  fun getRealStringIndices(
+      fillings: Map<Int, String>
+  ): Map<Int, IntRange>
 }

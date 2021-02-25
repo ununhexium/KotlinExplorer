@@ -18,11 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import net.lab0.grammar.kotlin.KotlinHighlight
+import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.business.domain.parser.Block
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.kotlinexplorer.framework.ui.theme.sourceCodeFontFamily
-import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
+import net.lab0.kotlinexplorer.framework.util.isInRange
 import net.lab0.kotlinexplorer.utils.Do
 
 
@@ -32,12 +33,14 @@ fun KotlinCode(
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     showLineNumbers: Boolean = false,
     activeHighlight: Int? = null,
+    focus: List<IntRange> = listOf(),
 ) {
   KotlinCode(
       AnnotatedString(code),
       codeStyle,
       showLineNumbers,
       activeHighlight,
+      focus,
   )
 }
 
@@ -50,6 +53,7 @@ fun KotlinCode(
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     showLineNumbers: Boolean = false,
     activeHighlight: Int? = null,
+    focus: List<IntRange> = listOf(),
 ) {
   val lines = code.text.split("\n")
 
@@ -66,14 +70,15 @@ fun KotlinCode(
           lines = lines,
           code = code,
           codeStyle = codeStyle,
-          activeHighlight = activeHighlight
+          activeHighlight = activeHighlight,
+          focus = focus,
       )
     }
   }
 }
 
 @Composable
-fun GutterPart(
+private fun GutterPart(
     lines: List<String>,
     codeStyle: CodeStyle<KotlinHighlight>,
 ) {
@@ -96,6 +101,7 @@ private fun CodePart(
     code: AnnotatedString,
     codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
     activeHighlight: Int? = null,
+    focus: List<IntRange>,
 ) {
   Column {
     lines.forEachIndexed { index, line ->
@@ -105,6 +111,7 @@ private fun CodePart(
       Row {
         KotlinCodeWithBlanksImpl(line).parse().forEach { block ->
           Do exhaustive when (block) {
+
             is Block.PlaceholderBlock ->
               Surface(
                   modifier = Modifier
@@ -124,13 +131,28 @@ private fun CodePart(
                     fontSize = TextUnit.Companion.Sp(10)
                 )
               }
-            is Block.CodeBlock ->
-              Monospace(
-                  code.subSequence(
-                      realStartIndex + block.range.first,
-                      realStartIndex + block.range.last + 1
-                  )
+
+            is Block.CodeBlock -> {
+              val intersectingRanges = focus
+                  .map {
+                    // map to local string indices
+                    (it.first - realStartIndex .. it.last - realStartIndex)
+                  }.filter { f ->
+                    block.range.isInRange(f)
+                  }
+
+              val subSequence = code.subSequence(
+                  realStartIndex + block.range.first,
+                  realStartIndex + block.range.last + 1
               )
+
+              val focused = intersectingRanges.fold(subSequence) { acc, e ->
+                acc.invertForegroundBackgroundColors(e)
+              }
+
+              Monospace(focused)
+            }
+
           }
         }
       }
@@ -235,7 +257,7 @@ fun PreviewKotlinCode_Multiline() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PreviewKotlinCode_WithLineNumbers() {
   MaterialTheme {
@@ -253,6 +275,39 @@ fun PreviewKotlinCode_WithLineNumbers() {
           code = code,
           codeStyle = DefaultCodeStyle,
           showLineNumbers = true
+      )
+    }
+  }
+}
+
+@Preview
+@Composable
+fun PreviewKotlinCode_WithLineNumbersAndFocus() {
+  MaterialTheme {
+    val code = """
+          |fun foo() {
+          |  val bar = /**ANSWER(XX)**/ - 1234567
+          |  val i = 0
+          |}
+        """.trimMargin()
+    val annotated = AnnotatedString(
+        code,
+        multilineColorSpans,
+    )
+    val focus = "al i = 0"
+    val focusStart = code.indexOf(focus)
+    val focusEnd = focusStart + focus.length
+    ScrollableColumn {
+      KotlinCode(
+          code = annotated,
+          codeStyle = DefaultCodeStyle,
+          showLineNumbers = true,
+          focus = listOf(
+              2 .. 4,
+              8 .. 10,
+              45..47,
+              focusStart..focusEnd
+          )
       )
     }
   }
@@ -303,7 +358,7 @@ fun KotlinCodePreview_highlight3() {
   }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PreviewKotlinCode() {
   MaterialTheme {
