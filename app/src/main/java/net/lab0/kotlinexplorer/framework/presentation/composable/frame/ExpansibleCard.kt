@@ -12,8 +12,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,10 +24,9 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVertical
 fun ExpansibleCard(
     card: @Composable RowScope.() -> Unit,
     expansion: @Composable ColumnScope.() -> Unit,
-    expandedByDefault: Boolean = false,
+    expanded: Boolean = false,
+    setExpanded: (Boolean) -> Unit,
 ) {
-  val (expanded, setExpanded) = remember { mutableStateOf(expandedByDefault) }
-
   CardWithExpansion(
       card = {
         Row(
@@ -87,6 +84,7 @@ fun ExpansibleCardPreview_collapsed() {
               LessonListItem(lesson = lesson3, {})
             },
             false,
+            {},
         )
       }
     }
@@ -112,6 +110,7 @@ fun ExpansibleCardPreview_expanded() {
               LessonListItem(lesson = lesson3, {})
             },
             true,
+            {},
         )
       }
     }

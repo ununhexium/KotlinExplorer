@@ -6,6 +6,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,8 +26,12 @@ fun ChapterList(
      */
     onPlay: (String, String) -> Unit,
 ) {
+  val states = chapters.map {
+    val (expanded, setExpanded) = remember { mutableStateOf(false) }
+    expanded to setExpanded
+  }
   LazyColumn {
-    itemsIndexed(chapters) { _, chapter ->
+    itemsIndexed(chapters) { index, chapter ->
       ExpansibleCard(
           card = {
             ChapterCard(chapter = chapter)
@@ -37,7 +43,9 @@ fun ChapterList(
                   onPlay = { onPlay(chapter.id, lesson.id) }
               )
             }
-          }
+          },
+          expanded = states[index].first,
+          setExpanded = states[index].second,
       )
       MediumVerticalSpacer()
     }
