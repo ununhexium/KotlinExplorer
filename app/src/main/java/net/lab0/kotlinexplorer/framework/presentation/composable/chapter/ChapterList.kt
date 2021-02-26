@@ -12,26 +12,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ExpansibleCard
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonListItem
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.dummyChapter1
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.dummyChapter2
-import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonListItem
 
 @Composable
 fun ChapterList(
+    modifier: Modifier = Modifier,
     chapters: List<ChapterCardData>,
     /**
      * Play the selected (chapter, lesson)
      */
     onPlay: (String, String) -> Unit,
 ) {
-  val states = chapters.map {
-    val (expanded, setExpanded) = remember { mutableStateOf(false) }
-    expanded to setExpanded
-  }
-  LazyColumn {
-    itemsIndexed(chapters) { index, chapter ->
+  Column {
+    chapters.forEach { chapter ->
+      val (expanded, setExpanded) = remember { mutableStateOf(false) }
+      expanded to setExpanded
+
       ExpansibleCard(
           card = {
             ChapterCard(chapter = chapter)
@@ -44,8 +44,8 @@ fun ChapterList(
               )
             }
           },
-          expanded = states[index].first,
-          setExpanded = states[index].second,
+          expanded = expanded,
+          setExpanded = setExpanded,
       )
       MediumVerticalSpacer()
     }

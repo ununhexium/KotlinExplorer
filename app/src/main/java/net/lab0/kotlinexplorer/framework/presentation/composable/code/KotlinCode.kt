@@ -23,7 +23,6 @@ import net.lab0.kotlinexplorer.business.domain.parser.Block
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanksImpl
 import net.lab0.kotlinexplorer.framework.ui.theme.sourceCodeFontFamily
-import net.lab0.kotlinexplorer.framework.util.isInRange
 import net.lab0.kotlinexplorer.utils.Do
 
 
