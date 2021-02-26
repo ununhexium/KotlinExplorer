@@ -25,7 +25,11 @@ class KotlinCodeWithBlanksImpl(override val raw: String) : KotlinCodeWithBlanks 
           }
 
   override fun parse() =
-      parse(0)
+      if (raw.isEmpty()) {
+        listOf(Block.CodeBlock(0 until 0))
+      } else {
+        parse(0)
+      }
 
   private fun parse(
       offset: Int

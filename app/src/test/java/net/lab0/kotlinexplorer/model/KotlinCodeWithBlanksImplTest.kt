@@ -100,6 +100,22 @@ class KotlinCodeWithBlanksImplTest {
   }
 
   @Test
+  fun `can parse an empty string`() {
+    // given
+    val code = ""
+
+    // when
+    val parse = KotlinCodeWithBlanksImpl(code).parse()
+
+    // then
+    assertThat(parse).isEqualTo(
+        listOf(
+            Block.CodeBlock(0 until 0),
+        )
+    )
+  }
+
+  @Test
   fun `can parse the raw by placeholders and code, placeholders outside`() {
     // given
     //          /**ANSWER(0)**/a/**ANSWER(1)**/
