@@ -31,24 +31,26 @@ class InfoPageFragment(
       savedInstanceState: Bundle?
   ): View {
     return ComposeView(requireContext()).also { it ->
+
       val lesson = LessonBrowser.getLessonById(args.lessonId)
       val page = lesson.pages[args.page] as LessonPage.InfoPage
       val chapter = LessonBrowser.getChapterForLesson(args.lessonId)!!
+
       it.setContent {
         Scaffold(
             drawerContent = {
               LessonDrawer(
                   chapter = chapter.title,
                   lesson = lesson.title,
-                  lessonPages = chapter.lessons.map { it.title },
-                  currentPage = lesson.title
+                  lessonPages = lesson.pages.map { it.title },
+                  currentPage = page.title
               )
             }
         ) {
           LessonPage(
               lessonId = args.lessonId,
               progress = 1f * args.page / lesson.pages.size,
-              title = lesson.title,
+              title = page.title,
               onBack = {
                 findNavController().navigate(
                     InfoPageFragmentDirections

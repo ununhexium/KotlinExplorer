@@ -109,7 +109,7 @@ class ChapterListFragment
               if (state.canRequestMoreChapters) {
                 Icon(imageVector = Icons.Default.AddTask)
               }
-              
+
               Text(text = if (state.canRequestMoreChapters) "More please!" else "Requested")
             }
           }

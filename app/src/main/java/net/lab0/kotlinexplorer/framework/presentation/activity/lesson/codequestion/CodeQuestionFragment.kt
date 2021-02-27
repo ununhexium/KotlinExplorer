@@ -44,13 +44,17 @@ class CodeQuestionFragment(
       val collected = viewModel.uiDataState.collectAsState()
       val state = collected.value
 
+      val lesson = LessonBrowser.getLessonById(args.lessonId)
+      val page = lesson.pages[args.page] as LessonPage.CodeQuestionPage
+      val chapter = LessonBrowser.getChapterForLesson(args.lessonId)!!
+
       Scaffold(
           drawerContent = {
             LessonDrawer(
-                chapter = state.chapter.title,
-                lesson = state.lessonPage.title,
-                lessonPages = state.chapter.lessons.map { it.title },
-                currentPage = state.lessonPage.title
+                chapter = chapter.title,
+                lesson = lesson.title,
+                lessonPages = lesson.pages.map { it.title },
+                currentPage = page.title
             )
           }
       ) {

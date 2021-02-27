@@ -69,9 +69,8 @@ Here, `"Mhhh 🤔"` is a string. Therefore the type of `surprise` will also be a
             answer = setOf(0),
             choices = listOf("String", "It doesn't have a type", "Anything", "Nothing")
         ),
-        // TODO: summary page
         LessonPage.InfoPage(
-            title = "Type inference",
+            title = "Summary",
             """
 When no indication is given, Kotlin will infer the type of the value.
 
