@@ -13,11 +13,9 @@ class ExtraContentServiceImpl(
     private val firestore: FirebaseFirestore,
     private val fromDomain: FromDomain<ExtraContentRequestDocument, ExtraContentRequest>,
 ) : ExtraContentService {
-  override suspend fun requestExtraLessons(uid: String, extra: ExtraContentRequest) = flow {
+  override suspend fun requestExtraLessons(uid: String, extra: ExtraContentRequest) {
     firestore
         .extraLessonRequestDocument(uid)
         .set(fromDomain(extra))
-
-    emit(Resource.EmptyLoadedResource)
   }
 }

@@ -9,6 +9,7 @@ import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.Chapt
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackViewModel
@@ -25,6 +26,7 @@ constructor(
     private val saveLessonProgress: SaveLessonProgress,
     private val sendLessonFeedback: SendLessonFeedback,
     private val sendProblemReport: SendProblemReport,
+    private val requestExtraLessons: RequestExtraLessons,
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -34,7 +36,8 @@ constructor(
             ChapterListViewModel::class.java -> {
                 ChapterListViewModel(
                     getLessonsInProgress,
-                    getAllChapters
+                    getAllChapters,
+                    requestExtraLessons,
                 ) as T
             }
 

@@ -33,7 +33,7 @@ abstract class BaseViewModel<Event, State>(
   private val _loading = MutableStateFlow(false)
   val loading: StateFlow<Boolean> = _loading
 
-  suspend fun <T> processResource(flow: Flow<Resource<T>>, handleResult: (T) -> Unit) {
+  suspend fun <T> processResource(flow: Flow<Resource<T>>, handleResult: suspend (T) -> Unit) {
     flow.collect { resource ->
       Do exhaustive when (resource) {
         Resource.EmptyLoadedResource -> Unit

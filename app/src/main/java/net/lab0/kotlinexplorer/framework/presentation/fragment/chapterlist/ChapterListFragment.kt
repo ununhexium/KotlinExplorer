@@ -41,9 +41,6 @@ class ChapterListFragment
     private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<ChapterListStateEvent, ChapterListViewState>() {
 
-  private val NOTE_LIST_STATE_BUNDLE_KEY =
-      "net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist"
-
   override val viewModel: ChapterListViewModel by viewModels { viewModelFactory }
 
   override fun onCreateComposeView(view: ComposeView) {
@@ -70,8 +67,7 @@ class ChapterListFragment
       ) {
         val state by viewModel.uiDataState.collectAsState()
 
-
-        ScrollableColumn() {
+        ScrollableColumn {
           ChapterList(
               modifier = Modifier.padding(bottom = 64.dp),
               chapters = state.chapters.map { chapter ->
@@ -107,10 +103,14 @@ class ChapterListFragment
               horizontalArrangement = Arrangement.SpaceAround
           ) {
             Button(
-                onClick = { /* TODO i want more */ }
+                onClick = { viewModel.requestMoreContent(requireContext()) },
+                enabled = state.canRequestMoreChapters,
             ) {
-              Icon(imageVector = Icons.Default.AddTask)
-              Text(text = "More please!")
+              if (state.canRequestMoreChapters) {
+                Icon(imageVector = Icons.Default.AddTask)
+              }
+              
+              Text(text = if (state.canRequestMoreChapters) "More please!" else "Requested")
             }
           }
         }

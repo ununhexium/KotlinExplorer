@@ -3,6 +3,9 @@ package dependencies
 object TestDependencies {
   val androidx_test_ext = "androidx.test.ext:junit-ktx:${Versions.androidx_test_ext}"
 
+  val assertJ = "org.assertj:assertj-core:${Versions.assertJ}"
+  val assertK = "com.willowtreeapps.assertk:assertk-jvm:${Versions.assertK}"
+
   val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
   val espresso_contrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso_core}"
 

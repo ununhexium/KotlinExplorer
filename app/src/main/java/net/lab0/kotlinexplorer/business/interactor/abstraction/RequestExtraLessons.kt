@@ -1,12 +1,11 @@
-package net.lab0.kotlinexplorer.framework.firebase.abstraction
+package net.lab0.kotlinexplorer.business.interactor.abstraction
 
 import kotlinx.coroutines.flow.Flow
 import net.lab0.kotlinexplorer.business.domain.extracontent.ExtraContentRequest
 import net.lab0.kotlinexplorer.mvi.Resource
 
-interface ExtraContentService {
-  suspend fun requestExtraLessons(
+interface RequestExtraLessons {
+  operator fun invoke(
       uid: String,
-      extra: ExtraContentRequest
-  )
+  ): Flow<Resource.LoadedResource<Unit>>
 }

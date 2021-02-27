@@ -1,18 +1,19 @@
 package net.lab0.kotlinexplorer.injection
 
-import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
-import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
-import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
+import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
+import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
+import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
+import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -28,6 +29,7 @@ object MainModule {
       saveLessonProgress: SaveLessonProgress,
       sendLessonFeedback: SendLessonFeedback,
       sendProblemReport: SendProblemReport,
+      requestExtraLessons: RequestExtraLessons,
   ): JetpackExplorerViewModelFactory =
       JetpackExplorerViewModelFactory(
           getAllChapters,
@@ -35,6 +37,7 @@ object MainModule {
           saveLessonProgress,
           sendLessonFeedback,
           sendProblemReport,
+          requestExtraLessons,
       )
 
   @Singleton

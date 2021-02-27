@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp
 data class ExtraContentRequestDocument(
     val globalSuccess: Int,
     val globalFailure: Int,
-    val globalNeutral: Int,
     val timestamp: Timestamp = Timestamp.now(),
-)
+) {
+  constructor(): this(-1,-1, Timestamp.now())
+}

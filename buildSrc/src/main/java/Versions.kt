@@ -31,6 +31,8 @@ object Versions {
   val firebaseUi = "6.4.0"
 
   // test
+  val assertJ = "3.19.0"
+  val assertK = "0.23.1"
   val junit_4 = "4.13.1"
   val jupiter = "5.6.0"
   val mockk = "1.10.6"

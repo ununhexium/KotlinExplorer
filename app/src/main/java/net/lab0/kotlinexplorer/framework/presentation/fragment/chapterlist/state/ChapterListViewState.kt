@@ -7,6 +7,7 @@ import net.lab0.kotlinexplorer.mvi.UiState
 data class ChapterListViewState(
     val chapters: List<Chapter>,
     val lessonsInProgress: List<LessonProgress>,
+    val canRequestMoreChapters: Boolean,
 ) : UiState {
   val completionCache = mutableMapOf<Chapter, Float>()
 

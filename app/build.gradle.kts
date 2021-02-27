@@ -155,6 +155,8 @@ dependencies {
     // TEST
 
     testImplementation(TestDependencies.androidx_test_ext)
+    testImplementation(TestDependencies.assertJ)
+    testImplementation(TestDependencies.assertK)
     testImplementation(TestDependencies.hiltAndroidTesting)
     testImplementation(TestDependencies.junit4_junit)
     testImplementation(TestDependencies.junit5_api)
@@ -165,6 +167,8 @@ dependencies {
     testRuntimeOnly(TestDependencies.junit5_engine)
 
     androidTestImplementation(TestDependencies.androidx_test_ext)
+    androidTestImplementation(TestDependencies.assertJ)
+    androidTestImplementation(TestDependencies.assertK)
     androidTestImplementation(TestDependencies.espresso_core)
     androidTestImplementation(TestDependencies.espresso_contrib)
     androidTestImplementation(TestDependencies.hiltAndroidTesting)
