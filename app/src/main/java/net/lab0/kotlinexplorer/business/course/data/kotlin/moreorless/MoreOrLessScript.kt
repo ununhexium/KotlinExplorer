@@ -1,10 +1,11 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.moreorless
 
-import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 
 fun main() {
-  // generates a number between 0 and 99
-  val target = Random.nextInt(100)
+  // generates a random number
+  // between 0 and 99
+  val target = nextInt(100)
 
   var proposition:Int? = null
   var tries = 0
@@ -16,8 +17,8 @@ fun main() {
     print(
         when {
           proposition == target -> "You win in $tries!"
-          proposition > target -> "Too big!"
-          else -> "Too small!"
+          proposition > target -> "Too big."
+          else -> "Too small."
         }
     )
   }

@@ -7,7 +7,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.loadVectorResource
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +23,9 @@ import net.lab0.kotlinexplorer.utils.printLogD
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class UserProfileOverviewFragment : BaseFragment<UserProfileEvent, UserProfileViewState>() {
+class UserProfileOverviewFragment(
+    val auth:FirebaseAuth
+) : BaseFragment<UserProfileEvent, UserProfileViewState>() {
 
   override val viewModel: UserProfileViewModel by viewModels()
 

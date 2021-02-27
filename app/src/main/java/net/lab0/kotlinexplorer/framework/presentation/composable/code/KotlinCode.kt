@@ -214,6 +214,7 @@ fun PreviewKotlinCode_AnswerOnly() {
 
 val multilineColorSpans =
     listOf(
+        SpanStyleRange(normalStyle, 0, 64),
         SpanStyleRange(keywordStyle, 0, 3),
         SpanStyleRange(functionStyle, 4, 11),
         SpanStyleRange(keywordStyle, 14, 17),

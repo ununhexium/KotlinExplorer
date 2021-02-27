@@ -21,11 +21,13 @@ is bigger or smaller than the proposed number.
 
 ```kotlin_lines
 import kotlin.random.Random
+
 fun main() {
   // generates a number between 0 and 99
   val target = Random.nextInt(100)
   var tries = 0
   var proposition:Int? = null
+  
   while (proposition != target) {
     proposition = readLine()!!.toInt()
     tries++

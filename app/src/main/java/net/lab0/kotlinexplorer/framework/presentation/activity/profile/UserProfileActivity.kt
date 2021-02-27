@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.presentation.activity.profile
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -12,7 +13,9 @@ import javax.inject.Inject
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class UserProfileActivity : AppCompatActivity() {
+class UserProfileActivity(
+    val auth: FirebaseAuth
+) : AppCompatActivity() {
 
   @Inject
   lateinit var fragmentFactory: JetpackExplorerFragmentFactory

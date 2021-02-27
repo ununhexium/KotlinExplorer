@@ -5,17 +5,24 @@ import com.google.firebase.firestore.FirebaseFirestore
 fun FirebaseFirestore.usersCollection() =
     this.collection("users")
 
-fun FirebaseFirestore.feedbackCollection(user:String) =
+fun FirebaseFirestore.feedbackCollection(uid:String) =
     this
-        .collection("users")
-        .document(user)
+        .usersCollection()
+        .document(uid)
         .collection("feedbacks")
 
-fun FirebaseFirestore.problemReportCollection(user:String) =
+fun FirebaseFirestore.problemReportCollection(uid:String) =
     this
-        .collection("users")
-        .document(user)
+        .usersCollection()
+        .document(uid)
         .collection("problemReports")
+
+fun FirebaseFirestore.extraLessonRequestDocument(uid:String) =
+    this
+        .usersCollection()
+        .document(uid)
+        .collection("extraLessonRequest")
+        .document("singleton")
 
 fun FirebaseFirestore.anonymousProblemReportCollection() =
     this

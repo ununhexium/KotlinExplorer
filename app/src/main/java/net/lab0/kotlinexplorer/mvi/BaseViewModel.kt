@@ -4,15 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
-import net.lab0.kotlinexplorer.utils.Do
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.lab0.kotlinexplorer.utils.Do
 
 abstract class BaseViewModel<Event, State>(
     initialUiState: Event,
@@ -27,8 +26,6 @@ abstract class BaseViewModel<Event, State>(
 
   private val _uiState = MutableStateFlow(initialUiState)
   private val _uiDataState: MutableStateFlow<State> = MutableStateFlow(initialDataState)
-
-  private val jobsQueue = mutableMapOf<Event, Job>()
 
   val errors: StateFlow<ObserveOnce<String>> = _errors
   val uiDataState: StateFlow<State> = _uiDataState
@@ -64,26 +61,19 @@ abstract class BaseViewModel<Event, State>(
   fun emitSlowEvent(event: Event) {
     count++
 
-    jobsQueue.computeIfAbsent(event) {
-      viewModelScope.launch {
-        _loading.value = true
-        withContext(ioDispatcher) {
-          doJobForEvent(event)
-          jobsQueue.remove(event)
-          _loading.value = jobsQueue.isNotEmpty()
-          Log.d(TAG, "emitSlowEvent: ${_loading.value}")
-        }
+    viewModelScope.launch {
+      _loading.value = true
+      withContext(ioDispatcher) {
+        doJobForEvent(event)
+        Log.d(TAG, "emitSlowEvent: ${_loading.value}")
       }
     }
   }
 
-  fun emitFastEvent(event: Event): Job {
-    return jobsQueue.computeIfAbsent(event) {
-      viewModelScope.launch {
-        withContext(ioDispatcher) {
-          doJobForEvent(event)
-          jobsQueue.remove(event)
-        }
+  fun emitFastEvent(event: Event) {
+    viewModelScope.launch {
+      withContext(ioDispatcher) {
+        doJobForEvent(event)
       }
     }
   }
