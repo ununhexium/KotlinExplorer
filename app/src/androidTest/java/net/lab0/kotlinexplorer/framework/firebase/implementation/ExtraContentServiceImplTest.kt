@@ -57,7 +57,7 @@ internal class ExtraContentServiceImplTest {
   fun canSubmitAnExtraLessonRequest():Unit = runBlocking {
     // given
     val service = ExtraContentServiceImpl(firestore, fromDomain)
-    val extra = ExtraContentRequest(116, 117, 42)
+    val extra = ExtraContentRequest(116, 117)
 
     // when
     service.requestExtraLessons("user1", extra)
@@ -72,7 +72,7 @@ internal class ExtraContentServiceImplTest {
         .await()
         .toObject(ExtraContentRequestDocument::class.java)!!
 
-    val extraDoc = fromDomain(ExtraContentRequest(116, 117, 42))
+    val extraDoc = fromDomain(extra)
     assertThat(savedObject).isEqualToIgnoringGivenProperties(
         extraDoc,
         ExtraContentRequestDocument::timestamp

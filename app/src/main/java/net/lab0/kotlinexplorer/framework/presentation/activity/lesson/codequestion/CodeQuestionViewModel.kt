@@ -35,7 +35,7 @@ class CodeQuestionViewModel(
         }
       }
       is CodeQuestionUiEvent.SelectAnswer -> {
-        if (event.answer in uiDataState.value.choices.indices) {
+        if (event.answer in uiDataState.value.choices.indices && event.answer !in uiDataState.value.selectedAnswers) {
           updateUi {
             it.lockableCopy(selectedAnswers = (it.selectedAnswers + event.answer))
           }

@@ -24,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.framework.presentation.composable.SmallHorizontalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterCardData
 import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterList
 import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.LessonListItemData
@@ -108,8 +109,8 @@ class ChapterListFragment
             ) {
               if (state.canRequestMoreChapters) {
                 Icon(imageVector = Icons.Default.AddTask)
+                SmallHorizontalSpacer()
               }
-
               Text(text = if (state.canRequestMoreChapters) "More please!" else "Requested")
             }
           }
