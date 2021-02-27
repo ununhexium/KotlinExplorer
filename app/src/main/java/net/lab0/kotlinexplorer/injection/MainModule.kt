@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.injection
 
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,7 @@ object MainModule {
       sendLessonFeedback: SendLessonFeedback,
       sendProblemReport: SendProblemReport,
       requestExtraLessons: RequestExtraLessons,
+      firebaseAuth: FirebaseAuth,
   ): JetpackExplorerViewModelFactory =
       JetpackExplorerViewModelFactory(
           getAllChapters,
@@ -38,6 +40,7 @@ object MainModule {
           sendLessonFeedback,
           sendProblemReport,
           requestExtraLessons,
+          firebaseAuth,
       )
 
   @Singleton

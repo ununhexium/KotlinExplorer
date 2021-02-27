@@ -8,8 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.loadVectorResource
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
@@ -24,10 +24,10 @@ import net.lab0.kotlinexplorer.utils.printLogD
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UserProfileOverviewFragment(
-    val auth:FirebaseAuth
+    private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<UserProfileEvent, UserProfileViewState>() {
 
-  override val viewModel: UserProfileViewModel by viewModels()
+  override val viewModel: UserProfileViewModel by viewModels { viewModelFactory }
 
   override fun onCreateComposeView(view: ComposeView) {
     view.setContent {
@@ -54,10 +54,10 @@ class UserProfileOverviewFragment(
       )
 
       UserProfileUi(
-          state.user?.email,
-          placeholder,
-          null,
-          {
+          email = state.user?.email,
+          profilePicturePlaceholder = placeholder,
+          profilePicture = null,
+          logIn = {
             Auth.requestSignIn(
                 this,
                 {
@@ -69,7 +69,7 @@ class UserProfileOverviewFragment(
                 }
             )
           },
-          {
+          logOut = {
             val task = Auth.logOut(requireContext())
             task.addOnSuccessListener {
               viewModel.refreshUserData()
@@ -79,7 +79,7 @@ class UserProfileOverviewFragment(
               Toast.makeText(context, "Failed to log out", Toast.LENGTH_LONG).show()
             }
           },
-          FirebaseAuth.getInstance().uid ?: "Nope"
+          uid = state.user?.uid ?: "Nope"
       )
     }
   }

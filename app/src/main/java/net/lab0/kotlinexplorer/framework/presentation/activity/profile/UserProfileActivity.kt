@@ -13,9 +13,7 @@ import javax.inject.Inject
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class UserProfileActivity(
-    val auth: FirebaseAuth
-) : AppCompatActivity() {
+class UserProfileActivity : AppCompatActivity() {
 
   @Inject
   lateinit var fragmentFactory: JetpackExplorerFragmentFactory

@@ -10,7 +10,9 @@ import net.lab0.kotlinexplorer.mvi.Resource
 import net.lab0.kotlinexplorer.utils.Do
 import net.lab0.kotlinexplorer.utils.printLogD
 
-class UserProfileViewModel : BaseViewModel<UserProfileEvent, UserProfileViewState>(
+class UserProfileViewModel(
+    val auth:FirebaseAuth
+) : BaseViewModel<UserProfileEvent, UserProfileViewState>(
     UserProfileEvent.Empty,
     UserProfileViewState(),
 ) {

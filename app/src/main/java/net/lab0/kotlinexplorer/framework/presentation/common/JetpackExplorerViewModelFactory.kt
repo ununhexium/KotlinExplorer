@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.presentation.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
@@ -13,6 +14,9 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLesso
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.profile.UserProfileOverviewFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.profile.UserProfileViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login.LoginViewModel
 import javax.inject.Inject
 
 
@@ -27,6 +31,7 @@ constructor(
     private val sendLessonFeedback: SendLessonFeedback,
     private val sendProblemReport: SendProblemReport,
     private val requestExtraLessons: RequestExtraLessons,
+    private val firebaseAuth: FirebaseAuth,
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -51,6 +56,18 @@ constructor(
             LessonFeedbackViewModel::class.java -> {
                 LessonFeedbackViewModel(
                     sendLessonFeedback
+                ) as T
+            }
+
+            LoginViewModel::class.java -> {
+                LoginViewModel(
+                    firebaseAuth
+                ) as T
+            }
+
+            UserProfileViewModel::class.java -> {
+                UserProfileViewModel(
+                    firebaseAuth
                 ) as T
             }
 
