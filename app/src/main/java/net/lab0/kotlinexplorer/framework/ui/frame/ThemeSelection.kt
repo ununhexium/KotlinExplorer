@@ -11,7 +11,7 @@ import net.lab0.kotlinexplorer.framework.ui.theme.Theme
 
 @Composable
 fun ThemeSelection(modifier: Modifier = Modifier) {
-  val (theme, setTheme) = remember { mutableStateOf(Theme.LIGHT_DEFAULT) }
+  val (theme, setTheme) = remember { mutableStateOf(Theme.KOTLIN_LIGHT) }
 
 
 }
