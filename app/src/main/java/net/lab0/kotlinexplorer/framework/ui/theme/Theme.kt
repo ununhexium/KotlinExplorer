@@ -5,31 +5,29 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import net.lab0.kotlinexplorer.framework.ui.theme.Theme.DARK_DEFAULT
 import net.lab0.kotlinexplorer.framework.ui.theme.Theme.LIGHT_DEFAULT
 
 private val DarkColorPalette = darkColors(
-    primary = Red500,
-    primaryVariant = Red500,
+    primary = Orange800,
+    primaryVariant = Orange800,
     secondary = Green500,
     background = Gray200,
     surface = Gray200,
-    onBackground = Teal200
+    onBackground = BlueKotlinPantone
 )
 
 private val LightColorPalette = lightColors(
-    primary = purple500,
+    primary = purpleKotlinPantone,
     primaryVariant = purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
+    secondary = BlueKotlinPantone,
     background = Color.White,
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
-    */
 )
 
 enum class Theme {

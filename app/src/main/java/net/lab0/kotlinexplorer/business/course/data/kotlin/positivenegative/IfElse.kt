@@ -1,12 +1,12 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
+import net.lab0.kotlinexplorer.business.course.data.kotlin.dollar
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage.CodeQuestionPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
 import net.lab0.kotlinexplorer.business.domain.LessonPage.MultipleChoice
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
-// TODO: simplify and move some parts to if/else part 2?
 object IfElse : LessonImpl(
     id = "kotlin.positivenegative.ifelse",
     title = "If Else",
@@ -270,7 +270,6 @@ if (number > 0) {
             answer = listOf(">", "0", "<", "0"),
             confusion = listOf("<=", ">="),
         ),
-        // TODO delay the part about 'Any' return type
         InfoPage(
             title = "Summary",
             """
@@ -305,22 +304,6 @@ To use it as an expression, you must declare both a `true` and a `false` branch.
 
 ```kotlin
 val hi = if (false) "bye" else "hi"
-```
-
-##### Different types
-
-⚠️ It's possible to mix return types in the expression,
-but this creates complications that we will be explained later.
-
-```kotlin
-val any = if (true) 1 else "A"
-```
-
-`any` now has the type `Any` and you can only do what is possible to do with both integers and string.
-For example, you can print it and put it in string templates.
-
-```kotlin
-print("any = ${'$'}{any}")
 ```
 """
         ),

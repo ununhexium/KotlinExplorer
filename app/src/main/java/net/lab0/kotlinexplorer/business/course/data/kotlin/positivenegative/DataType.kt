@@ -95,6 +95,5 @@ val yes:Boolean = true
 ```
 """
         )
-        // TODO: multiple choice question: tell the type (like type inference) like to compiler would do
     )
 )

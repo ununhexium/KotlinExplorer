@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.framework.firebase.implementation
 
+import com.google.android.gms.tasks.Tasks
 import com.google.common.truth.Truth.assertThat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -7,14 +8,14 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import io.mockk.clearAllMocks
-import io.mockk.every
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
+import net.lab0.kotlinexplorer.framework.firebase.implementation.TestUsers.user1email
+import net.lab0.kotlinexplorer.framework.firebase.implementation.TestUsers.user1password
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
@@ -35,7 +36,8 @@ internal class ProblemReportServiceImplTest {
   @get:Rule(order = 0)
   var hiltRule = HiltAndroidRule(this)
 
-  val firebaseAuth: FirebaseAuth = mockk()
+  @Inject
+  lateinit var firebaseAuth: FirebaseAuth
 
   @Inject
   lateinit var firestore: FirebaseFirestore
@@ -50,7 +52,9 @@ internal class ProblemReportServiceImplTest {
   fun before() {
     hiltRule.inject()
     clearAllMocks()
-    every { firebaseAuth.uid } returns "user1"
+    Tasks.await(
+        firebaseAuth.createUserWithEmailAndPassword(user1email, user1password)
+    )
     problemReportService = ProblemReportServiceImpl(
         firebaseAuth,
         firestore,
