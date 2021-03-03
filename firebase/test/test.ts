@@ -1,4 +1,3 @@
-const assert = require('assert');
 const firebase = require('@firebase/testing')
 
 const PROJECT_ID = "kotlin-explorer"
@@ -44,7 +43,7 @@ describe("Security rules test", () => {
                 .doc(user.uid)
                 .collection("extraLessonRequest")
                 .doc("singleton");
-            await firebase.assertSucceeds(testDoc.set({dummy: "data"}))
+            await firebase.assertSucceeds(testDoc.set({dummy: "data"}));
         }
     )
 
@@ -57,7 +56,7 @@ describe("Security rules test", () => {
                 .doc(user.uid)
                 .collection("extraLessonRequest")
                 .doc("singleton");
-            await firebase.assertSucceeds(testDoc.get())
+            await firebase.assertSucceeds(testDoc.get());
         }
     )
 
@@ -69,7 +68,7 @@ describe("Security rules test", () => {
                 .collection("extraLessonRequest")
                 .doc("singleton");
 
-            await firebase.assertFails(testDoc.set({dummy: "data"}))
+            await firebase.assertFails(testDoc.set({dummy: "data"}));
         }
     )
 
@@ -81,7 +80,99 @@ describe("Security rules test", () => {
                 .collection("extraLessonRequest")
                 .doc("singleton");
 
-            await firebase.assertFails(testDoc.get())
+            await firebase.assertFails(testDoc.get());
         }
     )
+
+    it("Can create a new problem report", async () => {
+            const db = getFirestore(userA);
+            const testDoc = db
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("firstReport");
+
+            await firebase.assertSucceeds(testDoc.set({some: "data"}));
+        }
+    );
+
+    it("Can read a user's existing problem report", async () => {
+            await getAdminFirestore()
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport")
+                .set({some: "data"})
+
+            const db = getFirestore(userA);
+
+            const testDoc = db
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport");
+
+            await firebase.assertSucceeds(testDoc.get());
+        }
+    );
+
+    it("Prevent another user from reading a user's existing problem report", async () => {
+            await getAdminFirestore()
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport")
+                .set({some: "data"})
+
+            const db = getFirestore(userZ);
+
+            const testDoc = db
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport");
+
+            await firebase.assertFails(testDoc.get());
+        }
+    );
+
+    it("Prevent overwrite of an existing problem report", async () => {
+            await getAdminFirestore()
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport")
+                .set({some: "data"})
+
+            const db = getFirestore(userA);
+
+            const testDoc = db
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport");
+
+            await firebase.assertFails(testDoc.set({some: "new data"}));
+        }
+    );
+
+    it("Prevent update of an existing problem report", async () => {
+            await getAdminFirestore()
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport")
+                .set({some: "data"})
+
+            const db = getFirestore(userA);
+
+            const testDoc = db
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport");
+
+            await firebase.assertFails(testDoc.update({some: "new data"}));
+        }
+    );
 });

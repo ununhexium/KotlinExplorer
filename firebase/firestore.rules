@@ -5,8 +5,23 @@ service cloud.firestore {
             allow read, write: if false;
         }
 
-        match /users/{userId}/extraLessonRequest/singleton {
-            allow read, write: if (request.auth.uid == userId);
+        match /users/{userId} {
+            function isAuthorized() {
+                return request.auth.uid == userId;
+            }
+            function isSignedIn() {
+                return request.auth.uid != null;
+            }
+
+            match /extraLessonRequest/singleton {
+                allow read, write: if isAuthorized();
+            }
+
+            match /problemReports/{problemId} {
+                allow create: if isSignedIn() && !exists(/databases/$(database)/documents/users/$(userId)/problemReports/$(problemId));
+                allow update: if false;
+                allow read: if isAuthorized();
+            }
         }
     }
 }
