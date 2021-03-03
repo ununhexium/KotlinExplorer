@@ -4,35 +4,56 @@ const firebase = require('@firebase/testing')
 const PROJECT_ID = "kotlin-explorer"
 
 
+class Authentication {
+    uid: string;
+    email: string;
+
+    constructor(uid: string, email: string) {
+        this.uid = uid;
+        this.email = email;
+    }
+}
 
 beforeEach(async () => {
     await firebase.clearFirestoreData({projectId: PROJECT_ID});
 })
 
 describe("Security rules test", () => {
-    it("Maths", () =>
-        assert.strictEqual(2 + 2, 4)
-    );
 
-    function getFirestore(auth) {
-        return firebase.initializeTestApp({projectId: PROJECT_ID, auth: auth}).firestore();
+    let userAbcAuth: Authentication = new Authentication("user_abc", "user_abc@example.com");
+
+    function getFirestore(auth: Authentication | null) {
+        if (auth != null) {
+            return firebase.initializeTestApp({projectId: PROJECT_ID, auth: auth}).firestore();
+        } else {
+            return firebase.initializeTestApp({projectId: PROJECT_ID}).firestore();
+        }
     }
 
     function getAdminFirestore() {
         return firebase.initializeAdminApp({projectId: PROJECT_ID}).firestore();
     }
 
-    let userAbcAuth = {uid: "user_abc", email: "user_abc@example.com"};
+    it("Can access the user's extra lessons request", async () => {
+            const db = getFirestore(null);
+            const testDoc = db
+                .collection("users")
+                .doc(userAbcAuth.uid)
+                .collection("extraLessonRequest")
+                .doc("singleton");
+            await firebase.assertSucceeds(testDoc.set({dummy: "data"}))
+        }
+    )
 
     it("Can read items in the read-only collection", async () => {
-            const db = getFirestore();
+            const db = getFirestore(null);
             const testDoc = db.collection("readonly").doc("testDoc");
             await firebase.assertSucceeds(testDoc.get());
         }
     );
 
     it("Can't write items in the read-only collection", async () => {
-            const db = getFirestore();
+            const db = getFirestore(null);
             const testDoc = db.collection("readonly").doc("testDoc2");
             await firebase.assertFails(testDoc.set({foo: "bar"}));
         }
@@ -53,7 +74,7 @@ describe("Security rules test", () => {
     );
 
     it("Can read posts that are marked public", async () => {
-        const db = getFirestore();
+        const db = getFirestore(null);
         const testDoc = db.collection("posts").where("visibility", "==", "public");
         await firebase.assertSucceeds(testDoc.get());
     });
@@ -65,7 +86,7 @@ describe("Security rules test", () => {
     });
 
     it("Can't query all posts", async () => {
-        const db = getFirestore();
+        const db = getFirestore(null);
         const testDoc = db.collection("posts");
         await firebase.assertFails(testDoc.get());
     });
@@ -76,7 +97,7 @@ describe("Security rules test", () => {
         let setupDoc = admin.collection("posts").doc(postId);
         await setupDoc.set({authorId: "user_xyz", visibility: "public"});
 
-        const db = getFirestore();
+        const db = getFirestore(null);
         const testDoc = db.collection("posts").doc(postId);
         await firebase.assertSucceeds(testDoc.get());
     });
