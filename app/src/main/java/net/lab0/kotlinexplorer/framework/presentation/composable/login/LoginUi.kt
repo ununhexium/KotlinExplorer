@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -28,51 +29,52 @@ fun LoginUi(
 ) {
   Column(
       modifier = Modifier.fillMaxSize(),
-      verticalArrangement = Arrangement.Center,
+      verticalArrangement = Arrangement.SpaceEvenly,
   ) {
     val kotlinExplorerLogo = painterResource(
         id = R.drawable.kotlinexplorer_logo,
     )
 
-    kotlinExplorerLogo
-        ?.let {
-          val scale = 3f
-          Image(
-              painter = kotlinExplorerLogo,
-              contentDescription = "Kotlin Explorer logo",
-              modifier = Modifier
-                  .align(Alignment.CenterHorizontally)
-                  .padding(bottom = 32.dp)
-                  .scale(scale),
-          )
+    val scale = 4f
+    Image(
+        painter = kotlinExplorerLogo,
+        contentDescription = "Kotlin Explorer logo",
+        modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+            .padding(bottom = 32.dp)
+            .scale(scale),
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.CenterHorizontally),
+    ) {
+      val modifier = Modifier
+          .align(Alignment.CenterHorizontally)
+          .padding(vertical = 8.dp)
+
+      if (username == null) {
+        Button(
+            modifier = modifier,
+            onClick = login,
+        ) {
+          Text("Login")
         }
 
-    if (username == null) {
-      Button(
-          modifier = Modifier
-              .align(Alignment.CenterHorizontally)
-              .padding(vertical = 8.dp),
-          onClick = login,
-      ) {
-        Text("Login")
-      }
-
-      Button(
-          modifier = Modifier
-              .align(Alignment.CenterHorizontally)
-              .padding(vertical = 8.dp),
-          onClick = loginAnonymously,
-      ) {
-        Text("Use anonymously")
-      }
-    } else {
-      Button(
-          modifier = Modifier
-              .align(Alignment.CenterHorizontally)
-              .padding(vertical = 8.dp),
-          onClick = startApp,
-      ) {
-        Text("Continue as $username")
+        Button(
+            modifier = modifier,
+            onClick = loginAnonymously,
+        ) {
+          Text("Use anonymously")
+        }
+      } else {
+        Button(
+            modifier = modifier,
+            onClick = startApp,
+        ) {
+          Text("Continue as $username")
+        }
       }
     }
   }

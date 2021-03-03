@@ -1,6 +1,9 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.profile
 
+import android.app.Activity
+import android.content.Context
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -10,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.firebase.ui.auth.AuthUI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
@@ -29,6 +33,24 @@ class UserProfileOverviewFragment(
 ) : BaseFragment<UserProfileEvent, UserProfileViewState>() {
 
   override val viewModel: UserProfileViewModel by viewModels { viewModelFactory }
+
+  val registration = registerForActivityResult(
+      ActivityResultContracts.StartActivityForResult()
+  ) { result ->
+    if (result.resultCode == Activity.RESULT_OK) {
+      // logged in
+      viewModel.refreshUserData()
+      Toast.makeText(context, "Signed in", Toast.LENGTH_SHORT).show()
+    } else {
+      Toast.makeText(context, "Sign in failed", Toast.LENGTH_LONG).show()
+    }
+  }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+
+
+  }
 
   override fun onCreateComposeView(view: ComposeView) {
     view.setContent {
@@ -60,15 +82,15 @@ class UserProfileOverviewFragment(
             profilePicturePlaceholder = placeholder,
             profilePicture = null,
             logIn = {
-              Auth.requestSignIn(
-                  this,
-                  {
-                    viewModel.refreshUserData()
-                    Toast.makeText(context, "Signed in", Toast.LENGTH_SHORT).show()
-                  },
-                  {
-                    Toast.makeText(context, "Sign in failed", Toast.LENGTH_LONG).show()
-                  }
+              registration.launch(
+                  AuthUI.getInstance()
+                      .createSignInIntentBuilder()
+                      .setAvailableProviders(
+                          listOf(
+                              AuthUI.IdpConfig.EmailBuilder().build(),
+                          )
+                      )
+                      .build()
               )
             },
             logOut = {
