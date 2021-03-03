@@ -1,13 +1,15 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -34,9 +36,10 @@ fun LessonPage(
     page: @Composable ColumnScope.() -> Unit,
 ) {
   val (reportPopup, setReportPopup) = remember { mutableStateOf(false) }
+  val scrollState = rememberScrollState()
 
   Column(
-      modifier = Modifier.fillMaxHeight(),
+      modifier = Modifier.fillMaxSize(),
       verticalArrangement = Arrangement.SpaceBetween
   ) {
     LessonPageHeader(
@@ -44,6 +47,7 @@ fun LessonPage(
         backAction = onBack,
         reportMistakeAction = { setReportPopup(!reportPopup) }
     )
+
     if (reportPopup) {
       ProblemReportUi(
           problemLocation = "$lessonId, title = $title",
@@ -51,8 +55,9 @@ fun LessonPage(
           onCloseProblemReport = { setReportPopup(false) }
       )
     } else {
-      page()
+        page()
     }
+
     LinearProgressIndicator(
         progress = progress,
         modifier = Modifier

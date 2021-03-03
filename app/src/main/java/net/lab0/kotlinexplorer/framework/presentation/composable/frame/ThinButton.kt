@@ -32,7 +32,6 @@ fun ThinButton(
     Text(
         text.toUpperCase(Locale.getDefault()),
         modifier = Modifier
-            .border(1.dp, color)
             .clickable { onClick() }
             .padding(horizontal = 3.dp),
         style = MaterialTheme.typography.body1,

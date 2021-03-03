@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.code
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -8,10 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.business.domain.Chapter
+import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.CodeQuestionUiState
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeAnswerInput
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.CodeInputControlBar
@@ -44,16 +51,15 @@ fun CodeQuizPage2(
             codeColoration = codeColoration
         )
       },
-      answer = if (state.showAnswer) {
-        {
+      answer = {
+        if (state.showAnswer) {
           AnswerPart2(
               isCorrectAnswer = state.isCorrectAnswer,
               explanationMarkdown = state.lessonPage.explanation,
               answerSnippet = state.snippetWithFocusedMistakes,
-              codeColoration = codeColoration,
           )
         }
-      } else null,
+      },
       input = {
         if (!state.showAnswer) {
           CodeAnswerInput(
@@ -65,7 +71,9 @@ fun CodeQuizPage2(
       },
       controlBar = {
         if (state.showAnswer) {
-          NextPageControlBar(onNext = nextQuestion)
+          NextPageControlBar(
+              onNext = nextQuestion
+          )
         } else {
           CodeInputControlBar(
               canUndoOrReset = state.canUndoOrReset,
@@ -84,30 +92,31 @@ private fun AnswerPart2(
     isCorrectAnswer: Boolean,
     explanationMarkdown: String,
     answerSnippet: AnnotatedString,
-    codeColoration: Boolean,
 ) {
-  val markdown = remember { mutableStateOf(parseMD(explanationMarkdown)) }
-  if (isCorrectAnswer) {
-    CorrectAnswer(
-        explanation = {
-          MDDocument(document = markdown.value)
-        }
-    )
-  } else {
-    WrongAnswer(
-        explanation = {
-          Column {
-            Text("Correct answer:", style = MaterialTheme.typography.body1)
-            DefaultVerticalSpacer()
-            KotlinCode(
-                code = answerSnippet,
-                codeStyle = DefaultCodeStyle,
-            )
-            DefaultVerticalSpacer()
+  Column {
+    val markdown = remember { mutableStateOf(parseMD(explanationMarkdown)) }
+    if (isCorrectAnswer) {
+      CorrectAnswer(
+          explanation = {
             MDDocument(document = markdown.value)
           }
-        }
-    )
+      )
+    } else {
+      WrongAnswer(
+          explanation = {
+            Column {
+              Text("Correct answer:", style = MaterialTheme.typography.body1)
+              DefaultVerticalSpacer()
+              KotlinCode(
+                  code = answerSnippet,
+                  codeStyle = DefaultCodeStyle,
+              )
+              DefaultVerticalSpacer()
+              MDDocument(document = markdown.value)
+            }
+          }
+      )
+    }
   }
 }
 
@@ -152,7 +161,15 @@ fun CodeQuestionQuizPage2Preview_selectedAnswer() {
   }
 }
 
-val modelValidated2 = CodeQuestionViewModel().also {
+val modelValidated2 = CodeQuestionViewModel(
+    initialState = CodeQuestionUiState(
+        pageIndex = 0,
+        lessonPage = LessonPage.CodeQuestionPage.EXAMPLE,
+        chapter = Chapter.EMPTY,
+        selectedAnswers = listOf(),
+        locked = true
+    )
+).also {
   it.select(0)
   it.validate()
 }

@@ -19,10 +19,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NextPageControlBar(
+    modifier: Modifier = Modifier,
     onNext: () -> Unit,
 ) {
   Row(
-      modifier = Modifier.fillMaxWidth(),
+      modifier = modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.End
   ) {
     Row {

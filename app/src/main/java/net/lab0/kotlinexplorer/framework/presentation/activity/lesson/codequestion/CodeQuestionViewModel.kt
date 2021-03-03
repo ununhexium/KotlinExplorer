@@ -11,9 +11,15 @@ import net.lab0.kotlinexplorer.utils.Do
 
 class CodeQuestionViewModel(
     ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    initialState: CodeQuestionUiState = CodeQuestionUiState(
+        0,
+        LessonPage.CodeQuestionPage.EMPTY,
+        Chapter.EMPTY,
+        listOf()
+    ),
 ) : BaseViewModel<CodeQuestionUiEvent, CodeQuestionUiState>(
     CodeQuestionUiEvent.Empty,
-    CodeQuestionUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf()),
+    initialState,
     ioDispatcher
 ) {
   override suspend fun doJobForEvent(event: CodeQuestionUiEvent) {
@@ -44,7 +50,7 @@ class CodeQuestionViewModel(
     }
   }
 
-  fun init(pageIndex:Int, lessonPage: LessonPage.CodeQuestionPage, chapter: Chapter) {
+  fun init(pageIndex: Int, lessonPage: LessonPage.CodeQuestionPage, chapter: Chapter) {
     updateUi {
       it.copy(pageIndex = pageIndex, lessonPage = lessonPage, chapter = chapter)
     }

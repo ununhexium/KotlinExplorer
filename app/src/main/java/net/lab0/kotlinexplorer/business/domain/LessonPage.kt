@@ -38,6 +38,16 @@ sealed class LessonPage(
           answer = listOf(),
           confusion = listOf(),
       )
+
+
+      val EXAMPLE = CodeQuestionPage(
+          title = "The title",
+          question = "The question?",
+          snippet = """fun main(){println("Hello World!"}""",
+          explanation = "Because reasons.",
+          answer = listOf("Bar"),
+          confusion = listOf("Foo"),
+      )
     }
   }
 
