@@ -23,9 +23,3 @@ fun FirebaseFirestore.extraLessonRequestDocument(uid:String) =
         .document(uid)
         .collection("extraLessonRequest")
         .document("singleton")
-
-fun FirebaseFirestore.anonymousProblemReportCollection() =
-    this
-        .collection("anonymousData")
-        .document("root")
-        .collection("problemReports")

@@ -6,7 +6,6 @@ import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.firebase.WithUidMixin
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
-import net.lab0.kotlinexplorer.framework.firebase.model.anonymousProblemReportCollection
 import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 
@@ -21,8 +20,6 @@ class ProblemReportServiceImpl(
 
     if (uid != null) {
       firestore.problemReportCollection(firebaseAuth.uid!!).add(document)
-    } else {
-      firestore.anonymousProblemReportCollection().add(document)
     }
   }
 }
