@@ -14,6 +14,7 @@ import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.EvaluationTopic
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.LessonFeedbackPage
+import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.utils.Do
 
 class LessonFeedbackFragment(
@@ -45,31 +46,33 @@ class LessonFeedbackFragment(
   ): View {
     return ComposeView(requireContext()).also { view ->
       view.setContent {
-        LessonFeedbackPage(
-            durationTopic = viewModel.uiDataState.value.durationEvaluation.map<String> {
-              Do exhaustiveNonNull when (it) {
-                DurationRating.TOO_SHORT -> "Too short"
-                DurationRating.BALANCED -> "Balanced"
-                DurationRating.TOO_LONG -> "Too long"
-                DurationRating.UNSET -> "No answer"
-              }
-            },
-            difficultyTopic = viewModel.uiDataState.value.difficultyEvaluation.map<String> {
-              Do exhaustiveNonNull when (it) {
-                DifficultyRating.TOO_EASY -> "Too easy"
-                DifficultyRating.BALANCED -> "Balanced"
-                DifficultyRating.TOO_HARD -> "Too hard"
-                DifficultyRating.UNSET -> "No answer"
-              }
-            },
-            onValidate = {
-              viewModel.validate()
-              goToNextLessonFragment()
-            },
-            onSkip = {
-              goToNextLessonFragment()
-            },
-        )
+        KotlinExplorerTheme() {
+          LessonFeedbackPage(
+              durationTopic = viewModel.uiDataState.value.durationEvaluation.map<String> {
+                Do exhaustiveNonNull when (it) {
+                  DurationRating.TOO_SHORT -> "Too short"
+                  DurationRating.BALANCED -> "Balanced"
+                  DurationRating.TOO_LONG -> "Too long"
+                  DurationRating.UNSET -> "No answer"
+                }
+              },
+              difficultyTopic = viewModel.uiDataState.value.difficultyEvaluation.map<String> {
+                Do exhaustiveNonNull when (it) {
+                  DifficultyRating.TOO_EASY -> "Too easy"
+                  DifficultyRating.BALANCED -> "Balanced"
+                  DifficultyRating.TOO_HARD -> "Too hard"
+                  DifficultyRating.UNSET -> "No answer"
+                }
+              },
+              onValidate = {
+                viewModel.validate()
+                goToNextLessonFragment()
+              },
+              onSkip = {
+                goToNextLessonFragment()
+              },
+          )
+        }
       }
     }
   }

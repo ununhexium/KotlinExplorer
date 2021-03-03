@@ -64,7 +64,7 @@ fun Samples(themeName: String) {
 fun ThemePreview_KotlinLight() {
   Column {
     val theme = Theme.KOTLIN_LIGHT
-    JetpackComposeExplorerTheme(theme = theme) {
+    KotlinExplorerTheme(theme = theme) {
       Surface {
         Samples(theme.toString())
       }
@@ -78,7 +78,7 @@ fun ThemePreview_KotlinLight() {
 fun ThemePreview() {
   Column {
     val theme = Theme.KOTLIN_DARK
-    JetpackComposeExplorerTheme(theme = theme) {
+    KotlinExplorerTheme(theme = theme) {
       Surface {
         Samples(theme.toString())
       }

@@ -33,6 +33,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.LessonL
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
+import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 import javax.inject.Inject
 
@@ -50,10 +51,10 @@ class ChapterListFragment
     view.setContent { Content() }
     viewModel.loadLessonsInProgress()
   }
-
+  
   @Composable
   fun Content() {
-    MaterialTheme {
+    KotlinExplorerTheme {
       val scaffoldState = rememberScaffoldState()
 
       TopLevelScaffold(

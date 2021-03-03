@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.NextLessonPage
+import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 
 class NextLessonFragment : Fragment() {
   private val args: NextLessonFragmentArgs by navArgs()
@@ -23,18 +24,20 @@ class NextLessonFragment : Fragment() {
       val nextLessonInChapter = LessonBrowser.getNextLessonInChapter(args.lessonId)
 
       it.setContent {
-        NextLessonPage(
-            goToChapters = {
+        KotlinExplorerTheme {
+          NextLessonPage(
+              goToChapters = {
+                findNavController().navigate(
+                    NextLessonFragmentDirections.actionNextLessonFragmentToChapterListFragment()
+                )
+              },
+              nextLesson = nextLessonInChapter
+          ) {
+            nextLessonInChapter?.let { lesson ->
               findNavController().navigate(
-                  NextLessonFragmentDirections.actionNextLessonFragmentToChapterListFragment()
+                  NextLessonFragmentDirections.actionNextLessonFragmentToLessonFirstPage(lesson.id)
               )
-            },
-            nextLesson = nextLessonInChapter
-        ) {
-          nextLessonInChapter?.let { lesson ->
-            findNavController().navigate(
-                NextLessonFragmentDirections.actionNextLessonFragmentToLessonFirstPage(lesson.id)
-            )
+            }
           }
         }
       }

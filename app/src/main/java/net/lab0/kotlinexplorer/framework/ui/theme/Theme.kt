@@ -9,16 +9,16 @@ import net.lab0.kotlinexplorer.framework.ui.theme.Theme.KOTLIN_DARK
 import net.lab0.kotlinexplorer.framework.ui.theme.Theme.KOTLIN_LIGHT
 
 private val DarkColorPalette = darkColors(
-    primary = PurpleKotlinPantone,
+    primary = BlueKotlinPantone,
     primaryVariant = Purple700,
-    secondary = BlueKotlinPantone,
+    secondary = PurpleKotlinPantone,
 //    secondaryVariant = Blue500,
 )
 
 private val LightColorPalette = lightColors(
-    primary = PurpleKotlinPantone,
+    primary = BlueKotlinPantone,
     primaryVariant = Purple700,
-    secondary = BlueKotlinPantone,
+    secondary = PurpleKotlinPantone,
     secondaryVariant = OrangeKotlinPantone,
 )
 
@@ -28,7 +28,7 @@ enum class Theme {
 }
 
 @Composable
-fun JetpackComposeExplorerTheme(
+fun KotlinExplorerTheme(
     theme: Theme = if (isSystemInDarkTheme()) KOTLIN_DARK else KOTLIN_LIGHT,
     content: @Composable () -> Unit
 ) {

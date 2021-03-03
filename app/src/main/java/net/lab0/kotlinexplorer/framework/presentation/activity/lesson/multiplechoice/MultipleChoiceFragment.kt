@@ -21,6 +21,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.Lesson
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.MultipleChoicePage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
+import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 
 @ExperimentalCoroutinesApi
@@ -48,45 +49,47 @@ class MultipleChoiceFragment(
       val page = lesson.pages[args.page] as LessonPage.MultipleChoice
       val chapter = LessonBrowser.getChapterForLesson(args.lessonId)!!
 
-      Scaffold(
-          drawerContent = {
-            LessonDrawer(
-                chapter = chapter.title,
-                lesson = lesson.title,
-                lessonPages = lesson.pages.map { it.title },
-                currentPage = page.title
-            )
-          }
-      ) {
-        LessonPage(
-            lessonId = args.lessonId,
-            progress = state.progress,
-            title = state.lessonPage.title,
-            onBack = {
-              findNavController().navigate(
-                  MultipleChoiceFragmentDirections
-                      .actionMultipleChoicePageFragmentToChapterListFragment()
+      KotlinExplorerTheme {
+        Scaffold(
+            drawerContent = {
+              LessonDrawer(
+                  chapter = chapter.title,
+                  lesson = lesson.title,
+                  lessonPages = lesson.pages.map { it.title },
+                  currentPage = page.title
               )
-            },
-            onProblemReport = {
-              activityViewModel.onProblemReport(it, requireContext())
             }
         ) {
-          MultipleChoicePage(
-              model = viewModel,
-              state = state,
-              onNextPage = nextPage(
-                  activityViewModel,
-                  if (state.isCorrectAnswer) SUCCESS else FAILURE,
-                  args.page,
-                  args.lessonId,
-                  findNavController(),
-                  navigationToFeedback = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToLessonFeedbackFragment,
-                  navigationToInfo = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToInfoPageFragment,
-                  navigationToCodeQuestion = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToCodeQuestionPageFragment,
-                  navigationToMultipleChoice = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentSelf,
-              )
-          )
+          LessonPage(
+              lessonId = args.lessonId,
+              progress = state.progress,
+              title = state.lessonPage.title,
+              onBack = {
+                findNavController().navigate(
+                    MultipleChoiceFragmentDirections
+                        .actionMultipleChoicePageFragmentToChapterListFragment()
+                )
+              },
+              onProblemReport = {
+                activityViewModel.onProblemReport(it, requireContext())
+              }
+          ) {
+            MultipleChoicePage(
+                model = viewModel,
+                state = state,
+                onNextPage = nextPage(
+                    activityViewModel,
+                    if (state.isCorrectAnswer) SUCCESS else FAILURE,
+                    args.page,
+                    args.lessonId,
+                    findNavController(),
+                    navigationToFeedback = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToLessonFeedbackFragment,
+                    navigationToInfo = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToInfoPageFragment,
+                    navigationToCodeQuestion = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToCodeQuestionPageFragment,
+                    navigationToMultipleChoice = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentSelf,
+                )
+            )
+          }
         }
       }
     }

@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.framework.firebase.implementation
 
-import com.google.android.gms.tasks.Tasks
 import com.google.common.truth.Truth.assertThat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,8 +15,6 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportService
-import net.lab0.kotlinexplorer.framework.firebase.implementation.TestUsers.user1email
-import net.lab0.kotlinexplorer.framework.firebase.implementation.TestUsers.user1password
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
@@ -38,7 +35,7 @@ internal class ProblemReportServiceImplTest {
   @get:Rule(order = 0)
   var hiltRule = HiltAndroidRule(this)
 
-  val firebaseAuth: FirebaseAuth = mockk()
+  private val firebaseAuth: FirebaseAuth = mockk()
 
   @Inject
   lateinit var firestore: FirebaseFirestore

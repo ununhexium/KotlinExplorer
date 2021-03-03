@@ -14,6 +14,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login.mvi
 import net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login.mvi.LoginUiState
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
 import net.lab0.kotlinexplorer.framework.presentation.intent.Auth
+import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 
 @ExperimentalCoroutinesApi
@@ -35,33 +36,35 @@ class LoginFragment(
       val collected = viewModel.uiDataState.collectAsState()
       val state = collected.value
 
-      LoginUi(
-          username = state.username,
-          startApp = {
-            findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToLessonGraph()
-            )
-          },
-          login = {
-            Auth.requestSignIn(
-                this,
-                {
-                  findNavController().navigate(
-                      LoginFragmentDirections.actionLoginFragmentToLessonGraph()
-                  )
-                },
-                {
-                  Toast.makeText(context, "Login failed", Toast.LENGTH_LONG).show()
-                },
-            )
-          },
-          loginAnonymously = {
-            FirebaseAuth.getInstance().signInAnonymously()
-            findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToLessonGraph()
-            )
-          },
-      )
+      KotlinExplorerTheme {
+        LoginUi(
+            username = state.username,
+            startApp = {
+              findNavController().navigate(
+                  LoginFragmentDirections.actionLoginFragmentToLessonGraph()
+              )
+            },
+            login = {
+              Auth.requestSignIn(
+                  this,
+                  {
+                    findNavController().navigate(
+                        LoginFragmentDirections.actionLoginFragmentToLessonGraph()
+                    )
+                  },
+                  {
+                    Toast.makeText(context, "Login failed", Toast.LENGTH_LONG).show()
+                  },
+              )
+            },
+            loginAnonymously = {
+              FirebaseAuth.getInstance().signInAnonymously()
+              findNavController().navigate(
+                  LoginFragmentDirections.actionLoginFragmentToLessonGraph()
+              )
+            },
+        )
+      }
     }
   }
 }

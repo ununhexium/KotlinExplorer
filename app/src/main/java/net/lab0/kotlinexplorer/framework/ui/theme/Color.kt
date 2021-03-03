@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 val Purple200 = Color(0xFF958AE0)
 val PurpleKotlinPantone = Color(0xFF766DB2)
-val Purple500 = PurpleKotlinPantone
+val Purple500 = Color(0xFF574AB1)
 val Purple700 = Color(0xFF3A3658)
 
 val OrangeKotlinPantone = Color(0xFFF6891F)
