@@ -2,7 +2,8 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.chapter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -63,7 +64,16 @@ fun ChapterListPreview() {
           modifier = Modifier.padding(20.dp)
       ) {
         ChapterList(
-            chapters = listOf(dummyChapter1, dummyChapter2),
+            chapters = listOf(
+                dummyChapter1,
+                dummyChapter2,
+                dummyChapter1,
+                dummyChapter2,
+                dummyChapter1,
+                dummyChapter2,
+                dummyChapter1,
+                dummyChapter2,
+            ),
             onPlay = { _: String, _: String -> }
         )
       }

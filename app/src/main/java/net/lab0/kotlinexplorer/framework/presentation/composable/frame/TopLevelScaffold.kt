@@ -15,29 +15,39 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 
 @Composable
 fun TopLevelScaffold(
-    title:String,
+    title: String,
     scaffoldState: ScaffoldState,
     onProfileSelected: () -> Unit,
     onLessonsSelected: () -> Unit,
-    bodyContent: @Composable (PaddingValues) -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
 ) {
+  val coroutineScope = rememberCoroutineScope()
+
   Scaffold(
       scaffoldState = scaffoldState,
       drawerContent = {
         ExploreDrawer(
             onProfile = {
-              scaffoldState.drawerState.close(onProfileSelected)
+              coroutineScope.launch {
+                scaffoldState.drawerState.close()
+                onProfileSelected()
+              }
             },
             onLessonsSelected = {
-              scaffoldState.drawerState.close(onLessonsSelected)
-            }
+              coroutineScope.launch {
+                scaffoldState.drawerState.close()
+                onLessonsSelected()
+              }
+            },
         )
       },
       topBar = {
@@ -51,16 +61,21 @@ fun TopLevelScaffold(
             navigationIcon = {
               IconButton(
                   onClick = {
-                    scaffoldState.drawerState.open()
-                  }
+                    coroutineScope.launch {
+                      scaffoldState.drawerState.open()
+                    }
+                  },
               ) {
-                Icon(Icons.Default.Menu)
+                Icon(
+                    Icons.Default.Menu,
+                    contentDescription = "Menu",
+                )
               }
             },
             elevation = 4.dp,
         )
       },
-      bodyContent = bodyContent
+      content = content,
   )
 }
 
@@ -85,7 +100,7 @@ fun TopLevelScaffoldPreview() {
               state,
               {},
               {},
-          ){
+          ) {
             Text("Body")
           }
         }

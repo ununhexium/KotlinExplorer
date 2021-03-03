@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.R
@@ -18,7 +18,8 @@ import net.lab0.kotlinexplorer.R
 fun UserProfile() {
   Column {
     Image(
-        imageResource(id = R.drawable.ic_kotlin_logo),
+        painterResource(id = R.drawable.ic_kotlin_logo),
+        contentDescription = "Kotlin logo",
         contentScale = ContentScale.Fit
     )
 //    Row(

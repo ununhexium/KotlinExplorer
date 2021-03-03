@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import net.lab0.kotlinexplorer.R
@@ -76,8 +76,15 @@ fun PreviewSlider() {
       Slider(visibleIndex = 2.5f) {
         Text("A")
         Text("B")
-        Icon(Icons.Default.Phone, tint = Color.Red)
-        Image(bitmap = imageResource(id = R.drawable.beach))
+        Icon(
+            Icons.Default.Phone,
+            contentDescription = "Phone",
+            tint = Color.Red
+        )
+        Image(
+            painterResource(id = R.drawable.beach),
+            contentDescription = "beach",
+        )
       }
     }
   }

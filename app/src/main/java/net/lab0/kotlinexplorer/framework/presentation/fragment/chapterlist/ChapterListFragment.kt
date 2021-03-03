@@ -1,10 +1,12 @@
 package net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist
 
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -67,8 +69,11 @@ class ChapterListFragment
           }
       ) {
         val state by viewModel.uiDataState.collectAsState()
+        val scrollState = rememberScrollState()
 
-        ScrollableColumn {
+        Column(
+            modifier = Modifier.verticalScroll(scrollState)
+        ) {
           ChapterList(
               modifier = Modifier.padding(bottom = 64.dp),
               chapters = state.chapters.map { chapter ->
@@ -108,7 +113,10 @@ class ChapterListFragment
                 enabled = state.canRequestMoreChapters,
             ) {
               if (state.canRequestMoreChapters) {
-                Icon(imageVector = Icons.Default.AddTask)
+                Icon(
+                    imageVector = Icons.Default.AddTask,
+                    "Add Task",
+                )
                 SmallHorizontalSpacer()
               }
               Text(text = if (state.canRequestMoreChapters) "More please!" else "Requested")

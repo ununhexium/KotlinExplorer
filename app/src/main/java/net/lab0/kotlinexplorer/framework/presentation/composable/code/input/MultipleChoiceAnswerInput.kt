@@ -40,6 +40,11 @@ fun MultipleChoiceAnswerInput(
             } else {
               Icons.Default.CheckBoxOutlineBlank
             },
+            contentDescription = if (answer.used) {
+              "CheckBox"
+            } else {
+              "CheckBoxOutlineBlank"
+            },
             modifier = Modifier
                 .padding(horizontal = 4.dp)
                 .align(Alignment.CenterVertically),

@@ -8,6 +8,8 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import io.mockk.clearAllMocks
+import io.mockk.every
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
@@ -36,8 +38,7 @@ internal class ProblemReportServiceImplTest {
   @get:Rule(order = 0)
   var hiltRule = HiltAndroidRule(this)
 
-  @Inject
-  lateinit var firebaseAuth: FirebaseAuth
+  val firebaseAuth: FirebaseAuth = mockk()
 
   @Inject
   lateinit var firestore: FirebaseFirestore
@@ -52,9 +53,7 @@ internal class ProblemReportServiceImplTest {
   fun before() {
     hiltRule.inject()
     clearAllMocks()
-    Tasks.await(
-        firebaseAuth.createUserWithEmailAndPassword(user1email, user1password)
-    )
+    every { firebaseAuth.uid } returns "user1"
     problemReportService = ProblemReportServiceImpl(
         firebaseAuth,
         firestore,

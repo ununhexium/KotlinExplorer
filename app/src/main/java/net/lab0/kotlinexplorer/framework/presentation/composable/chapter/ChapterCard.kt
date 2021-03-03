@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -37,7 +37,7 @@ fun ChapterCard(
             progress = chapter.completion,
             modifier = Modifier
                 .padding(8.dp)
-                .preferredSize(64.dp)
+                .size(64.dp)
         )
         Text(
             NumberFormat.getPercentInstance().format(chapter.completion),

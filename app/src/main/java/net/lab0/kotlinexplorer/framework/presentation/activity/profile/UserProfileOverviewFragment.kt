@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.loadVectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -38,7 +38,7 @@ class UserProfileOverviewFragment(
   @Composable
   fun UserProfileComposable(viewModel: UserProfileViewModel) {
     val scaffoldState = rememberScaffoldState()
-    val placeholder = loadVectorResource(id = R.drawable.ic_kotlin_logo)
+    val placeholder = painterResource(R.drawable.ic_kotlin_logo)
 
     TopLevelScaffold(
         title = "Profile",
@@ -64,7 +64,7 @@ class UserProfileOverviewFragment(
                   viewModel.refreshUserData()
                   Toast.makeText(context, "Signed in", Toast.LENGTH_SHORT).show()
                 },
-                { result ->
+                {
                   Toast.makeText(context, "Sign in failed", Toast.LENGTH_LONG).show()
                 }
             )

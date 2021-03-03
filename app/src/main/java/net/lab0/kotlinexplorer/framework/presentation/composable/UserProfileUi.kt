@@ -18,18 +18,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.DeferredResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.BuildConfig
+import net.lab0.kotlinexplorer.R
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.ThinButton
 import java.util.*
 
 @Composable
 fun UserProfileUi(
     email: String?,
-    profilePicturePlaceholder: DeferredResource<ImageVector>? = null,
+    profilePicturePlaceholder: Painter,
     profilePicture: ImageBitmap? = null,
     logIn: () -> Unit,
     logOut: () -> Unit,
@@ -58,16 +59,16 @@ fun UserProfileUi(
             color = MaterialTheme.colors.surface,
         ) {
           val padding = Modifier.padding(8.dp)
-          val placeholderVectorImage: ImageVector? = profilePicturePlaceholder?.resource?.resource
           when {
             profilePicture != null ->
-              Image(profilePicture, modifier = padding)
-
-            placeholderVectorImage != null ->
-              Image(placeholderVectorImage, modifier = padding)
+              Image(profilePicture, contentDescription = "Profile picture", modifier = padding)
 
             else ->
-              Surface(modifier = padding, color = Color.Gray) {}
+              Image(
+                  profilePicturePlaceholder,
+                  contentDescription = "Profile picture placeholder",
+                  modifier = padding
+              )
           }
         }
       }
@@ -128,7 +129,7 @@ fun UserProfileUiPreview() {
         ) {
           UserProfileUi(
               email = "foo@example.com",
-              profilePicturePlaceholder = null,
+              profilePicturePlaceholder = painterResource(R.drawable.ic_kotlin_logo),
               profilePicture = null,
               logIn = {},
               logOut = {},

@@ -1,3 +1,4 @@
+
 object Versions {
   // android SDK
   val minSdk = 24
@@ -6,14 +7,15 @@ object Versions {
 
   // java / kotlin
   val java = "1.8"
-  val kotlin = "1.4.21"
-  val coroutines = "1.3.2"
+  val kotlin = "1.4.30"
+  val coroutines = "1.4.2"
 
   // android libs
   val androidx_test_ext = "1.1.2"
   val app_compat = "1.2.0"
-  val compose = "1.0.0-alpha10"
-  val constraintLayout = "2.0.4"
+  val activityCompose = "1.3.0-alpha03"
+  val compose = "1.0.0-beta01"
+  val constraintLayout = "1.0.0-alpha03"
   val dagger = "2.28-alpha"
   val espresso_core = "3.3.0"
   val lifecycle = "2.2.0"

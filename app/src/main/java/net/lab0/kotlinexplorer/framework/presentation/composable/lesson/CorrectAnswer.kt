@@ -27,6 +27,7 @@ private fun Answer(
     header: String,
     color: Color,
     icon: ImageVector,
+    contentDescription: String,
     content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(modifier = Modifier.fillMaxSize(1f)) {
@@ -36,6 +37,7 @@ private fun Answer(
     ) {
       Icon(
           imageVector = icon,
+          contentDescription = contentDescription,
           modifier = Modifier
               .padding(start = 8.dp, end = 8.dp)
               .align(Alignment.CenterVertically),
@@ -65,6 +67,7 @@ fun CorrectAnswer(
       "Correct",
       Color(0xFF4CAF50),
       Icons.Default.CheckCircleOutline,
+      contentDescription = "outline",
       explanation
   )
 }
@@ -77,6 +80,7 @@ fun WrongAnswer(
       "Incorrect",
       Color(0xFFFF5722),
       Icons.Default.Warning,
+      contentDescription = "warning",
       explanation
   )
 }

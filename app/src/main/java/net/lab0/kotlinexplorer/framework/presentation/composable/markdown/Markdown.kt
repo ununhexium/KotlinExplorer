@@ -16,9 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.gesture.tapGestureFilter
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AmbientUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
@@ -228,23 +226,12 @@ fun MarkdownText(
     style: TextStyle,
     modifier: Modifier = Modifier,
 ) {
-  val uriHandler = AmbientUriHandler.current
+  // TODO: re-add support for links
   val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
   Text(
       text = text,
-      modifier = modifier.tapGestureFilter { pos ->
-        layoutResult.value?.let { layoutResult ->
-          val position = layoutResult.getOffsetForPosition(pos)
-          text.getStringAnnotations(position, position)
-              .firstOrNull()
-              ?.let { sa ->
-                if (sa.tag == TAG_URL) {
-                  uriHandler.openUri(sa.item)
-                }
-              }
-        }
-      },
+      modifier = modifier,
       style = style,
       inlineContent = mapOf(
           TAG_IMAGE_URL to InlineTextContent(

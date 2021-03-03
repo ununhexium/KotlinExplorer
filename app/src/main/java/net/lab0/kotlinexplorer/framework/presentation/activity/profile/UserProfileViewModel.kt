@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.profile
 
+import androidx.compose.material.rememberScaffoldState
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.flow
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.UserProfileEvent

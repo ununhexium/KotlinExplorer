@@ -2,6 +2,7 @@ package dependencies
 
 object Dependencies {
   val app_compat = "androidx.appcompat:appcompat:${Versions.app_compat}"
+  val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
 
   val compose_foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
 
@@ -15,7 +16,7 @@ object Dependencies {
   val compose_ui = "androidx.compose.ui:ui:${Versions.compose}"
   val compose_uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
 
-  val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+  val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayout}"
 
   val firebase = "com.google.firebase:firebase-bom:${Versions.firebase}"
   val firebaseAuth = "com.google.firebase:firebase-auth"

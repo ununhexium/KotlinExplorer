@@ -13,6 +13,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.ui.theme.sourceCodeFontFamily
 
@@ -25,7 +26,7 @@ fun Monospace(
       text,
       modifier = modifier,
       fontFamily = sourceCodeFontFamily,
-      fontSize = TextUnit.Companion.Sp(14),
+      fontSize = 14.sp,
       softWrap = false,
   )
 }

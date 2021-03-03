@@ -55,12 +55,18 @@ fun ControlBarPreview() {
           ControlBar(
               startItems = {
                 Button(onClick = {}) {
-                  Icon(Icons.Default.CloudQueue)
+                  Icon(
+                      Icons.Default.CloudQueue,
+                      contentDescription = "Cloud Queue",
+                  )
                 }
               },
               endItems = {
                 Button(onClick = {}) {
-                  Icon(Icons.Default.Check)
+                  Icon(
+                      Icons.Default.Check,
+                      contentDescription = "Check",
+                  )
                 }
               }
           )
@@ -86,7 +92,10 @@ fun ControlBarPreview_endOnly() {
           ControlBar(
               endItems = {
                 Button(onClick = {}) {
-                  Icon(Icons.Default.Check)
+                  Icon(
+                      Icons.Default.Check,
+                      contentDescription = "Check",
+                  )
                 }
               }
           )

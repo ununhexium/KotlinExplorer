@@ -1,12 +1,14 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
-import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -28,9 +30,10 @@ fun LessonPageBody(
     input: (@Composable () -> Unit)? = null,
     controlBar: @Composable () -> Unit,
 ) {
-  ScrollableColumn(
+  Column(
       modifier = Modifier
           .fillMaxSize()
+          .scrollable(rememberScrollState(), Orientation.Vertical)
           .padding(8.dp),
       verticalArrangement = Arrangement.SpaceBetween,
   ) {

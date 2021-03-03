@@ -76,6 +76,7 @@ fun MultipleChoicePage(
               ) {
                 Icon(
                     imageVector = Icons.Default.Done,
+                    contentDescription = "Done",
                 )
               }
             }
@@ -88,6 +89,7 @@ fun MultipleChoicePage(
               ) {
                 Icon(
                     imageVector = Icons.Default.ArrowForward,
+                    contentDescription = "Arrow Forward",
                 )
               }
             }

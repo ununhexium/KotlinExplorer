@@ -29,7 +29,10 @@ fun InfoLessonPage(
           Button(
               onClick = nextPage,
           ) {
-            Icon(imageVector = Icons.Default.CheckCircle)
+            Icon(
+                imageVector = Icons.Default.CheckCircle,
+                contentDescription = "Check Circle",
+            )
           }
         }
       }

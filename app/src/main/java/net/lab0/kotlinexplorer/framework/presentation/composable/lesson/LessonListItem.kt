@@ -72,6 +72,7 @@ fun LessonListItem(
           Icon(
               modifier = Modifier.align(Alignment.Center),
               imageVector = Icons.Default.CheckCircle,
+              contentDescription = "Check Circle",
               tint = iconColor,
           )
         }
@@ -91,7 +92,10 @@ fun LessonListItem(
     }
 
     Button(onClick = onPlay) {
-      Icon(Icons.Default.PlayArrow)
+      Icon(
+          Icons.Default.PlayArrow,
+          contentDescription = "Play Arrow"
+      )
     }
   }
 }

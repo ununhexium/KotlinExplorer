@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -47,7 +47,7 @@ fun ProblemReportUi(
 
       TextField(
           modifier = Modifier
-              .preferredHeight(256.dp)
+              .height(256.dp)
               .fillMaxWidth(),
           value = report,
           onValueChange = { setReport(it) },

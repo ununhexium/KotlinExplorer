@@ -67,8 +67,14 @@ android {
 
 
   packagingOptions {
-    exclude("META-INF/LICENSE.md")
-    exclude("META-INF/LICENSE-notice.md")
+    resources.excludes.addAll(
+        listOf(
+            "META-INF/LICENSE.md",
+            "META-INF/LICENSE-notice.md",
+            "META-INF/AL2.0",
+            "META-INF/LGPL2.1"
+        )
+    )
   }
 
 }
@@ -95,6 +101,7 @@ tasks {
 
 dependencies {
   implementation(Dependencies.app_compat)
+  implementation(Dependencies.activityCompose)
 
   implementation(Dependencies.constraintLayout)
 

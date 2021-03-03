@@ -41,6 +41,7 @@ fun CodeInputControlBar(
           ) {
             Icon(
                 imageVector = Icons.Default.Backspace,
+                contentDescription = "Backspace",
             )
           }
           Spacer(modifier = Modifier.padding(8.dp))
@@ -51,6 +52,7 @@ fun CodeInputControlBar(
           ) {
             Icon(
                 imageVector = Icons.Default.Replay,
+                contentDescription = "Replay",
             )
           }
         }
@@ -63,6 +65,7 @@ fun CodeInputControlBar(
           ) {
             Icon(
                 imageVector = Icons.Default.Done,
+                contentDescription = "Done",
             )
           }
         }

@@ -31,6 +31,7 @@ fun NextPageControlBar(
       ) {
         Icon(
             imageVector = Icons.Default.ArrowForward,
+            contentDescription = "ArrowForward",
         )
       }
     }

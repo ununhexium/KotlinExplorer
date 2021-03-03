@@ -7,8 +7,6 @@ import net.lab0.kotlinexplorer.framework.util.overlapedBy
 fun AnnotatedString.invertForegroundBackgroundColors(range: IntRange): AnnotatedString {
   val original = this
 
-  this.copy()
-
   return buildAnnotatedString {
     append(original.text)
     original.spanStyles.forEach { span ->

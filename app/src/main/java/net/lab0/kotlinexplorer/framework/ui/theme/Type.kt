@@ -2,10 +2,9 @@ package net.lab0.kotlinexplorer.framework.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.font
-import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.unit.sp
 import net.lab0.kotlinexplorer.R
 
@@ -30,8 +29,8 @@ val typography = Typography(
     */
 )
 
-private val sourceCodePro = fontFamily(
-    font(R.font.sourcecodepro_medium, FontWeight.Medium)
+private val sourceCodePro = FontFamily(
+    Font(R.font.sourcecodepro_medium, FontWeight.Medium)
 )
 
 var sourceCodeFontFamily = sourceCodePro

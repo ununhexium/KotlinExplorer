@@ -62,7 +62,10 @@ fun <T> LessonFeedbackPage(
         }
     ) {
       Button(onClick = onValidate) {
-        Icon(imageVector = Icons.Default.CheckCircle)
+        Icon(
+            imageVector = Icons.Default.CheckCircle,
+            contentDescription = "CheckCircle"
+        )
       }
     }
   }

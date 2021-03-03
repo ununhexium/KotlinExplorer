@@ -84,7 +84,7 @@ class LessonFirstPageFragment(
                 }
               }
           ) {
-            Icon(imageVector = Icons.Default.PlayArrow)
+            Icon(imageVector = Icons.Default.PlayArrow, "Play arrow")
             Text("Start!")
           }
         }

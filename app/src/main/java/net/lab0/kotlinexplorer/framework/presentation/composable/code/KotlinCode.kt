@@ -1,10 +1,12 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.code
 
-import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -12,11 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyleRange
-import androidx.compose.ui.text.subSequence
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.business.domain.parser.Block
@@ -124,7 +125,7 @@ private fun CodePart(
                 Text(
                     text = " ... ",
                     fontFamily = sourceCodeFontFamily,
-                    fontSize = TextUnit.Companion.Sp(10)
+                    fontSize = 10.sp
                 )
               }
 
@@ -151,7 +152,7 @@ fun PreviewKotlinCode_Empty() {
   MaterialTheme {
     val code = AnnotatedString("")
 
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code, DefaultCodeStyle)
     }
   }
@@ -162,7 +163,7 @@ fun PreviewKotlinCode_Empty() {
 fun PreviewKotlinCode_NoAnswer() {
   MaterialTheme {
     val code = AnnotatedString("val i = 0")
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code, DefaultCodeStyle)
     }
   }
@@ -173,7 +174,7 @@ fun PreviewKotlinCode_NoAnswer() {
 fun PreviewKotlinCode_println() {
   MaterialTheme {
     val code = AnnotatedString("println(${placeholder()})")
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code, DefaultCodeStyle)
     }
   }
@@ -191,7 +192,7 @@ fun PreviewKotlinCode_NewLine() {
           |}
         """.trimMargin()
     )
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code, DefaultCodeStyle)
     }
   }
@@ -206,7 +207,7 @@ fun PreviewKotlinCode_AnswerOnly() {
             |val ${placeholder(0)} = 11
           """.trimMargin()
     )
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code, DefaultCodeStyle)
     }
   }
@@ -214,30 +215,34 @@ fun PreviewKotlinCode_AnswerOnly() {
 
 val multilineColorSpans =
     listOf(
-        SpanStyleRange(normalStyle, 0, 64),
-        SpanStyleRange(keywordStyle, 0, 3),
-        SpanStyleRange(functionStyle, 4, 11),
-        SpanStyleRange(keywordStyle, 14, 17),
-        SpanStyleRange(numberStyle, 43, 50),
-        SpanStyleRange(keywordStyle, 53, 56),
-        SpanStyleRange(numberStyle, 61, 62),
-        SpanStyleRange(functionStyle, 63, 64),
+        Triple(normalStyle, 0, 64),
+        Triple(keywordStyle, 0, 3),
+        Triple(functionStyle, 4, 11),
+        Triple(keywordStyle, 14, 17),
+        Triple(numberStyle, 43, 50),
+        Triple(keywordStyle, 53, 56),
+        Triple(numberStyle, 61, 62),
+        Triple(functionStyle, 63, 64),
     )
 
 @Preview
 @Composable
 fun PreviewKotlinCode_Multiline() {
   MaterialTheme {
-    val code = AnnotatedString(
-        """
+    val code = buildAnnotatedString {
+      append(
+          """
             |fun foo() {
             |  val bar = ${placeholder(10)} - 1234567
             |  val i = 0
             |}
-          """.trimMargin(),
-        multilineColorSpans
-    )
-    ScrollableColumn {
+          """.trimMargin()
+      )
+      multilineColorSpans.forEach {
+        addStyle(it.first, it.second, it.third)
+      }
+    }
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code, DefaultCodeStyle)
     }
   }
@@ -247,16 +252,20 @@ fun PreviewKotlinCode_Multiline() {
 @Composable
 fun PreviewKotlinCode_WithLineNumbers() {
   MaterialTheme {
-    val code = AnnotatedString(
-        """
+    val code = buildAnnotatedString {
+      append(
+          """
           |fun foo() {
           |  val bar = /**ANSWER(XX)**/ - 1234567
           |  val i = 0
           |}
-        """.trimMargin(),
-        multilineColorSpans,
-    )
-    ScrollableColumn {
+        """.trimMargin()
+      )
+      multilineColorSpans.forEach {
+        addStyle(it.first, it.second, it.third)
+      }
+    }
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(
           code = code,
           codeStyle = DefaultCodeStyle,
@@ -276,21 +285,23 @@ fun PreviewKotlinCode_WithLineNumbersAndFocus() {
           |  val i = 0
           |}
         """.trimMargin()
-    val annotated = AnnotatedString(
-        code,
-        multilineColorSpans,
-    )
+    val annotated = buildAnnotatedString {
+      append(code)
+      multilineColorSpans.forEach {
+        addStyle(it.first, it.second, it.third)
+      }
+    }
     val focus = "al i = 0"
     val focusStart = code.indexOf(focus)
     val focusEnd = focusStart + focus.length
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(
           code = listOf(
               2 .. 4,
               8 .. 10,
-              45..47,
-              focusStart..focusEnd
-          ).fold(annotated){acc, e ->
+              45 .. 47,
+              focusStart .. focusEnd
+          ).fold(annotated) { acc, e ->
             acc.invertForegroundBackgroundColors(e)
           },
           codeStyle = DefaultCodeStyle,
@@ -309,7 +320,7 @@ fun KotlinCodePreview_back2back() {
         |  ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
         |}
       """.trimMargin()
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code = code)
     }
   }
@@ -324,7 +335,7 @@ fun KotlinCodePreview_highlight1() {
         |  ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
         |}
       """.trimMargin()
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code = code, activeHighlight = 1)
     }
   }
@@ -339,7 +350,7 @@ fun KotlinCodePreview_highlight3() {
         |  ${placeholder(0)}(${placeholder(1)}${placeholder(2)}${placeholder(1)})
         |}
       """.trimMargin()
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(code = code, activeHighlight = 3)
     }
   }
@@ -418,7 +429,7 @@ fun PreviewKotlinCode() {
           |}
         """.trimMargin()
 
-    ScrollableColumn {
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(
           code = extractHighlightsAndAnnotate(code, ijStyle),
           DefaultCodeStyle

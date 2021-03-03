@@ -1,8 +1,8 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.code
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.SpanStyleRange
 import androidx.compose.ui.text.buildAnnotatedString
 import com.google.common.truth.Truth.assertThat
 import org.junit.jupiter.api.Test
@@ -23,7 +23,7 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        SpanStyleRange(style, 0, 3),
+        AnnotatedString.Range(style, 0, 3),
     )
   }
 
@@ -43,12 +43,12 @@ internal class AnnotatedStringExtensionsKtTest {
     // then
 
     assertThat(i.spanStyles).containsExactly(
-        SpanStyleRange(
+        AnnotatedString.Range(
             style.copy(color = style.background, background = style.color),
             0,
             3
         ),
-        SpanStyleRange(
+        AnnotatedString.Range(
             style,
             0,
             3
@@ -78,20 +78,20 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        SpanStyleRange(redStyle, 0, 3),
-        SpanStyleRange(
+        AnnotatedString.Range(redStyle, 0, 3),
+        AnnotatedString.Range(
             redStyle.copy(
                 color = redStyle.background,
                 background = redStyle.color
             ), 2, 3
         ),
-        SpanStyleRange(
+        AnnotatedString.Range(
             blueStyle.copy(
                 color = blueStyle.background,
                 background = blueStyle.color
             ), 4, 5
         ),
-        SpanStyleRange(blueStyle, 4, 7),
+        AnnotatedString.Range(blueStyle, 4, 7),
     )
   }
 
@@ -110,8 +110,8 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        SpanStyleRange(style, 0, 3),
-        SpanStyleRange(
+        AnnotatedString.Range(style, 0, 3),
+        AnnotatedString.Range(
             style.copy(color = style.background, background = style.color),
             1,
             2
@@ -136,13 +136,13 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        SpanStyleRange(
+        AnnotatedString.Range(
             style.copy(color = style.background, background = style.color),
             // not 0..5 because
             1,
             4,
         ),
-        SpanStyleRange(
+        AnnotatedString.Range(
             style,
             1,
             4,

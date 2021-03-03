@@ -36,12 +36,15 @@ fun LessonPageHeader(
     Button(
         onClick = backAction,
         shape = MaterialTheme.shapes.small.copy(
-            topLeft = CornerSize(0),
-            topRight = CornerSize(0),
-            bottomLeft = CornerSize(0),
+            topStart = CornerSize(0),
+            topEnd = CornerSize(0),
+            bottomStart = CornerSize(0),
         ),
     ) {
-      Icon(imageVector = Icons.Default.ArrowBack)
+      Icon(
+          imageVector = Icons.Default.ArrowBack,
+          contentDescription = "Arrow Back",
+      )
     }
     Text(
         text = title,
@@ -52,13 +55,16 @@ fun LessonPageHeader(
     Button(
         onClick = reportMistakeAction,
         shape = MaterialTheme.shapes.small.copy(
-            topLeft = CornerSize(0),
-            topRight = CornerSize(0),
-            bottomRight = CornerSize(0),
+            topStart = CornerSize(0),
+            topEnd = CornerSize(0),
+            bottomEnd = CornerSize(0),
         ),
         enabled = true,
     ) {
-      Icon(imageVector = Icons.Default.ReportProblem)
+      Icon(
+          imageVector = Icons.Default.ReportProblem,
+          contentDescription = "Report Problem"
+      )
     }
   }
 }
