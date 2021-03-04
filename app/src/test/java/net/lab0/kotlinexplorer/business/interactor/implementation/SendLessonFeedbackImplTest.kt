@@ -48,7 +48,7 @@ internal class SendLessonFeedbackImplTest {
     // given
     val lfs = mockk<LessonFeedbackService>()
     coEvery { lfs.insertOrUpdateFeedback(uid, any()) } returns Unit
-    val f = SendLessonFeedbackImpl(lfs, auth)
+    val f = SendLessonFeedbackImpl(auth, lfs)
 
     // when
     val lessonFeedback = LessonFeedback(
@@ -67,7 +67,7 @@ internal class SendLessonFeedbackImplTest {
     // given
     val lfs = mockk<LessonFeedbackService>()
     coEvery { lfs.insertOrUpdateFeedback(uid, any()) } returns Unit
-    val f = SendLessonFeedbackImpl(lfs, auth)
+    val f = SendLessonFeedbackImpl(auth, lfs)
 
     // when
     val lessonFeedback = LessonFeedback(

@@ -20,13 +20,16 @@ interface NextPageSelectorMixin {
       navigationToMultipleChoice: (String, Int) -> NavDirections,
       navigationToCodeQuestion: (String, Int) -> NavDirections,
   ): () -> Unit {
-    val lessonPage = LessonBrowser.getLessonById(lessonId).pages[page]
-    val lastLessonInChapter = LessonBrowser.getNextLessonInChapter(lessonId) == null
+    if(page >= 0) {
+      val lessonPage = LessonBrowser.getLessonById(lessonId).pages[page]
 
-    activityViewModel.countMark(
+      activityViewModel.countMark(
         lessonPage = lessonPage,
         correctness = correctness
-    )
+      )
+    }
+
+    val isLastLessonInChapter = LessonBrowser.getNextLessonInChapter(lessonId) == null
 
     val nextPageIndex = page + 1
     val maybeNextPage = LessonBrowser.getLessonById(lessonId)
@@ -39,7 +42,7 @@ interface NextPageSelectorMixin {
             null -> {
               // no more pages -> end lesson
               activityViewModel.saveLesson()
-              if(lastLessonInChapter) {
+              if(isLastLessonInChapter) {
                 navigationToFeedback(lessonId)
               }else{
                 navigationToNextChapter(lessonId)
