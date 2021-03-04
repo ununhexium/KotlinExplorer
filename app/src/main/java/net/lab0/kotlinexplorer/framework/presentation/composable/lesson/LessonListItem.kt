@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -30,24 +32,24 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.frame.lesson3c
 
 @Composable
 fun LessonListItem(
-    lesson: LessonListItemData,
-    onPlay: () -> Unit,
+  lesson: LessonListItemData,
+  onPlay: () -> Unit,
 ) {
   Row(
-      modifier = Modifier
-          .fillMaxWidth()
-          .padding(vertical = 4.dp),
-      horizontalArrangement = Arrangement.SpaceBetween
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(vertical = 4.dp),
+    horizontalArrangement = Arrangement.SpaceBetween
   ) {
 
     Row(
-        modifier = Modifier.align(Alignment.CenterVertically),
-        horizontalArrangement = Arrangement.Start
+      modifier = Modifier.align(Alignment.CenterVertically),
+      horizontalArrangement = Arrangement.Start
     ) {
       val fullyCompleted = lesson.progress != null && lesson.progress >= 1f
       val noProgressPossible = lesson.progress == null
       val iconColor = if (
-          lesson.completed && (fullyCompleted || noProgressPossible)
+        lesson.completed && (fullyCompleted || noProgressPossible)
       ) {
         MaterialTheme.colors.primary
       } else {
@@ -55,46 +57,67 @@ fun LessonListItem(
       }
 
       Box(
-          Modifier
-              .padding(4.dp)
-              .align(Alignment.CenterVertically)
+        Modifier
+          .padding(4.dp)
+          .align(Alignment.CenterVertically)
       ) {
         val progress = lesson.progress
         CircularProgressIndicator(
-            when (progress) {
-              null -> 0f
-              1f -> 0f
-              else -> progress
-            },
-            modifier = Modifier.align(Alignment.Center),
+          when (progress) {
+            null -> 0f
+            1f -> 0f
+            else -> progress
+          },
+          modifier = Modifier.align(Alignment.Center),
         )
         if (lesson.completed) {
           Icon(
-              modifier = Modifier.align(Alignment.Center),
-              imageVector = Icons.Default.CheckCircle,
-              contentDescription = "Check Circle",
-              tint = iconColor,
+            modifier = Modifier.align(Alignment.Center),
+            imageVector = Icons.Default.CheckCircle,
+            contentDescription = "Check Circle",
+            tint = iconColor,
           )
         }
       }
 
       Text(
-          text = lesson.title,
-          modifier = Modifier
-              .padding(4.dp)
-              .align(Alignment.CenterVertically),
-          color = when {
-            lesson.highlighted -> MaterialTheme.colors.primary
-            lesson.completed -> MaterialTheme.colors.onSurface
-            else -> Color.Gray
-          },
+        text = lesson.title,
+        modifier = Modifier
+          .padding(4.dp)
+          .align(Alignment.CenterVertically),
+        color = when {
+          lesson.highlighted -> MaterialTheme.colors.primary
+          lesson.completed -> MaterialTheme.colors.onSurface
+          else -> Color.Gray
+        },
       )
     }
 
-    Button(onClick = onPlay) {
+    val buttonsColor = when {
+      lesson.highlighted ->
+        ButtonDefaults.buttonColors(
+          backgroundColor = MaterialTheme.colors.primary,
+          contentColor = MaterialTheme.colors.onPrimary
+        )
+      lesson.completed ->
+        ButtonDefaults.buttonColors(
+          backgroundColor = MaterialTheme.colors.onPrimary,
+          contentColor = MaterialTheme.colors.secondary
+        )
+      else ->
+        ButtonDefaults.buttonColors(
+        backgroundColor = MaterialTheme.colors.onPrimary,
+        contentColor = MaterialTheme.colors.primary
+      )
+    }
+
+    Button(
+      onClick = onPlay,
+      colors = buttonsColor,
+    ) {
       Icon(
-          Icons.Default.PlayArrow,
-          contentDescription = "Play Arrow"
+        Icons.Default.PlayArrow,
+        contentDescription = "Play Arrow",
       )
     }
   }
@@ -105,10 +128,10 @@ fun LessonListItem(
 fun LessonListItemPreview_todo() {
   MaterialTheme {
     Surface(
-        color = Color(0xFFeeeeee)
+      color = Color(0xFFeeeeee)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         LessonListItem(lesson1) {}
       }
@@ -121,10 +144,10 @@ fun LessonListItemPreview_todo() {
 fun LessonListItemPreview_list() {
   MaterialTheme {
     Surface(
-        color = Color(0xFFeeeeee)
+      color = Color(0xFFeeeeee)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         LessonListItem(lesson1) {}
         LessonListItem(lesson2) {}

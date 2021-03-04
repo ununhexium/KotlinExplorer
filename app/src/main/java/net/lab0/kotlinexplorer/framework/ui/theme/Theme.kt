@@ -21,7 +21,6 @@ private val LightColorPalette = lightColors(
   primaryVariant = Purple700,
   secondary = PurpleKotlinPantone,
   secondaryVariant = OrangeKotlinPantone,
-  surface = PurpleKotlinPantone,
 )
 
 enum class Theme {

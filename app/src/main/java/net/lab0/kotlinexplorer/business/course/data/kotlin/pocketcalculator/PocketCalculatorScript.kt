@@ -1,18 +1,28 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 
+/**
+ * Requirements
+ *
+ * basic functions
+ * fully qualified names
+ * function call orders
+ *
+ * Operators priority
+ *
+ * More number types
+ */
+
 fun add(a: Int, b: Int): Int {
   return a + b
 }
 
 fun squareRoot(a: Int): Double =
-    kotlin.math.sqrt(a.toDouble())
-
-fun println(any:Any): Unit {
-  print(any.toString())
-  print("\n")
-}
+  kotlin.math.sqrt(a.toDouble())
 
 fun main() {
-  println(add(2, 3))
-  kotlin.io.println(squareRoot(9))
+  kotlin.io.println(add(2, 3)) // 5
+  println(
+    // 3
+    squareRoot(add(3, add(3, 3)))
+  )
 }
