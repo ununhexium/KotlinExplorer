@@ -16,7 +16,6 @@ import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
 
 /**
- * TODO: test with random inputs
  *
  * This stuff sometimes breaks on unexpected inputs. Stuff that should not be null can be null and it crashes the app.
  */

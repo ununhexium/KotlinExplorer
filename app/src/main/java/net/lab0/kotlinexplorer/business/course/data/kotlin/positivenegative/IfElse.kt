@@ -223,7 +223,6 @@ To use `if else` as an expression, there *must* be both a branch for `true` and 
             choices = listOf("It doesn't work", "Integer", "Something else"),
             answer = setOf(0),
         ),
-        // TODO: cut in 2 parts
         CodeQuestionPage(
             title = "Chains",
             question = """

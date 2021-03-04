@@ -6,9 +6,17 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.Evalua
 import net.lab0.kotlinexplorer.mvi.UiState
 
 data class LessonFeedbackState(
-    val lessonId: String = "",
-    val durationEvaluation: EvaluationTopic<DurationRating> = EvaluationTopic.empty(),
-    val difficultyEvaluation: EvaluationTopic<DifficultyRating> = EvaluationTopic.empty(),
-    val durationIndex: Int = 0,
-    val difficultyIndex: Int = 0,
-) : UiState
+  val lessonId: String,
+  val durationEvaluation: DurationRating,
+  val difficultyEvaluation: DifficultyRating,
+  val existingDurationEvaluation: DurationRating?,
+  val existingDifficultyEvaluation: DifficultyRating?,
+) : UiState {
+  constructor() : this(
+    "",
+    DurationRating.UNSET,
+    DifficultyRating.UNSET,
+    null,
+    null,
+  )
+}

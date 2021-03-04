@@ -15,22 +15,25 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.SmallVerticalSp
 
 @Composable
 fun <T> RadioFeedbackTopic(
-    topic: String,
-    options: List<T>,
-    onSelection: (Int?) -> Unit,
-) where T:Any {
+  topic: String,
+  options: List<T>,
+  selected: T,
+  onSelection: (T) -> Unit,
+) where T : Any {
   Column(
-      modifier = Modifier.fillMaxWidth()
+    modifier = Modifier.fillMaxWidth()
   ) {
     Text(
-        modifier = Modifier.fillMaxWidth(0.5f),
-        text = topic,
-        style = MaterialTheme.typography.body1
+      modifier = Modifier.fillMaxWidth(0.5f),
+      text = topic,
+      style = MaterialTheme.typography.body1,
+      color = MaterialTheme.colors.onBackground,
     )
     SmallVerticalSpacer()
     ThinRadioOptions(
-        options = options,
-        onSelection = onSelection
+      options = options,
+      selected = selected,
+      onSelection = onSelection,
     )
   }
 }
@@ -40,24 +43,26 @@ fun <T> RadioFeedbackTopic(
 fun FeedbackTopicPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           Column {
             RadioFeedbackTopic(
-                "Water temperature",
-                listOf("Red", "Green", "Blue")
-            ){}
+              "Water temperature",
+              listOf("Red", "Green", "Blue"),
+              "Green",
+            ) {}
 
             RadioFeedbackTopic(
-                "Foo",
-                listOf("Alpha", "Beta", "Gamma")
-            ){}
+              "Foo",
+              listOf("Alpha", "Beta", "Gamma"),
+              "Alpha",
+            ) {}
           }
         }
       }

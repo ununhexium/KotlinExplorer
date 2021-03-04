@@ -17,54 +17,60 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
+import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.ControlBar
 
 @Composable
-fun <T> LessonFeedbackPage(
-    durationTopic: EvaluationTopic<T>,
-    difficultyTopic: EvaluationTopic<T>,
-    onValidate: () -> Unit,
-    onSkip: () -> Unit,
-) where T : Any {
+fun LessonFeedbackPage(
+  duration: DurationRating,
+  difficulty: DifficultyRating,
+  onDurationSelection: (DurationRating) -> Unit,
+  onDifficultySelection: (DifficultyRating) -> Unit,
+  onValidate: () -> Unit,
+  onSkip: () -> Unit,
+) {
   Column(
-      modifier = Modifier
-          .fillMaxSize()
-          .padding(8.dp),
-      verticalArrangement = Arrangement.Bottom
+    modifier = Modifier
+      .fillMaxSize()
+      .padding(8.dp),
+    verticalArrangement = Arrangement.Bottom
   ) {
 
     RadioFeedbackTopic(
-        topic = durationTopic.topic,
-        options = durationTopic.options,
-        onSelection = { durationTopic.onSelection }
+      topic = "Duration",
+      options = DurationRating.values().toList(),
+      onSelection = { onDurationSelection(it) },
+      selected = duration,
     )
     BigVerticalSpacer()
 
     RadioFeedbackTopic(
-        topic = difficultyTopic.topic,
-        options = difficultyTopic.options,
-        onSelection = { difficultyTopic.onSelection }
+      topic = "Difficulty",
+      options = DifficultyRating.values().toList(),
+      onSelection = { onDifficultySelection(it) },
+      selected = difficulty,
     )
     BigVerticalSpacer()
 
     ControlBar(
-        startItems = {
-          Button(
-              colors = ButtonDefaults.outlinedButtonColors(
-                  MaterialTheme.colors.surface,
-                  MaterialTheme.colors.primary,
-              ),
-              onClick = onSkip,
-          ) {
-            Text(text = "Skip")
-          }
+      startItems = {
+        Button(
+          colors = ButtonDefaults.outlinedButtonColors(
+            MaterialTheme.colors.surface,
+            MaterialTheme.colors.primary,
+          ),
+          onClick = onSkip,
+        ) {
+          Text(text = "Skip")
         }
+      }
     ) {
       Button(onClick = onValidate) {
         Icon(
-            imageVector = Icons.Default.CheckCircle,
-            contentDescription = "CheckCircle"
+          imageVector = Icons.Default.CheckCircle,
+          contentDescription = "CheckCircle"
         )
       }
     }
@@ -76,35 +82,21 @@ fun <T> LessonFeedbackPage(
 fun LessonFeedbackPagePreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           LessonFeedbackPage(
-              EvaluationTopic(
-                  "Lesson duration",
-                  listOf(
-                      "Too short",
-                      "Balanced",
-                      "Too long",
-                      "No Answer",
-                  )
-              ) {},
-              EvaluationTopic(
-                  "Lesson difficulty",
-                  listOf(
-                      "Too easy",
-                      "Balanced",
-                      "Too hard",
-                      "No Answer",
-                  )
-              ) {},
-              {},
-              {},
+            DurationRating.UNSET,
+            DifficultyRating.UNSET,
+            {},
+            {},
+            {},
+            {},
           )
         }
       }

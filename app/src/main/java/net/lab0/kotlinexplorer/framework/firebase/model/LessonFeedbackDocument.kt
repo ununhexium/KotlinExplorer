@@ -4,7 +4,7 @@ import com.google.firebase.Timestamp
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 
-data class FeedbackDocument(
+data class LessonFeedbackDocument(
     val id: String = "",
     val createdAt: Timestamp = Timestamp(0, 0),
     val lessonId:String = "",

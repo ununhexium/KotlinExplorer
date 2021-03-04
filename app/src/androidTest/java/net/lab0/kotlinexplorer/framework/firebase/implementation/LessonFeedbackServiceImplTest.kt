@@ -15,7 +15,7 @@ import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
-import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
+import net.lab0.kotlinexplorer.framework.firebase.model.LessonFeedbackDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
@@ -42,10 +42,10 @@ internal class LessonFeedbackServiceImplTest {
   lateinit var firestore: FirebaseFirestore
 
   @Inject
-  lateinit var fromDomain: FromDomain<FeedbackDocument, LessonFeedback>
+  lateinit var fromDomain: FromDomain<LessonFeedbackDocument, LessonFeedback>
 
   @Inject
-  lateinit var toDomain: ToDomain<FeedbackDocument, LessonFeedback>
+  lateinit var toDomain: ToDomain<LessonFeedbackDocument, LessonFeedback>
 
   @Before
   fun before() {
@@ -78,7 +78,7 @@ internal class LessonFeedbackServiceImplTest {
     // then
     val saved = toDomain(
       firestore.feedbackCollection(firebaseAuth.uid!!).document(lessonId).get().await()
-        .toObject(FeedbackDocument::class.java)!!
+        .toObject(LessonFeedbackDocument::class.java)!!
     )
     assertThat(saved).isEqualTo(feedback)
   }

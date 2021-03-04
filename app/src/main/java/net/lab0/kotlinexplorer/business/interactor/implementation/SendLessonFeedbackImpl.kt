@@ -9,11 +9,10 @@ import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
 import net.lab0.kotlinexplorer.mvi.Resource
-import net.lab0.kotlinexplorer.utils.printLogD
 
 class SendLessonFeedbackImpl(
-  private val lessonFeedbackService: LessonFeedbackService,
   private val auth: FirebaseAuth,
+  private val lessonFeedbackService: LessonFeedbackService,
 ) : SendLessonFeedback {
   override fun invoke(lessonFeedback: LessonFeedback): Flow<Resource<*>> = flow {
     if (lessonFeedback.difficultyRating != DifficultyRating.UNSET || lessonFeedback.durationRating != DurationRating.UNSET) {

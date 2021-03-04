@@ -50,7 +50,6 @@ print(
             answer = listOf("\"", "Hello ", """\"""", "World"),
             confusion = listOf("'"),
         ),
-        // TODO: multiline code reordering
         LessonPage.InfoPage(
             title = "Done!",
             """

@@ -16,7 +16,11 @@ class LoginViewModel(
     Do exhaustive when (event) {
       LoginUiEvent.CheckCanLogin -> {
         val currentUser = auth.currentUser
-        val username = currentUser?.email ?: currentUser?.uid
+        val username = if(currentUser?.isAnonymous == true) {
+          null
+        } else {
+          currentUser?.email ?: currentUser?.uid
+        }
         updateUi {
           it.copy(username = username)
         }

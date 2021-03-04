@@ -7,30 +7,27 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.ReloadLessonFeedb
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi.LessonFeedbackEvent
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi.LessonFeedbackState
-import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.EvaluationTopic
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
-import net.lab0.kotlinexplorer.utils.printLogD
 
 class LessonFeedbackViewModel(
-    val sendLessonFeedback: SendLessonFeedback,
-    val reloadLessonFeedback: ReloadLessonFeedback,
+  val sendLessonFeedback: SendLessonFeedback,
+  val reloadLessonFeedback: ReloadLessonFeedback,
 ) : BaseViewModel<LessonFeedbackEvent, LessonFeedbackState>(
-    LessonFeedbackEvent.Empty,
-    LessonFeedbackState()
+  LessonFeedbackEvent.Empty,
+  LessonFeedbackState()
 ) {
   fun init(
-      lessonId: String,
-      durationEvaluation: EvaluationTopic<DurationRating> = EvaluationTopic.empty(),
-      difficultyEvaluation: EvaluationTopic<DifficultyRating> = EvaluationTopic.empty(),
+    lessonId: String,
   ) {
     updateUi {
       it.copy(
-          lessonId = lessonId,
-          durationEvaluation = durationEvaluation,
-          difficultyEvaluation = difficultyEvaluation
+        lessonId = lessonId,
+        durationEvaluation = DurationRating.UNSET,
+        difficultyEvaluation = DifficultyRating.UNSET,
       )
     }
+    emitFastEvent(LessonFeedbackEvent.Init(lessonId))
   }
 
   override suspend fun doJobForEvent(event: LessonFeedbackEvent) {
@@ -40,18 +37,37 @@ class LessonFeedbackViewModel(
         val state = uiDataState.value
         // TODO: update older feedback if it exists
         // TODO: show previous feedback if it exists
-        printLogD(TAG, "Feedback: sending...")
-        processResource(
-          sendLessonFeedback(
-            LessonFeedback(
-              state.lessonId,
-              state.durationEvaluation.options[state.durationIndex],
-              state.difficultyEvaluation.options[state.difficultyIndex],
+        if (
+          state.existingDifficultyEvaluation != state.difficultyEvaluation ||
+          state.existingDurationEvaluation != state.durationEvaluation
+        ) {
+          processResource(
+            sendLessonFeedback(
+              LessonFeedback(
+                state.lessonId,
+                state.durationEvaluation,
+                state.difficultyEvaluation,
+              )
             )
-          )
-        ) {}
-        printLogD(TAG, "Feedback: processing...")
+          ) {}
+        }
+        Unit
       }
+      is LessonFeedbackEvent.Init ->
+        processResource(
+          reloadLessonFeedback(event.lessonId)
+        ) { feedback ->
+          feedback?.let {
+            updateUi { state ->
+              state.copy(
+                durationEvaluation = feedback.durationRating,
+                difficultyEvaluation = feedback.difficultyRating,
+                existingDurationEvaluation = feedback.durationRating,
+                existingDifficultyEvaluation = feedback.difficultyRating,
+              )
+            }
+          }
+        }
     }
   }
 
@@ -59,19 +75,16 @@ class LessonFeedbackViewModel(
     emitSlowEvent(LessonFeedbackEvent.Submit)
   }
 
-  fun selectDuration(index: Int?) {
-    index?.let {
-      updateUi { ui ->
-        ui.copy(durationIndex = index)
-      }
+  fun selectDuration(durationEvaluation: DurationRating) {
+    updateUi { ui ->
+      ui.copy(durationEvaluation = durationEvaluation)
     }
   }
 
-  fun selectDifficulty(index: Int?) {
-    index?.let {
-      updateUi { ui ->
-        ui.copy(difficultyIndex = index)
-      }
+  fun selectDifficulty(difficultyEvaluation: DifficultyRating) {
+    updateUi { ui ->
+      ui.copy(difficultyEvaluation = difficultyEvaluation)
     }
   }
+
 }

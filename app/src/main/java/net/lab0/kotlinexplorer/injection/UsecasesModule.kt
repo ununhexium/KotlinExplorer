@@ -65,13 +65,13 @@ object UsecasesModule {
 
   @Singleton
   @Provides
-  fun provideSendLessonFeedback(service: LessonFeedbackService, auth: FirebaseAuth): SendLessonFeedback =
-    SendLessonFeedbackImpl(service, auth)
+  fun provideSendLessonFeedback(auth: FirebaseAuth, service: LessonFeedbackService): SendLessonFeedback =
+    SendLessonFeedbackImpl(auth, service)
 
   @Singleton
   @Provides
-  fun provideReloadLessonFeedback(service: LessonFeedbackService): ReloadLessonFeedback =
-    ReloadLessonFeedbackImpl(service)
+  fun provideReloadLessonFeedback(auth: FirebaseAuth, service: LessonFeedbackService): ReloadLessonFeedback =
+    ReloadLessonFeedbackImpl(auth, service)
 
   @Singleton
   @Provides

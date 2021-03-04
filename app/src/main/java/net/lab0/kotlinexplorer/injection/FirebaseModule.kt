@@ -22,7 +22,7 @@ import net.lab0.kotlinexplorer.framework.firebase.mappers.FeedbackDocumentToDoma
 import net.lab0.kotlinexplorer.framework.firebase.mappers.ProblemReportDocumentFromDomain
 import net.lab0.kotlinexplorer.framework.firebase.mappers.ProblemReportDocumentToDomain
 import net.lab0.kotlinexplorer.framework.firebase.model.ExtraContentRequestDocument
-import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
+import net.lab0.kotlinexplorer.framework.firebase.model.LessonFeedbackDocument
 import net.lab0.kotlinexplorer.framework.firebase.model.ProblemReportDocument
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
@@ -38,12 +38,12 @@ object FirebaseModule {
 
   @Singleton
   @Provides
-  fun provideFeedbackFromDomain(): FromDomain<FeedbackDocument, LessonFeedback> =
+  fun provideFeedbackFromDomain(): FromDomain<LessonFeedbackDocument, LessonFeedback> =
       FeedbackDocumentFromDomain()
 
   @Singleton
   @Provides
-  fun provideFeedbackToDomain(): ToDomain<FeedbackDocument, LessonFeedback> =
+  fun provideFeedbackToDomain(): ToDomain<LessonFeedbackDocument, LessonFeedback> =
       FeedbackDocumentToDomain()
 
   @Singleton
@@ -59,9 +59,9 @@ object FirebaseModule {
   @Singleton
   @Provides
   fun provideLessonFeedbackService(
-      firestore: FirebaseFirestore,
-      fromDomain: FromDomain<FeedbackDocument, LessonFeedback>,
-      toDomain: ToDomain<FeedbackDocument, LessonFeedback>,
+    firestore: FirebaseFirestore,
+    fromDomain: FromDomain<LessonFeedbackDocument, LessonFeedback>,
+    toDomain: ToDomain<LessonFeedbackDocument, LessonFeedback>,
   ): LessonFeedbackService =
     LessonFeedbackServiceImpl(
             firestore,
