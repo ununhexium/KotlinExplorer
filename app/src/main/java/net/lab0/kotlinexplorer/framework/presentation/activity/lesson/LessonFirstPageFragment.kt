@@ -29,7 +29,7 @@ import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.utils.Do
 
 class LessonFirstPageFragment(
-    private val viewModelFactory: ViewModelProvider.Factory,
+  private val viewModelFactory: ViewModelProvider.Factory,
 ) : Fragment(), NextPageSelectorMixin {
   private val args: LessonFirstPageFragmentArgs by navArgs()
   private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
@@ -41,50 +41,51 @@ class LessonFirstPageFragment(
   }
 
   override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View {
     return ComposeView(requireContext()).also {
       it.setContent {
         KotlinExplorerTheme {
           val lesson = LessonBrowser.getLessonById(args.lessonId)
           Column(
-              verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.SpaceEvenly
           ) {
             Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally),
-                text = lesson.title,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h3,
+              modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+              text = lesson.title,
+              textAlign = TextAlign.Center,
+              style = MaterialTheme.typography.h3,
+              color = MaterialTheme.colors.onBackground,
             )
             Button(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                onClick = {
-                  // TODO: use NextPageMixin
-                  val firstPage = lesson.pages.first()
-                  Do exhaustive when (firstPage) {
-                    is LessonPage.InfoPage ->
-                      findNavController().navigate(
-                          LessonFirstPageFragmentDirections
-                              .actionLessonFirstPageToInfoPageFragment(args.lessonId, 0)
-                      )
+              modifier = Modifier.align(Alignment.CenterHorizontally),
+              onClick = {
+                // TODO: use NextPageMixin
+                val firstPage = lesson.pages.first()
+                Do exhaustive when (firstPage) {
+                  is LessonPage.InfoPage ->
+                    findNavController().navigate(
+                      LessonFirstPageFragmentDirections
+                        .actionLessonFirstPageToInfoPageFragment(args.lessonId, 0)
+                    )
 
-                    is LessonPage.CodeQuestionPage ->
-                      findNavController().navigate(
-                          LessonFirstPageFragmentDirections
-                              .actionLessonFirstPageToCodeQuestionPageFragment(args.lessonId, 0)
-                      )
+                  is LessonPage.CodeQuestionPage ->
+                    findNavController().navigate(
+                      LessonFirstPageFragmentDirections
+                        .actionLessonFirstPageToCodeQuestionPageFragment(args.lessonId, 0)
+                    )
 
-                    is LessonPage.MultipleChoice ->
-                      findNavController().navigate(
-                          LessonFirstPageFragmentDirections
-                              .actionLessonFirstPageToMultipleChoicePageFragment(args.lessonId, 0)
-                      )
-                  }
+                  is LessonPage.MultipleChoice ->
+                    findNavController().navigate(
+                      LessonFirstPageFragmentDirections
+                        .actionLessonFirstPageToMultipleChoicePageFragment(args.lessonId, 0)
+                    )
                 }
+              }
             ) {
               Icon(imageVector = Icons.Default.PlayArrow, "Play arrow")
               Text("Start!")

@@ -19,7 +19,6 @@ class LessonFeedbackServiceImpl(
 
   override suspend fun insertOrUpdateFeedback(lessonFeedback: LessonFeedback) {
     firestore
-        // TODO: use WithUidMixin ?
         .feedbackCollection(firebaseAuth.uid!!)
         .document(lessonFeedback.id.toString())
         .set(fromDomain(lessonFeedback))

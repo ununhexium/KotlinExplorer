@@ -18,42 +18,52 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.Answer
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.MultipleChoiceAnswer
 
 @Composable
 fun MultipleChoiceAnswerInput(
-    answers: List<Answer>,
-    toggle: (Int) -> Unit,
+  answers: List<MultipleChoiceAnswer>,
+  toggle: (Int) -> Unit,
 ) {
   Column {
     answers.forEach { answer ->
       Row(
-          modifier = Modifier
-              .padding(4.dp)
-              .clickable(onClick = { toggle(answer.id) })
-              .padding(4.dp),
-          horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+          .padding(4.dp)
+          .clickable(onClick = { toggle(answer.id) })
+          .padding(4.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
       ) {
+        val color = when (answer.correct) {
+          true -> MaterialTheme.colors.primary
+          false -> MaterialTheme.colors.secondaryVariant
+          null -> MaterialTheme.colors.onBackground
+        }
+        val icon = when (answer.used) {
+          true -> Icons.Default.CheckBox
+          false -> Icons.Default.CheckBoxOutlineBlank
+        }
         Icon(
-            if (answer.used) {
-              Icons.Default.CheckBox
-            } else {
-              Icons.Default.CheckBoxOutlineBlank
-            },
-            contentDescription = if (answer.used) {
-              "CheckBox"
-            } else {
-              "CheckBoxOutlineBlank"
-            },
-            modifier = Modifier
-                .padding(horizontal = 4.dp)
-                .align(Alignment.CenterVertically),
+          icon,
+          contentDescription =
+          (if (answer.used) "Selected" else "Unselected") +
+              when (answer.correct) {
+                null -> " "
+                true -> " correct"
+                false -> " wrong"
+              } +
+              " choice",
+          modifier = Modifier
+            .padding(horizontal = 4.dp)
+            .align(Alignment.CenterVertically),
+          tint = color,
         )
 
         Text(
-            answer.text,
-            modifier = Modifier.align(Alignment.CenterVertically),
-            style = MaterialTheme.typography.body1,
+          answer.text,
+          modifier = Modifier.align(Alignment.CenterVertically),
+          style = MaterialTheme.typography.body1,
+          color = color,
         )
       }
     }
@@ -65,20 +75,24 @@ fun MultipleChoiceAnswerInput(
 fun MultipleChoiceAnswerInputPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           MultipleChoiceAnswerInput(
-              answers = listOf(
-                  Answer(0, "Alpha", false),
-                  Answer(0, "Beta", true),
-              ),
-              toggle = {},
+            answers = listOf(
+              MultipleChoiceAnswer(0, "Checked unset", true, null),
+              MultipleChoiceAnswer(1, "Unchecked unset", false, null),
+              MultipleChoiceAnswer(2, "Checked correct", true, true),
+              MultipleChoiceAnswer(2, "Unchecked correct", false, true),
+              MultipleChoiceAnswer(3, "Checked incorrect", true, false),
+              MultipleChoiceAnswer(3, "Unchecked incorrect", false, false),
+            ),
+            toggle = {},
           )
         }
       }

@@ -10,11 +10,17 @@ import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
 
 class MultipleChoiceViewModel(
-    ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+  ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+  initialState: MultipleChoiceUiState = MultipleChoiceUiState(
+    0,
+    LessonPage.MultipleChoice.EMPTY,
+    Chapter.EMPTY,
+    listOf()
+  ),
 ) : BaseViewModel<MultipleChoiceUiEvent, MultipleChoiceUiState>(
-    MultipleChoiceUiEvent.Empty,
-    MultipleChoiceUiState(0, LessonPage.MultipleChoice.EMPTY, Chapter.EMPTY, listOf()),
-    ioDispatcher
+  MultipleChoiceUiEvent.Empty,
+  initialState,
+  ioDispatcher,
 ) {
 
   override suspend fun doJobForEvent(event: MultipleChoiceUiEvent) {
@@ -29,19 +35,19 @@ class MultipleChoiceViewModel(
       }
 
       is MultipleChoiceUiEvent.ToggleAnswer -> {
-          updateUi {
-            if (event.answer in it.selectedAnswers) {
-              it.lockableCopy(
-                  selectedAnswers = it.selectedAnswers.filterNot { answer ->
-                    answer == event.answer
-                  }
-              )
-            } else {
-              it.lockableCopy(
-                  selectedAnswers = (it.selectedAnswers + event.answer)
-              )
-            }
+        updateUi {
+          if (event.answer in it.selectedAnswers) {
+            it.lockableCopy(
+              selectedAnswers = it.selectedAnswers.filterNot { answer ->
+                answer == event.answer
+              }
+            )
+          } else {
+            it.lockableCopy(
+              selectedAnswers = (it.selectedAnswers + event.answer)
+            )
           }
+        }
       }
     }
   }

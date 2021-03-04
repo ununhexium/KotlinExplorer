@@ -18,7 +18,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.NextPageSe
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.mvi.MultipleChoiceUiEvent
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.mvi.MultipleChoiceUiState
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.MultipleChoicePage
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.MultipleChoicePage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme

@@ -18,6 +18,7 @@ import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
 import net.lab0.kotlinexplorer.injection.FirestoreInstanceModule
+import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
@@ -50,7 +51,6 @@ internal class LessonFeedbackServiceImplTest {
   fun before() {
     hiltRule.inject()
     lessonFeedbackService = LessonFeedbackServiceImpl(
-        // TODO: test with authenticated and non authenticated users
         firebaseAuth.also { Tasks.await(it.signInAnonymously()) },
         firestore,
         fromDomain,
@@ -58,8 +58,11 @@ internal class LessonFeedbackServiceImplTest {
     )
   }
 
-  // TODO: FIXME use Auth
-  @Ignore
+  @After
+  fun after() {
+    firebaseAuth.signOut()
+  }
+
   @Test
   fun createReadFeedback(): Unit = runBlocking {
     // given

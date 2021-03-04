@@ -9,9 +9,6 @@ service cloud.firestore {
             function isAuthorized() {
                 return request.auth.uid == userId;
             }
-            function isSignedIn() {
-                return request.auth.uid != null;
-            }
 
             match /extraLessonRequest/singleton {
                 allow read, write: if isAuthorized();
@@ -22,7 +19,6 @@ service cloud.firestore {
             }
 
             match /problemReports/{problemId} {
-                // TODO: isSignedIn: remove and use isAuthed ?
                 allow create: if isAuthorized() && !exists(/databases/$(database)/documents/users/$(userId)/problemReports/$(problemId));
                 allow update: if false;
                 allow read: if isAuthorized();
