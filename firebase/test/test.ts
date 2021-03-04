@@ -96,6 +96,19 @@ describe("Security rules test", () => {
         }
     );
 
+    it("Prevent another user from creating a user's problem report", async () => {
+            const db = getFirestore(userZ);
+
+            const testDoc = db
+                .collection("users")
+                .doc(userA.uid)
+                .collection("problemReports")
+                .doc("existingReport");
+
+            await firebase.assertFails(testDoc.set({some: "data"}));
+        }
+    );
+
     it("Can read a user's existing problem report", async () => {
             await getAdminFirestore()
                 .collection("users")
@@ -175,4 +188,28 @@ describe("Security rules test", () => {
             await firebase.assertFails(testDoc.update({some: "new data"}));
         }
     );
+
+    it("Can submit a user feedback when signed in", async () => {
+        const db = getFirestore(userA);
+
+        const testDoc = db
+            .collection("users")
+            .doc(userA.uid)
+            .collection("feedbacks")
+            .doc("newFeedback");
+
+        await firebase.assertSucceeds(testDoc.set({some: "data"}));
+    });
+
+    it("Prevent unauthenticated users from submitting feedbacks", async () => {
+        const db = getFirestore(null);
+
+        const testDoc = db
+            .collection("users")
+            .doc(userA.uid)
+            .collection("feedbacks")
+            .doc("newFeedback");
+
+        await firebase.assertFails(testDoc.set({some: "data"}));
+    });
 });
