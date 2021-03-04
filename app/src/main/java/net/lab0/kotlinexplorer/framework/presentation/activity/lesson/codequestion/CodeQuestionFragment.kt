@@ -83,6 +83,7 @@ class CodeQuestionFragment(
                     args.lessonId,
                     findNavController(),
                     navigationToFeedback = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToLessonFeedbackFragment,
+                    navigationToNextChapter = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToNextLessonFragment,
                     navigationToInfo = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToInfoPageFragment,
                     navigationToCodeQuestion = CodeQuestionFragmentDirections::actionLessonCodeQuestionPageFragmentSelf,
                     navigationToMultipleChoice = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToMultipleChoicePageFragment,

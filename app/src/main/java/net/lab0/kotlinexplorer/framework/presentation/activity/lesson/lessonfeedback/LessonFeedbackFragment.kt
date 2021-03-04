@@ -11,11 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
-import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.LessonFeedbackPage
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
-import net.lab0.kotlinexplorer.utils.Do
 
 class LessonFeedbackFragment(
   private val viewModelFactory: ViewModelProvider.Factory,

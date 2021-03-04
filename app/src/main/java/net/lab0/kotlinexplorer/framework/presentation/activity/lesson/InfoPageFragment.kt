@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionFragmentDirections
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.InfoLessonPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
@@ -71,6 +72,7 @@ class InfoPageFragment(
                       args.lessonId,
                       findNavController(),
                       navigationToFeedback = InfoPageFragmentDirections::actionInfoPageFragmentToLessonFeedbackFragment,
+                      navigationToNextChapter = InfoPageFragmentDirections::actionInfoPageFragmentToNextLessonFragment,
                       navigationToInfo = InfoPageFragmentDirections::actionInfoPageFragmentSelf,
                       navigationToMultipleChoice = InfoPageFragmentDirections::actionInfoPageFragmentToMultipleChoicePageFragment,
                       navigationToCodeQuestion = InfoPageFragmentDirections::actionInfoPageFragmentToCodeQuestionPageFragment,

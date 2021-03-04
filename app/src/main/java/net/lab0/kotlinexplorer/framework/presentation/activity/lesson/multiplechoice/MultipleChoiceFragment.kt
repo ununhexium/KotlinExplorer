@@ -84,6 +84,7 @@ class MultipleChoiceFragment(
                     args.lessonId,
                     findNavController(),
                     navigationToFeedback = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToLessonFeedbackFragment,
+                    navigationToNextChapter = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToNextLessonFragment,
                     navigationToInfo = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToInfoPageFragment,
                     navigationToCodeQuestion = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToCodeQuestionPageFragment,
                     navigationToMultipleChoice = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentSelf,
