@@ -59,7 +59,7 @@ constructor(
       is RequestMoreChapters -> {
         processResource(
             // TODO: user ID usecase?
-            requestExtraLessons("foo")
+            requestExtraLessons()
         ) {
           updateUi {
             it.copy(canRequestMoreChapters = false)

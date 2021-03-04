@@ -1,6 +1,6 @@
 package net.lab0.kotlinexplorer.mvi
 
-// TODO: wrap T do tell if the returned data is clean (successful call) or dirty (failed somthing)
+// TODO: wrap T do tell if the returned data is clean (successful call) or dirty (failed something)
 sealed class Resource<out T> {
   @Deprecated("Crappy architecture, needs rewrite")
   object EmptyLoadedResource : Resource<Unit>()

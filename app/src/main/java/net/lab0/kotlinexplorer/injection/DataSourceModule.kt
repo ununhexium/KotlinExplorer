@@ -24,7 +24,7 @@ object DataSourceModule {
   @Provides
   fun provideLessonProgressDataSource(
       dao: LessonProgressDao,
-      // TODO mappers should go in a DaoService class
+      // TODO mappers should go in a LessonProgressService class
       toDomain: ToDomain<LessonProgressEntity, LessonProgress>,
       fromDomain: FromDomain<LessonProgressEntity, LessonProgress>,
   ): LessonProgressDataSource {

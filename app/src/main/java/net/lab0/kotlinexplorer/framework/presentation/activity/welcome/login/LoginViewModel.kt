@@ -26,7 +26,6 @@ class LoginViewModel(
         }
       }
       LoginUiEvent.Empty -> Unit
-      LoginUiEvent.Login -> TODO()
     }
   }
 

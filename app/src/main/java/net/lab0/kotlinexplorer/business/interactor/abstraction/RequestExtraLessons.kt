@@ -5,7 +5,5 @@ import net.lab0.kotlinexplorer.business.domain.extracontent.ExtraContentRequest
 import net.lab0.kotlinexplorer.mvi.Resource
 
 interface RequestExtraLessons {
-  operator fun invoke(
-      uid: String,
-  ): Flow<Resource.LoadedResource<Unit>>
+  operator fun invoke(): Flow<Resource.LoadedResource<Unit>>
 }

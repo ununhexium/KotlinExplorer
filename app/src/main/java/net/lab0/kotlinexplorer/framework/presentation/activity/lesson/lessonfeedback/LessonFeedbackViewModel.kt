@@ -35,8 +35,6 @@ class LessonFeedbackViewModel(
       LessonFeedbackEvent.Empty -> Unit
       LessonFeedbackEvent.Submit -> {
         val state = uiDataState.value
-        // TODO: update older feedback if it exists
-        // TODO: show previous feedback if it exists
         if (
           state.existingDifficultyEvaluation != state.difficultyEvaluation ||
           state.existingDurationEvaluation != state.durationEvaluation

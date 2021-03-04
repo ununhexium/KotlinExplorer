@@ -34,9 +34,6 @@ class Courses {
   fun project(name: String, vararg dependencies: Dep) =
       Project(name, dependencies.toList()).also { groups.add(it) }
 
-  // TODO: also add projects as soon as possible
-  // TODO: quick test to gage the level of the student
-
   @Test
   fun `list kotlin courses`() {
     // Hello world

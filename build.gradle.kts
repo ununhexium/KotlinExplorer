@@ -26,5 +26,11 @@ tasks {
   withType<Delete> {
     delete(rootProject.buildDir)
   }
+
+  val allTests by registering {
+    dependsOn(":grammar:test")
+    dependsOn(":app:test")
+    dependsOn(":app:connectedAndroidTest")
+  }
 }
 

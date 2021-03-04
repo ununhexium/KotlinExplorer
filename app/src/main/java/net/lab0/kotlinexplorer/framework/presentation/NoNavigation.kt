@@ -5,5 +5,5 @@ import androidx.navigation.NavDirections
 
 object NoNavigation : NavDirections {
   override fun getActionId() = 0
-  override fun getArguments(): Bundle = TODO("Not yet implemented")
+  override fun getArguments(): Bundle = throw IllegalStateException("Don't call this")
 }

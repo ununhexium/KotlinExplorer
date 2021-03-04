@@ -51,39 +51,46 @@ object UsecasesModule {
   @Singleton
   @Provides
   fun provideSaveLessonProgress(dataSource: LessonProgressDataSource): SaveLessonProgress =
-      SaveLessonProgressImpl(dataSource)
+    SaveLessonProgressImpl(dataSource)
 
   @Singleton
   @Provides
   fun provideGetLessonsInProgress(dataSource: LessonProgressDataSource): GetLessonsInProgress =
-      GetLessonsInProgressImpl(dataSource)
+    GetLessonsInProgressImpl(dataSource)
 
   @Singleton
   @Provides
   fun provideGetLessonFeedback(service: LessonFeedbackService): GetLessonFeedback =
-      GetLessonFeedbackImpl(service)
+    GetLessonFeedbackImpl(service)
 
   @Singleton
   @Provides
-  fun provideSendLessonFeedback(auth: FirebaseAuth, service: LessonFeedbackService): SendLessonFeedback =
+  fun provideSendLessonFeedback(
+    auth: FirebaseAuth,
+    service: LessonFeedbackService
+  ): SendLessonFeedback =
     SendLessonFeedbackImpl(auth, service)
 
   @Singleton
   @Provides
-  fun provideReloadLessonFeedback(auth: FirebaseAuth, service: LessonFeedbackService): ReloadLessonFeedback =
+  fun provideReloadLessonFeedback(
+    auth: FirebaseAuth,
+    service: LessonFeedbackService
+  ): ReloadLessonFeedback =
     ReloadLessonFeedbackImpl(auth, service)
 
   @Singleton
   @Provides
   fun provideSendProblemReport(problemReportService: ProblemReportService): SendProblemReport =
-      SendProblemReportImpl(problemReportService)
+    SendProblemReportImpl(problemReportService)
 
   @Singleton
   @Provides
   fun provideRequestExtraLessons(
-      extraContentService: ExtraContentService,
-      dataSource: LessonProgressDataSource,
+    auth: FirebaseAuth,
+    extraContentService: ExtraContentService,
+    dataSource: LessonProgressDataSource,
   ): RequestExtraLessons =
-      RequestExtraLessonsImpl(extraContentService, dataSource)
+    RequestExtraLessonsImpl(auth, extraContentService, dataSource)
 
 }

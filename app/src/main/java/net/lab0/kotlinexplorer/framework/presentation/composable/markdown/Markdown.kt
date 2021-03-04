@@ -232,7 +232,7 @@ fun MarkdownText(
   style: TextStyle,
   modifier: Modifier = Modifier,
 ) {
-  // TODO: re-add support for links
+  // Support for links was here. Deleted when migrating to compose beta01
   val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
   Text(
