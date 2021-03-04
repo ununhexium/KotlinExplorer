@@ -153,7 +153,7 @@ The content of the string doesn't matter when using `+` between them.
 `n` is a string. `+` between strings does a concatenation. Therefore `n + n` is `"1" + "1"`.
 Glue them together and you have `"11"`.
 """,
-            choices = listOf("\"11\"", "2"),
+            choices = listOf("1 + 1 = 11", "1 + 1 = 2"),
             answer = setOf(0),
         ),
         InfoPage(
