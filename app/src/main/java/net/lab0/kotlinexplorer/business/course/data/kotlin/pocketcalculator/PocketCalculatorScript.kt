@@ -12,17 +12,21 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
  * More number types
  */
 
+// your own function
 fun add(a: Int, b: Int): Int {
   return a + b
 }
 
+// fancy notation
 fun squareRoot(a: Int): Double =
+  // calling external function
   kotlin.math.sqrt(a.toDouble())
 
 fun main() {
-  kotlin.io.println(add(2, 3)) // 5
+  // fully qualified function call
+  kotlin.io.println(add(2, 3))
   println(
-    // 3
+    // chaining function calls
     squareRoot(add(3, add(3, 3)))
   )
 }

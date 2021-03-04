@@ -94,4 +94,5 @@ They can contain integers, strings, booleans and many other kinds of data that y
 // TODO: value names can't contain some characters, add tests for that.
 // TODO: values can be assigned from another value.
 // TODO: copy/paste from one reference to another.
+// TODO: multiple choice what does val v=2; print(v) print? V or 2?
 // val a = 1; val b = a; // references to the same object. If the value pointed by a changes, then the value pointed by be changes too.
