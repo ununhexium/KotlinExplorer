@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.injection
 
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,6 +11,7 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgressCount
+import net.lab0.kotlinexplorer.business.interactor.abstraction.ReloadLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
@@ -19,6 +21,7 @@ import net.lab0.kotlinexplorer.business.interactor.implementation.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.implementation.GetLessonFeedbackImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.GetLessonsInProgressCountImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.GetLessonsInProgressImpl
+import net.lab0.kotlinexplorer.business.interactor.implementation.ReloadLessonFeedbackImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.RequestExtraLessonsImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.SaveLessonProgressImpl
 import net.lab0.kotlinexplorer.business.interactor.implementation.SendLessonFeedbackImpl
@@ -62,8 +65,13 @@ object UsecasesModule {
 
   @Singleton
   @Provides
-  fun provideSendLessonFeedback(service: LessonFeedbackService): SendLessonFeedback =
-      SendLessonFeedbackImpl(service)
+  fun provideSendLessonFeedback(service: LessonFeedbackService, auth: FirebaseAuth): SendLessonFeedback =
+    SendLessonFeedbackImpl(service, auth)
+
+  @Singleton
+  @Provides
+  fun provideReloadLessonFeedback(service: LessonFeedbackService): ReloadLessonFeedback =
+    ReloadLessonFeedbackImpl(service)
 
   @Singleton
   @Provides

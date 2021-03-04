@@ -3,23 +3,23 @@ package net.lab0.kotlinexplorer.framework.firebase.model
 import com.google.firebase.firestore.FirebaseFirestore
 
 fun FirebaseFirestore.usersCollection() =
-    this.collection("users")
+  this.collection("users")
 
-fun FirebaseFirestore.feedbackCollection(uid:String) =
-    this
-        .usersCollection()
-        .document(uid)
-        .collection("feedbacks")
+fun FirebaseFirestore.userDocument(uid: String) =
+  this.usersCollection().document(uid)
 
-fun FirebaseFirestore.problemReportCollection(uid:String) =
-    this
-        .usersCollection()
-        .document(uid)
-        .collection("problemReports")
+fun FirebaseFirestore.feedbackCollection(uid: String) =
+  this
+    .userDocument(uid)
+    .collection("feedbacks")
 
-fun FirebaseFirestore.extraLessonRequestDocument(uid:String) =
-    this
-        .usersCollection()
-        .document(uid)
-        .collection("extraLessonRequest")
-        .document("singleton")
+fun FirebaseFirestore.problemReportCollection(uid: String) =
+  this
+    .userDocument(uid)
+    .collection("problemReports")
+
+fun FirebaseFirestore.extraLessonRequestDocument(uid: String) =
+  this
+    .userDocument(uid)
+    .collection("extraLessonRequest")
+    .document("singleton")

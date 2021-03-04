@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.firebase.implementation
 
 import assertk.assertThat
 import assertk.assertions.isEqualToIgnoringGivenProperties
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -47,35 +48,38 @@ internal class ExtraContentServiceImplTest {
   @Before
   fun before() {
     hiltRule.inject()
+
+    Tasks.await(firebaseAuth.signInAnonymously())
+
     extraContentService = ExtraContentServiceImpl(
-        firestore,
-        fromDomain,
+      firestore,
+      fromDomain,
     )
   }
 
   @Test
-  fun canSubmitAnExtraLessonRequest():Unit = runBlocking {
+  fun canSubmitAnExtraLessonRequest(): Unit = runBlocking {
     // given
     val service = ExtraContentServiceImpl(firestore, fromDomain)
     val extra = ExtraContentRequest(116, 117)
 
     // when
-    service.requestExtraLessons("user1", extra)
+    service.requestExtraLessons(firebaseAuth.uid!!, extra)
 
     // then
     val savedObject = firestore
-        .collection("users")
-        .document("user1")
-        .collection("extraLessonRequest")
-        .document("singleton")
-        .get()
-        .await()
-        .toObject(ExtraContentRequestDocument::class.java)!!
+      .collection("users")
+      .document(firebaseAuth.uid!!)
+      .collection("extraLessonRequest")
+      .document("singleton")
+      .get()
+      .await()
+      .toObject(ExtraContentRequestDocument::class.java)!!
 
     val extraDoc = fromDomain(extra)
     assertThat(savedObject).isEqualToIgnoringGivenProperties(
-        extraDoc,
-        ExtraContentRequestDocument::timestamp
+      extraDoc,
+      ExtraContentRequestDocument::timestamp
     )
   }
 }

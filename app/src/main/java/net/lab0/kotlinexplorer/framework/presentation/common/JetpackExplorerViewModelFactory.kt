@@ -10,6 +10,7 @@ import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.Chapt
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.ReloadLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
@@ -29,6 +30,7 @@ constructor(
     private val getLessonsInProgress: GetLessonsInProgress,
     private val saveLessonProgress: SaveLessonProgress,
     private val sendLessonFeedback: SendLessonFeedback,
+    private val reloadLessonFeedback: ReloadLessonFeedback,
     private val sendProblemReport: SendProblemReport,
     private val requestExtraLessons: RequestExtraLessons,
     private val firebaseAuth: FirebaseAuth,
@@ -55,7 +57,8 @@ constructor(
 
             LessonFeedbackViewModel::class.java -> {
                 LessonFeedbackViewModel(
-                    sendLessonFeedback
+                    sendLessonFeedback,
+                    reloadLessonFeedback,
                 ) as T
             }
 

@@ -15,7 +15,7 @@ service cloud.firestore {
             }
 
             match /feedbacks/{feedbackId} {
-                allow create: if isAuthorized();
+                allow read, create, update: if isAuthorized();
             }
 
             match /problemReports/{problemId} {

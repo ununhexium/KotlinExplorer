@@ -46,7 +46,7 @@ class LessonFeedbackFragment(
   ): View {
     return ComposeView(requireContext()).also { view ->
       view.setContent {
-        KotlinExplorerTheme() {
+        KotlinExplorerTheme {
           LessonFeedbackPage(
               durationTopic = viewModel.uiDataState.value.durationEvaluation.map<String> {
                 Do exhaustiveNonNull when (it) {

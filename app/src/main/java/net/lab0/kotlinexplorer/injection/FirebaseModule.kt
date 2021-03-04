@@ -59,13 +59,11 @@ object FirebaseModule {
   @Singleton
   @Provides
   fun provideLessonFeedbackService(
-      firebaseAuth: FirebaseAuth,
       firestore: FirebaseFirestore,
       fromDomain: FromDomain<FeedbackDocument, LessonFeedback>,
       toDomain: ToDomain<FeedbackDocument, LessonFeedback>,
   ): LessonFeedbackService =
     LessonFeedbackServiceImpl(
-        firebaseAuth,
             firestore,
             fromDomain,
             toDomain,

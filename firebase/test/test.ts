@@ -196,9 +196,47 @@ describe("Security rules test", () => {
             .collection("users")
             .doc(userA.uid)
             .collection("feedbacks")
-            .doc("newFeedback");
+            .doc("new.feedback");
 
         await firebase.assertSucceeds(testDoc.set({some: "data"}));
+    });
+
+    it("Can update a user feedback when signed in", async () => {
+        await getAdminFirestore()
+            .collection("users")
+            .doc(userA.uid)
+            .collection("feedbacks")
+            .doc("existing.feedback")
+            .set({some: "data"})
+
+        const db = getFirestore(userA);
+
+        const testDoc = db
+            .collection("users")
+            .doc(userA.uid)
+            .collection("feedbacks")
+            .doc("existing.feedback");
+
+        await firebase.assertSucceeds(testDoc.update({some: "new data"}));
+    });
+
+    it("Can read a user feedback when signed in", async () => {
+        await getAdminFirestore()
+            .collection("users")
+            .doc(userA.uid)
+            .collection("feedbacks")
+            .doc("existing.feedback")
+            .set({some: "data"})
+
+        const db = getFirestore(userA);
+
+        const testDoc = db
+            .collection("users")
+            .doc(userA.uid)
+            .collection("feedbacks")
+            .doc("existing.feedback");
+
+        await firebase.assertSucceeds(testDoc.get());
     });
 
     it("Prevent unauthenticated users from submitting feedbacks", async () => {

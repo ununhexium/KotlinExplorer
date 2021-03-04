@@ -10,17 +10,17 @@ import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
 import net.lab0.kotlinexplorer.framework.firebase.model.FeedbackDocument
+import net.lab0.kotlinexplorer.framework.firebase.model.feedbackCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 import net.lab0.kotlinexplorer.framework.util.ToDomain
 import net.lab0.kotlinexplorer.injection.FirestoreInstanceModule
-import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import javax.inject.Inject
@@ -50,34 +50,56 @@ internal class LessonFeedbackServiceImplTest {
   @Before
   fun before() {
     hiltRule.inject()
+
+    Tasks.await(firebaseAuth.signInAnonymously())
+
     lessonFeedbackService = LessonFeedbackServiceImpl(
-        firebaseAuth.also { Tasks.await(it.signInAnonymously()) },
-        firestore,
-        fromDomain,
-        toDomain,
+      firestore,
+      fromDomain,
+      toDomain,
     )
   }
 
-  @After
-  fun after() {
-    firebaseAuth.signOut()
-  }
 
   @Test
   fun createReadFeedback(): Unit = runBlocking {
     // given
+    val lessonId = "lessonId"
+
     val feedback = LessonFeedback(
-        "lessonId",
-        DurationRating.BALANCED,
-        DifficultyRating.BALANCED,
+      lessonId,
+      DurationRating.BALANCED,
+      DifficultyRating.BALANCED,
     )
 
     // when
-    lessonFeedbackService.insertOrUpdateFeedback(feedback)
-    val allFeedbacks = lessonFeedbackService.readAllUserFeedbacks()
+    lessonFeedbackService.insertOrUpdateFeedback(firebaseAuth.uid!!, feedback)
 
     // then
-    assertThat(allFeedbacks).containsAtLeastElementsIn(listOf(feedback))
+    val saved = toDomain(
+      firestore.feedbackCollection(firebaseAuth.uid!!).document(lessonId).get().await()
+        .toObject(FeedbackDocument::class.java)!!
+    )
+    assertThat(saved).isEqualTo(feedback)
   }
 
+  @Test
+  fun canReadFeedbackForASpecificLesson() = runBlocking {
+    // given
+    val lessonId = "lessonId"
+
+    val feedback = LessonFeedback(
+      lessonId,
+      DurationRating.BALANCED,
+      DifficultyRating.BALANCED,
+    )
+    lessonFeedbackService.insertOrUpdateFeedback(firebaseAuth.uid!!, feedback)
+
+    // when
+    val previousFeedback =
+      lessonFeedbackService.readUserFeedbackForLesson(firebaseAuth.uid!!, lessonId)
+
+    // then
+    assertThat(previousFeedback).isEqualTo(feedback)
+  }
 }

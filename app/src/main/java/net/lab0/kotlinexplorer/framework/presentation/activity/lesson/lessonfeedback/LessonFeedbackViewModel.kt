@@ -3,20 +3,22 @@ package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfee
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
+import net.lab0.kotlinexplorer.business.interactor.abstraction.ReloadLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi.LessonFeedbackEvent
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.mvi.LessonFeedbackState
 import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.EvaluationTopic
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
+import net.lab0.kotlinexplorer.utils.printLogD
 
 class LessonFeedbackViewModel(
-    val sendLessonFeedback: SendLessonFeedback
+    val sendLessonFeedback: SendLessonFeedback,
+    val reloadLessonFeedback: ReloadLessonFeedback,
 ) : BaseViewModel<LessonFeedbackEvent, LessonFeedbackState>(
     LessonFeedbackEvent.Empty,
     LessonFeedbackState()
 ) {
-
   fun init(
       lessonId: String,
       durationEvaluation: EvaluationTopic<DurationRating> = EvaluationTopic.empty(),
@@ -38,13 +40,17 @@ class LessonFeedbackViewModel(
         val state = uiDataState.value
         // TODO: update older feedback if it exists
         // TODO: show previous feedback if it exists
-        sendLessonFeedback(
+        printLogD(TAG, "Feedback: sending...")
+        processResource(
+          sendLessonFeedback(
             LessonFeedback(
-                state.lessonId,
-                state.durationEvaluation.options[state.durationIndex],
-                state.difficultyEvaluation.options[state.difficultyIndex],
+              state.lessonId,
+              state.durationEvaluation.options[state.durationIndex],
+              state.difficultyEvaluation.options[state.difficultyIndex],
             )
-        )
+          )
+        ) {}
+        printLogD(TAG, "Feedback: processing...")
       }
     }
   }

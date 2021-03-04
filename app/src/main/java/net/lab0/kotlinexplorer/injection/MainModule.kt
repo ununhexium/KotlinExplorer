@@ -9,6 +9,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
+import net.lab0.kotlinexplorer.business.interactor.abstraction.ReloadLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
@@ -29,6 +30,7 @@ object MainModule {
       getLessonsInProgress: GetLessonsInProgress,
       saveLessonProgress: SaveLessonProgress,
       sendLessonFeedback: SendLessonFeedback,
+      reloadLessonFeedback: ReloadLessonFeedback,
       sendProblemReport: SendProblemReport,
       requestExtraLessons: RequestExtraLessons,
       firebaseAuth: FirebaseAuth,
@@ -38,6 +40,7 @@ object MainModule {
           getLessonsInProgress,
           saveLessonProgress,
           sendLessonFeedback,
+          reloadLessonFeedback,
           sendProblemReport,
           requestExtraLessons,
           firebaseAuth,

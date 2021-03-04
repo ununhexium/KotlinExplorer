@@ -10,8 +10,8 @@ import net.lab0.kotlinexplorer.mvi.Resource
 class GetLessonFeedbackImpl(
     private val lessonFeedbackService: LessonFeedbackService
 ) : GetLessonFeedback {
-  override suspend fun invoke(lessonId: String): Flow<Resource<LessonFeedback?>> = flow {
-    val feedback = lessonFeedbackService.readAllUserFeedbacks().sortedByDescending { it.timestamp }.firstOrNull()
+  override suspend fun invoke(uid:String, lessonId: String): Flow<Resource<LessonFeedback?>> = flow {
+    val feedback = lessonFeedbackService.readAllUserFeedbacks(uid).sortedByDescending { it.timestamp }.firstOrNull()
     emit(Resource.LoadedResource(feedback))
   }
 }
