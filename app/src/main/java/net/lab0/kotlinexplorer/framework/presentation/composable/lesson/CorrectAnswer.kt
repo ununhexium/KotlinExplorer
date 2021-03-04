@@ -66,7 +66,7 @@ fun CorrectAnswer(
 ) {
   Answer(
       "Correct",
-      Color(0xFF4CAF50),
+      MaterialTheme.colors.primary,
       Icons.Default.CheckCircleOutline,
       contentDescription = "outline",
       explanation
@@ -79,7 +79,7 @@ fun WrongAnswer(
 ) {
   Answer(
       "Incorrect",
-      Color(0xFFFF5722),
+      MaterialTheme.colors.secondaryVariant,
       Icons.Default.Warning,
       contentDescription = "warning",
       explanation

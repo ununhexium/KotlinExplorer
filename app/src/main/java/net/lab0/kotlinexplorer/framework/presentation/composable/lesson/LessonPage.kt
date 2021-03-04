@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -36,7 +34,6 @@ fun LessonPage(
     page: @Composable ColumnScope.() -> Unit,
 ) {
   val (reportPopup, setReportPopup) = remember { mutableStateOf(false) }
-  val scrollState = rememberScrollState()
 
   Column(
       modifier = Modifier.fillMaxSize(),

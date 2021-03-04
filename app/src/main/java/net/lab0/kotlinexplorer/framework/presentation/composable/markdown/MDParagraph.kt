@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
+import net.lab0.kotlinexplorer.framework.ui.theme.Theme
 import org.commonmark.node.Document
 import org.commonmark.node.Image
 import org.commonmark.node.Paragraph
@@ -67,32 +69,46 @@ fun MDParagraphPreview_SplitLine() {
 
 @Preview
 @Composable
-fun MDParagraphPreview_Multiline() {
-  MaterialTheme {
-    Surface(
-        color = Color(0xFF4CAF50)
+fun MDParagraphPreview_Light_Multiline() {
+  KotlinExplorerTheme(theme = Theme.KOTLIN_LIGHT) {
+    PreviewContent()
+  }
+}
+
+@Preview
+@Composable
+fun MDParagraphPreview_Dark_Multiline() {
+  KotlinExplorerTheme(theme = Theme.KOTLIN_DARK) {
+    PreviewContent()
+  }
+}
+
+@Composable
+private fun PreviewContent() {
+  Surface(
+    color = Color(0xFF4CAF50)
+  ) {
+    Column(
+      modifier = Modifier.padding(20.dp)
     ) {
-      Column(
-          modifier = Modifier.padding(20.dp)
+      Surface(
+        color = MaterialTheme.colors.background
       ) {
-        Surface(
-            color = MaterialTheme.colors.surface
-        ) {
-          Column {
-            MDDocument(
-                parseMD(
-                    """
+        Column {
+          MDDocument(
+            parseMD(
+              """
 `print` to show the value on the terminal.
 
 `"` to quote the string.
 
 `Hello, World!` for the content.
 """
-                )
             )
-          }
+          )
         }
       }
     }
   }
 }
+

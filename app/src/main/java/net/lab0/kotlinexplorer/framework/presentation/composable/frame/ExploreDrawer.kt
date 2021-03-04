@@ -11,27 +11,29 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ExploreDrawer(
-    onProfile: () -> Unit,
-    onLessonsSelected: () -> Unit,
+  onProfile: () -> Unit,
+  onLessonsSelected: () -> Unit,
 ) {
   Column {
     Text(
-        "Profile",
-        modifier = Modifier.clickable(
-            onClick = {
-              onProfile()
-            }
-        ),
-        style = MaterialTheme.typography.h3
+      "Profile",
+      modifier = Modifier.clickable(
+        onClick = {
+          onProfile()
+        }
+      ),
+      style = MaterialTheme.typography.h3,
+      color = MaterialTheme.colors.onBackground,
     )
     Text(
-        "Lessons",
-        modifier = Modifier.clickable(
-            onClick = {
-              onLessonsSelected()
-            }
-        ),
-        style = MaterialTheme.typography.h3
+      "Lessons",
+      modifier = Modifier.clickable(
+        onClick = {
+          onLessonsSelected()
+        }
+      ),
+      style = MaterialTheme.typography.h3,
+      color = MaterialTheme.colors.onBackground,
     )
 
   }

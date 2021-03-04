@@ -86,9 +86,9 @@ fun MDImage(image: Image, modifier: Modifier = Modifier) {
 
 @Composable
 fun MDListItems(
-    listBlock: ListBlock,
-    modifier: Modifier = Modifier,
-    item: @Composable (node: Node) -> Unit,
+  listBlock: ListBlock,
+  modifier: Modifier = Modifier,
+  item: @Composable (node: Node) -> Unit,
 ) {
   val bottom = if (listBlock.parent is Document) 8.dp else 0.dp
   val start = if (listBlock.parent is Document) 0.dp else 8.dp
@@ -113,21 +113,21 @@ fun MDListItems(
 fun MDBlockQuote(blockQuote: BlockQuote, modifier: Modifier = Modifier) {
   val color = MaterialTheme.colors.onBackground
   Box(
-      modifier = modifier
-          .drawBehind {
-            drawLine(
-                color = color,
-                strokeWidth = 2f,
-                start = Offset(12.dp.value, 0f),
-                end = Offset(12.dp.value, size.height)
-            )
-          }
-          .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+    modifier = modifier
+      .drawBehind {
+        drawLine(
+          color = color,
+          strokeWidth = 2f,
+          start = Offset(12.dp.value, 0f),
+          end = Offset(12.dp.value, size.height)
+        )
+      }
+      .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
   ) {
     val text = buildAnnotatedString {
       pushStyle(
-          MaterialTheme.typography.body1.toSpanStyle()
-              .plus(SpanStyle(fontStyle = FontStyle.Italic))
+        MaterialTheme.typography.body1.toSpanStyle()
+          .plus(SpanStyle(fontStyle = FontStyle.Italic))
       )
       appendMarkdownChildren(blockQuote, MaterialTheme.colors)
       pop()
@@ -138,16 +138,16 @@ fun MDBlockQuote(blockQuote: BlockQuote, modifier: Modifier = Modifier) {
 
 @Composable
 fun MDIndentedCodeBlock(
-    indentedCodeBlock: IndentedCodeBlock,
-    modifier: Modifier = Modifier,
+  indentedCodeBlock: IndentedCodeBlock,
+  modifier: Modifier = Modifier,
 ) {
   // Ignored
 }
 
 @Composable
 fun MDThematicBreak(
-    thematicBreak: ThematicBreak,
-    modifier: Modifier = Modifier,
+  thematicBreak: ThematicBreak,
+  modifier: Modifier = Modifier,
 ) {
   //Ignored
 }
@@ -172,16 +172,16 @@ fun MDBlockChildren(parent: Node) {
 }
 
 fun AnnotatedString.Builder.appendMarkdownChildren(
-    parent: Node, colors: Colors,
+  parent: Node, colors: Colors,
 ) {
   var child = parent.firstChild
   while (child != null) {
     when (child) {
       is Paragraph -> appendMarkdownChildren(child, colors)
       is Text -> {
-        if(parent is Paragraph && child != parent.lastChild){
+        if (parent is Paragraph && child != parent.lastChild) {
           append(child.literal + " ")
-        }else{
+        } else {
           append(child.literal)
         }
       }
@@ -197,7 +197,13 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
         pop()
       }
       is Code -> {
-        pushStyle(TextStyle(fontFamily = sourceCodeFontFamily, background = Color.LightGray).toSpanStyle())
+        pushStyle(
+          TextStyle(
+            fontFamily = sourceCodeFontFamily,
+            background = colors.surface,
+            color = colors.onSurface,
+          ).toSpanStyle()
+        )
         append(child.literal)
         pop()
       }
@@ -206,8 +212,8 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
       }
       is Link -> {
         val underline = SpanStyle(
-            colors.primary,
-            textDecoration = TextDecoration.Underline
+          colors.primary,
+          textDecoration = TextDecoration.Underline
         )
         pushStyle(underline)
         pushStringAnnotation(TAG_URL, child.destination)
@@ -222,28 +228,28 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
 
 @Composable
 fun MarkdownText(
-    text: AnnotatedString,
-    style: TextStyle,
-    modifier: Modifier = Modifier,
+  text: AnnotatedString,
+  style: TextStyle,
+  modifier: Modifier = Modifier,
 ) {
   // TODO: re-add support for links
   val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
   Text(
-      text = text,
-      modifier = modifier,
-      style = style,
-      inlineContent = mapOf(
-          TAG_IMAGE_URL to InlineTextContent(
-              Placeholder(
-                  style.fontSize,
-                  style.fontSize,
-                  PlaceholderVerticalAlign.Bottom
-              )
-          ) {
-            // image not implemented
-          }
-      ),
-      onTextLayout = { layoutResult.value = it }
+    text = text,
+    modifier = modifier,
+    style = style,
+    inlineContent = mapOf(
+      TAG_IMAGE_URL to InlineTextContent(
+        Placeholder(
+          style.fontSize,
+          style.fontSize,
+          PlaceholderVerticalAlign.Bottom
+        )
+      ) {
+        // image not implemented
+      }
+    ),
+    onTextLayout = { layoutResult.value = it }
   )
 }

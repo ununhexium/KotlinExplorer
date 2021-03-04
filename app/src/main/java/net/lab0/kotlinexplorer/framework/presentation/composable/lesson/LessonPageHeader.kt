@@ -57,7 +57,7 @@ fun LessonPageHeader(
         shape = MaterialTheme.shapes.small.copy(
             topStart = CornerSize(0),
             topEnd = CornerSize(0),
-            bottomEnd = CornerSize(0),
+            bottomStart = CornerSize(0),
         ),
         enabled = true,
     ) {

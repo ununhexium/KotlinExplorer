@@ -24,58 +24,60 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun TopLevelScaffold(
-    title: String,
-    scaffoldState: ScaffoldState,
-    onProfileSelected: () -> Unit,
-    onLessonsSelected: () -> Unit,
-    content: @Composable (PaddingValues) -> Unit,
+  title: String,
+  scaffoldState: ScaffoldState,
+  onProfileSelected: () -> Unit,
+  onLessonsSelected: () -> Unit,
+  content: @Composable (PaddingValues) -> Unit,
 ) {
   val coroutineScope = rememberCoroutineScope()
 
   Scaffold(
-      scaffoldState = scaffoldState,
-      drawerContent = {
-        ExploreDrawer(
-            onProfile = {
+    scaffoldState = scaffoldState,
+    drawerContent = {
+      ExploreDrawer(
+        onProfile = {
+          coroutineScope.launch {
+            scaffoldState.drawerState.close()
+            onProfileSelected()
+          }
+        },
+        onLessonsSelected = {
+          coroutineScope.launch {
+            scaffoldState.drawerState.close()
+            onLessonsSelected()
+          }
+        },
+      )
+    },
+    topBar = {
+      TopAppBar(
+        title = {
+          Text(
+            text = title,
+            style = MaterialTheme.typography.h4,
+            color = MaterialTheme.colors.onSurface,
+          )
+        },
+        navigationIcon = {
+          IconButton(
+            onClick = {
               coroutineScope.launch {
-                scaffoldState.drawerState.close()
-                onProfileSelected()
+                scaffoldState.drawerState.open()
               }
             },
-            onLessonsSelected = {
-              coroutineScope.launch {
-                scaffoldState.drawerState.close()
-                onLessonsSelected()
-              }
-            },
-        )
-      },
-      topBar = {
-        TopAppBar(
-            title = {
-              Text(
-                  text = title,
-                  style = MaterialTheme.typography.h4,
-              )
-            },
-            navigationIcon = {
-              IconButton(
-                  onClick = {
-                    coroutineScope.launch {
-                      scaffoldState.drawerState.open()
-                    }
-                  },
-              ) {
-                Icon(
-                    Icons.Default.Menu,
-                    contentDescription = "Menu",
-                )
-              }
-            },
-            elevation = 4.dp,
-        )
-      },
-      content = content,
+          ) {
+            Icon(
+              Icons.Default.Menu,
+              contentDescription = "Menu",
+              tint = MaterialTheme.colors.onSurface,
+            )
+          }
+        },
+        elevation = 4.dp,
+      )
+    },
+    content = content,
   )
 }
 
@@ -87,19 +89,19 @@ fun TopLevelScaffoldPreview() {
 
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           TopLevelScaffold(
-              "The Section",
-              state,
-              {},
-              {},
+            "The Section",
+            state,
+            {},
+            {},
           ) {
             Text("Body")
           }

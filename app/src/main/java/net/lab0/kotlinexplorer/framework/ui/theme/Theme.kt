@@ -9,17 +9,19 @@ import net.lab0.kotlinexplorer.framework.ui.theme.Theme.KOTLIN_DARK
 import net.lab0.kotlinexplorer.framework.ui.theme.Theme.KOTLIN_LIGHT
 
 private val DarkColorPalette = darkColors(
-    primary = BlueKotlinPantone,
-    primaryVariant = Purple700,
-    secondary = PurpleKotlinPantone,
-//    secondaryVariant = Blue500,
+  primary = BlueKotlinPantone,
+  primaryVariant = Purple700,
+  secondary = PurpleKotlinPantone,
+  secondaryVariant = OrangeKotlinPantone,
+  surface = Purple700,
 )
 
 private val LightColorPalette = lightColors(
-    primary = BlueKotlinPantone,
-    primaryVariant = Purple700,
-    secondary = PurpleKotlinPantone,
-    secondaryVariant = OrangeKotlinPantone,
+  primary = BlueKotlinPantone,
+  primaryVariant = Purple700,
+  secondary = PurpleKotlinPantone,
+  secondaryVariant = OrangeKotlinPantone,
+  surface = PurpleKotlinPantone,
 )
 
 enum class Theme {
@@ -29,19 +31,19 @@ enum class Theme {
 
 @Composable
 fun KotlinExplorerTheme(
-    theme: Theme = if (isSystemInDarkTheme()) KOTLIN_DARK else KOTLIN_LIGHT,
-    content: @Composable () -> Unit
+  theme: Theme = if (isSystemInDarkTheme()) KOTLIN_DARK else KOTLIN_LIGHT,
+  content: @Composable () -> Unit
 ) {
   val colors =
-      when (theme) {
-        KOTLIN_DARK -> DarkColorPalette
-        KOTLIN_LIGHT -> LightColorPalette
-      }
+    when (theme) {
+      KOTLIN_DARK -> DarkColorPalette
+      KOTLIN_LIGHT -> LightColorPalette
+    }
 
   MaterialTheme(
-      colors = colors,
-      typography = typography,
-      shapes = shapes,
-      content = content
+    colors = colors,
+    typography = typography,
+    shapes = shapes,
+    content = content
   )
 }

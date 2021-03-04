@@ -51,6 +51,7 @@ fun ChapterCard(
         Text(
             text = chapter.title,
             style = MaterialTheme.typography.h6,
+            color = MaterialTheme.colors.onSurface,
         )
         Text(
             text = "${chapter.lessons.size} LESSONS",

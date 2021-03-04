@@ -21,7 +21,6 @@ fun CodeAnswerInput(
     canValidate: Boolean,
     answers: List<Answer>,
 ) {
-  Surface {
     Column {
       Row(
           modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
@@ -42,7 +41,6 @@ fun CodeAnswerInput(
         }
       }
     }
-  }
 }
 
 @Preview
