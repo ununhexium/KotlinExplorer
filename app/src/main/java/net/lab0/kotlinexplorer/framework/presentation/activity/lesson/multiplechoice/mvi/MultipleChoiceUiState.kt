@@ -11,6 +11,8 @@ data class MultipleChoiceUiState(
   val chapter: Chapter,
   val selectedAnswers: List<Int> = listOf(),
   val locked: Boolean = false,
+  val randomizedChoices: List<Pair<Int, String>> =
+    (0 .. Int.MAX_VALUE).zip(lessonPage.choices).shuffled(),
 ) : UiState {
 
   fun lockableCopy(
@@ -23,26 +25,30 @@ data class MultipleChoiceUiState(
       chapter = this.chapter,
       selectedAnswers = selectedAnswers ?: this.selectedAnswers,
       locked = this.locked,
+      randomizedChoices = if (lessonPage == null) {
+        randomizedChoices
+      } else {
+        (0 .. Int.MAX_VALUE).zip(lessonPage.choices).shuffled()
+      },
     )
   } else this
 
-  private val TAG = this::class.java.canonicalName
-
   val choices: List<MultipleChoiceAnswer> =
-    lessonPage.choices.mapIndexed { index, it ->
-      MultipleChoiceAnswer(
-        id = index,
-        text = it,
-        used = index in selectedAnswers,
-        correct = if (locked) {
-          when{
-            index in selectedAnswers && index in lessonPage.answer -> true
-            index !in selectedAnswers && index !in lessonPage.answer -> true
-            else -> false
-          }
-        } else null
-      )
-    }
+    randomizedChoices
+      .map { (index, it) ->
+        MultipleChoiceAnswer(
+          id = index,
+          text = it,
+          used = index in selectedAnswers,
+          correct = if (locked) {
+            when {
+              index in selectedAnswers && index in lessonPage.answer -> true
+              index !in selectedAnswers && index !in lessonPage.answer -> true
+              else -> false
+            }
+          } else null
+        )
+      }
 
   val isCorrectAnswer = selectedAnswers.toSet() == lessonPage.answer
   val showAnswer = locked

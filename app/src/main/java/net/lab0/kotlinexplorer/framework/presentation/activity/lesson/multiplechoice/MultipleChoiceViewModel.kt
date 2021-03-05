@@ -54,7 +54,8 @@ class MultipleChoiceViewModel(
 
   fun init(pageIndex: Int, lessonPage: LessonPage.MultipleChoice, chapter: Chapter) {
     updateUi {
-      it.copy(pageIndex = pageIndex, lessonPage = lessonPage, chapter = chapter)
+      // use lockable copy separately to also force the update of the choices
+      it.copy(pageIndex = pageIndex, chapter = chapter).lockableCopy(lessonPage = lessonPage)
     }
   }
 

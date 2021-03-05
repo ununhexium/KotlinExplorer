@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -26,40 +25,40 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.problemreport.P
 
 @Composable
 fun LessonPage(
-    lessonId: String,
-    progress: Float,
-    title: String,
-    onBack: () -> Unit,
-    onProblemReport: (ProblemReport) -> Unit,
-    page: @Composable ColumnScope.() -> Unit,
+  lessonId: String,
+  progress: Float,
+  title: String,
+  onBack: () -> Unit,
+  onProblemReport: (ProblemReport) -> Unit,
+  page: @Composable ColumnScope.() -> Unit,
 ) {
   val (reportPopup, setReportPopup) = remember { mutableStateOf(false) }
 
   Column(
-      modifier = Modifier.fillMaxSize(),
-      verticalArrangement = Arrangement.SpaceBetween
+    modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.SpaceBetween
   ) {
     LessonPageHeader(
-        title = title,
-        backAction = onBack,
-        reportMistakeAction = { setReportPopup(!reportPopup) }
+      title = title,
+      backAction = onBack,
+      reportMistakeAction = { setReportPopup(!reportPopup) }
     )
 
     if (reportPopup) {
       ProblemReportUi(
-          problemLocation = "$lessonId, title = $title",
-          submitReport = onProblemReport,
-          onCloseProblemReport = { setReportPopup(false) }
+        problemLocation = "$lessonId, title = $title",
+        submitReport = onProblemReport,
+        onCloseProblemReport = { setReportPopup(false) }
       )
     } else {
-        page()
+      page()
     }
 
     LinearProgressIndicator(
-        progress = progress,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(4.dp)
+      progress = if (progress.isNaN() || progress.isInfinite()) 0f else progress,
+      modifier = Modifier
+        .fillMaxWidth()
+        .height(4.dp)
     )
   }
 }
@@ -71,15 +70,15 @@ fun LessonPagePreview() {
     Surface {
       Column {
         LessonPage(
-            "lessonId",
-            0.116f,
-            "Somewhere over the rainbow",
-            {},
-            {}
+          "lessonId",
+          0.116f,
+          "Somewhere over the rainbow",
+          {},
+          {}
         ) {
           Surface(
-              modifier = Modifier.fillMaxSize(),
-              color = Color.Gray
+            modifier = Modifier.fillMaxSize(),
+            color = Color.Gray
           ) {
 
           }
@@ -94,24 +93,24 @@ fun LessonPagePreview() {
 fun LessonPagePreview_singleButton() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           LessonPage(
-              lessonId = "lessonId",
-              progress = 1.0f,
-              title = "Foo",
-              onBack = {},
-              onProblemReport = {},
+            lessonId = "lessonId",
+            progress = 1.0f,
+            title = "Foo",
+            onBack = {},
+            onProblemReport = {},
           ) {
             Button(
-                onClick = {},
-                modifier = Modifier.align(Alignment.CenterHorizontally),
+              onClick = {},
+              modifier = Modifier.align(Alignment.CenterHorizontally),
             ) {
               Text("Finished")
             }
