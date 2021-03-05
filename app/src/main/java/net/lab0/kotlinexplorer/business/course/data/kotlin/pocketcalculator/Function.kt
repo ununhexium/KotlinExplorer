@@ -37,7 +37,7 @@ fun sayHello(){
   print("Hello")
 }
 
-// call
+// call sayHello
 ${p(0)}${p(1)}${p(2)}
 """,
       explanation = """
@@ -332,7 +332,7 @@ fun add(left:Int, right:Int): Int {
 }
 
 // prints 5
-print(${p(0)}(${p(1)}${p(12} ${p(3)}))
+print(${p(0)}(${p(1)}${p(2)} ${p(3)}))
 """,
       explanation = """
 When a function needs more than 1 argument, the arguments are separated by comas `,`.
