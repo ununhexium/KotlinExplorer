@@ -40,7 +40,6 @@ abstract class BaseViewModel<Event, State>(
         is Resource.LoadedResource -> handleResult(resource.resource)
         is Resource.FailedResource -> {
           _errors.value = ObserveOnce(resource.message)
-          Log.d(TAG, "page: ${resource.message}")
         }
         is Resource.EmptyLoadedResourceWithMessage -> {
           _errors.value = ObserveOnce(resource.message)
@@ -65,7 +64,6 @@ abstract class BaseViewModel<Event, State>(
       _loading.value = true
       withContext(ioDispatcher) {
         doJobForEvent(event)
-        Log.d(TAG, "emitSlowEvent: ${_loading.value}")
       }
     }
   }

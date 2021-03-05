@@ -20,7 +20,8 @@ internal class MultipleChoiceUiStateTest {
         answer = setOf(0, 1)
       ),
       chapter = Chapter.EMPTY,
-      selectedAnswers = listOf()
+      selectedAnswers = listOf(),
+      randomizedChoices = (0..3).zip(listOf("A", "B", "C", "D")),
     )
 
     // when
@@ -46,10 +47,11 @@ internal class MultipleChoiceUiStateTest {
         question = "",
         explanation = "",
         choices = listOf("A", "B", "C", "D"),
-        answer = setOf(0, 1)
+        answer = setOf(0, 1),
       ),
       chapter = Chapter.EMPTY,
-      selectedAnswers = listOf(0, 2)
+      selectedAnswers = listOf(0, 2),
+      randomizedChoices = (0..3).zip(listOf("A", "B", "C", "D"))
     )
 
     // when
@@ -80,6 +82,7 @@ internal class MultipleChoiceUiStateTest {
       chapter = Chapter.EMPTY,
       selectedAnswers = listOf(0, 2),
       locked = true,
+      randomizedChoices = (0..3).zip(listOf("A", "B", "C", "D")),
     )
 
     // when

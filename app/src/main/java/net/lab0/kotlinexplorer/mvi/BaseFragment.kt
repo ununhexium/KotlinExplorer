@@ -28,8 +28,6 @@ abstract class BaseFragment<Event, Data> : Fragment()
           lookOnce.observe {
             listener.onResponseReceived(it)
           }
-        } else {
-          Log.w(TAG, "onAttach: the context does not implement UICommunicationListener")
         }
       }
     }
