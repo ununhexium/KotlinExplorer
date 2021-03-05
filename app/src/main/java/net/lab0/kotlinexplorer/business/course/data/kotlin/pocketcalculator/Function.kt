@@ -315,7 +315,7 @@ Functions can take as many parameters as necessary.
 Each parameter has a type.
 Parameters are separated by comas `,`.
 
-For readability and your own sanity, function with a few parameters are preferred.
+For readability and your own sanity, functions with few parameters are preferred.
 """,
       answer = listOf("add", "Int", "return"),
       confusion = listOf(""),
@@ -331,7 +331,7 @@ fun add(left:Int, right:Int): Int {
   return left + right
 }
 
-// prints 5
+// prints 6
 print(${p(0)}(${p(1)}${p(2)} ${p(3)}))
 """,
       explanation = """
@@ -432,12 +432,61 @@ Choose something that is long enough but no more than that.
 
 `computeTheNumberOfEggsToCookForBreakfast` is probably too long: you can't read the function declaration anymore.
 """,
-      answer = listOf("breakfastEggsAmount"),
+      answer = listOf("computeBreakfastEggsAmount"),
       confusion = listOf(
         "eggs",
         "computeTheNumberOfEggsToCookForBreakfast",
         "compute_the_number_of_eggs_to_cook_for_breakfast"
       ),
     ),
+    LessonPage.InfoPage(
+      title = "Summary",
+      markdown = """
+Functions are used everywhere when programming.
+
+A function will always have the following structure:
+
+```kotlin
+fun name(
+  parameter1:Type1,
+  parameter2:Type2,
+  // maybe more parameters...
+): Int {
+  return 42
+}
+```
+
+Here is exactly the same declaration, with extra comments.
+This declaration is valida Kotlin code.
+The whitespace doesn't matter most of the time, 
+so you can take all the space you need to state all the input parameters.
+
+```kotlin
+fun // declares a function
+    name // function's name
+      ( // list 0 or more parameters
+  parameter1: // first parameter's name
+    Type1, // first parameter's type
+  parameter2: // second parameter's name
+    Type2, // second parameter's type
+) // end of the parameters' list
+: Int // Declare the return type
+{ // start the function's body block.
+  // write the code to execute
+  
+  // ... more code ...
+  
+  /*
+   * return a value at the end
+   * the returned type must match
+   * the declared return type
+   */
+  return 42
+} // end of the function's body
+```
+"""
+    )
   ),
 )
+
+// TODO: function can't return more than 1 parameter
