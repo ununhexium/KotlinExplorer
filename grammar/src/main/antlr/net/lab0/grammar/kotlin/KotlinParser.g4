@@ -149,7 +149,7 @@ functionDeclaration
     ;
 
 functionValueParameters
-    : LPAREN (functionValueParameter (COMMA functionValueParameter)*)? RPAREN
+    : LPAREN (functionValueParameter (COMMA functionValueParameter)*)? COMMA? RPAREN
     ;
 
 functionValueParameter
@@ -392,7 +392,7 @@ arrayAccess
     ;
 
 valueArguments
-    : LPAREN (valueArgument (COMMA valueArgument)*)? RPAREN
+    : LPAREN (valueArgument (COMMA valueArgument)*)? COMMA? RPAREN
     ;
 
 typeArguments

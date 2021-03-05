@@ -3,7 +3,6 @@ package net.lab0.grammar.kotlin
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
-import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
@@ -217,6 +216,8 @@ class KotlinSyntaxHighlighterVisitor(
         add(visitChildren(ctx))
       }
 
+
+
   override fun visitTerminal(node: TerminalNode) =
       hl {
         when (node.symbol.type) {
@@ -227,10 +228,15 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.HexLiteral -> add(NUMBER, node.range)
           KotlinParser.IF -> add(KEYWORD, node.range)
           KotlinParser.IntegerLiteral -> add(NUMBER, node.range)
-          KotlinParser.LineComment -> add(COMMENT, node.range)
           KotlinParser.NullLiteral -> add(KEYWORD, node.range)
           KotlinParser.RETURN -> add(KEYWORD, node.range)
           KotlinParser.WHERE -> add(KEYWORD, node.range)
+
+          // comments
+//          KotlinParser.Inside_Comment -> add(COMMENT, node.range)
+//          KotlinParser.LineComment -> add(COMMENT, node.range)
+//          KotlinParser.DelimitedComment -> add(COMMENT, node.range)
+//          KotlinParser.StrExpr_Comment -> add(COMMENT, node.range)
 
           // brackets, parent, ...
           KotlinParser.LPAREN -> add(BRACKET, node.range)

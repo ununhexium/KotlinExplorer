@@ -20,7 +20,9 @@ fun parseKotlin(code: String): KotlinParser {
 
 val COMMENT_TOKEN_TYPES = arrayOf(
     KotlinParser.LineComment,
-    KotlinParser.DelimitedComment
+    KotlinParser.DelimitedComment,
+    KotlinParser.Inside_Comment,
+    KotlinParser.StrExpr_Comment,
 )
 
 fun extractSpots(code: String): List<Highlights.Spot<KotlinHighlight>> {

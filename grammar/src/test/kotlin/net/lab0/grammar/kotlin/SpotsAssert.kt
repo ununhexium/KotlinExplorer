@@ -5,13 +5,13 @@ import org.assertj.core.api.AbstractAssert
 import kotlin.math.min
 
 class SpotsAssert<H>(
-    private val code: String,
-    actual: List<Spot<H>>
+  private val code: String,
+  actual: List<Spot<H>>
 ) :
-    AbstractAssert<SpotsAssert<H>, List<Spot<H>>>(
-        actual.toList(),
-        SpotsAssert::class.java
-    ) {
+  AbstractAssert<SpotsAssert<H>, List<Spot<H>>>(
+    actual.toList(),
+    SpotsAssert::class.java
+  ) {
 
   companion object {
     fun <H> assertThat(code: String, actual: List<Spot<H>>): SpotsAssert<H> {
@@ -48,16 +48,16 @@ class SpotsAssert<H>(
         }
       }
       failWithMessage(
-          "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
-              (code.indices).joinToString("") {
-                when (val i = it % 10) {
-                  0 -> "${('A' .. 'Z').toList()[it / 10]}"
-                  1 -> "_"
-                  else -> "$i"
-                }
-              } + "\n" +
-              code.split('\n').joinToString("\u21B5") + "\n" +
-              missingMarks.joinToString("").trimEnd()
+        "Missing spots:\n" + missing.joinToString("\n") { "  $it" } + "\n" +
+            (code.indices).joinToString("") {
+              when (val i = it % 10) {
+                0 -> "${('A' .. 'Z').toList()[it / 10]}"
+                1 -> "_"
+                else -> "$i"
+              }
+            } + "\n" +
+            code.split('\n').joinToString("\u21B5") + "\n" +
+            missingMarks.joinToString("").trimEnd()
       )
     }
 
@@ -76,11 +76,11 @@ class SpotsAssert<H>(
       val missing = spots.filter { it !in a }
       val missingMarks = buildRangesLine(missing)
       failWithMessage(
-          buildMissingSpotsMessage(
-              "Missing spots:",
-              missing,
-              missingMarks
-          )
+        buildMissingSpotsMessage(
+          "Missing spots:",
+          missing,
+          missingMarks
+        )
       )
     }
 
@@ -101,16 +101,16 @@ class SpotsAssert<H>(
       val missingMarks = buildRangesLine(missing)
       val extraneousMarks = buildRangesLine(tooMuch)
       failWithMessage(
-          buildMissingSpotsMessage(
-              "Missing spots:",
-              missing,
-              missingMarks
-          ) + "\n\n" +
-              buildMissingSpotsMessage(
-                  "Extraneous spots:",
-                  tooMuch,
-                  extraneousMarks
-              )
+        buildMissingSpotsMessage(
+          "Missing spots:",
+          missing,
+          missingMarks
+        ) + "\n\n" +
+            buildMissingSpotsMessage(
+              "Extraneous spots:",
+              tooMuch,
+              extraneousMarks
+            )
       )
     }
 
@@ -119,13 +119,13 @@ class SpotsAssert<H>(
   }
 
   private fun buildMissingSpotsMessage(
-      label: String,
-      spots: List<Spot<H>>,
-      missingMarks: Array<Char>
+    label: String,
+    spots: List<Spot<H>>,
+    missingMarks: Array<Char>
   ) = "$label\n" + spots.joinToString("\n") { "  $it" } + "\n" +
       (code.indices).joinToString("") {
         when (val i = it % 10) {
-          0 -> "${('A' .. 'Z').toList()[it / 10]}"
+          0 -> "${('A' .. 'Z').toList()[(it / 10) % 26]}"
           1 -> "_"
           else -> "$i"
         }
@@ -133,7 +133,7 @@ class SpotsAssert<H>(
       code.split('\n').joinToString("\u21B5") + "\n" +
       missingMarks.joinToString("").trimEnd() + "\n" +
       verticalWriter(
-          spots.map { ((it.end + it.start) / 2) to it.highlight.toString() }.toMap()
+        spots.map { ((it.end + it.start) / 2) to it.highlight.toString() }.toMap()
       ).trimEnd()
 
   private fun buildRangesLine(missing: List<Spot<H>>): Array<Char> {
