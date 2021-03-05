@@ -12,6 +12,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
+import net.lab0.grammar.kotlin.KotlinHighlight.TYPE
 import net.lab0.grammar.kotlin.SpotsAssert.Companion.assertThat
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
@@ -743,9 +744,18 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-//    assertThat(code, spots).hasExactlySpots(
-//
-//    )
+    assertThat(code, spots).hasExactlySpots(
+      // "Int" param type
+      Spot(highlight = TYPE, start = 8, end = 10),
+
+      // other elements
+      Spot(highlight = KEYWORD, start = 0, end = 2),
+      Spot(highlight = FUNCTION, start = 4, end = 4),
+      Spot(highlight = BRACKET, start = 5, end = 5),
+      Spot(highlight = BRACKET, start = 11, end = 11),
+      Spot(highlight = BRACKET, start = 12, end = 12),
+      Spot(highlight = BRACKET, start = 13, end = 13),
+    )
   }
 
 }

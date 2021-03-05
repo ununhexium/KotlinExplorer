@@ -5,6 +5,7 @@ enum class KotlinHighlight {
     BACKGROUND,
     BRACKET,
     CLASS_DECLARATION,
+    TYPE,
     MODIFIER,
     CLASS_PARAMETER,
     COMMA,

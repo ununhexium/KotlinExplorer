@@ -10,6 +10,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
+import net.lab0.grammar.kotlin.KotlinHighlight.TYPE
 import net.lab0.grammar.kotlin.KotlinParser.PostfixUnaryExpressionContext
 import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
@@ -256,6 +257,11 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.MultiLineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
         }
       }
+
+  override fun visitType(ctx: KotlinParser.TypeContext) =
+    hl {
+      add(TYPE, ctx.range)
+    }
 
   override fun visitTypeParameters(ctx: KotlinParser.TypeParametersContext) =
       hl {
