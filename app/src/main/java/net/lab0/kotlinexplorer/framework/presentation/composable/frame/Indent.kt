@@ -16,11 +16,11 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.MediumHorizonta
 
 @Composable
 fun Indent(
-    indent: Int = 1,
-    content: @Composable () -> Unit,
+  indent: Int = 1,
+  content: @Composable () -> Unit,
 ) {
   Row {
-    (1..indent).forEach {
+    (1 .. indent).forEach {
       MediumHorizontalSpacer()
     }
     content()
@@ -32,20 +32,22 @@ fun Indent(
 fun IndentPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
-          Indent(1) {
-            Text("1 down")
-          }
-          BigVerticalSpacer()
-          Indent(2) {
-            Text("2 down")
+          Column {
+            Indent(1) {
+              Text("1 down")
+            }
+            BigVerticalSpacer()
+            Indent(2) {
+              Text("2 down")
+            }
           }
         }
       }

@@ -686,4 +686,40 @@ class KotlinSyntaxHighlighterVisitorTest {
         Spot(BRACKET, 11, 11),
     )
   }
+
+  @Test
+  fun `support complex nested comments`() {
+    // given
+    val code = """
+fun // declares a function
+    name // function's name
+      ( // list 0 or more parameters
+  parameter1: // first parameter's name
+    Type1, // first parameter's type
+  parameter2: // second parameter's name
+    Type2, // second parameter's type
+) // end of the parameters' list
+: Int // Declare the return type
+{ // start the function's body block.
+  // write the code to execute
+  
+  // ... more code ...
+  
+  /*
+   * return a value at the end
+   * the returned type must match
+   * the declared return type
+   */
+  return 42
+} // end of the function's body
+"""
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+//    assertThat(code, spots).hasExactlySpots(
+//
+//    )
+  }
 }

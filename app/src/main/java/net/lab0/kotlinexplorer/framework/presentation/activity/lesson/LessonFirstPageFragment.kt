@@ -23,11 +23,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
-import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.NoNavigation
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
-import net.lab0.kotlinexplorer.utils.Do
 
 class LessonFirstPageFragment(
   private val viewModelFactory: ViewModelProvider.Factory,
@@ -65,17 +63,18 @@ class LessonFirstPageFragment(
             Button(
               modifier = Modifier.align(Alignment.CenterHorizontally),
               onClick = nextPage(
-                  activityViewModel,
-                  AnswerCorrectness.NEUTRAL,
-                  -1,
-                  args.lessonId,
-                  findNavController(),
-                  navigationToCodeQuestion = LessonFirstPageFragmentDirections::actionLessonFirstPageToCodeQuestionPageFragment,
-                  navigationToMultipleChoice = LessonFirstPageFragmentDirections::actionLessonFirstPageToMultipleChoicePageFragment,
-                  navigationToInfo = LessonFirstPageFragmentDirections::actionLessonFirstPageToInfoPageFragment,
-                  navigationToFeedback = { NoNavigation },
-                  navigationToNextChapter = { NoNavigation },
-                )
+                activityViewModel = activityViewModel,
+                correctness = AnswerCorrectness.NEUTRAL,
+                page = -1,
+                nextPage = 0,
+                lessonId = args.lessonId,
+                navController = findNavController(),
+                navigationToCodeQuestion = LessonFirstPageFragmentDirections::actionLessonFirstPageToCodeQuestionPageFragment,
+                navigationToMultipleChoice = LessonFirstPageFragmentDirections::actionLessonFirstPageToMultipleChoicePageFragment,
+                navigationToInfo = LessonFirstPageFragmentDirections::actionLessonFirstPageToInfoPageFragment,
+                navigationToFeedback = { NoNavigation },
+                navigationToNextChapter = { NoNavigation },
+              )
             ) {
               Icon(imageVector = Icons.Default.PlayArrow, "Play arrow")
               Text("Start!")

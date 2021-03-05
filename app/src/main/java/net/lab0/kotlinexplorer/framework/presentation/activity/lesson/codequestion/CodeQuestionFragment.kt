@@ -26,7 +26,7 @@ import net.lab0.kotlinexplorer.mvi.BaseFragment
 
 @ExperimentalCoroutinesApi
 class CodeQuestionFragment(
-    private val viewModelFactory: ViewModelProvider.Factory,
+  private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<CodeQuestionUiEvent, CodeQuestionUiState>(), NextPageSelectorMixin {
   private val args: CodeQuestionFragmentArgs by navArgs()
   private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
@@ -51,48 +51,54 @@ class CodeQuestionFragment(
 
       KotlinExplorerTheme {
         Scaffold(
-            drawerContent = {
-              LessonDrawer(
-                  chapter = chapter.title,
-                  lesson = lesson.title,
-                  lessonPages = lesson.pages.map { it.title },
-                  currentPage = page.title
-              )
+          drawerContent = {
+            LessonDrawer(
+              chapter = chapter.title,
+              lesson = lesson.title,
+              lessonPages = lesson.pages.map { it.title },
+              currentPage = page.title
+            ) { title ->
+              onNextPage(state, lesson.pages.indexOfFirst { it.title == title })()
             }
+          }
         ) {
           LessonPage(
-              lessonId = args.lessonId,
-              progress = state.progress,
-              title = state.lessonPage.title,
-              onBack = {
-                findNavController().navigate(
-                    CodeQuestionFragmentDirections
-                        .actionCodeQuestionPageFragmentToChapterListFragment()
-                )
-              },
-              onProblemReport = {
-                activityViewModel.onProblemReport(it, requireContext())
-              }
+            lessonId = args.lessonId,
+            progress = state.progress,
+            title = state.lessonPage.title,
+            onBack = {
+              findNavController().navigate(
+                CodeQuestionFragmentDirections
+                  .actionCodeQuestionPageFragmentToChapterListFragment()
+              )
+            },
+            onProblemReport = {
+              activityViewModel.onProblemReport(it, requireContext())
+            }
           ) {
             CodeQuizPage2(
-                model = viewModel,
-                nextQuestion = nextPage(
-                    activityViewModel,
-                    if (state.isCorrectAnswer) SUCCESS else FAILURE,
-                    args.page,
-                    args.lessonId,
-                    findNavController(),
-                    navigationToFeedback = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToLessonFeedbackFragment,
-                    navigationToNextChapter = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToNextLessonFragment,
-                    navigationToInfo = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToInfoPageFragment,
-                    navigationToCodeQuestion = CodeQuestionFragmentDirections::actionLessonCodeQuestionPageFragmentSelf,
-                    navigationToMultipleChoice = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToMultipleChoicePageFragment,
-                ),
-                onSelect = { viewModel.select(it.id) },
+              model = viewModel,
+              nextQuestion = onNextPage(state),
+              onSelect = { viewModel.select(it.id) },
             )
           }
         }
       }
     }
   }
+
+  private fun onNextPage(state: CodeQuestionUiState, targetPage: Int = args.page + 1) =
+    nextPage(
+      activityViewModel = activityViewModel,
+      correctness = if (state.isCorrectAnswer) SUCCESS else FAILURE,
+      page = args.page,
+      nextPage = targetPage,
+      lessonId = args.lessonId,
+      navController = findNavController(),
+      navigationToFeedback = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToLessonFeedbackFragment,
+      navigationToNextChapter = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToNextLessonFragment,
+      navigationToInfo = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToInfoPageFragment,
+      navigationToCodeQuestion = CodeQuestionFragmentDirections::actionLessonCodeQuestionPageFragmentSelf,
+      navigationToMultipleChoice = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToMultipleChoicePageFragment,
+    )
 }

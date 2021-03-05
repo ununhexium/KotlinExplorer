@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -12,67 +13,59 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Indent
-import java.util.*
 
 @Composable
 fun LessonDrawer(
-    chapter: String,
-    lesson: String,
-    lessonPages: List<String>,
-    currentPage: String?,
+  chapter: String,
+  lesson: String,
+  lessonPages: List<String>,
+  currentPage: String?,
+  onPageNavigation: (pageName: String) -> Unit,
 ) {
   Column {
     Text(
-        text = chapter,
-        style = MaterialTheme.typography.h5,
+      text = chapter,
+      style = MaterialTheme.typography.h5,
     )
 
     Indent {
       Text(
-          text = lesson.toUpperCase(),
-          style = MaterialTheme.typography.h6.copy(),
-          color = Color.Gray,
-          fontWeight = FontWeight.Bold,
+        text = lesson.toUpperCase(),
+        style = MaterialTheme.typography.h6.copy(),
+        color = Color.Gray,
+        fontWeight = FontWeight.Bold,
       )
     }
 
-    if (currentPage == null) {
-      lessonPages.forEach { page ->
-        Indent(2) {
-          Text(
-              text = lesson,
-              style = MaterialTheme.typography.h6,
-          )
-        }
+    lessonPages.takeWhile { it != currentPage }.forEach { page ->
+      Indent(2) {
+        Text(
+          text = page,
+          modifier = Modifier.clickable { onPageNavigation(page) },
+          style = MaterialTheme.typography.h6,
+        )
       }
-    } else {
-      lessonPages.takeWhile { it != currentPage }.forEach { page ->
-        Indent(2){
-          Text(
-              text = page,
-              style = MaterialTheme.typography.h6,
-          )
-        }
-      }
+    }
 
-      lessonPages.find { it == currentPage }?.let { page ->
-        Indent(2) {
-          Text(
-              text = page,
-              style = MaterialTheme.typography.h6,
-              color = MaterialTheme.colors.primary,
-          )
-        }
+    lessonPages.find { it == currentPage }?.let { page ->
+      Indent(2) {
+        Text(
+          text = page,
+          modifier = Modifier.clickable { onPageNavigation(page) },
+          style = MaterialTheme.typography.h6,
+          color = MaterialTheme.colors.primary,
+        )
       }
+    }
 
-      lessonPages.takeLastWhile { it != currentPage }.forEach { lesson ->
-        Indent(2) {
-          Text(
-              text = lesson,
-              style = MaterialTheme.typography.h6,
-              color = Color.Gray
-          )
-        }
+    lessonPages.takeLastWhile { it != currentPage }.forEach { page ->
+      Indent(2) {
+        Text(
+          text = page,
+          modifier = Modifier.clickable { onPageNavigation(page) },
+          style = MaterialTheme.typography.h6,
+          color = Color.Gray
+        )
       }
     }
   }
@@ -83,24 +76,25 @@ fun LessonDrawer(
 fun LessonDrawerPreview_chapter1() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           // TODO: remove the use of XxxData classes and use the model directly?
           LessonDrawer(
-              "Chapter 1",
-              "Lesson 2",
-              listOf(
-                  "Page 1",
-                  "Page 2",
-                  "Page 3",
-              ),
-              "Page 2"
+            "Chapter 1",
+            "Lesson 2",
+            listOf(
+              "Page 1",
+              "Page 2",
+              "Page 3",
+            ),
+            "Page 2",
+            {},
           )
         }
       }

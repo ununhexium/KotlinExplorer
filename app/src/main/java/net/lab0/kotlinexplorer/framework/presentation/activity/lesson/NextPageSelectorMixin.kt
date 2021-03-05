@@ -9,16 +9,17 @@ import net.lab0.kotlinexplorer.utils.Do
 
 interface NextPageSelectorMixin {
   fun nextPage(
-      activityViewModel: LessonViewModel,
-      correctness: AnswerCorrectness,
-      page: Int,
-      lessonId: String,
-      navController: NavController,
-      navigationToFeedback: (String) -> NavDirections,
-      navigationToNextChapter: (String) -> NavDirections,
-      navigationToInfo: (String, Int) -> NavDirections,
-      navigationToMultipleChoice: (String, Int) -> NavDirections,
-      navigationToCodeQuestion: (String, Int) -> NavDirections,
+    activityViewModel: LessonViewModel,
+    correctness: AnswerCorrectness,
+    page: Int,
+    lessonId: String,
+    navController: NavController,
+    navigationToFeedback: (String) -> NavDirections,
+    navigationToNextChapter: (String) -> NavDirections,
+    navigationToInfo: (String, Int) -> NavDirections,
+    navigationToMultipleChoice: (String, Int) -> NavDirections,
+    navigationToCodeQuestion: (String, Int) -> NavDirections,
+    nextPage: Int = page + 1,
   ): () -> Unit {
     if(page >= 0) {
       val lessonPage = LessonBrowser.getLessonById(lessonId).pages[page]
@@ -31,10 +32,9 @@ interface NextPageSelectorMixin {
 
     val isLastLessonInChapter = LessonBrowser.getNextLessonInChapter(lessonId) == null
 
-    val nextPageIndex = page + 1
     val maybeNextPage = LessonBrowser.getLessonById(lessonId)
         .pages
-        .getOrNull(nextPageIndex)
+        .getOrNull(nextPage)
 
     return {
       navController.navigate(
@@ -48,9 +48,9 @@ interface NextPageSelectorMixin {
                 navigationToNextChapter(lessonId)
               }
             }
-            is LessonPage.InfoPage -> navigationToInfo(lessonId, nextPageIndex)
-            is LessonPage.CodeQuestionPage -> navigationToCodeQuestion(lessonId, nextPageIndex)
-            is LessonPage.MultipleChoice -> navigationToMultipleChoice(lessonId, nextPageIndex)
+            is LessonPage.InfoPage -> navigationToInfo(lessonId, nextPage)
+            is LessonPage.CodeQuestionPage -> navigationToCodeQuestion(lessonId, nextPage)
+            is LessonPage.MultipleChoice -> navigationToMultipleChoice(lessonId, nextPage)
           }
       )
     }
