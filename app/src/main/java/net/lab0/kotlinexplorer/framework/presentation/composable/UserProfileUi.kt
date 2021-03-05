@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,79 +38,94 @@ fun UserProfileUi(
     uid: String,
 ) {
   Column(
-      modifier = Modifier.fillMaxWidth(),
+    modifier = Modifier.fillMaxHeight(),
+    verticalArrangement = Arrangement.SpaceBetween
   ) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
 
-    Box(modifier = Modifier.height(192.dp)) {
-      Surface(
-          modifier = Modifier
-              .height(128.dp)
-              .fillMaxWidth(),
-          color = MaterialTheme.colors.primary,
-      ) {}
-
-      Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.Center,
-      ) {
+      Box(modifier = Modifier.height(192.dp)) {
         Surface(
             modifier = Modifier
+              .height(128.dp)
+              .fillMaxWidth(),
+            color = MaterialTheme.colors.background,
+        ) {}
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+        ) {
+          Surface(
+              modifier = Modifier
                 .padding(top = 64.dp)
                 .size(128.dp),
-            color = MaterialTheme.colors.surface,
-        ) {
-          val padding = Modifier.padding(8.dp)
-          when {
-            profilePicture != null ->
-              Image(profilePicture, contentDescription = "Profile picture", modifier = padding)
+              color = MaterialTheme.colors.surface,
+          ) {
+            val padding = Modifier.padding(8.dp)
+            when {
+              profilePicture != null ->
+                Image(profilePicture, contentDescription = "Profile picture", modifier = padding)
 
-            else ->
-              Image(
-                  profilePicturePlaceholder,
-                  contentDescription = "Profile picture placeholder",
-                  modifier = padding
-              )
+              else ->
+                Image(
+                    profilePicturePlaceholder,
+                    contentDescription = "Profile picture placeholder",
+                    modifier = padding
+                )
+            }
           }
         }
       }
-    }
 
 
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.Center
-    ) {
-      if (email != null) {
-        Text(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = email,
-            style = MaterialTheme.typography.h6
-        )
-
-        DefaultVerticalSpacer()
-
-        ThinButton(
-            text = "Log out".toUpperCase(Locale.getDefault()),
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            onClick = logOut,
-        )
-      } else {
-        Button(
-            onClick = logIn,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-        ) {
+      Column(
+          modifier = Modifier.fillMaxWidth(),
+          verticalArrangement = Arrangement.Center
+      ) {
+        if (email != null) {
           Text(
-              text = "Log in",
-              style = MaterialTheme.typography.h6,
+              modifier = Modifier.align(Alignment.CenterHorizontally),
+              text = email,
+              style = MaterialTheme.typography.h6
           )
+
+          DefaultVerticalSpacer()
+
+          ThinButton(
+              text = "Log out".toUpperCase(Locale.getDefault()),
+              modifier = Modifier.align(Alignment.CenterHorizontally),
+              onClick = logOut,
+          )
+        } else {
+          Button(
+              onClick = logIn,
+              modifier = Modifier.align(Alignment.CenterHorizontally),
+          ) {
+            Text(
+                text = "Log in",
+                style = MaterialTheme.typography.h6,
+            )
+          }
+        }
+      }
+
+      if (BuildConfig.DEBUG) {
+        Row {
+          Text("UID: $uid")
         }
       }
     }
 
-    if (BuildConfig.DEBUG) {
-      Row {
-        Text("UID: $uid")
-      }
+    Row(
+      modifier = Modifier.fillMaxWidth(),
+      horizontalArrangement = Arrangement.SpaceAround
+    ) {
+      Text(
+        text = "Contact: kotlin-explorer@googlegroups.com",
+        style = MaterialTheme.typography.body2
+      )
     }
   }
 }
