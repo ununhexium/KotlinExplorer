@@ -15,6 +15,7 @@ import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
+import net.lab0.grammar.kotlin.KotlinHighlight.TYPE
 
 
 val backgroundColor = Color(0xff2B2B2B)
@@ -25,9 +26,9 @@ val yellow = Color(0xffBBB529)
 
 val annotationStyle = SpanStyle(color = yellow, background = backgroundColor)
 val commentStyle = SpanStyle(
-    color = Color(0xff929792),
-    background = backgroundColor,
-    fontStyle = FontStyle.Italic,
+  color = Color(0xff929792),
+  background = backgroundColor,
+  fontStyle = FontStyle.Italic,
 )
 val functionStyle = SpanStyle(color = Color(0xffFFC66D), background = backgroundColor)
 val keywordStyle = SpanStyle(color = Color(0xffCC7832), background = backgroundColor)
@@ -37,19 +38,22 @@ val operatorStyle = SpanStyle(color = yellow, background = backgroundColor)
 val stringStyle = SpanStyle(color = stringColor, background = backgroundColor)
 val escapedStringStyle = SpanStyle(color = escapedStringColor, background = backgroundColor)
 
+val typeStyle = SpanStyle(color = Color(0xFFFFFFFFF), background = backgroundColor)
+
 val ijStyle = { it: KotlinHighlight ->
   when (it) {
-      ANNOTATION -> annotationStyle
-      BRACKET -> functionStyle
-      CLASS_DECLARATION -> keywordStyle
-      COMMENT -> commentStyle
-      FUNCTION -> functionStyle
-      KEYWORD -> keywordStyle
-      MODIFIER -> keywordStyle
-      NUMBER -> numberStyle
-      OPERATOR -> operatorStyle
-      STRING -> stringStyle
-      STRING_ESCAPED_CHARACTER -> escapedStringStyle
+    ANNOTATION -> annotationStyle
+    BRACKET -> functionStyle
+    CLASS_DECLARATION -> keywordStyle
+    COMMENT -> commentStyle
+    FUNCTION -> functionStyle
+    KEYWORD -> keywordStyle
+    MODIFIER -> keywordStyle
+    NUMBER -> numberStyle
+    OPERATOR -> operatorStyle
+    STRING -> stringStyle
+    STRING_ESCAPED_CHARACTER -> escapedStringStyle
+    TYPE -> typeStyle
     else -> normalStyle
   }
 }
