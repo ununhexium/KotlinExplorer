@@ -9,6 +9,7 @@ object Function : LessonImpl(
   id = "kotlin.pocketcalculator.function",
   title = "Functions",
   pages = listOf(
+
     // function declaration
     LessonPage.CodeQuestionPage(
       title = "Declare a function",
@@ -26,6 +27,7 @@ This works the same way as the `main()` function, but with a different name.
       answer = listOf("fun", "sayHello", "(", ")"),
       confusion = listOf("{", "}", "function", ""),
     ),
+
     // function call
     LessonPage.CodeQuestionPage(
       title = "Call sayHello",
@@ -46,6 +48,7 @@ This works the same you as calling `print()`.
       answer = listOf("sayHello", "(", ")"),
       confusion = listOf("call", "fun", "{", "}"),
     ),
+
     // argument (with print)
     LessonPage.CodeQuestionPage(
       title = "Print's argument",
@@ -65,6 +68,7 @@ The function `print` **takes** 1 **parameter**: a `String`.
       answer = listOf("\"Hello\""),
       confusion = listOf("Hello: String"),
     ),
+
     // parameter type
     LessonPage.MultipleChoice(
       title = "Parameter type",
@@ -84,6 +88,7 @@ The type inference finds that `"1"` is a `String`.
       ),
       answer = setOf(0),
     ),
+
     // parameter declaration
     LessonPage.CodeQuestionPage(
       title = "Parameters",
@@ -102,6 +107,7 @@ fun foo(${p(0)}: ${p(1)}) {
       answer = listOf("parameter1", "Int"),
       confusion = listOf(),
     ),
+
     // use a parameter
     LessonPage.CodeQuestionPage(
       title = "Hello, you",
@@ -127,6 +133,7 @@ The hello message is concatenated with a string template.
       answer = listOf("name", "String", "$", "name"),
       confusion = listOf(),
     ),
+
     // argument value
     // TODO parameter name and type
     LessonPage.MultipleChoice(
@@ -146,6 +153,7 @@ The first argument's *type* is `String`.
       choices = listOf("\"hello\"", "String"),
       answer = setOf(0),
     ),
+
     // function return and return type
     LessonPage.CodeQuestionPage(
       title = "Return hello",
@@ -167,6 +175,7 @@ It is mandatory to match this declaration with the actual return type of the fun
       answer = listOf("String", "return"),
       confusion = listOf("Int"),
     ),
+
     // what does it return: variable name or content of the variable?
     LessonPage.MultipleChoice(
       title = "What is returned",
@@ -189,6 +198,8 @@ When returning, the content of `message` is returned.
       choices = listOf("Hello you", "message"),
       answer = setOf(0),
     ),
+
+    // declare function body
     LessonPage.CodeQuestionPage(
       title = "Return 4",
       question = """
@@ -207,6 +218,7 @@ print(dice()) // prints 6
       answer = listOf("Int", "6"),
       confusion = listOf("String", "0"),
     ),
+
     // parameter type is mandatory
     LessonPage.MultipleChoice(
       title = "Missing parameter",
@@ -236,6 +248,7 @@ The variable type is *mandatory*.
       ),
       answer = setOf(0),
     ),
+
     // increment and return int
     LessonPage.CodeQuestionPage(
       title = "Increment",
@@ -259,6 +272,7 @@ print(increment(1))  // prints 2
       answer = listOf("number", "Int", "Int", "return"),
       confusion = listOf("n", ""),
     ),
+
     // mismatch return type
     LessonPage.MultipleChoice(
       title = "Mismatch",
@@ -280,6 +294,7 @@ print(doStuff())
       choices = listOf("Returns Int but String expected", "42 as an integer", "\"42\" as a string"),
       answer = setOf(0),
     ),
+
     // variable or function?
     LessonPage.MultipleChoice(
       title = "Value fun",
@@ -299,6 +314,7 @@ print(x) // prints ..?
       choices = listOf("1", "2", "Ambiguous identifier: x"),
       answer = setOf(0),
     ),
+
     // declare function with mutiple params
     LessonPage.CodeQuestionPage(
       title = "Addition",
@@ -320,6 +336,7 @@ For readability and your own sanity, functions with few parameters are preferred
       answer = listOf("add", "Int", "return"),
       confusion = listOf(""),
     ),
+
     // call function with multiple args
     LessonPage.CodeQuestionPage(
       title = "Call add",
@@ -340,6 +357,7 @@ When a function needs more than 1 argument, the arguments are separated by comas
       answer = listOf("add", "3", ",", "3"),
       confusion = listOf("fun add", "3", "3", "+"),
     ),
+
     // missing arg
     LessonPage.MultipleChoice(
       title = "1 + 1 =",
@@ -366,6 +384,7 @@ Therefore the second argument is missing.
       choices = listOf("An error: missing parameter #2", "2"),
       answer = setOf(0),
     ),
+
     // missing parentheses
     LessonPage.CodeQuestionPage(
       title = "Call me",
@@ -391,6 +410,7 @@ print(add(5, 5)) // prints 10
       answer = listOf("(2 + 3, 5)"),
       confusion = listOf("5, 5")
     ),
+
     // store function call result to value
     LessonPage.MultipleChoice(
       title = "Wait a second",
@@ -413,6 +433,7 @@ Functions return values and that value can be stored for later use.
       choices = listOf("69", "result", "An error: the result must be used directly."),
       answer = setOf(0),
     ),
+
     // naming functions
     LessonPage.CodeQuestionPage(
       title = "Best name",
@@ -439,6 +460,8 @@ Choose something that is long enough but no more than that.
         "compute_the_number_of_eggs_to_cook_for_breakfast"
       ),
     ),
+
+    // summary
     LessonPage.InfoPage(
       title = "Summary",
       markdown = """

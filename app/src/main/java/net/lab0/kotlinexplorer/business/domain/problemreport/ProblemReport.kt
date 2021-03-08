@@ -7,4 +7,5 @@ data class ProblemReport(
     val userFeedback: String,
     val createdAt: Date = Date(),
     val id: UUID = UUID.randomUUID(),
+    val status: String = "new",
 )

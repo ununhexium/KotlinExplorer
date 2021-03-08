@@ -12,5 +12,6 @@ class ProblemReportDocumentFromDomain : FromDomain<ProblemReportDocument, Proble
           Timestamp(domain.createdAt),
           domain.problemLocationDescription,
           domain.userFeedback,
+          domain.status,
       )
 }

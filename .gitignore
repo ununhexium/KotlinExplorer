@@ -11,3 +11,9 @@ local.properties
 
 # ANTLR generated files
 /grammar/gen
+
+# releases
+app/release/
+
+# piece of shit of node!
+firebase/test/node_modules

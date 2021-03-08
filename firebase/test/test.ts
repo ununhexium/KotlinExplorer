@@ -250,4 +250,8 @@ describe("Security rules test", () => {
 
         await firebase.assertFails(testDoc.set({some: "data"}));
     });
+
+    it("Let admins users read any feedback", async () => {
+
+    });
 });
