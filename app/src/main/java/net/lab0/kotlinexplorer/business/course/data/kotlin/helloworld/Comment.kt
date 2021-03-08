@@ -59,7 +59,6 @@ The commented block starts at `/*` and ends at `*/`.
     // Commented code doesn't execute
     LessonPage.MultipleChoice(
       title = "Skip code",
-      // TODO: don't use kotlin but only monospace so it doesn't give a hint
       question = """
 Which part of the code will be executed?
 
@@ -87,7 +86,7 @@ print("4")
       choices = listOf("print(\"1\")", "print(\"4\")", "print(\"2\")", "print(\"3\")"),
       answer = setOf(0, 1),
     ),
-    //
+    // avoid giving arguments with multi line comments
     LessonPage.CodeQuestionPage(
       title = "Print nothing",
       question = "**Don't** print `Something`",
@@ -113,8 +112,9 @@ This is not commented
       answer = listOf("/*", "*/"),
       confusion = listOf("//", "//")
     ),
+    // summary
     LessonPage.InfoPage(
-      title = "Comment squeeze",
+      title = "Summary",
       """
 Comments will be used a lot to add information that can't be expressed with code.
 

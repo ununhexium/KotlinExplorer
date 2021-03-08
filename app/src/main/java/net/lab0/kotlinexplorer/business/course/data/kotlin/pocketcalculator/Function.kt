@@ -135,7 +135,6 @@ The hello message is concatenated with a string template.
     ),
 
     // argument value
-    // TODO parameter name and type
     LessonPage.MultipleChoice(
       title = "Parameter value",
       question = """

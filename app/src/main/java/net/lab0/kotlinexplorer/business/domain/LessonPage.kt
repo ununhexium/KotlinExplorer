@@ -19,7 +19,8 @@ sealed class LessonPage(
       val explanation: String,
       val answer: List<String>,
       val confusion: List<String> = listOf(),
-      val choices: List<String> = (answer + confusion).shuffled()
+      val choices: List<String> = (answer + confusion).shuffled(),
+      val validator: ((List<String>) -> Boolean)? = null
   ) : LessonPage(
       title
   ) {

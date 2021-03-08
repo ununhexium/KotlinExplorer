@@ -9,5 +9,6 @@ object PocketCalculatorChapter : ChapterImpl(
   lessons = listOf(
     Introduction,
     Function,
+    StringSpecialChars,
   )
 )

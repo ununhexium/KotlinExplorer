@@ -11,36 +11,45 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.code.invertFore
 import net.lab0.kotlinexplorer.mvi.UiState
 
 data class CodeQuestionUiState(
-    val pageIndex: Int,
-    val lessonPage: LessonPage.CodeQuestionPage,
-    val chapter: Chapter,
-    val selectedAnswers: List<Int> = listOf(),
-    val locked: Boolean = false,
+  val pageIndex: Int,
+  val lessonPage: LessonPage.CodeQuestionPage,
+  val chapter: Chapter,
+  val selectedAnswers: List<Int> = listOf(),
+  val locked: Boolean = false,
 ) : UiState {
 
   fun lockableCopy(
-      lessonPage: LessonPage.CodeQuestionPage? = null,
-      selectedAnswers: List<Int>? = null,
+    lessonPage: LessonPage.CodeQuestionPage? = null,
+    selectedAnswers: List<Int>? = null,
   ) = if (!locked) {
     CodeQuestionUiState(
-        pageIndex = this.pageIndex,
-        lessonPage = lessonPage ?: this.lessonPage,
-        chapter = this.chapter,
-        selectedAnswers = selectedAnswers ?: this.selectedAnswers,
-        locked = this.locked,
+      pageIndex = this.pageIndex,
+      lessonPage = lessonPage ?: this.lessonPage,
+      chapter = this.chapter,
+      selectedAnswers = selectedAnswers ?: this.selectedAnswers,
+      locked = this.locked,
     )
   } else this
 
   val choices: List<Answer> =
-      lessonPage.choices.mapIndexed { index, it ->
-        Answer(index, it, index in selectedAnswers)
-      }
+    lessonPage.choices.mapIndexed { index, it ->
+      Answer(index, it, index in selectedAnswers)
+    }
 
   val canUndoOrReset = selectedAnswers.isNotEmpty()
 
   val canValidate = selectedAnswers.size == lessonPage.answer.size
 
-  val isCorrectAnswer = selectedAnswers.map { lessonPage.choices[it] } == lessonPage.answer
+  val isCorrectAnswer: Boolean
+    get() {
+      val answer = selectedAnswers.map { lessonPage.choices[it] }
+      val validator = lessonPage.validator
+      return if (validator != null) {
+        validator(answer)
+      } else {
+        answer == lessonPage.answer
+      }
+    }
 
   val showAnswer = locked
 
@@ -49,9 +58,9 @@ data class CodeQuestionUiState(
   val progress: Float = 1f * pageIndex / chapter.lessons.size
 
   val selectedAnswersSnippet: String = KotlinCodeWithBlanksImpl(
-      lessonPage.snippet
+    lessonPage.snippet
   ).fill(
-      selectedAnswers.mapIndexed { index, it -> index to lessonPage.choices[it] }.toMap()
+    selectedAnswers.mapIndexed { index, it -> index to lessonPage.choices[it] }.toMap()
   )
 
   /**
@@ -62,22 +71,22 @@ data class CodeQuestionUiState(
     val correctAnswers = lessonPage.answer.mapIndexed { index, it -> index to it }
     val choicesAsStrings = selectedAnswers.map { lessonPage.choices[it] }
     val wrongAnswers = choicesAsStrings
-        .zip(correctAnswers)
-        .filter { it.first != it.second.second }
-        .map { it.second.first }
+      .zip(correctAnswers)
+      .filter { it.first != it.second.second }
+      .map { it.second.first }
 
     KotlinCodeWithBlanksImpl(lessonPage.snippet)
-        .getRealStringIndices(correctAnswers.toMap())
-        .filterKeys { it in wrongAnswers }
-        .values
-        .toList()
-        .flatten()
+      .getRealStringIndices(correctAnswers.toMap())
+      .filterKeys { it in wrongAnswers }
+      .values
+      .toList()
+      .flatten()
   }
 
   val snippetWithFocusedMistakes: AnnotatedString by lazy {
     val annotated = extractHighlightsAndAnnotate(
-        lessonPage.answerSnippet,
-        DefaultCodeStyle.textStyler
+      lessonPage.answerSnippet,
+      DefaultCodeStyle.textStyler
     )
     correctedAnswersLocations.fold(annotated) { acc, e ->
       acc.invertForegroundBackgroundColors(e)

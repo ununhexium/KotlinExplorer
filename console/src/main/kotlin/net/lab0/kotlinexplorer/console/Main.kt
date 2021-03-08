@@ -1,11 +1,7 @@
 package net.lab0.kotlinexplorer.console
 
-import com.google.api.gax.paging.Page
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.firestore.Firestore
-import com.google.cloud.storage.Bucket
-import com.google.cloud.storage.Storage
-import com.google.cloud.storage.StorageOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.cloud.FirestoreClient
@@ -13,8 +9,6 @@ import com.google.firebase.cloud.FirestoreClient
 
 fun main() {
   val projectId = "kotlin-explorer-7824c"
-
-  authImplicit()
 
   // Use the application default credentials
   val credentials = GoogleCredentials.getApplicationDefault()
@@ -65,14 +59,3 @@ fun Firestore.extraLessonRequestDocument(uid: String) =
     .collection("extraLessonRequest")
     .document("singleton")
 
-
-fun authImplicit() {
-  // If you don't specify credentials when constructing the client, the client library will
-  // look for credentials via the environment variable GOOGLE_APPLICATION_CREDENTIALS.
-  val storage: Storage = StorageOptions.getDefaultInstance().service
-  println("Buckets:")
-  val buckets: Page<Bucket> = storage.list()
-  for (bucket in buckets.iterateAll()) {
-    System.out.println(bucket.toString())
-  }
-}

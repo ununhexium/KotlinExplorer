@@ -12,19 +12,19 @@ internal class CodeQuestionUiStateTest {
   fun `truth is computed based on the string content, not the chosen indices`() {
     // given
     val page = LessonPage.CodeQuestionPage(
-        "",
-        "",
-        "",
-        "",
-        answer = listOf("A", "B"),
-        confusion = listOf("A"),
-        choices = listOf("A", "B", "A")
+      "",
+      "",
+      "",
+      "",
+      answer = listOf("A", "B"),
+      confusion = listOf("A"),
+      choices = listOf("A", "B", "A")
     )
     val l = CodeQuestionUiState(
-        pageIndex = 0,
-        lessonPage = page,
-        chapter = Chapter.EMPTY,
-        selectedAnswers = listOf(2, 1),
+      pageIndex = 0,
+      lessonPage = page,
+      chapter = Chapter.EMPTY,
+      selectedAnswers = listOf(2, 1),
     )
 
     // then
@@ -35,19 +35,19 @@ internal class CodeQuestionUiStateTest {
   fun `can tell which spots to focus when wrong answer`() {
     // given
     val page = LessonPage.CodeQuestionPage(
-        "",
-        "",
-        "val ${p(0)} ${p(1)} ${p(2)}${p(3)}",
-        "",
-        answer = listOf("alpha", "=", "116", ";"),
-        confusion = listOf("foo", ":="),
-        choices = listOf("alpha", "=", "116", ";", "foo", ":=")
+      "",
+      "",
+      "val ${p(0)} ${p(1)} ${p(2)}${p(3)}",
+      "",
+      answer = listOf("alpha", "=", "116", ";"),
+      confusion = listOf("foo", ":="),
+      choices = listOf("alpha", "=", "116", ";", "foo", ":=")
     )
     val state = CodeQuestionUiState(
-        pageIndex = 0,
-        lessonPage = page,
-        chapter = Chapter.EMPTY,
-        selectedAnswers = listOf(0, 5, 2, 4),
+      pageIndex = 0,
+      lessonPage = page,
+      chapter = Chapter.EMPTY,
+      selectedAnswers = listOf(0, 5, 2, 4),
     )
 
     // when
@@ -63,22 +63,22 @@ internal class CodeQuestionUiStateTest {
   fun `can tell which spots to focus when wrong answer 2`() {
     // given
     val page = LessonPage.CodeQuestionPage(
-        "",
-        "",
-        """${p(0)} main${p(1)}${p(2)} ${p(3)}
+      "",
+      "",
+      """${p(0)} main${p(1)}${p(2)} ${p(3)}
   // next steps
 ${p(4)}
 """,
-        "",
-        answer = listOf("fun", "(", ")", "{", "}"),
-        confusion = listOf("[", "]"),
-        choices = listOf("fun", "(", ")", "{", "}", "[", "]")
+      "",
+      answer = listOf("fun", "(", ")", "{", "}"),
+      confusion = listOf("[", "]"),
+      choices = listOf("fun", "(", ")", "{", "}", "[", "]")
     )
     val state = CodeQuestionUiState(
-        pageIndex = 0,
-        lessonPage = page,
-        chapter = Chapter.EMPTY,
-        selectedAnswers = listOf(0, 3, 4, 5, 6),
+      pageIndex = 0,
+      lessonPage = page,
+      chapter = Chapter.EMPTY,
+      selectedAnswers = listOf(0, 3, 4, 5, 6),
     )
 
     // when
@@ -89,12 +89,12 @@ ${p(4)}
     // 012345678901234567890123456789012345
     // fun main() {␤  // next steps␤}
     assertThat(locations).isEqualTo(
-        listOf(
-            8 .. 8,
-            9 .. 9,
-            11 .. 11,
-            29 .. 29,
-        )
+      listOf(
+        8 .. 8,
+        9 .. 9,
+        11 .. 11,
+        29 .. 29,
+      )
     )
   }
 
@@ -102,19 +102,19 @@ ${p(4)}
   fun `can tell which spots to focus when wrong answer and duplicated ids`() {
     // given
     val page = LessonPage.CodeQuestionPage(
-        "",
-        "",
-        """${p(0)}Hello${p(0)}""",
-        "",
-        answer = listOf("\""),
-        confusion = listOf("'"),
-        choices = listOf("\"", "'")
+      "",
+      "",
+      """${p(0)}Hello${p(0)}""",
+      "",
+      answer = listOf("\""),
+      confusion = listOf("'"),
+      choices = listOf("\"", "'")
     )
     val state = CodeQuestionUiState(
-        pageIndex = 0,
-        lessonPage = page,
-        chapter = Chapter.EMPTY,
-        selectedAnswers = listOf(1),
+      pageIndex = 0,
+      lessonPage = page,
+      chapter = Chapter.EMPTY,
+      selectedAnswers = listOf(1),
     )
 
     // when
@@ -126,4 +126,31 @@ ${p(4)}
     assertThat(locations).containsExactly(0 .. 0, 6 .. 6)
   }
 
+  @Test
+  fun `when there is a custom validator, use it`() {
+    // given
+    val page = LessonPage.CodeQuestionPage(
+      "",
+      "",
+      "",
+      "",
+      answer = listOf("A"),
+      confusion = listOf("B"),
+      choices = listOf("A", "B"),
+      validator = { it == listOf("B") }
+    )
+
+    val state = CodeQuestionUiState(
+      pageIndex = 0,
+      lessonPage = page,
+      chapter = Chapter.EMPTY,
+      selectedAnswers = listOf(1),
+    )
+
+    // when
+    val correct = state.isCorrectAnswer
+
+    // then
+    assertThat(correct).isTrue()
+  }
 }
