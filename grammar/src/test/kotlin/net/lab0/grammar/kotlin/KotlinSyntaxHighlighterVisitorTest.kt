@@ -3,6 +3,7 @@ package net.lab0.grammar.kotlin
 import net.lab0.grammar.kotlin.Highlights.Spot
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
+import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
@@ -689,7 +690,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `support trailing comas`() {
+  fun `can higlight trailing comas`() {
     // given
     val code = "val l = listOf(1, 2, 3,)"
 
@@ -736,7 +737,7 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @Test
-  fun `highlight parameter types`() {
+  fun `can highlight parameter types`() {
     // given
     val code = "fun f(a:Int){}"
 
@@ -758,4 +759,22 @@ class KotlinSyntaxHighlighterVisitorTest {
     )
   }
 
+  @Test
+  fun `can highlight character literals`() {
+    // given
+    val code = "val c = 'c'"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+      // "val"
+      Spot(highlight = KEYWORD, start = 0, end = 2),
+      // "="
+      Spot(highlight = OPERATOR, start = 6, end = 6),
+      // "'c'"
+      Spot(highlight = CHARACTER, start = 8, end = 10),
+    )
+  }
 }

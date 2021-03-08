@@ -2,6 +2,7 @@ package net.lab0.grammar.kotlin
 
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
+import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
@@ -245,6 +246,9 @@ class KotlinSyntaxHighlighterVisitor(
           KotlinParser.LSQUARE -> add(BRACKET, node.range)
           KotlinParser.RSQUARE -> add(BRACKET, node.range)
 
+          // characters
+          KotlinParser.CharacterLiteral -> add(CHARACTER, node.range)
+
           // operators
           KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
 
@@ -286,4 +290,6 @@ class KotlinSyntaxHighlighterVisitor(
 
         add(visitChildren(ctx))
       }
+
+
 }
