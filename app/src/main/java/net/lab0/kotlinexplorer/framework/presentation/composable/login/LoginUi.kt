@@ -57,13 +57,6 @@ fun LoginUi(
       if (username == null) {
         Button(
             modifier = modifier,
-            onClick = login,
-        ) {
-          Text("Login")
-        }
-
-        Button(
-            modifier = modifier,
             onClick = loginAnonymously,
         ) {
           Text("Use anonymously")
