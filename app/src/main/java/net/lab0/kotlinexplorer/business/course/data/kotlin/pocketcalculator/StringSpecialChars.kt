@@ -139,7 +139,7 @@ So both answers are actually valid, but prefer a simple non escaped quote `'` fo
     LessonPage.CodeQuestionPage(
       title = "New Linux line",
       question = """
-Write a function that prints something and then prints a new line.
+Write a function that prints the `input` and then prints a new line.
 """,
       snippet = """
 fun println(input: String) {

@@ -31,8 +31,8 @@ fun main() {
   docs.forEach {
     println(it.id)
     println("Status: " + it["status"])
-    println("Problem location" + it["problemLocationDescription"])
-    println("Feedback" + it["userFeedback"])
+    println("Location: " + it["problemLocationDescription"])
+    println("Feedback: " + it["userFeedback"])
     println()
   }
 }

@@ -61,8 +61,6 @@ print(${p(0)})
       explanation = """
 `"hello"` is the first *argument* that was *given* to the function `print`.
 
-Kotlin knows what the type of the argument is, either with type inference or explicit declaration.
-
 The function `print` **takes** 1 **parameter**: a `String`.
 """,
       answer = listOf("\"Hello\""),
@@ -160,33 +158,48 @@ The first argument's *type* is `String`.
 Build a string but `return` it instead of printing it.
 """,
       snippet = """
-fun makeHello(name: String): ${p(0)} {
-  ${p(1)} "Hello ${dollar}name"
+fun makeHello(name: ${p(0)}): ${p(1)} {
+  ${p(2)} "Hello ${dollar}name"
 }
 
-val sentence: ${p(0)} = makeHello("world")
-print(sentence) // prints Hello world 
+// prints Hello world 
+print(makeHello("world"))
 """,
       explanation = """
 `String` is the return type of the `makeHello` function.
 It is mandatory to match this declaration with the actual return type of the function.
+
+The above code can also be written as
+
+```kotlin
+fun makeHello(name: String): String {
+  return "Hello ${dollar}name"
+}
+
+// contains the value returned by makeHello
+val sentence: ${p(0)} = makeHello("world")
+
+// prints Hello world
+print(sentence)
+```
 """,
-      answer = listOf("String", "return"),
-      confusion = listOf("Int"),
+      answer = listOf("String", "String", "return"),
+      confusion = listOf("Int", "Int"),
     ),
 
     // what does it return: variable name or content of the variable?
     LessonPage.MultipleChoice(
       title = "What is returned",
       question = """
-What will the function `foo` return?
+What will the function `makeHello` return?
 ```kotlin_lines
 fun makeHello(name: String): String {
   val message:String = "Hello ${dollar}name"
   return message
 }
 
-print(makeHello("you")) // what does it print?
+// what does it print?
+print(makeHello("you"))
 ```
 """,
       explanation = """
@@ -224,7 +237,8 @@ print(dice()) // prints 6
       question = """
 What will this do?
 
-```kotlin
+Note: the code coloration was removed.
+```
 fun surprise(int) {
   print(int)
 }
@@ -288,7 +302,25 @@ print(doStuff())
 ```
 """,
       explanation = """
+If a function declares a return type of `String`, it can't return something different.
 
+Here it could either return an integer.
+
+```kotlin
+fun doStuff(): Int {
+  // intense computation
+  return 42
+}
+```
+
+or return a string
+
+```kotlin
+fun doStuff(): String {
+  // intense computation
+  return "42"
+}
+```
 """,
       choices = listOf("Returns Int but String expected", "42 as an integer", "\"42\" as a string"),
       answer = setOf(0),
@@ -296,7 +328,7 @@ print(doStuff())
 
     // variable or function?
     LessonPage.MultipleChoice(
-      title = "Value fun",
+      title = "Value or function",
       question = """
 What does this print?
 
@@ -308,13 +340,17 @@ print(x) // prints ..?
 ```
 """,
       explanation = """
+It's possible, *but not recommended*, to give the same name to a function and a variable.
 
+The variable can be accessed with just its name, here `x`.
+
+The function must be called with it's name + parentheses. `x()`.
 """,
       choices = listOf("1", "2", "Ambiguous identifier: x"),
       answer = setOf(0),
     ),
 
-    // declare function with mutiple params
+    // declare function with multiple params
     LessonPage.CodeQuestionPage(
       title = "Addition",
       question = """
@@ -479,7 +515,7 @@ fun name(
 ```
 
 Here is exactly the same declaration, with extra comments.
-This declaration is valida Kotlin code.
+This declaration is valid Kotlin code.
 The whitespace doesn't matter most of the time, 
 so you can take all the space you need to state all the input parameters.
 
