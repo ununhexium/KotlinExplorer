@@ -5,32 +5,32 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Import : LessonImpl(
-    id = "kotlin.moreorless.import",
-    title = "Import",
-    pages = listOf(
-LessonPage.CodeQuestionPage(
-            title = "Import Int",
-            question = """
+  id = "kotlin.moreorless.import",
+  title = "Import",
+  pages = listOf(
+    LessonPage.CodeQuestionPage(
+      title = "Import Int",
+      question = """
 ${p(0)} 
 """,
-            snippet = """
+      snippet = """
 
 """,
-            explanation = """
+      explanation = """
 
 """,
-            answer = listOf(),
-            confusion = listOf(),
-        ),
-LessonPage.CodeQuestionPage(
-            title = "Import",
-            question = """
+      answer = listOf(),
+      confusion = listOf(),
+    ),
+    LessonPage.CodeQuestionPage(
+      title = "Import",
+      question = """
 Import the random integer generator.
 """,
-            snippet = """
+      snippet = """
 ${p(0)} import kotlin.random.Random.Default.nextInt
 """,
-            explanation = """
+      explanation = """
 `import` imports something from some package.
 
 All the elements that you use in Kotlin are located in some package.
@@ -57,9 +57,9 @@ Because the most often used packages are imported by default.
 
 Here we explicitly imported the `nextInt` function.
 """,
-            answer = listOf(),
-            confusion = listOf(),
-        ),
+      answer = listOf(),
+      confusion = listOf(),
     ),
-    dependencies = listOf()
+  ),
+  dependencies = listOf()
 )

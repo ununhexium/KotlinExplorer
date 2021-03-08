@@ -5,18 +5,18 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Boolean : LessonImpl(
-    id = "kotlin.positivenegative.boolean",
-    title = "Boolean",
-    pages = listOf(
-        LessonPage.CodeQuestionPage(
-            title = "Make it true",
-            question = """
+  id = "kotlin.positivenegative.boolean",
+  title = "Boolean",
+  pages = listOf(
+    LessonPage.CodeQuestionPage(
+      title = "Make it true",
+      question = """
 Assign the boolean value `true`.
 """,
-            snippet = """
+      snippet = """
 val kotlinIsEasy = ${p(0)}
 """,
-            explanation = """
+      explanation = """
 `true` is a keyword for the boolean true.
 
 As with everything else, Kotlin is case sensitive, therefore `True` is not an equivalent of `True`.
@@ -25,30 +25,30 @@ As with everything else, Kotlin is case sensitive, therefore `True` is not an eq
 
 `"true"` is a string, not the `true` keyword.
 """,
-            answer = listOf("true"),
-            confusion = listOf("True", "1", """"true""""),
-        ),
-        LessonPage.CodeQuestionPage(
-            title = "Nope",
-            question = """
+      answer = listOf("true"),
+      confusion = listOf("True", "1", """"true""""),
+    ),
+    LessonPage.CodeQuestionPage(
+      title = "Nope",
+      question = """
 Pretend that you don't like candies.
 """,
-            snippet = """
+      snippet = """
 val iLikeCandies = ${p(0)}
 """,
-            explanation = """
+      explanation = """
 The conventions logic of `true` also applies to `false`.
 
 The empty string `""` is not equivalent to false. It's a string, not a boolean.
 """,
-            answer = listOf("false"),
-            confusion = listOf("False", "0", """"false"""", "\"\""),
-        ),
-        LessonPage.InfoPage(
-            title = "That's it",
-            """
+      answer = listOf("false"),
+      confusion = listOf("False", "0", """"false"""", "\"\""),
+    ),
+    LessonPage.InfoPage(
+      title = "That's it",
+      """
 There are only 2 boolean values, `true` and `false`.
 """
-        )
     )
+  )
 )

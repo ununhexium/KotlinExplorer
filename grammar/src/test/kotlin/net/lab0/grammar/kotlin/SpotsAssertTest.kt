@@ -10,22 +10,23 @@ class SpotsAssertTest {
   fun `can show spots`() {
     // given
     val asserter = SpotsAssert<String>(
-        "abcdefghijklmnopqrstuvwxyzABCD",
-        listOf()
+      "abcdefghijklmnopqrstuvwxyzABCD",
+      listOf()
     )
 
     // when
     val error = assertThrows(AssertionError::class.java) {
       asserter.hasAtLeastSpotsH(
-          Spot("one", 1, 1),
-          Spot("two", 3, 4),
-          Spot("four", 6, 11),
-          Spot("ten", 13, 23),
+        Spot("one", 1, 1),
+        Spot("two", 3, 4),
+        Spot("four", 6, 11),
+        Spot("ten", 13, 23),
       )
     }
 
     // then
-    assertThat(error).hasMessage("""
+    assertThat(error).hasMessage(
+      """
       |Missing spots:
       |  Spot(highlight=one, start=1, end=1)
       |  Spot(highlight=two, start=3, end=4)
@@ -34,57 +35,61 @@ class SpotsAssertTest {
       |A_23456789B_23456789C_23456789
       |abcdefghijklmnopqrstuvwxyzABCD
       | o <> <four> <ten------>
-    """.trimMargin())
+    """.trimMargin()
+    )
   }
 
   @Test
   fun `dont write after the end of the code`() {
     val asserter = SpotsAssert<String>(
-        "",
-        listOf()
+      "",
+      listOf()
     )
 
     // when
     val error = assertThrows(AssertionError::class.java) {
       asserter.hasAtLeastSpotsH(
-          Spot("one", 1, 1),
+        Spot("one", 1, 1),
       )
     }
 
     // then
-    assertThat(error).hasMessage("""
+    assertThat(error).hasMessage(
+      """
       |Missing spots:
       |  Spot(highlight=one, start=1, end=1)
       |
       |
       |
-    """.trimMargin())
+    """.trimMargin()
+    )
   }
 
   @Test
   fun `multiline assertion`() {
     // given
     val asserter = SpotsAssert<String>(
-        """
+      """
           |fun main() {
           |  println("Hello, World!")
           |}
         """.trimMargin(),
-        listOf()
+      listOf()
     )
 
     // when
     val error = assertThrows(AssertionError::class.java) {
       asserter.hasAtLeastSpotsH(
-          Spot("x", 1, 1),
-          Spot("two", 3, 4),
-          Spot("four", 6, 11),
-          Spot("ten", 13, 23),
+        Spot("x", 1, 1),
+        Spot("two", 3, 4),
+        Spot("four", 6, 11),
+        Spot("ten", 13, 23),
       )
     }
 
     // then
-    assertThat(error).hasMessage("""
+    assertThat(error).hasMessage(
+      """
       |Missing spots:
       |  Spot(highlight=x, start=1, end=1)
       |  Spot(highlight=two, start=3, end=4)
@@ -93,33 +98,35 @@ class SpotsAssertTest {
       |A_23456789B_23456789C_23456789D_23456789E
       |fun main() {↵  println("Hello, World!")↵}
       | x <> <four> <ten------>
-    """.trimMargin())
+    """.trimMargin()
+    )
   }
 
   @Test
   fun `multiline assertion vertical display`() {
     // given
     val asserter = SpotsAssert<String>(
-        """
+      """
           |fun main() {
           |  println("Hello, World!")
           |}
         """.trimMargin(),
-        listOf()
+      listOf()
     )
 
     // when
     val error = assertThrows(AssertionError::class.java) {
       asserter.hasAtLeastSpots(
-          Spot("x", 1, 1),
-          Spot("two", 3, 4),
-          Spot("four", 6, 11),
-          Spot("ten", 13, 23),
+        Spot("x", 1, 1),
+        Spot("two", 3, 4),
+        Spot("four", 6, 11),
+        Spot("ten", 13, 23),
       )
     }
 
     // then
-    assertThat(error).hasMessage("""
+    assertThat(error).hasMessage(
+      """
       |Missing spots:
       |  Spot(highlight=x, start=1, end=1)
       |  Spot(highlight=two, start=3, end=4)
@@ -132,36 +139,38 @@ class SpotsAssertTest {
       |   w    o         e
       |   o    u         n
       |        r
-    """.trimMargin())
+    """.trimMargin()
+    )
   }
 
   @Test
   fun `multiline assertion vertical display with some extra and some missing`() {
     // given
     val asserter = SpotsAssert<String>(
-        """
+      """
           |fun main() {
           |  println("Hello, World!")
           |}
         """.trimMargin(),
-        listOf(
-            Spot("two", 3, 4),
-            Spot("55555", 26, 30)
-        )
+      listOf(
+        Spot("two", 3, 4),
+        Spot("55555", 26, 30)
+      )
     )
 
     // when
     val error = assertThrows(AssertionError::class.java) {
       asserter.hasExactlySpots(
-          Spot("x", 1, 1),
-          Spot("two", 3, 4),
-          Spot("four", 6, 11),
-          Spot("ten", 13, 23),
+        Spot("x", 1, 1),
+        Spot("two", 3, 4),
+        Spot("four", 6, 11),
+        Spot("ten", 13, 23),
       )
     }
 
     // then
-    assertThat(error).hasMessage("""
+    assertThat(error).hasMessage(
+      """
       |Missing spots:
       |  Spot(highlight=x, start=1, end=1)
       |  Spot(highlight=four, start=6, end=11)
@@ -184,6 +193,7 @@ class SpotsAssertTest {
       |                            5
       |                            5
       |                            5
-    """.trimMargin())
+    """.trimMargin()
+    )
   }
 }

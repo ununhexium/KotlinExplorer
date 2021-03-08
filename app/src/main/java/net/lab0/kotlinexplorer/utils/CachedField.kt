@@ -3,11 +3,11 @@ package net.lab0.kotlinexplorer.utils
 import kotlin.reflect.KProperty
 
 fun <I, T> cached(input: () -> I, transform: (I) -> T) =
-    ThreadUnsafeCachedImpl(input, transform)
+  ThreadUnsafeCachedImpl(input, transform)
 
 class ThreadUnsafeCachedImpl<I, out T>(
-    val input: () -> I,
-    val transform: (I) -> T,
+  val input: () -> I,
+  val transform: (I) -> T,
 ) {
   private var _value: T? = null
   private var lastInput: I? = null

@@ -7,8 +7,8 @@ import net.lab0.kotlinexplorer.framework.util.ToDomain
 class ExtraContentRequestToDomain : ToDomain<ExtraContentRequestDocument, ExtraContentRequest> {
   override fun invoke(entity: ExtraContentRequestDocument): ExtraContentRequest {
     return ExtraContentRequest(
-        entity.globalSuccess,
-        entity.globalFailure,
+      entity.globalSuccess,
+      entity.globalFailure,
     )
   }
 }

@@ -27,7 +27,7 @@ class Sevenish {
     println(pow7(2))
     println(sevenish(1))
 
-    (0..10).forEach {
+    (0 .. 10).forEach {
       println(sevenish(it))
     }
 

@@ -9,14 +9,14 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorr
 sealed class LessonStateEvent : StateEvent {
   object Empty : LessonStateEvent()
   data class CountMark(
-      val currentPage: LessonPage,
-      val correctness: AnswerCorrectness
+    val currentPage: LessonPage,
+    val correctness: AnswerCorrectness
   ) : LessonStateEvent()
 
   object SaveLessonProgress : LessonStateEvent()
 
   data class ReportProblem(
-      val problemReport: ProblemReport,
-      val context: Context
-  ): LessonStateEvent()
+    val problemReport: ProblemReport,
+    val context: Context
+  ) : LessonStateEvent()
 }

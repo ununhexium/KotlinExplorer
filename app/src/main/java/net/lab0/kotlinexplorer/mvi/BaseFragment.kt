@@ -2,7 +2,6 @@ package net.lab0.kotlinexplorer.mvi
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +33,9 @@ abstract class BaseFragment<Event, Data> : Fragment()
   }
 
   override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?,
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?,
   ): View {
     super.onCreateView(inflater, container, savedInstanceState)
 

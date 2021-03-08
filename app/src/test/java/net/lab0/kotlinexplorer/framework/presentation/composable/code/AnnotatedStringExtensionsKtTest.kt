@@ -23,7 +23,7 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        AnnotatedString.Range(style, 0, 3),
+      AnnotatedString.Range(style, 0, 3),
     )
   }
 
@@ -43,16 +43,16 @@ internal class AnnotatedStringExtensionsKtTest {
     // then
 
     assertThat(i.spanStyles).containsExactly(
-        AnnotatedString.Range(
-            style.copy(color = style.background, background = style.color),
-            0,
-            3
-        ),
-        AnnotatedString.Range(
-            style,
-            0,
-            3
-        )
+      AnnotatedString.Range(
+        style.copy(color = style.background, background = style.color),
+        0,
+        3
+      ),
+      AnnotatedString.Range(
+        style,
+        0,
+        3
+      )
     )
   }
 
@@ -78,20 +78,20 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        AnnotatedString.Range(redStyle, 0, 3),
-        AnnotatedString.Range(
-            redStyle.copy(
-                color = redStyle.background,
-                background = redStyle.color
-            ), 2, 3
-        ),
-        AnnotatedString.Range(
-            blueStyle.copy(
-                color = blueStyle.background,
-                background = blueStyle.color
-            ), 4, 5
-        ),
-        AnnotatedString.Range(blueStyle, 4, 7),
+      AnnotatedString.Range(redStyle, 0, 3),
+      AnnotatedString.Range(
+        redStyle.copy(
+          color = redStyle.background,
+          background = redStyle.color
+        ), 2, 3
+      ),
+      AnnotatedString.Range(
+        blueStyle.copy(
+          color = blueStyle.background,
+          background = blueStyle.color
+        ), 4, 5
+      ),
+      AnnotatedString.Range(blueStyle, 4, 7),
     )
   }
 
@@ -110,12 +110,12 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        AnnotatedString.Range(style, 0, 3),
-        AnnotatedString.Range(
-            style.copy(color = style.background, background = style.color),
-            1,
-            2
-        ),
+      AnnotatedString.Range(style, 0, 3),
+      AnnotatedString.Range(
+        style.copy(color = style.background, background = style.color),
+        1,
+        2
+      ),
     )
   }
 
@@ -136,17 +136,17 @@ internal class AnnotatedStringExtensionsKtTest {
 
     // then
     assertThat(i.spanStyles).containsExactly(
-        AnnotatedString.Range(
-            style.copy(color = style.background, background = style.color),
-            // not 0..5 because
-            1,
-            4,
-        ),
-        AnnotatedString.Range(
-            style,
-            1,
-            4,
-        )
+      AnnotatedString.Range(
+        style.copy(color = style.background, background = style.color),
+        // not 0..5 because
+        1,
+        4,
+      ),
+      AnnotatedString.Range(
+        style,
+        1,
+        4,
+      )
     )
   }
 }

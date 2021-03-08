@@ -21,7 +21,7 @@ internal class MultipleChoiceUiStateTest {
       ),
       chapter = Chapter.EMPTY,
       selectedAnswers = listOf(),
-      randomizedChoices = (0..3).zip(listOf("A", "B", "C", "D")),
+      randomizedChoices = (0 .. 3).zip(listOf("A", "B", "C", "D")),
     )
 
     // when
@@ -51,7 +51,7 @@ internal class MultipleChoiceUiStateTest {
       ),
       chapter = Chapter.EMPTY,
       selectedAnswers = listOf(0, 2),
-      randomizedChoices = (0..3).zip(listOf("A", "B", "C", "D"))
+      randomizedChoices = (0 .. 3).zip(listOf("A", "B", "C", "D"))
     )
 
     // when
@@ -82,7 +82,7 @@ internal class MultipleChoiceUiStateTest {
       chapter = Chapter.EMPTY,
       selectedAnswers = listOf(0, 2),
       locked = true,
-      randomizedChoices = (0..3).zip(listOf("A", "B", "C", "D")),
+      randomizedChoices = (0 .. 3).zip(listOf("A", "B", "C", "D")),
     )
 
     // when

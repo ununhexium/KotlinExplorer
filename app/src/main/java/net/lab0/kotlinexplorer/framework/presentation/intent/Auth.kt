@@ -9,13 +9,13 @@ import com.firebase.ui.auth.AuthUI
 
 object Auth {
   fun requestSignIn(
-      fragment: Fragment,
-      onSuccess: (ActivityResult) -> Unit,
-      onFailure: (ActivityResult) -> Unit,
+    fragment: Fragment,
+    onSuccess: (ActivityResult) -> Unit,
+    onFailure: (ActivityResult) -> Unit,
   ) {
 
     fragment.registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
+      ActivityResultContracts.StartActivityForResult()
     ) { result ->
       if (result.resultCode == Activity.RESULT_OK) {
         // logged in
@@ -24,18 +24,18 @@ object Auth {
         onFailure(result)
       }
     }.launch(
-        AuthUI.getInstance()
-            .createSignInIntentBuilder()
-            .setAvailableProviders(
-                listOf(
-                    AuthUI.IdpConfig.EmailBuilder().build(),
-                )
-            )
-            .build()
+      AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(
+          listOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+          )
+        )
+        .build()
     )
   }
 
   fun logOut(context: Context) =
-      AuthUI.getInstance().signOut(context)
+    AuthUI.getInstance().signOut(context)
 }
 

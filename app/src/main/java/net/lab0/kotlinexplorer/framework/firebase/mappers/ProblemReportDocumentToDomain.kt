@@ -7,10 +7,10 @@ import java.util.*
 
 class ProblemReportDocumentToDomain : ToDomain<ProblemReportDocument, ProblemReport> {
   override fun invoke(entity: ProblemReportDocument) =
-      ProblemReport(
-          entity.problemLocationDescription,
-          entity.userFeedback,
-          entity.createdAt.toDate(),
-          UUID.fromString(entity.id),
-      )
+    ProblemReport(
+      entity.problemLocationDescription,
+      entity.userFeedback,
+      entity.createdAt.toDate(),
+      UUID.fromString(entity.id),
+    )
 }

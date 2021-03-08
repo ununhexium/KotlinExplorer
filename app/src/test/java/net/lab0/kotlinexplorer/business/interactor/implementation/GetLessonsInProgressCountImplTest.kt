@@ -1,14 +1,14 @@
 package net.lab0.kotlinexplorer.business.interactor.implementation
 
-import net.lab0.kotlinexplorer.business.domain.LessonProgress
-import net.lab0.kotlinexplorer.business.persistence.abstraction.LessonProgressDataSource
-import net.lab0.kotlinexplorer.mvi.Resource
 import com.google.common.truth.Truth.assertThat
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
+import net.lab0.kotlinexplorer.business.domain.LessonProgress
+import net.lab0.kotlinexplorer.business.persistence.abstraction.LessonProgressDataSource
+import net.lab0.kotlinexplorer.mvi.Resource
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -26,8 +26,8 @@ internal class GetLessonsInProgressCountImplTest {
   fun canGetTheLessonProgress_whenItAlreadyExists() = runBlocking {
     // given
     val inProgress = listOf(
-        LessonProgress("id1", 1, 2),
-        LessonProgress("id2", 2, 0),
+      LessonProgress("id1", 1, 2),
+      LessonProgress("id2", 2, 0),
     )
     coEvery {
       dao.getLessonsInProgress()

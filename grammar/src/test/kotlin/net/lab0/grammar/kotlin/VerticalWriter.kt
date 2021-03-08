@@ -15,7 +15,7 @@ package net.lab0.grammar.kotlin
  * With 2 spaces in the middle.
  */
 fun verticalWriter(
-    strings: Map<Int, String>
+  strings: Map<Int, String>
 ): String {
   if (strings.isEmpty()) return ""
 
@@ -28,7 +28,7 @@ fun verticalWriter(
       val word = strings[depth]
 
       if (word != null && length < word.length) {
-          word[length].toString()
+        word[length].toString()
       } else " "
     }
   }.trimEnd()

@@ -24,31 +24,31 @@ fun Samples(themeName: String) {
     }
 
     Button(
-        onClick = {},
-        modifier = pad,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.primaryVariant
-        )
+      onClick = {},
+      modifier = pad,
+      colors = ButtonDefaults.buttonColors(
+        backgroundColor = MaterialTheme.colors.primaryVariant
+      )
     ) {
       Text("Primary variant")
     }
 
     Button(
-        onClick = {},
-        modifier = pad,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.secondary
-        )
+      onClick = {},
+      modifier = pad,
+      colors = ButtonDefaults.buttonColors(
+        backgroundColor = MaterialTheme.colors.secondary
+      )
     ) {
       Text("Secondary")
     }
 
     Button(
-        onClick = {},
-        modifier = pad,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.secondaryVariant
-        )
+      onClick = {},
+      modifier = pad,
+      colors = ButtonDefaults.buttonColors(
+        backgroundColor = MaterialTheme.colors.secondaryVariant
+      )
     ) {
       Text("Secondary variant")
     }

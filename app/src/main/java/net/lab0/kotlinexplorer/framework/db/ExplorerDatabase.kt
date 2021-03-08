@@ -15,12 +15,12 @@ abstract class ExplorerDatabase : RoomDatabase() {
 
     fun init(applicationContext: Context) {
       db = Room
-          .databaseBuilder(
-              applicationContext,
-              ExplorerDatabase::class.java,
-              DATABASE_NAME
-          )
-          .build()
+        .databaseBuilder(
+          applicationContext,
+          ExplorerDatabase::class.java,
+          DATABASE_NAME
+        )
+        .build()
 
       if (db.getUserProfileDao().getAll().isEmpty()) {
         db.getUserProfileDao().insert(UserProfileEntity("World"))

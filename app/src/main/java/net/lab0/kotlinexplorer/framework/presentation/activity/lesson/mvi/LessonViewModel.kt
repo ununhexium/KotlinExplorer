@@ -14,11 +14,11 @@ import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
 
 class LessonViewModel(
-    private val saveLessonProgress: SaveLessonProgress,
-    private val sendProblemReport: SendProblemReport,
+  private val saveLessonProgress: SaveLessonProgress,
+  private val sendProblemReport: SendProblemReport,
 ) : BaseViewModel<LessonStateEvent, LessonViewState>(
-    LessonStateEvent.Empty,
-    LessonViewState(Lesson.EMPTY)
+  LessonStateEvent.Empty,
+  LessonViewState(Lesson.EMPTY)
 ) {
 
   override suspend fun doJobForEvent(event: LessonStateEvent) {
@@ -28,25 +28,25 @@ class LessonViewModel(
 
       LessonStateEvent.SaveLessonProgress ->
         processResource(
-            saveLessonProgress(
-                LessonProgress(
-                    uiDataState.value.lesson.id,
-                    uiDataState.value.answersCount(AnswerCorrectness.SUCCESS),
-                    uiDataState.value.answersCount(AnswerCorrectness.FAILURE),
-                )
+          saveLessonProgress(
+            LessonProgress(
+              uiDataState.value.lesson.id,
+              uiDataState.value.answersCount(AnswerCorrectness.SUCCESS),
+              uiDataState.value.answersCount(AnswerCorrectness.FAILURE),
             )
+          )
         ) {}
 
       is LessonStateEvent.CountMark ->
         updateUi {
           it.copy(
-              answers = it.answers + mapOf(event.currentPage to event.correctness)
+            answers = it.answers + mapOf(event.currentPage to event.correctness)
           )
         }
 
       is LessonStateEvent.ReportProblem ->
         processResource(
-            sendProblemReport(event.problemReport)
+          sendProblemReport(event.problemReport)
         ) {
           Toast.makeText(event.context, "Report sent", Toast.LENGTH_SHORT).show()
         }
@@ -54,10 +54,10 @@ class LessonViewModel(
   }
 
   fun saveLesson() =
-      emitSlowEvent(LessonStateEvent.SaveLessonProgress)
+    emitSlowEvent(LessonStateEvent.SaveLessonProgress)
 
   fun countMark(lessonPage: LessonPage, correctness: AnswerCorrectness) =
-      emitFastEvent(LessonStateEvent.CountMark(lessonPage, correctness))
+    emitFastEvent(LessonStateEvent.CountMark(lessonPage, correctness))
 
   fun init(lesson: Lesson) {
     updateUi {

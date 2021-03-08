@@ -8,10 +8,13 @@ import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackServ
 import net.lab0.kotlinexplorer.mvi.Resource
 
 class GetLessonFeedbackImpl(
-    private val lessonFeedbackService: LessonFeedbackService
+  private val lessonFeedbackService: LessonFeedbackService
 ) : GetLessonFeedback {
-  override suspend fun invoke(uid:String, lessonId: String): Flow<Resource<LessonFeedback?>> = flow {
-    val feedback = lessonFeedbackService.readAllUserFeedbacks(uid).sortedByDescending { it.timestamp }.firstOrNull()
-    emit(Resource.LoadedResource(feedback))
-  }
+  override suspend fun invoke(uid: String, lessonId: String): Flow<Resource<LessonFeedback?>> =
+    flow {
+      val feedback =
+        lessonFeedbackService.readAllUserFeedbacks(uid).sortedByDescending { it.timestamp }
+          .firstOrNull()
+      emit(Resource.LoadedResource(feedback))
+    }
 }

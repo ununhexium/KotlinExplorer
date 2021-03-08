@@ -8,12 +8,12 @@ import net.lab0.kotlinexplorer.framework.firebase.model.extraLessonRequestDocume
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 
 class ExtraContentServiceImpl(
-    private val firestore: FirebaseFirestore,
-    private val fromDomain: FromDomain<ExtraContentRequestDocument, ExtraContentRequest>,
+  private val firestore: FirebaseFirestore,
+  private val fromDomain: FromDomain<ExtraContentRequestDocument, ExtraContentRequest>,
 ) : ExtraContentService {
   override suspend fun requestExtraLessons(uid: String, extra: ExtraContentRequest) {
     firestore
-        .extraLessonRequestDocument(uid)
-        .set(fromDomain(extra))
+      .extraLessonRequestDocument(uid)
+      .set(fromDomain(extra))
   }
 }

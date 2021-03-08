@@ -17,8 +17,8 @@ open class DatabaseTest {
   fun configureDatabase() {
     val context = ApplicationProvider.getApplicationContext<Context>()
     db = Room
-        .inMemoryDatabaseBuilder(context, ExplorerDatabase::class.java)
-        .build()
+      .inMemoryDatabaseBuilder(context, ExplorerDatabase::class.java)
+      .build()
 
     userProfileDao = db.getUserProfileDao()
     lessonProgressDao = db.getLessonProgressDao()

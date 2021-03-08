@@ -8,38 +8,38 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object StringConcatenation : LessonImpl(
-    id = "kotlin.positivenegative.stringconcatenation",
-    title = "String Concatenation",
-    pages = listOf(
-        CodeQuestionPage(
-            title = "❤ + ❤",
-            question = """
+  id = "kotlin.positivenegative.stringconcatenation",
+  title = "String Concatenation",
+  pages = listOf(
+    CodeQuestionPage(
+      title = "❤ + ❤",
+      question = """
 Concatenate these 2 hearts together.
 """,
-            snippet = """
+      snippet = """
 val twoHearts = "❤" ${p(0)} "❤"
 """,
-            explanation = """
+      explanation = """
 Between 2 strings, the `+` operator concatenates the strings together.
 
 ```kotlin
 "❤" + "❤" == "❤❤"  // true
 ```
 """,
-            answer = listOf("+"),
-            confusion = listOf(".", "~", "$$"),
-        ),
-        CodeQuestionPage(
-            title = "String Templates",
-            question = """
+      answer = listOf("+"),
+      confusion = listOf(".", "~", "$$"),
+    ),
+    CodeQuestionPage(
+      title = "String Templates",
+      question = """
 Put Kotlin's age in the middle of this `String`.
 """,
-            snippet = """
+      snippet = """
 val age = $kotlinsAge
 val s = "Kotlin is ${p(0)}${p(1)}age${p(2)} years old."
 // or $kotlinsV1Age since version 1.0
 """,
-            explanation = """
+      explanation = """
 Any value in Kotlin can be converted to a `String`.
 
 The easy way is to use the string template syntax. `$dollar{}`
@@ -61,18 +61,18 @@ val s: String = "world"
 val hello = "Hello $dollar{s}" 
 ```
 """,
-            answer = listOf("$", "{", "}"),
-            confusion = listOf("(", ")", "&"),
-        ),
-        CodeQuestionPage(
-            title = "Short Template",
-            question = """
+      answer = listOf("$", "{", "}"),
+      confusion = listOf("(", ")", "&"),
+    ),
+    CodeQuestionPage(
+      title = "Short Template",
+      question = """
 You can also use templates without `{}`.
 """,
-            snippet = """
+      snippet = """
 val s1 = "Kotlin is ${p(0)}age years old."
 """,
-            explanation = """
+      explanation = """
 For the moment it will work in most cases.
  
 ```kotlin
@@ -92,12 +92,12 @@ val s = "world"
 val hello = "Hello ${dollar}s" 
 ```
 """,
-            answer = listOf("$"),
-            confusion = listOf("!", "&"),
-        ),
-        LessonPage.MultipleChoice(
-            title = "Short problems",
-            question = """
+      answer = listOf("$"),
+      confusion = listOf("!", "&"),
+    ),
+    LessonPage.MultipleChoice(
+      title = "Short problems",
+      question = """
 What will this print?
 
 ```kotlin
@@ -105,7 +105,7 @@ val what = "duck"
 print("I shot 99 ${dollar}whats today.")
 ```
 """,
-            explanation = """
+      explanation = """
 Kotlin doesn't know when the variable `what` ends and
 the rest of the string `"s today."` continues. It will not guess.
 You must use the full notation `$dollar{what}s` to isolate the variable name
@@ -116,30 +116,30 @@ val what = "duck"
 print("I shot 99 ${dollar}{what}s today.")
 ```
 """,
-            choices = listOf("Some error", "I shot 99 whats today.", "I shot 99 ducks today."),
-            answer = setOf(0)
-        ),
-        CodeQuestionPage(
-            title = "Code in strings",
-            question = """
+      choices = listOf("Some error", "I shot 99 whats today.", "I shot 99 ducks today."),
+      answer = setOf(0)
+    ),
+    CodeQuestionPage(
+      title = "Code in strings",
+      question = """
 Put the number `2` in `s`.
 """,
-            snippet = """
+      snippet = """
 val n = 1
 val s = "$dollar{ n ${p(0)} n }"
 """,
-            explanation = """
+      explanation = """
 `$dollar{...}` can contain any Kotlin code.
 
 The code inside the curly brackets `{}` will be executed and 
 the result will be transformed to a string.
 """,
-            answer = listOf("+"),
-            confusion = listOf("==", ">", "4"),
-        ),
-        LessonPage.MultipleChoice(
-            title = "1 + 1 =",
-            question = """
+      answer = listOf("+"),
+      confusion = listOf("==", ">", "4"),
+    ),
+    LessonPage.MultipleChoice(
+      title = "1 + 1 =",
+      question = """
 What will this print?
 
 ```kotlin
@@ -147,18 +147,18 @@ val n = "1"
 print("1 + 1 = $dollar{ n + n }")
 ```
 """,
-            explanation = """
+      explanation = """
 The content of the string doesn't matter when using `+` between them.
 
 `n` is a string. `+` between strings does a concatenation. Therefore `n + n` is `"1" + "1"`.
 Glue them together and you have `"11"`.
 """,
-            choices = listOf("1 + 1 = 11", "1 + 1 = 2"),
-            answer = setOf(0),
-        ),
-        InfoPage(
-            "Summary",
-            """
+      choices = listOf("1 + 1 = 11", "1 + 1 = 2"),
+      answer = setOf(0),
+    ),
+    InfoPage(
+      "Summary",
+      """
 Strings can be concatenated either with `+` for simple cases or with `$dollar{}` for more complex cases.
 
 All the Kotlin data types have a `String` representation.
@@ -173,6 +173,6 @@ println(
 )
 ```
 """
-        )
     )
+  )
 )

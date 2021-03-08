@@ -1,8 +1,8 @@
 package net.lab0.kotlinexplorer.business.domain
 
-interface Chapter: Prerequisite {
+interface Chapter : Prerequisite {
   companion object {
-    val EMPTY = object: Chapter {
+    val EMPTY = object : Chapter {
       override val id = ""
       override val title = ""
       override val description = ""

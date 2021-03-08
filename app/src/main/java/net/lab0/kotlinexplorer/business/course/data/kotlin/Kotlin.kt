@@ -6,8 +6,8 @@ import net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator.Pock
 import net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative.PositiveNegativeChapter
 
 val KOTLIN = listOf(
-    HelloWorldChapter,
-    PositiveNegativeChapter,
-    PocketCalculatorChapter,
-    MoreOrLessChapter,
+  HelloWorldChapter,
+  PositiveNegativeChapter,
+  PocketCalculatorChapter,
+  MoreOrLessChapter,
 )

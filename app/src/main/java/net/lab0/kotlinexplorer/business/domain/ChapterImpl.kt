@@ -1,10 +1,10 @@
 package net.lab0.kotlinexplorer.business.domain
 
 open class ChapterImpl(
-    override val id: String,
-    override val title: String,
-    override val description: String,
-    override val lessons: List<Lesson>,
+  override val id: String,
+  override val title: String,
+  override val description: String,
+  override val lessons: List<Lesson>,
 ) : Chapter {
   override fun equals(other: Any?): Boolean {
     if (this === other) return true

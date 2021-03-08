@@ -17,8 +17,6 @@ import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.LessonFeedbackService
-import org.junit.After
-import org.junit.Before
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

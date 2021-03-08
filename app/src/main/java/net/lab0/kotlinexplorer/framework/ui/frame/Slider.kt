@@ -24,9 +24,9 @@ import kotlin.math.floor
  */
 @Composable
 fun Slider(
-    modifier: Modifier = Modifier,
-    visibleIndex: Float = 0f,
-    children: @Composable () -> Unit,
+  modifier: Modifier = Modifier,
+  visibleIndex: Float = 0f,
+  children: @Composable () -> Unit,
 ) {
   Layout(children, modifier) { measurables, constraints ->
 
@@ -35,10 +35,10 @@ fun Slider(
     val currentRatio = visibleIndex - floor(visibleIndex)
 
     val placeables = measurables
-        .subList(previousIndex, nextIndex)
-        .map { measurable ->
-          measurable.measure(constraints)
-        }
+      .subList(previousIndex, nextIndex)
+      .map { measurable ->
+        measurable.measure(constraints)
+      }
 
     layout(constraints.maxWidth, constraints.maxHeight) {
       val placeable0 = placeables[0]
@@ -47,10 +47,10 @@ fun Slider(
       val xOffset0 = (constraints.maxWidth * currentRatio).toInt()
 
       placeable0.placeRelative(
-          IntOffset(
-              (emptySpaceX0 / 2) - xOffset0,
-              emptySpaceY0 / 2
-          )
+        IntOffset(
+          (emptySpaceX0 / 2) - xOffset0,
+          emptySpaceY0 / 2
+        )
       )
 
       val placeable1 = placeables[1]
@@ -59,10 +59,10 @@ fun Slider(
       val xOffset1 = (xOffset0 + constraints.maxWidth * (1f - currentRatio)).toInt()
 
       placeable1.placeRelative(
-          IntOffset(
-              (emptySpaceX1 / 2) - xOffset0 + xOffset1,
-              emptySpaceY1 / 2
-          )
+        IntOffset(
+          (emptySpaceX1 / 2) - xOffset0 + xOffset1,
+          emptySpaceY1 / 2
+        )
       )
     }
   }
@@ -77,13 +77,13 @@ fun PreviewSlider() {
         Text("A")
         Text("B")
         Icon(
-            Icons.Default.Phone,
-            contentDescription = "Phone",
-            tint = Color.Red
+          Icons.Default.Phone,
+          contentDescription = "Phone",
+          tint = Color.Red
         )
         Image(
-            painterResource(id = R.drawable.beach),
-            contentDescription = "beach",
+          painterResource(id = R.drawable.beach),
+          contentDescription = "beach",
         )
       }
     }

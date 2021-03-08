@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "LessonProgress")
 data class LessonProgressEntity(
-    @PrimaryKey
-    val id: String,
+  @PrimaryKey
+  val id: String,
 
-    @ColumnInfo(name = "successCount")
-    val successCount: Int,
+  @ColumnInfo(name = "successCount")
+  val successCount: Int,
 
-    @ColumnInfo(name = "failureCount")
-    val failureCount: Int,
+  @ColumnInfo(name = "failureCount")
+  val failureCount: Int,
 )

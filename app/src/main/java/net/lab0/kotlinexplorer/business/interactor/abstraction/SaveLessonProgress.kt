@@ -1,11 +1,11 @@
 package net.lab0.kotlinexplorer.business.interactor.abstraction
 
+import kotlinx.coroutines.flow.Flow
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.mvi.Resource
-import kotlinx.coroutines.flow.Flow
 
 interface SaveLessonProgress {
   operator fun invoke(
-      lessonProgress: LessonProgress,
+    lessonProgress: LessonProgress,
   ): Flow<Resource<Nothing>>
 }

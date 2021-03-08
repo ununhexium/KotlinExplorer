@@ -7,7 +7,7 @@ fun main() {
   // between 0 and 99
   val target = nextInt(100)
 
-  var proposition:Int? = null
+  var proposition: Int? = null
   var tries = 0
 
   while (proposition != target) {
@@ -15,11 +15,11 @@ fun main() {
     tries++
 
     print(
-        when {
-          proposition == target -> "You win in $tries!"
-          proposition > target -> "Too big."
-          else -> "Too small."
-        }
+      when {
+        proposition == target -> "You win in $tries!"
+        proposition > target -> "Too big."
+        else -> "Too small."
+      }
     )
   }
 }

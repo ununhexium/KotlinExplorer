@@ -7,18 +7,18 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage.MultipleChoice
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Comparators : LessonImpl(
-    id = "kotlin.positivenegative.comparators",
-    title = "Comparators",
-    pages = listOf(
-        CodeQuestionPage(
-            title = "Equality",
-            question = """
+  id = "kotlin.positivenegative.comparators",
+  title = "Comparators",
+  pages = listOf(
+    CodeQuestionPage(
+      title = "Equality",
+      question = """
 Make the following comparison true
 """,
-            snippet = """
+      snippet = """
 true ${p(0)} true
 """,
-            explanation = """
+      explanation = """
 ##### `==`
 
 The comparison *operator*.
@@ -44,18 +44,18 @@ Exists but does a different kind of comparison. More about that in another lesso
 1 == 2      // better. More readable
 ```
 """,
-            answer = listOf("=="),
-            confusion = listOf("=", "===", "equals"),
-        ),
-        CodeQuestionPage(
-            title = "Not so equal",
-            question = """
+      answer = listOf("=="),
+      confusion = listOf("=", "===", "equals"),
+    ),
+    CodeQuestionPage(
+      title = "Not so equal",
+      question = """
 Make the following comparison true.
 """,
-            snippet = """
+      snippet = """
 "long" ${p(0)} "short"
 """,
-            explanation = """
+      explanation = """
 ##### `!=` 
 
 Inequality operator
@@ -69,18 +69,18 @@ Exists but does a different kind of comparison. It works in pair with `===`. Mor
 Is not a Kotlin operator.
 
 """,
-            answer = listOf("!="),
-            confusion = listOf("<>", "!=="),
-        ),
-        CodeQuestionPage(
-            title = "Bigger",
-            question = """
+      answer = listOf("!="),
+      confusion = listOf("<>", "!=="),
+    ),
+    CodeQuestionPage(
+      title = "Bigger",
+      question = """
 Make the following comparison true.
 """,
-            snippet = """
+      snippet = """
 100 ${p(0)} 99
 """,
-            explanation = """
+      explanation = """
 ##### `x < y`
 
 `x` is smaller than `y`
@@ -90,18 +90,18 @@ Make the following comparison true.
 `x` is greater than `y`
 
 """,
-            answer = listOf(">"),
-            confusion = listOf("<"),
-        ),
-        CodeQuestionPage(
-            title = "Smaller",
-            question = """
+      answer = listOf(">"),
+      confusion = listOf("<"),
+    ),
+    CodeQuestionPage(
+      title = "Smaller",
+      question = """
 Make the following comparison true.
 """,
-            snippet = """
+      snippet = """
 0 ${p(0)} 1
 """,
-            explanation = """
+      explanation = """
 ##### `x < y`
 
 `x` is smaller than `y`
@@ -111,19 +111,19 @@ Make the following comparison true.
 `x` is greater than `y`
 
 """,
-            answer = listOf("<"),
-            confusion = listOf(">"),
-        ),
-        CodeQuestionPage(
-            title = "Greater or equal",
-            question = """
+      answer = listOf("<"),
+      confusion = listOf(">"),
+    ),
+    CodeQuestionPage(
+      title = "Greater or equal",
+      question = """
 Make the following comparisons true.
 """,
-            snippet = """
+      snippet = """
 1 ${p(0)} 0
 1 ${p(0)} 1
 """,
-            explanation = """
+      explanation = """
 ##### `x <= y`
  
 `x` is smaller than `y` or equal to `y`
@@ -132,19 +132,19 @@ Make the following comparisons true.
  
 `x` is greater than `y` or equal to `y`
 """,
-            answer = listOf(">="),
-            confusion = listOf("<="),
-        ),
-        CodeQuestionPage(
-            title = "Smaller or equal",
-            question = """
+      answer = listOf(">="),
+      confusion = listOf("<="),
+    ),
+    CodeQuestionPage(
+      title = "Smaller or equal",
+      question = """
 Make the following comparisons true.
 """,
-            snippet = """
+      snippet = """
 0 ${p(0)} 0
 0 ${p(0)} 1
 """,
-            explanation = """
+      explanation = """
 ##### `x <= y`
  
 `x` is smaller than `y` or equal to `y`
@@ -153,12 +153,12 @@ Make the following comparisons true.
  
 `x` is greater than `y` or equal to `y`
 """,
-            answer = listOf("<="),
-            confusion = listOf(">="),
-        ),
-        CodeQuestionPage(
-            title = "Result type",
-            question = """
+      answer = listOf("<="),
+      confusion = listOf(">="),
+    ),
+    CodeQuestionPage(
+      title = "Result type",
+      question = """
 A comparison returns a value. Can you guess its type?
 
 Parentheses show operations priority.
@@ -166,10 +166,10 @@ Parentheses show operations priority.
 1. compare
 2. put the comparison's result into the value 'isTrue'
 """,
-            snippet = """
+      snippet = """
 val isTrue: ${p(0)} = (1 == 1) 
 """,
-            explanation = """
+      explanation = """
 All comparisons return a boolean, either `true`, like here, or `false` like in
 
 ```kotlin
@@ -186,38 +186,38 @@ true == true == true == true       // true
 (true == true) == (false == false) // true
 ```
 """,
-            answer = listOf("Boolean"),
-            confusion = listOf("Int", "String", "Undefined"),
-        ),
-        MultipleChoice(
-            title = "Mhhh \uD83E\uDD14",
-            question = """
+      answer = listOf("Boolean"),
+      confusion = listOf("Int", "String", "Undefined"),
+    ),
+    MultipleChoice(
+      title = "Mhhh \uD83E\uDD14",
+      question = """
 Can you guess the result of the following expression?
 
 ```kotlin
 true > false
 ```
 """,
-            explanation = """
+      explanation = """
 You could also use `>=` and `<=`. But only on the first of April 😉.
 
 ...
 
 Please don't do that. Only use `==` and `!=` to compare booleans. 🙏
 """,
-            choices = listOf("true", "false", "Not valid", "Undefined"),
-            answer = setOf(0),
-        ),
-        MultipleChoice(
-            title = "Different data types",
-            question = """
+      choices = listOf("true", "false", "Not valid", "Undefined"),
+      answer = setOf(0),
+    ),
+    MultipleChoice(
+      title = "Different data types",
+      question = """
 Can you guess the result of the following expression?
 
 ```kotlin
 "a" != 1
 ```
 """,
-            explanation = """
+      explanation = """
 Comparisons must be between elements of the same type.
 
 ```kotlin
@@ -226,12 +226,12 @@ Comparisons must be between elements of the same type.
 "a" !=  1  // error
 ```
 """,
-            choices = listOf("Some error?", "true", "false"),
-            answer = setOf(0),
-        ),
-        InfoPage(
-            title = "Summary",
-            """
+      choices = listOf("Some error?", "true", "false"),
+      answer = setOf(0),
+    ),
+    InfoPage(
+      title = "Summary",
+      """
 Comparison operators can be used on comparable data types. So far you know three data types.
 
 1. `Int`eger
@@ -254,6 +254,6 @@ Compared with `!=`, `==`, `<`, `>`, `<=`, `>=`
 Compared with `!=`, `==`.
 Could be compared with `<`, `>`, `<=`, `>=`, more about that in another lesson.
 """
-        )
     )
+  )
 )

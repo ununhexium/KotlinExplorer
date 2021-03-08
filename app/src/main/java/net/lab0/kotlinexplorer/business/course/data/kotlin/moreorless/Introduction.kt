@@ -5,12 +5,12 @@ import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 
 object Introduction : LessonImpl(
-    id = "kotlin.moreorless.introduction",
-    title = "Introduction",
-    pages = listOf(
-        LessonPage.InfoPage(
-            "More or less",
-            """
+  id = "kotlin.moreorless.introduction",
+  title = "Introduction",
+  pages = listOf(
+    LessonPage.InfoPage(
+      "More or less",
+      """
 In this chapter we will see how to implement a game when the user 
 has to guess a number.
 
@@ -85,6 +85,6 @@ Why can we do `.toInt()` on the result? Where does it come from?
 
 What does `when` do here? Why are we not using `if`/`else`?
 """
-        )
     )
+  )
 )

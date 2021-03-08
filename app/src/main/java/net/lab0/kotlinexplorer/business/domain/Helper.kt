@@ -6,7 +6,10 @@ import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.grammar.kotlin.extractSpots
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.normalStyle
 
-fun extractHighlightsAndAnnotate(kotlinCode: String, styler: (KotlinHighlight) -> SpanStyle): AnnotatedString {
+fun extractHighlightsAndAnnotate(
+  kotlinCode: String,
+  styler: (KotlinHighlight) -> SpanStyle
+): AnnotatedString {
   val spots = extractSpots(kotlinCode)
 
   val builder = AnnotatedString.Builder(kotlinCode)
@@ -15,9 +18,9 @@ fun extractHighlightsAndAnnotate(kotlinCode: String, styler: (KotlinHighlight) -
 
   spots.forEach {
     builder.addStyle(
-        styler(it.highlight),
-        it.start,
-        it.end + 1
+      styler(it.highlight),
+      it.start,
+      it.end + 1
     )
   }
 

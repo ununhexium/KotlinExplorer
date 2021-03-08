@@ -7,8 +7,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import io.mockk.clearAllMocks
-import io.mockk.every
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.runBlocking
@@ -54,9 +52,9 @@ internal class ProblemReportServiceImplTest {
     Tasks.await(firebaseAuth.signInAnonymously())
 
     problemReportService = ProblemReportServiceImpl(
-        firebaseAuth,
-        firestore,
-        fromDomain,
+      firebaseAuth,
+      firestore,
+      fromDomain,
     )
   }
 
@@ -75,14 +73,14 @@ internal class ProblemReportServiceImplTest {
 
     // then
     val reports = firestore
-        .problemReportCollection(firebaseAuth.uid!!)
-        .get()
-        .await()
-        .toObjects(ProblemReportDocument::class.java)
+      .problemReportCollection(firebaseAuth.uid!!)
+      .get()
+      .await()
+      .toObjects(ProblemReportDocument::class.java)
 
     assertThat(reports.map { it.id }).containsAtLeast(
-        problemReport1.id.toString(),
-        problemReport2.id.toString()
+      problemReport1.id.toString(),
+      problemReport2.id.toString()
     )
   }
 }

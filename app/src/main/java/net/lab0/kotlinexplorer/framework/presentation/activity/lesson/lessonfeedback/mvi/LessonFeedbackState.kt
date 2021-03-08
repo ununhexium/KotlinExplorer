@@ -2,7 +2,6 @@ package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfee
 
 import net.lab0.kotlinexplorer.business.domain.feedback.DifficultyRating
 import net.lab0.kotlinexplorer.business.domain.feedback.DurationRating
-import net.lab0.kotlinexplorer.framework.presentation.composable.feedback.EvaluationTopic
 import net.lab0.kotlinexplorer.mvi.UiState
 
 data class LessonFeedbackState(

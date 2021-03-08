@@ -15,18 +15,18 @@ class LessonFeedbackServiceImpl(
   private val toDomain: ToDomain<LessonFeedbackDocument, LessonFeedback>,
 ) : LessonFeedbackService {
 
-  override suspend fun insertOrUpdateFeedback(uid:String, lessonFeedback: LessonFeedback) {
+  override suspend fun insertOrUpdateFeedback(uid: String, lessonFeedback: LessonFeedback) {
     firestore
       .feedbackCollection(uid)
       .document(lessonFeedback.lessonId)
-      .also{
+      .also {
         print(it.path)
       }
       .set(fromDomain(lessonFeedback))
       .await()
   }
 
-  override suspend fun readAllUserFeedbacks(uid:String): List<LessonFeedback> {
+  override suspend fun readAllUserFeedbacks(uid: String): List<LessonFeedback> {
     return firestore
       .feedbackCollection(uid)
       .get()

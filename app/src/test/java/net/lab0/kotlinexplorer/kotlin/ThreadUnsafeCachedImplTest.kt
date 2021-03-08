@@ -1,7 +1,7 @@
 package net.lab0.kotlinexplorer.kotlin
 
-import net.lab0.kotlinexplorer.utils.cached
 import com.google.common.truth.Truth.assertThat
+import net.lab0.kotlinexplorer.utils.cached
 import org.junit.Before
 import org.junit.jupiter.api.Test
 

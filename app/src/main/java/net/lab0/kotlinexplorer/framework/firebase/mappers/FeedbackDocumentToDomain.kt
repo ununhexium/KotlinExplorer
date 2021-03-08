@@ -9,11 +9,11 @@ import java.util.*
 
 class FeedbackDocumentToDomain : ToDomain<LessonFeedbackDocument, LessonFeedback> {
   override fun invoke(entity: LessonFeedbackDocument) =
-      LessonFeedback(
-          lessonId = entity.lessonId,
-          durationRating = DurationRating.values().first { it.code == entity.durationRating },
-          difficultyRating = DifficultyRating.values().first { it.code == entity.difficultyRating },
-          timestamp = entity.createdAt.toDate(),
-          id = UUID.fromString(entity.id)
-      )
+    LessonFeedback(
+      lessonId = entity.lessonId,
+      durationRating = DurationRating.values().first { it.code == entity.durationRating },
+      difficultyRating = DifficultyRating.values().first { it.code == entity.difficultyRating },
+      timestamp = entity.createdAt.toDate(),
+      id = UUID.fromString(entity.id)
+    )
 }

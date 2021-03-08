@@ -7,11 +7,11 @@ import net.lab0.kotlinexplorer.framework.util.FromDomain
 
 class ProblemReportDocumentFromDomain : FromDomain<ProblemReportDocument, ProblemReport> {
   override fun invoke(domain: ProblemReport) =
-      ProblemReportDocument(
-          domain.id.toString(),
-          Timestamp(domain.createdAt),
-          domain.problemLocationDescription,
-          domain.userFeedback,
-          domain.status,
-      )
+    ProblemReportDocument(
+      domain.id.toString(),
+      Timestamp(domain.createdAt),
+      domain.problemLocationDescription,
+      domain.userFeedback,
+      domain.status,
+    )
 }

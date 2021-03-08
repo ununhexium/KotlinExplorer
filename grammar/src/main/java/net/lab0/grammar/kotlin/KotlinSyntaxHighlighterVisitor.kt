@@ -21,7 +21,7 @@ import org.antlr.v4.runtime.tree.TerminalNode
  * This stuff sometimes breaks on unexpected inputs. Stuff that should not be null can be null and it crashes the app.
  */
 class KotlinSyntaxHighlighterVisitor(
-    val wellKnownFunctions: List<String> = listOf("println", "print"),
+  val wellKnownFunctions: List<String> = listOf("println", "print"),
 ) : KotlinParserBaseVisitor<Highlights<KotlinHighlight>>() {
   private fun hl(l: Highlights<KotlinHighlight>.() -> Unit): Highlights<KotlinHighlight> {
     val h = Highlights<KotlinHighlight>()
@@ -32,8 +32,8 @@ class KotlinSyntaxHighlighterVisitor(
   override fun defaultResult() = hl {}
 
   override fun aggregateResult(
-      aggregate: Highlights<KotlinHighlight>,
-      nextResult: Highlights<KotlinHighlight>,
+    aggregate: Highlights<KotlinHighlight>,
+    nextResult: Highlights<KotlinHighlight>,
   ): Highlights<KotlinHighlight> {
     aggregate.add(nextResult)
     return aggregate
@@ -45,222 +45,221 @@ class KotlinSyntaxHighlighterVisitor(
   }
 
   override fun visitAdditiveOperator(ctx: KotlinParser.AdditiveOperatorContext) =
-      hl {
-        add(OPERATOR, ctx.range)
-      }
+    hl {
+      add(OPERATOR, ctx.range)
+    }
 
   override fun visitAnnotation(ctx: KotlinParser.AnnotationContext) =
-      hl {
-        add(ANNOTATION, ctx.LabelReference().range)
+    hl {
+      add(ANNOTATION, ctx.LabelReference().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitAssignmentOperator(ctx: KotlinParser.AssignmentOperatorContext) =
-      hl {
-        add(OPERATOR, ctx.range)
-      }
+    hl {
+      add(OPERATOR, ctx.range)
+    }
 
   override fun visitBlock(ctx: KotlinParser.BlockContext) =
-      hl {
-        add(BRACKET, ctx.LCURL().range)
-        add(BRACKET, ctx.RCURL().range)
+    hl {
+      add(BRACKET, ctx.LCURL().range)
+      add(BRACKET, ctx.RCURL().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitClassDeclaration(ctx: KotlinParser.ClassDeclarationContext) =
-      hl {
-        ctx.CLASS()?.let { add(KEYWORD, it.range) }
-        ctx.INTERFACE()?.let { add(KEYWORD, it.range) }
+    hl {
+      ctx.CLASS()?.let { add(KEYWORD, it.range) }
+      ctx.INTERFACE()?.let { add(KEYWORD, it.range) }
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitClassParameter(ctx: KotlinParser.ClassParameterContext) =
-      hl {
-        ctx.VAL()?.let { add(KEYWORD, it.range) }
-        ctx.VAR()?.let { add(KEYWORD, it.range) }
+    hl {
+      ctx.VAL()?.let { add(KEYWORD, it.range) }
+      ctx.VAR()?.let { add(KEYWORD, it.range) }
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitClassParameters(ctx: KotlinParser.ClassParametersContext) =
-      hl {
-        ctx.COMMA().forEach {
-          add(COMMA, it.range)
-        }
-
-        add(visitChildren(ctx))
+    hl {
+      ctx.COMMA().forEach {
+        add(COMMA, it.range)
       }
+
+      add(visitChildren(ctx))
+    }
 
   override fun visitComparisonOperator(ctx: KotlinParser.ComparisonOperatorContext) =
-      hl {
-        add(OPERATOR, ctx.range)
-      }
+    hl {
+      add(OPERATOR, ctx.range)
+    }
 
   override fun visitEqualityOperation(ctx: KotlinParser.EqualityOperationContext) =
-      hl {
-        add(OPERATOR, ctx.range)
-      }
+    hl {
+      add(OPERATOR, ctx.range)
+    }
 
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
-      hl {
-        add(KEYWORD, ctx.FUN().range)
-        ctx.identifier()?.let {
-          add(FUNCTION, ctx.identifier().range)
-        }
-
-        add(visitChildren(ctx))
+    hl {
+      add(KEYWORD, ctx.FUN().range)
+      ctx.identifier()?.let {
+        add(FUNCTION, ctx.identifier().range)
       }
+
+      add(visitChildren(ctx))
+    }
 
   override fun visitLineStringLiteral(ctx: KotlinParser.LineStringLiteralContext) =
-      hl {
-        ctx.QUOTE_OPEN()?.let { add(STRING, it.range) }
-        ctx.QUOTE_CLOSE()?.let{ add(STRING, it.range) }
+    hl {
+      ctx.QUOTE_OPEN()?.let { add(STRING, it.range) }
+      ctx.QUOTE_CLOSE()?.let { add(STRING, it.range) }
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitLineStringContent(ctx: KotlinParser.LineStringContentContext) =
-      hl {
-        add(visitChildren(ctx))
-      }
+    hl {
+      add(visitChildren(ctx))
+    }
 
   override fun visitLineStringExpression(ctx: KotlinParser.LineStringExpressionContext) =
-      hl {
-        add(STRING_ESCAPED_CHARACTER, ctx.LineStrExprStart().range)
-        add(STRING_ESCAPED_CHARACTER, ctx.RCURL().range)
+    hl {
+      add(STRING_ESCAPED_CHARACTER, ctx.LineStrExprStart().range)
+      add(STRING_ESCAPED_CHARACTER, ctx.RCURL().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitModifier(ctx: KotlinParser.ModifierContext) =
-      hl {
-        add(MODIFIER, ctx.range)
+    hl {
+      add(MODIFIER, ctx.range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitMultiLineStringLiteral(ctx: KotlinParser.MultiLineStringLiteralContext) =
-      hl {
-        add(STRING, ctx.TRIPLE_QUOTE_OPEN().range)
-        add(STRING, ctx.TRIPLE_QUOTE_CLOSE().range)
+    hl {
+      add(STRING, ctx.TRIPLE_QUOTE_OPEN().range)
+      add(STRING, ctx.TRIPLE_QUOTE_CLOSE().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitMultiLineStringContent(ctx: KotlinParser.MultiLineStringContentContext) =
-      hl {
-        add(visitChildren(ctx))
-      }
+    hl {
+      add(visitChildren(ctx))
+    }
 
   override fun visitMultiLineStringExpression(ctx: KotlinParser.MultiLineStringExpressionContext) =
-      hl {
-        add(STRING_ESCAPED_CHARACTER, ctx.MultiLineStrExprStart().range)
-        add(STRING_ESCAPED_CHARACTER, ctx.RCURL().range)
+    hl {
+      add(STRING_ESCAPED_CHARACTER, ctx.MultiLineStrExprStart().range)
+      add(STRING_ESCAPED_CHARACTER, ctx.RCURL().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitMultiplicativeOperation(ctx: KotlinParser.MultiplicativeOperationContext) =
-      hl {
-        add(OPERATOR, ctx.range)
-      }
+    hl {
+      add(OPERATOR, ctx.range)
+    }
 
   override fun visitImportHeader(ctx: KotlinParser.ImportHeaderContext) =
-      hl {
-        add(KEYWORD, ctx.IMPORT().range)
+    hl {
+      add(KEYWORD, ctx.IMPORT().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitPackageHeader(ctx: KotlinParser.PackageHeaderContext) =
-      hl {
-        ctx.PACKAGE()?.let { add(KEYWORD, it.range) }
+    hl {
+      ctx.PACKAGE()?.let { add(KEYWORD, it.range) }
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitPropertyDeclaration(ctx: KotlinParser.PropertyDeclarationContext) =
-      hl {
-        ctx.VAL()?.let { add(KEYWORD, ctx.VAL().range) }
-        ctx.VAR()?.let { add(KEYWORD, ctx.VAR().range) }
+    hl {
+      ctx.VAL()?.let { add(KEYWORD, ctx.VAL().range) }
+      ctx.VAR()?.let { add(KEYWORD, ctx.VAR().range) }
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitPostfixUnaryExpression(ctx: PostfixUnaryExpressionContext) =
-      hl {
-        if (ctx.atomicExpression()?.text in wellKnownFunctions) {
-          add(FUNCTION, ctx.atomicExpression().range)
-        }
-
-        add(visitChildren(ctx))
+    hl {
+      if (ctx.atomicExpression()?.text in wellKnownFunctions) {
+        add(FUNCTION, ctx.atomicExpression().range)
       }
+
+      add(visitChildren(ctx))
+    }
 
   override fun visitPostfixUnaryOperation(ctx: KotlinParser.PostfixUnaryOperationContext) =
-      hl {
-        ctx.INCR()?.let {
-          add(OPERATOR, it.range)
-        }
-
-        ctx.DECR()?.let {
-          add(OPERATOR, it.range)
-        }
-
-        ctx.EXCL()?.let {
-          if (it.size == 2) {
-            add(OPERATOR, it.first().range.first, it.last().range.last)
-          }
-        }
-
-        add(visitChildren(ctx))
+    hl {
+      ctx.INCR()?.let {
+        add(OPERATOR, it.range)
       }
 
+      ctx.DECR()?.let {
+        add(OPERATOR, it.range)
+      }
+
+      ctx.EXCL()?.let {
+        if (it.size == 2) {
+          add(OPERATOR, it.first().range.first, it.last().range.last)
+        }
+      }
+
+      add(visitChildren(ctx))
+    }
 
 
   override fun visitTerminal(node: TerminalNode) =
-      hl {
-        when (node.symbol.type) {
-          KotlinParser.BooleanLiteral -> add(KEYWORD, node.range)
-          KotlinParser.FloatLiteral -> add(NUMBER, node.range)
-          KotlinParser.RealLiteral -> add(NUMBER, node.range)
-          KotlinParser.ELSE -> add(KEYWORD, node.range)
-          KotlinParser.HexLiteral -> add(NUMBER, node.range)
-          KotlinParser.IF -> add(KEYWORD, node.range)
-          KotlinParser.IntegerLiteral -> add(NUMBER, node.range)
-          KotlinParser.NullLiteral -> add(KEYWORD, node.range)
-          KotlinParser.RETURN -> add(KEYWORD, node.range)
-          KotlinParser.WHERE -> add(KEYWORD, node.range)
+    hl {
+      when (node.symbol.type) {
+        KotlinParser.BooleanLiteral -> add(KEYWORD, node.range)
+        KotlinParser.FloatLiteral -> add(NUMBER, node.range)
+        KotlinParser.RealLiteral -> add(NUMBER, node.range)
+        KotlinParser.ELSE -> add(KEYWORD, node.range)
+        KotlinParser.HexLiteral -> add(NUMBER, node.range)
+        KotlinParser.IF -> add(KEYWORD, node.range)
+        KotlinParser.IntegerLiteral -> add(NUMBER, node.range)
+        KotlinParser.NullLiteral -> add(KEYWORD, node.range)
+        KotlinParser.RETURN -> add(KEYWORD, node.range)
+        KotlinParser.WHERE -> add(KEYWORD, node.range)
 
-          // comments
+        // comments
 //          KotlinParser.Inside_Comment -> add(COMMENT, node.range)
 //          KotlinParser.LineComment -> add(COMMENT, node.range)
 //          KotlinParser.DelimitedComment -> add(COMMENT, node.range)
 //          KotlinParser.StrExpr_Comment -> add(COMMENT, node.range)
 
-          // brackets, parent, ...
-          KotlinParser.LPAREN -> add(BRACKET, node.range)
-          KotlinParser.RPAREN -> add(BRACKET, node.range)
-          KotlinParser.LSQUARE -> add(BRACKET, node.range)
-          KotlinParser.RSQUARE -> add(BRACKET, node.range)
+        // brackets, parent, ...
+        KotlinParser.LPAREN -> add(BRACKET, node.range)
+        KotlinParser.RPAREN -> add(BRACKET, node.range)
+        KotlinParser.LSQUARE -> add(BRACKET, node.range)
+        KotlinParser.RSQUARE -> add(BRACKET, node.range)
 
-          // characters
-          KotlinParser.CharacterLiteral -> add(CHARACTER, node.range)
+        // characters
+        KotlinParser.CharacterLiteral -> add(CHARACTER, node.range)
 
-          // operators
-          KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
+        // operators
+        KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
 
-          // strings
-          KotlinParser.LineStrText -> add(STRING, node.range)
-          KotlinParser.LineStrExprStart -> add(STRING_ESCAPED_CHARACTER, node.range)
-          KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
-          KotlinParser.MultiLineStringQuote -> add(STRING, node.range)
-          KotlinParser.MultiLineStrText -> add(STRING, node.range)
-          KotlinParser.MultiLineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
-        }
+        // strings
+        KotlinParser.LineStrText -> add(STRING, node.range)
+        KotlinParser.LineStrExprStart -> add(STRING_ESCAPED_CHARACTER, node.range)
+        KotlinParser.LineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
+        KotlinParser.MultiLineStringQuote -> add(STRING, node.range)
+        KotlinParser.MultiLineStrText -> add(STRING, node.range)
+        KotlinParser.MultiLineStrEscapedChar -> add(STRING_ESCAPED_CHARACTER, node.range)
       }
+    }
 
   override fun visitType(ctx: KotlinParser.TypeContext) =
     hl {
@@ -268,28 +267,28 @@ class KotlinSyntaxHighlighterVisitor(
     }
 
   override fun visitTypeParameters(ctx: KotlinParser.TypeParametersContext) =
-      hl {
-        add(BRACKET, ctx.LANGLE().range)
-        add(BRACKET, ctx.RANGLE().range)
+    hl {
+      add(BRACKET, ctx.LANGLE().range)
+      add(BRACKET, ctx.RANGLE().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitWhenExpression(ctx: KotlinParser.WhenExpressionContext) =
-      hl {
-        add(KEYWORD, ctx.WHEN().range)
-        ctx.LCURL()?.let { add(BRACKET, it.range) }
-        ctx.RCURL()?.let { add(BRACKET, it.range) }
+    hl {
+      add(KEYWORD, ctx.WHEN().range)
+      ctx.LCURL()?.let { add(BRACKET, it.range) }
+      ctx.RCURL()?.let { add(BRACKET, it.range) }
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
   override fun visitWhileExpression(ctx: KotlinParser.WhileExpressionContext) =
-      hl {
-        add(KEYWORD, ctx.WHILE().range)
+    hl {
+      add(KEYWORD, ctx.WHILE().range)
 
-        add(visitChildren(ctx))
-      }
+      add(visitChildren(ctx))
+    }
 
 
 }

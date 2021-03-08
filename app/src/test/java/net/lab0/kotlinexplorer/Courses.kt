@@ -12,27 +12,27 @@ class Courses {
   }
 
   data class Course(
-      override val name: String,
-      val description: String,
-      val dependencies: List<Dep> = listOf()
+    override val name: String,
+    val description: String,
+    val dependencies: List<Dep> = listOf()
   ) : Dep
 
   data class Project(
-      override val name: String,
-      val dependencies: List<Dep> = listOf()
+    override val name: String,
+    val dependencies: List<Dep> = listOf()
   ) : Dep
 
   val courses = mutableListOf<Course>()
   val groups = mutableListOf<Project>()
 
   fun course(name: String, vararg dependencies: Dep) =
-      Course(name, "", dependencies.toList()).also { courses.add(it) }
+    Course(name, "", dependencies.toList()).also { courses.add(it) }
 
   fun course(name: String, description: String, vararg dependencies: Dep) =
-      Course(name, description, dependencies.toList()).also { courses.add(it) }
+    Course(name, description, dependencies.toList()).also { courses.add(it) }
 
   fun project(name: String, vararg dependencies: Dep) =
-      Project(name, dependencies.toList()).also { groups.add(it) }
+    Project(name, dependencies.toList()).also { groups.add(it) }
 
   @Test
   fun `list kotlin courses`() {
@@ -42,10 +42,10 @@ class Courses {
     val main = course("Main", "main, start, entry point")
 
     val helloWorld = project(
-        "Hello World",
-        print,
-        main,
-        strings,
+      "Hello World",
+      print,
+      main,
+      strings,
     )
 
     val value = course("Value", "val, value, constant")
@@ -57,12 +57,12 @@ class Courses {
     val stringConcatenation = course("String concatenation", strings)
 
     val positivenegative = project(
-        "Positive or Negative",
-        helloWorld,
-        ifElse,
-        value,
-        comparison,
-        stringConcatenation,
+      "Positive or Negative",
+      helloWorld,
+      ifElse,
+      value,
+      comparison,
+      stringConcatenation,
     )
 
 
@@ -74,12 +74,12 @@ class Courses {
     val whileLoop = course("While", ifElse)
 
     val plusOrMinus = project(
-        "Basics",
-        helloWorld,
-        value,
-        variable,
-        ifElse,
-        whileLoop,
+      "Basics",
+      helloWorld,
+      value,
+      variable,
+      ifElse,
+      whileLoop,
     )
 
     val nullable = course("Null", "null, nullable, ?", value, variable)
@@ -95,12 +95,12 @@ class Courses {
     val characters = course("Characters", plusOrMinus)
 
     val dataTypes = project(
-        "Data types",
-        integers,
-        boolean,
-        floatingPoint,
-        characters,
-        strings,
+      "Data types",
+      integers,
+      boolean,
+      floatingPoint,
+      characters,
+      strings,
     )
 
     val stringTemplates = course("String templates", "dollar, $, \${}, string template", strings)
@@ -114,8 +114,8 @@ class Courses {
     val operatorPriorities = course("Operator priorities", integers)
 
     val operators = project(
-        "Operators",
-        unaryPlus
+      "Operators",
+      unaryPlus
     )
 
     val operatorsOverloading = course("Operators overload")
@@ -186,19 +186,19 @@ class Courses {
 
     // then output .dot file
     File("/home/uuh/dev/ununhexium/JetpackComposeExplorer/topics.dot").writeText(
-        "digraph g { \n" +
-            courses.joinToString(separator = "\n", prefix = "\n", postfix = "\n") {
-              it.name.quoted()
-            } +
+      "digraph g { \n" +
+          courses.joinToString(separator = "\n", prefix = "\n", postfix = "\n") {
+            it.name.quoted()
+          } +
 
-            courses.joinToString(separator = "\n", prefix = "\n", postfix = "\n") { course ->
-              course.dependencies.joinToString("\n") {
-                course.name.quoted() + " -> " + it.name.quoted()
-              }
+          courses.joinToString(separator = "\n", prefix = "\n", postfix = "\n") { course ->
+            course.dependencies.joinToString("\n") {
+              course.name.quoted() + " -> " + it.name.quoted()
             }
+          }
     )
   }
 
   private fun String.quoted() =
-      '"' + this + '"'
+    '"' + this + '"'
 }

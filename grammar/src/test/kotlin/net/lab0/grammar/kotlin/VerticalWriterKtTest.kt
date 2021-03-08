@@ -7,7 +7,7 @@ internal class VerticalWriterKtTest {
   @Test
   fun `write nothing`() {
     // given
-    val strings = mapOf<Int,String>()
+    val strings = mapOf<Int, String>()
 
     // when
     val vertical = verticalWriter(strings)
@@ -26,7 +26,7 @@ internal class VerticalWriterKtTest {
 
     // then
     assertThat(vertical).isEqualTo(
-        """
+      """
           |f
           |o
           |o
@@ -44,7 +44,7 @@ internal class VerticalWriterKtTest {
 
     // then
     assertThat(vertical).isEqualTo(
-        """
+      """
           |f  t
           |o  a
           |o  t
@@ -63,7 +63,7 @@ internal class VerticalWriterKtTest {
 
     // then
     assertThat(vertical).isEqualTo(
-        """
+      """
           |f  t b
           |o  a a
           |o  t r

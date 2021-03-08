@@ -10,17 +10,17 @@ import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
 
 class CodeQuestionViewModel(
-    ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    initialState: CodeQuestionUiState = CodeQuestionUiState(
-        0,
-        LessonPage.CodeQuestionPage.EMPTY,
-        Chapter.EMPTY,
-        listOf()
-    ),
+  ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+  initialState: CodeQuestionUiState = CodeQuestionUiState(
+    0,
+    LessonPage.CodeQuestionPage.EMPTY,
+    Chapter.EMPTY,
+    listOf()
+  ),
 ) : BaseViewModel<CodeQuestionUiEvent, CodeQuestionUiState>(
-    CodeQuestionUiEvent.Empty,
-    initialState,
-    ioDispatcher
+  CodeQuestionUiEvent.Empty,
+  initialState,
+  ioDispatcher
 ) {
   override suspend fun doJobForEvent(event: CodeQuestionUiEvent) {
     Do exhaustive when (event) {

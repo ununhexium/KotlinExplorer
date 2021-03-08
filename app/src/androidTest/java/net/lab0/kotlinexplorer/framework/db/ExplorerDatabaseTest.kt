@@ -6,11 +6,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ExplorerDatabaseTest: DatabaseTest() {
+class ExplorerDatabaseTest : DatabaseTest() {
   @Test
   @Throws(Exception::class)
   fun writeUserAndReadInList() {
-    val user = UserProfileEntity( "george", -1)
+    val user = UserProfileEntity("george", -1)
 
     userProfileDao.insert(user)
     val byName = userProfileDao.getAll().first()

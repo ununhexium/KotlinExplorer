@@ -23,7 +23,7 @@ fun addOne(a: Int): Int {
   return a + 1
 }
 
-fun add(a:Int, b:Int): Int {
+fun add(a: Int, b: Int): Int {
   return a + b
 }
 
@@ -49,7 +49,7 @@ fun add(a:Int, b:Int): Int {
 /**
  * Change type
  */
-fun say(a:Int): String {
+fun say(a: Int): String {
   return "$a"
 }
 

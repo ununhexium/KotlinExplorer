@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Singleton
 class LessonProgressFirebaseServiceImpl
 @Inject constructor(
-    private val firebaseAuth: FirebaseAuth,
-    private val firestore: FirebaseFirestore,
-    private val mapperToDomain: ToDomain<LessonProgressDocument, LessonProgress>
-): LessonProgressFirebaseService
+  private val firebaseAuth: FirebaseAuth,
+  private val firestore: FirebaseFirestore,
+  private val mapperToDomain: ToDomain<LessonProgressDocument, LessonProgress>
+) : LessonProgressFirebaseService

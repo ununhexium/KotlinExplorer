@@ -5,58 +5,58 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Main : LessonImpl(
-    id = "kotlin.helloworld.main",
-    title = "Main",
-    pages = listOf(
+  id = "kotlin.helloworld.main",
+  title = "Main",
+  pages = listOf(
 
-        LessonPage.CodeQuestionPage(
-            title = "The Main Function",
-            question = """
+    LessonPage.CodeQuestionPage(
+      title = "The Main Function",
+      question = """
 Declare a function named `main`.
 """,
-            snippet = """
+      snippet = """
 ${p(0)} ${p(1)}(){}
 """,
-            explanation = """
+      explanation = """
 `fun` declares a function.
 
 The name of the declared function in between `fun` and the opening parenthesis `(`.
 
 `Main` and `main` are two different identifiers.
 """,
-            answer = listOf("fun", "main"),
-            confusion = listOf("function", "Main")
-        ),
+      answer = listOf("fun", "main"),
+      confusion = listOf("function", "Main")
+    ),
 
-        LessonPage.CodeQuestionPage(
-            title = "Print in the main",
-            question = """
+    LessonPage.CodeQuestionPage(
+      title = "Print in the main",
+      question = """
 Make the main function print `hello`.
 """,
-            snippet = """
+      snippet = """
 fun main() ${p(0)}
     ${p(1)}
 ${p(2)}
 """,
-            explanation = """
+      explanation = """
 The body of the function goes between curly brackets. It starts at `{` and ends at `}`.
 
 To make the function more readable, the body inside the function is indented. This is optional.
 """,
-            answer = listOf("{", """print("hello")""", "}"),
-            confusion = listOf("(", ")", "[", "]")
-        ),
+      answer = listOf("{", """print("hello")""", "}"),
+      confusion = listOf("(", ")", "[", "]")
+    ),
 
-        LessonPage.InfoPage(
-            title = "Summary",
-            """
+    LessonPage.InfoPage(
+      title = "Summary",
+      """
 The `main` function is the entry point of a program.
 
 This is where it will start its execution.
 
 It will execute the content in its body in the order it is written.
 """
-        )
     )
+  )
 )
 

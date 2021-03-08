@@ -7,10 +7,11 @@ import net.lab0.kotlinexplorer.framework.firebase.abstraction.ProblemReportServi
 import net.lab0.kotlinexplorer.mvi.Resource
 
 class SendProblemReportImpl(
-    private val problemReportService: ProblemReportService
+  private val problemReportService: ProblemReportService
 ) : SendProblemReport {
-  override suspend fun invoke(problemReport: ProblemReport): Flow<Resource.EmptyLoadedResource> = flow {
-    problemReportService.insertOrUpdateProblemReport(problemReport)
-    emit(Resource.EmptyLoadedResource)
-  }
+  override suspend fun invoke(problemReport: ProblemReport): Flow<Resource.EmptyLoadedResource> =
+    flow {
+      problemReportService.insertOrUpdateProblemReport(problemReport)
+      emit(Resource.EmptyLoadedResource)
+    }
 }

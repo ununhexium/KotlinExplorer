@@ -6,9 +6,9 @@ import android.view.View
 data class StateMessage(val response: Response)
 
 data class Response(
-    val message: String?,
-    val uiComponentType: UIComponentType,
-    val messageType: MessageType,
+  val message: String?,
+  val uiComponentType: UIComponentType,
+  val messageType: MessageType,
 )
 
 sealed class UIComponentType {
@@ -18,11 +18,11 @@ sealed class UIComponentType {
   object Dialog : UIComponentType()
 
   class AreYouSureDialog(
-      val callback: AreYouSureCallback,
+    val callback: AreYouSureCallback,
   ) : UIComponentType()
 
   class SnackBar(
-      val undoCallback: SnackbarUndoCallback? = null,
+    val undoCallback: SnackbarUndoCallback? = null,
 //        val onDismissCallback: TodoCallback? = null
   ) : UIComponentType()
 
@@ -61,7 +61,7 @@ interface SnackbarUndoCallback {
 
 class SnackbarUndoListener
 constructor(
-    private val snackbarUndoCallback: SnackbarUndoCallback?,
+  private val snackbarUndoCallback: SnackbarUndoCallback?,
 ) : View.OnClickListener {
 
   override fun onClick(v: View?) {

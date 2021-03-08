@@ -9,9 +9,9 @@ import net.lab0.kotlinexplorer.framework.firebase.model.problemReportCollection
 import net.lab0.kotlinexplorer.framework.util.FromDomain
 
 class ProblemReportServiceImpl(
-    private val firebaseAuth: FirebaseAuth,
-    private val firestore: FirebaseFirestore,
-    private val fromDomain: FromDomain<ProblemReportDocument, ProblemReport>,
+  private val firebaseAuth: FirebaseAuth,
+  private val firestore: FirebaseFirestore,
+  private val fromDomain: FromDomain<ProblemReportDocument, ProblemReport>,
 ) : ProblemReportService {
   override suspend fun insertOrUpdateProblemReport(problemReport: ProblemReport) {
     val uid = firebaseAuth.uid

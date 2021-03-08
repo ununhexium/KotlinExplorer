@@ -11,19 +11,19 @@ class KotlinCodeWithBlanksImplTest {
   fun `can count the placeholders`() {
     // given
     val cases = listOf(
-        0 to "example",
-        1 to "val ${p()}",
-        2 to "val ${p(0)} = ${p(1)}",
-        3 to "val ${p(0)} = ${p(1)} + ${p(2)}",
-        2 to "${p(0)}${p(0)}"
+      0 to "example",
+      1 to "val ${p()}",
+      2 to "val ${p(0)} = ${p(1)}",
+      3 to "val ${p(0)} = ${p(1)} + ${p(2)}",
+      2 to "${p(0)}${p(0)}"
     )
 
     // then
     cases.forEach {
       assertThat(
-          KotlinCodeWithBlanksImpl(it.second).placeholdersCount
+        KotlinCodeWithBlanksImpl(it.second).placeholdersCount
       ).isEqualTo(
-          it.first
+        it.first
       )
     }
   }
@@ -32,18 +32,18 @@ class KotlinCodeWithBlanksImplTest {
   fun `can list the placeholder ids`() {
     // given
     val cases = listOf(
-        listOf<Int>() to "example",
-        listOf(-1) to "val ${p()}",
-        listOf(0, 1) to "val ${p(0)} = ${p(1)}",
-        listOf(0, 116, 2) to "val ${p(0)} = ${p(116)} + ${p(2)}",
+      listOf<Int>() to "example",
+      listOf(-1) to "val ${p()}",
+      listOf(0, 1) to "val ${p(0)} = ${p(1)}",
+      listOf(0, 116, 2) to "val ${p(0)} = ${p(116)} + ${p(2)}",
     )
 
     // then
     cases.forEach {
       assertThat(
-          KotlinCodeWithBlanksImpl(it.second).placeholderIds
+        KotlinCodeWithBlanksImpl(it.second).placeholderIds
       ).isEqualTo(
-          it.first
+        it.first
       )
     }
   }
@@ -67,17 +67,17 @@ class KotlinCodeWithBlanksImplTest {
 
     // when
     val filled = KotlinCodeWithBlanksImpl(code).fill(
-        mapOf(
-            0 to "i",
-            1 to "116"
-        )
+      mapOf(
+        0 to "i",
+        1 to "116"
+      )
     )
 
     // then
     assertThat(
-        filled
+      filled
     ).isEqualTo(
-        "val i = 116"
+      "val i = 116"
     )
   }
 
@@ -88,14 +88,14 @@ class KotlinCodeWithBlanksImplTest {
 
     // when
     val filled = KotlinCodeWithBlanksImpl(code).fill(
-        mapOf(0 to "true")
+      mapOf(0 to "true")
     )
 
     // then
     assertThat(
-        filled
+      filled
     ).isEqualTo(
-        "if(true == true)"
+      "if(true == true)"
     )
   }
 
@@ -109,9 +109,9 @@ class KotlinCodeWithBlanksImplTest {
 
     // then
     assertThat(parse).isEqualTo(
-        listOf(
-            Block.CodeBlock(0 until 0),
-        )
+      listOf(
+        Block.CodeBlock(0 until 0),
+      )
     )
   }
 
@@ -128,11 +128,11 @@ class KotlinCodeWithBlanksImplTest {
     // then
     val phl = p(0).length
     assertThat(parse).isEqualTo(
-        listOf(
-            Block.PlaceholderBlock(0 until phl, 0),
-            Block.CodeBlock(phl .. phl),
-            Block.PlaceholderBlock(phl + 1 until phl + 1 + phl, 1),
-        )
+      listOf(
+        Block.PlaceholderBlock(0 until phl, 0),
+        Block.CodeBlock(phl .. phl),
+        Block.PlaceholderBlock(phl + 1 until phl + 1 + phl, 1),
+      )
     )
   }
 
@@ -149,11 +149,11 @@ class KotlinCodeWithBlanksImplTest {
     // then
     val phl = p(0).length
     assertThat(parse).isEqualTo(
-        listOf(
-            Block.CodeBlock(0 .. 0),
-            Block.PlaceholderBlock((1) until (1 + phl), 0),
-            Block.CodeBlock((1 + phl) until (1 + phl + 1)),
-        )
+      listOf(
+        Block.CodeBlock(0 .. 0),
+        Block.PlaceholderBlock((1) until (1 + phl), 0),
+        Block.CodeBlock((1 + phl) until (1 + phl + 1)),
+      )
     )
   }
 
@@ -171,12 +171,12 @@ class KotlinCodeWithBlanksImplTest {
     // then
     val phl = p(0).length
     assertThat(parse).isEqualTo(
-        listOf(
-            Block.CodeBlock(0 until 1),
-            Block.PlaceholderBlock(1 until phl + 1, 0),
-            Block.PlaceholderBlock(phl + 1 until phl + 1 + phl, 1),
-            Block.CodeBlock(phl + 1 + phl until phl + 1 + phl + 1),
-        )
+      listOf(
+        Block.CodeBlock(0 until 1),
+        Block.PlaceholderBlock(1 until phl + 1, 0),
+        Block.PlaceholderBlock(phl + 1 until phl + 1 + phl, 1),
+        Block.CodeBlock(phl + 1 + phl until phl + 1 + phl + 1),
+      )
     )
   }
 
@@ -190,9 +190,9 @@ class KotlinCodeWithBlanksImplTest {
 
     // then
     assertThat(parse).isEqualTo(
-        listOf(
-            Block.CodeBlock(0 .. 0),
-        )
+      listOf(
+        Block.CodeBlock(0 .. 0),
+      )
     )
   }
 
@@ -207,9 +207,9 @@ class KotlinCodeWithBlanksImplTest {
     // then
     val phl = p(0).length
     assertThat(parse).isEqualTo(
-        listOf(
-            Block.PlaceholderBlock(0 until phl, 0),
-        )
+      listOf(
+        Block.PlaceholderBlock(0 until phl, 0),
+      )
     )
   }
 
@@ -218,9 +218,9 @@ class KotlinCodeWithBlanksImplTest {
     // given
     val code = "val ${p(0)} ${p(1)} ${p(2)}${p(3)}"
     val fillings = mapOf(
-        0 to "alpha",
-        2 to "116",
-        3 to ";",
+      0 to "alpha",
+      2 to "116",
+      3 to ";",
     )
     val withBlanks = KotlinCodeWithBlanksImpl(code)
 
@@ -232,12 +232,12 @@ class KotlinCodeWithBlanksImplTest {
     // 012345678901234567890123456789
     // val alpha /**ANSWER(1)**/ 116;
     assertThat(ranges).isEqualTo(
-        mapOf(
-            0 to listOf(4 .. 8),
-            1 to listOf(10 .. 24),
-            2 to listOf(26 .. 28),
-            3 to listOf(29 .. 29),
-        )
+      mapOf(
+        0 to listOf(4 .. 8),
+        1 to listOf(10 .. 24),
+        2 to listOf(26 .. 28),
+        3 to listOf(29 .. 29),
+      )
     )
   }
 
@@ -249,11 +249,11 @@ class KotlinCodeWithBlanksImplTest {
 ${p(4)}
 """
     val fillings = mapOf(
-        0 to "fun",
-        1 to "{",
-        2 to "}",
-        3 to "[",
-        4 to "]",
+      0 to "fun",
+      1 to "{",
+      2 to "}",
+      3 to "[",
+      4 to "]",
     )
     val withBlanks = KotlinCodeWithBlanksImpl(code)
 
@@ -265,13 +265,13 @@ ${p(4)}
     // 012345678901234567890123456789
     // fun main() {␤  // next steps␤}
     assertThat(ranges).isEqualTo(
-        mapOf(
-            0 to listOf(0 .. 2),
-            1 to listOf(8 .. 8),
-            2 to listOf(9 .. 9),
-            3 to listOf(11 .. 11),
-            4 to listOf(29 .. 29),
-        )
+      mapOf(
+        0 to listOf(0 .. 2),
+        1 to listOf(8 .. 8),
+        2 to listOf(9 .. 9),
+        3 to listOf(11 .. 11),
+        4 to listOf(29 .. 29),
+      )
     )
   }
 
@@ -289,9 +289,9 @@ ${p(4)}
     // 0123456
     // "Hello"
     assertThat(ranges).isEqualTo(
-        mapOf(
-            0 to listOf(0 .. 0, 6 .. 6),
-        )
+      mapOf(
+        0 to listOf(0 .. 0, 6 .. 6),
+      )
     )
   }
 }

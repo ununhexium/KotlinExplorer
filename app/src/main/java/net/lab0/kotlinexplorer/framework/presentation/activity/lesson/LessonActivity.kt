@@ -14,7 +14,7 @@ import javax.inject.Inject
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class LessonActivity: AppCompatActivity() {
+class LessonActivity : AppCompatActivity() {
   @Inject
   lateinit var fragmentFactory: JetpackExplorerFragmentFactory
 

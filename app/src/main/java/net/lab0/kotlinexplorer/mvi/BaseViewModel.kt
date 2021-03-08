@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.mvi
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,14 +13,14 @@ import kotlinx.coroutines.withContext
 import net.lab0.kotlinexplorer.utils.Do
 
 abstract class BaseViewModel<Event, State>(
-    initialUiState: Event,
-    initialDataState: State,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+  initialUiState: Event,
+  initialDataState: State,
+  private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
   val TAG: String = this::class.java.canonicalName ?: "NoCanonicalName"
 
   private val _errors = MutableStateFlow(
-      ObserveOnce("", true /* Don't show this initial message */)
+    ObserveOnce("", true /* Don't show this initial message */)
   )
 
   private val _uiState = MutableStateFlow(initialUiState)

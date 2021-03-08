@@ -7,9 +7,9 @@ import net.lab0.kotlinexplorer.framework.util.ToDomain
 class LessonProgressMapperToDomain : ToDomain<LessonProgressEntity, LessonProgress> {
 
   override fun invoke(entity: LessonProgressEntity) =
-      LessonProgress(
-          entity.id,
-          entity.successCount,
-          entity.failureCount,
-      )
+    LessonProgress(
+      entity.id,
+      entity.successCount,
+      entity.failureCount,
+    )
 }

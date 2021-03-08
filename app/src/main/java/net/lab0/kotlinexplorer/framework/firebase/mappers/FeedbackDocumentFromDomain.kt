@@ -7,11 +7,11 @@ import net.lab0.kotlinexplorer.framework.util.FromDomain
 
 class FeedbackDocumentFromDomain : FromDomain<LessonFeedbackDocument, LessonFeedback> {
   override fun invoke(domain: LessonFeedback) =
-      LessonFeedbackDocument(
-          id = domain.id.toString(),
-          createdAt = Timestamp(domain.timestamp),
-          lessonId = domain.lessonId,
-          durationRating = domain.durationRating.code,
-          difficultyRating = domain.difficultyRating.code,
-      )
+    LessonFeedbackDocument(
+      id = domain.id.toString(),
+      createdAt = Timestamp(domain.timestamp),
+      lessonId = domain.lessonId,
+      durationRating = domain.durationRating.code,
+      difficultyRating = domain.difficultyRating.code,
+    )
 }

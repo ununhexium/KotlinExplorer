@@ -20,12 +20,12 @@ import org.junit.Test
 internal class CodeQuestionViewModelTest {
 
   private val allAnswers = LessonPage.CodeQuestionPage(
-      "",
-      "",
-      "",
-      "",
-      listOf("A", "B", "C"),
-      listOf("D")
+    "",
+    "",
+    "",
+    "",
+    listOf("A", "B", "C"),
+    listOf("D")
   )
 
   private val testDispatcher = TestCoroutineDispatcher()
@@ -55,11 +55,11 @@ internal class CodeQuestionViewModelTest {
 
     // then
     assertThat(vm.uiDataState.value).isEqualTo(
-        CodeQuestionUiState(
-            116,
-            allAnswers,
-            HelloWorldChapter
-        )
+      CodeQuestionUiState(
+        116,
+        allAnswers,
+        HelloWorldChapter
+      )
     )
   }
 
@@ -76,9 +76,9 @@ internal class CodeQuestionViewModelTest {
 
     // then
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
     )
   }
 
@@ -95,9 +95,9 @@ internal class CodeQuestionViewModelTest {
 
     // then
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(3))
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(3))
     )
   }
 
@@ -115,9 +115,9 @@ internal class CodeQuestionViewModelTest {
 
     // then
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
     )
   }
 
@@ -134,9 +134,9 @@ internal class CodeQuestionViewModelTest {
 
     // then
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf())
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf())
     )
   }
 
@@ -153,9 +153,9 @@ internal class CodeQuestionViewModelTest {
 
     // then no exception, no change
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf())
+      CodeQuestionUiState(0, LessonPage.CodeQuestionPage.EMPTY, Chapter.EMPTY, listOf())
     )
   }
 
@@ -174,9 +174,9 @@ internal class CodeQuestionViewModelTest {
 
     // then no exception, no change
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0))
     )
   }
 
@@ -196,9 +196,9 @@ internal class CodeQuestionViewModelTest {
 
     // then no exception, no change
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf())
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf())
     )
   }
 
@@ -220,9 +220,9 @@ internal class CodeQuestionViewModelTest {
 
     // then no exception, no change
     assertThat(
-        vm.uiDataState.value
+      vm.uiDataState.value
     ).isEqualTo(
-        CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0), locked = true)
+      CodeQuestionUiState(0, allAnswers, Chapter.EMPTY, listOf(0), locked = true)
     )
   }
 }

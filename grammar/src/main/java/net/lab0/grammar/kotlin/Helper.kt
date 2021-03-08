@@ -19,10 +19,10 @@ fun parseKotlin(code: String): KotlinParser {
 }
 
 val COMMENT_TOKEN_TYPES = arrayOf(
-    KotlinParser.LineComment,
-    KotlinParser.DelimitedComment,
-    KotlinParser.Inside_Comment,
-    KotlinParser.StrExpr_Comment,
+  KotlinParser.LineComment,
+  KotlinParser.DelimitedComment,
+  KotlinParser.Inside_Comment,
+  KotlinParser.StrExpr_Comment,
 )
 
 fun extractSpots(code: String): List<Highlights.Spot<KotlinHighlight>> {
@@ -46,12 +46,12 @@ fun extractSpots(code: String): List<Highlights.Spot<KotlinHighlight>> {
 
 val KotlinParser.IdentifierContext.range: IntRange
   get() =
-    this.start.startIndex..this.stop.stopIndex
+    this.start.startIndex .. this.stop.stopIndex
 
 val TerminalNode.range: IntRange
   get() =
-    this.symbol.startIndex..this.symbol.stopIndex
+    this.symbol.startIndex .. this.symbol.stopIndex
 
 val ParserRuleContext.range: IntRange
   get() =
-    this.start.startIndex..this.stop.stopIndex
+    this.start.startIndex .. this.stop.stopIndex

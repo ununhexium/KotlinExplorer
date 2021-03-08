@@ -1,11 +1,11 @@
 package net.lab0.kotlinexplorer.business.persistence.implementation
 
-import net.lab0.kotlinexplorer.business.domain.LessonProgress
-import net.lab0.kotlinexplorer.framework.db.DatabaseTest
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromDomain
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
+import net.lab0.kotlinexplorer.business.domain.LessonProgress
+import net.lab0.kotlinexplorer.framework.db.DatabaseTest
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromDomain
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -17,9 +17,9 @@ internal class LessonProgressDataSourceImplTest : DatabaseTest() {
   fun beforeEach() {
     super.configureDatabase()
     dataSource = LessonProgressDataSourceImpl(
-        lessonProgressDao,
-        LessonProgressMapperToDomain(),
-        LessonProgressMapperFromDomain(),
+      lessonProgressDao,
+      LessonProgressMapperToDomain(),
+      LessonProgressMapperFromDomain(),
     )
   }
 
@@ -32,9 +32,9 @@ internal class LessonProgressDataSourceImplTest : DatabaseTest() {
   fun canSaveTheProgressForALesson() = runBlocking {
     // given
     val lessonProgress = LessonProgress(
-        "someId",
-        116,
-        117
+      "someId",
+      116,
+      117
     )
 
     // when

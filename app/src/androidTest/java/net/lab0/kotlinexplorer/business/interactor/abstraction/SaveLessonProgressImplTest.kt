@@ -1,14 +1,14 @@
 package net.lab0.kotlinexplorer.business.interactor.abstraction
 
+import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.runBlocking
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.business.interactor.implementation.SaveLessonProgressImpl
 import net.lab0.kotlinexplorer.business.persistence.implementation.LessonProgressDataSourceImpl
 import net.lab0.kotlinexplorer.framework.db.DatabaseTest
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
 import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromDomain
-import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.runBlocking
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -29,15 +29,15 @@ internal class SaveLessonProgressImplTest : DatabaseTest() {
   fun canSaveTheLessonProgress() = runBlocking {
     // given
     val lessonProgress = LessonProgress(
-        "lessonId",
-        116,
-        117,
+      "lessonId",
+      116,
+      117,
     )
 
     val dataSource = LessonProgressDataSourceImpl(
-        lessonProgressDao,
-        LessonProgressMapperToDomain(),
-        LessonProgressMapperFromDomain(),
+      lessonProgressDao,
+      LessonProgressMapperToDomain(),
+      LessonProgressMapperFromDomain(),
     )
 
     val saveLessonProgress = SaveLessonProgressImpl(dataSource)

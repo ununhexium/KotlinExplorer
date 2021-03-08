@@ -1,7 +1,5 @@
 package net.lab0.kotlinexplorer.injection
 
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dagger.Module
@@ -18,16 +16,16 @@ object TestModule {
   @Provides
   fun provideFirestoreSettings(): FirebaseFirestoreSettings {
     return FirebaseFirestoreSettings.Builder()
-        .setHost("10.0.2.2:9098")
-        .setSslEnabled(false)
-        .setPersistenceEnabled(false)
-        .build()
+      .setHost("10.0.2.2:9098")
+      .setSslEnabled(false)
+      .setPersistenceEnabled(false)
+      .build()
   }
 
   @Singleton
   @Provides
   fun provideFirebaseFirestore(
-      firestoreSettings: FirebaseFirestoreSettings
+    firestoreSettings: FirebaseFirestoreSettings
   ): FirebaseFirestore {
     val firestore = FirebaseFirestore.getInstance()
     firestore.firestoreSettings = firestoreSettings

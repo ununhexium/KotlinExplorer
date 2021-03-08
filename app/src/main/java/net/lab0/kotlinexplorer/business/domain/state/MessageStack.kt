@@ -2,9 +2,8 @@ package net.lab0.kotlinexplorer.business.domain.state
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import net.lab0.kotlinexplorer.utils.printLogD
 import kotlinx.android.parcel.IgnoredOnParcel
-import java.lang.IndexOutOfBoundsException
+import net.lab0.kotlinexplorer.utils.printLogD
 import java.util.*
 
 class MessageStack : ArrayList<StateMessage>() {
@@ -53,11 +52,11 @@ class MessageStack : ArrayList<StateMessage>() {
       e.printStackTrace()
     }
     return StateMessage( // this does nothing
-        Response(
-            message = "does nothing",
-            uiComponentType = UIComponentType.None,
-            messageType = MessageType.None
-        )
+      Response(
+        message = "does nothing",
+        uiComponentType = UIComponentType.None,
+        messageType = MessageType.None
+      )
     )
   }
 
