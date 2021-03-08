@@ -5,64 +5,54 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object String : LessonImpl(
-    id = "kotlin.helloworld.string",
-    title = "String",
-    pages = listOf(
-        LessonPage.CodeQuestionPage(
-            title = "Declaration",
-            question = "Declare a string containing `hello`",
-            snippet =
-            """
-${p(0)}hello${p(0)}
+  id = "kotlin.helloworld.string",
+  title = "String",
+  pages = listOf(
+    // "hello"
+    LessonPage.CodeQuestionPage(
+      title = "Declaration",
+      question = "Declare a string containing `hello`",
+      snippet =
+      """
+${p(0)}hello${p(1)}
 """,
-            explanation = """
+      explanation = """
 Double quotes `"` are for quoting strings.
 
 Simple quotes `'` are for quoting single characters.
 """,
-            answer = listOf("\""),
-            confusion = listOf("'"),
-        ),
+      answer = listOf("\"", "\""),
+      confusion = listOf("'", "'"),
+    ),
 
-        LessonPage.CodeQuestionPage(
-            title = "Double quotes",
-            question = """Double quotes are delimiters for strings. Try to declare a string containing just a double quote`"`""",
-            snippet =
-            """
-${p(0)}${p(1)}${p(2)}
+    // "hello world"
+    LessonPage.CodeQuestionPage(
+      title = "Spaces",
+      question = "Strings can contain several words. Declare a `Hello World` string.",
+      snippet =
+      """
+${p(0)}${p(1)}${p(2)}${p(3)}${p(4)}
 """,
-            explanation = """
-Inside strings, double quotes `"` must be escaped.
+      explanation = """
 
-The escape character is backslash `\`. Remember it, it will come back often. 😉
 """,
-            answer = listOf("\"", """\"""", "\""),
-            confusion = listOf("""\"""",),
-        ),
+      answer = listOf("\"", "Hello", " ", "World", "\""),
+      confusion = listOf("'", "'"),
+    ),
 
-        LessonPage.CodeQuestionPage(
-            title = "Quotes",
-            question = """Declare a string containing `He said "hello"`""",
-            snippet =
-            """
-${p(0)}He said${p(1)}hello${p(1)}${p(0)}
+    // "hello world"
+    LessonPage.CodeQuestionPage(
+      title = "Emojis",
+      question = "Strings contain almost any character. Declare a string `\uD83D\uDC14 ➡ \uD83E\uDD5A !`.",
+      snippet =
+      """
+${p(0)}${p(1)} ➡ ${p(2)} !${p(0)}
 """,
-            explanation = """
-Inside strings, double quotes `"` must be escaped.
-
-The escape character is backslash `\`.
+      explanation = """
+You can use most unicode characters.
 """,
-            answer = listOf(""""""", """\""""),
-            confusion = listOf(),
-        ),
-
-        LessonPage.InfoPage(
-            "Summary",
-            """
-Strings are an ubiquitous data type.
-
-There are many other things to learn about them but they are not needed for the "Hello World" project.
-"""
-        )
-    )
+      answer = listOf("\"", "🐔", "🥚"),
+      confusion = listOf("'", "'"),
+    ),
+  )
 )

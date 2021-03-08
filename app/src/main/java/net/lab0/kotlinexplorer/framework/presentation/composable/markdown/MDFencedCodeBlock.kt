@@ -1,20 +1,19 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.markdown
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.DefaultCodeStyle
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.KotlinCode
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.Monospace
 import org.commonmark.node.Document
 import org.commonmark.node.FencedCodeBlock
 import java.util.*
@@ -46,11 +45,11 @@ fun MDFencedCodeBlock(
             showLineNumbers = true,
         )
       else ->
-        Monospace(
+        Text(
             text = fencedCodeBlock.literal.trim(),
             modifier = Modifier
-                .background(Color.LightGray, MaterialTheme.shapes.medium)
                 .padding(start = 4.dp, end = 4.dp),
+            fontFamily = FontFamily.Monospace,
         )
     }
   }

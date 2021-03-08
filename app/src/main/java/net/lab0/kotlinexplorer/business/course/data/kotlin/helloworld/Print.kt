@@ -41,7 +41,7 @@ When printing text, the text must be between double quotes `"`.
             snippet = """print${ph(0)}"Hi! :)"${ph(1)}""",
             explanation =
             """
-To call the `print` function, you must use `(` and `)`. The other characters are reserved for other usages.
+To call the `print` function, you must use `(` and `)`.
 """,
             answer = listOf("(", ")"),
             confusion = listOf("{", "}"),
@@ -63,7 +63,7 @@ Remember this, it will be used a lot later ;).
             "Summary",
             """
 Printing is the most primitive way to communicate with the user,
-but that's the best way to start showing information.
+but that's the easiest way to start showing information.
 """
         )
     )

@@ -1,6 +1,6 @@
 const firebase = require('@firebase/testing')
 
-const PROJECT_ID = "kotlin-explorer"
+const PROJECT_ID = "kotlin-explorer-7824c"
 
 
 class Authentication {

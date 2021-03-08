@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
@@ -200,8 +199,7 @@ fun AnnotatedString.Builder.appendMarkdownChildren(
         pushStyle(
           TextStyle(
             fontFamily = sourceCodeFontFamily,
-            background = colors.surface,
-            color = colors.onSurface,
+            color = colors.secondary,
           ).toSpanStyle()
         )
         append(child.literal)

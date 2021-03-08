@@ -2,7 +2,6 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.code
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.font.FontStyle
 import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
@@ -28,7 +27,6 @@ val annotationStyle = SpanStyle(color = yellow, background = backgroundColor)
 val commentStyle = SpanStyle(
   color = Color(0xff929792),
   background = backgroundColor,
-  fontStyle = FontStyle.Italic,
 )
 val functionStyle = SpanStyle(color = Color(0xffFFC66D), background = backgroundColor)
 val keywordStyle = SpanStyle(color = Color(0xffCC7832), background = backgroundColor)

@@ -12,7 +12,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.ui.theme.sourceCodeFontFamily
@@ -48,20 +47,20 @@ fun MonospacePreview() {
   MaterialTheme {
     Surface {
       Column {
-        Monospace("Foo")
+        Monospace("Wii")
         DefaultVerticalSpacer()
         Monospace(
             buildAnnotatedString {
               pushStyle(SpanStyle(color = Color.Blue))
-              append("F")
+              append("W")
               pushStyle(SpanStyle(color = Color.White))
-              append("o")
+              append("i")
               pushStyle(SpanStyle(color = Color.Red))
-              append("o")
+              append("i")
             }
         )
         DefaultVerticalSpacer()
-        Text("Foo", fontFamily = FontFamily.Monospace)
+        Text("Wii", fontFamily = FontFamily.Monospace)
       }
     }
   }
