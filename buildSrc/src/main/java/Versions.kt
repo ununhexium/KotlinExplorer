@@ -24,11 +24,12 @@ object Versions {
   val hilt = "1.0.0-alpha02"
   val room = "2.2.6"
 
+  // console libs
+  val clikt = "3.1.0"
+  val slf4j = "1.7.30"
+
   // atlassian
   val commonMark = "0.16.1"
-
-  // log
-  val slf4j = "1.7.30"
 
   // services
   val googleServices = "4.3.5"

@@ -6,40 +6,40 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage.InfoPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Indentation : LessonImpl(
-    id = "kotlin.helloworld.indentation",
-    title = "Indentation",
-    pages = listOf(
-        LessonPage.CodeQuestionPage(
-            title = "Indent",
-            question = """
+  id = "kotlin.helloworld.indentation",
+  title = "Indentation",
+  pages = listOf(
+    LessonPage.CodeQuestionPage(
+      title = "Indent",
+      question = """
 Indent the code by 4 spaces.
 """,
-            snippet = """
+      snippet = """
 fun main() {  // start of block
 ${p(0)}print("Hello")
 }
 """,
-            explanation = """
+      explanation = """
 When writing code inside a block,
 the convention is to indent the code by some amount of spaces.
 It doesn't change the behaviour of the program, but makes it easier to read.
 """,
-            answer = listOf("    "),
-            confusion = listOf("→→→→"),
-        ),
-        LessonPage.CodeQuestionPage(
-            title = "Indent more",
-            question = """
+      answer = listOf("    "),
+      confusion = listOf("→→→→"),
+    ),
+    LessonPage.CodeQuestionPage(
+      title = "Indent more",
+      question = """
 Indent the code by the right amount of spaces.
 """,
-            snippet = """
+      snippet = """
 fun main() {  // start of block
 ${p(0)}print(  // start of continuation
 ${p(1)}"Hello"
-${p(0)})  // end of continuation
+${p(2)})  // end of continuation
 }  // end of block
 """,
-            explanation = """
+      explanation = """
 The deeper the block, the more indented it is.
 
 You can also notice that the second block is indented 
@@ -51,12 +51,12 @@ single line but they get long and don't fit anymore.
 This continuation can be made longer to differentiate it 
 from the regular block indent.
 """,
-            answer = listOf("    ", "            "),
-            confusion = listOf("→      →"),
-        ),
-        InfoPage(
-            title = "Summary",
-            markdown = """
+      answer = listOf("    ", "            ", "    "),
+      confusion = listOf("→      →", "                "),
+    ),
+    InfoPage(
+      title = "Summary",
+      markdown = """
 Indentation is for human readers.
 
 For each opening block, the indentation increases by 4 additional spaces.
@@ -70,6 +70,6 @@ Don't worry about when to use continuation of regular indent,
 your future code editor will do it automatically for you.
 You just need to know that this will often happen.
 """
-        ),
-    )
+    ),
+  )
 )

@@ -12,13 +12,15 @@ java {
 }
 
 dependencies {
+  implementation("com.github.ajalt.clikt:clikt:${Versions.clikt}")
+
   implementation("com.google.firebase:firebase-admin:${Versions.firebaseAdmin}")
 
   implementation("org.slf4j:slf4j-jdk14:${Versions.slf4j}")
   
   // TEST
 
-  testImplementation("org.assertj:assertj-core:3.18.1")
+  testImplementation("org.assertj:assertj-core:3.19.0")
   testImplementation(TestDependencies.junit5_api)
   testImplementation(TestDependencies.junit5_params)
   testRuntimeOnly(TestDependencies.junit5_engine)
