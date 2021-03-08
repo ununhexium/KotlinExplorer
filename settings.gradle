@@ -1,3 +1,4 @@
 rootProject.name = "Jetpack Compose Explorer"
 include ':app'
+include ':console'
 include ':grammar'

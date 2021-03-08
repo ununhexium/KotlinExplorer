@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "92869372539",
-    "project_id": "kotlin-explorer",
-    "storage_bucket": "kotlin-explorer.appspot.com"
+    "project_number": "340214167458",
+    "project_id": "kotlin-explorer-7824c",
+    "storage_bucket": "kotlin-explorer-7824c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92869372539:android:6ffff763bfa3ea6b9810de",
+        "mobilesdk_app_id": "1:340214167458:android:b0e5b33d29f12bd473e4fb",
         "android_client_info": {
           "package_name": "net.lab0.kotlinexplorer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "92869372539-4vjgfnimmeuol1gj0ck88pei36kfidqa.apps.googleusercontent.com",
+          "client_id": "340214167458-71o29jg15tth3jlu1as8cc89likj5oda.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBQ9GW9pWkxktL2Kx3E2ujlgNLJwofXz2I"
+          "current_key": "AIzaSyDaT9hwrdyCWLrE1e9zhefhbcAhwUyvo3A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "92869372539-4vjgfnimmeuol1gj0ck88pei36kfidqa.apps.googleusercontent.com",
+              "client_id": "340214167458-71o29jg15tth3jlu1as8cc89likj5oda.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

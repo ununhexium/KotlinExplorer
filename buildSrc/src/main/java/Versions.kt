@@ -27,9 +27,13 @@ object Versions {
   // atlassian
   val commonMark = "0.16.1"
 
+  // log
+  val slf4j = "1.7.30"
+
   // services
   val googleServices = "4.3.5"
   val firebase = "26.4.0"
+  val firebaseAdmin = "7.1.0"
   val firebaseUi = "6.4.0"
 
   // test
