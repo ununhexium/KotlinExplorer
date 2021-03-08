@@ -312,7 +312,7 @@ Probably not what you want to show but it's not an error.
 
     // summary
     LessonPage.InfoPage(
-      title = "summary",
+      title = "Summary",
       markdown = """
 `'` surrounds single characters declarations.
 

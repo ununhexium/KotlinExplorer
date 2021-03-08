@@ -3,6 +3,7 @@ package net.lab0.grammar.kotlin
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER
+import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER_ESCAPED
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
@@ -246,7 +247,18 @@ class KotlinSyntaxHighlighterVisitor(
         KotlinParser.RSQUARE -> add(BRACKET, node.range)
 
         // characters
-        KotlinParser.CharacterLiteral -> add(CHARACTER, node.range)
+        KotlinParser.CharacterLiteral -> {
+          val range = node.range
+
+          if ('\\' in node.text) {
+            add(CHARACTER, range.start .. range.start)
+            add(CHARACTER_ESCAPED, (range.start + 1) .. (range.last - 1))
+            add(CHARACTER, range.last .. range.last)
+          } else {
+            add(CHARACTER, range)
+          }
+
+        }
 
         // operators
         KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)

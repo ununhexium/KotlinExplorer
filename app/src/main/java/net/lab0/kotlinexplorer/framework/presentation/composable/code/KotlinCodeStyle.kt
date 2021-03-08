@@ -5,6 +5,8 @@ import androidx.compose.ui.text.SpanStyle
 import net.lab0.grammar.kotlin.KotlinHighlight
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
+import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER
+import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER_ESCAPED
 import net.lab0.grammar.kotlin.KotlinHighlight.CLASS_DECLARATION
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
@@ -18,8 +20,10 @@ import net.lab0.grammar.kotlin.KotlinHighlight.TYPE
 
 
 val backgroundColor = Color(0xff2B2B2B)
-val stringColor = Color(0xFFAC6CAF)
+val charColor = Color(0xFF7153AF)
+val escapedCharColor = Color(0xFF53AF5C)
 val escapedStringColor = Color(0xFF6CADAF)
+val stringColor = Color(0xFFAC6CAF)
 
 val yellow = Color(0xffBBB529)
 
@@ -28,6 +32,7 @@ val commentStyle = SpanStyle(
   color = Color(0xff929792),
   background = backgroundColor,
 )
+val charStyle = SpanStyle(color = charColor, background = backgroundColor)
 val functionStyle = SpanStyle(color = Color(0xffFFC66D), background = backgroundColor)
 val keywordStyle = SpanStyle(color = Color(0xffCC7832), background = backgroundColor)
 val normalStyle = SpanStyle(color = Color(0xffA9B7C6), background = backgroundColor)
@@ -35,6 +40,7 @@ val numberStyle = SpanStyle(color = Color(0xff6897BB), background = backgroundCo
 val operatorStyle = SpanStyle(color = yellow, background = backgroundColor)
 val stringStyle = SpanStyle(color = stringColor, background = backgroundColor)
 val escapedStringStyle = SpanStyle(color = escapedStringColor, background = backgroundColor)
+val escapedCharStyle = SpanStyle(color = escapedCharColor, background = backgroundColor)
 
 val typeStyle = SpanStyle(color = Color(0xFFFFFFFFF), background = backgroundColor)
 
@@ -44,6 +50,8 @@ val ijStyle = { it: KotlinHighlight ->
     BRACKET -> functionStyle
     CLASS_DECLARATION -> keywordStyle
     COMMENT -> commentStyle
+    CHARACTER -> charStyle
+    CHARACTER_ESCAPED -> escapedCharStyle
     FUNCTION -> functionStyle
     KEYWORD -> keywordStyle
     MODIFIER -> keywordStyle

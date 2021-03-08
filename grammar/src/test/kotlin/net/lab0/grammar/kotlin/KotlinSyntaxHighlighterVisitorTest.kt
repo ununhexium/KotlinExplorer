@@ -4,6 +4,7 @@ import net.lab0.grammar.kotlin.Highlights.Spot
 import net.lab0.grammar.kotlin.KotlinHighlight.ANNOTATION
 import net.lab0.grammar.kotlin.KotlinHighlight.BRACKET
 import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER
+import net.lab0.grammar.kotlin.KotlinHighlight.CHARACTER_ESCAPED
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMA
 import net.lab0.grammar.kotlin.KotlinHighlight.COMMENT
 import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
@@ -775,6 +776,29 @@ class KotlinSyntaxHighlighterVisitorTest {
       Spot(highlight = OPERATOR, start = 6, end = 6),
       // "'c'"
       Spot(highlight = CHARACTER, start = 8, end = 10),
+    )
+  }
+
+  @Test
+  fun `can highlight escaped character literals`() {
+    // given
+    val code = "val c = '\\''"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+      // "val"
+      Spot(highlight = KEYWORD, start = 0, end = 2),
+      // "="
+      Spot(highlight = OPERATOR, start = 6, end = 6),
+      // "'"
+      Spot(highlight = CHARACTER, start = 8, end = 8),
+      // "\'"
+      Spot(highlight = CHARACTER_ESCAPED, start = 9, end = 10),
+      // "'"
+      Spot(highlight = CHARACTER, start = 11, end = 11),
     )
   }
 }
