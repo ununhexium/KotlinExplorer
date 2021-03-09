@@ -9,6 +9,9 @@ class ExtraContentRequestToDomain : ToDomain<ExtraContentRequestDocument, ExtraC
     return ExtraContentRequest(
       entity.globalSuccess,
       entity.globalFailure,
+      entity.liking,
+      entity.reason,
+      entity.comment,
     )
   }
 }

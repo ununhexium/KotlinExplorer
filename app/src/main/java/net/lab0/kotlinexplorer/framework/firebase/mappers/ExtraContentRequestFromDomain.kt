@@ -9,6 +9,9 @@ class ExtraContentRequestFromDomain : FromDomain<ExtraContentRequestDocument, Ex
     return ExtraContentRequestDocument(
       domain.globalSuccess,
       domain.globalFailure,
+      domain.liking,
+      domain.reason,
+      domain.comment,
     )
   }
 }

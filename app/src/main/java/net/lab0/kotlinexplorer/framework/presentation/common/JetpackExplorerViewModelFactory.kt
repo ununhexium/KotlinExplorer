@@ -43,7 +43,6 @@ constructor(
         ChapterListViewModel(
           getLessonsInProgress,
           getAllChapters,
-          requestExtraLessons,
         ) as T
       }
 

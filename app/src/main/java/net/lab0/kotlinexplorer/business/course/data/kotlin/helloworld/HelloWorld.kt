@@ -44,7 +44,7 @@ Declare a string that contains `Hello World!`.
       snippet = """
 fun main() {
   print(
-      ${p(0)}${p(1)}${p(3)}!${p(4)}
+      ${p(0)}${p(1)} ${p(2)}!${p(3)}
   )
 }
 """,

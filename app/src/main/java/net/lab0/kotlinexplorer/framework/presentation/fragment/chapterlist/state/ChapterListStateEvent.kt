@@ -7,5 +7,4 @@ sealed class ChapterListStateEvent : UiEvent {
   object Empty: ChapterListStateEvent()
   object LoadLessonsInProgress: ChapterListStateEvent()
   object LoadAllChapters: ChapterListStateEvent()
-  class RequestMoreChapters(val context:Context): ChapterListStateEvent()
 }

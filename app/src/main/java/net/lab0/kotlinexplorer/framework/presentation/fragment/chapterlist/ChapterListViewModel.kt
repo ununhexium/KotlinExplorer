@@ -13,7 +13,6 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLesso
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.LoadAllChapters
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.LoadLessonsInProgress
-import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.RequestMoreChapters
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListViewState
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
@@ -28,7 +27,6 @@ class ChapterListViewModel
 constructor(
     val getLessonsInProgressCount: GetLessonsInProgress,
     val getAllChapters: GetAllChapters,
-    val requestExtraLessons: RequestExtraLessons,
 ) : BaseViewModel<ChapterListStateEvent, ChapterListViewState>(
     ChapterListStateEvent.Empty,
     ChapterListViewState(KOTLIN, listOf(), true)
@@ -56,27 +54,9 @@ constructor(
         }
       }
 
-      is RequestMoreChapters -> {
-        processResource(
-            // TODO: user ID usecase?
-            requestExtraLessons()
-        ) {
-          updateUi {
-            it.copy(canRequestMoreChapters = false)
-          }
-          withContext(Dispatchers.Main) {
-            Toast.makeText(event.context, "We'll work on that! :)", Toast.LENGTH_SHORT).show()
-          }
-        }
-      }
-
       ChapterListStateEvent.Empty -> Unit
     }
   }
 
-  fun loadChapters() = emitFastEvent(LoadAllChapters)
-
   fun loadLessonsInProgress() = emitFastEvent(LoadLessonsInProgress)
-
-  fun requestMoreContent(context: Context) = emitFastEvent(RequestMoreChapters(context))
 }

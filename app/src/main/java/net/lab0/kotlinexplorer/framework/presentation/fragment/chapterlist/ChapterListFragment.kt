@@ -9,7 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddTask
@@ -43,7 +42,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ChapterListFragment
 @Inject constructor(
-    private val viewModelFactory: ViewModelProvider.Factory,
+  private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<ChapterListStateEvent, ChapterListViewState>() {
 
   override val viewModel: ChapterListViewModel by viewModels { viewModelFactory }
@@ -52,72 +51,76 @@ class ChapterListFragment
     view.setContent { Content() }
     viewModel.loadLessonsInProgress()
   }
-  
+
   @Composable
   fun Content() {
     KotlinExplorerTheme {
       val scaffoldState = rememberScaffoldState()
 
       TopLevelScaffold(
-          title = "Lessons",
-          scaffoldState = scaffoldState,
-          onProfileSelected = {
-            findNavController().navigate(
-                ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
-            )
-          },
-          onLessonsSelected = {
-            // stay here
-          }
+        title = "Lessons",
+        scaffoldState = scaffoldState,
+        onProfileSelected = {
+          findNavController().navigate(
+            ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
+          )
+        },
+        onLessonsSelected = {
+          // stay here
+        }
       ) {
         val state by viewModel.uiDataState.collectAsState()
         val scrollState = rememberScrollState()
 
         Column(
-            modifier = Modifier.verticalScroll(scrollState)
+          modifier = Modifier.verticalScroll(scrollState)
         ) {
           ChapterList(
-              modifier = Modifier.padding(bottom = 64.dp),
-              chapters = state.chapters.map { chapter ->
-                val completion = state.getChapterCompletion(chapter)
-                val lessonsInProgress = state.lessonsInProgress.map { it.lessonId }
-                val nextLesson = chapter.lessons.firstOrNull { it.id !in lessonsInProgress }
+            modifier = Modifier.padding(bottom = 64.dp),
+            chapters = state.chapters.map { chapter ->
+              val completion = state.getChapterCompletion(chapter)
+              val lessonsInProgress = state.lessonsInProgress.map { it.lessonId }
+              val nextLesson = chapter.lessons.firstOrNull { it.id !in lessonsInProgress }
 
-                ChapterCardData(
-                    chapter.id,
-                    chapter.title,
-                    completion,
-                    chapter.lessons.map { lesson ->
-                      LessonListItemData(
-                          id = lesson.id,
-                          title = lesson.title,
-                          completed = lesson.id in lessonsInProgress,
-                          lesson == nextLesson,
-                          progress = state.getLessonCompletion(lesson.id)
-                      )
-                    }
-                )
-              },
-              onPlay = { _, lessonId ->
-                findNavController().navigate(
-                    ChapterListFragmentDirections
-                        .actionChapterListFragmentToLessonGraph(lessonId)
-                )
-              }
+              ChapterCardData(
+                chapter.id,
+                chapter.title,
+                completion,
+                chapter.lessons.map { lesson ->
+                  LessonListItemData(
+                    id = lesson.id,
+                    title = lesson.title,
+                    completed = lesson.id in lessonsInProgress,
+                    lesson == nextLesson,
+                    progress = state.getLessonCompletion(lesson.id)
+                  )
+                }
+              )
+            },
+            onPlay = { _, lessonId ->
+              findNavController().navigate(
+                ChapterListFragmentDirections
+                  .actionChapterListFragmentToLessonGraph(lessonId)
+              )
+            }
           )
 
           Row(
-              modifier = Modifier.fillMaxWidth(),
-              horizontalArrangement = Arrangement.SpaceAround
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround
           ) {
             Button(
-                onClick = { viewModel.requestMoreContent(requireContext()) },
-                enabled = state.canRequestMoreChapters,
+              onClick = {
+                findNavController().navigate(
+                  ChapterListFragmentDirections.actionChapterListFragmentToExtraContentFragment()
+                )
+              },
+              enabled = state.canRequestMoreChapters,
             ) {
               if (state.canRequestMoreChapters) {
                 Icon(
-                    imageVector = Icons.Default.AddTask,
-                    "Add Task",
+                  imageVector = Icons.Default.AddTask,
+                  "Add Task",
                 )
                 SmallHorizontalSpacer()
               }

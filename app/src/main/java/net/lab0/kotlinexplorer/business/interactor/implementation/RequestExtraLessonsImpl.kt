@@ -14,11 +14,18 @@ class RequestExtraLessonsImpl(
   private val extraContentService: ExtraContentService,
   private val dataSource: LessonProgressDataSource,
 ) : RequestExtraLessons {
-  override fun invoke(): Flow<Resource.LoadedResource<Unit>> = flow {
+  override fun invoke(
+    liking: String?,
+    reason: String?,
+    comment: String?
+  ): Flow<Resource.LoadedResource<Unit>> = flow {
     val inProgress = dataSource.getLessonsInProgress()
     val extra = ExtraContentRequest(
       inProgress.sumBy { it.successCount },
       inProgress.sumBy { it.failureCount },
+      liking,
+      reason,
+      comment,
     )
     extraContentService.requestExtraLessons(auth.uid!!, extra)
     emit(Resource.LoadedResource(Unit))

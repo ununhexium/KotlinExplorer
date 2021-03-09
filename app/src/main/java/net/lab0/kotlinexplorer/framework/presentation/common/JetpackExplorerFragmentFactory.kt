@@ -4,11 +4,13 @@ import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.InfoPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonFirstPageFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.lessonfeedback.LessonFeedbackFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceFragment
+import net.lab0.kotlinexplorer.framework.presentation.activity.morelessons.ExtraContentFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.UserProfileOverviewFragment
 import net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login.LoginFragment
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragment
@@ -20,6 +22,7 @@ class JetpackExplorerFragmentFactory
 @Inject
 constructor(
   private val viewModelFactory: ViewModelProvider.Factory,
+  private val requestExtraLessons: RequestExtraLessons,
 ) : FragmentFactory() {
 
   override fun instantiate(classLoader: ClassLoader, className: String) =
@@ -31,6 +34,10 @@ constructor(
 
       CodeQuestionFragment::class.java.name -> {
         CodeQuestionFragment(viewModelFactory)
+      }
+
+      ExtraContentFragment::class.java.name -> {
+        ExtraContentFragment(requestExtraLessons)
       }
 
       InfoPageFragment::class.java.name -> {

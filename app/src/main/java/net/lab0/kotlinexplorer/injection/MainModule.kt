@@ -26,31 +26,32 @@ object MainModule {
   @Singleton
   @Provides
   fun provideViewModelFactory(
-      getAllChapters: GetAllChapters,
-      getLessonsInProgress: GetLessonsInProgress,
-      saveLessonProgress: SaveLessonProgress,
-      sendLessonFeedback: SendLessonFeedback,
-      reloadLessonFeedback: ReloadLessonFeedback,
-      sendProblemReport: SendProblemReport,
-      requestExtraLessons: RequestExtraLessons,
-      firebaseAuth: FirebaseAuth,
+    getAllChapters: GetAllChapters,
+    getLessonsInProgress: GetLessonsInProgress,
+    saveLessonProgress: SaveLessonProgress,
+    sendLessonFeedback: SendLessonFeedback,
+    reloadLessonFeedback: ReloadLessonFeedback,
+    sendProblemReport: SendProblemReport,
+    requestExtraLessons: RequestExtraLessons,
+    firebaseAuth: FirebaseAuth,
   ): JetpackExplorerViewModelFactory =
-      JetpackExplorerViewModelFactory(
-          getAllChapters,
-          getLessonsInProgress,
-          saveLessonProgress,
-          sendLessonFeedback,
-          reloadLessonFeedback,
-          sendProblemReport,
-          requestExtraLessons,
-          firebaseAuth,
-      )
+    JetpackExplorerViewModelFactory(
+      getAllChapters,
+      getLessonsInProgress,
+      saveLessonProgress,
+      sendLessonFeedback,
+      reloadLessonFeedback,
+      sendProblemReport,
+      requestExtraLessons,
+      firebaseAuth,
+    )
 
   @Singleton
   @Provides
   fun provideJetpackExplorerFragmentFactory(
-      factory: JetpackExplorerViewModelFactory,
+    factory: JetpackExplorerViewModelFactory,
+    requestExtraLessons: RequestExtraLessons
   ): JetpackExplorerFragmentFactory {
-    return JetpackExplorerFragmentFactory(factory)
+    return JetpackExplorerFragmentFactory(factory, requestExtraLessons)
   }
 }

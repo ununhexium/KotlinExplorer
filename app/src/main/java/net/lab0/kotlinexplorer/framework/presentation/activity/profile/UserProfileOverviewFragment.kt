@@ -34,7 +34,7 @@ class UserProfileOverviewFragment(
 
   override val viewModel: UserProfileViewModel by viewModels { viewModelFactory }
 
-  val registration = registerForActivityResult(
+  private val registration = registerForActivityResult(
       ActivityResultContracts.StartActivityForResult()
   ) { result ->
     if (result.resultCode == Activity.RESULT_OK) {
@@ -47,9 +47,8 @@ class UserProfileOverviewFragment(
   }
 
   override fun onAttach(context: Context) {
+    // TODO: remove?
     super.onAttach(context)
-
-
   }
 
   override fun onCreateComposeView(view: ComposeView) {

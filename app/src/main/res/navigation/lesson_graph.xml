@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_chapterListFragment_to_lesson_graph"
             app:destination="@id/lesson_pages_graph" />
+        <action
+            android:id="@+id/action_chapterListFragment_to_extraContentFragment"
+            app:destination="@id/extraContentFragment" />
     </fragment>
     <include app:graph="@navigation/profile_graph" />
     <navigation android:id="@+id/lesson_pages_graph"
@@ -150,4 +153,8 @@
                 app:destination="@id/nextLessonFragment" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/extraContentFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.morelessons.ExtraContentFragment"
+        android:label="ExtraContentFragment" />
 </navigation>
