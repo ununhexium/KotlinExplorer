@@ -18,8 +18,10 @@ import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
 
 /**
- *
  * This stuff sometimes breaks on unexpected inputs. Stuff that should not be null can be null and it crashes the app.
+ *
+ * Grammar:
+ * https://kotlinlang.org/docs/reference/grammar.html
  */
 class KotlinSyntaxHighlighterVisitor(
   val wellKnownFunctions: List<String> = listOf("println", "print"),

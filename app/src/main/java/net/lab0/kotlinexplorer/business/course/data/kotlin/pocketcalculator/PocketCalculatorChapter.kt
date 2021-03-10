@@ -10,5 +10,9 @@ object PocketCalculatorChapter : ChapterImpl(
     Introduction,
     Function,
     StringSpecialChars,
+    PriorityForSignAndMultiplicativeOperators,
+    PriorityForAdditiveOperators,
+    PriorityForComparisonAndSimpleAssignmentOperators,
+    PriorityFinalBoss,
   )
 )

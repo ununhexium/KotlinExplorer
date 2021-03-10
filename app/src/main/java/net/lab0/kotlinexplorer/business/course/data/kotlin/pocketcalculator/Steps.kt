@@ -1,11 +1,5 @@
 // Steps to learn functions
 
-/**
- * declare a function
- * give it a name
- * what is a valid name?
- * what is a good name?
- */
 fun sayHello() {
 // do things inside the function
   println("Hello")
@@ -23,14 +17,9 @@ fun addOne(a: Int): Int {
   return a + 1
 }
 
-fun add(a: Int, b: Int): Int {
-  return a + b
+fun subtract(a: Int, b: Int): Int {
+  return a - b
 }
-
-/**
- * named arguments
- * add(b = 1, a = 2)
- */
 
 /**
  * Number, Int, Double, Float

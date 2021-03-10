@@ -131,3 +131,6 @@ print(${p()})
 // in Functions:
 // TODO parameter name and type
 
+
+// TODO more operators: conjunction
+// TODO more operators: disjunction

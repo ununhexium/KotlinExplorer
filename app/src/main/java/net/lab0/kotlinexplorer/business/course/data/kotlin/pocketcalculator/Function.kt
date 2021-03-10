@@ -484,6 +484,8 @@ fun ${p(0)}(): Int {
 Just like variables, functions must have clear, descriptive names.
 Choose something that is long enough but no more than that.
 
+Function names have the same restrictions as variable names.
+
 `eggs` is too short, it doesn't say anything about what the function does, why it does it or how it does it.
 
 `computeTheNumberOfEggsToCookForBreakfast` is probably too long: you can't read the function declaration anymore.

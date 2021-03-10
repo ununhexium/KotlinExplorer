@@ -36,6 +36,11 @@ fun squareRoot(a: Int): Double =
   // calling external function
   kotlin.math.sqrt(a.toDouble())
 
+// compute the average
+fun average(a: Int, b: Int): Double {
+  return (a + b) / 2.0
+}
+
 fun println(double: Double) {
   print(double.toString())
   print("\n")
