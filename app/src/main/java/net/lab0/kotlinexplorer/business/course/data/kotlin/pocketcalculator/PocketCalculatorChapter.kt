@@ -14,5 +14,6 @@ object PocketCalculatorChapter : ChapterImpl(
     PriorityForAdditiveOperators,
     PriorityForComparisonAndSimpleAssignmentOperators,
     PriorityFinalBoss,
+    FloatingPoint,
   )
 )

@@ -61,7 +61,7 @@ internal class ExtraContentServiceImplTest {
   fun canSubmitAnExtraLessonRequest(): Unit = runBlocking {
     // given
     val service = ExtraContentServiceImpl(firestore, fromDomain)
-    val extra = ExtraContentRequest(116, 117)
+    val extra = ExtraContentRequest(116, 117, "", "", "")
 
     // when
     service.requestExtraLessons(firebaseAuth.uid!!, extra)

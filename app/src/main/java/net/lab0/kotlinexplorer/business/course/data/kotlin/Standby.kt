@@ -134,3 +134,5 @@ print(${p()})
 
 // TODO more operators: conjunction
 // TODO more operators: disjunction
+
+// TODO . operator prio

@@ -8,3 +8,5 @@ fun main() {
     else "It's 0"
   )
 }
+
+// TODO: add exercise about integers: max, min, 1_0_0 notation
