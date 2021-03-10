@@ -2,7 +2,7 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object PriorityForAdditiveOperators : LessonImpl(
   id = "kotlin.pocketcalculator.priorityforadditiveoperators",
@@ -16,7 +16,7 @@ object PriorityForAdditiveOperators : LessonImpl(
 First grader math.
 """,
       snippet = """
-1 ${KotlinCodeWithBlanks.placeholder(0)} 2 == 3
+1 ${p(0)} 2 == 3
 """,
       explanation = """
 Does this require an explanation? 🧐
@@ -32,7 +32,7 @@ Does this require an explanation? 🧐
 First grader *advanced* math.
 """,
       snippet = """
-2 ${KotlinCodeWithBlanks.placeholder(0)} 1 == 1
+2 ${p(0)} 1 == 1
 """,
       explanation = """
 2 - 1 = 1  🤷
@@ -288,7 +288,7 @@ What's the result?
     ),
 
     // declare average function
-LessonPage.CodeQuestionPage(
+    LessonPage.CodeQuestionPage(
       title = "Average function",
       question = """
 Write a function to compute the average between 2 values.
@@ -296,21 +296,47 @@ Write a function to compute the average between 2 values.
 If the average is not a whole number, truncate the result.
 
 ```kotlin
-// 3
+// 2 + 4 = 6
+// 6 / 2 = 3
 average(2, 4)
 
-// 1 (1 + 2 = 3, 3 / 2 = 1)
+// 1 + 2 = 3
+// 3 / 2 = 1
 average(1, 2)
 ```
+
+Note the average of 2 numbers `a` and `b` is the sum of these 2 numbers, divided by 2.
 """,
       snippet = """
-
+fun average(a:${p(0)}, b:${p(0)}): ${p(1)} {
+  return ${p(2)}
+}
 """,
       explanation = """
+`a + b / 2` is `a + (b / 2)`
 
+One must divide the sum, not a single number. Use parentheses to force that behaviour.
+
+`(a + b) / 2`
+
+Dividing each number by 2 doesn't work. Example:
+
+```kotlin
+average(3,3) == 3
+```
+
+But:
+
+`3 / 2 + 3 / 2`
+
+`1 + 1`
+
+`2`
+
+All the data types are `Int`s.
 """,
-      answer = listOf(),
-      confusion = listOf(),
+      answer = listOf("Int", "Int", "(a + b) / 2"),
+      confusion = listOf("String", "a + b / 2", "a / 2 + b / 2"),
     ),
 
     // prio 5
