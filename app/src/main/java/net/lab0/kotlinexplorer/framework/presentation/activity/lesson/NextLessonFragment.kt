@@ -8,8 +8,10 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import net.lab0.kotlinexplorer.R
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.NextLessonPage
+import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListFragmentDirections
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 
 class NextLessonFragment : Fragment() {
@@ -27,15 +29,14 @@ class NextLessonFragment : Fragment() {
         KotlinExplorerTheme {
           NextLessonPage(
               goToChapters = {
-                findNavController().navigate(
-                    NextLessonFragmentDirections.actionNextLessonFragmentToChapterListFragment()
-                )
+                findNavController().popBackStack(R.id.chapterListFragment, false)
               },
               nextLesson = nextLessonInChapter
           ) {
             nextLessonInChapter?.let { lesson ->
+              findNavController().popBackStack(R.id.chapterListFragment, false)
               findNavController().navigate(
-                  NextLessonFragmentDirections.actionNextLessonFragmentToLessonFirstPage(lesson.id)
+                  ChapterListFragmentDirections.actionChapterListFragmentToLessonGraph(lesson.id)
               )
             }
           }
