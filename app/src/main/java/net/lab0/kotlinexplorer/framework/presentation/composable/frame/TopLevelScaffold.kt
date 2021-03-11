@@ -28,6 +28,7 @@ fun TopLevelScaffold(
   scaffoldState: ScaffoldState,
   onProfileSelected: () -> Unit,
   onLessonsSelected: () -> Unit,
+  onToolsSelected: () -> Unit,
   content: @Composable (PaddingValues) -> Unit,
 ) {
   val coroutineScope = rememberCoroutineScope()
@@ -46,6 +47,12 @@ fun TopLevelScaffold(
           coroutineScope.launch {
             scaffoldState.drawerState.close()
             onLessonsSelected()
+          }
+        },
+        onToolsSelected = {
+          coroutineScope.launch {
+            scaffoldState.drawerState.close()
+            onToolsSelected()
           }
         },
       )
@@ -100,6 +107,7 @@ fun TopLevelScaffoldPreview() {
           TopLevelScaffold(
             "The Section",
             state,
+            {},
             {},
             {},
           ) {

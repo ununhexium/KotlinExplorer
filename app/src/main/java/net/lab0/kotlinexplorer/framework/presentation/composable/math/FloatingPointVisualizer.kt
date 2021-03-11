@@ -18,7 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Checkable
@@ -72,7 +74,7 @@ private fun ToStringNotation(datedFloat: DatedFloat) {
   ) {
     Text(
       text = datedFloat.float.toString(),
-      style = MaterialTheme.typography.h5,
+      style = MaterialTheme.typography.h4,
       fontFamily = FontFamily.Monospace
     )
   }
@@ -91,7 +93,7 @@ private fun ScientificNotation(
         text = "Not a Number",
         fontFamily = FontFamily.Monospace,
         color = MaterialTheme.colors.secondaryVariant,
-        style = MaterialTheme.typography.h6
+        style = MaterialTheme.typography.h4
       )
 
       datedFloat.float == Float.POSITIVE_INFINITY ||
@@ -99,7 +101,8 @@ private fun ScientificNotation(
         Text(
           text = datedFloat.float.toString(),
           fontFamily = FontFamily.Monospace,
-          color = MaterialTheme.colors.secondaryVariant
+          color = MaterialTheme.colors.secondaryVariant,
+          style = MaterialTheme.typography.h4
         )
 
       else -> {
@@ -270,6 +273,10 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
         Text(text = "0", style = MaterialTheme.typography.body2)
       }
 
+      Button(onClick = { setDatedFloat(DatedFloat(-0f)) }) {
+        Text(text = "-0", style = MaterialTheme.typography.body2)
+      }
+
       Button(onClick = { setDatedFloat(DatedFloat(1f)) }) {
         Text(text = "1", style = MaterialTheme.typography.body2)
       }
@@ -307,30 +314,54 @@ private fun RawBinaryNotation(float: DatedFloat) {
     horizontalArrangement = Arrangement.SpaceBetween,
   ) {
     // sign
-    Row {
-      Text(
-        text = float.editor.signBit,
-        fontFamily = FontFamily.Monospace,
-        color = MaterialTheme.colors.secondaryVariant
-      )
+    Column {
+      Row {
+        Text(
+          text = "sign",
+          style = MaterialTheme.typography.body2,
+        )
+      }
+      Row {
+        Text(
+          text = float.editor.signBit,
+          fontFamily = FontFamily.Monospace,
+          color = MaterialTheme.colors.secondaryVariant,
+        )
+      }
     }
 
     // exponent
-    Row {
-      Text(
-        text = float.editor.exponentBits,
-        fontFamily = FontFamily.Monospace,
-        color = MaterialTheme.colors.secondary
-      )
+    Column {
+      Row {
+        Text(
+          text = "exponent",
+          style = MaterialTheme.typography.body2,
+        )
+      }
+      Row {
+        Text(
+          text = float.editor.exponentBits,
+          fontFamily = FontFamily.Monospace,
+          color = MaterialTheme.colors.secondary
+        )
+      }
     }
 
     // mantissa
-    Row {
-      Text(
-        text = float.editor.mantissaBits,
-        fontFamily = FontFamily.Monospace,
-        color = MaterialTheme.colors.primary,
-      )
+    Column {
+      Row {
+        Text(
+          text = "mantissa",
+          style = MaterialTheme.typography.body2,
+        )
+      }
+      Row {
+        Text(
+          text = float.editor.mantissaBits,
+          fontFamily = FontFamily.Monospace,
+          color = MaterialTheme.colors.primary,
+        )
+      }
     }
   }
 }
@@ -341,7 +372,8 @@ private fun DecimalScientificNotation(datedFloat: DatedFloat) {
   Text(
     text = if (datedFloat.editor.signBit == "0") "+" else "-",
     fontFamily = FontFamily.Monospace,
-    color = MaterialTheme.colors.secondaryVariant
+    color = MaterialTheme.colors.secondaryVariant,
+    style = MaterialTheme.typography.h4,
   )
 
   // mantissa
@@ -350,18 +382,22 @@ private fun DecimalScientificNotation(datedFloat: DatedFloat) {
     text = datedFloat.editor.mantissaDec ?: "Error",
     fontFamily = FontFamily.Monospace,
     color = MaterialTheme.colors.primary,
+    style = MaterialTheme.typography.h4,
   )
 
   Text(
-    " * 10^",
+    "·10",
     fontFamily = FontFamily.Monospace,
+    style = MaterialTheme.typography.h4,
   )
 
   // exponent
   Text(
+    modifier = Modifier.padding(bottom = 4.dp),
     text = datedFloat.editor.exponentDec ?: "Error",
     fontFamily = FontFamily.Monospace,
     color = MaterialTheme.colors.secondary,
+    style = MaterialTheme.typography.h5,
   )
 }
 

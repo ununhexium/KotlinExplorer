@@ -67,7 +67,8 @@ class UserProfileOverviewFragment(
           title = "Profile",
           scaffoldState = scaffoldState,
           onProfileSelected = { /*Stay here*/ },
-          onLessonsSelected = { findNavController().popBackStack() }
+          onLessonsSelected = { findNavController().popBackStack() },
+          onToolsSelected = { findNavController().popBackStack() },
       ) {
         val state by viewModel.uiDataState.collectAsState()
 

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_chapterListFragment_to_extraContentFragment"
             app:destination="@id/extraContentFragment" />
+        <action
+            android:id="@+id/action_chapterListFragment_to_floatingPointToolFragment"
+            app:destination="@id/floatingPointToolFragment" />
     </fragment>
     <include app:graph="@navigation/profile_graph" />
     <navigation android:id="@+id/lesson_pages_graph"
@@ -157,4 +160,8 @@
         android:id="@+id/extraContentFragment"
         android:name="net.lab0.kotlinexplorer.framework.presentation.activity.morelessons.ExtraContentFragment"
         android:label="ExtraContentFragment" />
+    <fragment
+        android:id="@+id/floatingPointToolFragment"
+        android:name="net.lab0.kotlinexplorer.framework.presentation.activity.tool.float.FloatingPointToolFragment"
+        android:label="FloatingPointToolFragment" />
 </navigation>

@@ -67,13 +67,18 @@ class ChapterListFragment
         },
         onLessonsSelected = {
           // stay here
+        },
+        onToolsSelected = {
+          findNavController().navigate(
+            ChapterListFragmentDirections.actionChapterListFragmentToFloatingPointToolFragment()
+          )
         }
       ) {
         val state by viewModel.uiDataState.collectAsState()
         val scrollState = rememberScrollState()
 
         Column(
-          modifier = Modifier.verticalScroll(scrollState)
+          modifier = Modifier.verticalScroll(scrollState),
         ) {
           ChapterList(
             modifier = Modifier.padding(bottom = 64.dp),

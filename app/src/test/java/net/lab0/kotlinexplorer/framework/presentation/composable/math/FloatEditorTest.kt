@@ -237,4 +237,31 @@ internal class FloatEditorTest {
     assertThat(z.mantissaBits).isEqualTo("10".repeat(11) + "1")
     assertThat(original).isNotEqualTo(result)
   }
+
+  @Test
+  fun `can get negative zero`() {
+    // given
+    val zero = 0f
+    val e = FloatEditor(zero)
+
+    // when
+    val n = e.setNegative()
+    val minZero = e.setNegative().value
+
+    // then
+    assertThat(n.signBit).isEqualTo("1")
+  }
+
+  @Test
+  fun `can set negative when already negative`() {
+    // given
+    val zero = -1f
+    val e = FloatEditor(zero)
+
+    // when
+    val n = e.setNegative()
+
+    // then
+    assertThat(n.value).isEqualTo(-1f)
+  }
 }

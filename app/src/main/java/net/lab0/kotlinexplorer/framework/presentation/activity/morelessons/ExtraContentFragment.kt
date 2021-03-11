@@ -38,6 +38,7 @@ class ExtraContentFragment(
             scaffoldState = scaffoldState,
             onProfileSelected = { findNavController().popBackStack() },
             onLessonsSelected = { findNavController().popBackStack() },
+            onToolsSelected = { findNavController().popBackStack() },
           ) {
             MoreLessonsUi(
               onValidate = { liking, whyMore, comment ->

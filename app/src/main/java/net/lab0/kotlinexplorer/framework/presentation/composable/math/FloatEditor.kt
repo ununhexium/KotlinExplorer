@@ -65,7 +65,7 @@ class FloatEditor(val value: Float) {
   }
 
   val mantissaDecBase2Hack by lazy {
-      Integer.parseInt(mantissaBits, 2)
+    Integer.parseInt(mantissaBits, 2)
   }
 
   val mantissaBits: String
@@ -77,15 +77,17 @@ class FloatEditor(val value: Float) {
   val signBit: String
     get() = Integer.toBinaryString(value.toRawBits()).padStart(32, '0').first().toString()
 
-  fun setPositive(): FloatEditor =
-    FloatEditor(
-      if (value < 0) value * -1.0f else value
+  fun setSignPositive(positive: Boolean): FloatEditor {
+    return FloatEditor(
+      Float.fromBits(
+        value.toRawBits() shl 1 ushr 1 or ((if (positive) 0 else 1) shl 31)
+      )
     )
+  }
 
-  fun setNegative(): FloatEditor =
-    FloatEditor(
-      if (value > 0) value * -1.0f else value
-    )
+  fun setPositive() = setSignPositive(true)
+
+  fun setNegative() = setSignPositive(false)
 
   fun setExponent(exponent: Int): FloatEditor {
     if (exponent !in 0 .. 255) return this
