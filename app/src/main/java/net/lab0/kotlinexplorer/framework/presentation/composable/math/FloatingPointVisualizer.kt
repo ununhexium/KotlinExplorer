@@ -247,10 +247,6 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-      Button(onClick = { setDatedFloat(DatedFloat(0f)) }) {
-        Text(text = "0", style = MaterialTheme.typography.body2)
-      }
-
       Button(onClick = { setDatedFloat(DatedFloat(Float.POSITIVE_INFINITY)) }) {
         Text(text = "∞", style = MaterialTheme.typography.body2)
       }
@@ -261,6 +257,44 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
 
       Button(onClick = { setDatedFloat(DatedFloat(Float.NaN)) }) {
         Text(text = "NaN", style = MaterialTheme.typography.body2)
+      }
+    }
+
+    DefaultVerticalSpacer()
+
+    Row(
+      modifier = Modifier.fillMaxWidth(),
+      horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
+      Button(onClick = { setDatedFloat(DatedFloat(0f)) }) {
+        Text(text = "0", style = MaterialTheme.typography.body2)
+      }
+
+      Button(onClick = { setDatedFloat(DatedFloat(1f)) }) {
+        Text(text = "1", style = MaterialTheme.typography.body2)
+      }
+
+      Button(onClick = { setDatedFloat(DatedFloat(.5f)) }) {
+        Text(text = ".5", style = MaterialTheme.typography.body2)
+      }
+    }
+
+    DefaultVerticalSpacer()
+
+    Row(
+      modifier = Modifier.fillMaxWidth(),
+      horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
+      Button(onClick = { setDatedFloat(DatedFloat(0.1f)) }) {
+        Text(text = "0.1", style = MaterialTheme.typography.body2)
+      }
+
+      Button(onClick = { setDatedFloat(DatedFloat(Math.PI.toFloat())) }) {
+        Text(text = "π", style = MaterialTheme.typography.body2)
+      }
+
+      Button(onClick = { setDatedFloat(DatedFloat(Math.E.toFloat())) }) {
+        Text(text = "e", style = MaterialTheme.typography.body2)
       }
     }
   }
