@@ -31,16 +31,16 @@ import net.lab0.kotlinexplorer.utils.Do
 @Deprecated("Only for previews or tests. Use KotlinCode(AnnotatedString, ...)")
 @Composable
 fun KotlinCode(
-    code: String,
-    codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
-    showLineNumbers: Boolean = false,
-    activeHighlight: Int? = null,
+  code: String,
+  codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
+  showLineNumbers: Boolean = false,
+  activeHighlight: Int? = null,
 ) {
   KotlinCode(
-      AnnotatedString(code),
-      codeStyle,
-      showLineNumbers,
-      activeHighlight,
+    AnnotatedString(code),
+    codeStyle,
+    showLineNumbers,
+    activeHighlight,
   )
 }
 
@@ -49,27 +49,27 @@ fun KotlinCode(
  */
 @Composable
 fun KotlinCode(
-    code: AnnotatedString,
-    codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
-    showLineNumbers: Boolean = false,
-    activeHighlight: Int? = null,
+  code: AnnotatedString,
+  codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
+  showLineNumbers: Boolean = false,
+  activeHighlight: Int? = null,
 ) {
   val lines = code.text.split("\n")
 
   Surface(
-      modifier = Modifier.fillMaxWidth(),
-      color = codeStyle.backgroundColor,
-      contentColor = codeStyle.foregroundColor
+    modifier = Modifier.fillMaxWidth(),
+    color = codeStyle.backgroundColor,
+    contentColor = codeStyle.foregroundColor
   ) {
     Row {
       if (showLineNumbers) {
         GutterPart(lines = lines, codeStyle)
       }
       CodePart(
-          lines = lines,
-          code = code,
-          codeStyle = codeStyle,
-          activeHighlight = activeHighlight,
+        lines = lines,
+        code = code,
+        codeStyle = codeStyle,
+        activeHighlight = activeHighlight,
       )
     }
   }
@@ -77,13 +77,13 @@ fun KotlinCode(
 
 @Composable
 private fun GutterPart(
-    lines: List<String>,
-    codeStyle: CodeStyle<KotlinHighlight>,
+  lines: List<String>,
+  codeStyle: CodeStyle<KotlinHighlight>,
 ) {
   Surface(
-      modifier = Modifier.padding(end = 8.dp),
-      color = codeStyle.gutterBackgroundColor,
-      contentColor = codeStyle.gutterForegroundColor
+    modifier = Modifier.padding(end = 8.dp),
+    color = codeStyle.gutterBackgroundColor,
+    contentColor = codeStyle.gutterForegroundColor
   ) {
     Column(horizontalAlignment = Alignment.End) {
       lines.forEachIndexed { index, _ ->
@@ -95,15 +95,15 @@ private fun GutterPart(
 
 @Composable
 private fun CodePart(
-    lines: List<String>,
-    code: AnnotatedString,
-    codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
-    activeHighlight: Int? = null,
+  lines: List<String>,
+  code: AnnotatedString,
+  codeStyle: CodeStyle<KotlinHighlight> = DefaultCodeStyle,
+  activeHighlight: Int? = null,
 ) {
   Column {
     lines.forEachIndexed { index, line ->
       val realStartIndex =
-          lines.take(index).fold(0) { acc, e -> acc + e.length + 1 }
+        lines.take(index).fold(0) { acc, e -> acc + e.length + 1 }
 
       Row {
         KotlinCodeWithBlanksImpl(line).parse().forEach { block ->
@@ -111,29 +111,29 @@ private fun CodePart(
 
             is Block.PlaceholderBlock ->
               Surface(
-                  modifier = Modifier
-                      .padding(horizontal = 2.dp)
-                      .align(Alignment.CenterVertically),
-                  shape = MaterialTheme.shapes.small,
-                  color = when (activeHighlight) {
-                    block.index -> codeStyle.activePlaceholderBackgroundColor
-                    else -> codeStyle.placeholderBackgroundColor
-                  },
-                  contentColor = codeStyle.placeholderForegroundColor,
+                modifier = Modifier
+                  .padding(horizontal = 2.dp)
+                  .align(Alignment.CenterVertically),
+                shape = MaterialTheme.shapes.small,
+                color = when (activeHighlight) {
+                  block.index -> codeStyle.activePlaceholderBackgroundColor
+                  else -> codeStyle.placeholderBackgroundColor
+                },
+                contentColor = codeStyle.placeholderForegroundColor,
               ) {
                 // placeholder to have the right size
                 Text(
-                    text = " ... ",
-                    fontFamily = sourceCodeFontFamily,
-                    fontSize = 10.sp
+                  text = " ... ",
+                  fontFamily = sourceCodeFontFamily,
+                  fontSize = 10.sp
                 )
               }
 
             is Block.CodeBlock -> {
 
               val subSequence = code.subSequence(
-                  realStartIndex + block.range.first,
-                  realStartIndex + block.range.last + 1
+                realStartIndex + block.range.first,
+                realStartIndex + block.range.last + 1
               )
 
               Monospace(subSequence)
@@ -185,7 +185,7 @@ fun PreviewKotlinCode_println() {
 fun PreviewKotlinCode_NewLine() {
   MaterialTheme {
     val code = AnnotatedString(
-        """
+      """
           |val i = 0
           |fun foo() {
           |  
@@ -203,7 +203,7 @@ fun PreviewKotlinCode_NewLine() {
 fun PreviewKotlinCode_AnswerOnly() {
   MaterialTheme {
     val code = AnnotatedString(
-        """
+      """
             |val ${placeholder(0)} = 11
           """.trimMargin()
     )
@@ -214,16 +214,16 @@ fun PreviewKotlinCode_AnswerOnly() {
 }
 
 val multilineColorSpans =
-    listOf(
-        Triple(normalStyle, 0, 64),
-        Triple(keywordStyle, 0, 3),
-        Triple(functionStyle, 4, 11),
-        Triple(keywordStyle, 14, 17),
-        Triple(numberStyle, 43, 50),
-        Triple(keywordStyle, 53, 56),
-        Triple(numberStyle, 61, 62),
-        Triple(functionStyle, 63, 64),
-    )
+  listOf(
+    Triple(normalStyle, 0, 64),
+    Triple(keywordStyle, 0, 3),
+    Triple(functionStyle, 4, 11),
+    Triple(keywordStyle, 14, 17),
+    Triple(numberStyle, 43, 50),
+    Triple(keywordStyle, 53, 56),
+    Triple(numberStyle, 61, 62),
+    Triple(functionStyle, 63, 64),
+  )
 
 @Preview
 @Composable
@@ -231,7 +231,7 @@ fun PreviewKotlinCode_Multiline() {
   MaterialTheme {
     val code = buildAnnotatedString {
       append(
-          """
+        """
             |fun foo() {
             |  val bar = ${placeholder(10)} - 1234567
             |  val i = 0
@@ -254,7 +254,7 @@ fun PreviewKotlinCode_WithLineNumbers() {
   MaterialTheme {
     val code = buildAnnotatedString {
       append(
-          """
+        """
           |fun foo() {
           |  val bar = /**ANSWER(XX)**/ - 1234567
           |  val i = 0
@@ -267,9 +267,9 @@ fun PreviewKotlinCode_WithLineNumbers() {
     }
     Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(
-          code = code,
-          codeStyle = DefaultCodeStyle,
-          showLineNumbers = true
+        code = code,
+        codeStyle = DefaultCodeStyle,
+        showLineNumbers = true
       )
     }
   }
@@ -296,16 +296,16 @@ fun PreviewKotlinCode_WithLineNumbersAndFocus() {
     val focusEnd = focusStart + focus.length
     Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(
-          code = listOf(
-              2 .. 4,
-              8 .. 10,
-              45 .. 47,
-              focusStart .. focusEnd
-          ).fold(annotated) { acc, e ->
-            acc.invertForegroundBackgroundColors(e)
-          },
-          codeStyle = DefaultCodeStyle,
-          showLineNumbers = true,
+        code = listOf(
+          2 .. 4,
+          8 .. 10,
+          45 .. 47,
+          focusStart .. focusEnd
+        ).fold(annotated) { acc, e ->
+          acc.invertForegroundBackgroundColors(e)
+        },
+        codeStyle = DefaultCodeStyle,
+        showLineNumbers = true,
       )
     }
   }
@@ -363,7 +363,7 @@ fun PreviewKotlinCode() {
     val tripleQuote = "\"\"\""
     val dollar = "$"
     val code =
-        """
+      """
           |package org.kotlinlang.play
           |
           |import com.example.Class
@@ -431,8 +431,8 @@ fun PreviewKotlinCode() {
 
     Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
       KotlinCode(
-          code = extractHighlightsAndAnnotate(code, ijStyle),
-          DefaultCodeStyle
+        code = extractHighlightsAndAnnotate(code, ijStyle),
+        DefaultCodeStyle
       )
     }
   }

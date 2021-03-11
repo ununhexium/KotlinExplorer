@@ -22,12 +22,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ControlBar(
-    startItems: (@Composable RowScope.() -> Unit)? = null,
-    endItems: @Composable RowScope.() -> Unit,
+  startItems: (@Composable RowScope.() -> Unit)? = null,
+  endItems: @Composable RowScope.() -> Unit,
 ) {
   Row(
-      modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween
+    modifier = Modifier.fillMaxWidth(),
+    horizontalArrangement = Arrangement.SpaceBetween
   ) {
     if (startItems != null) {
       startItems()
@@ -44,31 +44,31 @@ fun ControlBar(
 fun ControlBarPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           ControlBar(
-              startItems = {
-                Button(onClick = {}) {
-                  Icon(
-                      Icons.Default.CloudQueue,
-                      contentDescription = "Cloud Queue",
-                  )
-                }
-              },
-              endItems = {
-                Button(onClick = {}) {
-                  Icon(
-                      Icons.Default.Check,
-                      contentDescription = "Check",
-                  )
-                }
+            startItems = {
+              Button(onClick = {}) {
+                Icon(
+                  Icons.Default.CloudQueue,
+                  contentDescription = "Cloud Queue",
+                )
               }
+            },
+            endItems = {
+              Button(onClick = {}) {
+                Icon(
+                  Icons.Default.Check,
+                  contentDescription = "Check",
+                )
+              }
+            }
           )
         }
       }
@@ -81,23 +81,23 @@ fun ControlBarPreview() {
 fun ControlBarPreview_endOnly() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           ControlBar(
-              endItems = {
-                Button(onClick = {}) {
-                  Icon(
-                      Icons.Default.Check,
-                      contentDescription = "Check",
-                  )
-                }
+            endItems = {
+              Button(onClick = {}) {
+                Icon(
+                  Icons.Default.Check,
+                  contentDescription = "Check",
+                )
               }
+            }
           )
         }
       }

@@ -1,15 +1,10 @@
 package net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist
 
-import android.content.Context
-import android.widget.Toast
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.withContext
 import net.lab0.kotlinexplorer.business.course.data.kotlin.KOTLIN
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
-import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.LoadAllChapters
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.state.ChapterListStateEvent.LoadLessonsInProgress
@@ -25,18 +20,18 @@ import javax.inject.Singleton
 class ChapterListViewModel
 @Inject
 constructor(
-    val getLessonsInProgressCount: GetLessonsInProgress,
-    val getAllChapters: GetAllChapters,
+  val getLessonsInProgressCount: GetLessonsInProgress,
+  val getAllChapters: GetAllChapters,
 ) : BaseViewModel<ChapterListStateEvent, ChapterListViewState>(
-    ChapterListStateEvent.Empty,
-    ChapterListViewState(KOTLIN, listOf(), true)
+  ChapterListStateEvent.Empty,
+  ChapterListViewState(KOTLIN, listOf(), true)
 ) {
 
   override suspend fun doJobForEvent(event: ChapterListStateEvent) {
     Do exhaustive when (event) {
       LoadLessonsInProgress -> {
         processResource(
-            getLessonsInProgressCount()
+          getLessonsInProgressCount()
         ) { chapters ->
           updateUi {
             it.copy(lessonsInProgress = chapters)
@@ -46,7 +41,7 @@ constructor(
 
       LoadAllChapters -> {
         processResource(
-            getAllChapters()
+          getAllChapters()
         ) { chapters ->
           updateUi {
             it.copy(chapters = chapters)

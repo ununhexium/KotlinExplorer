@@ -3,7 +3,6 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -25,64 +24,64 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseM
 
 @Composable
 private fun Answer(
-    header: String,
-    color: Color,
-    icon: ImageVector,
-    contentDescription: String,
-    content: @Composable ColumnScope.() -> Unit,
+  header: String,
+  color: Color,
+  icon: ImageVector,
+  contentDescription: String,
+  content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(modifier = Modifier.fillMaxWidth(1f)) {
     Row(
-        modifier = Modifier
-            .padding(bottom = 8.dp),
+      modifier = Modifier
+        .padding(bottom = 8.dp),
     ) {
       Icon(
-          imageVector = icon,
-          contentDescription = contentDescription,
-          modifier = Modifier
-              .padding(start = 8.dp, end = 8.dp)
-              .align(Alignment.CenterVertically),
-          tint = color,
+        imageVector = icon,
+        contentDescription = contentDescription,
+        modifier = Modifier
+          .padding(start = 8.dp, end = 8.dp)
+          .align(Alignment.CenterVertically),
+        tint = color,
       )
       Text(
-          header,
-          modifier = Modifier
-              .align(Alignment.CenterVertically),
-          color = color,
-          style = MaterialTheme.typography.h5
+        header,
+        modifier = Modifier
+          .align(Alignment.CenterVertically),
+        color = color,
+        style = MaterialTheme.typography.h5
       )
     }
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
-        content = content,
+      modifier = Modifier.fillMaxWidth(),
+      content = content,
     )
   }
 }
 
 @Composable
 fun CorrectAnswer(
-    explanation: @Composable ColumnScope.() -> Unit,
+  explanation: @Composable ColumnScope.() -> Unit,
 ) {
   Answer(
-      "Correct",
-      MaterialTheme.colors.primary,
-      Icons.Default.CheckCircleOutline,
-      contentDescription = "outline",
-      explanation
+    "Correct",
+    MaterialTheme.colors.primary,
+    Icons.Default.CheckCircleOutline,
+    contentDescription = "outline",
+    explanation
   )
 }
 
 @Composable
 fun WrongAnswer(
-    explanation: @Composable ColumnScope.() -> Unit,
+  explanation: @Composable ColumnScope.() -> Unit,
 ) {
   Answer(
-      "Incorrect",
-      MaterialTheme.colors.secondaryVariant,
-      Icons.Default.Warning,
-      contentDescription = "warning",
-      explanation
+    "Incorrect",
+    MaterialTheme.colors.secondaryVariant,
+    Icons.Default.Warning,
+    contentDescription = "warning",
+    explanation
   )
 }
 
@@ -91,28 +90,28 @@ fun WrongAnswer(
 fun CorrectAnswerPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           CorrectAnswer(
-              explanation = {
-                Text(
-                    "This is some explanation about the answer." +
-                        " It may be very long, so it's better be wrapped." +
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
-                        " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
-                        " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
-                        "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in" +
-                        " reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." +
-                        " Excepteur sint occaecat cupidatat non proident, " +
-                        "sunt in culpa qui officia deserunt mollit anim id est laborum."
-                )
-              }
+            explanation = {
+              Text(
+                "This is some explanation about the answer." +
+                    " It may be very long, so it's better be wrapped." +
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+                    " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
+                    " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+                    "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in" +
+                    " reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." +
+                    " Excepteur sint occaecat cupidatat non proident, " +
+                    "sunt in culpa qui officia deserunt mollit anim id est laborum."
+              )
+            }
           )
         }
       }
@@ -125,28 +124,28 @@ fun CorrectAnswerPreview() {
 fun WrongAnswerPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           WrongAnswer(
-              explanation = {
-                Text(
-                    "This is some explanation about the answer." +
-                        " It may be very long, so it's better be wrapped." +
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
-                        " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
-                        " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
-                        "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in" +
-                        " reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." +
-                        " Excepteur sint occaecat cupidatat non proident, " +
-                        "sunt in culpa qui officia deserunt mollit anim id est laborum."
-                )
-              }
+            explanation = {
+              Text(
+                "This is some explanation about the answer." +
+                    " It may be very long, so it's better be wrapped." +
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+                    " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
+                    " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+                    "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in" +
+                    " reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." +
+                    " Excepteur sint occaecat cupidatat non proident, " +
+                    "sunt in culpa qui officia deserunt mollit anim id est laborum."
+              )
+            }
           )
         }
       }
@@ -159,28 +158,28 @@ fun WrongAnswerPreview() {
 fun CorrectAnswerPreview_Markdown() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           CorrectAnswer(
-              explanation = {
-                MDDocument(
-                    document = parseMD(
-                        """
+            explanation = {
+              MDDocument(
+                document = parseMD(
+                  """
 `print` to show the value on the terminal.
 
 `"` to quote the string.
 
 `Hello, World!` for the content.
 """
-                    )
                 )
-              }
+              )
+            }
           )
         }
       }

@@ -18,9 +18,9 @@ class NextLessonFragment : Fragment() {
   private val args: NextLessonFragmentArgs by navArgs()
 
   override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View {
     return ComposeView(requireContext()).also {
       val nextLessonInChapter = LessonBrowser.getNextLessonInChapter(args.lessonId)
@@ -28,15 +28,15 @@ class NextLessonFragment : Fragment() {
       it.setContent {
         KotlinExplorerTheme {
           NextLessonPage(
-              goToChapters = {
-                findNavController().popBackStack(R.id.chapterListFragment, false)
-              },
-              nextLesson = nextLessonInChapter
+            goToChapters = {
+              findNavController().popBackStack(R.id.chapterListFragment, false)
+            },
+            nextLesson = nextLessonInChapter
           ) {
             nextLessonInChapter?.let { lesson ->
               findNavController().popBackStack(R.id.chapterListFragment, false)
               findNavController().navigate(
-                  ChapterListFragmentDirections.actionChapterListFragmentToLessonGraph(lesson.id)
+                ChapterListFragmentDirections.actionChapterListFragmentToLessonGraph(lesson.id)
               )
             }
           }

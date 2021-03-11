@@ -22,41 +22,41 @@ import java.text.NumberFormat
 
 @Composable
 fun ChapterCard(
-    chapter: ChapterCardData,
+  chapter: ChapterCardData,
 ) {
   Surface {
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+      modifier = Modifier.fillMaxWidth(),
+      verticalAlignment = Alignment.CenterVertically
     ) {
       Box(
-          modifier = Modifier.padding(8.dp),
-          contentAlignment = Alignment.Center,
+        modifier = Modifier.padding(8.dp),
+        contentAlignment = Alignment.Center,
       ) {
         CircularProgressIndicator(
-            progress = chapter.completion,
-            modifier = Modifier
-                .padding(8.dp)
-                .size(64.dp)
+          progress = chapter.completion,
+          modifier = Modifier
+            .padding(8.dp)
+            .size(64.dp)
         )
         Text(
-            NumberFormat.getPercentInstance().format(chapter.completion),
-            color = MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.body1,
+          NumberFormat.getPercentInstance().format(chapter.completion),
+          color = MaterialTheme.colors.primary,
+          style = MaterialTheme.typography.body1,
         )
       }
       Column(
-          verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Center,
       ) {
         Text(
-            text = chapter.title,
-            style = MaterialTheme.typography.h6,
-            color = MaterialTheme.colors.onSurface,
+          text = chapter.title,
+          style = MaterialTheme.typography.h6,
+          color = MaterialTheme.colors.onSurface,
         )
         Text(
-            text = "${chapter.lessons.size} LESSONS",
-            style = MaterialTheme.typography.body1,
-            color = Color.Gray,
+          text = "${chapter.lessons.size} LESSONS",
+          style = MaterialTheme.typography.body1,
+          color = Color.Gray,
         )
       }
     }
@@ -68,13 +68,13 @@ fun ChapterCard(
 fun ChapterCardPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         ChapterCard(
-            dummyChapter1
+          dummyChapter1
         )
       }
     }

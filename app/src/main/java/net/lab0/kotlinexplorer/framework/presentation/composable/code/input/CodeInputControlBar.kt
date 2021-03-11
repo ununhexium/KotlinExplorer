@@ -21,55 +21,55 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CodeInputControlBar(
-    canUndoOrReset: Boolean,
-    canValidate: Boolean,
-    onUndo: () -> Unit,
-    onReset: () -> Unit,
-    onValidate: () -> Unit,
+  canUndoOrReset: Boolean,
+  canValidate: Boolean,
+  onUndo: () -> Unit,
+  onReset: () -> Unit,
+  onValidate: () -> Unit,
 ) {
   ControlBar(
-      startItems = {
-        Row {
-          val secondaryButtonColors = ButtonDefaults.buttonColors(
-              backgroundColor = MaterialTheme.colors.secondaryVariant,
-              contentColor = MaterialTheme.colors.surface
+    startItems = {
+      Row {
+        val secondaryButtonColors = ButtonDefaults.buttonColors(
+          backgroundColor = MaterialTheme.colors.secondaryVariant,
+          contentColor = MaterialTheme.colors.surface
+        )
+        Button(
+          onClick = onUndo,
+          enabled = canUndoOrReset,
+          colors = secondaryButtonColors
+        ) {
+          Icon(
+            imageVector = Icons.Default.Backspace,
+            contentDescription = "Backspace",
           )
-          Button(
-              onClick = onUndo,
-              enabled = canUndoOrReset,
-              colors = secondaryButtonColors
-          ) {
-            Icon(
-                imageVector = Icons.Default.Backspace,
-                contentDescription = "Backspace",
-            )
-          }
-          Spacer(modifier = Modifier.padding(8.dp))
-          Button(
-              onClick = onReset,
-              enabled = canUndoOrReset,
-              colors = secondaryButtonColors
-          ) {
-            Icon(
-                imageVector = Icons.Default.Replay,
-                contentDescription = "Replay",
-            )
-          }
         }
-      },
-      endItems = {
-        Row {
-          Button(
-              onClick = onValidate,
-              enabled = canValidate,
-          ) {
-            Icon(
-                imageVector = Icons.Default.Done,
-                contentDescription = "Done",
-            )
-          }
+        Spacer(modifier = Modifier.padding(8.dp))
+        Button(
+          onClick = onReset,
+          enabled = canUndoOrReset,
+          colors = secondaryButtonColors
+        ) {
+          Icon(
+            imageVector = Icons.Default.Replay,
+            contentDescription = "Replay",
+          )
         }
       }
+    },
+    endItems = {
+      Row {
+        Button(
+          onClick = onValidate,
+          enabled = canValidate,
+        ) {
+          Icon(
+            imageVector = Icons.Default.Done,
+            contentDescription = "Done",
+          )
+        }
+      }
+    }
   )
 }
 
@@ -78,20 +78,20 @@ fun CodeInputControlBar(
 fun CodeInputControlBarPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           CodeInputControlBar(
-              true,
-              true,
-              {},
-              {},
-              {}
+            true,
+            true,
+            {},
+            {},
+            {}
           )
         }
       }

@@ -75,7 +75,7 @@ class InfoPageFragment(
     }
   }
 
-  private fun onNextPage(targetPage: Int = args.page+  1) = nextPage(
+  private fun onNextPage(targetPage: Int = args.page + 1) = nextPage(
     activityViewModel = activityViewModel,
     correctness = AnswerCorrectness.NEUTRAL,
     page = args.page,

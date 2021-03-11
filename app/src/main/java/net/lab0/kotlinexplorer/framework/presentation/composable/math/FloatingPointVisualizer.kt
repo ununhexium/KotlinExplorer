@@ -18,9 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Checkable
@@ -117,32 +115,6 @@ private fun Sliders(
   datedFloat: DatedFloat,
   setDatedFloat: (DatedFloat) -> Unit,
 ) {
-  // global slider
-//  Text("Global", style = MaterialTheme.typography.h5)
-//
-//
-//  val globalRange = 190.0f
-//
-//  fun to(slider: Float, range: Float) =
-//    exp((slider - 0.5) * range).toFloat()
-//
-//  fun from(f: Float, range: Float) =
-//    (ln(f) / range) + .5f
-//
-//  Slider(
-//    value = if (f.isNaN() || f == Float.POSITIVE_INFINITY || f == Float.NEGATIVE_INFINITY) {
-//      1f
-//    } else {
-//      from(f, globalRange)
-//    },
-//    onValueChange = { sliderValue ->
-//      setF(
-//        to(sliderValue, globalRange)
-//      )
-//    },
-//    valueRange = 0f .. 1f
-//  )
-
   Text("Parts", style = MaterialTheme.typography.h5)
 
   DefaultVerticalSpacer()

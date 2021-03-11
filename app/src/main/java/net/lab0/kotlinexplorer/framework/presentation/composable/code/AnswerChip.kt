@@ -12,20 +12,20 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AnswerChip(
-    text: String,
-    enabled: Boolean,
-    onClick: () -> Unit,
+  text: String,
+  enabled: Boolean,
+  onClick: () -> Unit,
 ) {
   Surface(
-      elevation = 4.dp,
-      shape = MaterialTheme.shapes.medium,
+    elevation = 4.dp,
+    shape = MaterialTheme.shapes.medium,
   ) {
     Button(
-        onClick = onClick,
-        enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.secondary
-        )
+      onClick = onClick,
+      enabled = enabled,
+      colors = ButtonDefaults.buttonColors(
+        backgroundColor = MaterialTheme.colors.secondary
+      )
     ) {
       Monospace(text)
     }

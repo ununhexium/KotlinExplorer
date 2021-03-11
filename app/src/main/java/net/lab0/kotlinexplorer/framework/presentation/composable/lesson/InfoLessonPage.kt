@@ -16,26 +16,26 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseM
 
 @Composable
 fun InfoLessonPage(
-    markdownAsString: String,
-    nextPage: () -> Unit,
+  markdownAsString: String,
+  nextPage: () -> Unit,
 ) {
   LessonPageBody(
-      question = {
-        val markdown = remember(markdownAsString) { parseMD(markdownAsString) }
-        MDDocument(document = markdown)
-      },
-      controlBar = {
-        ControlBar {
-          Button(
-              onClick = nextPage,
-          ) {
-            Icon(
-                imageVector = Icons.Default.CheckCircle,
-                contentDescription = "Check Circle",
-            )
-          }
+    question = {
+      val markdown = remember(markdownAsString) { parseMD(markdownAsString) }
+      MDDocument(document = markdown)
+    },
+    controlBar = {
+      ControlBar {
+        Button(
+          onClick = nextPage,
+        ) {
+          Icon(
+            imageVector = Icons.Default.CheckCircle,
+            contentDescription = "Check Circle",
+          )
         }
       }
+    }
   )
 }
 
@@ -46,7 +46,7 @@ fun InfoLessonPagePreview() {
     Surface {
       Column {
         InfoLessonPage(
-            """
+          """
                   |# Title
                   |
                   |1. One

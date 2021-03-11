@@ -32,22 +32,22 @@ fun MDBulletList(bulletList: BulletList, modifier: Modifier = Modifier) {
 fun MDBulletListPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Surface(
-          modifier = Modifier.padding(20.dp),
-          color = MaterialTheme.colors.surface,
+        modifier = Modifier.padding(20.dp),
+        color = MaterialTheme.colors.surface,
       ) {
         Column {
           MDDocument(
-              document = parseMD(
-                  """
+            document = parseMD(
+              """
                     |The list:
                     |* one
                     |* 2
                     |* trois
                   """.trimMargin()
-              )
+            )
           )
         }
       }

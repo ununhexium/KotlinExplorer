@@ -7,16 +7,16 @@ import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
 
 class LoginViewModel(
-    private val auth: FirebaseAuth
+  private val auth: FirebaseAuth
 ) : BaseViewModel<LoginUiEvent, LoginUiState>(
-    LoginUiEvent.Empty,
-    LoginUiState(null),
+  LoginUiEvent.Empty,
+  LoginUiState(null),
 ) {
   override suspend fun doJobForEvent(event: LoginUiEvent) {
     Do exhaustive when (event) {
       LoginUiEvent.CheckCanLogin -> {
         val currentUser = auth.currentUser
-        val username = if(currentUser?.isAnonymous == true) {
+        val username = if (currentUser?.isAnonymous == true) {
           null
         } else {
           currentUser?.email ?: currentUser?.uid

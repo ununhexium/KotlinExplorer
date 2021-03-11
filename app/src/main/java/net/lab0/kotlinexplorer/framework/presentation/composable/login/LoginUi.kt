@@ -22,49 +22,49 @@ import net.lab0.kotlinexplorer.R
 
 @Composable
 fun LoginUi(
-    username: String? = null,
-    startApp: () -> Unit,
-    login: () -> Unit,
-    loginAnonymously: () -> Unit,
+  username: String? = null,
+  startApp: () -> Unit,
+  login: () -> Unit,
+  loginAnonymously: () -> Unit,
 ) {
   Column(
-      modifier = Modifier.fillMaxSize(),
-      verticalArrangement = Arrangement.SpaceEvenly,
+    modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.SpaceEvenly,
   ) {
     val kotlinExplorerLogo = painterResource(
-        id = R.drawable.kotlinexplorer_logo,
+      id = R.drawable.kotlinexplorer_logo,
     )
 
     val scale = 4f
     Image(
-        painter = kotlinExplorerLogo,
-        contentDescription = "Kotlin Explorer logo",
-        modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .padding(bottom = 32.dp)
-            .scale(scale),
+      painter = kotlinExplorerLogo,
+      contentDescription = "Kotlin Explorer logo",
+      modifier = Modifier
+        .align(Alignment.CenterHorizontally)
+        .padding(bottom = 32.dp)
+        .scale(scale),
     )
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .align(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .fillMaxWidth()
+        .align(Alignment.CenterHorizontally),
     ) {
       val modifier = Modifier
-          .align(Alignment.CenterHorizontally)
-          .padding(vertical = 8.dp)
+        .align(Alignment.CenterHorizontally)
+        .padding(vertical = 8.dp)
 
       if (username == null) {
         Button(
-            modifier = modifier,
-            onClick = loginAnonymously,
+          modifier = modifier,
+          onClick = loginAnonymously,
         ) {
           Text("Use anonymously")
         }
       } else {
         Button(
-            modifier = modifier,
-            onClick = startApp,
+          modifier = modifier,
+          onClick = startApp,
         ) {
           Text("Continue as $username")
         }
@@ -78,13 +78,13 @@ fun LoginUi(
 fun LoginUiPreview_authentified() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           LoginUi("Foo", {}, {}, {})
         }
@@ -98,13 +98,13 @@ fun LoginUiPreview_authentified() {
 fun LoginUiPreview_notAuth() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           LoginUi(null, {}, {}, {})
         }

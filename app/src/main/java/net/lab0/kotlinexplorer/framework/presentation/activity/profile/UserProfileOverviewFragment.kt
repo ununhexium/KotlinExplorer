@@ -29,13 +29,13 @@ import net.lab0.kotlinexplorer.utils.printLogD
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UserProfileOverviewFragment(
-    private val viewModelFactory: ViewModelProvider.Factory,
+  private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<UserProfileEvent, UserProfileViewState>() {
 
   override val viewModel: UserProfileViewModel by viewModels { viewModelFactory }
 
   private val registration = registerForActivityResult(
-      ActivityResultContracts.StartActivityForResult()
+    ActivityResultContracts.StartActivityForResult()
   ) { result ->
     if (result.resultCode == Activity.RESULT_OK) {
       // logged in
@@ -64,46 +64,46 @@ class UserProfileOverviewFragment(
 
     KotlinExplorerTheme {
       TopLevelScaffold(
-          title = "Profile",
-          scaffoldState = scaffoldState,
-          onProfileSelected = { /*Stay here*/ },
-          onLessonsSelected = { findNavController().popBackStack() },
-          onToolsSelected = { findNavController().popBackStack() },
+        title = "Profile",
+        scaffoldState = scaffoldState,
+        onProfileSelected = { /*Stay here*/ },
+        onLessonsSelected = { findNavController().popBackStack() },
+        onToolsSelected = { findNavController().popBackStack() },
       ) {
         val state by viewModel.uiDataState.collectAsState()
 
         printLogD(
-            UserProfileOverviewFragment::class.java.simpleName,
-            "State changed: ${state.user}"
+          UserProfileOverviewFragment::class.java.simpleName,
+          "State changed: ${state.user}"
         )
 
         UserProfileUi(
-            email = state.user?.email,
-            profilePicturePlaceholder = placeholder,
-            profilePicture = null,
-            logIn = {
-              registration.launch(
-                  AuthUI.getInstance()
-                      .createSignInIntentBuilder()
-                      .setAvailableProviders(
-                          listOf(
-                              AuthUI.IdpConfig.EmailBuilder().build(),
-                          )
-                      )
-                      .build()
-              )
-            },
-            logOut = {
-              val task = Auth.logOut(requireContext())
-              task.addOnSuccessListener {
-                viewModel.refreshUserData()
-                Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
-              }
-              task.addOnFailureListener {
-                Toast.makeText(context, "Failed to log out", Toast.LENGTH_LONG).show()
-              }
-            },
-            uid = state.user?.uid ?: "Nope"
+          email = state.user?.email,
+          profilePicturePlaceholder = placeholder,
+          profilePicture = null,
+          logIn = {
+            registration.launch(
+              AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(
+                  listOf(
+                    AuthUI.IdpConfig.EmailBuilder().build(),
+                  )
+                )
+                .build()
+            )
+          },
+          logOut = {
+            val task = Auth.logOut(requireContext())
+            task.addOnSuccessListener {
+              viewModel.refreshUserData()
+              Toast.makeText(context, "Logged out", Toast.LENGTH_SHORT).show()
+            }
+            task.addOnFailureListener {
+              Toast.makeText(context, "Failed to log out", Toast.LENGTH_LONG).show()
+            }
+          },
+          uid = state.user?.uid ?: "Nope"
         )
       }
     }

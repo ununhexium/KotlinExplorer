@@ -162,7 +162,7 @@ number types returns that same type of number type.
     ),
 
     // 0.3f - 0.2f rounding
-LessonPage.MultipleChoice(
+    LessonPage.MultipleChoice(
       title = "0.3 - 0.2",
       question = """
 What does this print?

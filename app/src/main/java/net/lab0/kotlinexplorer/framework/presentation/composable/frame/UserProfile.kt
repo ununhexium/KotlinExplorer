@@ -18,9 +18,9 @@ import net.lab0.kotlinexplorer.R
 fun UserProfile() {
   Column {
     Image(
-        painterResource(id = R.drawable.ic_kotlin_logo),
-        contentDescription = "Kotlin logo",
-        contentScale = ContentScale.Fit
+      painterResource(id = R.drawable.ic_kotlin_logo),
+      contentDescription = "Kotlin logo",
+      contentScale = ContentScale.Fit
     )
 //    Row(
 //        modifier = Modifier
@@ -43,13 +43,13 @@ fun UserProfile() {
 fun UserProfilePreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           UserProfile()
         }

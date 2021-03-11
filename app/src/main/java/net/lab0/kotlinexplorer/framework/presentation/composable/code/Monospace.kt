@@ -18,26 +18,26 @@ import net.lab0.kotlinexplorer.framework.ui.theme.sourceCodeFontFamily
 
 @Composable
 fun Monospace(
-    text: AnnotatedString,
-    modifier: Modifier = Modifier,
+  text: AnnotatedString,
+  modifier: Modifier = Modifier,
 ) {
   Text(
-      text,
-      modifier = modifier,
-      fontFamily = sourceCodeFontFamily,
-      fontSize = 14.sp,
-      softWrap = false,
+    text,
+    modifier = modifier,
+    fontFamily = sourceCodeFontFamily,
+    fontSize = 14.sp,
+    softWrap = false,
   )
 }
 
 @Composable
 fun Monospace(
-    text: String,
-    modifier: Modifier = Modifier,
+  text: String,
+  modifier: Modifier = Modifier,
 ) {
   Monospace(
-      AnnotatedString(text),
-      modifier
+    AnnotatedString(text),
+    modifier
   )
 }
 
@@ -50,14 +50,14 @@ fun MonospacePreview() {
         Monospace("Wii")
         DefaultVerticalSpacer()
         Monospace(
-            buildAnnotatedString {
-              pushStyle(SpanStyle(color = Color.Blue))
-              append("W")
-              pushStyle(SpanStyle(color = Color.White))
-              append("i")
-              pushStyle(SpanStyle(color = Color.Red))
-              append("i")
-            }
+          buildAnnotatedString {
+            pushStyle(SpanStyle(color = Color.Blue))
+            append("W")
+            pushStyle(SpanStyle(color = Color.White))
+            append("i")
+            pushStyle(SpanStyle(color = Color.Red))
+            append("i")
+          }
         )
         DefaultVerticalSpacer()
         Text("Wii", fontFamily = FontFamily.Monospace)

@@ -17,12 +17,12 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.code.AnswerChip
 
 @Composable
 fun StaggeredGrid(
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
+  modifier: Modifier = Modifier,
+  content: @Composable () -> Unit,
 ) {
   Layout(
-      modifier = modifier,
-      content = content,
+    modifier = modifier,
+    content = content,
   ) { measurables, constraints ->
     val maxWidth = constraints.maxWidth
 
@@ -59,16 +59,16 @@ fun StaggeredGrid(
     }
 
     val actualWidth = targetWidth
-        ?.coerceIn(constraints.minWidth..constraints.maxWidth)
-        ?: constraints.minWidth
+      ?.coerceIn(constraints.minWidth .. constraints.maxWidth)
+      ?: constraints.minWidth
 
     val actualHeight = targetHeight
-        .coerceIn(constraints.minHeight..constraints.maxHeight)
+      .coerceIn(constraints.minHeight .. constraints.maxHeight)
 
 
     layout(
-        width = actualWidth,
-        height = actualHeight,
+      width = actualWidth,
+      height = actualHeight,
     ) {
       var currentWidth = 0
       var currentHeight = 0
@@ -77,10 +77,10 @@ fun StaggeredGrid(
       groupedPlaceables.forEach { placeableList ->
         placeableList.forEach { placeable ->
           placeable.placeRelative(
-              IntOffset(
-                  x = currentWidth + (actualWidth - widths[currentRow]) / 2,
-                  y = currentHeight
-              )
+            IntOffset(
+              x = currentWidth + (actualWidth - widths[currentRow]) / 2,
+              y = currentHeight
+            )
           )
           currentWidth += placeable.width
         }
@@ -98,13 +98,13 @@ fun StaggeredGrid(
 fun StaggeredGridPreview_empty() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           StaggeredGrid {}
         }
@@ -118,32 +118,32 @@ fun StaggeredGridPreview_empty() {
 fun StaggeredGridPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         val modifier = Modifier.padding(4.dp)
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           StaggeredGrid {
-            (0..10).forEach {
+            (0 .. 10).forEach {
               Row(
-                  modifier = modifier,
+                modifier = modifier,
               ) {
                 AnswerChip(it.toString(), true) {}
               }
             }
 
             Row(
-                modifier = modifier,
+              modifier = modifier,
             ) {
               AnswerChip("ksjhdrfgsfulkjsgkjhluihasdf", true) {}
             }
 
             Row(
-                modifier = modifier,
+              modifier = modifier,
             ) {
               AnswerChip("6874506872089572345892340", true) {}
             }

@@ -34,27 +34,27 @@ object FirebaseModule {
   @Singleton
   @Provides
   fun provideFirebaseAuth(): FirebaseAuth =
-      FirebaseAuth.getInstance()
+    FirebaseAuth.getInstance()
 
   @Singleton
   @Provides
   fun provideFeedbackFromDomain(): FromDomain<LessonFeedbackDocument, LessonFeedback> =
-      FeedbackDocumentFromDomain()
+    FeedbackDocumentFromDomain()
 
   @Singleton
   @Provides
   fun provideFeedbackToDomain(): ToDomain<LessonFeedbackDocument, LessonFeedback> =
-      FeedbackDocumentToDomain()
+    FeedbackDocumentToDomain()
 
   @Singleton
   @Provides
   fun provideProblemReportFromDomain(): FromDomain<ProblemReportDocument, ProblemReport> =
-      ProblemReportDocumentFromDomain()
+    ProblemReportDocumentFromDomain()
 
   @Singleton
   @Provides
   fun provideProblemReportToDomain(): ToDomain<ProblemReportDocument, ProblemReport> =
-      ProblemReportDocumentToDomain()
+    ProblemReportDocumentToDomain()
 
   @Singleton
   @Provides
@@ -64,44 +64,44 @@ object FirebaseModule {
     toDomain: ToDomain<LessonFeedbackDocument, LessonFeedback>,
   ): LessonFeedbackService =
     LessonFeedbackServiceImpl(
-            firestore,
-            fromDomain,
-            toDomain,
+      firestore,
+      fromDomain,
+      toDomain,
     )
 
   @Singleton
   @Provides
   fun provideProblemReportService(
-      firebaseAuth: FirebaseAuth,
-      firestore: FirebaseFirestore,
-      fromDomain: FromDomain<ProblemReportDocument, ProblemReport>,
+    firebaseAuth: FirebaseAuth,
+    firestore: FirebaseFirestore,
+    fromDomain: FromDomain<ProblemReportDocument, ProblemReport>,
   ): ProblemReportService =
     ProblemReportServiceImpl(
-        firebaseAuth,
-            firestore,
-            fromDomain,
+      firebaseAuth,
+      firestore,
+      fromDomain,
     )
 
   @Singleton
   @Provides
   fun provideExtraContentRequestFromDomain(): FromDomain<ExtraContentRequestDocument, ExtraContentRequest> =
-      ExtraContentRequestFromDomain()
+    ExtraContentRequestFromDomain()
 
 
   @Singleton
   @Provides
   fun provideExtraContentRequestToDomain(): ToDomain<ExtraContentRequestDocument, ExtraContentRequest> =
-      ExtraContentRequestToDomain()
+    ExtraContentRequestToDomain()
 
   @Singleton
   @Provides
   fun provideExtraContentService(
-      firestore: FirebaseFirestore,
-      fromDomain: FromDomain<ExtraContentRequestDocument, ExtraContentRequest>,
+    firestore: FirebaseFirestore,
+    fromDomain: FromDomain<ExtraContentRequestDocument, ExtraContentRequest>,
   ): ExtraContentService =
     ExtraContentServiceImpl(
-        firestore,
-        fromDomain,
+      firestore,
+      fromDomain,
     )
 
 }

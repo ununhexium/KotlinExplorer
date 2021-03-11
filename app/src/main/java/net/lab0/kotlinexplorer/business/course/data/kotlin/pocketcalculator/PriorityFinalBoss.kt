@@ -3,7 +3,7 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 
-object PriorityFinalBoss: LessonImpl(
+object PriorityFinalBoss : LessonImpl(
   id = "kotlin.pocketcalculator.priorityfinalboss",
   title = "Final Boss",
   pages = listOf(

@@ -13,15 +13,15 @@ fun AnnotatedString.invertForegroundBackgroundColors(range: IntRange): Annotated
       val intersection = (span.start until span.end).overlapedBy(range)
 
       addStyle(
-          span.item,
-          span.startInclusive,
-          span.endExclusive
+        span.item,
+        span.startInclusive,
+        span.endExclusive
       )
       intersection?.let {
         addStyle(
-            span.item.copy(color = span.item.background, background = span.item.color),
-            intersection.startInclusive,
-            intersection.endExclusive
+          span.item.copy(color = span.item.background, background = span.item.color),
+          intersection.startInclusive,
+          intersection.endExclusive
         )
       }
     }

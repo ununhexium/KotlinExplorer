@@ -2,8 +2,6 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.chapter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -21,12 +19,12 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonLi
 
 @Composable
 fun ChapterList(
-    modifier: Modifier = Modifier,
-    chapters: List<ChapterCardData>,
-    /**
-     * Play the selected (chapter, lesson)
-     */
-    onPlay: (String, String) -> Unit,
+  modifier: Modifier = Modifier,
+  chapters: List<ChapterCardData>,
+  /**
+   * Play the selected (chapter, lesson)
+   */
+  onPlay: (String, String) -> Unit,
 ) {
   Column {
     chapters.forEach { chapter ->
@@ -34,19 +32,19 @@ fun ChapterList(
       expanded to setExpanded
 
       ExpansibleCard(
-          card = {
-            ChapterCard(chapter = chapter)
-          },
-          expansion = {
-            chapter.lessons.forEach { lesson ->
-              LessonListItem(
-                  lesson = lesson,
-                  onPlay = { onPlay(chapter.id, lesson.id) }
-              )
-            }
-          },
-          expanded = expanded,
-          setExpanded = setExpanded,
+        card = {
+          ChapterCard(chapter = chapter)
+        },
+        expansion = {
+          chapter.lessons.forEach { lesson ->
+            LessonListItem(
+              lesson = lesson,
+              onPlay = { onPlay(chapter.id, lesson.id) }
+            )
+          }
+        },
+        expanded = expanded,
+        setExpanded = setExpanded,
       )
       MediumVerticalSpacer()
     }
@@ -58,23 +56,23 @@ fun ChapterList(
 fun ChapterListPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         ChapterList(
-            chapters = listOf(
-                dummyChapter1,
-                dummyChapter2,
-                dummyChapter1,
-                dummyChapter2,
-                dummyChapter1,
-                dummyChapter2,
-                dummyChapter1,
-                dummyChapter2,
-            ),
-            onPlay = { _: String, _: String -> }
+          chapters = listOf(
+            dummyChapter1,
+            dummyChapter2,
+            dummyChapter1,
+            dummyChapter2,
+            dummyChapter1,
+            dummyChapter2,
+            dummyChapter1,
+            dummyChapter2,
+          ),
+          onPlay = { _: String, _: String -> }
         )
       }
     }

@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,7 +12,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder
@@ -26,34 +24,34 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.code.input.Next
 
 @Composable
 fun LessonPageBody(
-    question: @Composable () -> Unit,
-    answer: (@Composable () -> Unit)? = null,
-    input: (@Composable () -> Unit)? = null,
-    controlBar: @Composable () -> Unit,
+  question: @Composable () -> Unit,
+  answer: (@Composable () -> Unit)? = null,
+  input: (@Composable () -> Unit)? = null,
+  controlBar: @Composable () -> Unit,
 ) {
   val state = rememberScrollState()
   Column(
-      modifier = Modifier
-          .fillMaxSize()
-          .padding(8.dp)
-          .verticalScroll(state),
-      verticalArrangement = Arrangement.SpaceBetween,
+    modifier = Modifier
+      .fillMaxSize()
+      .padding(8.dp)
+      .verticalScroll(state),
+    verticalArrangement = Arrangement.SpaceBetween,
   ) {
     Column {
       question()
       Column(
-          modifier = Modifier.padding(vertical = 8.dp)
+        modifier = Modifier.padding(vertical = 8.dp)
       ) {
         answer?.invoke()
       }
     }
 
     Column(
-        modifier = Modifier.padding(vertical = 8.dp),
+      modifier = Modifier.padding(vertical = 8.dp),
     ) {
       Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceAround
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceAround
       ) {
         input?.invoke()
       }
@@ -66,39 +64,39 @@ fun LessonPageBody(
 @Composable
 fun LessonPageBodyPreview_input() {
   MaterialTheme {
-    Column(modifier = Modifier.fillMaxSize(),) {
+    Column(modifier = Modifier.fillMaxSize()) {
       LessonPageBody(
-          question = {
-            Text("Why?")
-            DefaultVerticalSpacer()
-            KotlinCode(
-                code = """println("Because ${placeholder(0)}!")"""
+        question = {
+          Text("Why?")
+          DefaultVerticalSpacer()
+          KotlinCode(
+            code = """println("Because ${placeholder(0)}!")"""
+          )
+        },
+        answer = {
+        },
+        input = {
+          CodeAnswerInput(
+            onSelect = { },
+            canValidate = true,
+            answers = listOf(
+              Answer(0, "alpha", false),
+              Answer(0, "beta", true),
+              Answer(0, "gamma", false),
+            ),
+          )
+        },
+        controlBar = {
+          Row(Modifier.padding(8.dp)) {
+            CodeInputControlBar(
+              canUndoOrReset = true,
+              canValidate = true,
+              onUndo = {},
+              onReset = {},
+              onValidate = {},
             )
-          },
-          answer = {
-          },
-          input = {
-            CodeAnswerInput(
-                onSelect = { },
-                canValidate = true,
-                answers = listOf(
-                    Answer(0, "alpha", false),
-                    Answer(0, "beta", true),
-                    Answer(0, "gamma", false),
-                ),
-            )
-          },
-          controlBar = {
-            Row(Modifier.padding(8.dp)) {
-              CodeInputControlBar(
-                  canUndoOrReset = true,
-                  canValidate = true,
-                  onUndo = {},
-                  onReset = {},
-                  onValidate = {},
-              )
-            }
           }
+        }
       )
     }
   }
@@ -110,19 +108,19 @@ fun LessonPageBodyPreview_input() {
 fun LessonPageBodyPreview_answer() {
   MaterialTheme {
     LessonPageBody(
-        question = {
-          Text("Why?")
-          DefaultVerticalSpacer()
-          KotlinCode(
-              code = """println("Because ${placeholder(0)}!")"""
-          )
-        },
-        answer = {
-          CorrectAnswer(explanation = { Text("That's why") })
-        },
-        controlBar = {
-          NextPageControlBar(onNext = { })
-        }
+      question = {
+        Text("Why?")
+        DefaultVerticalSpacer()
+        KotlinCode(
+          code = """println("Because ${placeholder(0)}!")"""
+        )
+      },
+      answer = {
+        CorrectAnswer(explanation = { Text("That's why") })
+      },
+      controlBar = {
+        NextPageControlBar(onNext = { })
+      }
     )
   }
 }
@@ -133,23 +131,23 @@ fun LessonPageBodyPreview_answer() {
 fun LessonPageBodyPreview_longAnswer() {
   MaterialTheme {
     LessonPageBody(
-        question = {
-          Text("Why?")
-          DefaultVerticalSpacer()
-          KotlinCode(
-              code = """println("Because ${placeholder(0)}!")"""
-          )
-        },
-        answer = {
-          CorrectAnswer(
-              explanation = {
-                Text("That's why ".repeat(200))
-              }
-          )
-        },
-        controlBar = {
-          NextPageControlBar(onNext = { })
-        }
+      question = {
+        Text("Why?")
+        DefaultVerticalSpacer()
+        KotlinCode(
+          code = """println("Because ${placeholder(0)}!")"""
+        )
+      },
+      answer = {
+        CorrectAnswer(
+          explanation = {
+            Text("That's why ".repeat(200))
+          }
+        )
+      },
+      controlBar = {
+        NextPageControlBar(onNext = { })
+      }
     )
   }
 }

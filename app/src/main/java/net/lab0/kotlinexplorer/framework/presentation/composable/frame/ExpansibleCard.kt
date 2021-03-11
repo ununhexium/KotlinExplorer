@@ -16,27 +16,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterCard
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonListItem
-import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 
 @Composable
 fun ExpansibleCard(
-    card: @Composable RowScope.() -> Unit,
-    expansion: @Composable ColumnScope.() -> Unit,
-    expanded: Boolean = false,
-    setExpanded: (Boolean) -> Unit,
+  card: @Composable RowScope.() -> Unit,
+  expansion: @Composable ColumnScope.() -> Unit,
+  expanded: Boolean = false,
+  setExpanded: (Boolean) -> Unit,
 ) {
   CardWithExpansion(
-      card = {
-        Row(
-            modifier = Modifier.clickable(
-                onClick = { setExpanded(!expanded) }
-            ),
-        ) {
-          card()
-        }
+    card = {
+      Row(
+        modifier = Modifier.clickable(
+          onClick = { setExpanded(!expanded) }
+        ),
+      ) {
+        card()
       }
+    }
   ) {
     if (expanded) {
       Column {
@@ -53,14 +53,14 @@ fun ExpansibleCard(
 }
 
 @Composable
-private fun BottomText(text:String, setExpanded: (Boolean) -> Unit, expanded: Boolean) {
+private fun BottomText(text: String, setExpanded: (Boolean) -> Unit, expanded: Boolean) {
   Row(
-      modifier = Modifier
-          .fillMaxWidth()
-          .clickable(
-              onClick = { setExpanded(!expanded) }
-          ),
-      horizontalArrangement = Arrangement.Center,
+    modifier = Modifier
+      .fillMaxWidth()
+      .clickable(
+        onClick = { setExpanded(!expanded) }
+      ),
+    horizontalArrangement = Arrangement.Center,
   ) {
     Text(text, color = MaterialTheme.colors.secondary)
   }
@@ -71,20 +71,20 @@ private fun BottomText(text:String, setExpanded: (Boolean) -> Unit, expanded: Bo
 fun ExpansibleCardPreview_collapsed() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         ExpansibleCard(
-            { ChapterCard(chapter = dummyChapter1) },
-            {
-              LessonListItem(lesson = lesson1, {})
-              LessonListItem(lesson = lesson2, {})
-              LessonListItem(lesson = lesson3, {})
-            },
-            false,
-            {},
+          { ChapterCard(chapter = dummyChapter1) },
+          {
+            LessonListItem(lesson = lesson1, {})
+            LessonListItem(lesson = lesson2, {})
+            LessonListItem(lesson = lesson3, {})
+          },
+          false,
+          {},
         )
       }
     }
@@ -97,20 +97,20 @@ fun ExpansibleCardPreview_collapsed() {
 fun ExpansibleCardPreview_expanded() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         ExpansibleCard(
-            { ChapterCard(chapter = dummyChapter1) },
-            {
-              LessonListItem(lesson = lesson1, {})
-              LessonListItem(lesson = lesson2, {})
-              LessonListItem(lesson = lesson3, {})
-            },
-            true,
-            {},
+          { ChapterCard(chapter = dummyChapter1) },
+          {
+            LessonListItem(lesson = lesson1, {})
+            LessonListItem(lesson = lesson2, {})
+            LessonListItem(lesson = lesson3, {})
+          },
+          true,
+          {},
         )
       }
     }

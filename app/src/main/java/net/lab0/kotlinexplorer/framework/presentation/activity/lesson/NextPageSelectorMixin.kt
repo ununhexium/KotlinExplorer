@@ -21,7 +21,7 @@ interface NextPageSelectorMixin {
     navigationToCodeQuestion: (String, Int) -> NavDirections,
     nextPage: Int = page + 1,
   ): () -> Unit {
-    if(page >= 0) {
+    if (page >= 0) {
       val lessonPage = LessonBrowser.getLessonById(lessonId).pages[page]
 
       activityViewModel.countMark(
@@ -33,25 +33,25 @@ interface NextPageSelectorMixin {
     val isLastLessonInChapter = LessonBrowser.getNextLessonInChapter(lessonId) == null
 
     val maybeNextPage = LessonBrowser.getLessonById(lessonId)
-        .pages
-        .getOrNull(nextPage)
+      .pages
+      .getOrNull(nextPage)
 
     return {
       navController.navigate(
-          Do exhaustiveNonNull when (maybeNextPage) {
-            null -> {
-              // no more pages -> end lesson
-              activityViewModel.saveLesson()
-              if(isLastLessonInChapter) {
-                navigationToFeedback(lessonId)
-              }else{
-                navigationToNextChapter(lessonId)
-              }
+        Do exhaustiveNonNull when (maybeNextPage) {
+          null -> {
+            // no more pages -> end lesson
+            activityViewModel.saveLesson()
+            if (isLastLessonInChapter) {
+              navigationToFeedback(lessonId)
+            } else {
+              navigationToNextChapter(lessonId)
             }
-            is LessonPage.InfoPage -> navigationToInfo(lessonId, nextPage)
-            is LessonPage.CodeQuestionPage -> navigationToCodeQuestion(lessonId, nextPage)
-            is LessonPage.MultipleChoice -> navigationToMultipleChoice(lessonId, nextPage)
           }
+          is LessonPage.InfoPage -> navigationToInfo(lessonId, nextPage)
+          is LessonPage.CodeQuestionPage -> navigationToCodeQuestion(lessonId, nextPage)
+          is LessonPage.MultipleChoice -> navigationToMultipleChoice(lessonId, nextPage)
+        }
       )
     }
   }

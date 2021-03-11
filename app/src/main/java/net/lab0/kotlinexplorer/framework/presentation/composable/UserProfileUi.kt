@@ -30,38 +30,38 @@ import java.util.*
 
 @Composable
 fun UserProfileUi(
-    email: String?,
-    profilePicturePlaceholder: Painter,
-    profilePicture: ImageBitmap? = null,
-    logIn: () -> Unit,
-    logOut: () -> Unit,
-    uid: String,
+  email: String?,
+  profilePicturePlaceholder: Painter,
+  profilePicture: ImageBitmap? = null,
+  logIn: () -> Unit,
+  logOut: () -> Unit,
+  uid: String,
 ) {
   Column(
     modifier = Modifier.fillMaxHeight(),
     verticalArrangement = Arrangement.SpaceBetween
   ) {
     Column(
-        modifier = Modifier.fillMaxWidth(),
+      modifier = Modifier.fillMaxWidth(),
     ) {
 
       Box(modifier = Modifier.height(192.dp)) {
         Surface(
-            modifier = Modifier
-              .height(128.dp)
-              .fillMaxWidth(),
-            color = MaterialTheme.colors.background,
+          modifier = Modifier
+            .height(128.dp)
+            .fillMaxWidth(),
+          color = MaterialTheme.colors.background,
         ) {}
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.Center,
         ) {
           Surface(
-              modifier = Modifier
-                .padding(top = 64.dp)
-                .size(128.dp),
-              color = MaterialTheme.colors.surface,
+            modifier = Modifier
+              .padding(top = 64.dp)
+              .size(128.dp),
+            color = MaterialTheme.colors.surface,
           ) {
             val padding = Modifier.padding(8.dp)
             when {
@@ -70,9 +70,9 @@ fun UserProfileUi(
 
               else ->
                 Image(
-                    profilePicturePlaceholder,
-                    contentDescription = "Profile picture placeholder",
-                    modifier = padding
+                  profilePicturePlaceholder,
+                  contentDescription = "Profile picture placeholder",
+                  modifier = padding
                 )
             }
           }
@@ -81,31 +81,31 @@ fun UserProfileUi(
 
 
       Column(
-          modifier = Modifier.fillMaxWidth(),
-          verticalArrangement = Arrangement.Center
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center
       ) {
         if (email != null) {
           Text(
-              modifier = Modifier.align(Alignment.CenterHorizontally),
-              text = email,
-              style = MaterialTheme.typography.h6
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = email,
+            style = MaterialTheme.typography.h6
           )
 
           DefaultVerticalSpacer()
 
           ThinButton(
-              text = "Log out".toUpperCase(Locale.getDefault()),
-              modifier = Modifier.align(Alignment.CenterHorizontally),
-              onClick = logOut,
+            text = "Log out".toUpperCase(Locale.getDefault()),
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            onClick = logOut,
           )
         } else {
           Button(
-              onClick = logIn,
-              modifier = Modifier.align(Alignment.CenterHorizontally),
+            onClick = logIn,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
           ) {
             Text(
-                text = "Log in",
-                style = MaterialTheme.typography.h6,
+              text = "Log in",
+              style = MaterialTheme.typography.h6,
             )
           }
         }
@@ -135,21 +135,21 @@ fun UserProfileUi(
 fun UserProfileUiPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           UserProfileUi(
-              email = "foo@example.com",
-              profilePicturePlaceholder = painterResource(R.drawable.ic_kotlin_logo),
-              profilePicture = null,
-              logIn = {},
-              logOut = {},
-              "uid0",
+            email = "foo@example.com",
+            profilePicturePlaceholder = painterResource(R.drawable.ic_kotlin_logo),
+            profilePicture = null,
+            logIn = {},
+            logOut = {},
+            "uid0",
           )
         }
       }

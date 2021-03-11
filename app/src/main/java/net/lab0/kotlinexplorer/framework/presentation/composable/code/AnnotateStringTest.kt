@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AnnotateStringTest() {
   Text(
-      buildAnnotatedString {
-        pushStyle(SpanStyle(color = Color.Red, background = Color.Black))
-        append("foo")
-        pop()
-        addStyle(SpanStyle(color = Color.Black, background = Color.Red), 0,3)
-      }
+    buildAnnotatedString {
+      pushStyle(SpanStyle(color = Color.Red, background = Color.Black))
+      append("foo")
+      pop()
+      addStyle(SpanStyle(color = Color.Black, background = Color.Red), 0, 3)
+    }
   )
 }
 
@@ -30,13 +30,13 @@ fun AnnotateStringTest() {
 fun AnnotateStringTestPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           AnnotateStringTest()
         }

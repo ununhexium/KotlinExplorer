@@ -23,54 +23,54 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.Chapter
 // design: https://www.designcrowd.de/design/15152008
 @Composable
 fun CardWithExpansion(
-    card: @Composable RowScope.() -> Unit,
-    expansion: @Composable RowScope.() -> Unit,
+  card: @Composable RowScope.() -> Unit,
+  expansion: @Composable RowScope.() -> Unit,
 ) {
-  Row(modifier = Modifier.padding(4.dp),) {
+  Row(modifier = Modifier.padding(4.dp)) {
     ConstraintLayout(
-        modifier = Modifier.fillMaxWidth(),
+      modifier = Modifier.fillMaxWidth(),
     ) {
       val (above, below) = createRefs()
 
       Row(
-          modifier = Modifier
-              .padding(start = 8.dp, end = 8.dp)
-              .fillMaxWidth()
-              .constrainAs(below) {
-                top.linkTo(above.bottom)
-              },
+        modifier = Modifier
+          .padding(start = 8.dp, end = 8.dp)
+          .fillMaxWidth()
+          .constrainAs(below) {
+            top.linkTo(above.bottom)
+          },
       ) {
         Card(
-            shape = MaterialTheme.shapes.medium.copy(
-                topStart = CornerSize(0),
-                topEnd = CornerSize(0),
-            ),
-            elevation = 4.dp,
+          shape = MaterialTheme.shapes.medium.copy(
+            topStart = CornerSize(0),
+            topEnd = CornerSize(0),
+          ),
+          elevation = 4.dp,
         ) {
           Row(
-              modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(4.dp),
-              horizontalArrangement = Arrangement.SpaceAround,
-              content = expansion
+            modifier = Modifier
+              .fillMaxWidth()
+              .padding(4.dp),
+            horizontalArrangement = Arrangement.SpaceAround,
+            content = expansion
           )
         }
       }
 
       Card(
-          modifier = Modifier
-              .fillMaxWidth()
-              .constrainAs(above) {
-                top.linkTo(parent.top)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-              },
-          shape = MaterialTheme.shapes.medium,
-          elevation = 4.dp,
+        modifier = Modifier
+          .fillMaxWidth()
+          .constrainAs(above) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+          },
+        shape = MaterialTheme.shapes.medium,
+        elevation = 4.dp,
       ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            content = card
+          verticalAlignment = Alignment.CenterVertically,
+          content = card
         )
       }
     }
@@ -82,22 +82,22 @@ fun CardWithExpansion(
 fun ChaptersListPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         CardWithExpansion(
-            card = {
-              ChapterCard(
-                  dummyChapter1
-              )
-            }
+          card = {
+            ChapterCard(
+              dummyChapter1
+            )
+          }
         ) {
           Text(
-              "SHOW MORE",
-              color = MaterialTheme.colors.secondary,
-              style = MaterialTheme.typography.body1,
+            "SHOW MORE",
+            color = MaterialTheme.colors.secondary,
+            style = MaterialTheme.typography.body1,
           )
         }
       }

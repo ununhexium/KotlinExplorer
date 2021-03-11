@@ -30,8 +30,8 @@ fun MDOrderedListPreview() {
   MaterialTheme {
     Column {
       MDDocument(
-          parseMD(
-              """
+        parseMD(
+          """
                 |Hello you
                 |
                 |Bye me. 
@@ -40,7 +40,7 @@ fun MDOrderedListPreview() {
                 |1. One
                 |1. Two
               """.trimMargin()
-          )
+        )
       )
     }
   }
@@ -52,17 +52,17 @@ fun MDTextPreview() {
   MaterialTheme {
     Column {
       MarkdownText(
-          buildAnnotatedString {
-            pushStyle(MaterialTheme.typography.body1.toSpanStyle())
-            append(
-                """
+        buildAnnotatedString {
+          pushStyle(MaterialTheme.typography.body1.toSpanStyle())
+          append(
+            """
                   |1. One
                   |2. Two
                 """.trimMargin()
-            )
-            pop()
-          },
-          MaterialTheme.typography.body1
+          )
+          pop()
+        },
+        MaterialTheme.typography.body1
       )
     }
   }

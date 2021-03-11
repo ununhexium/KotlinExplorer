@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.DefaultCodeStyle
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.DefaultCodeStyle
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.KotlinCode
 import org.commonmark.node.Document
 import org.commonmark.node.FencedCodeBlock
@@ -21,35 +21,35 @@ import java.util.*
 
 @Composable
 fun MDFencedCodeBlock(
-    fencedCodeBlock: FencedCodeBlock,
-    modifier: Modifier = Modifier,
+  fencedCodeBlock: FencedCodeBlock,
+  modifier: Modifier = Modifier,
 ) {
   val padding = if (fencedCodeBlock.parent is Document) 8.dp else 0.dp
   Box(modifier = modifier.padding(bottom = padding, start = 8.dp)) {
     when (fencedCodeBlock.info.toLowerCase(Locale.ROOT)) {
       "kotlin" ->
         KotlinCode(
-            extractHighlightsAndAnnotate(
-                fencedCodeBlock.literal.trim(),
-                DefaultCodeStyle.textStyler
-            ),
-            codeStyle = DefaultCodeStyle,
+          extractHighlightsAndAnnotate(
+            fencedCodeBlock.literal.trim(),
+            DefaultCodeStyle.textStyler
+          ),
+          codeStyle = DefaultCodeStyle,
         )
       "kotlin_lines" ->
         KotlinCode(
-            extractHighlightsAndAnnotate(
-                fencedCodeBlock.literal.trim(),
-                DefaultCodeStyle.textStyler
-            ),
-            codeStyle = DefaultCodeStyle,
-            showLineNumbers = true,
+          extractHighlightsAndAnnotate(
+            fencedCodeBlock.literal.trim(),
+            DefaultCodeStyle.textStyler
+          ),
+          codeStyle = DefaultCodeStyle,
+          showLineNumbers = true,
         )
       else ->
         Text(
-            text = fencedCodeBlock.literal.trim(),
-            modifier = Modifier
-                .padding(start = 4.dp, end = 4.dp),
-            fontFamily = FontFamily.Monospace,
+          text = fencedCodeBlock.literal.trim(),
+          modifier = Modifier
+            .padding(start = 4.dp, end = 4.dp),
+          fontFamily = FontFamily.Monospace,
         )
     }
   }
@@ -62,8 +62,8 @@ fun MDFencedCodeBlockPreview() {
     Surface {
       Column {
         MDDocument(
-            parseMD(
-                """
+          parseMD(
+            """
                   |Hello `World`
                   |
                   |```
@@ -76,7 +76,7 @@ fun MDFencedCodeBlockPreview() {
                   |val i3 = 3
                   |```
                 """.trimMargin()
-            )
+          )
         )
       }
     }

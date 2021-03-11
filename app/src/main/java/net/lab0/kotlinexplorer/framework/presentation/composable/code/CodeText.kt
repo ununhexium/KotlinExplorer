@@ -7,18 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun CodeText(code:String) {
-    Monospace(code)
+fun CodeText(code: String) {
+  Monospace(code)
 }
 
 @Preview
 @Composable
 fun CodeTextPreview() {
-    MaterialTheme {
-        Surface {
-            Column {
-                CodeText("Wii")
-            }
-        }
+  MaterialTheme {
+    Surface {
+      Column {
+        CodeText("Wii")
+      }
     }
+  }
 }

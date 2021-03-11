@@ -46,8 +46,8 @@ fun MDHeadingPreview() {
     Surface {
       Column {
         MDDocument(
-            document = parseMD(
-                """
+          document = parseMD(
+            """
                   |# Title
                   |## Subtitle
                   |### H3
@@ -55,17 +55,17 @@ fun MDHeadingPreview() {
                   |##### H5
                   |###### H6
                 """.trimMargin()
-            )
+          )
         )
         MDDocument(
-            document = parseMD(
-                """
+          document = parseMD(
+            """
                   |# Kotlin
                   |
                   |Kotlin is a programming language widely used for Android development 
                   |but also for server-side and tooling development.
                 """.trimMargin()
-            )
+          )
         )
       }
     }

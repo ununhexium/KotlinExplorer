@@ -5,5 +5,5 @@ import com.google.firebase.auth.FirebaseUser
 import net.lab0.kotlinexplorer.mvi.UiState
 
 data class UserProfileViewState(
-    val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser,
-): UiState
+  val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser,
+) : UiState

@@ -2,20 +2,20 @@ package net.lab0.kotlinexplorer.injection
 
 import android.app.Application
 import androidx.room.Room
-import net.lab0.kotlinexplorer.business.domain.LessonProgress
-import net.lab0.kotlinexplorer.framework.db.ExplorerDatabase
-import net.lab0.kotlinexplorer.framework.db.LessonProgressDao
-import net.lab0.kotlinexplorer.framework.db.LessonProgressEntity
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
-import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromDomain
-import net.lab0.kotlinexplorer.framework.util.ToDomain
-import net.lab0.kotlinexplorer.framework.util.FromDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import net.lab0.kotlinexplorer.business.domain.LessonProgress
+import net.lab0.kotlinexplorer.framework.db.ExplorerDatabase
+import net.lab0.kotlinexplorer.framework.db.LessonProgressDao
+import net.lab0.kotlinexplorer.framework.db.LessonProgressEntity
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperFromDomain
+import net.lab0.kotlinexplorer.framework.db.mappers.LessonProgressMapperToDomain
+import net.lab0.kotlinexplorer.framework.util.FromDomain
+import net.lab0.kotlinexplorer.framework.util.ToDomain
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -27,28 +27,28 @@ object DatabaseModule {
   @Singleton
   @Provides
   fun provideExplorerDatabase(
-      app: Application
+    app: Application
   ): ExplorerDatabase {
     return Room
-        .databaseBuilder(app, ExplorerDatabase::class.java, ExplorerDatabase.DATABASE_NAME)
-        .fallbackToDestructiveMigration()
-        .build()
+      .databaseBuilder(app, ExplorerDatabase::class.java, ExplorerDatabase.DATABASE_NAME)
+      .fallbackToDestructiveMigration()
+      .build()
   }
 
   @Singleton
   @Provides
   fun provideLessonProgressDao(
-      db: ExplorerDatabase,
+    db: ExplorerDatabase,
   ): LessonProgressDao =
-      db.getLessonProgressDao()
+    db.getLessonProgressDao()
 
   @Singleton
   @Provides
   fun provideLessonProgressMapperFromEntity(): ToDomain<LessonProgressEntity, LessonProgress> =
-      LessonProgressMapperToDomain()
+    LessonProgressMapperToDomain()
 
   @Singleton
   @Provides
   fun provideLessonProgressMapperToEntity(): FromDomain<LessonProgressEntity, LessonProgress> =
-      LessonProgressMapperFromDomain()
+    LessonProgressMapperFromDomain()
 }

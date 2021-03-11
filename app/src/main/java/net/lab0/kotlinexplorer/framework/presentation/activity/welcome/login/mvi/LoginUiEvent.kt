@@ -2,8 +2,8 @@ package net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login.mv
 
 import net.lab0.kotlinexplorer.mvi.UiEvent
 
-sealed class LoginUiEvent: UiEvent {
-  object CheckCanLogin: LoginUiEvent()
+sealed class LoginUiEvent : UiEvent {
+  object CheckCanLogin : LoginUiEvent()
 
   object Empty : LoginUiEvent()
 }

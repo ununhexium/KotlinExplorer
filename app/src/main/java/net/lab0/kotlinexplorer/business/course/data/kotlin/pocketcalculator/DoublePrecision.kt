@@ -4,7 +4,7 @@ import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks
 
-object DoublePrecision: LessonImpl(
+object DoublePrecision : LessonImpl(
   id = "",
   title = "",
   pages = listOf(

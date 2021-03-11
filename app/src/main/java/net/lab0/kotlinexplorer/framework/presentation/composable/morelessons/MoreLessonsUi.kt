@@ -138,7 +138,7 @@ fun MoreLessonsUiPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          MoreLessonsUi {_,_,_ -> }
+          MoreLessonsUi { _, _, _ -> }
         }
       }
     }

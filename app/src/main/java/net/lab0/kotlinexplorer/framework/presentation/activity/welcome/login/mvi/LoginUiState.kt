@@ -3,5 +3,5 @@ package net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login.mv
 import net.lab0.kotlinexplorer.mvi.UiState
 
 data class LoginUiState(
-    val username: String? = null,
+  val username: String? = null,
 ) : UiState

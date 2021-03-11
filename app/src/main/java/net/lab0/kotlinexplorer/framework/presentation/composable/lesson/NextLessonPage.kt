@@ -19,24 +19,24 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpac
 
 @Composable
 fun NextLessonPage(
-    goToChapters: () -> Unit,
-    nextLesson: Lesson?,
-    goToNextLesson: (() -> Unit)?,
+  goToChapters: () -> Unit,
+  nextLesson: Lesson?,
+  goToNextLesson: (() -> Unit)?,
 ) {
   Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
     Button(
-        modifier = Modifier.align(Alignment.CenterHorizontally),
-        onClick = goToChapters,
+      modifier = Modifier.align(Alignment.CenterHorizontally),
+      onClick = goToChapters,
     ) {
       Text("Back to Chapters")
     }
 
     BigVerticalSpacer()
 
-    if(nextLesson != null && goToNextLesson != null) {
+    if (nextLesson != null && goToNextLesson != null) {
       Button(
-          modifier = Modifier.align(Alignment.CenterHorizontally),
-          onClick = goToNextLesson,
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        onClick = goToNextLesson,
       ) {
         Text("Next: ${nextLesson.title}")
       }
@@ -49,18 +49,18 @@ fun NextLessonPage(
 fun NextLessonPagePreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           NextLessonPage(
-              {},
-              null,
-              null
+            {},
+            null,
+            null
           )
         }
       }

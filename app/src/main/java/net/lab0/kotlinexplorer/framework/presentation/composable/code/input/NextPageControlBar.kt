@@ -19,20 +19,20 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NextPageControlBar(
-    modifier: Modifier = Modifier,
-    onNext: () -> Unit,
+  modifier: Modifier = Modifier,
+  onNext: () -> Unit,
 ) {
   Row(
-      modifier = modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.End
+    modifier = modifier.fillMaxWidth(),
+    horizontalArrangement = Arrangement.End
   ) {
     Row {
       Button(
-          onClick = onNext,
+        onClick = onNext,
       ) {
         Icon(
-            imageVector = Icons.Default.ArrowForward,
-            contentDescription = "ArrowForward",
+          imageVector = Icons.Default.ArrowForward,
+          contentDescription = "ArrowForward",
         )
       }
     }
@@ -44,13 +44,13 @@ fun NextPageControlBar(
 fun NextPageControlBarPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           NextPageControlBar {}
         }

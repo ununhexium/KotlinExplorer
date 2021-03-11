@@ -40,17 +40,17 @@ fun MDParagraph(paragraph: Paragraph, modifier: Modifier = Modifier) {
 fun MDParagraphPreview_SplitLine() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-            color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.surface
         ) {
           MDDocument(
-              document = parseMD(
-                  """
+            document = parseMD(
+              """
                     |This
                     |must
                     |be
@@ -59,7 +59,7 @@ fun MDParagraphPreview_SplitLine() {
                     |single
                     |line
                   """.trimMargin()
-              )
+            )
           )
         }
       }

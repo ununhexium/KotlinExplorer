@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.frame
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -17,10 +16,10 @@ import java.util.*
 
 @Composable
 fun ThinButton(
-    text: String,
-    modifier: Modifier = Modifier,
-    highlight: Boolean = true,
-    onClick: () -> Unit,
+  text: String,
+  modifier: Modifier = Modifier,
+  highlight: Boolean = true,
+  onClick: () -> Unit,
 ) {
   Surface(modifier, color = MaterialTheme.colors.surface) {
     val color = if (highlight) {
@@ -30,12 +29,12 @@ fun ThinButton(
     }
 
     Text(
-        text.toUpperCase(Locale.getDefault()),
-        modifier = Modifier
-            .clickable { onClick() }
-            .padding(horizontal = 3.dp),
-        style = MaterialTheme.typography.body1,
-        color = color,
+      text.toUpperCase(Locale.getDefault()),
+      modifier = Modifier
+        .clickable { onClick() }
+        .padding(horizontal = 3.dp),
+      style = MaterialTheme.typography.body1,
+      color = color,
     )
   }
 }
@@ -45,20 +44,20 @@ fun ThinButton(
 fun ThinButtonPreview() {
   MaterialTheme {
     Surface(
-        color = Color(0xFF4CAF50)
+      color = Color(0xFF4CAF50)
     ) {
       Column(
-          modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
       ) {
         Column {
           ThinButton(
-              text = "Example",
-              highlight = true
+            text = "Example",
+            highlight = true
           ) {}
           DefaultVerticalSpacer()
           ThinButton(
-              text = "Example",
-              highlight = false
+            text = "Example",
+            highlight = false
           ) {}
         }
       }
