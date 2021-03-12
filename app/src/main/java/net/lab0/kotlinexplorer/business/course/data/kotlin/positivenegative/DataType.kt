@@ -8,6 +8,8 @@ object DataType : LessonImpl(
   id = "kotlin.positivenegative.datatype",
   title = "Data type",
   pages = listOf(
+
+    // tell int type
     LessonPage.CodeQuestionPage(
       title = "Tell what it is",
       question = """
@@ -17,11 +19,13 @@ Tell the type of this value.
 val number: ${p(0)} = 42
 """,
       explanation = """
-`Int` (integer) indicates the data type of the value `number`.
+`Int` indicates that the data type of the value `number` must be an `Int`eger..
 """,
       answer = listOf("Int"),
       confusion = listOf("String", "Boolean"),
     ),
+
+    // tell string type
     LessonPage.CodeQuestionPage(
       title = "It's a string",
       question = """
@@ -31,11 +35,13 @@ Tell the type of this value.
 val alphabet: ${p(0)} = "abcdef..."
 """,
       explanation = """
-`String` indicates that alphabet is a string.
+`String` indicates that alphabet must be a string.
 """,
       answer = listOf("String"),
       confusion = listOf("Int", "Boolean"),
     ),
+
+    // tell boolean type
     LessonPage.CodeQuestionPage(
       title = "It's the truth",
       question = """
@@ -45,11 +51,45 @@ Tell the type of this value.
 val theSkyIsBlue: ${p(0)} = true // mostly...
 """,
       explanation = """
-`theSkyIsBlue` must now be a boolean.
+`theSkyIsBlue` must be a boolean.
 """,
       answer = listOf("Boolean"),
       confusion = listOf("Int", "String"),
     ),
+
+    // negative int
+    LessonPage.CodeQuestionPage(
+      title = "Negative",
+      question = """
+Declare a negative integer
+""",
+      snippet = """
+val negative = ${p(0)}
+""",
+      explanation = """
+This can also be written
+
+```kotlin
+val negative=-12
+
+val negative = - 12
+
+val negative =    -   12
+
+val negative
+  =
+    -
+      12
+```
+
+The amount of spaces doesn't matter.
+
+"-12" is a `String`
+""",
+      answer = listOf("-12"),
+      confusion = listOf("\"-12\""),
+    ),
+
     LessonPage.MultipleChoice(
       title = "Type inference",
       question = """

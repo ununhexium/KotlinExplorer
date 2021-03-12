@@ -9,11 +9,12 @@ object PocketCalculatorChapter : ChapterImpl(
   lessons = listOf(
     Introduction,
     Function,
-    StringSpecialChars,
+    StringSpecialChars, // TODO: needed? move to later?
     PriorityForSignAndMultiplicativeOperators,
     PriorityForAdditiveOperators,
     PriorityForComparisonAndSimpleAssignmentOperators,
     PriorityFinalBoss,
+    Integers,
     FloatingPoint,
   )
 )

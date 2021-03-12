@@ -2,15 +2,75 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object DoublePrecision : LessonImpl(
-  id = "",
-  title = "",
+  id = "kotlin.pocketcalculator.doubleprecision",
+  title = "Double Precision",
   pages = listOf(
 
-    // how to store 1e99 -> use double
-//    LessonPage.InfoPage(),
+    // how to store 1e100 -> use double
+    LessonPage.CodeQuestionPage(
+      title = "Google",
+      question = """
+Declare a google (`1e100`).
+""",
+      snippet = """
+val google: ${p(0)} = 1e100
+""",
+      explanation = """
+A `Double` can contain up to `1e308` (`1.7976931348623157 * 10^308`).
+
+Contrary to the `Float` that uses 32 bits for its storage,
+the `Double` uses 64 bits and has a wider range of values.
+
+The downside is that it can slower to compute and take twice the amount of memory.
+
+If you're not sure, just use `Double`s.
+
+A `Float` can only contain up to around `1e38`.
+""",
+      answer = listOf("Double"),
+      confusion = listOf("Float"),
+    ),
+
+    // Declare different types
+    LessonPage.CodeQuestionPage(
+      title = "Float or Double",
+      question = """
+Declare the right type of number.
+""",
+      snippet = """
+val double:Double = ${p(0)}
+val float:Float = ${p(1)}
+""",
+      explanation = """
+`f` indicates that it's a `Float`.
+
+If nothing is specified, it defaults to `Double`.
+""",
+      answer = listOf("1.0f", "1.0"),
+      confusion = listOf(),
+    ),
+
+    // Type inference
+    LessonPage.CodeQuestionPage(
+      title = "Type inference",
+      question = """
+What's the type?
+""",
+      snippet = """
+val a:${p(0)} = 1.0
+val b:${p(1)} = 1f
+""",
+      explanation = """
+`f` indicates that it's a `Float`.
+
+If nothing is specified, it defaults to `Double`.
+""",
+      answer = listOf("Double", "Float"),
+      confusion = listOf(),
+    ),
 
     // Declare double PI
     LessonPage.CodeQuestionPage(
@@ -19,27 +79,123 @@ object DoublePrecision : LessonImpl(
 Declare the value π with double precision.
 """,
       snippet = """
-val pi:Double = ${KotlinCodeWithBlanks.placeholder(0)}
+val pi:Double = ${p(0)}
 """,
       explanation = """
-By default, a floating point value is expressed in double precision.
+`3.141592653589793` is the closest decimal representation.
+
+The other numbers are close but not the best choices.
+When using a floating point number, try to be as precise as possible.
+
+So why not using more digits?
+
+Because the 64bit precision can't handle them.
+They are accepted in the code but will be forgotten at execution.
+
+Just like integers, floating point numbers can have underscores `_`
+to be more readable.
 """,
-      answer = listOf("3.1415"),
-      confusion = listOf("3.1415f", "3.1415d"),
+      answer = listOf("3.141_592_653_589_793"),
+      confusion = listOf("3.1415", "3.1415927"),
     ),
-// difference between float and double
-// declare 1
-// declare -1
-// declare big number 1E10
-// declare big number 1E100
-// declare +inf
-// declare -inf
-// declare NaN
-// x/inf = 0
-// 3 / 0 = Inf
-// 0 / 0 = NaN
-// Rounding
-// convert between number types
-// interaction with Ints in calculation
+
+    // reassign to float
+    LessonPage.MultipleChoice(
+      title = "Precision comparison",
+      question = """
+What will happen?
+
+```kotlin
+val floatingPie: Float = 3.141592653589793f
+val doublePie: Double = 3.141592653589793
+
+print(floatingPie == doublePie)
+```
+""",
+      explanation = """
+The comparison operator `==` will refuse to compare data 
+that is different, because it can lead to errors.
+""",
+      choices = listOf(
+        "Some error: can't compare 2 types that are different",
+        "false: they have a different precision",
+        "true:they're both π"
+      ),
+      answer = setOf(0),
+    ),
+
+    // convert from float: loose precision
+    LessonPage.MultipleChoice(
+      title = "From Float",
+      question = """
+What will happen?
+
+```kotlin
+val pi = 3.141592653589793
+
+val doublePie = pi.toDouble()
+val floatingPie = pi.toFloat().toDouble()
+
+print(floatingPie == doublePie)
+""",
+      explanation = """
+A float has 7 digits of precision. A double has 15 digits of precision.
+ 
+Converting a number from `Double` to `Float` and back to double makes it 
+loose precision.
+
+If these digits are important like in π, the converted number is different.
+
+If these digits are not important, like in `1.0`, then they remain equal.
+
+```kotlin
+// true
+1.0.toFloat().toDouble() == 1.0
+```
+""",
+      choices = listOf(
+        "false: they have a different precision",
+        "Some error: can't compare 2 types that are different",
+        "true: they're both π",
+      ),
+      answer = setOf(0),
+    ),
+
+    // just like floats
+LessonPage.CodeQuestionPage(
+      title = "Float-like",
+      question = """
+`Double`s are just like `Float`s but with higher precision and larger range.
+
+Try stuff you learned with doubles.
+""",
+      snippet = """
+val minimum = Double.${p(0)}
+val maximum = Double.${p(1)}
+val infinity = Double.${p(2)}
+val notANumber = Double.${p(3)}
+""",
+      explanation = """
+Works exactly like floats.
+""",
+      answer = listOf("MIN_VALUE", "MAX_VALUE", "POSITIVE_INFINITY", "NaN"),
+      confusion = listOf(),
+    ),
+
+    LessonPage.InfoPage(
+      title = "Summary",
+      """
+`Double` precision floating point numbers behave the same as floating point numbers.
+
+Everything you know about floating points is true for doubles.
+
+A `Double` can always contain what a `Float` contains without any precision loss.
+The reverse is not true.
+
+Comparisons can only happen between numbers of the same type.
+
+Long decimal numbers can use `_` just like ints.
+"""
+    )
   )
 )

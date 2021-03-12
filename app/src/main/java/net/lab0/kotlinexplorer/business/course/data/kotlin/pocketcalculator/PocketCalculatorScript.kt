@@ -59,6 +59,12 @@ fun main() {
   // 2.333...
   println(divideIntsReturnDouble(7, 3))
 
+  // 1.5
+  println(
+    // chaining function calls
+    average(2, 3)
+  )
+
   // 3.0
   println(
     // chaining function calls

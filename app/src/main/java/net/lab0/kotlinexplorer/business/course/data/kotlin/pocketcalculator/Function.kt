@@ -151,6 +151,7 @@ The first argument's *type* is `String`.
       answer = setOf(0),
     ),
 
+    // TODO put return stuff in a different module and talk about scopes (can't read inside another function's body).
     // function return and return type
     LessonPage.CodeQuestionPage(
       title = "Return hello",
@@ -550,3 +551,4 @@ fun // declares a function
 )
 
 // TODO: function can't return more than 1 parameter
+// TODO: variables scope

@@ -9,6 +9,27 @@ object StringSpecialChars : LessonImpl(
   id = "kotlin.pocketcalculator.stringspecialchars",
   title = "String Special Characters",
   pages = listOf(
+    // empty string
+    LessonPage.CodeQuestionPage(
+      title = "Empty",
+      question = """
+Declare an empty string
+""",
+      snippet = """
+val empty = ${p(0)}
+""",
+      explanation = """
+A string that contains nothing is a valid string.
+It's the only possible empty string.
+
+`"   "` is not empty, it contains spaces.
+
+`"."` is a point
+""",
+      answer = listOf("\"\""),
+      confusion = listOf("\"     \"", "\".\"", "String.EMPTY"),
+    ),
+
     // characters declaration
     LessonPage.CodeQuestionPage(
       title = "Characters",
