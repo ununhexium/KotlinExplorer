@@ -16,5 +16,6 @@ object PocketCalculatorChapter : ChapterImpl(
     PriorityFinalBoss,
     Integers,
     FloatingPoint,
+    DoublePrecision,
   )
 )

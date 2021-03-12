@@ -24,9 +24,9 @@ A `Double` can contain up to `1e308` (`1.7976931348623157 * 10^308`).
 Contrary to the `Float` that uses 32 bits for its storage,
 the `Double` uses 64 bits and has a wider range of values.
 
-The downside is that it can slower to compute and take twice the amount of memory.
-
 If you're not sure, just use `Double`s.
+
+There can be performance penalty for that but that's not a beginner's problem 😜.
 
 A `Float` can only contain up to around `1e38`.
 """,
@@ -162,7 +162,7 @@ If these digits are not important, like in `1.0`, then they remain equal.
     ),
 
     // just like floats
-LessonPage.CodeQuestionPage(
+    LessonPage.CodeQuestionPage(
       title = "Float-like",
       question = """
 `Double`s are just like `Float`s but with higher precision and larger range.
