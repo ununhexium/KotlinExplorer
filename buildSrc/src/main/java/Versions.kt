@@ -16,12 +16,13 @@ object Versions {
   val activityCompose = "1.3.0-alpha03"
   val compose = "1.0.0-beta01"
   val constraintLayout = "1.0.0-alpha03"
-  val dagger = "2.28-alpha"
+  val dagger = "2.33-beta"
   val espresso_core = "3.3.0"
   val lifecycle = "2.2.0"
   val material = "1.2.1"
   val nav = "2.3.2"
-  val hilt = "1.0.0-alpha02"
+  val navCompose = "1.0.0-alpha08"
+  val hilt = "1.0.0-alpha03"
   val room = "2.2.6"
 
   // console libs

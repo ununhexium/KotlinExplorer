@@ -120,6 +120,7 @@ dependencies {
   implementation(Dependencies.firebaseAnalytics)
   implementation(Dependencies.firebaseFirestore)
 
+  implementation(Dependencies.navigation_compose)
   implementation(Dependencies.navigation_fragment)
   implementation(Dependencies.navigation_ui)
 

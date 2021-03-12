@@ -31,6 +31,7 @@ object Dependencies {
 
   val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
+  val navigation_compose = "androidx.navigation:navigation-compose:${Versions.navCompose}"
   val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
   val navigation_ui = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
 

@@ -1,6 +1,7 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.welcome.login
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi

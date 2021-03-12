@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 object MainModule {
   @Singleton

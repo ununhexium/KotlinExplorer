@@ -5,7 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import net.lab0.kotlinexplorer.business.domain.extracontent.ExtraContentRequest
 import net.lab0.kotlinexplorer.business.domain.feedback.LessonFeedback
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
@@ -29,7 +29,7 @@ import net.lab0.kotlinexplorer.framework.util.ToDomain
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object FirebaseModule {
   @Singleton
   @Provides
