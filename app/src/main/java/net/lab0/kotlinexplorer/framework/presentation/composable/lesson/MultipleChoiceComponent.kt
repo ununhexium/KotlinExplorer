@@ -10,8 +10,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
@@ -23,10 +25,12 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseM
 
 @Composable
 fun MultipleChoicePage(
-  model: MultipleChoiceViewModel,
-  state: MultipleChoiceUiState,
   onNextPage: () -> Unit,
 ) {
+  val model: MultipleChoiceViewModel = viewModel()
+  val collected = model.uiDataState.collectAsState()
+  val state: MultipleChoiceUiState = collected.value
+
   LessonPageBody(
     question = {
       val markdown = remember(
@@ -135,23 +139,6 @@ fun MCCP_selectedAnswers() {
     Surface {
       Column {
         MultipleChoicePage(
-          multipleChoiceModelAnswer,
-          multipleChoiceModelAnswer.uiDataState.value,
-        ) { }
-      }
-    }
-  }
-}
-
-@Preview
-@Composable
-fun MCCP_question() {
-  MaterialTheme {
-    Surface {
-      Column {
-        MultipleChoicePage(
-          multipleChoiceModelQuestion,
-          multipleChoiceModelQuestion.uiDataState.value,
         ) { }
       }
     }

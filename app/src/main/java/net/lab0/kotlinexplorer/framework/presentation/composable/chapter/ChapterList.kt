@@ -26,7 +26,7 @@ fun ChapterList(
    */
   onPlay: (String, String) -> Unit,
 ) {
-  Column {
+  Column(modifier = modifier) {
     chapters.forEach { chapter ->
       val (expanded, setExpanded) = remember { mutableStateOf(false) }
       expanded to setExpanded
@@ -53,7 +53,7 @@ fun ChapterList(
 
 @Preview
 @Composable
-fun ChapterListPreview() {
+private fun ChapterListPreview() {
   MaterialTheme {
     Surface(
       color = Color(0xFF4CAF50)

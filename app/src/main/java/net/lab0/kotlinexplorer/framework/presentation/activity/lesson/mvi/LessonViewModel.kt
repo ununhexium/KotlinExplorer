@@ -24,7 +24,7 @@ class LessonViewModel(
   override suspend fun doJobForEvent(event: LessonStateEvent) {
     Do exhaustive when (event) {
 
-      LessonStateEvent.Empty -> Unit
+      LessonStateEvent.Empty -> {}
 
       LessonStateEvent.SaveLessonProgress ->
         processResource(

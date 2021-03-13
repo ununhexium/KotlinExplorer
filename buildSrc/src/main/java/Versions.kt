@@ -1,4 +1,3 @@
-
 object Versions {
   // android SDK
   val minSdk = 24
@@ -19,10 +18,12 @@ object Versions {
   val dagger = "2.33-beta"
   val espresso_core = "3.3.0"
   val lifecycle = "2.2.0"
+  val lifecycleCompose = "1.0.0-alpha03"
   val material = "1.2.1"
   val nav = "2.3.2"
   val navCompose = "1.0.0-alpha08"
   val hilt = "1.0.0-alpha03"
+  val hiltNavigationCompose = "1.0.0-alpha01"
   val room = "2.2.6"
 
   // console libs

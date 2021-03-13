@@ -19,7 +19,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplech
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.mvi.MultipleChoiceUiState
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageUi
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.MultipleChoicePage
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
@@ -62,26 +62,6 @@ class MultipleChoiceFragment(
             }
           }
         ) {
-          LessonPage(
-            lessonId = args.lessonId,
-            progress = state.progress,
-            title = state.lessonPage.title,
-            onBack = {
-              findNavController().navigate(
-                MultipleChoiceFragmentDirections
-                  .actionMultipleChoicePageFragmentToChapterListFragment()
-              )
-            },
-            onProblemReport = {
-              activityViewModel.onProblemReport(it, requireContext())
-            }
-          ) {
-            MultipleChoicePage(
-              model = viewModel,
-              state = state,
-              onNextPage = onNextPage(state)
-            )
-          }
         }
       }
     }

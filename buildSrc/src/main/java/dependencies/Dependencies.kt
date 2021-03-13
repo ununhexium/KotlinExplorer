@@ -26,10 +26,12 @@ object Dependencies {
 
   val hilt_android = "com.google.dagger:hilt-android:${Versions.dagger}"
   val hilt_lifecycle_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt}"
+  val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}"
 
   val kotlinCoroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.coroutines}"
 
   val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+  val lifecycleViewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleCompose}"
 
   val navigation_compose = "androidx.navigation:navigation-compose:${Versions.navCompose}"
   val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"

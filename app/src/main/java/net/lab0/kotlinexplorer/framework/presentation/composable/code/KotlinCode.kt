@@ -121,7 +121,6 @@ private fun CodePart(
                 },
                 contentColor = codeStyle.placeholderForegroundColor,
               ) {
-                // placeholder to have the right size
                 Text(
                   text = " ... ",
                   fontFamily = sourceCodeFontFamily,

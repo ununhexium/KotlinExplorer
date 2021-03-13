@@ -49,7 +49,7 @@ constructor(
         }
       }
 
-      ChapterListStateEvent.Empty -> Unit
+      ChapterListStateEvent.Empty -> {}
     }
   }
 

@@ -16,7 +16,7 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.InfoLessonPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageUi
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 
 class InfoPageFragment(
@@ -50,25 +50,6 @@ class InfoPageFragment(
               }
             }
           ) {
-            LessonPage(
-              lessonId = args.lessonId,
-              progress = 1f * args.page / lesson.pages.size,
-              title = page.title,
-              onBack = {
-                findNavController().navigate(
-                  InfoPageFragmentDirections
-                    .actionLessonInfoPageFragmentToChapterListFragment()
-                )
-              },
-              onProblemReport = {
-                activityViewModel.onProblemReport(it, this@InfoPageFragment.requireContext())
-              }
-            ) {
-              InfoLessonPage(
-                markdownAsString = page.markdown,
-                nextPage = onNextPage()
-              )
-            }
           }
         }
       }

@@ -20,7 +20,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequesti
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageUi
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 
@@ -62,26 +62,6 @@ class CodeQuestionFragment(
             }
           }
         ) {
-          LessonPage(
-            lessonId = args.lessonId,
-            progress = state.progress,
-            title = state.lessonPage.title,
-            onBack = {
-              findNavController().navigate(
-                CodeQuestionFragmentDirections
-                  .actionCodeQuestionPageFragmentToChapterListFragment()
-              )
-            },
-            onProblemReport = {
-              activityViewModel.onProblemReport(it, requireContext())
-            }
-          ) {
-            CodeQuizPage2(
-              model = viewModel,
-              nextQuestion = onNextPage(state),
-              onSelect = { viewModel.select(it.id) },
-            )
-          }
         }
       }
     }

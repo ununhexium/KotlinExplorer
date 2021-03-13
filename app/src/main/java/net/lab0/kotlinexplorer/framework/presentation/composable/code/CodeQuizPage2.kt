@@ -5,11 +5,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
@@ -28,12 +30,12 @@ import org.commonmark.node.Node
 
 @Composable
 fun CodeQuizPage2(
-  model: CodeQuestionViewModel,
   nextQuestion: () -> Unit,
-  onSelect: (Answer) -> Unit,
   codeColoration: Boolean = true,
 ) {
-  val state = model.uiDataState.value
+  val model: CodeQuestionViewModel = viewModel()
+  val collected = model.uiDataState.collectAsState()
+  val state = collected.value
 
   LessonPageBody(
     question = {
@@ -59,7 +61,7 @@ fun CodeQuizPage2(
     input = {
       if (!state.showAnswer) {
         CodeAnswerInput(
-          onSelect = onSelect,
+          onSelect = { model.select(it.id) },
           canValidate = state.canValidate,
           answers = state.choices,
         )
@@ -147,9 +149,7 @@ fun CodeQuestionQuizPage2Preview_selectedAnswer() {
     Surface {
       Column {
         CodeQuizPage2(
-          model = modelSelected2,
           nextQuestion = {},
-          onSelect = {},
           codeColoration = false
         )
       }
@@ -177,9 +177,7 @@ fun CodeQuestionQuizPage2Preview_validatedAnswer() {
     Surface {
       Column {
         CodeQuizPage2(
-          model = modelValidated2,
           nextQuestion = {},
-          onSelect = {},
           codeColoration = false,
         )
       }

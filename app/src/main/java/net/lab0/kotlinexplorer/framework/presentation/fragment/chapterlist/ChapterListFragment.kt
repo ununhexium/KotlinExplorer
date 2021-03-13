@@ -96,7 +96,7 @@ class ChapterListFragment
                     id = lesson.id,
                     title = lesson.title,
                     completed = lesson.id in lessonsInProgress,
-                    lesson == nextLesson,
+                    highlighted = lesson == nextLesson,
                     progress = state.getLessonCompletion(lesson.id)
                   )
                 }

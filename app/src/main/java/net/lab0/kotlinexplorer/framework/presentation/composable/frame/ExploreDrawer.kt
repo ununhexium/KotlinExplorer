@@ -26,6 +26,7 @@ fun ExploreDrawer(
       style = MaterialTheme.typography.h3,
       color = MaterialTheme.colors.onBackground,
     )
+
     Text(
       "Lessons",
       modifier = Modifier.clickable(
@@ -36,6 +37,7 @@ fun ExploreDrawer(
       style = MaterialTheme.typography.h3,
       color = MaterialTheme.colors.onBackground,
     )
+
     Text(
       "Tools",
       modifier = Modifier.clickable(

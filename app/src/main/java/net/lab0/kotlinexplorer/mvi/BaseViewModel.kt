@@ -35,7 +35,7 @@ abstract class BaseViewModel<Event, State>(
   suspend fun <T> processResource(flow: Flow<Resource<T>>, handleResult: suspend (T) -> Unit) {
     flow.collect { resource ->
       Do exhaustive when (resource) {
-        Resource.EmptyLoadedResource -> Unit
+        Resource.EmptyLoadedResource -> {}
         is Resource.LoadedResource -> handleResult(resource.resource)
         is Resource.FailedResource -> {
           _errors.value = ObserveOnce(resource.message)
@@ -55,10 +55,7 @@ abstract class BaseViewModel<Event, State>(
     _uiDataState.value = action(_uiDataState.value)
   }
 
-  var count = 0
   fun emitSlowEvent(event: Event) {
-    count++
-
     viewModelScope.launch {
       _loading.value = true
       withContext(ioDispatcher) {
