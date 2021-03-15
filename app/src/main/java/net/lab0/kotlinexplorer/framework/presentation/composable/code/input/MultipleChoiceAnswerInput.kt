@@ -10,8 +10,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckBox
 import androidx.compose.material.icons.filled.CheckBoxOutlineBlank
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,27 +45,42 @@ fun MultipleChoiceAnswerInput(
           true -> Icons.Default.CheckBox
           false -> Icons.Default.CheckBoxOutlineBlank
         }
+
+        val iconContentDescription = (if (answer.used) "Selected" else "Unselected") +
+            when (answer.correct) {
+              null -> " "
+              true -> " correct"
+              false -> " wrong"
+            } + " choice"
+
+        if (answer.correct != null) {
+          Icon(
+            if (answer.correct) {
+              Icons.Default.Check
+            } else {
+              Icons.Default.Close
+            },
+            contentDescription = iconContentDescription,
+            modifier = Modifier
+              .padding(horizontal = 4.dp)
+              .align(Alignment.CenterVertically),
+            tint = color,
+          )
+        }
+
         Icon(
           icon,
           contentDescription =
-          (if (answer.used) "Selected" else "Unselected") +
-              when (answer.correct) {
-                null -> " "
-                true -> " correct"
-                false -> " wrong"
-              } +
-              " choice",
+          iconContentDescription,
           modifier = Modifier
             .padding(horizontal = 4.dp)
             .align(Alignment.CenterVertically),
-          tint = color,
         )
 
         Text(
           answer.text,
           modifier = Modifier.align(Alignment.CenterVertically),
           style = MaterialTheme.typography.body1,
-          color = color,
         )
       }
     }
@@ -85,8 +102,8 @@ fun MultipleChoiceAnswerInputPreview() {
         ) {
           MultipleChoiceAnswerInput(
             answers = listOf(
-              MultipleChoiceAnswer(0, "Checked unset", true, null),
-              MultipleChoiceAnswer(1, "Unchecked unset", false, null),
+              MultipleChoiceAnswer(0, "Checked non validated", true, null),
+              MultipleChoiceAnswer(1, "Unchecked non validated", false, null),
               MultipleChoiceAnswer(2, "Checked correct", true, true),
               MultipleChoiceAnswer(2, "Unchecked correct", false, true),
               MultipleChoiceAnswer(3, "Checked incorrect", true, false),

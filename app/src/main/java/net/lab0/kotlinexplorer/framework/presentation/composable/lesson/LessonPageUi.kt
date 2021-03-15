@@ -90,7 +90,7 @@ fun LessonPageUi(
         is LessonPage.MultipleChoice -> {
           val model: MultipleChoiceViewModel = viewModel()
           model.init(pageIndex, page, chapter)
-          MultipleChoicePage(
+          MultipleChoiceUi(
             onNextPage = nextPage
           )
         }
