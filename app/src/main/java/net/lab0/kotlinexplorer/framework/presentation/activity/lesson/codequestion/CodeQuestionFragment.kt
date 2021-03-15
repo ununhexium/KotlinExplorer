@@ -27,7 +27,7 @@ class CodeQuestionFragment(
   private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<CodeQuestionUiEvent, CodeQuestionUiState>(), NextPageSelectorMixin {
   private val args: CodeQuestionFragmentArgs by navArgs()
-  private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
+//  private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
   override val viewModel: CodeQuestionViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,18 +65,18 @@ class CodeQuestionFragment(
     }
   }
 
-  private fun onNextPage(state: CodeQuestionUiState, targetPage: Int = args.page + 1) =
-    nextPage(
-      activityViewModel = activityViewModel,
-      correctness = if (state.isCorrectAnswer) SUCCESS else FAILURE,
-      page = args.page,
-      nextPage = targetPage,
-      lessonId = args.lessonId,
-      navController = findNavController(),
-      navigationToFeedback = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToLessonFeedbackFragment,
-      navigationToNextChapter = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToNextLessonFragment,
-      navigationToInfo = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToInfoPageFragment,
-      navigationToCodeQuestion = CodeQuestionFragmentDirections::actionLessonCodeQuestionPageFragmentSelf,
-      navigationToMultipleChoice = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToMultipleChoicePageFragment,
-    )
+//  private fun onNextPage(state: CodeQuestionUiState, targetPage: Int = args.page + 1) =
+//    nextPage(
+//      activityViewModel = activityViewModel,
+//      correctness = if (state.isCorrectAnswer) SUCCESS else FAILURE,
+//      page = args.page,
+//      nextPage = targetPage,
+//      lessonId = args.lessonId,
+//      navController = findNavController(),
+//      navigationToFeedback = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToLessonFeedbackFragment,
+//      navigationToNextChapter = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToNextLessonFragment,
+//      navigationToInfo = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToInfoPageFragment,
+//      navigationToCodeQuestion = CodeQuestionFragmentDirections::actionLessonCodeQuestionPageFragmentSelf,
+//      navigationToMultipleChoice = CodeQuestionFragmentDirections::actionCodeQuestionPageFragmentToMultipleChoicePageFragment,
+//    )
 }

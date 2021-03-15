@@ -62,6 +62,14 @@ fun HomeUi(
       navController = topLevelNavController,
       startDestination = TopLevelScreen.Login.routeDefinition
     ) {
+
+      composable(
+        TopLevelScreen.Chapters.routeDefinition,
+        arguments = listOf(navArgument("id") { }),
+      ) {
+        LessonsUi(topLevelNavController, viewModelFactory)
+      }
+
       composable(TopLevelScreen.Login.routeDefinition) {
         LoginUi(
           onStartApp = {
@@ -74,22 +82,15 @@ fun HomeUi(
       }
 
       composable(
-        TopLevelScreen.Tools.routeDefinition
-      ) {
-        ToolsUi(topLevelNavController)
-      }
-
-      composable(
-        TopLevelScreen.Chapters.routeDefinition,
-        arguments = listOf(navArgument("id") { }),
-      ) {
-        LessonsUi(topLevelNavController, viewModelFactory)
-      }
-
-      composable(
         TopLevelScreen.Profile.routeDefinition,
       ) {
         // TODO
+      }
+
+      composable(
+        TopLevelScreen.Tools.routeDefinition
+      ) {
+        ToolsUi(topLevelNavController)
       }
     }
   }

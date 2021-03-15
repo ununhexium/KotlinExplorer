@@ -7,7 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.R
-import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
 import javax.inject.Inject
 
@@ -18,7 +17,7 @@ class LessonActivity : AppCompatActivity() {
   @Inject
   lateinit var fragmentFactory: JetpackExplorerFragmentFactory
 
-  private val lessonViewModel: LessonViewModel by viewModels()
+//  private val lessonViewModel: LessonViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

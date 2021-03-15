@@ -3,12 +3,13 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorrectness
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.mvi.MultipleChoiceUiState
 
 @Composable
 fun MultipleChoiceUi(
-  onNextPage: () -> Unit,
+  onNextPage: (AnswerCorrectness) -> Unit,
 ) {
   val model: MultipleChoiceViewModel = viewModel()
   val collected = model.uiDataState.collectAsState()
@@ -18,7 +19,11 @@ fun MultipleChoiceUi(
     state = state,
     toggleAnswer = model::toggle,
     onValidate = model::validate,
-    onNextPage = onNextPage
-  )
+    onNextPage = {
+      onNextPage(
+        if (state.isCorrectAnswer) AnswerCorrectness.SUCCESS
+        else AnswerCorrectness.FAILURE
+      )
+    }  )
 }
 

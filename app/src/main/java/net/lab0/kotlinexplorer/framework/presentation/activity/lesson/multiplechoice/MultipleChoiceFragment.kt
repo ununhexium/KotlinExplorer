@@ -27,7 +27,7 @@ class MultipleChoiceFragment(
   private val viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<MultipleChoiceUiEvent, MultipleChoiceUiState>(), NextPageSelectorMixin {
   private val args: MultipleChoiceFragmentArgs by navArgs()
-  private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
+//  private val activityViewModel: LessonViewModel by activityViewModels { viewModelFactory }
   override val viewModel: MultipleChoiceViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,18 +65,18 @@ class MultipleChoiceFragment(
     }
   }
 
-  private fun onNextPage(state: MultipleChoiceUiState, targetPage: Int = args.page + 1) =
-    nextPage(
-      activityViewModel = activityViewModel,
-      correctness = if (state.isCorrectAnswer) SUCCESS else FAILURE,
-      page = args.page,
-      nextPage = targetPage,
-      lessonId = args.lessonId,
-      navController = findNavController(),
-      navigationToFeedback = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToLessonFeedbackFragment,
-      navigationToNextChapter = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToNextLessonFragment,
-      navigationToInfo = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToInfoPageFragment,
-      navigationToCodeQuestion = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToCodeQuestionPageFragment,
-      navigationToMultipleChoice = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentSelf,
-    )
+//  private fun onNextPage(state: MultipleChoiceUiState, targetPage: Int = args.page + 1) =
+//    nextPage(
+//      activityViewModel = activityViewModel,
+//      correctness = if (state.isCorrectAnswer) SUCCESS else FAILURE,
+//      page = args.page,
+//      nextPage = targetPage,
+//      lessonId = args.lessonId,
+//      navController = findNavController(),
+//      navigationToFeedback = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToLessonFeedbackFragment,
+//      navigationToNextChapter = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToNextLessonFragment,
+//      navigationToInfo = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToInfoPageFragment,
+//      navigationToCodeQuestion = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentToCodeQuestionPageFragment,
+//      navigationToMultipleChoice = MultipleChoiceFragmentDirections::actionMultipleChoicePageFragmentSelf,
+//    )
 }

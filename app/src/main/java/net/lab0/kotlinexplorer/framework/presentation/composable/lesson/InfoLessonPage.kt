@@ -17,7 +17,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseM
 @Composable
 fun InfoLessonPage(
   markdownAsString: String,
-  nextPage: () -> Unit,
+  onNextPage: () -> Unit,
 ) {
   LessonPageBody(
     question = {
@@ -27,7 +27,7 @@ fun InfoLessonPage(
     controlBar = {
       ControlBar {
         Button(
-          onClick = nextPage,
+          onClick = onNextPage,
         ) {
           Icon(
             imageVector = Icons.Default.CheckCircle,

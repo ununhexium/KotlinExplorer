@@ -98,12 +98,11 @@ private fun getColor(
   wrongColor: Color,
   noCorrectness: Color
 ): Color {
-  val color = when (answer.correct) {
+  return when (answer.correct) {
     true -> correctColor
     false -> wrongColor
     null -> noCorrectness
   }
-  return color
 }
 
 @Composable
@@ -118,21 +117,6 @@ private fun RowScope.Checkbox(
       Icons.Default.CheckBoxOutlineBlank
     },
     contentDescription = if (selected) "Selected" else "Unselected",
-    modifier = Modifier
-      .padding(horizontal = 4.dp)
-      .align(Alignment.CenterVertically),
-    tint = color,
-  )
-}
-
-@Composable
-private fun RowScope.Unchecked(
-  iconContentDescription: String,
-  color: Color
-) {
-  Icon(
-    Icons.Default.CheckBoxOutlineBlank,
-    contentDescription = iconContentDescription,
     modifier = Modifier
       .padding(horizontal = 4.dp)
       .align(Alignment.CenterVertically),

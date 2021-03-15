@@ -1,3 +1,4 @@
+
 import dependencies.AnnotationProcessing
 import dependencies.Application
 import dependencies.Dependencies
@@ -126,6 +127,7 @@ dependencies {
 
   implementation(Dependencies.hilt_android)
   implementation(Dependencies.hilt_lifecycle_viewmodel)
+  implementation(Dependencies.hiltNavigationCompose)
   kapt(AnnotationProcessing.hilt_android_compiler)
   kapt(AnnotationProcessing.hilt_compiler)
 

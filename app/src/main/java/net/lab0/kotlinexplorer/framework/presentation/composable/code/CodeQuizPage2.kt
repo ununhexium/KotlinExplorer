@@ -15,6 +15,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.extractHighlightsAndAnnotate
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorrectness
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.CodeQuestionUiState
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
@@ -30,7 +31,7 @@ import org.commonmark.node.Node
 
 @Composable
 fun CodeQuizPage2(
-  nextQuestion: () -> Unit,
+  onNextPage: (AnswerCorrectness) -> Unit,
   codeColoration: Boolean = true,
 ) {
   val model: CodeQuestionViewModel = viewModel()
@@ -70,7 +71,12 @@ fun CodeQuizPage2(
     controlBar = {
       if (state.showAnswer) {
         NextPageControlBar(
-          onNext = nextQuestion
+          onNext = {
+            onNextPage(
+              if (state.isCorrectAnswer) AnswerCorrectness.SUCCESS
+              else AnswerCorrectness.FAILURE
+            )
+          }
         )
       } else {
         CodeInputControlBar(
@@ -149,7 +155,7 @@ fun CodeQuestionQuizPage2Preview_selectedAnswer() {
     Surface {
       Column {
         CodeQuizPage2(
-          nextQuestion = {},
+          onNextPage = {},
           codeColoration = false
         )
       }
@@ -177,7 +183,7 @@ fun CodeQuestionQuizPage2Preview_validatedAnswer() {
     Surface {
       Column {
         CodeQuizPage2(
-          nextQuestion = {},
+          onNextPage = {},
           codeColoration = false,
         )
       }

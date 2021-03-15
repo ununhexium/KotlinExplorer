@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -75,10 +75,13 @@ fun LessonsUi(
     val navController = rememberNavController()
 
     NavHost(navController, startDestination = LessonScreen.Chapters.routeDefinition) {
+
+      // Chapters
       composable(LessonScreen.Chapters.routeDefinition) {
         ChapterUi(topLevelNavController, navController, viewModelFactory)
       }
 
+      // Introduction
       composable(
         LessonScreen.Introduction.routeDefinition,
         arguments = listOf(
@@ -94,9 +97,14 @@ fun LessonsUi(
         val lesson = LessonBrowser.getLessonById(
           backStackEntry.arguments?.getString("lessonId")!!
         )
+
+        val lessonViewModel: LessonViewModel = hiltNavGraphViewModel()
+        lessonViewModel.init(lesson)
+
         LessonIntroductionPageUi(navController, lesson)
       }
 
+      // LessonPage
       composable(
         LessonScreen.LessonPage.routeDefinition,
         arguments = listOf(
@@ -116,28 +124,18 @@ fun LessonsUi(
         val pageIndex = backStackEntry.arguments?.getInt("pageIndex")!!
         println("pageIndex $pageIndex")
 
-        if (pageIndex == lesson.pages.size) {
-          navController.navigate(LessonScreen.NextLesson.route(lessonId))
-        } else {
-          LessonPageUi(
-            navController = navController,
-            lesson = lesson,
-            pageIndex = pageIndex,
-            onBack = {
-              // TODO: change for burger icon KE-90
-              navController.navigate(LessonScreen.Chapters.routeDefinition) {
-                popUpTo(LessonScreen.Chapters.routeDefinition) {
-                  inclusive = true
-                }
-              }
-            },
-            onProblemReport = {
-              navController.navigate(LessonScreen.ProblemReport.route(lessonId, pageIndex))
-            }
-          )
-        }
+        val lessonViewModel: LessonViewModel =
+          navController.hiltNavGraphViewModel(LessonScreen.Introduction.routeDefinition)
+
+        LessonPageUi(
+          navController = navController,
+          lessonViewModel = lessonViewModel,
+          lesson = lesson,
+          pageIndex = pageIndex,
+        )
       }
 
+      // NextLesson
       composable(
         LessonScreen.NextLesson.routeDefinition,
         arguments = listOf(
@@ -170,6 +168,7 @@ fun LessonsUi(
         }
       }
 
+      // ProblemReport
       composable(
         LessonScreen.ProblemReport.routeDefinition,
         arguments = listOf(
@@ -188,12 +187,18 @@ fun LessonsUi(
         val pageIndex = backStackEntry.arguments?.getInt("pageIndex")!!
         val page = lesson.pages[pageIndex]
 
-        val activityViewModel: LessonViewModel = viewModel(factory = viewModelFactory)
         val context = LocalContext.current
+
+        val lessonViewModel: LessonViewModel =
+          navController.hiltNavGraphViewModel(
+            LessonScreen.LessonPage.route(lesson.id, 0)
+          )
 
         ProblemReportUi(
           problemLocation = "lessonId = ${lesson.id}, page=${page.title}",
-          submitReport = { activityViewModel.onProblemReport(it, context) },
+          submitReport = {
+            lessonViewModel.onProblemReport(it, context)
+          },
           onCloseProblemReport = {
             navController.popBackStack()
           },

@@ -12,24 +12,27 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorrectness
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
+import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
 import net.lab0.kotlinexplorer.utils.Do
+import net.lab0.kotlinexplorer.utils.printLogD
 
 @Composable
 fun LessonPageUi(
   navController: NavHostController,
+  lessonViewModel: LessonViewModel,
   lesson: Lesson,
   pageIndex: Int,
-  onBack: () -> Unit,
-  onProblemReport: () -> Unit,
 ) {
   val chapter = LessonBrowser.getChapterForLesson(lesson.id)!!
   val progress = 1f * pageIndex / lesson.pages.size
@@ -48,7 +51,9 @@ fun LessonPageUi(
         chapter = chapter.title,
         lesson = lesson,
         currentPage = page,
-        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+        modifier = Modifier
+          .padding(8.dp)
+          .fillMaxWidth(),
       ) { page ->
         // skip to page
         navController.navigate(
@@ -59,7 +64,6 @@ fun LessonPageUi(
       }
     }
   ) {
-
     Column(
       modifier = Modifier.fillMaxSize(),
       verticalArrangement = Arrangement.SpaceBetween
@@ -72,10 +76,15 @@ fun LessonPageUi(
         val nextPageIndex = pageIndex + 1
         println("Next page: $nextPageIndex")
         if (nextPageIndex >= lesson.pages.size) {
+          lessonViewModel.saveLesson()
           navController.navigate(
             LessonScreen.NextLesson.route(lesson.id)
           )
         } else {
+          printLogD(
+            className = "LessonPageUi",
+            message = "Navigate to ${lesson.id}, $nextPageIndex"
+          )
           navController.navigate(
             LessonScreen.LessonPage.route(lesson.id, nextPageIndex)
           )
@@ -88,14 +97,22 @@ fun LessonPageUi(
           model.init(pageIndex, page, chapter)
 
           CodeQuizPage2(
-            nextQuestion = nextPage
+            onNextPage = { correctness ->
+              lessonViewModel.countMark(page, correctness)
+
+              nextPage()
+            }
           )
         }
 
         is LessonPage.InfoPage -> {
           InfoLessonPage(
             markdownAsString = page.markdown,
-            nextPage = nextPage
+            onNextPage = {
+              lessonViewModel.countMark(page, AnswerCorrectness.NEUTRAL)
+
+              nextPage()
+            }
           )
         }
 
@@ -103,7 +120,11 @@ fun LessonPageUi(
           val model: MultipleChoiceViewModel = viewModel()
           model.init(pageIndex, page, chapter)
           MultipleChoiceUi(
-            onNextPage = nextPage
+            onNextPage = { correctness ->
+              lessonViewModel.countMark(page, correctness)
+
+              nextPage()
+            }
           )
         }
       }

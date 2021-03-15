@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi
 
 import android.content.Context
 import android.widget.Toast
+import dagger.hilt.android.lifecycle.HiltViewModel
 import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
@@ -12,8 +13,11 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorr
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.LessonViewState
 import net.lab0.kotlinexplorer.mvi.BaseViewModel
 import net.lab0.kotlinexplorer.utils.Do
+import net.lab0.kotlinexplorer.utils.printLogD
+import javax.inject.Inject
 
-class LessonViewModel(
+@HiltViewModel
+class LessonViewModel @Inject constructor(
   private val saveLessonProgress: SaveLessonProgress,
   private val sendProblemReport: SendProblemReport,
 ) : BaseViewModel<LessonStateEvent, LessonViewState>(
@@ -38,10 +42,12 @@ class LessonViewModel(
         ) {}
 
       is LessonStateEvent.CountMark ->
-        updateUi {
+        updateUi { it ->
           it.copy(
             answers = it.answers + mapOf(event.currentPage to event.correctness)
-          )
+          ).also {
+            printLogD(LessonViewModel::class, "Count mark: $it")
+          }
         }
 
       is LessonStateEvent.ReportProblem ->
