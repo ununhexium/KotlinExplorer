@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -18,7 +16,6 @@ import androidx.navigation.compose.navigate
 import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
@@ -30,10 +27,8 @@ fun LessonPageUi(
   lesson: Lesson,
   pageIndex: Int,
   onBack: () -> Unit,
-  onProblemReport: (ProblemReport) -> Unit,
+  onProblemReport: () -> Unit,
 ) {
-  val (reportPopup, setReportPopup) = remember { mutableStateOf(false) }
-
   val chapter = LessonBrowser.getChapterForLesson(lesson.id)!!
   val progress = 1f * pageIndex / lesson.pages.size
   val page = lesson.pages[pageIndex]
@@ -58,7 +53,7 @@ fun LessonPageUi(
       LessonPageHeader(
         title = page.title,
         backAction = onBack,
-        reportMistakeAction = { setReportPopup(!reportPopup) }
+        reportMistakeAction = onProblemReport
       )
 
       val nextPage = {
@@ -66,11 +61,11 @@ fun LessonPageUi(
         println("Next page: $nextPageIndex")
         if (nextPageIndex >= lesson.pages.size) {
           navController.navigate(
-            LessonScreen.NextLesson.routeDefinition
+            LessonScreen.NextLesson.route(lesson.id)
           )
         } else {
           navController.navigate(
-            LessonScreen.LessonPage.route(nextPageIndex)
+            LessonScreen.LessonPage.route(lesson.id, nextPageIndex)
           )
         }
       }

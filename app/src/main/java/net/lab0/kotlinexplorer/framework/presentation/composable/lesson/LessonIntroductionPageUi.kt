@@ -22,9 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld.Introduction
+import net.lab0.kotlinexplorer.business.domain.Lesson
 
 @Composable
-fun LessonIntroductionPageUi(navController: NavHostController, title: String) {
+fun LessonIntroductionPageUi(navController: NavHostController, lesson:Lesson) {
   Column(
     modifier = Modifier.fillMaxSize(),
     verticalArrangement = Arrangement.SpaceEvenly,
@@ -33,7 +35,7 @@ fun LessonIntroductionPageUi(navController: NavHostController, title: String) {
       modifier = Modifier
         .fillMaxWidth()
         .align(Alignment.CenterHorizontally),
-      text = title,
+      text = lesson.title,
       textAlign = TextAlign.Center,
       style = MaterialTheme.typography.h3,
       color = MaterialTheme.colors.onBackground,
@@ -42,7 +44,7 @@ fun LessonIntroductionPageUi(navController: NavHostController, title: String) {
       modifier = Modifier.align(Alignment.CenterHorizontally),
       onClick = {
         navController.navigate(
-          LessonScreen.LessonPage.route(0)
+          LessonScreen.LessonPage.route(lesson.id, 0)
         )
       }
     ) {
@@ -65,7 +67,7 @@ private fun IntroductionUiPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          LessonIntroductionPageUi(rememberNavController(), "Allgemeinmedizin")
+          LessonIntroductionPageUi(rememberNavController(), Introduction)
         }
       }
     }
