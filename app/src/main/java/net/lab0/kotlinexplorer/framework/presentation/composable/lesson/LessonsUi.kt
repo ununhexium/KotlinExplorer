@@ -124,7 +124,12 @@ fun LessonsUi(
             lesson = lesson,
             pageIndex = pageIndex,
             onBack = {
-              topLevelNavController.popBackStack()
+              // TODO: change for burger icon KE-90
+              navController.navigate(LessonScreen.Chapters.routeDefinition) {
+                popUpTo(LessonScreen.Chapters.routeDefinition) {
+                  inclusive = true
+                }
+              }
             },
             onProblemReport = {
               navController.navigate(LessonScreen.ProblemReport.route(lessonId, pageIndex))
@@ -155,7 +160,7 @@ fun LessonsUi(
           },
           nextLesson = nextLesson
         ) {
-          nextLesson?.let{
+          nextLesson?.let {
             navController.navigate(LessonScreen.Introduction.route(nextLesson.id)) {
               popUpTo(LessonScreen.Chapters.routeDefinition) {
                 inclusive = false
@@ -189,7 +194,9 @@ fun LessonsUi(
         ProblemReportUi(
           problemLocation = "lessonId = ${lesson.id}, page=${page.title}",
           submitReport = { activityViewModel.onProblemReport(it, context) },
-          onCloseProblemReport = { navController.popBackStack() },
+          onCloseProblemReport = {
+            navController.popBackStack()
+          },
         )
       }
     }

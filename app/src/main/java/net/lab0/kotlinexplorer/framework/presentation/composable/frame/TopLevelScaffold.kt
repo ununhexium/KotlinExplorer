@@ -14,7 +14,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -36,9 +35,6 @@ fun TopLevelScaffold(
   navController: NavHostController,
   title: String,
   scaffoldState: ScaffoldState,
-  onProfileSelected: () -> Unit,
-  onChaptersSelected: () -> Unit,
-  onToolsSelected: () -> Unit,
   quickScreens: List<TopLevelScreen>,
   content: @Composable (PaddingValues) -> Unit,
 ) {
@@ -51,19 +47,19 @@ fun TopLevelScaffold(
         onProfile = {
           coroutineScope.launch {
             scaffoldState.drawerState.close()
-            onProfileSelected()
+            navController.navigate(TopLevelScreen.Profile.routeDefinition)
           }
         },
         onLessonsSelected = {
           coroutineScope.launch {
             scaffoldState.drawerState.close()
-            onChaptersSelected()
+            navController.navigate(TopLevelScreen.Chapters.routeDefinition)
           }
         },
         onToolsSelected = {
           coroutineScope.launch {
             scaffoldState.drawerState.close()
-            onToolsSelected()
+            navController.navigate(TopLevelScreen.Tools.routeDefinition)
           }
         },
       )
@@ -146,9 +142,6 @@ fun TopLevelScaffoldPreview() {
             rememberNavController(),
             "The Section",
             state,
-            {},
-            {},
-            {},
             listOf(),
           ) {
             Text("Body")

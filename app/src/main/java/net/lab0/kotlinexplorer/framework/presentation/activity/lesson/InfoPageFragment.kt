@@ -14,9 +14,7 @@ import androidx.navigation.fragment.navArgs
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.InfoLessonPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageUi
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 
 class InfoPageFragment(
@@ -37,21 +35,20 @@ class InfoPageFragment(
       val chapter = LessonBrowser.getChapterForLesson(args.lessonId)!!
 
       it.setContent {
-        KotlinExplorerTheme {
-          Scaffold(
-            drawerContent = {
-              LessonDrawer(
-                chapter = chapter.title,
-                lesson = lesson.title,
-                lessonPages = lesson.pages.map { it.title },
-                currentPage = page.title,
-              ) { title ->
-                onNextPage(lesson.pages.indexOfFirst { it.title == title })()
-              }
-            }
-          ) {
-          }
-        }
+//        KotlinExplorerTheme {
+//          Scaffold(
+//            drawerContent = {
+//              LessonDrawer(
+//                chapter = chapter.title,
+//                lesson = lesson,
+//                currentPage = page,
+//              ) { title ->
+//                onNextPage(lesson.pages.indexOfFirst { it == title })()
+//              }
+//            }
+//          ) {
+//          }
+//        }
       }
     }
   }

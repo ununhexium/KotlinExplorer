@@ -18,9 +18,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.NextPageSe
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.CodeQuestionUiEvent
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.mvi.CodeQuestionUiState
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonDrawer
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonPageUi
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
 
@@ -49,21 +47,21 @@ class CodeQuestionFragment(
       val page = lesson.pages[args.page] as LessonPage.CodeQuestionPage
       val chapter = LessonBrowser.getChapterForLesson(args.lessonId)!!
 
-      KotlinExplorerTheme {
-        Scaffold(
-          drawerContent = {
-            LessonDrawer(
-              chapter = chapter.title,
-              lesson = lesson.title,
-              lessonPages = lesson.pages.map { it.title },
-              currentPage = page.title
-            ) { title ->
-              onNextPage(state, lesson.pages.indexOfFirst { it.title == title })()
-            }
-          }
-        ) {
-        }
-      }
+//      KotlinExplorerTheme {
+//        Scaffold(
+//          drawerContent = {
+//            LessonDrawer(
+//              chapter = chapter.title,
+//              lessonName = lesson.title,
+//              lessonPages = lesson.pages.map { it.title },
+//              currentPage = page.title
+//            ) { title ->
+//              onNextPage(state, lesson.pages.indexOfFirst { it.title == title })()
+//            }
+//          }
+//        ) {
+//        }
+//      }
     }
   }
 

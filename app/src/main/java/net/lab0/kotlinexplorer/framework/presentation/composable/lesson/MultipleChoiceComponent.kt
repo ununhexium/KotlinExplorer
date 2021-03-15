@@ -43,7 +43,7 @@ fun MultipleChoicePage(
         val markdown = remember(state.lessonPage.explanation) {
           parseMD(state.lessonPage.explanation)
         }
-        
+
         MultipleChoiceAnswerInput(
           answers = state.choices,
           toggle = {},

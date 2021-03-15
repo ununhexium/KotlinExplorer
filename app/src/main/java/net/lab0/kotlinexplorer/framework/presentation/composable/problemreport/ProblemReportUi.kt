@@ -81,9 +81,7 @@ fun ProblemReportUi(
       horizontalArrangement = Arrangement.SpaceBetween
     ) {
       Button(
-        onClick = {
-          onCloseProblemReport()
-        },
+        onClick = onCloseProblemReport,
         colors = ButtonDefaults.outlinedButtonColors(
           MaterialTheme.colors.surface,
           MaterialTheme.colors.primary,

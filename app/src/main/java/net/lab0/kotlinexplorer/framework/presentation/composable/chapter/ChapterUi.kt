@@ -62,15 +62,6 @@ fun ChapterUi(
     navController = topLevelNavController,
     title = "Chapters",
     scaffoldState = scaffoldState,
-    onProfileSelected = {
-      topLevelNavController.navigate(TopLevelScreen.Profile.routeDefinition)
-    },
-    onChaptersSelected = {
-      // stay here
-    },
-    onToolsSelected = {
-      topLevelNavController.navigate(TopLevelScreen.Tools.routeDefinition)
-    },
     quickScreens = TopLevelScreen.scaffoldScreens,
   ) {
     val scrollState = rememberScrollState()

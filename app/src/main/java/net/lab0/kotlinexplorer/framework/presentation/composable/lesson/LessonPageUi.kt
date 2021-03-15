@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -33,15 +35,27 @@ fun LessonPageUi(
   val progress = 1f * pageIndex / lesson.pages.size
   val page = lesson.pages[pageIndex]
 
+  val scaffoldState = rememberScaffoldState()
+
   Scaffold(
+    scaffoldState = scaffoldState,
+    topBar = {
+      LessonTopBar(lesson.title, scaffoldState)
+    },
     drawerContent = {
       LessonDrawer(
+        navController = navController,
         chapter = chapter.title,
-        lesson = lesson.title,
-        lessonPages = lesson.pages.map { it.title },
-        currentPage = page.title,
-      ) { title ->
+        lesson = lesson,
+        currentPage = page,
+        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+      ) { page ->
         // skip to page
+        navController.navigate(
+          LessonScreen.LessonPage.route(
+            lesson.id, lesson.pages.indexOfFirst { it == page }
+          )
+        )
       }
     }
   ) {
@@ -52,8 +66,6 @@ fun LessonPageUi(
     ) {
       LessonPageHeader(
         title = page.title,
-        backAction = onBack,
-        reportMistakeAction = onProblemReport
       )
 
       val nextPage = {

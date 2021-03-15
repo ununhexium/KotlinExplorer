@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScreen
@@ -27,15 +26,6 @@ fun ToolsUi(
     navController = navHostController,
     title = "Tools",
     scaffoldState = scaffoldState,
-    onProfileSelected = {
-      navHostController.navigate(TopLevelScreen.Profile.routeDefinition)
-    },
-    onChaptersSelected = {
-      navHostController.navigate(TopLevelScreen.Chapters.routeDefinition)
-    },
-    onToolsSelected = {
-      navHostController.navigate(TopLevelScreen.Tools.routeDefinition)
-    },
     quickScreens = TopLevelScreen.scaffoldScreens,
   ){
     Text("Tools")
