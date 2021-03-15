@@ -24,21 +24,21 @@ class FloatingPointToolFragment : Fragment() {
   ): View {
     return ComposeView(requireContext()).also {
       it.setContent {
-        KotlinExplorerTheme {
-          val scaffold = rememberScaffoldState()
-
-          TopLevelScaffold(
-            title = "Floating Point",
-            scaffoldState = scaffold,
-            onProfileSelected = { findNavController().popBackStack() },
-            onLessonsSelected = { findNavController().popBackStack() },
-            onToolsSelected = { findNavController().popBackStack() },
-          ) {
-            Column(Modifier.padding(8.dp)) {
-              FloatingPointVisualizer()
-            }
-          }
-        }
+//        KotlinExplorerTheme {
+//          val scaffold = rememberScaffoldState()
+//
+//          TopLevelScaffold(
+//            title = "Floating Point",
+//            scaffoldState = scaffold,
+//            onProfileSelected = { findNavController().popBackStack() },
+//            onLessonsSelected = { findNavController().popBackStack() },
+//            onToolsSelected = { findNavController().popBackStack() },
+//          ) {
+//            Column(Modifier.padding(8.dp)) {
+//              FloatingPointVisualizer()
+//            }
+//          }
+//        }
       }
     }
   }

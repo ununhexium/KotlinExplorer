@@ -32,25 +32,25 @@ class ExtraContentFragment(
       it.setContent {
         val scaffoldState = rememberScaffoldState()
 
-        KotlinExplorerTheme {
-          TopLevelScaffold(
-            title = "More Lessons",
-            scaffoldState = scaffoldState,
-            onProfileSelected = { findNavController().popBackStack() },
-            onLessonsSelected = { findNavController().popBackStack() },
-            onToolsSelected = { findNavController().popBackStack() },
-          ) {
-            MoreLessonsUi(
-              onValidate = { liking, whyMore, comment ->
-                lifecycleScope.launch {
-                  requestExtraLessons.invoke(liking, whyMore, comment).collect()
-                  Toast.makeText(context, "We'll work on that! :)", Toast.LENGTH_LONG).show()
-                  findNavController().popBackStack()
-                }
-              }
-            )
-          }
-        }
+//        KotlinExplorerTheme {
+//          TopLevelScaffold(
+//            title = "More Lessons",
+//            scaffoldState = scaffoldState,
+//            onProfileSelected = { findNavController().popBackStack() },
+//            onLessonsSelected = { findNavController().popBackStack() },
+//            onToolsSelected = { findNavController().popBackStack() },
+//          ) {
+//            MoreLessonsUi(
+//              onValidate = { liking, whyMore, comment ->
+//                lifecycleScope.launch {
+//                  requestExtraLessons.invoke(liking, whyMore, comment).collect()
+//                  Toast.makeText(context, "We'll work on that! :)", Toast.LENGTH_LONG).show()
+//                  findNavController().popBackStack()
+//                }
+//              }
+//            )
+//          }
+//        }
       }
     }
   }

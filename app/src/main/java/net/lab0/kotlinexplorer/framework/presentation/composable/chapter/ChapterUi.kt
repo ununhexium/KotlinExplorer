@@ -39,7 +39,7 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
 import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.SmallHorizontalSpacer
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.HomeScreen
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScreen
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonScreen
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListViewModel
@@ -49,7 +49,8 @@ import net.lab0.kotlinexplorer.mvi.Resource
 @ExperimentalCoroutinesApi
 @Composable
 fun ChapterUi(
-  navHostController: NavHostController,
+  topLevelNavController: NavHostController,
+  lessonsNavController: NavHostController,
   viewModelFactory: ViewModelProvider.Factory,
 ) {
   val viewModel: ChapterListViewModel = viewModel(factory = viewModelFactory)
@@ -58,17 +59,19 @@ fun ChapterUi(
   val scaffoldState = rememberScaffoldState()
 
   TopLevelScaffold(
+    navController = topLevelNavController,
     title = "Chapters",
     scaffoldState = scaffoldState,
     onProfileSelected = {
-      navHostController.navigate(HomeScreen.Profile.routeDefinition)
+      topLevelNavController.navigate(TopLevelScreen.Profile.routeDefinition)
     },
-    onLessonsSelected = {
+    onChaptersSelected = {
       // stay here
     },
     onToolsSelected = {
-      navHostController.navigate(HomeScreen.Tools.routeDefinition)
-    }
+      topLevelNavController.navigate(TopLevelScreen.Tools.routeDefinition)
+    },
+    quickScreens = TopLevelScreen.scaffoldScreens,
   ) {
     val scrollState = rememberScrollState()
 
@@ -99,7 +102,7 @@ fun ChapterUi(
         },
         onPlay = { _, lessonId ->
           // navigate to lesson
-          navHostController.navigate(
+          lessonsNavController.navigate(
             LessonScreen.Introduction.route(lessonId)
           )
         }
@@ -144,6 +147,7 @@ private fun ChapterUiPreview() {
           color = MaterialTheme.colors.background
         ) {
           ChapterUi(
+            rememberNavController(),
             rememberNavController(),
             object : ViewModelProvider.Factory {
               override fun <T : ViewModel?> create(modelClass: Class<T>): T {

@@ -26,7 +26,6 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.Chapter
 import net.lab0.kotlinexplorer.framework.presentation.composable.fakeFactory
 import net.lab0.kotlinexplorer.framework.presentation.composable.fakeGetAllChapters
 import net.lab0.kotlinexplorer.framework.presentation.composable.fakeGetLessonsInProgress
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.HomeScreen
 import net.lab0.kotlinexplorer.framework.presentation.composable.problemreport.ProblemReportUi
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListViewModel
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
@@ -68,8 +67,8 @@ sealed class LessonScreen(
 }
 
 @Composable
-fun ChaptersUi(
-  homeNavController: NavHostController,
+fun LessonsUi(
+  topLevelNavController: NavHostController,
   viewModelFactory: ViewModelProvider.Factory,
 ) {
   KotlinExplorerTheme {
@@ -77,7 +76,7 @@ fun ChaptersUi(
 
     NavHost(navController, startDestination = LessonScreen.Chapters.routeDefinition) {
       composable(LessonScreen.Chapters.routeDefinition) {
-        ChapterUi(navController, viewModelFactory)
+        ChapterUi(topLevelNavController, navController, viewModelFactory)
       }
 
       composable(
@@ -125,7 +124,7 @@ fun ChaptersUi(
             lesson = lesson,
             pageIndex = pageIndex,
             onBack = {
-              homeNavController.popBackStack()
+              topLevelNavController.popBackStack()
             },
             onProblemReport = {
               navController.navigate(LessonScreen.ProblemReport.route(lessonId, pageIndex))
@@ -210,7 +209,7 @@ private fun LessonUiPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          ChaptersUi(
+          LessonsUi(
             rememberNavController(),
             fakeFactory {
               ChapterListViewModel(

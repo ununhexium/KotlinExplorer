@@ -43,8 +43,8 @@ Its value is `-2,147,483,648` or `-2^31`
 
 `-9999999999` is too small for an `Int`.
 
-`-2145483648` is not the right value, notice the `5`.
-Because of this kind of typos, always use the constant instead of typing the value manually.
+`-2145483648` is not the right value, notice the `5` instead of `7`.
+Because of this kind of typos, **always** use the constant instead of typing the value manually.
 """,
       answer = listOf("Int.MIN_VALUE"),
       confusion = listOf("-999999999", "-2149483648"),

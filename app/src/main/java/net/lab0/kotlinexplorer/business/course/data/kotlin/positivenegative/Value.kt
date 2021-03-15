@@ -102,7 +102,7 @@ print(date)
 `date` is a variable, when calling `print(someVariable)`,
 the content of the variable will be printed.
 """,
-      choices = listOf("date", "today"),
+      choices = listOf("today", "date"),
       answer = setOf(0),
     ),
 
@@ -215,10 +215,10 @@ Choose valid names.
 """,
       snippet = """
 // french
-val ${p(1)} = "Bonjour"
+val ${p(0)} = "Bonjour"
 
 // japanese
-val ${p(3)} = "今日わ"
+val ${p(1)} = "今日わ"
 """,
       explanation = """
 Even though Kotlin supports a large range of characters for its variables names,

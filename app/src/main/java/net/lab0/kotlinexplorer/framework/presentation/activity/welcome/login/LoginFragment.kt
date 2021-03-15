@@ -54,23 +54,23 @@ class LoginFragment(
       KotlinExplorerTheme {
         LoginUi(
           username = state.username,
-          startApp = {
+          onStartApp = {
             findNavController().navigate(
               LoginFragmentDirections.actionLoginFragmentToLessonGraph()
             )
           },
-          login = {
-            loginActivity.launch(
-              AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(
-                  listOf(
-                    AuthUI.IdpConfig.EmailBuilder().build(),
-                  )
-                )
-                .build()
-            )
-          },
+//          login = {
+//            loginActivity.launch(
+//              AuthUI.getInstance()
+//                .createSignInIntentBuilder()
+//                .setAvailableProviders(
+//                  listOf(
+//                    AuthUI.IdpConfig.EmailBuilder().build(),
+//                  )
+//                )
+//                .build()
+//            )
+//          },
           loginAnonymously = {
             FirebaseAuth.getInstance().signInAnonymously()
             findNavController().navigate(

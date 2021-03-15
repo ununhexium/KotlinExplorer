@@ -23,8 +23,7 @@ import net.lab0.kotlinexplorer.R
 @Composable
 fun LoginUi(
   username: String? = null,
-  startApp: () -> Unit,
-  login: () -> Unit,
+  onStartApp: () -> Unit,
   loginAnonymously: () -> Unit,
 ) {
   Column(
@@ -57,14 +56,17 @@ fun LoginUi(
       if (username == null) {
         Button(
           modifier = modifier,
-          onClick = loginAnonymously,
+          onClick = {
+            loginAnonymously()
+            onStartApp()
+          },
         ) {
           Text("Use anonymously")
         }
       } else {
         Button(
           modifier = modifier,
-          onClick = startApp,
+          onClick = onStartApp,
         ) {
           Text("Continue as $username")
         }
@@ -86,7 +88,7 @@ fun LoginUiPreview_authentified() {
         Surface(
           color = MaterialTheme.colors.surface
         ) {
-          LoginUi("Foo", {}, {}, {})
+          LoginUi("Foo", {}, {})
         }
       }
     }
@@ -106,7 +108,7 @@ fun LoginUiPreview_notAuth() {
         Surface(
           color = MaterialTheme.colors.surface
         ) {
-          LoginUi(null, {}, {}, {})
+          LoginUi(null, {}, {})
         }
       }
     }

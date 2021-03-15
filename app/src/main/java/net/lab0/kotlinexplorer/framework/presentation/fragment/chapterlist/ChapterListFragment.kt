@@ -57,84 +57,84 @@ class ChapterListFragment
     KotlinExplorerTheme {
       val scaffoldState = rememberScaffoldState()
 
-      TopLevelScaffold(
-        title = "Lessons",
-        scaffoldState = scaffoldState,
-        onProfileSelected = {
-          findNavController().navigate(
-            ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
-          )
-        },
-        onLessonsSelected = {
-          // stay here
-        },
-        onToolsSelected = {
-          findNavController().navigate(
-            ChapterListFragmentDirections.actionChapterListFragmentToFloatingPointToolFragment()
-          )
-        }
-      ) {
-        val state by viewModel.uiDataState.collectAsState()
-        val scrollState = rememberScrollState()
-
-        Column(
-          modifier = Modifier.verticalScroll(scrollState),
-        ) {
-          ChapterList(
-            modifier = Modifier.padding(bottom = 64.dp),
-            chapters = state.chapters.map { chapter ->
-              val completion = state.getChapterCompletion(chapter)
-              val lessonsInProgress = state.lessonsInProgress.map { it.lessonId }
-              val nextLesson = chapter.lessons.firstOrNull { it.id !in lessonsInProgress }
-
-              ChapterCardData(
-                chapter.id,
-                chapter.title,
-                completion,
-                chapter.lessons.map { lesson ->
-                  LessonListItemData(
-                    id = lesson.id,
-                    title = lesson.title,
-                    completed = lesson.id in lessonsInProgress,
-                    highlighted = lesson == nextLesson,
-                    progress = state.getLessonCompletion(lesson.id)
-                  )
-                }
-              )
-            },
-            onPlay = { _, lessonId ->
-              findNavController().navigate(
-                ChapterListFragmentDirections
-                  .actionChapterListFragmentToLessonGraph(lessonId)
-              )
-            }
-          )
-
-          Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
-          ) {
-            Button(
-              onClick = {
-                findNavController().navigate(
-                  ChapterListFragmentDirections.actionChapterListFragmentToExtraContentFragment()
-                )
-              },
-              enabled = state.canRequestMoreChapters,
-            ) {
-              if (state.canRequestMoreChapters) {
-                Icon(
-                  imageVector = Icons.Default.AddTask,
-                  "Add Task",
-                )
-                SmallHorizontalSpacer()
-              }
-              Text(text = if (state.canRequestMoreChapters) "More please!" else "Requested")
-              MediumVerticalSpacer()
-            }
-          }
-        }
-      }
+//      TopLevelScaffold(
+//        title = "Lessons",
+//        scaffoldState = scaffoldState,
+//        onProfileSelected = {
+//          findNavController().navigate(
+//            ChapterListFragmentDirections.actionChapterListFragmentToProfileGraph()
+//          )
+//        },
+//        onLessonsSelected = {
+//          // stay here
+//        },
+//        onToolsSelected = {
+//          findNavController().navigate(
+//            ChapterListFragmentDirections.actionChapterListFragmentToFloatingPointToolFragment()
+//          )
+//        }
+//      ) {
+//        val state by viewModel.uiDataState.collectAsState()
+//        val scrollState = rememberScrollState()
+//
+//        Column(
+//          modifier = Modifier.verticalScroll(scrollState),
+//        ) {
+//          ChapterList(
+//            modifier = Modifier.padding(bottom = 64.dp),
+//            chapters = state.chapters.map { chapter ->
+//              val completion = state.getChapterCompletion(chapter)
+//              val lessonsInProgress = state.lessonsInProgress.map { it.lessonId }
+//              val nextLesson = chapter.lessons.firstOrNull { it.id !in lessonsInProgress }
+//
+//              ChapterCardData(
+//                chapter.id,
+//                chapter.title,
+//                completion,
+//                chapter.lessons.map { lesson ->
+//                  LessonListItemData(
+//                    id = lesson.id,
+//                    title = lesson.title,
+//                    completed = lesson.id in lessonsInProgress,
+//                    highlighted = lesson == nextLesson,
+//                    progress = state.getLessonCompletion(lesson.id)
+//                  )
+//                }
+//              )
+//            },
+//            onPlay = { _, lessonId ->
+//              findNavController().navigate(
+//                ChapterListFragmentDirections
+//                  .actionChapterListFragmentToLessonGraph(lessonId)
+//              )
+//            }
+//          )
+//
+//          Row(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalArrangement = Arrangement.SpaceAround
+//          ) {
+//            Button(
+//              onClick = {
+//                findNavController().navigate(
+//                  ChapterListFragmentDirections.actionChapterListFragmentToExtraContentFragment()
+//                )
+//              },
+//              enabled = state.canRequestMoreChapters,
+//            ) {
+//              if (state.canRequestMoreChapters) {
+//                Icon(
+//                  imageVector = Icons.Default.AddTask,
+//                  "Add Task",
+//                )
+//                SmallHorizontalSpacer()
+//              }
+//              Text(text = if (state.canRequestMoreChapters) "More please!" else "Requested")
+//              MediumVerticalSpacer()
+//            }
+//          }
+//        }
+//      }
     }
   }
 }
