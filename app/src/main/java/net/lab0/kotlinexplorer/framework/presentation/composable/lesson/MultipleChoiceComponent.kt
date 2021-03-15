@@ -119,6 +119,7 @@ val multipleChoiceSample = LessonPage.MultipleChoice(
   choices,
   setOf(0, 1),
 )
+
 val multipleChoiceModelAnswer = MultipleChoiceViewModel(
   initialState = MultipleChoiceUiState(
     pageIndex = 0,
