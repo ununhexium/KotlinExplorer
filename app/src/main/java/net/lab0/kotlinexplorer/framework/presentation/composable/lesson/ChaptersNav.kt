@@ -67,7 +67,7 @@ sealed class LessonScreen(
 }
 
 @Composable
-fun LessonsNav(
+fun ChaptersNav(
   topLevelNavController: NavHostController,
   viewModelFactory: ViewModelProvider.Factory,
 ) {
@@ -224,7 +224,7 @@ private fun LessonUiPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          LessonsNav(
+          ChaptersNav(
             rememberNavController(),
             fakeFactory {
               ChapterListViewModel(

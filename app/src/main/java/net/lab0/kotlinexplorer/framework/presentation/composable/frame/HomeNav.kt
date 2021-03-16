@@ -19,7 +19,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import net.lab0.kotlinexplorer.BuildConfig
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonsNav
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.ChaptersNav
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
 
 
@@ -81,7 +81,7 @@ fun HomeNav(
     }
 
     val debugStart = if (BuildConfig.DEBUG) {
-      TopLevelScreen.Tools.routeDefinition
+      TopLevelScreen.Chapters.routeDefinition
     } else startDestination
 
     NavHost(
@@ -92,7 +92,7 @@ fun HomeNav(
         TopLevelScreen.Chapters.routeDefinition,
         arguments = listOf(navArgument("id") { }),
       ) {
-        LessonsNav(topLevelNavController, viewModelFactory)
+        ChaptersNav(topLevelNavController, viewModelFactory)
       }
 
       composable(TopLevelScreen.Login.routeDefinition) {

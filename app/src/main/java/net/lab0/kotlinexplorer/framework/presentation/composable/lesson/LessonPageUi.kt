@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.popUpTo
 import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.business.domain.LessonPage
@@ -22,7 +23,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorr
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequestion.CodeQuestionViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
-import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
+import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuestionPage
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
 import net.lab0.kotlinexplorer.utils.Do
 import net.lab0.kotlinexplorer.utils.printLogD
@@ -96,12 +97,20 @@ fun LessonPageUi(
           val model: CodeQuestionViewModel = viewModel()
           model.init(pageIndex, page, chapter)
 
-          CodeQuizPage2(
+          CodeQuestionPage(
             onNextPage = { correctness ->
               lessonViewModel.countMark(page, correctness)
 
               nextPage()
-            }
+            },
+            onRetryPage = {
+              val self = LessonScreen.LessonPage.route(lesson.id, pageIndex)
+              navController.navigate(self) {
+                popUpTo(self) {
+                  inclusive = true
+                }
+              }
+            },
           )
         }
 

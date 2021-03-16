@@ -11,28 +11,44 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Replay
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultHorizontalSpacer
 
 @Composable
 fun NextPageControlBar(
   modifier: Modifier = Modifier,
   onNext: () -> Unit,
+  onRetry: (() -> Unit)? = null,
 ) {
   Row(
     modifier = modifier.fillMaxWidth(),
     horizontalArrangement = Arrangement.End
   ) {
     Row {
+      onRetry?.let {
+        Button(
+          onClick = onRetry,
+        ) {
+          Icon(
+            imageVector = Icons.Default.Replay,
+            contentDescription = "Retry",
+          )
+        }
+      }
+
+      DefaultHorizontalSpacer()
+
       Button(
         onClick = onNext,
       ) {
         Icon(
           imageVector = Icons.Default.ArrowForward,
-          contentDescription = "ArrowForward",
+          contentDescription = "Next page",
         )
       }
     }
@@ -52,7 +68,7 @@ fun NextPageControlBarPreview() {
         Surface(
           color = MaterialTheme.colors.surface
         ) {
-          NextPageControlBar {}
+          NextPageControlBar(onNext = {}, onRetry = {})
         }
       }
     }

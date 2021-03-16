@@ -30,8 +30,9 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.markdown.parseM
 import org.commonmark.node.Node
 
 @Composable
-fun CodeQuizPage2(
+fun CodeQuestionPage(
   onNextPage: (AnswerCorrectness) -> Unit,
+  onRetryPage: () -> Unit,
   codeColoration: Boolean = true,
 ) {
   val model: CodeQuestionViewModel = viewModel()
@@ -76,7 +77,8 @@ fun CodeQuizPage2(
               if (state.isCorrectAnswer) AnswerCorrectness.SUCCESS
               else AnswerCorrectness.FAILURE
             )
-          }
+          },
+          onRetry = if(state.isCorrectAnswer) null else onRetryPage
         )
       } else {
         CodeInputControlBar(
@@ -154,8 +156,9 @@ fun CodeQuestionQuizPage2Preview_selectedAnswer() {
   MaterialTheme {
     Surface {
       Column {
-        CodeQuizPage2(
+        CodeQuestionPage(
           onNextPage = {},
+          onRetryPage = {},
           codeColoration = false
         )
       }
@@ -182,8 +185,9 @@ fun CodeQuestionQuizPage2Preview_validatedAnswer() {
   MaterialTheme {
     Surface {
       Column {
-        CodeQuizPage2(
+        CodeQuestionPage(
           onNextPage = {},
+          onRetryPage = {},
           codeColoration = false,
         )
       }
