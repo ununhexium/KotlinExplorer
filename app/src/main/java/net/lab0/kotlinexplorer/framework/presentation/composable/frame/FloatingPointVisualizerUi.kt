@@ -16,9 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.popUpTo
 import androidx.navigation.compose.rememberNavController
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryBody1
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryH5
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.KDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.math.DatedFloat
@@ -48,7 +48,11 @@ fun FloatingPointVisualizerUi(navHostController: NavHostController, initialFloat
           onClick = {
             navHostController.navigate(
               ToolScreens.IntVisualizer.route(floatState.value.float.toLong())
-            )
+            ) {
+              popUpTo(ToolScreens.List.routeDefinition) {
+                inclusive = false
+              }
+            }
           },
           fontFamily = FontFamily.Monospace,
         )

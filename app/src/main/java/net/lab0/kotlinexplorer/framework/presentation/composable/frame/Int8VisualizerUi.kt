@@ -1,6 +1,5 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.frame
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -9,8 +8,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.font.FontFamily
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.popUpTo
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryBody1
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryH5
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.KDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
 import net.lab0.kotlinexplorer.framework.presentation.composable.math.Int8Visualizer
@@ -39,7 +38,11 @@ fun Int8VisualizerUi(navHostController: NavHostController, initialByte: Byte) {
           onClick = {
             navHostController.navigate(
               ToolScreens.FloatVisualizer.route(byteState.value.toFloat())
-            )
+            ) {
+              popUpTo(ToolScreens.List.routeDefinition) {
+                inclusive = false
+              }
+            }
           },
           fontFamily = FontFamily.Monospace,
         )

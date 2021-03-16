@@ -127,11 +127,11 @@ fun HomeNav(
         composable(
           ToolScreens.IntVisualizer.routeDefinition,
           arguments = listOf(navArgument("number") {
-            type = NavType.StringType
-            defaultValue = "0"
+            type = NavType.LongType
+            defaultValue = 0L
           }),
         ) { backStackEntry ->
-          val byte = backStackEntry.arguments?.getString("number")!!.toByte()
+          val byte = backStackEntry.arguments?.getLong("number")!!.toByte()
 
           Int8VisualizerUi(topLevelNavController, initialByte = byte)
         }

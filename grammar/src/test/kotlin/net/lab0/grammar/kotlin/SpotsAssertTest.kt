@@ -231,33 +231,4 @@ class SpotsAssertTest {
     """.trimMargin()
     )
   }
-
-  @Test
-  fun `can show missing spots entry located after the code`() {
-    // given
-    val asserter = SpotsAssert(
-      "a",
-      listOf(Spot("two", 5, 5),)
-    )
-
-    // when
-    val error = assertThrows(AssertionError::class.java) {
-      asserter.hasExactlySpots()
-    }
-
-    // then
-    assertThat(error).hasMessage(
-      """
-      |Extraneous spots:
-      |  Spot(highlight=two, start=5, end=5)
-      |A
-      |a
-      |     ^
-      |     t
-      |     w
-      |     o
-      |
-    """.trimMargin()
-    )
-  }
 }
