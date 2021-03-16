@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.code
 
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,7 +64,7 @@ fun KotlinCode(
     color = codeStyle.backgroundColor,
     contentColor = codeStyle.foregroundColor
   ) {
-    Row {
+    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
       if (showLineNumbers) {
         GutterPart(lines = lines, codeStyle)
       }
@@ -357,6 +359,16 @@ fun KotlinCodePreview_highlight3() {
 }
 
 @Preview
+@Composable
+fun KotlinCodePreview_isHorizontallyScrollable() {
+  MaterialTheme {
+    val code = "val thisIsAReallyLongVariableNameThatRequiresHorizontalScrolling"
+    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
+      KotlinCode(code = code, activeHighlight = 3)
+    }  }
+}
+
+//@Preview
 @Composable
 fun PreviewKotlinCode() {
   MaterialTheme {

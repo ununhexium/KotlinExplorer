@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import net.lab0.kotlinexplorer.BuildConfig
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonsNav
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
-import net.lab0.kotlinexplorer.framework.presentation.composable.math.FloatingPointVisualizer
-import net.lab0.kotlinexplorer.framework.presentation.composable.math.Int8Visualizer
 
 
 sealed class TopLevelScreen(
