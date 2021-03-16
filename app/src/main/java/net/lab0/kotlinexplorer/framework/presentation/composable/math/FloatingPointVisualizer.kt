@@ -39,9 +39,9 @@ data class DatedFloat(
 
 @OptIn(ExperimentalUnsignedTypes::class)
 @Composable
-fun FloatingPointVisualizer() {
+fun FloatingPointVisualizer(initialValue:Float) {
 
-  val (datedFloat, setDatedFloat) = remember { mutableStateOf(DatedFloat(0f)) }
+  val (datedFloat, setDatedFloat) = remember { mutableStateOf(DatedFloat(initialValue)) }
 
   Column(
     modifier = Modifier.fillMaxWidth(),
@@ -387,7 +387,7 @@ fun FloatingPointVisualizerPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          FloatingPointVisualizer()
+          FloatingPointVisualizer(116f)
         }
       }
     }

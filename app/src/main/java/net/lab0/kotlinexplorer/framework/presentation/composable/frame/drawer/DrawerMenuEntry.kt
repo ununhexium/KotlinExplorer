@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.frame
+package net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

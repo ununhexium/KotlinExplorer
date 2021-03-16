@@ -10,6 +10,11 @@ import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
 import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.ARITHMETIC_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.ASSIGNMENT_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.COMPARISON_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.POSTFIX_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.PREFIX_OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.KotlinHighlight.TYPE
@@ -49,7 +54,7 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitAdditiveOperator(ctx: KotlinParser.AdditiveOperatorContext) =
     hl {
-      add(OPERATOR, ctx.range)
+      add(ARITHMETIC_OPERATOR, ctx.range)
     }
 
   override fun visitAnnotation(ctx: KotlinParser.AnnotationContext) =
@@ -61,7 +66,7 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitAssignmentOperator(ctx: KotlinParser.AssignmentOperatorContext) =
     hl {
-      add(OPERATOR, ctx.range)
+      add(ASSIGNMENT_OPERATOR, ctx.range)
     }
 
   override fun visitBlock(ctx: KotlinParser.BlockContext) =
@@ -99,12 +104,12 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitComparisonOperator(ctx: KotlinParser.ComparisonOperatorContext) =
     hl {
-      add(OPERATOR, ctx.range)
+      add(COMPARISON_OPERATOR, ctx.range)
     }
 
   override fun visitEqualityOperation(ctx: KotlinParser.EqualityOperationContext) =
     hl {
-      add(OPERATOR, ctx.range)
+      add(COMPARISON_OPERATOR, ctx.range)
     }
 
   override fun visitFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) =
@@ -168,7 +173,7 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitMultiplicativeOperation(ctx: KotlinParser.MultiplicativeOperationContext) =
     hl {
-      add(OPERATOR, ctx.range)
+      add(ARITHMETIC_OPERATOR, ctx.range)
     }
 
   override fun visitImportHeader(ctx: KotlinParser.ImportHeaderContext) =
@@ -187,11 +192,11 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitPrefixUnaryOperation(ctx: KotlinParser.PrefixUnaryOperationContext) =
     hl {
-      ctx.INCR()?.let { add(OPERATOR, it.range) }
-      ctx.DECR()?.let { add(OPERATOR, it.range) }
-      ctx.ADD()?.let { add(OPERATOR, it.range) }
-      ctx.SUB()?.let { add(OPERATOR, it.range) }
-      ctx.EXCL()?.let { add(OPERATOR, it.range) }
+      ctx.INCR()?.let { add(PREFIX_OPERATOR, it.range) }
+      ctx.DECR()?.let { add(PREFIX_OPERATOR, it.range) }
+      ctx.ADD()?.let { add(PREFIX_OPERATOR, it.range) }
+      ctx.SUB()?.let { add(PREFIX_OPERATOR, it.range) }
+      ctx.EXCL()?.let { add(PREFIX_OPERATOR, it.range) }
 
       add(visitChildren(ctx))
     }
@@ -215,17 +220,12 @@ class KotlinSyntaxHighlighterVisitor(
 
   override fun visitPostfixUnaryOperation(ctx: KotlinParser.PostfixUnaryOperationContext) =
     hl {
-      ctx.INCR()?.let {
-        add(OPERATOR, it.range)
-      }
-
-      ctx.DECR()?.let {
-        add(OPERATOR, it.range)
-      }
+      ctx.INCR()?.let { add(POSTFIX_OPERATOR, it.range) }
+      ctx.DECR()?.let { add(POSTFIX_OPERATOR, it.range) }
 
       ctx.EXCL()?.let {
         if (it.size == 2) {
-          add(OPERATOR, it.first().range.first, it.last().range.last)
+          add(POSTFIX_OPERATOR, it.first().range.first, it.last().range.last)
         }
       }
 
@@ -274,7 +274,7 @@ class KotlinSyntaxHighlighterVisitor(
         }
 
         // operators
-        KotlinParser.ASSIGNMENT -> add(OPERATOR, node.range)
+        KotlinParser.ASSIGNMENT -> add(ASSIGNMENT_OPERATOR, node.range)
 
         // strings
         KotlinParser.LineStrText -> add(STRING, node.range)

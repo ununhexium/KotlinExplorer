@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
+package net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -21,18 +21,20 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
-fun LessonTopBar(
-  title: String,
-  scaffoldState: ScaffoldState
+fun KTopAppBar(
+  scaffoldState: ScaffoldState,
+  title:String,
 ) {
   val coroutineScope = rememberCoroutineScope()
+
+  val color = MaterialTheme.colors.onBackground
 
   TopAppBar(
     title = {
       Text(
         text = title,
-        style = MaterialTheme.typography.h5,
-        color = MaterialTheme.colors.onSurface,
+        style = MaterialTheme.typography.h4,
+        color = color,
       )
     },
     navigationIcon = {
@@ -46,7 +48,7 @@ fun LessonTopBar(
         Icon(
           Icons.Default.Menu,
           contentDescription = "Menu",
-          tint = MaterialTheme.colors.onSurface,
+          tint = color,
         )
       }
     },
@@ -56,7 +58,7 @@ fun LessonTopBar(
 
 @Preview
 @Composable
-fun LessonTopBarPreview() {
+private fun TopAppBarPreview() {
   MaterialTheme {
     Surface(
       color = Color(0xFF4CAF50)
@@ -65,11 +67,11 @@ fun LessonTopBarPreview() {
         modifier = Modifier.padding(20.dp)
       ) {
         Surface(
-          color = MaterialTheme.colors.surface
+          color = MaterialTheme.colors.background
         ) {
-          LessonTopBar(
-            "Page Title",
-            rememberScaffoldState()
+          KTopAppBar(
+            rememberScaffoldState(),
+            "Hello"
           )
         }
       }

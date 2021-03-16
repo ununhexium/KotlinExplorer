@@ -56,7 +56,7 @@ val ijStyle = { it: KotlinHighlight ->
     KEYWORD -> keywordStyle
     MODIFIER -> keywordStyle
     NUMBER -> numberStyle
-    OPERATOR -> operatorStyle
+    is OPERATOR -> operatorStyle
     STRING -> stringStyle
     STRING_ESCAPED_CHARACTER -> escapedStringStyle
     TYPE -> typeStyle

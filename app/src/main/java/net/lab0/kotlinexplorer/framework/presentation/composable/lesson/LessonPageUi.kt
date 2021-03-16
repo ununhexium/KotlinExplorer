@@ -12,7 +12,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
@@ -24,6 +23,7 @@ import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.codequesti
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.multiplechoice.MultipleChoiceViewModel
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.code.CodeQuizPage2
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
 import net.lab0.kotlinexplorer.utils.Do
 import net.lab0.kotlinexplorer.utils.printLogD
 
@@ -43,7 +43,7 @@ fun LessonPageUi(
   Scaffold(
     scaffoldState = scaffoldState,
     topBar = {
-      LessonTopBar(lesson.title, scaffoldState)
+      KTopAppBar(scaffoldState, lesson.title)
     },
     drawerContent = {
       LessonDrawer(

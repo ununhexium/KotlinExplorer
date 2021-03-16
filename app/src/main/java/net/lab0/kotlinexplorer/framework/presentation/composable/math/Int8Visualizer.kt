@@ -11,6 +11,7 @@ import androidx.compose.material.Slider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import kotlin.random.Random
 
 @Composable
-fun Int8Visualizer(initialByte: Byte) {
-  val (byte, setByte) = remember { mutableStateOf(initialByte) }
+fun Int8Visualizer(byteState: MutableState<Byte>) {
+  val (byte, setByte) = byteState
 
   Column(modifier = Modifier.fillMaxWidth()) {
     Text(
@@ -101,7 +102,7 @@ fun Int8VisualizerPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          Int8Visualizer(-116)
+          Int8Visualizer(mutableStateOf(-116))
         }
       }
     }

@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -26,7 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.DrawerMenuEntry
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntry
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Indent
 
 @Composable
@@ -41,10 +43,19 @@ fun LessonDrawer(
   val lessonPages = lesson.pages
   val lessonName = lesson.title
 
-  Column(modifier = modifier) {
+  val scrollState = rememberScrollState()
+
+  val topEntriesModifier = Modifier.padding(vertical = 16.dp)
+
+  Column(
+    modifier = modifier
+    .padding(horizontal = 16.dp)
+    .verticalScroll(scrollState)
+  ) {
     DrawerMenuEntry(
       title = "Chapters",
       icon = Icons.Default.MenuBook,
+      modifier = topEntriesModifier,
       onClick = {
         navController.navigate(LessonScreen.Chapters.routeDefinition) {
           popUpTo(LessonScreen.Chapters.routeDefinition) {
@@ -57,6 +68,7 @@ fun LessonDrawer(
     DrawerMenuEntry(
       title = "Report an issue",
       icon = Icons.Default.Warning,
+      modifier = topEntriesModifier,
       onClick = {
         currentPage?.let { lessonPage ->
           navController.navigate(
@@ -83,6 +95,7 @@ fun LessonDrawer(
 
     Text(
       text = chapter,
+      modifier = topEntriesModifier,
       style = MaterialTheme.typography.h5,
       color = MaterialTheme.colors.onBackground,
     )
@@ -133,11 +146,9 @@ fun LessonDrawer(
 val sampleLesson = LessonImpl(
   "",
   "Lesson title",
-  listOf(
-    LessonPage.InfoPage("Page1", ""),
-    LessonPage.InfoPage("Page2", ""),
-    LessonPage.InfoPage("Page3", ""),
-  )
+  (0..20).map{
+    LessonPage.InfoPage("Page$it", "")
+  }
 )
 
 @Preview
@@ -157,7 +168,7 @@ fun LessonDrawerPreview_chapter1() {
             navController = rememberNavController(),
             chapter = "Chapter 1",
             lesson = sampleLesson,
-            currentPage = sampleLesson.pages[1],
+            currentPage = sampleLesson.pages[5],
           ) {}
         }
       }

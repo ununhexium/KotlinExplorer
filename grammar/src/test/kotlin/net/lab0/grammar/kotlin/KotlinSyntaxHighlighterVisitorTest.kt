@@ -11,7 +11,11 @@ import net.lab0.grammar.kotlin.KotlinHighlight.FUNCTION
 import net.lab0.grammar.kotlin.KotlinHighlight.KEYWORD
 import net.lab0.grammar.kotlin.KotlinHighlight.MODIFIER
 import net.lab0.grammar.kotlin.KotlinHighlight.NUMBER
-import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.ARITHMETIC_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.ASSIGNMENT_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.COMPARISON_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.POSTFIX_OPERATOR
+import net.lab0.grammar.kotlin.KotlinHighlight.OPERATOR.PREFIX_OPERATOR
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING
 import net.lab0.grammar.kotlin.KotlinHighlight.STRING_ESCAPED_CHARACTER
 import net.lab0.grammar.kotlin.KotlinHighlight.TYPE
@@ -502,8 +506,8 @@ class KotlinSyntaxHighlighterVisitorTest {
   }
 
   @TestFactory
-  fun `can highlight 1-char operators for ints`(): Iterable<DynamicTest> {
-    val operators = listOf("+", "-", "*", "/", "<", ">")
+  fun `can highlight 1-char arithmetic operators for ints`(): Iterable<DynamicTest> {
+    val operators = listOf("+", "-", "*", "/")
 
     return operators.map { operator ->
       DynamicTest.dynamicTest(operator) {
@@ -516,9 +520,33 @@ class KotlinSyntaxHighlighterVisitorTest {
         // then
         assertThat(code, spots).hasAtLeastSpotsH(
           Spot(KEYWORD, 0, 2),
-          Spot(OPERATOR, 6, 6),
+          Spot(ASSIGNMENT_OPERATOR, 6, 6),
           Spot(NUMBER, 8, 8),
-          Spot(OPERATOR, 10, 10),
+          Spot(ARITHMETIC_OPERATOR, 10, 10),
+          Spot(NUMBER, 12, 12),
+        )
+      }
+    }
+  }
+
+  @TestFactory
+  fun `can highlight 1-char comparison operators for ints`(): Iterable<DynamicTest> {
+    val operators = listOf("<", ">")
+
+    return operators.map { operator ->
+      DynamicTest.dynamicTest(operator) {
+        // given
+        val code = """val b = 1 $operator 2"""
+
+        // when
+        val spots = extractSpots(code)
+
+        // then
+        assertThat(code, spots).hasAtLeastSpotsH(
+          Spot(KEYWORD, 0, 2),
+          Spot(ASSIGNMENT_OPERATOR, 6, 6),
+          Spot(NUMBER, 8, 8),
+          Spot(COMPARISON_OPERATOR, 10, 10),
           Spot(NUMBER, 12, 12),
         )
       }
@@ -540,9 +568,9 @@ class KotlinSyntaxHighlighterVisitorTest {
         // then
         assertThat(code, spots).hasAtLeastSpotsH(
           Spot(KEYWORD, 0, 2),
-          Spot(OPERATOR, 6, 6),
+          Spot(ASSIGNMENT_OPERATOR, 6, 6),
           Spot(NUMBER, 8, 8),
-          Spot(OPERATOR, 10, 11),
+          Spot(COMPARISON_OPERATOR, 10, 11),
           Spot(NUMBER, 13, 13),
         )
       }
@@ -562,7 +590,7 @@ class KotlinSyntaxHighlighterVisitorTest {
       Spot(STRING, 0, 0),
       Spot(STRING_ESCAPED_CHARACTER, 1, 2),
       Spot(NUMBER, 3, 3),
-      Spot(OPERATOR, 4, 4),
+      Spot(ARITHMETIC_OPERATOR, 4, 4),
       Spot(NUMBER, 5, 5),
       Spot(STRING_ESCAPED_CHARACTER, 6, 6),
       Spot(STRING, 7, 7),
@@ -582,7 +610,7 @@ class KotlinSyntaxHighlighterVisitorTest {
       Spot(STRING, 0, 2),
       Spot(STRING_ESCAPED_CHARACTER, 3, 4),
       Spot(NUMBER, 5, 5),
-      Spot(OPERATOR, 6, 6),
+      Spot(ARITHMETIC_OPERATOR, 6, 6),
       Spot(NUMBER, 7, 7),
       Spot(STRING_ESCAPED_CHARACTER, 8, 8),
       Spot(STRING, 9, 11),
@@ -603,7 +631,7 @@ class KotlinSyntaxHighlighterVisitorTest {
       Spot(STRING, 3, 3),
       Spot(STRING_ESCAPED_CHARACTER, 4, 5),
       Spot(NUMBER, 6, 6),
-      Spot(OPERATOR, 7, 7),
+      Spot(ARITHMETIC_OPERATOR, 7, 7),
       Spot(NUMBER, 8, 8),
       Spot(STRING_ESCAPED_CHARACTER, 9, 9),
       Spot(STRING, 10, 10),
@@ -654,8 +682,8 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(code, spots).hasExactlySpots(
-      Spot(OPERATOR, 1, 2),
-      Spot(OPERATOR, 5, 6),
+      Spot(POSTFIX_OPERATOR, 1, 2),
+      Spot(POSTFIX_OPERATOR, 5, 6),
     )
   }
 
@@ -669,7 +697,7 @@ class KotlinSyntaxHighlighterVisitorTest {
 
     // then
     assertThat(code, spots).hasExactlySpots(
-      Spot(OPERATOR, 1, 2),
+      Spot(POSTFIX_OPERATOR, 1, 2),
     )
   }
 
@@ -703,7 +731,7 @@ class KotlinSyntaxHighlighterVisitorTest {
     // then
     assertThat(code, spots).hasExactlySpots(
       Spot(highlight = KEYWORD, start = 0, end = 2),
-      Spot(highlight = OPERATOR, start = 6, end = 6),
+      Spot(highlight = ASSIGNMENT_OPERATOR, start = 6, end = 6),
       Spot(highlight = BRACKET, start = 14, end = 14),
       Spot(highlight = NUMBER, start = 15, end = 15),
       Spot(highlight = NUMBER, start = 18, end = 18),
@@ -725,7 +753,7 @@ class KotlinSyntaxHighlighterVisitorTest {
       // "val"
       Spot(highlight = KEYWORD, start = 0, end = 2),
       // "="
-      Spot(highlight = OPERATOR, start = 6, end = 6),
+      Spot(highlight = ASSIGNMENT_OPERATOR, start = 6, end = 6),
       // "("
       Spot(highlight = BRACKET, start = 8, end = 8),
       // "1"
@@ -775,7 +803,7 @@ class KotlinSyntaxHighlighterVisitorTest {
       // "val"
       Spot(highlight = KEYWORD, start = 0, end = 2),
       // "="
-      Spot(highlight = OPERATOR, start = 6, end = 6),
+      Spot(highlight = ASSIGNMENT_OPERATOR, start = 6, end = 6),
       // "'c'"
       Spot(highlight = CHARACTER, start = 8, end = 10),
     )
@@ -794,7 +822,7 @@ class KotlinSyntaxHighlighterVisitorTest {
       // "val"
       Spot(highlight = KEYWORD, start = 0, end = 2),
       // "="
-      Spot(highlight = OPERATOR, start = 6, end = 6),
+      Spot(highlight = ASSIGNMENT_OPERATOR, start = 6, end = 6),
       // "'"
       Spot(highlight = CHARACTER, start = 8, end = 8),
       // "\'"
@@ -817,9 +845,9 @@ class KotlinSyntaxHighlighterVisitorTest {
       // "val"
       Spot(highlight = KEYWORD, start = 0, end = 2),
       // "="
-      Spot(highlight = OPERATOR, start = 6, end = 6),
+      Spot(highlight = ASSIGNMENT_OPERATOR, start = 6, end = 6),
       // "+"
-      Spot(highlight = OPERATOR, start = 8, end = 8),
+      Spot(highlight = PREFIX_OPERATOR, start = 8, end = 8),
       // "1"
       Spot(highlight = NUMBER, start = 9, end = 9),
     )

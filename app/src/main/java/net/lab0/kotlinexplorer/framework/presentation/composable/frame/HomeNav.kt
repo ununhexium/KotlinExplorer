@@ -10,15 +10,19 @@ import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
-import net.lab0.kotlinexplorer.framework.presentation.composable.ToolsUi
+import net.lab0.kotlinexplorer.BuildConfig
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonsNav
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
+import net.lab0.kotlinexplorer.framework.presentation.composable.math.FloatingPointVisualizer
+import net.lab0.kotlinexplorer.framework.presentation.composable.math.Int8Visualizer
 
 
 sealed class TopLevelScreen(
@@ -51,6 +55,19 @@ sealed class TopLevelScreen(
   )
 }
 
+sealed class ToolScreens(val routeDefinition: String) {
+  object List : ToolScreens("List")
+  object IntVisualizer : ToolScreens("IntVisualizer?number={number}") {
+    fun route(number: Long) =
+      routeDefinition.replace("{number}", number.toString())
+  }
+
+  object FloatVisualizer : ToolScreens("FloatVisualizer?number={number}") {
+    fun route(number: Float) =
+      routeDefinition.replace("{number}", number.toString())
+  }
+}
+
 @Composable
 fun HomeNav(
   viewModelFactory: ViewModelProvider.Factory
@@ -65,9 +82,13 @@ fun HomeNav(
       TopLevelScreen.Chapters.routeDefinition
     }
 
+    val debugStart = if (BuildConfig.DEBUG) {
+      TopLevelScreen.Tools.routeDefinition
+    } else startDestination
+
     NavHost(
       navController = topLevelNavController,
-      startDestination = startDestination
+      startDestination = debugStart
     ) {
       composable(
         TopLevelScreen.Chapters.routeDefinition,
@@ -93,10 +114,39 @@ fun HomeNav(
         UserProfileUi(topLevelNavController)
       }
 
-      composable(
-        TopLevelScreen.Tools.routeDefinition
+      navigation(
+        startDestination = ToolScreens.List.routeDefinition,
+        route = TopLevelScreen.Tools.routeDefinition
       ) {
-        ToolsUi(topLevelNavController)
+        composable(
+          ToolScreens.List.routeDefinition
+        ) {
+          ToolsUi(topLevelNavController)
+        }
+
+        composable(
+          ToolScreens.IntVisualizer.routeDefinition,
+          arguments = listOf(navArgument("number") {
+            type = NavType.StringType
+            defaultValue = "0"
+          }),
+        ) { backStackEntry ->
+          val byte = backStackEntry.arguments?.getString("number")!!.toByte()
+
+          Int8VisualizerUi(topLevelNavController, initialByte = byte)
+        }
+
+        composable(
+          ToolScreens.FloatVisualizer.routeDefinition,
+          arguments = listOf(navArgument("number") {
+            type = NavType.FloatType
+            defaultValue = 0f
+          }),
+        ) { backStackEntry ->
+          val float = backStackEntry.arguments?.getFloat("number")!!
+
+          FloatingPointVisualizer(float)
+        }
       }
     }
   }
