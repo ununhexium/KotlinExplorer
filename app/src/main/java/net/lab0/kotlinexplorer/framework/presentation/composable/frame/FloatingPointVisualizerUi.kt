@@ -1,31 +1,40 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.frame
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryBody1
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryH5
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.KDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
-import net.lab0.kotlinexplorer.framework.presentation.composable.math.Int8Visualizer
+import net.lab0.kotlinexplorer.framework.presentation.composable.math.DatedFloat
+import net.lab0.kotlinexplorer.framework.presentation.composable.math.FloatingPointVisualizer
 
 @Composable
-fun Int8VisualizerUi(navHostController: NavHostController, initialByte: Byte) {
+fun FloatingPointVisualizerUi(navHostController: NavHostController, initialFloat: Float) {
   val scaffoldState = rememberScaffoldState()
-  val byteState = remember { mutableStateOf(initialByte) }
+  val floatState = remember { mutableStateOf(DatedFloat(initialFloat)) }
 
   Scaffold(
     scaffoldState = scaffoldState,
 
     //top bar
     topBar = {
-      KTopAppBar(scaffoldState = scaffoldState, title = "Byte")
+      KTopAppBar(scaffoldState = scaffoldState, title = "Float")
     },
 
     // drawer
@@ -35,10 +44,10 @@ fun Int8VisualizerUi(navHostController: NavHostController, initialByte: Byte) {
           title = "Type converters"
         )
         DrawerMenuEntryBody1(
-          title = ".toFloat()",
+          title = ".toByte()",
           onClick = {
             navHostController.navigate(
-              ToolScreens.FloatVisualizer.route(byteState.value.toFloat())
+              ToolScreens.IntVisualizer.route(floatState.value.float.toLong())
             )
           },
           fontFamily = FontFamily.Monospace,
@@ -46,6 +55,26 @@ fun Int8VisualizerUi(navHostController: NavHostController, initialByte: Byte) {
       }
     }
   ) {
-    Int8Visualizer(byteState)
+    FloatingPointVisualizer(floatState)
+  }
+}
+
+@Preview
+@Composable
+private fun FloatingPointVisualizerUiPreview() {
+  MaterialTheme {
+    Surface(
+      color = Color(0xFF4CAF50)
+    ) {
+      Column(
+        modifier = Modifier.padding(20.dp)
+      ) {
+        Surface(
+          color = MaterialTheme.colors.background
+        ) {
+          FloatingPointVisualizerUi(rememberNavController(), -116f)
+        }
+      }
+    }
   }
 }

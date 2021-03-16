@@ -28,7 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntry
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryH5
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Indent
 
 @Composable
@@ -52,7 +52,7 @@ fun LessonDrawer(
     .padding(horizontal = 16.dp)
     .verticalScroll(scrollState)
   ) {
-    DrawerMenuEntry(
+    DrawerMenuEntryH5(
       title = "Chapters",
       icon = Icons.Default.MenuBook,
       modifier = topEntriesModifier,
@@ -65,7 +65,7 @@ fun LessonDrawer(
       }
     )
 
-    DrawerMenuEntry(
+    DrawerMenuEntryH5(
       title = "Report an issue",
       icon = Icons.Default.Warning,
       modifier = topEntriesModifier,

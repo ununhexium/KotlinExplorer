@@ -12,6 +12,7 @@ import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -39,9 +40,9 @@ data class DatedFloat(
 
 @OptIn(ExperimentalUnsignedTypes::class)
 @Composable
-fun FloatingPointVisualizer(initialValue:Float) {
+fun FloatingPointVisualizer(initialValue: MutableState<DatedFloat>) {
 
-  val (datedFloat, setDatedFloat) = remember { mutableStateOf(DatedFloat(initialValue)) }
+  val (datedFloat, setDatedFloat) = initialValue
 
   Column(
     modifier = Modifier.fillMaxWidth(),
@@ -387,7 +388,7 @@ fun FloatingPointVisualizerPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          FloatingPointVisualizer(116f)
+          FloatingPointVisualizer(mutableStateOf(DatedFloat(116f)))
         }
       }
     }

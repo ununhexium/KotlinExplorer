@@ -49,17 +49,20 @@ fun TopLevelScaffold(
       BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+        val color = MaterialTheme.colors.onBackground
+
         quickScreens.forEach { screen ->
+
           BottomNavigationItem(
             icon = {
               Icon(
                 screen.icon,
                 contentDescription = "",
-                tint = MaterialTheme.colors.primary
+                tint = color,
               )
             },
             label = {
-              Text(screen.name, color = MaterialTheme.colors.primary)
+              Text(screen.name, color = color)
             },
             selected = currentRoute == screen.routeDefinition,
             onClick = {

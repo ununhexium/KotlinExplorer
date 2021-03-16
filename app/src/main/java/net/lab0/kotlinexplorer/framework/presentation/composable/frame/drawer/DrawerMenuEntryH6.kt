@@ -3,7 +3,9 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,29 +21,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DrawerMenuEntry(
+fun DrawerMenuEntryH6(
   title: String,
-  onClick: () -> Unit,
   modifier: Modifier = Modifier,
+  onClick: (() -> Unit)? = null,
   icon: ImageVector? = null,
 ) {
-  Row(modifier = modifier.clickable { onClick() }) {
-    icon?.let {
+  Row(
+    modifier = modifier
+      .clickable { onClick?.invoke() }
+      .padding(vertical = 8.dp)
+  ) {
+    val color = Color.Gray
+
+    if (icon != null) {
       Icon(
-        it,
+        icon,
         contentDescription = title,
         modifier = Modifier
           .align(Alignment.CenterVertically)
           .padding(end = 8.dp),
-        tint = MaterialTheme.colors.onBackground,
+        tint = color,
       )
+    } else {
+      Spacer(modifier = Modifier.width((8 + 16 + 8).dp))
     }
 
     Text(
-      text = title,
+      text = title.toUpperCase(),
       modifier = Modifier.align(Alignment.CenterVertically),
-      style = MaterialTheme.typography.h5,
-      color = MaterialTheme.colors.onBackground,
+      style = MaterialTheme.typography.h6,
+      color = color,
     )
   }
 }
@@ -61,9 +71,17 @@ private fun DrawerMenuEntryPreview() {
         ) {
           Column {
 
-            DrawerMenuEntry(
+            DrawerMenuEntryH5(title = "Entry H5")
+
+            DrawerMenuEntryH6(
               title = "Entry title",
               icon = Icons.Default.Place,
+              onClick = {}
+            )
+
+            DrawerMenuEntryH6(
+              title = "Entry without icon",
+              icon = null,
               onClick = {}
             )
           }

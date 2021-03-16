@@ -145,7 +145,7 @@ fun HomeNav(
         ) { backStackEntry ->
           val float = backStackEntry.arguments?.getFloat("number")!!
 
-          FloatingPointVisualizer(float)
+          FloatingPointVisualizerUi(topLevelNavController, float)
         }
       }
     }
