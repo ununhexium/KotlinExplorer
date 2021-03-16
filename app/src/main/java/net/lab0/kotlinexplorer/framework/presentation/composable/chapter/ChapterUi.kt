@@ -62,7 +62,7 @@ fun ChapterUi(
     navController = topLevelNavController,
     title = "Chapters",
     scaffoldState = scaffoldState,
-    quickScreens = TopLevelScreen.scaffoldScreens,
+    quickScreens = listOf(TopLevelScreen.Chapters, TopLevelScreen.Tools),
   ) {
     val scrollState = rememberScrollState()
 
@@ -94,7 +94,7 @@ fun ChapterUi(
         onPlay = { _, lessonId ->
           // navigate to lesson
           lessonsNavController.navigate(
-            LessonScreen.Introduction.route(lessonId)
+            LessonScreen.LessonPage.route(lessonId, 0)
           )
         }
       )

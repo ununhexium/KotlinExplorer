@@ -6,25 +6,17 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.firebase.ui.auth.AuthUI
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.lab0.kotlinexplorer.R
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.UserProfileEvent
 import net.lab0.kotlinexplorer.framework.presentation.activity.profile.state.UserProfileViewState
-import net.lab0.kotlinexplorer.framework.presentation.composable.UserProfileUi
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
-import net.lab0.kotlinexplorer.framework.presentation.intent.Auth
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import net.lab0.kotlinexplorer.mvi.BaseFragment
-import net.lab0.kotlinexplorer.utils.printLogD
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint

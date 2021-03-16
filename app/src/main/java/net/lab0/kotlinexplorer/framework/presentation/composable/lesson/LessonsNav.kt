@@ -67,7 +67,7 @@ sealed class LessonScreen(
 }
 
 @Composable
-fun LessonsUi(
+fun LessonsNav(
   topLevelNavController: NavHostController,
   viewModelFactory: ViewModelProvider.Factory,
 ) {
@@ -78,6 +78,8 @@ fun LessonsUi(
 
       // Chapters
       composable(LessonScreen.Chapters.routeDefinition) {
+        hiltNavGraphViewModel<LessonViewModel>()
+
         ChapterUi(topLevelNavController, navController, viewModelFactory)
       }
 
@@ -97,9 +99,6 @@ fun LessonsUi(
         val lesson = LessonBrowser.getLessonById(
           backStackEntry.arguments?.getString("lessonId")!!
         )
-
-        val lessonViewModel: LessonViewModel = hiltNavGraphViewModel()
-        lessonViewModel.init(lesson)
 
         LessonIntroductionPageUi(navController, lesson)
       }
@@ -125,7 +124,11 @@ fun LessonsUi(
         println("pageIndex $pageIndex")
 
         val lessonViewModel: LessonViewModel =
-          navController.hiltNavGraphViewModel(LessonScreen.Introduction.routeDefinition)
+          navController.hiltNavGraphViewModel(LessonScreen.Chapters.routeDefinition)
+
+        if (pageIndex == 0) {
+          lessonViewModel.init(lesson)
+        }
 
         LessonPageUi(
           navController = navController,
@@ -221,7 +224,7 @@ private fun LessonUiPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          LessonsUi(
+          LessonsNav(
             rememberNavController(),
             fakeFactory {
               ChapterListViewModel(

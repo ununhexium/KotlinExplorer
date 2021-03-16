@@ -8,7 +8,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
 import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.HomeUi
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.HomeNav
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import javax.inject.Inject
 
@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       KotlinExplorerTheme {
-        HomeUi(viewModelFactory)
+        HomeNav(viewModelFactory)
       }
     }
   }

@@ -17,7 +17,7 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import net.lab0.kotlinexplorer.framework.presentation.composable.ToolsUi
-import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonsUi
+import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonsNav
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
 
 
@@ -26,25 +26,24 @@ sealed class TopLevelScreen(
   val icon: ImageVector,
   val name: String,
 ) {
-  companion object{
-    val scaffoldScreens = listOf(Chapters, Tools)
-  }
-
   object Chapters : TopLevelScreen(
     routeDefinition = "Chapters",
     icon = Icons.Default.MenuBook,
     name = "Chapters"
   )
+
   object Profile : TopLevelScreen(
     routeDefinition = "Profile",
     icon = Icons.Default.AccountBox,
     name = "Profile"
   )
+
   object Login : TopLevelScreen(
     routeDefinition = "Login",
     icon = Icons.Default.Login,
     name = "Login"
   )
+
   object Tools : TopLevelScreen(
     routeDefinition = "Tools",
     icon = Icons.Default.Build,
@@ -53,21 +52,28 @@ sealed class TopLevelScreen(
 }
 
 @Composable
-fun HomeUi(
+fun HomeNav(
   viewModelFactory: ViewModelProvider.Factory
 ) {
   Surface(color = MaterialTheme.colors.background) {
     val topLevelNavController = rememberNavController()
+    val auth = FirebaseAuth.getInstance()
+
+    val startDestination = if (auth.currentUser == null) {
+      TopLevelScreen.Login.routeDefinition
+    } else {
+      TopLevelScreen.Chapters.routeDefinition
+    }
+
     NavHost(
       navController = topLevelNavController,
-      startDestination = TopLevelScreen.Login.routeDefinition
+      startDestination = startDestination
     ) {
-
       composable(
         TopLevelScreen.Chapters.routeDefinition,
         arguments = listOf(navArgument("id") { }),
       ) {
-        LessonsUi(topLevelNavController, viewModelFactory)
+        LessonsNav(topLevelNavController, viewModelFactory)
       }
 
       composable(TopLevelScreen.Login.routeDefinition) {
@@ -84,7 +90,7 @@ fun HomeUi(
       composable(
         TopLevelScreen.Profile.routeDefinition,
       ) {
-        // TODO
+        UserProfileUi(topLevelNavController)
       }
 
       composable(

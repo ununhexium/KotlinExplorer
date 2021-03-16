@@ -2,6 +2,7 @@ package net.lab0.kotlinexplorer.framework.presentation.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -26,9 +27,14 @@ fun ToolsUi(
     navController = navHostController,
     title = "Tools",
     scaffoldState = scaffoldState,
-    quickScreens = TopLevelScreen.scaffoldScreens,
+    quickScreens = listOf(TopLevelScreen.Chapters, TopLevelScreen.Tools),
   ){
-    Text("Tools")
+    Button(onClick = { /*TODO*/ }) {
+      Text("Integer explorer")
+    }
+    Button(onClick = { /*TODO*/ }) {
+      Text("Floating point explorer")
+    }
   }
 }
 
