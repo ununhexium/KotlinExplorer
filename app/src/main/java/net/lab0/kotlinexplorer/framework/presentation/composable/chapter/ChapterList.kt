@@ -29,7 +29,6 @@ fun ChapterList(
   Column(modifier = modifier) {
     chapters.forEach { chapter ->
       val (expanded, setExpanded) = remember { mutableStateOf(false) }
-      expanded to setExpanded
 
       ExpansibleCard(
         card = {

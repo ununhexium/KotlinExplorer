@@ -37,10 +37,10 @@ import net.lab0.kotlinexplorer.business.domain.Chapter
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetAllChapters
 import net.lab0.kotlinexplorer.business.interactor.abstraction.GetLessonsInProgress
-import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
+import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.SmallHorizontalSpacer
-import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScreen
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScaffold
+import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScreen
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.LessonScreen
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListViewModel
 import net.lab0.kotlinexplorer.mvi.Resource
@@ -116,10 +116,16 @@ fun ChapterUi(
             )
             SmallHorizontalSpacer()
           }
-          Text(text = if (chapterListViewState.canRequestMoreChapters) "More please!" else "Requested")
-          MediumVerticalSpacer()
+          Text(
+            text =
+            if (chapterListViewState.canRequestMoreChapters) "More please!"
+            else "Requested"
+          )
         }
       }
+
+      BigVerticalSpacer()
+      BigVerticalSpacer()
     }
   }
 }
