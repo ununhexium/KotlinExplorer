@@ -185,6 +185,17 @@ class KotlinSyntaxHighlighterVisitor(
       add(visitChildren(ctx))
     }
 
+  override fun visitPrefixUnaryOperation(ctx: KotlinParser.PrefixUnaryOperationContext) =
+    hl {
+      ctx.INCR()?.let { add(OPERATOR, it.range) }
+      ctx.DECR()?.let { add(OPERATOR, it.range) }
+      ctx.ADD()?.let { add(OPERATOR, it.range) }
+      ctx.SUB()?.let { add(OPERATOR, it.range) }
+      ctx.EXCL()?.let { add(OPERATOR, it.range) }
+
+      add(visitChildren(ctx))
+    }
+
   override fun visitPropertyDeclaration(ctx: KotlinParser.PropertyDeclarationContext) =
     hl {
       ctx.VAL()?.let { add(KEYWORD, ctx.VAL().range) }

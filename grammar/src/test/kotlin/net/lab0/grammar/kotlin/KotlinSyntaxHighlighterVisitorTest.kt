@@ -239,11 +239,13 @@ class KotlinSyntaxHighlighterVisitorTest {
     val spots = extractSpots(code)
 
     // then
-    assertThat(code, spots).hasAtLeastSpotsH(
+    assertThat(code, spots).hasExactlySpots(
       Spot(FUNCTION, 0, 6),
+      Spot(BRACKET, 7, 7),
       Spot(STRING, 8, 8),
       Spot(STRING, 9, 11),
       Spot(STRING, 12, 12),
+      Spot(BRACKET, 13, 13),
     )
   }
 
@@ -799,6 +801,27 @@ class KotlinSyntaxHighlighterVisitorTest {
       Spot(highlight = CHARACTER_ESCAPED, start = 9, end = 10),
       // "'"
       Spot(highlight = CHARACTER, start = 11, end = 11),
+    )
+  }
+
+  @Test
+  fun `can highlight plus and minus as prefix`() {
+    // given
+    val code = "val p = +1"
+
+    // when
+    val spots = extractSpots(code)
+
+    // then
+    assertThat(code, spots).hasExactlySpots(
+      // "val"
+      Spot(highlight = KEYWORD, start = 0, end = 2),
+      // "="
+      Spot(highlight = OPERATOR, start = 6, end = 6),
+      // "+"
+      Spot(highlight = OPERATOR, start = 8, end = 8),
+      // "1"
+      Spot(highlight = NUMBER, start = 9, end = 9),
     )
   }
 }

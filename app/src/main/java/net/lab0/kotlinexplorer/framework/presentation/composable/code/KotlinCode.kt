@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -355,7 +356,7 @@ fun KotlinCodePreview_highlight3() {
   }
 }
 
-//@Preview
+@Preview
 @Composable
 fun PreviewKotlinCode() {
   MaterialTheme {
@@ -379,6 +380,13 @@ fun PreviewKotlinCode() {
           |  ${placeholder(20)}
           |  println("Hello, \"World!\"")
           |}
+          |
+          |// prefix operators
+          |val inc = ++x
+          |val dec = --x
+          |val pos = +1
+          |val neg = -1
+          |val not = !true
           |
           |// classes
           |
@@ -428,7 +436,9 @@ fun PreviewKotlinCode() {
           |}
         """.trimMargin()
 
-    Column(modifier = Modifier.scrollable(rememberScrollState(), Orientation.Vertical)) {
+    Column(
+      modifier = Modifier.verticalScroll(rememberScrollState())
+    ) {
       KotlinCode(
         code = extractHighlightsAndAnnotate(code, ijStyle),
         DefaultCodeStyle

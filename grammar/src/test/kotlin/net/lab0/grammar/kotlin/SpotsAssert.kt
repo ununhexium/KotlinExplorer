@@ -98,20 +98,43 @@ class SpotsAssert<H>(
     if (!containsExactly) {
       val missing = spots.filter { it !in a }
       val tooMuch = a.filter { it !in spots }
+
+      val outOfRange = missing.firstOrNull { it.start < 0 || it.end < 0 } ?:
+            tooMuch.firstOrNull { it.start < 0 || it.end < 0 }
+      if(outOfRange != null) {
+        failWithMessage("The spot $outOfRange")
+      }
+
       val missingMarks = buildRangesLine(missing)
       val extraneousMarks = buildRangesLine(tooMuch)
-      failWithMessage(
-        buildMissingSpotsMessage(
-          "Missing spots:",
-          missing,
-          missingMarks
-        ) + "\n\n" +
-            buildMissingSpotsMessage(
-              "Extraneous spots:",
-              tooMuch,
-              extraneousMarks
-            )
-      )
+
+      val messageBuilder = StringBuilder()
+
+      if (missing.isNotEmpty()) {
+        messageBuilder.append(
+          buildMissingSpotsMessage(
+            "Missing spots:",
+            missing,
+            missingMarks
+          )
+        ).append("\n")
+      }
+
+      if (missing.isNotEmpty() && tooMuch.isNotEmpty()) {
+        messageBuilder.append("\n")
+      }
+
+      if (tooMuch.isNotEmpty()) {
+        messageBuilder.append(
+          buildMissingSpotsMessage(
+            "Extraneous spots:",
+            tooMuch,
+            extraneousMarks
+          )
+        )
+      }
+
+      failWithMessage(messageBuilder.toString())
     }
 
     // return the current assertion for method chaining

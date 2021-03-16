@@ -196,4 +196,68 @@ class SpotsAssertTest {
     """.trimMargin()
     )
   }
+
+  @Test
+  fun `dont show extraneous spots entry when there are none`() {
+    // given
+    val asserter = SpotsAssert(
+      """
+          |fun main() {
+          |  println("Hello, World!")
+          |}
+        """.trimMargin(),
+      listOf<Spot<String>>()
+    )
+
+    // when
+    val error = assertThrows(AssertionError::class.java) {
+      asserter.hasExactlySpots(
+        Spot("two", 3, 4),
+      )
+    }
+
+    // then
+    assertThat(error).hasMessage(
+      """
+      |Missing spots:
+      |  Spot(highlight=two, start=3, end=4)
+      |A_23456789B_23456789C_23456789D_23456789E
+      |fun main() {↵  println("Hello, World!")↵}
+      |   <>
+      |   t
+      |   w
+      |   o
+      |
+    """.trimMargin()
+    )
+  }
+
+  @Test
+  fun `can show missing spots entry located after the code`() {
+    // given
+    val asserter = SpotsAssert(
+      "a",
+      listOf(Spot("two", 5, 5),)
+    )
+
+    // when
+    val error = assertThrows(AssertionError::class.java) {
+      asserter.hasExactlySpots()
+    }
+
+    // then
+    assertThat(error).hasMessage(
+      """
+      |Extraneous spots:
+      |  Spot(highlight=two, start=5, end=5)
+      |A
+      |a
+      |     ^
+      |     t
+      |     w
+      |     o
+      |
+    """.trimMargin()
+    )
+  }
 }
