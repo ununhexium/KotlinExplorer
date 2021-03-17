@@ -8,6 +8,8 @@ object HelloWorld : LessonImpl(
   id = "kotlin.helloworld.helloworld",
   title = "Hello World Project",
   pages = listOf(
+
+    // declare main
     LessonPage.CodeQuestionPage(
       title = "Main",
       question = """
@@ -22,6 +24,8 @@ ${p(4)}
       answer = listOf("fun", "(", ")", "{", "}"),
       confusion = listOf("[", "]"),
     ),
+
+    // add print
     LessonPage.CodeQuestionPage(
       title = "Print",
       question = "Call the print function",
@@ -36,6 +40,8 @@ fun main() {
       answer = listOf("print", "(", ")"),
       confusion = listOf("Print", "{", "}")
     ),
+
+    // put hello world in a string
     LessonPage.CodeQuestionPage(
       title = "String",
       question = """
@@ -52,10 +58,12 @@ fun main() {
       answer = listOf("\"", "Hello ", "World", "\""),
       confusion = listOf("'", "\""),
     ),
+
+    // done
     LessonPage.InfoPage(
       title = "Done!",
       """
-You wrote your first program. Congratz!
+You wrote your first program. Congratulations!
 
 You can now keep learning for your next project.
 """

@@ -9,6 +9,7 @@ object Indentation : LessonImpl(
   id = "kotlin.helloworld.indentation",
   title = "Indentation",
   pages = listOf(
+    // 4 spaces indent
     LessonPage.CodeQuestionPage(
       title = "Indent",
       question = """
@@ -25,8 +26,9 @@ the convention is to indent the code by some amount of spaces.
 It doesn't change the behaviour of the program, but makes it easier to read.
 """,
       answer = listOf("    "),
-      confusion = listOf("→→→→"),
     ),
+
+    // more indents
     LessonPage.CodeQuestionPage(
       title = "Indent more",
       question = """
@@ -35,7 +37,7 @@ Indent the code by the right amount of spaces.
       snippet = """
 fun main() {  // start of block
 ${p(0)}print(  // start of continuation
-${p(1)}"Hello"
+${p(1)}"Hello"  // call continues here
 ${p(2)})  // end of continuation
 }  // end of block
 """,
@@ -46,25 +48,27 @@ You can also notice that the second block is indented
 once for the first block and twice for the second block,
  for a total of 12 spaces. This is a continuation indent.
  
-Continuation indent are used when thing are normally on a 
+Continuation indents are used when things are normally on a 
 single line but they get long and don't fit anymore.
 This continuation can be made longer to differentiate it 
 from the regular block indent.
 """,
       answer = listOf("    ", "            ", "    "),
-      confusion = listOf("→      →", "                "),
     ),
     InfoPage(
       title = "Summary",
       markdown = """
 Indentation is for human readers.
 
-For each opening block, the indentation increases by 4 additional spaces.
+For each opening block, the indentation increases by 4 additional spaces `    `.
 
 The indentation decreases at the end of a block.
 
 4 spaces is the default, it can be any amount.
-In the code example here we will use only 2 spaces because the code is about 40 characters wide.
+
+In the code examples in this app we will use only
+2 spaces because the code is about 40 characters wide
+and that will save space.
 
 Don't worry about when to use continuation of regular indent, 
 your future code editor will do it automatically for you.
