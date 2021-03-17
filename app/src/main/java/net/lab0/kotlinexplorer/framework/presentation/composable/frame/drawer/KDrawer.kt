@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.TopLevelScreen
 
 @Composable
@@ -32,6 +33,8 @@ fun KDrawer(
   ) {
     entries()
   }
+
+  MediumVerticalSpacer()
 }
 
 @Preview
