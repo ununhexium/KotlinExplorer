@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.KotlinExplorerFragmentFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.KotlinExplorerViewModelFactory
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.HomeNav
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
 import javax.inject.Inject
@@ -18,10 +18,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
   @Inject
-  lateinit var fragmentFactory: JetpackExplorerFragmentFactory
+  lateinit var fragmentFactory: KotlinExplorerFragmentFactory
 
   @Inject
-  lateinit var viewModelFactory: JetpackExplorerViewModelFactory
+  lateinit var viewModelFactory: KotlinExplorerViewModelFactory
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

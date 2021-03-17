@@ -5,7 +5,7 @@ import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.KotlinExplorerFragmentFactory
 import javax.inject.Inject
 
 @FlowPreview
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class MainNavHostFragment : NavHostFragment() {
 
   @Inject
-  lateinit var fragmentFactory: JetpackExplorerFragmentFactory
+  lateinit var fragmentFactory: KotlinExplorerFragmentFactory
 
   override fun onAttach(context: Context) {
     super.onAttach(context)

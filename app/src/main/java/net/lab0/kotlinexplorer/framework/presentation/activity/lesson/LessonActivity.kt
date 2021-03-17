@@ -1,13 +1,12 @@
 package net.lab0.kotlinexplorer.framework.presentation.activity.lesson
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import net.lab0.kotlinexplorer.R
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.KotlinExplorerFragmentFactory
 import javax.inject.Inject
 
 @FlowPreview
@@ -15,7 +14,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LessonActivity : AppCompatActivity() {
   @Inject
-  lateinit var fragmentFactory: JetpackExplorerFragmentFactory
+  lateinit var fragmentFactory: KotlinExplorerFragmentFactory
 
 //  private val lessonViewModel: LessonViewModel by viewModels()
 

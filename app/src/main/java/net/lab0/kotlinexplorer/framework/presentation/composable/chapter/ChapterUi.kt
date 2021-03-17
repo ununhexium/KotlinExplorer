@@ -105,7 +105,9 @@ fun ChapterUi(
       ) {
         Button(
           onClick = {
-            // TODO navigate to Extra content request
+            lessonsNavController.navigate(
+              LessonScreen.ExtraLessonsRequest.routeDefinition
+            )
           },
           enabled = chapterListViewState.canRequestMoreChapters,
         ) {
@@ -124,6 +126,8 @@ fun ChapterUi(
         }
       }
 
+      BigVerticalSpacer()
+      BigVerticalSpacer()
       BigVerticalSpacer()
       BigVerticalSpacer()
     }

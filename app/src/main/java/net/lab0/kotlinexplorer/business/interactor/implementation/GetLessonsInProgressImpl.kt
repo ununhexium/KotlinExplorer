@@ -12,10 +12,9 @@ class GetLessonsInProgressImpl(
 ) : GetLessonsInProgress {
   override fun invoke(): Flow<Resource<List<LessonProgress>>> =
     flow {
+      val resource = dataSource.getLessonsInProgress()
       emit(
-        Resource.LoadedResource(
-          dataSource.getLessonsInProgress()
-        )
+        Resource.LoadedResource(resource)
       )
     }
 }

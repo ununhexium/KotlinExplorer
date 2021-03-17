@@ -8,18 +8,21 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLesso
 import net.lab0.kotlinexplorer.business.persistence.abstraction.LessonProgressDataSource
 import net.lab0.kotlinexplorer.framework.firebase.abstraction.ExtraContentService
 import net.lab0.kotlinexplorer.mvi.Resource
+import net.lab0.kotlinexplorer.utils.printLogD
 
 class RequestExtraLessonsImpl(
   private val auth: FirebaseAuth,
   private val extraContentService: ExtraContentService,
   private val dataSource: LessonProgressDataSource,
 ) : RequestExtraLessons {
+
   override fun invoke(
     liking: String?,
     reason: String?,
     comment: String?
   ): Flow<Resource.LoadedResource<Unit>> = flow {
     val inProgress = dataSource.getLessonsInProgress()
+
     val extra = ExtraContentRequest(
       inProgress.sumBy { it.successCount },
       inProgress.sumBy { it.failureCount },
@@ -27,7 +30,9 @@ class RequestExtraLessonsImpl(
       reason,
       comment,
     )
+
     extraContentService.requestExtraLessons(auth.uid!!, extra)
+
     emit(Resource.LoadedResource(Unit))
   }
 }

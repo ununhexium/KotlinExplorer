@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class JetpackExplorerViewModelFactory
+class KotlinExplorerViewModelFactory
 @Inject
 constructor(
   private val getAllChapters: GetAllChapters,
@@ -50,6 +50,7 @@ constructor(
         LessonViewModel(
           saveLessonProgress,
           sendProblemReport,
+          requestExtraLessons,
         ) as T
       }
 

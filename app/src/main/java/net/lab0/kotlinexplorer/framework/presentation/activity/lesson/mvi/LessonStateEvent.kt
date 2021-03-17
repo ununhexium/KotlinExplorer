@@ -19,4 +19,11 @@ sealed class LessonStateEvent : StateEvent {
     val problemReport: ProblemReport,
     val context: Context
   ) : LessonStateEvent()
+
+  data class ExtraLessonsRequest(
+    val liking: String?,
+    val whyMoreLessons: String?,
+    val comment: String?,
+    val thenNav: () -> Unit,
+  ) : LessonStateEvent()
 }

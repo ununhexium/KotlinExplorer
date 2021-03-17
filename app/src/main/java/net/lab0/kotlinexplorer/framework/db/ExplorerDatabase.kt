@@ -11,7 +11,7 @@ abstract class ExplorerDatabase : RoomDatabase() {
     lateinit var db: ExplorerDatabase
       private set
 
-    const val DATABASE_NAME: String = "jetpack-explorer"
+    const val DATABASE_NAME: String = "kotlin-explorer.db"
 
     fun init(applicationContext: Context) {
       db = Room

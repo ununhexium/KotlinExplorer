@@ -14,8 +14,8 @@ import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLesso
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendLessonFeedback
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerFragmentFactory
-import net.lab0.kotlinexplorer.framework.presentation.common.JetpackExplorerViewModelFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.KotlinExplorerFragmentFactory
+import net.lab0.kotlinexplorer.framework.presentation.common.KotlinExplorerViewModelFactory
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -34,8 +34,8 @@ object MainModule {
     sendProblemReport: SendProblemReport,
     requestExtraLessons: RequestExtraLessons,
     firebaseAuth: FirebaseAuth,
-  ): JetpackExplorerViewModelFactory =
-    JetpackExplorerViewModelFactory(
+  ): KotlinExplorerViewModelFactory =
+    KotlinExplorerViewModelFactory(
       getAllChapters,
       getLessonsInProgress,
       saveLessonProgress,
@@ -49,9 +49,9 @@ object MainModule {
   @Singleton
   @Provides
   fun provideJetpackExplorerFragmentFactory(
-    factory: JetpackExplorerViewModelFactory,
+    factory: KotlinExplorerViewModelFactory,
     requestExtraLessons: RequestExtraLessons
-  ): JetpackExplorerFragmentFactory {
-    return JetpackExplorerFragmentFactory(factory, requestExtraLessons)
+  ): KotlinExplorerFragmentFactory {
+    return KotlinExplorerFragmentFactory(factory, requestExtraLessons)
   }
 }

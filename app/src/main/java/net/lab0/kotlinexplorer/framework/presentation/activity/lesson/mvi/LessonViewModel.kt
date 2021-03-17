@@ -7,6 +7,7 @@ import net.lab0.kotlinexplorer.business.domain.Lesson
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.LessonProgress
 import net.lab0.kotlinexplorer.business.domain.problemreport.ProblemReport
+import net.lab0.kotlinexplorer.business.interactor.abstraction.RequestExtraLessons
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SaveLessonProgress
 import net.lab0.kotlinexplorer.business.interactor.abstraction.SendProblemReport
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.AnswerCorrectness
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class LessonViewModel @Inject constructor(
   private val saveLessonProgress: SaveLessonProgress,
   private val sendProblemReport: SendProblemReport,
+  private val requestExtraLessons: RequestExtraLessons,
 ) : BaseViewModel<LessonStateEvent, LessonViewState>(
   LessonStateEvent.Empty,
   LessonViewState(Lesson.EMPTY)
@@ -28,7 +30,8 @@ class LessonViewModel @Inject constructor(
   override suspend fun doJobForEvent(event: LessonStateEvent) {
     Do exhaustive when (event) {
 
-      LessonStateEvent.Empty -> {}
+      LessonStateEvent.Empty -> {
+      }
 
       LessonStateEvent.SaveLessonProgress ->
         processResource(
@@ -56,6 +59,13 @@ class LessonViewModel @Inject constructor(
         ) {
           Toast.makeText(event.context, "Report sent", Toast.LENGTH_SHORT).show()
         }
+
+      is LessonStateEvent.ExtraLessonsRequest ->
+        processResource(
+          requestExtraLessons(event.liking, event.whyMoreLessons, event.comment)
+        ) {
+          event.thenNav()
+        }
     }
   }
 
@@ -73,5 +83,22 @@ class LessonViewModel @Inject constructor(
 
   fun onProblemReport(problemReport: ProblemReport, context: Context) {
     emitFastEvent(LessonStateEvent.ReportProblem(problemReport, context))
+  }
+
+  fun request(
+    liking: String?,
+    whyMoreLessons: String?,
+    comment: String?,
+    // TODO: remove that shitty hack. If navigating too early, the model/coroutine doesn't have time ot submit the result
+    thenNav: () -> Unit
+  ) {
+    emitSlowEvent(
+      LessonStateEvent.ExtraLessonsRequest(
+        liking,
+        whyMoreLessons,
+        comment,
+        thenNav
+      )
+    )
   }
 }

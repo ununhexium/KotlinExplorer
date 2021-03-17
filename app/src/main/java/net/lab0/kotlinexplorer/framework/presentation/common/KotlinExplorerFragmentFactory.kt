@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class JetpackExplorerFragmentFactory
+class KotlinExplorerFragmentFactory
 @Inject
 constructor(
   private val viewModelFactory: ViewModelProvider.Factory,
