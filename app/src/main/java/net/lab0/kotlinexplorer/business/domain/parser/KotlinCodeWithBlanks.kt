@@ -4,10 +4,10 @@ interface KotlinCodeWithBlanks {
 
   companion object {
     /**
-     * @param index Must be in the range [0,1000]
+     * @param i i for Index, Must be in the range [0,1000]
      */
-    fun placeholder(@androidx.annotation.IntRange(from = -1, to = 999) index: Int = -1) =
-      "/**ANSWER($index)**/"
+    fun placeholder(@androidx.annotation.IntRange(from = -1, to = 999) i: Int = -1) =
+      "/**ANSWER($i)**/"
 
     val ANSWER_REGEX = Regex("""/\*\*ANSWER\((-?[0-9]{1,3})\)\*\*/""")
   }

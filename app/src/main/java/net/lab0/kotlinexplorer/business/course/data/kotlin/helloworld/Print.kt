@@ -2,7 +2,7 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.helloworld
 
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as ph
+import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Print : LessonImpl(
   id = "kotlin.helloworld.print",
@@ -11,7 +11,7 @@ object Print : LessonImpl(
     LessonPage.CodeQuestionPage(
       title = "Use Print",
       question = """Call the `print` function""",
-      snippet = """${ph(0)}("Kotlin")""",
+      snippet = """${p(0)}("Hi!")""",
       explanation =
       """
 The `print` function name is case sensitive,
@@ -25,38 +25,92 @@ Printing allows you to show text to the user.
 
     LessonPage.CodeQuestionPage(
       title = "Print Kotlin",
-      question = """Print `Kotlin`""",
-      snippet = """print(${ph(0)})""",
+      question = """Print a string that contains `Kotlin`""",
+      snippet = """print(${p(0)})""",
       explanation =
       """
 When printing text, the text must be between double quotes `"`.
+
+The quotes `"` will not be displayed.
 """,
-      answer = listOf(""""Kotlin""""),
+      answer = listOf("\"Kotlin\""),
       confusion = listOf("Kotlin"),
     ),
 
     LessonPage.CodeQuestionPage(
       title = "Call the print function",
       question = """Call the print function""",
-      snippet = """print${ph(0)}"Hi! :)"${ph(1)}""",
+      snippet = """print${p(0)}"Hi! :)"${p(1)}""",
       explanation =
       """
-To call the `print` function, you must use `(` and `)`.
+To call the `print` function, or any other function, you must use `(` and `)`.
+
+The values between `(` and `)` are called the arguments of the function.
+Arguments tell the function what to use to do its job.
 """,
       answer = listOf("(", ")"),
       confusion = listOf("{", "}"),
     ),
 
+    LessonPage.MultipleChoice(
+      title = "Wrong call",
+      question = """
+What's wrong with this call to `print`?
+
+```kotlin
+print "Kotlin"
+```
+""",
+      explanation = """
+```kotlin
+print("Kotlin")
+```
+
+A function requires parentheses around its arguments.
+""",
+      choices = listOf(
+        "Parentheses () are missing",
+        "print is not the correct function name",
+        "There must be no space between print and \"Kotlin\"",
+      ),
+      answer = setOf(0),
+    ),
+
+    LessonPage.MultipleChoice(
+      title = "Wrong call",
+      question = """
+What's wrong with this call to `print`?
+
+```kotlin
+(Print "Kotlin" )
+```
+""",
+      explanation = """
+```kotlin
+print("Kotlin")
+```
+
+Spaces don't matter when calling a function,
+the position of the parentheses `()` and the arguments are important.
+""",
+      choices = listOf(
+        "The parentheses are at the wrong position",
+        "Print is not the correct function name",
+        "There must be no space between print and \"Kotlin\"",
+      ),
+      answer = setOf(0, 1),
+    ),
+
     LessonPage.CodeQuestionPage(
       title = "Finished",
       question = """Print `Finished!`""",
-      snippet = """${ph(0)}${ph(1)}${ph(2)}${ph(3)}${ph(2)}${ph(4)}""",
+      snippet = """${p(0)}${p(1)}${p(2)}${p(3)}${p(4)}${p(5)}""",
       explanation =
       """
-Remember this, it will be used a lot later ;).
+Remember `print` and strings, they will be used a lot later 😉.
 """,
-      answer = listOf("print", "(", "\"", "Finished!", ")"),
-      confusion = listOf("'"),
+      answer = listOf("print", "(", "\"", "Finished!", "\"", ")"),
+      confusion = listOf("'", "'"),
     ),
 
     LessonPage.InfoPage(
