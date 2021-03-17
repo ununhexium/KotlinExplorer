@@ -99,7 +99,7 @@ Arguments tell the function what to use to do its job.
       question = """
 What's wrong with this call to `print`?
 
-```kotlin
+```
 print "Kotlin"
 ```
 """,
@@ -123,7 +123,7 @@ A function requires parentheses around its arguments.
       question = """
 What's wrong with this call to `print`?
 
-```kotlin
+```
 (Print "Kotlin" )
 ```
 """,

@@ -145,32 +145,51 @@ print("4")
       choices = listOf("print(\"1\")", "print(\"4\")", "print(\"2\")", "print(\"3\")"),
       answer = setOf(0, 1),
     ),
+
     // avoid giving arguments with multi line comments
     LessonPage.CodeQuestionPage(
       title = "Print nothing",
       question = "**Don't** print `Something`",
       snippet = """
-print(${p(0)}"Something"${p(1)})
+println(${p(0)}"Something"${p(1)})
 """,
       explanation = """
-Comments can be used to remove some of the code or add comments right next to the element to comment, like this:
+Comments can be used to ignore some of the code or add comments
+right next to the element to comment, like this:
 
 ```kotlin
 print(11*11 /* =121 */)
 ```
 
-Here `//` can't be used twice, because the closing `(` would be missing.
+Here `//` can't be used, because the closing parenthesis `)` would be missing.
 
 The opening multi line comment mark `/*`, works in pair with another `*/`.
-
-```kotlin
-// */ this is in the comment open with //
-This is not commented
-```
 """,
       answer = listOf("/*", "*/"),
       confusion = listOf("//", "//")
     ),
+
+    // dont close single line comments with multi line comments
+LessonPage.MultipleChoice(
+      title = "",
+      question = """
+What will be printed?
+        
+```kotlin
+// */ print("always")
+```
+""",
+      explanation = """
+`//` ignores the rest of the line. You can't stop it
+even with a multi line comment closing mark `*/`
+""",
+      choices = listOf(
+        "Nothing, because // comments the whole line",
+        "Always, because */ stops the comment",
+      ),
+      answer = setOf(0),
+    ),
+
     // summary
     LessonPage.InfoPage(
       title = "Summary",
