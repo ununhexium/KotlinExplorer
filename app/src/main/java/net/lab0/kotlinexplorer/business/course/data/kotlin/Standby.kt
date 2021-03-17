@@ -136,3 +136,5 @@ print(${p()})
 // TODO more operators: disjunction
 
 // TODO . operator prio
+
+// TODO funmain(){}  is this a function declaration or call?
