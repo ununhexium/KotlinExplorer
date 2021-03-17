@@ -23,7 +23,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultHorizont
 fun NextPageControlBar(
   modifier: Modifier = Modifier,
   onNext: () -> Unit,
-  onRetry: (() -> Unit)? = null,
+  onRetry: () -> Unit,
 ) {
   Row(
     modifier = modifier.fillMaxWidth(),

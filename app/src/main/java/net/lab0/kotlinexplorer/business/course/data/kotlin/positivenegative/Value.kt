@@ -49,6 +49,12 @@ val ${p(0)} = ${p(1)}
 Choose a valid name.
 """,
       snippet = """
+val example = 1
+val anotherName = 2
+val _thisCanWork = 3
+val HeyThere = 4
+val SCREAM = 5
+val sides_on_a_dice = 6
 val ${p(0)} = "English"
 """,
       explanation = """
@@ -75,8 +81,16 @@ Which of the following names are valid?
       explanation = """
 `lower Case` is invalid because it contains a space ` `.
 `sugar-free` is invalid because it contains a minus sign `-`.
+`1by1` is invalid because it starts with a number.
 """,
-      choices = listOf("__double_underscore", "UpperCase", "valueName", "lower Case", "sugar-free"),
+      choices = listOf(
+        "__double_underscore",
+        "UpperCase",
+        "valueName",
+        "lower Case",
+        "sugar-free",
+        "1by1"
+      ),
       answer = setOf(0, 1, 2),
     ),
 
@@ -187,17 +201,17 @@ Let's say you want to give a name to the number of cats in a house.
 Choose the best value name.
 """,
       snippet = """
+val totalCatCount = 10
 val ${p(0)} = 3
 """,
       explanation = """
 `n` is not a good name because it's too short.
 When the program is longer, it's harder to remember what single letter values mean.
 
-`nHouseCat` it that the number of house cats, by opposition to stray or wild cats?
-This meaning is different from the intended meaning. 
+`numCats` is that the number of cats in the house? outside the house? all of them? 
 """,
       answer = listOf("numberOfCatsInTheHouse"),
-      confusion = listOf("n", "nHouseCat")
+      confusion = listOf("n", "numCats")
     ),
 
     // print variable
@@ -214,6 +228,12 @@ print(date)
       explanation = """
 `date` is a variable, when calling `print(date)`,
 the content of the `date` variable is be printed.
+
+The code above is equivalent to
+
+```kotlin
+print("today")
+```
 """,
       choices = listOf("today", "date"),
       answer = setOf(0),
@@ -240,14 +260,9 @@ val lastName_ = "Kenedy"
 
 `_1` doesn't describe what it contains.
 
-`한글` is not english, it's korean.
+`한글` is not english.
 
 `first_name` uses snake case (`_` instead of spaces).
-Kotlin use lower camelCase for variables.
-Lower camel case starts with a lower case letter 
-capitalize letter that are between words.
-
-`thisIsAnExampleOfCamelCase`
  
 `lastName_` is lower camel case with has a trailing `_`
 """,
@@ -267,7 +282,7 @@ print("time")
 ```
 """,
       explanation = """
-`"time"` is a string, print will just print it.
+`"time"` is a string, `print` will just print it.
 
 The `time` value is not used here.
 """,
@@ -345,6 +360,37 @@ is stored.
 """
     ),
 
+    LessonPage.MultipleChoice(
+      title = "Naming convention",
+      question = """
+Why should you use good names?
+""",
+      explanation = """
+##### It's easier to remember what a variable contains
+
+This will help today's *you* and future *you* remember what a value represents. The easier it is to remember, the faster you will code.
+
+##### Take make it easier for other people to read my code
+
+Later, after learning the basics, software development will be team work, even if you work alone.
+You will read other people's code, you will share code with other people to get help.
+The easier it is to read your code, the easier it will be to communicate about it (get help, remove bugs, show your work to someone else).
+
+##### Don't. Avoid using good names to prevent people from stealing my code.
+
+Source code security comes from how the code is stored and exchanged, not how it's written.
+
+There are dedicated tools to make a readable code much less readable (obfuscation tools).
+They will do a better jobs than you at that 😜.
+""",
+      choices = listOf(
+        "It's easier to remember what a variable contains",
+        "Take make it easier for other people to read my code",
+        "Don't. Avoid using good names to prevent people from stealing my code."
+      ),
+      answer = setOf(0, 1),
+    ),
+
     // summary
     LessonPage.InfoPage(
       title = "Summary",
@@ -353,7 +399,7 @@ Values are there to **identify** a result and **reuse** it later.
 
 The **better the name**, the **easier** it is to **understand** what it contains.
 
-Values use `theCamelCase` as a naming convention.
+Values use `theLowerCamelCase` naming convention.
 
 Values can contain integers, strings, booleans and many other kinds of data that you will discover later.
 """

@@ -78,7 +78,7 @@ fun CodeQuestionPage(
               else AnswerCorrectness.FAILURE
             )
           },
-          onRetry = if(state.isCorrectAnswer) null else onRetryPage
+          onRetry = onRetryPage
         )
       } else {
         CodeInputControlBar(

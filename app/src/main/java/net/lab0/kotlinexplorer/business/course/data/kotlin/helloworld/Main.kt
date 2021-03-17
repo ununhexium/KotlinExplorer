@@ -85,7 +85,7 @@ The body of the function goes between curly brackets. It starts at `{` and ends 
 To make the function more readable, the body inside the function is indented. This is optional.
 """,
       answer = listOf("{\n\tprintln(\"hello\")\n}"),
-      confusion = listOf("{\n}\n\tprintln(\"hello\")", "(\n\tprintln{\"hello\"}\n)")
+      confusion = listOf("{\n}\n\tprintln(\"hello\")", "(\n\tprintln{\"hello\"}\n)", "(\n)\n\tprintln{\"hello\"}")
     ),
 
     LessonPage.MultipleChoice(

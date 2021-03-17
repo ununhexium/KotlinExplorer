@@ -18,4 +18,5 @@ object PocketCalculatorChapter : ChapterImpl(
     FloatingPoint,
     DoublePrecision,
   )
+// TODO after it's be stated what a member / field is, show the problems of ${abc.xyz) in string templates
 )

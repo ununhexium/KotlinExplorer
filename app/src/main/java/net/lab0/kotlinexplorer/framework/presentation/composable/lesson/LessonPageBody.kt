@@ -119,7 +119,7 @@ fun LessonPageBodyPreview_answer() {
         CorrectAnswer(explanation = { Text("That's why") })
       },
       controlBar = {
-        NextPageControlBar(onNext = { })
+        NextPageControlBar(onNext = { }, onRetry = {})
       }
     )
   }
@@ -146,7 +146,7 @@ fun LessonPageBodyPreview_longAnswer() {
         )
       },
       controlBar = {
-        NextPageControlBar(onNext = { })
+        NextPageControlBar(onNext = { }, onRetry = {})
       }
     )
   }

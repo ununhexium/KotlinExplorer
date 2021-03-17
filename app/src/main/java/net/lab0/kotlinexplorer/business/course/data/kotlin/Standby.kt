@@ -121,6 +121,28 @@ print(${p()})
       answer = listOf(),
       confusion = listOf(),
     )
+
+    // tricky boolean comparison with < and >
+    LessonPage.MultipleChoice(
+      title = "Mhhh \uD83E\uDD14",
+      question = """
+Can you guess the result of the following expression?
+
+```kotlin
+true > false
+```
+""",
+      explanation = """
+You could also use `>=` and `<=`. But only on the first of April 😉.
+
+(Don't use `<`, `>`, ... I'm watching you 🥺 🔫😠)
+...
+
+Please don't do that. Only use `==` and `!=` to compare booleans. 🙏
+""",
+      choices = listOf("true", "false", "Not valid", "Undefined"),
+      answer = setOf(0),
+    )
   }
 }
 
@@ -138,3 +160,23 @@ print(${p()})
 // TODO . operator prio
 
 // TODO funmain(){}  is this a function declaration or call?
+
+/*
+ Priority for booleans
+
+Evaluated from left to right:
+
+```kotlin
+true == true == true == true
+        true == true == true
+                true == true
+                        true
+```
+
+Evaluated with priorities
+
+```kotlin
+//   true      ==       true
+(true == true) == (false == false) // true
+```
+ */

@@ -19,7 +19,7 @@ Tell the type of this value.
 val number: ${p(0)} = 42
 """,
       explanation = """
-`Int` indicates that the data type of the value `number` must be an `Int`eger..
+`Int` indicates that the data type of the value `number` must be an `Int`eger.
 """,
       answer = listOf("Int"),
       confusion = listOf("String", "Boolean"),
@@ -84,7 +84,7 @@ val negative
 
 The amount of spaces doesn't matter.
 
-"-12" is a `String`
+`"-12"` is a `String`
 """,
       answer = listOf("-12"),
       confusion = listOf("\"-12\""),
