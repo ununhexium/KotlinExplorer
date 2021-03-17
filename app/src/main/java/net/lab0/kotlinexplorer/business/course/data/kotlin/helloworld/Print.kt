@@ -5,11 +5,11 @@ import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object Print : LessonImpl(
-  id = "kotlin.helloworld.print",
+  id = "kotlin.helloworld.println",
   title = "Printing",
   pages = listOf(
     LessonPage.CodeQuestionPage(
-      title = "Use Print",
+      title = "Use print",
       question = """Call the `print` function""",
       snippet = """${p(0)}("Hi!")""",
       explanation =
@@ -24,6 +24,48 @@ Printing allows you to show text to the user.
     ),
 
     LessonPage.CodeQuestionPage(
+      title = "Use println",
+      question = """Call the `println` function""",
+      snippet = """${p(0)}("Hi!")""",
+      explanation =
+      """
+All function names are case sensitive.
+
+`println` does the same as `print` and then goes back to the beginning of the next line.
+
+```kotlin
+print("1")
+print("2")
+print("3")
+```
+
+prints
+
+```
+123
+```
+
+but
+
+```kotlin
+println("1")
+println("2")
+println("3")
+```
+
+prints
+
+```
+1
+2
+3
+```
+""",
+      answer = listOf("println"),
+      confusion = listOf("Println", "printLn"),
+    ),
+
+    LessonPage.CodeQuestionPage(
       title = "Print Kotlin",
       question = """Print a string that contains `Kotlin`""",
       snippet = """print(${p(0)})""",
@@ -31,7 +73,7 @@ Printing allows you to show text to the user.
       """
 When printing text, the text must be between double quotes `"`.
 
-The quotes `"` will not be displayed.
+The quotes `"` are not displayed.
 """,
       answer = listOf("\"Kotlin\""),
       confusion = listOf("Kotlin"),
@@ -107,7 +149,7 @@ the position of the parentheses `()` and the arguments are important.
       snippet = """${p(0)}${p(1)}${p(2)}${p(3)}${p(4)}${p(5)}""",
       explanation =
       """
-Remember `print` and strings, they will be used a lot later 😉.
+Remember `print`, `println` and strings, they will be used a lot later 😉.
 """,
       answer = listOf("print", "(", "\"", "Finished!", "\"", ")"),
       confusion = listOf("'", "'"),

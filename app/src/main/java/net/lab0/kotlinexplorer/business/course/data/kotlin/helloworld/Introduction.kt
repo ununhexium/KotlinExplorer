@@ -14,9 +14,13 @@ In this chapter, you'll learn how to write the smallest possible
 program that prints `Hello World` to the user.
 
 ```kotlin
+/*
+ * This is the first program that all
+ * developers try when using a new language
+ */
 fun main() {
-  // says hello
-  println("Hello World")
+  // say Hello, World!
+  println("Hello, World!")
 }
 ```
 

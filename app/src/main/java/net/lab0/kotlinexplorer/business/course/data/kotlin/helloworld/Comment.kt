@@ -8,23 +8,70 @@ object Comment : LessonImpl(
   id = "kotlin.helloworld.comment",
   title = "Comment",
   pages = listOf(
+    // introduce comment
     LessonPage.CodeQuestionPage(
-      title = "Chit chat",
-      question = "Tell what the next line does",
+      title = "Comment it",
+      question = """
+Comment this single line.
+""",
       snippet = """
-${p(0)} The following line prints hello
-print("hello")
+${p(0)} print("Not executed")
 """,
       explanation = """
-Double slash `//` starts a single line comment.
+Double slash `//` starts a single-line comment.
 
-The text after `//` will only be shown in the source code. If it's code, it will not be executed.
+The rest of the line, after `//`, will not be executed
 """,
       answer = listOf("//"),
-      confusion = listOf("/*", "--", "!", "#")
+      confusion = listOf(),
     ),
+
+    // code in comments is not executed
     LessonPage.CodeQuestionPage(
-      title = "Ignore it",
+      title = "Semi \uD83D\uDE9A",
+      question = """
+Print only `Semi`
+""",
+      snippet = """
+// you can scroll the code horizontally to see what is written on very long lines like this one
+print("Semi")${p(0)}print("trailer")${p(1)}print("truck") 
+""",
+      explanation = """
+The whole line after `//` is commented.
+
+No need to repeat it before each piece of code.
+""",
+      answer = listOf("//", ""),
+      confusion = listOf(""),
+    ),
+
+    // comment only the line on which it is
+    LessonPage.MultipleChoice(
+      title = "Chit chat",
+      question = """
+Tell what the next line does
+
+```kotlin
+//// The following line prints hello
+print("hello")
+```
+""",
+      explanation = """
+The comment stops at the end of the line. `print` is executed.
+
+Doubling the comment `////` doesn't make the comment span over several lines.
+`////test` is actually a comment indicator `//` followed by some text `//test`.
+""",
+      choices = listOf(
+        "Hello, because the comment is for a single line",
+        "Nothing, the comment is doubled, commenting 2 lines"
+      ),
+      answer = setOf(0),
+    ),
+
+    // disable code
+    LessonPage.CodeQuestionPage(
+      title = "Disable code",
       question = "Print `B` only",
       snippet = """
 ${p(0)} print("A")
@@ -35,6 +82,8 @@ Commented code will not be executed.
 """,
       answer = listOf("//", "  "),
     ),
+
+    // Multi line comments
     LessonPage.CodeQuestionPage(
       title = "Talkative",
       question = "Comment all the lines",
@@ -43,19 +92,29 @@ ${p(0)}
    Lorem ipsum dolor sit amet,
    consectetur adipiscing elit,
    sed do eiusmod tempor incididunt
-    ut labore et dolore magna aliqua.
+   ut labore et dolore magna aliqua.
 ${p(1)}
 """,
       explanation = """
 Sometimes one line of explanation is not enough.
-In these cases, one can either use multiple single line comments `//`
+In these cases, you can either use multiple single line comments `//`
 or a single multi line comment `/* */`.
 
-The commented block starts at `/*` and ends at `*/`.
+The comment block starts at `/*` and ends at `*/`.
+
+The equivalent with single line comments is
+
+```kotlin
+// Lorem ipsum dolor sit amet,
+// consectetur adipiscing elit,
+// sed do eiusmod tempor incididunt
+// ut labore et dolore magna aliqua.
+```
 """,
       answer = listOf("/*", "*/"),
-      confusion = listOf("//", "//", "(*", "*)")
+      confusion = listOf("//", "//")
     ),
+
     // Commented code doesn't execute
     LessonPage.MultipleChoice(
       title = "Skip code",
@@ -81,7 +140,7 @@ print("4")
 
 `print("2")` is not executed because it's a single line comment.
 
-`print("3")` is not executed because it's a multi line comment.
+`print("3")` is not executed because it's in a multi line comment.
 """,
       choices = listOf("print(\"1\")", "print(\"4\")", "print(\"2\")", "print(\"3\")"),
       answer = setOf(0, 1),
@@ -102,7 +161,7 @@ print(11*11 /* =121 */)
 
 Here `//` can't be used twice, because the closing `(` would be missing.
 
-When a comment is open with `/*`, it must be closed with `*/`.
+The opening multi line comment mark `/*`, works in pair with another `*/`.
 
 ```kotlin
 // */ this is in the comment open with //
