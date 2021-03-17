@@ -34,13 +34,25 @@ fun ToolsUi(
       val modifier = Modifier
         .padding(vertical = 8.dp)
         .align(Alignment.CenterHorizontally)
+
+      Button(
+        modifier = modifier,
+        onClick = {
+          navHostController.navigate(ToolScreens.BooleanVisualizer.routeDefinition)
+        }
+      ) {
+        Text("Boolean explorer")
+      }
+
       Button(
         modifier = modifier,
         onClick = {
           navHostController.navigate(ToolScreens.IntVisualizer.routeDefinition)
-        }) {
+        }
+      ) {
         Text("Integer explorer")
       }
+
       Button(
         modifier = modifier,
         onClick = {

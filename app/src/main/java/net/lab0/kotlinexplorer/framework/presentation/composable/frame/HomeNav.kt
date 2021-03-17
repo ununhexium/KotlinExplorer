@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import net.lab0.kotlinexplorer.BuildConfig
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.ChaptersNav
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators
 
 
 sealed class TopLevelScreen(
@@ -55,6 +56,16 @@ sealed class TopLevelScreen(
 
 sealed class ToolScreens(val routeDefinition: String) {
   object List : ToolScreens("List")
+
+  object BooleanVisualizer :
+    ToolScreens("BooleanVisualizer?bool1={bool1}&bool2={bool2}&operator={operator}") {
+    fun route(bool1: Boolean, bool2: Boolean, operator: Operators) =
+      routeDefinition
+        .replace("{bool1}", bool1.toString())
+        .replace("{bool2}", bool2.toString())
+        .replace("{operator}", operator.toString())
+  }
+
   object IntVisualizer : ToolScreens("IntVisualizer?number={number}") {
     fun route(number: Long) =
       routeDefinition.replace("{number}", number.toString())
@@ -120,6 +131,35 @@ fun HomeNav(
           ToolScreens.List.routeDefinition
         ) {
           ToolsUi(topLevelNavController)
+        }
+
+        composable(
+          ToolScreens.BooleanVisualizer.routeDefinition,
+          arguments = listOf(
+            navArgument("bool1") {
+              type = NavType.BoolType
+              defaultValue = false
+            },
+            navArgument("bool2") {
+              type = NavType.BoolType
+              defaultValue = false
+            },
+            navArgument("operator") {
+              type = NavType.StringType
+              defaultValue = Operators.EQ.toString()
+            },
+          ),
+        ) { backStackEntry ->
+          val bool1 = backStackEntry.arguments?.getBoolean("bool1")!!
+          val bool2 = backStackEntry.arguments?.getBoolean("bool2")!!
+          val operator = backStackEntry.arguments?.getString("operator")!!
+
+          BooleanVisualizerUi(
+            topLevelNavController,
+            initialValue1 = bool1,
+            initialValue2 = bool2,
+            initialOperator = Operators.valueOf(operator)
+          )
         }
 
         composable(
