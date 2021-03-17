@@ -41,8 +41,8 @@ The whole line after `//` is commented.
 
 No need to repeat it before each piece of code.
 """,
-      answer = listOf("//", ""),
-      confusion = listOf(""),
+      answer = listOf("//", " "),
+      confusion = listOf(" "),
     ),
 
     // comment only the line on which it is
