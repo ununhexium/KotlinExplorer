@@ -6,7 +6,7 @@ import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Compa
 
 object String : LessonImpl(
   id = "kotlin.helloworld.string",
-  title = "String",
+  title = "Strings",
   pages = listOf(
     // "hello"
     LessonPage.CodeQuestionPage(
@@ -19,10 +19,10 @@ ${p(0)}hello${p(1)}
       explanation = """
 Double quotes `"` are for quoting strings.
 
-Simple quotes `'` are for quoting single characters.
+Strings are a series of characters.
+They may contain most existing characters.
 """,
       answer = listOf("\"", "\""),
-      confusion = listOf("'", "'"),
     ),
 
     // "hello world"
@@ -40,19 +40,36 @@ ${p(0)}${p(1)}${p(2)}${p(3)}${p(4)}
       confusion = listOf("'", "'"),
     ),
 
-    // "hello world"
+    // "hello chicks"
     LessonPage.CodeQuestionPage(
       title = "Emojis",
-      question = "Strings contain almost any character. Declare a string `\uD83D\uDC14 ➡ \uD83E\uDD5A !`.",
+      question = """
+Strings contain almost any character.
+
+This includes special characters like `!`, `~`, `^`, ... 
+but also all the emojis.
+
+Declare a string that contains chicks `🐣 🐣 cute!`.
+""",
       snippet =
       """
-${p(0)}${p(1)} ➡ ${p(2)} !${p(0)}
+${p(0)}${p(1)} ${p(2)} cute!${p(3)}
 """,
       explanation = """
 You can use most unicode characters.
 """,
-      answer = listOf("\"", "🐔", "🥚"),
+      answer = listOf("\"", "\uD83D\uDC23", "\uD83D\uDC23", "\""),
       confusion = listOf("'", "'"),
     ),
+
+    // summary
+    LessonPage.InfoPage(
+      title = "Summary",
+      """
+That's it for strings, for the moment...
+
+
+"""
+    )
   )
 )
