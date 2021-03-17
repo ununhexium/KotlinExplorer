@@ -1,5 +1,6 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.positivenegative
 
+import net.lab0.kotlinexplorer.business.course.data.kotlin.dollar
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
@@ -290,6 +291,44 @@ capitalize letter that are between words.
 """,
       choices = listOf("ไทย", "_1", "한글", "first_name", "lastName_"),
       answer = setOf(0, 1, 2, 3, 4),
+    ),
+
+    LessonPage.InfoPage(
+      "No repetition",
+      """
+Now, instead of writing the same value everywhere in the program, like that:
+
+```kotlin
+fun main() {
+  print(
+      if (116 > 0) "It's positive: " + 116
+      else if(116 < 0) "It's negative: ${dollar}116"
+      else "It's 0"
+  )
+}
+```
+
+We can factor that value into `n` and reuse it everywhere.
+
+```kotlin
+fun main() {
+  val n = 116 // any integer
+  print(
+      if (n > 0) "It's positive: " + n
+      else if(n < 0) "It's negative: ${dollar}n"
+      else "It's 0"
+  )
+}
+```
+
+If we want to either change this value or read that value
+from what the user of the program tells us, we can change
+it everywhere by changing a single line.
+
+This principle of factorization and deduplication will come
+back very often in programming but also in the way that data
+is stored.
+"""
     ),
 
     // summary

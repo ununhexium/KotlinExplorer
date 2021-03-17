@@ -94,7 +94,7 @@ fun ChapterUi(
         onPlay = { _, lessonId ->
           // navigate to lesson
           lessonsNavController.navigate(
-            LessonScreen.LessonPage.route(lessonId, 0)
+            LessonScreen.Introduction.route(lessonId)
           )
         }
       )

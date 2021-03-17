@@ -63,7 +63,7 @@ Doubling the comment `////` doesn't make the comment span over several lines.
 `////test` is actually a comment indicator `//` followed by some text `//test`.
 """,
       choices = listOf(
-        "Hello, because the comment is for a single line",
+        "Print hello, because the comment is for a single line",
         "Nothing, the comment is doubled, commenting 2 lines"
       ),
       answer = setOf(0),
@@ -175,7 +175,7 @@ LessonPage.MultipleChoice(
       question = """
 What will be printed?
         
-```kotlin
+```
 // */ print("always")
 ```
 """,

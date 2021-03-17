@@ -25,27 +25,38 @@ fun main() {
   )
 }
 ```
+"""
+    ),
+    LessonPage.InfoPage(
+      "Values",
+      """
+Values: what they're here for and how to use them.
 
-In particular, you will learn:
+```kotlin
+val n = 116 // any integer
+```
+"""
+    ),
+    LessonPage.InfoPage(
+      "Branching",
+      """
+Conditions: how to write and use it.
 
-##### Line 2
+```kotlin
+if (n > 0) "It's positive: " + n
+else if(n < 0) "It's negative: ${dollar}n"
+else "It's 0"
+```
+"""
+    ),
+    LessonPage.InfoPage(
+      "String template",
+      """
+How to use string template.
 
-What does `val` do?
-
-##### Lines 4 to 6
-
-What is this `if ... else ...` series?
-
-Why is it inside the `print` function?
-
-##### Line 5
-
-What is that `$` variable thing?
-
----
-
-All of this is explained in this chapter.
-
+```kotlin
+"It's negative: ${dollar}n"
+```
 """
     )
   ),
