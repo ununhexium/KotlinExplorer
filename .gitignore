@@ -8,6 +8,7 @@
 .cxx
 local.properties
 *.log
+topics.dot
 
 # ANTLR generated files
 /grammar/gen

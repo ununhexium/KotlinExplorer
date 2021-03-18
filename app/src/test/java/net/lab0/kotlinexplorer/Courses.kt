@@ -195,7 +195,7 @@ class Courses {
             course.dependencies.joinToString("\n") {
               course.name.quoted() + " -> " + it.name.quoted()
             }
-          }
+          } + "}"
     )
   }
 
