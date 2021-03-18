@@ -21,8 +21,8 @@ import androidx.navigation.compose.rememberNavController
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.DrawerMenuEntryBody1
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.KDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
-import net.lab0.kotlinexplorer.framework.presentation.composable.math.DatedFloat
-import net.lab0.kotlinexplorer.framework.presentation.composable.math.FloatingPointVisualizer
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.floatingpoint.DatedFloat
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.floatingpoint.FloatingPointVisualizer
 
 @Composable
 fun FloatingPointVisualizerUi(navHostController: NavHostController, initialFloat: Float) {

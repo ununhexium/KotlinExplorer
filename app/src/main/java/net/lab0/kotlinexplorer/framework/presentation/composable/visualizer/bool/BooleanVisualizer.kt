@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.math
+package net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,10 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.BigVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
-import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators
-import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators.EQ
-import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators.NEQ
-import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators.NOT
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanOperator
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanOperator.EQ
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanOperator.NEQ
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanOperator.NOT
 import net.lab0.kotlinexplorer.utils.Do
 
 
@@ -32,13 +32,13 @@ import net.lab0.kotlinexplorer.utils.Do
 fun BooleanVisualizer(
   initialValue1: Boolean,
   initialValue2: Boolean,
-  initialOperator: Operators
+  initialOperator: BooleanOperator
 ) {
   val (bool1, setBool1) = remember { mutableStateOf(initialValue1) }
   val (bool2, setBool2) = remember { mutableStateOf(initialValue2) }
   val (operator, setOperator) = remember { mutableStateOf(initialOperator) }
 
-  val operatorValues = Operators.values()
+  val operatorValues = BooleanOperator.values()
 
   Column(
     modifier = Modifier.fillMaxWidth()

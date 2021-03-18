@@ -1,4 +1,4 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.math
+package net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.floatingpoint
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -23,26 +25,53 @@ import androidx.compose.ui.unit.dp
 import net.lab0.kotlinexplorer.framework.presentation.composable.DefaultVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.Checkable
-import java.util.*
 import kotlin.random.Random
 
-
-/**
- * Workaround when working with NaN and compose refuses
- * to update a value that "didn't change",
- * when working with different NaN values.
- */
-data class DatedFloat(
-  val float: Float,
-  val editor: FloatEditor = FloatEditor(float),
-  val date: Date = Date()
-)
 
 @OptIn(ExperimentalUnsignedTypes::class)
 @Composable
 fun FloatingPointVisualizer(initialValue: MutableState<DatedFloat>) {
 
   val (datedFloat, setDatedFloat) = initialValue
+
+  // custom update methods to avoid precision loss / drifting when converting between types
+
+  var exponentSlider by remember {
+    mutableStateOf(datedFloat.editor.exponentAsInt.toFloat())
+  }
+
+  val exponentSetter = { n: Float ->
+    exponentSlider = n
+
+    setDatedFloat(
+      DatedFloat(
+        datedFloat.editor.setExponent(exponentSlider.toInt()).value
+      )
+    )
+  }
+
+  var mantissaSlider by remember {
+    mutableStateOf(datedFloat.editor.mantissaAsInt.toFloat())
+  }
+
+  val mantissaSetter = { n: Float ->
+    mantissaSlider = n
+
+    setDatedFloat(
+      DatedFloat(
+        datedFloat.editor.setMantissa(mantissaSlider.toInt()).value
+      )
+    )
+  }
+
+  val fullFloatSetter = { n: Float ->
+    val d = DatedFloat(n)
+
+    exponentSetter(d.editor.exponentAsInt.toFloat())
+    mantissaSetter(d.editor.mantissaAsInt.toFloat())
+
+    setDatedFloat(d)
+  }
 
   Column(
     modifier = Modifier.fillMaxWidth(),
@@ -51,17 +80,24 @@ fun FloatingPointVisualizer(initialValue: MutableState<DatedFloat>) {
 
     ToStringNotation(datedFloat)
 
-    ScientificNotation(datedFloat)
+    ScientificNotationBase10(datedFloat)
 
     RawBinaryNotation(datedFloat)
 
     MediumVerticalSpacer()
 
-    PresetValues(datedFloat, setDatedFloat)
+    PresetValues(datedFloat, fullFloatSetter)
 
     MediumVerticalSpacer()
 
-    Sliders(datedFloat, setDatedFloat)
+    Sliders(
+      datedFloat,
+      setDatedFloat,
+      exponentSlider,
+      exponentSetter,
+      mantissaSlider,
+      mantissaSetter
+    )
   }
 }
 
@@ -80,7 +116,7 @@ private fun ToStringNotation(datedFloat: DatedFloat) {
 }
 
 @Composable
-private fun ScientificNotation(
+private fun ScientificNotationBase10(
   datedFloat: DatedFloat
 ) {
   Row(
@@ -105,7 +141,7 @@ private fun ScientificNotation(
         )
 
       else -> {
-        DecimalScientificNotation(datedFloat)
+        DecimalScientificNotationBase10(datedFloat)
       }
     }
   }
@@ -115,6 +151,10 @@ private fun ScientificNotation(
 private fun Sliders(
   datedFloat: DatedFloat,
   setDatedFloat: (DatedFloat) -> Unit,
+  exponentSlider: Float,
+  exponentSetter: (Float) -> Unit,
+  mantissaSlider: Float,
+  mantissaSetter: (Float) -> Unit,
 ) {
   Text("Parts", style = MaterialTheme.typography.h5)
 
@@ -149,17 +189,9 @@ private fun Sliders(
   // exponent
   Text("Exponent", style = MaterialTheme.typography.h6)
   Slider(
-    value = datedFloat.editor.exponentDecBase2Hack?.toFloat() ?: 255f,
-    onValueChange = { exponent ->
-      setDatedFloat(
-        DatedFloat(
-          datedFloat.editor.setExponent(exponent.toInt()).value
-        )
-      )
-    },
-    valueRange = (
-        0f .. 255f
-        ),
+    value = exponentSlider,
+    onValueChange = exponentSetter,
+    valueRange = (0f .. FloatEditor.exponentMax.toFloat()),
     colors = SliderDefaults.colors(
       thumbColor = MaterialTheme.colors.secondary,
       activeTrackColor = MaterialTheme.colors.secondary,
@@ -169,20 +201,14 @@ private fun Sliders(
   // mantissa
   Text("Mantissa", style = MaterialTheme.typography.h6)
   Slider(
-    value = datedFloat.editor.mantissaDecBase2Hack.toFloat(),
-    onValueChange = { mantissa ->
-      setDatedFloat(
-        DatedFloat(
-          datedFloat.editor.setMantissa(mantissa.toInt()).value
-        )
-      )
-    },
-    valueRange = 0f .. FloatEditor.mantissaMask.toFloat(),
+    value = mantissaSlider,
+    onValueChange = mantissaSetter,
+    valueRange = 0f .. FloatEditor.mantissaMax.toFloat(),
   )
 }
 
 @Composable
-private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> Unit) {
+private fun PresetValues(datedFloat: DatedFloat, fullFloatSetter: (Float) -> Unit) {
   Column(
     modifier = Modifier.fillMaxWidth(),
   ) {
@@ -190,27 +216,29 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-      Button(onClick = { setDatedFloat(DatedFloat(Float.MAX_VALUE)) }) {
+      Button(
+        onClick = { fullFloatSetter(Float.MAX_VALUE) }
+      ) {
         Text(text = "Max", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(Float.MIN_VALUE)) }) {
+      Button(
+        onClick = { fullFloatSetter(Float.MIN_VALUE) }
+      ) {
         Text(text = "Min", style = MaterialTheme.typography.body2)
       }
 
       Button(onClick = {
-        setDatedFloat(
-          DatedFloat(
-            datedFloat
-              .editor
-              .setExponent(Random.nextInt(0, 256))
-              .setMantissa(Random.nextInt(0, 0x7fffff))
-              .let {
-                if (Random.nextBoolean()) it.setPositive()
-                else it.setNegative()
-              }
-              .value
-          )
+        fullFloatSetter(
+          datedFloat
+            .editor
+            .setExponent(Random.nextInt(0, 256))
+            .setMantissa(Random.nextInt(0, 0x7fffff))
+            .let {
+              if (Random.nextBoolean()) it.setPositive()
+              else it.setNegative()
+            }
+            .value
         )
       }) {
         Text(text = "Random", style = MaterialTheme.typography.body2)
@@ -223,15 +251,21 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-      Button(onClick = { setDatedFloat(DatedFloat(Float.POSITIVE_INFINITY)) }) {
+      Button(
+        onClick = { fullFloatSetter(Float.POSITIVE_INFINITY) }
+      ) {
         Text(text = "∞", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(Float.NEGATIVE_INFINITY)) }) {
+      Button(
+        onClick = { fullFloatSetter(Float.NEGATIVE_INFINITY) }
+      ) {
         Text(text = "-∞", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(Float.NaN)) }) {
+      Button(
+        onClick = { fullFloatSetter(Float.NaN) }
+      ) {
         Text(text = "NaN", style = MaterialTheme.typography.body2)
       }
     }
@@ -242,19 +276,27 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-      Button(onClick = { setDatedFloat(DatedFloat(0f)) }) {
+      Button(
+        onClick = { fullFloatSetter(0f) }
+      ) {
         Text(text = "0", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(-0f)) }) {
+      Button(
+        onClick = { fullFloatSetter(-0f) }
+      ) {
         Text(text = "-0", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(1f)) }) {
+      Button(
+        onClick = { fullFloatSetter(1f) }
+      ) {
         Text(text = "1", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(.5f)) }) {
+      Button(
+        onClick = { fullFloatSetter(.5f) }
+      ) {
         Text(text = ".5", style = MaterialTheme.typography.body2)
       }
     }
@@ -265,15 +307,21 @@ private fun PresetValues(datedFloat: DatedFloat, setDatedFloat: (DatedFloat) -> 
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-      Button(onClick = { setDatedFloat(DatedFloat(0.1f)) }) {
+      Button(
+        onClick = { fullFloatSetter(0.1f) }
+      ) {
         Text(text = "0.1", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(Math.PI.toFloat())) }) {
+      Button(
+        onClick = { fullFloatSetter(Math.PI.toFloat()) }
+      ) {
         Text(text = "π", style = MaterialTheme.typography.body2)
       }
 
-      Button(onClick = { setDatedFloat(DatedFloat(Math.E.toFloat())) }) {
+      Button(
+        onClick = { fullFloatSetter(Math.E.toFloat()) }
+      ) {
         Text(text = "e", style = MaterialTheme.typography.body2)
       }
     }
@@ -340,7 +388,7 @@ private fun RawBinaryNotation(float: DatedFloat) {
 }
 
 @Composable
-private fun DecimalScientificNotation(datedFloat: DatedFloat) {
+private fun DecimalScientificNotationBase10(datedFloat: DatedFloat) {
   // sign
   Text(
     text = if (datedFloat.editor.signBit == "0") "+" else "-",
@@ -377,7 +425,7 @@ private fun DecimalScientificNotation(datedFloat: DatedFloat) {
 
 @Preview
 @Composable
-fun FloatingPointVisualizerPreview() {
+private fun FloatingPointVisualizerPreview() {
   MaterialTheme {
     Surface(
       color = Color(0xFF4CAF50)

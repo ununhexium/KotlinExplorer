@@ -39,12 +39,10 @@ fun main() {
       explanation = """
 `var` is for variables, you will see it later.
 
-`let` is not Kotlin.
-
 `:=` is not a Kotlin assignment.
 """,
       answer = listOf("val", "n", "="),
-      confusion = listOf("var", "let", "", ":="),
+      confusion = listOf("var", "", ":="),
     ),
     LessonPage.MultipleChoice(
       title = "Meh 😕",
@@ -165,7 +163,7 @@ fun main() {
 """,
       explanation = """
 This `if` sequence must return a value to print.
-Therefore we need build a chain and cover all the if/else cases.
+Therefore we need to build a chain and cover all the if/else cases.
 
 Using `if` only will be invalid as the else block would be missing.
 """,
@@ -220,7 +218,7 @@ As this is the last statement, we need to stop the `if`/`else` chain and
     LessonPage.InfoPage(
       title = "You did it!",
       """
-Congratulations for write the first program that executes a little bit of logic!
+Congratulations for writing the first program that executes a little bit of logic!
 
 You can take a rest. 😊
 """

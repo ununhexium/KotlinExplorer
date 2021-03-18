@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import net.lab0.kotlinexplorer.BuildConfig
 import net.lab0.kotlinexplorer.framework.presentation.composable.lesson.ChaptersNav
 import net.lab0.kotlinexplorer.framework.presentation.composable.login.LoginUi
-import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanOperator
 
 
 sealed class TopLevelScreen(
@@ -59,7 +59,7 @@ sealed class ToolScreens(val routeDefinition: String) {
 
   object BooleanVisualizer :
     ToolScreens("BooleanVisualizer?bool1={bool1}&bool2={bool2}&operator={operator}") {
-    fun route(bool1: Boolean, bool2: Boolean, operator: Operators) =
+    fun route(bool1: Boolean, bool2: Boolean, operator: BooleanOperator) =
       routeDefinition
         .replace("{bool1}", bool1.toString())
         .replace("{bool2}", bool2.toString())
@@ -146,7 +146,7 @@ fun HomeNav(
             },
             navArgument("operator") {
               type = NavType.StringType
-              defaultValue = Operators.EQ.toString()
+              defaultValue = BooleanOperator.EQ.toString()
             },
           ),
         ) { backStackEntry ->
@@ -158,7 +158,7 @@ fun HomeNav(
             topLevelNavController,
             initialValue1 = bool1,
             initialValue2 = bool2,
-            initialOperator = Operators.valueOf(operator)
+            initialOperator = BooleanOperator.valueOf(operator)
           )
         }
 

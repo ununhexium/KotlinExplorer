@@ -10,6 +10,8 @@ object IfElse : LessonImpl(
   id = "kotlin.positivenegative.ifelse",
   title = "If Else",
   pages = listOf(
+
+    // if(true)
     CodeQuestionPage(
       title = "If it's true",
       question = """
@@ -24,10 +26,36 @@ if( ${p(0)} ) {
 The value in the `if`'s condition `()` must be a `Boolean`.
 
 If that boolean is true, then the code in the if's block `{ ... }` is executed.
+
+`"true"` is a string
+
+`1` is an integer.
 """,
       answer = listOf("true"),
-      confusion = listOf(""""true"""", "1"),
+      confusion = listOf("\"true\"", "1"),
     ),
+
+    // if(false)
+    CodeQuestionPage(
+      title = "If it's false",
+      question = """
+Don't print `I like games`
+""",
+      snippet = """
+if( ${p(0)} ) {
+    print("I like games")
+}
+""",
+      explanation = """
+The value in the `if`'s condition `()` must be a `Boolean`.
+
+If that boolean is true, then the code in the if's block `{ ... }` is executed.
+""",
+      answer = listOf("false"),
+      confusion = listOf("\"false\"", "0"),
+    ),
+
+    // if (false expression)
     CodeQuestionPage(
       title = "Denied",
       question = """
@@ -57,6 +85,8 @@ Only the third option will avoid executing the `if` block.
       answer = listOf("=="),
       confusion = listOf("!=", "<"),
     ),
+
+    // if true expression skip else
     CodeQuestionPage(
       title = "Ignore that",
       question = """
@@ -77,7 +107,7 @@ The part in the `else` block is executed only when the `if`'s condition is false
 This is called `branching`: selecting between 2 or more possible tasks.
 
 ```kotlin
-if ( 1 ${p(0)} 2 ) {
+if ( /* some boolean */ ) {
     // branch when if is true
     print("line 2")
 } else {
@@ -89,6 +119,8 @@ if ( 1 ${p(0)} 2 ) {
       answer = listOf("<"),
       confusion = listOf("==", ">="),
     ),
+
+    // is false exec else block
     CodeQuestionPage(
       title = "Otherwise",
       question = """
@@ -107,6 +139,8 @@ When the `if`'s condition is false, only the part in the `else` is executed.
       answer = listOf("false"),
       confusion = listOf("true"),
     ),
+
+    // not expression
     CodeQuestionPage(
       title = "No no no",
       question = """
@@ -129,21 +163,25 @@ negates a boolean.
 !false  // true
 ```
 
+These are the same
+
+```kotlin
+if ( ! true )
+if ( !true )
+if (!true)
+if ( false )
+```
+
 ##### `!!`
 
 Exists, but is not for negation.
 
-##### `~`
-
-Is nothing special in Kotlin.
-
-##### `not`
-
-Is nothing special in Kotlin.
 """,
       answer = listOf("!"),
       confusion = listOf("not", "!!", "~"),
     ),
+
+    // short if else no bracket
     MultipleChoice(
       title = "Short if else",
       question = """
@@ -184,6 +222,8 @@ Or any other variation.
       choices = listOf("1", "2", "An error like 'Missing {}'"),
       answer = setOf(0),
     ),
+
+    // if else expression
     MultipleChoice(
       title = "Return type",
       question = """
@@ -195,7 +235,7 @@ val x = if (true) 1 else 2
       explanation = """
 `if else` is an expression. It means that it returns *something*.
 
-What does it return? The content of either the `true` or the `false` branch.
+What does it return? The last statement of either the *true* or the *false* branch.
 
 Here both branches are `Int`egers, therefore it will return an integer.
 
@@ -204,6 +244,8 @@ In this case, it returns `1`.
       choices = listOf("Integer", "String", "Something else", "It doesn't work"),
       answer = setOf(0),
     ),
+
+    // if else expression return type
     MultipleChoice(
       title = "Return type?",
       question = """
@@ -217,11 +259,13 @@ val x = if (b) 1
       explanation = """
 Here there is only one branch. This will result in an error.
 
-To use `if else` as an expression, there *must* be both a branch for `true` and `false`.
+To use `if else` as an expression, there *must always* be some returned value.
 """,
       choices = listOf("It doesn't work", "Integer", "Something else"),
       answer = setOf(0),
     ),
+
+    // if else chains
     CodeQuestionPage(
       title = "Chains",
       question = """
@@ -268,13 +312,19 @@ if (number > 0) {
       answer = listOf(">", "0", "<", "0"),
       confusion = listOf("<=", ">="),
     ),
+
+    // summary
     InfoPage(
       title = "Summary",
       """
 #### Syntax
 
 ```kotlin
-if (true) { /*this*/ } else { /*that*/ }
+if (/*boolean*/) { 
+  /*this*/
+} else { 
+  /*that*/
+}
 ```
 
 ##### Shortened
@@ -283,12 +333,12 @@ If there is only 1 statement the `{}` can be removed.
 In the beginning, prefer always using `{}` as it will help you find mistakes.
 
 ```kotlin
-if (true) print("A") else print("B")
+if (/*boolean*/) print("A") else print("B")
 ```
 
 ##### `else` is optional
 
-If there is no statement, the `else` branch can be removed.
+If there is no statement in the else branch, the `else` branch can be removed.
 
 ```kotlin
 val happy = true

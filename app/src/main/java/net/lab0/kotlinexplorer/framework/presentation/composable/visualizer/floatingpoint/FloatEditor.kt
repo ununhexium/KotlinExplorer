@@ -1,12 +1,16 @@
-package net.lab0.kotlinexplorer.framework.presentation.composable.math
+package net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.floatingpoint
 
 import java.text.DecimalFormat
+
 
 class FloatEditor(val value: Float) {
   companion object {
     val mantissaMask = 0b00000000_01111111_11111111_11111111
     val exponentMask = 0b01111111_10000000_00000000_00000000
-    val signMask = /**/1 shl 31
+    val signMask = 1 shl 31
+
+    val mantissaMax = 0b00000000_01111111_11111111_11111111
+    val exponentMax = 0b01111111_1
   }
 
   fun setRawMantissa(mantissaToExtract: Float): FloatEditor {
@@ -44,12 +48,8 @@ class FloatEditor(val value: Float) {
     }
   }
 
-  val exponentDecBase2Hack: Int? by lazy {
-    if (value.isNaN() || value == Float.POSITIVE_INFINITY || value == Float.NEGATIVE_INFINITY) {
-      null
-    } else {
-      Integer.parseInt(exponentBits, 2)
-    }
+  val exponentAsInt by lazy {
+    Integer.parseInt(exponentBits, 2)
   }
 
   val mantissaDec: String? by lazy {
@@ -64,7 +64,7 @@ class FloatEditor(val value: Float) {
     }
   }
 
-  val mantissaDecBase2Hack by lazy {
+  val mantissaAsInt:Int by lazy {
     Integer.parseInt(mantissaBits, 2)
   }
 

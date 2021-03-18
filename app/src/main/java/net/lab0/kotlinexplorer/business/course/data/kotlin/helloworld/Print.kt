@@ -8,6 +8,8 @@ object Print : LessonImpl(
   id = "kotlin.helloworld.println",
   title = "Printing",
   pages = listOf(
+
+    // call print
     LessonPage.CodeQuestionPage(
       title = "Use print",
       question = """Call the `print` function""",
@@ -23,6 +25,7 @@ Printing allows you to show text to the user.
       confusion = listOf("Print", "PRINT"),
     ),
 
+    // call println
     LessonPage.CodeQuestionPage(
       title = "Use println",
       question = """Call the `println` function""",
@@ -65,6 +68,7 @@ prints
       confusion = listOf("Println", "printLn"),
     ),
 
+    // print a string
     LessonPage.CodeQuestionPage(
       title = "Print Kotlin",
       question = """Print a string that contains `Kotlin`""",
@@ -79,6 +83,7 @@ The quotes `"` are not displayed.
       confusion = listOf("Kotlin"),
     ),
 
+    // use () to call print
     LessonPage.CodeQuestionPage(
       title = "Call the print function",
       question = """Call the print function""",
@@ -94,6 +99,7 @@ Arguments tell the function what to use to do its job.
       confusion = listOf("{", "}"),
     ),
 
+    // wrong call
     LessonPage.MultipleChoice(
       title = "Wrong call",
       question = """
@@ -118,6 +124,35 @@ A function requires parentheses around its arguments.
       answer = setOf(0),
     ),
 
+    // correct call with tricky string :)
+    LessonPage.MultipleChoice(
+      title = "Another call",
+      question = """
+What's wrong with this call to `print`?
+
+```
+print(":)")
+```
+""",
+      explanation = """
+Better with color?
+        
+```kotlin
+print(":)")
+```
+
+There is no issue.
+
+The first `)` is part of the string. The second `)` is part of the print call.
+""",
+      choices = listOf(
+        "There is one extra closing parenthesis )",
+        "Column : is not allowed in strings.",
+      ),
+      answer = setOf(),
+    ),
+
+    // lisp style parentheses
     LessonPage.MultipleChoice(
       title = "Wrong call",
       question = """
@@ -143,6 +178,7 @@ the position of the parentheses `()` and the arguments are important.
       answer = setOf(0, 1),
     ),
 
+    // full call + string build
     LessonPage.CodeQuestionPage(
       title = "Finished",
       question = """Print `Finished!`""",
@@ -155,6 +191,7 @@ Remember `print`, `println` and strings, they will be used a lot later 😉.
       confusion = listOf("'", "'"),
     ),
 
+    // summary
     LessonPage.InfoPage(
       "Summary",
       """

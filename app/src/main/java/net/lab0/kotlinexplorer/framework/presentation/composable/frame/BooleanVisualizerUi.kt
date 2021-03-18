@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.drawer.KDrawer
 import net.lab0.kotlinexplorer.framework.presentation.composable.frame.topbar.KTopAppBar
-import net.lab0.kotlinexplorer.framework.presentation.composable.math.BooleanVisualizer
-import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.Operators
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanOperator
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.bool.BooleanVisualizer
 
 
 @Composable
@@ -15,7 +15,7 @@ fun BooleanVisualizerUi(
   navHostController: NavHostController,
   initialValue1: Boolean,
   initialValue2: Boolean,
-  initialOperator: Operators
+  initialOperator: BooleanOperator
 ) {
   val scaffoldState = rememberScaffoldState()
 

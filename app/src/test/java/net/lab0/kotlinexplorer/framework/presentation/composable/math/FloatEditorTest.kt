@@ -6,6 +6,7 @@ import assertk.assertions.isNegative
 import assertk.assertions.isNotEqualTo
 import assertk.assertions.isPositive
 import assertk.assertions.isTrue
+import net.lab0.kotlinexplorer.framework.presentation.composable.visualizer.floatingpoint.FloatEditor
 import org.junit.jupiter.api.Test
 
 internal class FloatEditorTest {

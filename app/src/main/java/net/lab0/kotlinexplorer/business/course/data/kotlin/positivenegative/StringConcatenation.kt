@@ -11,7 +11,8 @@ object StringConcatenation : LessonImpl(
   id = "kotlin.positivenegative.stringconcatenation",
   title = "Concatenation",
   pages = listOf(
-    // try concatenation with +
+
+    // discover concatenation with +
     CodeQuestionPage(
       title = "❤ + ❤",
       question = """
@@ -23,8 +24,11 @@ val twoHearts = "❤" ${p(0)} "❤"
       explanation = """
 Between 2 strings, the concatenation operator `+` joins the strings together.
 
+The following two lines are equal
+
 ```kotlin
-"❤" + "❤" == "❤❤"  // true
+"❤" + "❤"
+"❤❤"
 ```
 """,
       answer = listOf("+"),
@@ -40,26 +44,50 @@ Concatenate all these strings
 val alphabet = "a" ${p(0)} "b" ${p(1)} "c" ${p(2)} "d"
 """,
       explanation = """
-`+` is an operator. It returns the 2 strings concatenated together.
+The concatenation operator `+` returns the 2 strings concatenated together.
+
+When they are chained, the operators are evaluated from left to right.
+
+Here is how the series of concatenations is converted to a single string:
 
 ```kotlin
 val alphabet = "a" + "b" + "c" + "d"
-```
-
-```kotlin
 val alphabet = "ab" + "c" + "d"
-```
-
-```kotlin
 val alphabet = "abc" + "d"
-```
-
-```kotlin
 val alphabet = "abcd"
 ```
 """,
       answer = listOf("+", "+", "+"),
       confusion = listOf("$", "$", "$"),
+    ),
+
+    // concatenation and equals
+    LessonPage.MultipleChoice(
+      title = "Equal?",
+      question = """
+Is this equality `true` or `false`?
+
+```kotlin
+"h" + "i" + "!" == "hi!"
+```
+""",
+      explanation = """
+`"h" + "i" + "!"` is the same as
+
+`"hi" + "!"` which is the same as
+
+`"hi!"`
+
+Therefore
+```kotlin
+"h" + "i" + "!" == "hi!"  //true
+```
+""",
+      choices = listOf(
+        "true: the concatenation can be reduced to the same as \"hi!\"",
+        "false: separate strings are not the same as all the letters in the same string"
+      ),
+      answer = setOf(0),
     ),
 
     // multi line string concat
@@ -139,8 +167,8 @@ You can also use templates without `{}`.
 val s1 = "Kotlin is ${p(0)}age years old."
 """,
       explanation = """
-It will work when the printed value
-is followed by a space.
+It will work when the printed value is followed by a characters that is 
+not part of valid identifier.
 
 ```kotlin
 val g = true
@@ -157,6 +185,18 @@ val s = "world"
 
 // "Hello world"
 val hello = "Hello ${dollar}s" 
+```
+
+```kotlin
+val a = "1"
+val ab = "2"
+val hello = "${dollar}ab" // 2, not 1b
+```
+
+```kotlin
+val a = "1"
+// error: ab was not declared
+val hello = "${dollar}ab"
 ```
 """,
       answer = listOf("$"),
@@ -240,20 +280,19 @@ val s = "$dollar{ 1 == 1 }"
 val s = "$dollar{ true }"
 val s = "true"
 ```
-Here is the result for the last proposition:
+Here is the result for using `>`:
 
 ```kotlin
 val n = 1
 
-// false
 val s = "$dollar{ n > n }"
 val s = "$dollar{ 1 > 1 }"
 val s = "$dollar{ false }"
 val s = "false"
 ```
 """,
-      answer = listOf("+"),
-      confusion = listOf("==", ">"),
+      answer = listOf("=="),
+      confusion = listOf("+", ">"),
     ),
 
     // string concat inside string template
