@@ -75,6 +75,8 @@ sealed class ToolScreens(val routeDefinition: String) {
     fun route(number: Float) =
       routeDefinition.replace("{number}", number.toString())
   }
+
+  object PositiveNegativeProject:ToolScreens("PositiveNegativeProject")
 }
 
 @Composable
@@ -184,6 +186,14 @@ fun HomeNav(
           val float = backStackEntry.arguments?.getFloat("number")!!
 
           FloatingPointVisualizerUi(topLevelNavController, float)
+        }
+
+        // project tools
+
+        composable(
+          ToolScreens.PositiveNegativeProject.routeDefinition,
+        ) {
+          PositiveNegativeProjectUi()
         }
       }
     }

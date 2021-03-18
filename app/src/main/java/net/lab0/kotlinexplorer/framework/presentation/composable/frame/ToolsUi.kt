@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import net.lab0.kotlinexplorer.framework.presentation.composable.MediumVerticalSpacer
 
 @Composable
 fun ToolsUi(
@@ -60,6 +61,17 @@ fun ToolsUi(
         },
       ) {
         Text("Floating point explorer")
+      }
+
+      MediumVerticalSpacer()
+
+      Button(
+        modifier = modifier,
+        onClick = {
+          navHostController.navigate(ToolScreens.PositiveNegativeProject.routeDefinition)
+        },
+      ) {
+        Text("Positive or Negative project")
       }
     }
   }

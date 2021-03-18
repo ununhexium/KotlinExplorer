@@ -29,7 +29,7 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.frame.text.Body
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 @Composable
-fun PlusMinusProject() {
+fun PositiveNegativeProject(modifier: Modifier = Modifier) {
   val code = """
 fun main() {
   val n = ${p(0)}
@@ -60,7 +60,7 @@ fun main() {
   )
 
   Column(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
   ) {
     KotlinCode(code = extractHighlightsAndAnnotate(replaced, ijStyle))
 
@@ -87,15 +87,15 @@ fun main() {
     BigVerticalSpacer()
 
     val lowerBound = -5
-    val higherBound = 5
+    val upperBound = 5
 
     Row(
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-      Body1Text(string = "-5")
+      Body1Text(string = lowerBound.toString())
       Body1Text(string = "0")
-      Body1Text(string = "5")
+      Body1Text(string = upperBound.toString())
     }
 
     Slider(
@@ -104,7 +104,7 @@ fun main() {
         slider = it
         n = it.toInt()
       },
-      valueRange = (lowerBound.toFloat() .. higherBound.toFloat()),
+      valueRange = (lowerBound.toFloat() .. upperBound.toFloat()),
       steps = 9,
     )
   }
@@ -123,7 +123,7 @@ private fun PlusMinusProjectPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          PlusMinusProject()
+          PositiveNegativeProject()
         }
       }
     }
