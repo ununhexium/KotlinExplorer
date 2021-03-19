@@ -4,7 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -38,43 +40,26 @@ fun MultipleChoiceAnswerInput(
         val color = getColor(answer, correctColor, wrongColor, noCorrectness)
 
         Row(
-          modifier = Modifier.align(Alignment.End),
-        ) {
-          if (answer.correct != null) {
-            if (answer.correct == false) {
-              val shouldBeSelected = !answer.used
-
-              CorrectnessLabel(text = "Wrong")
-
-              Checkbox(
-                selected = shouldBeSelected,
-                color = color
-              )
-            } else {
-              CorrectnessLabel(text = "Correct")
-
-              Checkbox(
-                selected = answer.used,
-                color = color
-              )
-            }
-          }
-        }
-      }
-    }
-
-    Column {
-      answers.forEach { answer ->
-
-        val color = getColor(answer, correctColor, wrongColor, noCorrectness)
-
-        Row(
           modifier = Modifier.clickable {
             if (answer.correct == null) {
               toggle(answer.id)
             }
           },
         ) {
+          if (answer.correct != null) {
+            val goodAnswer = if (answer.correct) answer.used else !answer.used
+            Checkbox(
+              selected = goodAnswer,
+              color = if (answer.correct == false) wrongColor else noCorrectness,
+            )
+          } else {
+            Spacer(
+              modifier = Modifier
+                .width(Icons.Default.CheckBox.defaultWidth + 8.dp)
+                .align(Alignment.CenterVertically),
+            )
+          }
+
           Checkbox(
             selected = answer.used,
             color = if (answer.correct == false) wrongColor else noCorrectness,
@@ -151,6 +136,12 @@ fun MultipleChoiceAnswerInputPreview() {
         ) {
           MultipleChoiceAnswerInput(
             answers = listOf(
+              MultipleChoiceAnswer(
+                6,
+                "Unchecked non validated. But this one is really long ans spans over multiple line to check that it's all align nicely.",
+                false,
+                null
+              ),
               MultipleChoiceAnswer(0, "Checked correct", true, true),
               MultipleChoiceAnswer(1, "Unchecked correct", false, true),
               MultipleChoiceAnswer(2, "Checked incorrect", true, false),

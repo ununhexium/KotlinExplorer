@@ -108,8 +108,8 @@ fun MultipleChoicePage(
 val choices = listOf(
   "Selected, must be selected",
   "Not selected, must be selected",
-  "Selected, must NOT be selected",
-  "Not selected, must NOT be selected"
+  "Selected, must NOT be selected. Also it may be very long and span over several lines",
+  "Not selected, must NOT be selected. Also it may be very long and span over several lines"
 )
 
 val multipleChoiceSample = LessonPage.MultipleChoice(

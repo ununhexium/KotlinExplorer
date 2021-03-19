@@ -3,7 +3,6 @@ package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 import net.lab0.kotlinexplorer.business.course.data.kotlin.dollar
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
-import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object FunctionReturn : LessonImpl(
@@ -474,7 +473,7 @@ Function names have the same restrictions as variable names.
     ),
 
     // space in function
-LessonPage.MultipleChoice(
+    LessonPage.MultipleChoice(
       title = "Spaces",
       question = """
 What will this do?
