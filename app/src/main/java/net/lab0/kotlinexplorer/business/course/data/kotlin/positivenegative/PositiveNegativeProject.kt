@@ -221,6 +221,8 @@ As this is the last statement, we need to stop the `if`/`else` chain and
 Congratulations for writing the first program that executes a little bit of logic!
 
 You can take a rest. 😊
+
+Also this program is available to try in the Tools category.
 """
     )
   )

@@ -1,6 +1,6 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 
-import kotlin.io.println as printWithLine
+import kotlin.math.min
 
 /**
  * Requirements
@@ -14,60 +14,19 @@ import kotlin.io.println as printWithLine
  * More number types
  */
 
-// your own function
-fun add(a: Int, b: Int): Int {
-  return a + b
+fun square(a: Int): Int {
+  return a * a
 }
 
-// integer division
-fun divideInts(a: Int, b: Int): Double {
-  return a.toDouble() / b
-}
-
-// change the type of number
-fun divideIntsReturnDouble(
-  a: Int, b: Int
-): Double {
-  return a.toDouble() / b
-}
-
-// fancy notation
-fun squareRoot(a: Int): Double =
-  // calling external function
-  kotlin.math.sqrt(a.toDouble())
-
-// compute the average
-fun average(a: Int, b: Int): Double {
-  return (a + b) / 2.0
-}
-
-fun println(double: Double) {
-  print(double.toString())
-  print("\n")
+fun squareRoot(a: Int): Int {
+  val aAsDouble = a.toDouble()
+  return kotlin.math.sqrt(aAsDouble).toInt()
 }
 
 fun main() {
-  // fully qualified function call
-  printWithLine("Results")
-
-  // 5
-  kotlin.io.println(add(2, 3))
-
-  // 2
-  println(divideInts(7, 3))
-
-  // 2.333...
-  println(divideIntsReturnDouble(7, 3))
-
-  // 1.5
-  println(
-    // chaining function calls
-    average(2, 3)
-  )
-
-  // 3.0
-  println(
-    // chaining function calls
-    squareRoot(add(3, add(3, 3)))
-  )
+  val a = 3
+  val b = 1
+  kotlin.io.println(square(a))
+  println(squareRoot(square(a)))
+  println(min(a,b))
 }

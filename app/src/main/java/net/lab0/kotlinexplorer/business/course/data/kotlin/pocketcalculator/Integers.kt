@@ -49,6 +49,7 @@ Because of this kind of typos, **always** use the constant instead of typing the
       answer = listOf("Int.MIN_VALUE"),
       confusion = listOf("-999999999", "-2149483648"),
     ),
+
     // 2 words about properties
     LessonPage.InfoPage(
       title = "Properties?",
@@ -416,7 +417,7 @@ Integers can be expressed in 5 formats:
 * `Byte` 8 bits
 * `Short` 16 bits
 * `Int` 32 bits
-* `Long` 62 bits
+* `Long` 64 bits
 * `BigInteger` unlimited bits
 
 And 2 modes:

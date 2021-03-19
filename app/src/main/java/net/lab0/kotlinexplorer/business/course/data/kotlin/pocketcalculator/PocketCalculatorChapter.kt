@@ -8,7 +8,8 @@ object PocketCalculatorChapter : ChapterImpl(
   description = "Basic maths and function calls",
   lessons = listOf(
     Introduction,
-    Function,
+    FunctionDeclarationAndCall,
+    FunctionReturn,
     StringSpecialChars, // TODO: needed? move to later?
     PriorityForSignAndMultiplicativeOperators,
     PriorityForAdditiveOperators,
