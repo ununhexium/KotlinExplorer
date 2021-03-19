@@ -30,7 +30,7 @@ This works the same way as the `main()` function, but with a different name.
     ),
 
     // choose valid function names
-LessonPage.MultipleChoice(
+    LessonPage.MultipleChoice(
       title = "Valid names",
       question = """
 Function names should follow the same naming style as variables.
@@ -52,8 +52,15 @@ interacts with other programming languages.
 
 `step-by-step` contains a dash `-`.
 """,
-      choices = listOf("example", "camelCase", "UpDownLeftRight", "spaced out", "1by1", "step-by-step"),
-      answer = setOf(),
+      choices = listOf(
+        "example",
+        "camelCase",
+        "UpDownLeftRight",
+        "spaced out",
+        "1by1",
+        "step-by-step"
+      ),
+      answer = setOf(0, 1),
     ),
 
     // function call
@@ -61,6 +68,8 @@ interacts with other programming languages.
       title = "Call sayHello",
       question = """
 Call the `sayHello` function.
+
+Hint: this works the same as colling `print`.
 """,
       snippet = """
 fun sayHello() {
@@ -68,7 +77,7 @@ fun sayHello() {
 }
 
 // call sayHello
-${p(0)}${p(1)}${p(2)}
+${p(0)}
 """,
       explanation = """
 This works the same you as calling `print()`.
@@ -77,22 +86,6 @@ This works the same you as calling `print()`.
 """,
       answer = listOf("sayHello()"),
       confusion = listOf("sayHello"),
-    ),
-
-    // argument (with print)
-    LessonPage.CodeQuestionPage(
-      title = "Print's argument",
-      question = """
-Give the `String` argument `"hello"` to the print function.
-""",
-      snippet = """
-print(${p(0)})
-""",
-      explanation = """
-`"hello"` is the *first argument* that was *given* to the function `print`.
-""",
-      answer = listOf("\"Hello\""),
-      confusion = listOf("Hello: String"),
     ),
 
     // use a parameter
@@ -164,6 +157,66 @@ fun compute(${p(0)}: ${p(1)}) {
       confusion = listOf(),
     ),
 
+    // more than one argument
+    LessonPage.CodeQuestionPage(
+      title = "Several arguments",
+      question = """
+A function can have more than 1 parameter.
+""",
+      snippet = """
+fun hello(name:${p(0)}, age:${p(1)}) {
+  print(
+    "Hello ${dollar}name, " + 
+      "you are ${dollar}age years old"
+  )
+}
+""",
+      explanation = """
+The expected answer is
+
+```kotlin
+fun hello(name:String, age:Int)
+```
+
+but
+
+```kotlin
+fun hello(name:Int, age:String) {
+  print(
+    "Hello ${dollar}name, " + 
+      "you are ${dollar}age years old"
+  )
+}
+
+// Hello 19, you are James years old
+print(19, "James")
+```
+
+is acceptable if you're not familiar with humans.
+""",
+      answer = listOf("String", "Int"),
+      confusion = listOf(),
+      validator = { true },
+    ),
+
+    // argument (with print)
+    LessonPage.CodeQuestionPage(
+      title = "Print's argument",
+      question = """
+Give the `String` argument `"hello"` to the print function.
+""",
+      snippet = """
+print(${p(0)})
+""",
+      explanation = """
+`"hello"` is the *first argument* that was *given* to the function `print`.
+
+`hello: String` is declaring a parameter.
+""",
+      answer = listOf("\"hello\""),
+      confusion = listOf("hello: String"),
+    ),
+
     // argument value
     LessonPage.MultipleChoice(
       title = "Parameter value",
@@ -198,6 +251,7 @@ Functions can be declared with this syntax:
 fun someName(
   parameter1: Type1,
   parameter2: Type2,
+  // more parameters...
 ) {
   // some code
 }

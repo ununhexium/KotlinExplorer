@@ -31,7 +31,7 @@ print(result)
 
 It is only accessible inside that function's body.
 
-We say that the value result is *scoped* to the body of the compute function.
+We say that the value `result` is *scoped* to the body of the `compute` function.
 
 It starts existing where it is declared and is not accessible
 after the end of the block where it is declared.
@@ -56,7 +56,7 @@ fun makeCookie(): ${p(0)} /*Type*/ {
 
 val cookie = makeCookie()
 
-// prints 🍪
+// print the cookie
 print(cookie)
 """,
       explanation = """
@@ -70,7 +70,7 @@ using various techniques that we will see later.
 ```
 """,
       answer = listOf("String", "return"),
-      confusion = listOf("Int", "Int"),
+      confusion = listOf(),
     ),
 
     // use param and build some return value
@@ -84,7 +84,7 @@ fun makeHello(name: ${p(0)}): ${p(1)} {
   ${p(2)} "Hello ${dollar}name"
 }
 
-val greeting:String = makeHello("world")
+val greeting:${p(1)} = makeHello("world")
 
 // prints Hello world 
 print(greeting)
@@ -160,7 +160,7 @@ print(makeHello("you"))
 
 When returning a value, the *content* of `message` is returned.
 """,
-      choices = listOf("It prints \"Hello you\"", "It prints message"),
+      choices = listOf("It prints \"Hello you\"", "It prints \"you\"", "It prints \"message\""),
       answer = setOf(0),
     ),
 
@@ -478,13 +478,19 @@ LessonPage.MultipleChoice(
       title = "Spaces",
       question = """
 What will this do?
-""",
-      explanation = """
+
+```
 fun say Hello() {
   print("Hello")
 }
 
 say Hello()
+```
+""",
+      explanation = """
+Functions can contain spaces (with some special syntax) but it's not recommended.
+
+By default, it will fail like with variables.
 """,
       choices = listOf("It prints Hello", "Somme error: there is a space in the function's name"),
       answer = setOf(),
