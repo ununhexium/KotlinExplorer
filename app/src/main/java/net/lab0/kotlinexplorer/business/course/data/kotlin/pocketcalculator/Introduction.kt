@@ -15,7 +15,7 @@ object Introduction : LessonImpl(
 In this chapter, you will use the Kotlin
 number system for basic math.
 
-```kotlin_lines
+```kotlin
 fun square(a: Int): Int {
   return a * a
 }
@@ -59,7 +59,7 @@ fun add(a: Int, b: Int): Int {
 
     // call external function and number conversion
     LessonPage.InfoPage(
-      title = "Call external functions",
+      title = "Call and convert",
       """
 Call external functions.
 

@@ -6,7 +6,7 @@ import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Compa
 
 object FloatingPoint : LessonImpl(
   id = "kotlin.pocketcalculator.floatingpoint",
-  title = "Floating Point Numbers",
+  title = "Floating Point",
   pages = listOf(
     LessonPage.InfoPage(
       title = "Notations",
@@ -46,7 +46,7 @@ The `f` or `F` is mandatory to make the difference between integers and floating
 
     // type inference
     LessonPage.CodeQuestionPage(
-      title = "Type inference",
+      title = "Explicit type",
       question = """
 Declare the type of each variable.
 """,
@@ -61,9 +61,21 @@ val three: ${p(2)} = 3f
 `.xxf` makes it a `Float`.
 
 If nothing is specified, it's an `Int`.
+
+Thanks to the type inference mechanism, each number's type will be inferred from the notation.
+This make specifying types optional.
+
+The code below states exactly the same.
+
+```kotlin
+val one = 1
+val two = 2.0f
+val three = 3f
+```
+
 """,
-      answer = listOf("Int", "Float", "Float", "Float"),
-      confusion = listOf("Float", "Int"),
+      answer = listOf("Int", "Float", "Float"),
+      confusion = listOf("Int", "Int", "Float"),
     ),
 
     // doesn't auto convert from int to float
@@ -98,8 +110,6 @@ Declare a half `0.5` as a floating point number.
 val half: ${p(0)} = ${p(1)}
 """,
       explanation = """
-`0.5f` or `.5f` is how floating point numbers are declared.
-
 The `f` indicates that it's a floating point number and is mandatory to have a `Float` type.
 """,
       answer = listOf("Float", "0.5f"),
@@ -122,7 +132,7 @@ The `e` replaced the exponent symbol.
 
 `10 * 10` and `100` are `Int`s.
 """,
-      answer = listOf("1e10"),
+      answer = listOf("1e10f"),
       confusion = listOf("10 * 10", "100"),
     ),
 
@@ -136,7 +146,7 @@ Compute 1/2 + 1/2
 val one = 0.5f ${p(0)} 0.5f
 """,
       explanation = """
-The math operators `+` and `-` work with floating point numbers.
+The arithmetic operators `+`, `-` work with floating point numbers.
 """,
       answer = listOf("+"),
       confusion = listOf("++", "*", "-"),
@@ -152,7 +162,7 @@ What is the result type of an operation on 2 `Float`s ?
 val one: ${p(0)} = 0.5f + 0.5f
 """,
       explanation = """
-An operation between 2 floats is a float.
+An operation between 2 floats returns a float.
 
 As aa general rule, an operation between any two identical
 number types returns that same type of number type.
@@ -174,12 +184,15 @@ print(0.3f - 0.2f)
       explanation = """
 Why?
 
-Floating point number are not real numbers. They are approximations.
+Floating point number are not real numbers (in the mathematical sense).
+They are approximations.
 
 Floating point numbers are encoded in binary and some decimal
-representations or operations don't have an exact binary equivalent.
+representations or operations don't have an exact result.
 
-Rounding errors can also happen between decimal and binary.
+A decimal equivalent would be 1/3 + 2/3 = 1, but 0.333 + 0.666 = 0.999, not 1.
+
+Rounding errors can also happen when converting between decimal and binary.
 """,
       choices = listOf("It's a trap: 0.10000001", "0.1, obviously!"),
       answer = setOf(0),
@@ -212,10 +225,10 @@ val negativeHalf = ${p(0)}
 Compute `100f * 0.5f`
 """,
       snippet = """
-val fifty" ${p(0)} = 100f ${p(1)} 0.5f
+val fifty: ${p(0)} = 100f ${p(1)} 0.5f
 """,
       explanation = """
-The maths operators `*`, and `/` also work with floating point numbers.
+The arithmetic operators `*`, and `/` also work with floating point numbers.
 """,
       answer = listOf("Float", "*"),
       confusion = listOf("**", "Int"),
@@ -291,8 +304,10 @@ Its value is accessible via the `Float` *property* `MAX_VALUE`.
 
 This is `0x1.fffffeP+127f` in binary or `3.4028235e+38f` (3.4028235 * 10^38) in decimal.
 
-It's not possible to store anything bigger than `3.4028235e+38f`
-nor anything smaller than `-3.4028235e+38f` in a `Float`.
+It's not possible to store anything bigger than `3.4028235e+38f` nor
+anything smaller than `-3.4028235e+38f` in a `Float`.
+
+If you try to do so, it will approximate it with `+∞` or `-∞`.
 
 This is due to how `Float`s encode floating point numbers.
 """,
@@ -320,12 +335,10 @@ The `Float` object looks a bit like
 
 ```kotlin
 class Float {
-  val MAX_VALUE: Float = 0x1.fffffeP+127f; // 3.4028235e+38f
+  val MAX_VALUE: Float = 0x1.fffffeP+127f // 3.4028235e+38f
   // many other things.
 }
 ```
-
-From now on, the data types (`Int`, `Float`, `String`, ...) can be seen as either types or classes.
 """
     ),
 
@@ -353,7 +366,8 @@ A google `1e100` will be replaced with infinity, but it is confusing.
 When reading the code, you must remember which values are greater than
  the maximum allowed and translate them to infinity in your head.
 
-`-∞` is not a valid floating point value. Also it's hard to type.
+`-∞` is not a valid floating point value.
+
 `"-∞"` is a `String`, so not a valid floating point number.
 """,
       answer = listOf("Float.POSITIVE_INFINITY"),
@@ -432,7 +446,7 @@ inf ^ inf
 inf % 1f
 ```
 """,
-      answer = listOf("Float.NaN"),
+      answer = listOf("Float.NaN", "NaN"),
       confusion = listOf("\"NaN\""),
     ),
 
@@ -452,7 +466,7 @@ val f = Float.NaN * 0f
 `NaN` is a way to alert you that a computation went wrong.
 """,
       choices = listOf(
-        "NaN: any float * NaN is NaN",
+        "NaN: any operation with NaN returns NaN",
         "0: any float * 0f is 0",
         "Some error?"
       ),
@@ -499,31 +513,18 @@ nan != nan
       title = "Twice the max",
       question = """
 What will be the value in `f`?
+
+```kotlin
+val f = Float.MAX_VALUE * 2f
+```
 """,
       explanation = """
-val f = Float.MAX_VALUE * 2f
+When exceeding the maximum possible value, floating point numbers are rounded to `+∞`.
 """,
       choices = listOf(
-        "Infinity: it's too big to be stored",
+        "Infinity",
         "The max value: we can't go higher",
         "Float.MIN_VALUE: it will loop like integers",
-      ),
-      answer = setOf(0),
-    ),
-
-    // MIN - MIN
-    LessonPage.MultipleChoice(
-      title = "Twice the max",
-      question = """
-What will be the value in `f`?
-""",
-      explanation = """
-val f = Float.MIN_VALUE - Float.MIN_VALUE
-""",
-      choices = listOf(
-        "-Infinity: it's too big to be stored",
-        "The min value: we can't go lower",
-        "0: it will loop like integers",
       ),
       answer = setOf(0),
     ),
@@ -539,7 +540,7 @@ They run on your computer and use a binary representation.
 
 They may return strange results due to conversions between these 2 representations.
 
-Specials values are the max value, the min value, infinity and `NaN`
+Special values are the *max* value, the *min* value, *infinity* and *NaN*.
 
 `NaN` indicates that a computation went wrong.
 

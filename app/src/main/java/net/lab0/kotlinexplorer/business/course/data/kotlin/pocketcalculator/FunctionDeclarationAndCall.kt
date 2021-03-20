@@ -41,7 +41,7 @@ Select the function names that follow the right naming convention.
 First, all these names are *possible*.
 That doesn't mean it's a good idea to use them.
 
-The reason why will come later when looking how Kotlin
+The reason why will come later when looking at how Kotlin
 interacts with other programming languages.
 
 `UpDownLeftRight`: This is `U`pperCamelCase. Function names should be `l`owerCamelCase
@@ -69,7 +69,7 @@ interacts with other programming languages.
       question = """
 Call the `sayHello` function.
 
-Hint: this works the same as colling `print`.
+Hint: this works the same as calling `print`.
 """,
       snippet = """
 fun sayHello() {
@@ -80,8 +80,6 @@ fun sayHello() {
 ${p(0)}
 """,
       explanation = """
-This works the same you as calling `print()`.
-
 `sayHello` is the name of the function. It doesn't *call* it.
 """,
       answer = listOf("sayHello()"),
@@ -110,7 +108,7 @@ The hello message is concatenated with a string template.
 
 `"kitty"` is the first *argument* in the call to `sayHello()`.
 
-`kitty` is a valid parameters name but here it's printing the value of `name`.
+`kitty` is a valid parameter name but here it's printing the value of `name`.
 
 If we use `kitty` as a parameter name, then we have an error on the print line.
 """,
@@ -141,7 +139,7 @@ The type of that arguments is `String`.
     LessonPage.CodeQuestionPage(
       title = "Parameters",
       question = """
-The function `foo` takes 1 parameter: `parameter1`, an `Int`.
+The function `compute` takes 1 parameter: `parameter1`, an `Int`.
 """,
       snippet = """
 fun compute(${p(0)}: ${p(1)}) {
@@ -192,7 +190,7 @@ fun hello(name:Int, age:String) {
 print(19, "James")
 ```
 
-is acceptable if you're not familiar with humans.
+is technically acceptable if you're not familiar with humans.
 """,
       answer = listOf("String", "Int"),
       confusion = listOf(),
@@ -211,10 +209,13 @@ print(${p(0)})
       explanation = """
 `"hello"` is the *first argument* that was *given* to the function `print`.
 
+When calling a function, the argument type is not repeated.
+
 `hello: String` is declaring a parameter.
+`"hello": String` invalid.
 """,
       answer = listOf("\"hello\""),
-      confusion = listOf("hello: String"),
+      confusion = listOf("hello: String", "\"hello\": String"),
     ),
 
     // argument value
@@ -233,6 +234,12 @@ The first argument's *value* is `"hello"`.
 The first argument's *type* is `String`.
 
 `"hello" is the second argument` where did you see a second argument ..?
+
+```kotlin
+something("first", "second")
+```
+
+Notice the coma `,`.
 """,
       choices = listOf(
         "The first argument's type is String",
@@ -267,6 +274,8 @@ The function call states which `arguments` to send to the function.
 val argument2 = true
 someName("argument1", argument2)
 ```
+
+The arguments can be declared directly in the call or come from values.
 """
     )
   ),

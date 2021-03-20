@@ -6,7 +6,7 @@ import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Compa
 
 object PriorityForAdditiveOperators : LessonImpl(
   id = "kotlin.pocketcalculator.priorityforadditiveoperators",
-  title = "Priority for +, -",
+  title = "Priority for addition, subtraction",
   pages = listOf(
 
     // addition
@@ -85,7 +85,7 @@ val c = 1 + -1
       question = """
 What is the result?
 
-```kotlin
+```
 1+-1
 ```
 """,
@@ -110,7 +110,7 @@ Is the same as
       question = """
 What is the value of result?
 
-```kotlin
+```
 1-+1
 ```
 """,
@@ -135,7 +135,7 @@ Is the same as
     LessonPage.MultipleChoice(
       title = "++",
       question = """
-```kotlin
+```
 1++1
 ```
 """,
@@ -152,7 +152,7 @@ The above expression must be written with a space between the `+` signs.
     LessonPage.MultipleChoice(
       title = "+ +",
       question = """
-```kotlin
+```
 1  +  +  1
 ```
 """,
@@ -178,7 +178,7 @@ The expression is the same as
     LessonPage.MultipleChoice(
       title = "- -",
       question = """
-```kotlin
+```
 1 - - 1
 ```
 """,
@@ -193,7 +193,7 @@ Because of the spaces, this is seen as separate `-` symbols.
     LessonPage.MultipleChoice(
       title = "--",
       question = """
-```kotlin
+```
 1--1
 ```
 """,
@@ -227,7 +227,7 @@ Which equations are equal to 15?
       explanation = """
 ##### `3 (+ 2) * 6`
 
-Is invalid. It could works with an extra `+`
+Is invalid. It could work with an extra `+`
 
 3 `+` (+ 2) * 6
 
@@ -235,7 +235,7 @@ Is invalid. It could works with an extra `+`
 
 5 * 6 = 30
 
-Everything else is 15.
+##### Everything else is 15.
 
 `(3 + (2 * 6))`
 
@@ -244,6 +244,8 @@ The outer parentheses don't matter.
 The inner parentheses match the actual execution order.
 
 What is inside is executed with the regular operators priority.
+
+(3 + (2 * 6))
 
 = 3 + (2 * 6)
 
@@ -275,13 +277,31 @@ What's the result?
 ```
 """,
       explanation = """
-```
-9 / 7 + 6 - 4 * -5
-(9 / 7) + 6 - (4 * -5)
-(1) + 6 - (-20)
-1 + 6 + 20
-27
-```
+
+`9 / 7` + 6 - 4 * -5
+
+`(9 / 7)` + 6 - 4 * -5
+
+(9 / 7) + 6 - `4 * -5`
+
+(9 / 7) + 6 - `(4 * -5)`
+
+`(9 / 7)` + 6 - (4 * -5)
+
+`1` + 6 - (4 * -5)
+
+1 + 6 - `(4 * -5)`
+
+1 + 6 - `-20`
+
+`1 + 6` - -20
+
+`7` - -20
+
+`7 - -20`
+
+`27`
+
 """,
       choices = listOf("27", "-15", "-13", "0?"),
       answer = setOf(0),
@@ -298,11 +318,11 @@ If the average is not a whole number, truncate the result.
 ```kotlin
 // 2 + 4 = 6
 // 6 / 2 = 3
-average(2, 4)
+average(2, 4)  // 3
 
 // 1 + 2 = 3
 // 3 / 2 = 1
-average(1, 2)
+average(1, 2)  // 1
 ```
 
 Note the average of 2 numbers `a` and `b` is the sum of these 2 numbers, divided by 2.
@@ -312,28 +332,45 @@ fun average(a:${p(0)}, b:${p(0)}): ${p(1)} {
   return ${p(2)}
 }
 """,
-      explanation = """
+      explanation = """        
+All the input and output types are `Int`s.
+
 `a + b / 2` is `a + (b / 2)`
 
 One must divide the sum, not a single number. Use parentheses to force that behaviour.
 
 `(a + b) / 2`
 
-Dividing each number by 2 doesn't work. Example:
+Dividing each number by 2 doesn't always work.
+
+Works:
 
 ```kotlin
-average(3,3) == 3
+average(3,3)  // 3
 ```
 
-But:
+Doesn't work:
 
-`3 / 2 + 3 / 2`
+```kotlin
+average(2,2)  // 1
+```
+
+because:
+
+3 / 2 + 3 / 2
+
+`3 / 2` + 3 / 2
+
+`1` + 3 / 2
+
+1 + `3 / 2`
+
+1 + `1`
 
 `1 + 1`
 
 `2`
 
-All the data types are `Int`s.
 """,
       answer = listOf("Int", "Int", "(a + b) / 2"),
       confusion = listOf("String", "a + b / 2", "a / 2 + b / 2"),

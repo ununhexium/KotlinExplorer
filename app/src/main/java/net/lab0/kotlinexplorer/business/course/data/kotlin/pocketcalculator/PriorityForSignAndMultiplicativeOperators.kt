@@ -22,6 +22,8 @@ val veryCold = ${p(0)}10
 `-` in this context is just like the standard minus sign used in math.
 
 In front of a number ot makes a negative number.
+
+`--` exists but it's for a different usecase.
 """,
       answer = listOf("-"),
       confusion = listOf("+", "--"),
@@ -38,6 +40,8 @@ val veryHot = ${p(0)}100
 """,
       explanation = """
 A number like `100` is positive by default, but it's possible to use `+` to show it.
+
+`++` exists but it's for a different usecase. It works in pair with `--`.
 """,
       answer = listOf("+"),
       confusion = listOf("-", "++"),
@@ -51,7 +55,7 @@ There are many operators (about 40) and only some of them will be shown here.
 
 `+` and `-` are the operators with the second highest priority.
 
-You didn't see the operator with the highest priority yet.
+The operators with the highest priority are `++` and `--`.
 
 The operators in this chapter will be ordered from the highest priority to the lowest priority.
 """
@@ -126,8 +130,18 @@ Truncate this number: `3.1415`
 """,
       explanation = """
 Truncating drops everything after the decimal point.
+
+`3.141` has its *last* digit truncated. The `%` operator truncated at the unit digit.
+
+##### `4`
+
+To get 4, you need the ceiling function.
+
+```kotlin
+ceil(3.1415) == 4
+```
 """,
-      choices = listOf("3", "4"),
+      choices = listOf("3", "4", "3.141"),
       answer = setOf(0),
     ),
 
@@ -141,6 +155,12 @@ Truncate this number: `1.6180`
 Truncating drops everything after the decimal point.
 
 It doesn't round anything, so `truncate(0.99999999)` is 0.
+
+`truncate` also exists as a standalone function in the `kotlin.math` package.
+
+##### `2`
+
+This is φ rounded up.
 """,
       choices = listOf("1", "2"),
       answer = setOf(0),
@@ -165,7 +185,7 @@ What is the result?
 
 It doesn't matter how big the remainder is, 
 as long as the dividend is not at least equal to the divisor,
-the result of the division is 0.
+the result of the integer division is 0.
 
 `Almost 1` doesn't work for integers. It's either `0` or `1`, nothing in between.
 
@@ -244,10 +264,10 @@ So far we have:
     LessonPage.CodeQuestionPage(
       title = "Left to right",
       question = """
-Make this true.
+Compute 10.
 """,
       snippet = """
-8 ${p(0)} 5 ${p(1)} 4 == 10
+8 ${p(0)} 5 ${p(1)} 4 // 10
 """,
       explanation = """
 When operators with the same priority are used in the same statement,
@@ -255,13 +275,12 @@ When operators with the same priority are used in the same statement,
 
 Here is an equivalent
  
-8 * 5 = 40
+ ```kotlin
+8 * 5 / 4
+40 / 4
+10
+```
 
-40 / 4 = 10
-
-or
-
-8 * 5 / 4 = 10
 """,
       answer = listOf("*", "/"),
       confusion = listOf(),
@@ -271,10 +290,10 @@ or
     LessonPage.CodeQuestionPage(
       title = "Enforce the priority",
       question = """
-Use parentheses to make this equal 8.
+Use parentheses to make the "same" equation equal to 8.
 """,
       snippet = """
-8 * ${p(0)} 5 / 4 ${p(1)}  // =8   not 10
+8 * ${p(0)} 5 / 4 ${p(1)}  // 8
 """,
       explanation = """
 The operations inside the parentheses are evaluated with a higher
@@ -282,18 +301,17 @@ precedence than the operations outside of the parentheses.
 
 Here is an equivalent
 
+```kotlin
 8 * (5 / 4)
-
 (5 / 4) * 8
-
 5 / 4 * 8
-
 1 * 8
-
 8
+```
+
 """,
       answer = listOf("(", ")"),
-      confusion = listOf("[", "]", "{", "}"),
+      confusion = listOf(),
     ),
 
     // prio 0

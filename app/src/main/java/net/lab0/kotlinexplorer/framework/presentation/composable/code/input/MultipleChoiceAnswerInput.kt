@@ -50,7 +50,7 @@ fun MultipleChoiceAnswerInput(
             val goodAnswer = if (answer.correct) answer.used else !answer.used
             Checkbox(
               selected = goodAnswer,
-              color = if (answer.correct == false) wrongColor else noCorrectness,
+              color = if (answer.correct == false) wrongColor else correctColor,
             )
           } else {
             Spacer(

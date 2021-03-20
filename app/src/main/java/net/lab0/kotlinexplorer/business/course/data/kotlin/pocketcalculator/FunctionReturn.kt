@@ -37,7 +37,7 @@ after the end of the block where it is declared.
 """,
       choices = listOf(
         "Some error: no value named 'result'",
-        "Print 2: it computes the results, then send the result to print",
+        "Print 2: it computes the results, then sends the result to print with the value of the same name",
       ),
       answer = setOf(0),
     ),
@@ -198,7 +198,7 @@ The variable type is **mandatory**.
     LessonPage.CodeQuestionPage(
       title = "Increment",
       question = """
-Write a function that adds 1 to a number and returns that value.
+Write a `increment` function that adds `1` to a number and returns that value.
 """,
       snippet = """
 fun increment(${p(0)}:${p(1)}): ${p(2)} {
@@ -208,9 +208,11 @@ fun increment(${p(0)}:${p(1)}): ${p(2)} {
 print(increment(1))  // prints 2
 """,
       explanation = """
+`increment` needs *one* number to work with. I needs to declare *one* parameter.
+
 `integer` is used as an integer, its type must be `Int`.
 
-`increment()` returns an integer, its type must be `Int`.
+`increment()` returns an integer, its return type must be `Int`.
 """,
       answer = listOf("integer", "Int", "Int", "return"),
       confusion = listOf("String", "String"),
@@ -218,7 +220,7 @@ print(increment(1))  // prints 2
 
     // concat and return string
     LessonPage.CodeQuestionPage(
-      title = "Increment",
+      title = "Extend",
       question = """
 Write a function that appends `1` to a string and returns that value.
 """,
@@ -230,9 +232,11 @@ fun extend(${p(0)}:${p(1)}): ${p(2)} {
 print(extend("1"))  // prints 11
 """,
       explanation = """
+`increment` needs *one* string to work with. I needs to declare *one* parameter.
+
 `input` is used as a String, its type must be a `String`.
 
-`extend()` returns a string, its type must be a `String`.
+`extend()` returns a string, its return type must be a `String`.
 """,
       answer = listOf("input", "String", "String", "return"),
       confusion = listOf("Int", "Int"),
@@ -383,7 +387,7 @@ Therefore the second argument is missing.
 `// prints 2`: don't trust comments, maybe they were correct before, 
 but after (accidental) code changes, they will tell what was there *before*.
 
-Do understand what the code *does*, trust the code only.
+To understand what the code *does*, trust the code only.
 
 Comments are there to guide you, they're not an absolute truth.
 """,
@@ -430,16 +434,20 @@ fun add(left:Int, right:Int): Int {
 
 val result:Int = add(60, 9)
 
+val call2:Int = add(100, 16)
+
 print(result)
 ```
 """,
       explanation = """
 ##### `69`
 
-Functions return values and that value can be stored for later use.
+A function returns a value which can be stored for later use.
+
+When calling the function again, the new result is stored in a different place.
 
 """,
-      choices = listOf("69", "result", "An error: the result must be used directly."),
+      choices = listOf("69", "result", "An error: the result must be used directly.", "116"),
       answer = setOf(0),
     ),
 
@@ -491,8 +499,8 @@ Functions can contain spaces (with some special syntax) but it's not recommended
 
 By default, it will fail like with variables.
 """,
-      choices = listOf("It prints Hello", "Somme error: there is a space in the function's name"),
-      answer = setOf(),
+      choices = listOf("Somme error: there is a space in the function's name", "It prints Hello"),
+      answer = setOf(0),
     ),
 
     // summary
@@ -500,6 +508,9 @@ By default, it will fail like with variables.
       title = "Summary",
       markdown = """
 Functions are used everywhere when programming.
+
+They group a computation in a single place, to reuse it from different places
+and help when organizing the code.
 
 A function will always have the following structure:
 
@@ -526,6 +537,7 @@ fun // declares a function
     Type1, // first parameter's type
   parameter2: // second parameter's name
     Type2, // second parameter's type
+    // may have an many parameters are needed
 ) // end of the parameters' list
 : Int // Declare the return type
 { // start the function's body block.
@@ -543,7 +555,7 @@ fun // declares a function
   return 42
 } // end of the function's body
 
-// the "prisoner" value is no more accessible here
+// the "prisoner" value can't be used here
 ```
 """
     )

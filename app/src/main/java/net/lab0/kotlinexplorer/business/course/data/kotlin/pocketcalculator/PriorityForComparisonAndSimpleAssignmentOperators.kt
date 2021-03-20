@@ -14,6 +14,8 @@ object PriorityForComparisonAndSimpleAssignmentOperators : LessonImpl(
       title = "Comparison",
       question = """
 Make this true.
+
+Hint: comparison operators have a lower priority than the other operators you've seen so far.
 """,
       snippet = """
 1 + 1 ${KotlinCodeWithBlanks.placeholder(0)} 5
@@ -24,6 +26,7 @@ This is the same as
 ```kotlin
 (1 + 1) < 5
 2 < 5
+true
 ```
 """,
       answer = listOf("<"),

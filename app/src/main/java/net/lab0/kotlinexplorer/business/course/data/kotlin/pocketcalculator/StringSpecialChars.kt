@@ -1,13 +1,14 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 
 import net.lab0.kotlinexplorer.business.course.data.kotlin.dollar
+import net.lab0.kotlinexplorer.business.course.data.kotlin.trippleQuote
 import net.lab0.kotlinexplorer.business.domain.LessonImpl
 import net.lab0.kotlinexplorer.business.domain.LessonPage
 import net.lab0.kotlinexplorer.business.domain.parser.KotlinCodeWithBlanks.Companion.placeholder as p
 
 object StringSpecialChars : LessonImpl(
   id = "kotlin.pocketcalculator.stringspecialchars",
-  title = "String Special Characters",
+  title = "Special Characters",
   pages = listOf(
     // empty string
     LessonPage.CodeQuestionPage(
@@ -37,7 +38,7 @@ It's the only possible empty string.
 Declare a single character `A`
 """,
       snippet = """
-val a = ${p(0)}A${p(0)}
+val a:Char = ${p(0)}A${p(0)}
 """,
       explanation = """
 Single quotes `'` declare single characters.
@@ -60,6 +61,47 @@ val a:${p(0)} = 'A'
 """,
       answer = listOf("Char"),
       confusion = listOf("ShortString", "Character"),
+    ),
+
+    LessonPage.CodeQuestionPage(
+      title = "Single quote character",
+      question = """
+Declare a single quote `'`.
+""",
+      snippet = """
+val singleQuote = '${p(0)}'
+""",
+      explanation = """
+`'` is already the quoting character, we need a way to tell that this is not 
+the end of the single quotation with a backslash `\`.
+
+Backslash tells Kotlin not to interpret the next character as
+ something special, like a `'`, `"`, `$`, ...
+""",
+      answer = listOf("'", "\\'"),
+      confusion = listOf(),
+    ),
+
+    LessonPage.InfoPage(
+      title = "Escape character",
+      """
+Special characters are characters that would otherwise conflict with the normal use of Kotlin's syntax.
+
+For example, to declare a quote character, you need single quote `'` to
+surround the character, but you also need it inside the quoting block.
+ 
+```kotlin
+'''
+```
+ 
+The same happens with strings:
+ 
+```kotlin
+$trippleQuote
+```
+ 
+To avoid that problem, special characters like these can be escaped with backslash `\`.
+"""
     ),
 
     // escape double quotes
@@ -151,9 +193,7 @@ So both answers are actually valid, but prefer a simple non escaped quote `'` fo
 """,
       answer = listOf("'"),
       confusion = listOf("\\'"),
-      validator = {
-        it == listOf("\'") || it == listOf("'")
-      }
+      validator = { true }
     ),
 
     // New line linux
@@ -259,12 +299,13 @@ The output of the code above is:
     LessonPage.CodeQuestionPage(
       title = "Money laundering",
       question = """
-Don't print the content of the variable.
+**Don't** print the content of the variable.
 """,
       snippet = """
-val name = "James"
-// Hello ${dollar}name
-val template = "Hello ${p(0)}name"
+val name = "💵"
+// Give me ${dollar}name
+// don't fill the template with the value
+val template = "Give me ${p(0)}name"
 """,
       explanation = """
 In string templates, to avoid printing a variable,
@@ -290,17 +331,17 @@ val template = "Hello ${dollar}name"
       question = """
 Which of the following lines has valid escape sequences.
 
-```kotlin
+```
 // It's me, Mario
 val hello = "It's me, Mario!"
 
 // Line A.
 // Line B.
-val lineAandB = "Line A.\\NLine B."
+val lineAandB = "Line A.\NLine B."
 
 // Line 1.
 // Line 2.
-val line1and2 = "Line 1.\\nLine 2."
+val line1and2 = "Line 1.\nLine 2."
 
 //0       8       16
 val spacing = "0\t8\t16"
@@ -310,6 +351,25 @@ val surprise = "\reset"
 ```
 """,
       explanation = """
+```kotlin
+// It's me, Mario
+val hello = "It's me, Mario!"
+
+// Line A.
+// Line B.
+val lineAandB = "Line A.\NLine B."
+
+// Line 1.
+// Line 2.
+val line1and2 = "Line 1.\nLine 2."
+
+//0       8       16
+val spacing = "0\t8\t16"
+
+// ?
+val surprise = "\reset"
+```
+
 `Line A.\NLine B.`
         
 `\N` is not a valid escape sequence.

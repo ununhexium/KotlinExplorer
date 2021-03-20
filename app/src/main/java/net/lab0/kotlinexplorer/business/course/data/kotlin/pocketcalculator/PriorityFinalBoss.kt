@@ -28,7 +28,7 @@ Here are the steps to understand this kind of expression.
 This will make the expression more readable.
 
 Identify the operators and add a space before and after them.
-You can also add a new line after them, but never before them.
+You can also add a new line after them, but not before them.
 Indentation can also help.
 
 The operators are
@@ -81,7 +81,9 @@ Let's add some to show the priorities.
 
 We don't have that here.
 
-##### Prio 2: `+` prefix
+##### Prio 2: `-` prefix
+
+Minus prefix.
 
 ```kotlin
 val x =
@@ -96,6 +98,8 @@ val x =
 ```
 
 ##### Priority 4: `*`
+
+Multiplication.
 
 ```kotlin
 val x =
@@ -112,6 +116,8 @@ val x =
   (1 - (-1)) + (2 * 9)
 ```
 
+Addition and subtraction
+
 ```kotlin
 val x =
  false == (10 + 8) >=
@@ -126,6 +132,8 @@ val x =
 
 ##### Priority 10: `>=`
 
+Comparison
+
 ```kotlin
 val x =
  false == (
@@ -135,6 +143,8 @@ val x =
 ```
 
 ##### Priority 11: `==`
+
+Equality
 
 ```kotlin
 val x =
@@ -210,6 +220,8 @@ val comparison =
   
 val result = false == equality
 ```
+
+More readable and less error prone.
 """,
       choices = listOf("A Boolean: true", "A Boolean: false", "Some error"),
       answer = setOf(0)
@@ -220,7 +232,7 @@ val result = false == equality
       title = "Summary",
       """
 Operator priorities can become confusing.
-If you are not sure, use `()` to enforce the priority.
+If you are not sure, use `()` to enforce the priority, it always works.
 
 1. `++`, `--`
 2. `+`, `-`
