@@ -1,12 +1,10 @@
 package net.lab0.kotlinexplorer.framework.presentation.composable.lesson
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -22,15 +20,12 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import net.lab0.kotlinexplorer.business.domain.LessonBrowser
 import net.lab0.kotlinexplorer.framework.presentation.activity.lesson.mvi.LessonViewModel
 import net.lab0.kotlinexplorer.framework.presentation.composable.chapter.ChapterUi
 import net.lab0.kotlinexplorer.framework.presentation.composable.fakeFactory
 import net.lab0.kotlinexplorer.framework.presentation.composable.fakeGetAllChapters
 import net.lab0.kotlinexplorer.framework.presentation.composable.fakeGetLessonsInProgress
-import net.lab0.kotlinexplorer.framework.presentation.composable.morelessons.MoreLessonsUi
 import net.lab0.kotlinexplorer.framework.presentation.composable.problemreport.ProblemReportUi
 import net.lab0.kotlinexplorer.framework.presentation.fragment.chapterlist.ChapterListViewModel
 import net.lab0.kotlinexplorer.framework.ui.theme.KotlinExplorerTheme
@@ -92,7 +87,7 @@ fun ChaptersNav(
 
       // Extra Lessons Request
       composable(LessonScreen.ExtraLessonsRequest.routeDefinition) {
-        ExtraLessonRequestUi(topLevelNavController)
+        ExtraContentRequestUi(topLevelNavController)
       }
 
       // Introduction
@@ -221,33 +216,6 @@ fun ChaptersNav(
       }
     }
   }
-}
-
-@Composable
-fun ExtraLessonRequestUi(navController: NavHostController) {
-  val model: LessonViewModel =
-    navController.hiltNavGraphViewModel(LessonScreen.Chapters.routeDefinition)
-
-  val context = LocalContext.current
-
-  val coro = rememberCoroutineScope()
-
-  MoreLessonsUi(
-    onValidate = { liking, whyMore, comment ->
-
-      model.request(liking, whyMore, comment) {
-        coro.launch(Dispatchers.Main) {
-          navController.navigate(LessonScreen.Chapters.routeDefinition) {
-            popUpTo(LessonScreen.Chapters.routeDefinition) {
-              inclusive = true
-            }
-          }
-        }
-      }
-
-      Toast.makeText(context, "We'll work on that! :)", Toast.LENGTH_LONG).show()
-    }
-  )
 }
 
 @Preview

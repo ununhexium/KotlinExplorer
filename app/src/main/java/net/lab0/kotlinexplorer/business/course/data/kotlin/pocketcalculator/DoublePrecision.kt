@@ -9,6 +9,27 @@ object DoublePrecision : LessonImpl(
   title = "Double Precision",
   pages = listOf(
 
+    // just like floats
+    LessonPage.CodeQuestionPage(
+      title = "Float-like",
+      question = """
+`Double`s are just like `Float`s but with higher precision and a larger range.
+
+Try stuff you learned with doubles.
+""",
+      snippet = """
+val minimum = Double.${p(0)}
+val maximum = Double.${p(1)}
+val infinity = Double.${p(2)}
+val notANumber = Double.${p(3)}
+""",
+      explanation = """
+Works exactly like floats.
+""",
+      answer = listOf("MIN_VALUE", "MAX_VALUE", "POSITIVE_INFINITY", "NaN"),
+      confusion = listOf(),
+    ),
+
     // how to store 1e100 -> use double
     LessonPage.CodeQuestionPage(
       title = "Google",
@@ -26,8 +47,6 @@ the `Double` uses 64 bits and has a wider range of values.
 
 If you're not sure, just use `Double`s.
 
-There can be performance penalty for that but that's not a beginner's problem 😜.
-
 A `Float` can only contain up to around `1e38`.
 """,
       answer = listOf("Double"),
@@ -41,13 +60,13 @@ A `Float` can only contain up to around `1e38`.
 Declare the right type of number.
 """,
       snippet = """
-val double:Double = ${p(0)}
-val float:Float = ${p(1)}
+val float:Float = ${p(0)}
+val double:Double = ${p(1)}
 """,
       explanation = """
 `f` indicates that it's a `Float`.
 
-If nothing is specified, it defaults to `Double`.
+If nothing is specified, and it has a decimal point, it defaults to `Double`.
 """,
       answer = listOf("1.0f", "1.0"),
       confusion = listOf(),
@@ -60,15 +79,15 @@ If nothing is specified, it defaults to `Double`.
 What's the type?
 """,
       snippet = """
-val a:${p(0)} = 1.0
-val b:${p(1)} = 1f
+val b:${p(0)} = 1f
+val a:${p(1)} = 1.0
 """,
       explanation = """
 `f` indicates that it's a `Float`.
 
 If nothing is specified, it defaults to `Double`.
 """,
-      answer = listOf("Double", "Float"),
+      answer = listOf("Float", "Double"),
       confusion = listOf(),
     ),
 
@@ -82,9 +101,10 @@ Declare the value π with double precision.
 val pi:Double = ${p(0)}
 """,
       explanation = """
-`3.141592653589793` is the closest decimal representation.
+`3.141_592_653_589_793` is the closest decimal representation.
 
-The other numbers are close but not the best choices.
+The other numbers are approximations.
+
 When using a floating point number, try to be as precise as possible.
 
 So why not using more digits?
@@ -94,9 +114,13 @@ They are accepted in the code but will be forgotten at execution.
 
 Just like integers, floating point numbers can have underscores `_`
 to be more readable.
+
+Just like `3.1` is not good enough for PI, `3.1415927` is also not good enough for a `Double`.
+
+`3.1415927` is enough precision for Floating point numbers.
 """,
       answer = listOf("3.141_592_653_589_793"),
-      confusion = listOf("3.1415", "3.1415927"),
+      confusion = listOf("3.1", "3.1415927"),
     ),
 
     // reassign to float
@@ -126,7 +150,7 @@ that is different, because it can lead to errors.
 
     // convert from float: loose precision
     LessonPage.MultipleChoice(
-      title = "From Float",
+      title = "Type conversion",
       question = """
 What will happen?
 
@@ -134,24 +158,18 @@ What will happen?
 val pi = 3.141592653589793
 
 val doublePie = pi.toDouble()
-val floatingPie = pi.toFloat().toDouble()
+val floatingPie = pi.toFloat()
 
-print(floatingPie == doublePie)
+print(floatingPie.toDouble() == doublePie)
 """,
       explanation = """
-A float has 7 digits of precision. A double has 15 digits of precision.
+A float has 7 decimal digits of precision. A double has 15 decimal digits of precision.
  
-Converting a number from `Double` to `Float` and back to double makes it 
-loose precision.
+Converting a number from `Double` to `Float` and back to double makes it loose precision.
+
+On the float side, the value is `3.1415927`, which on the double side, the value is `3.141592653589793`
 
 If these digits are important like in π, the converted number is different.
-
-If these digits are not important, like in `1.0`, then they remain equal.
-
-```kotlin
-// true
-1.0.toFloat().toDouble() == 1.0
-```
 """,
       choices = listOf(
         "false: they have a different precision",
@@ -161,27 +179,37 @@ If these digits are not important, like in `1.0`, then they remain equal.
       answer = setOf(0),
     ),
 
-    // just like floats
-    LessonPage.CodeQuestionPage(
-      title = "Float-like",
+    // convert to float without precision loss
+    LessonPage.MultipleChoice(
+      title = "",
       question = """
-`Double`s are just like `Float`s but with higher precision and larger range.
+What will happen?
 
-Try stuff you learned with doubles.
-""",
-      snippet = """
-val minimum = Double.${p(0)}
-val maximum = Double.${p(1)}
-val infinity = Double.${p(2)}
-val notANumber = Double.${p(3)}
+```kotlin
+val one = 1.0
+
+val doubleOne = one.toDouble()
+val floatingOne = one.toFloat()
+
+print(floatingOne.toDouble() == doubleOne)
 """,
       explanation = """
-Works exactly like floats.
+When converting, it's possible that there is no precision loss.
+
+`1` can be stored without precision loss in a float.
+
+So its value will not change when converting from a double to a float.
+
+`1.0` == `1.00` == `1.000` ...
 """,
-      answer = listOf("MIN_VALUE", "MAX_VALUE", "POSITIVE_INFINITY", "NaN"),
-      confusion = listOf(),
+      choices = listOf(
+        "Print true: 1 didn't loose precision in the conversion",
+        "Print false: we lost the end digits' precision in the conversion"
+      ),
+      answer = setOf(0),
     ),
 
+    // summary
     LessonPage.InfoPage(
       title = "Summary",
       """

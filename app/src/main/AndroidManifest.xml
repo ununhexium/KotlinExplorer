@@ -16,7 +16,9 @@
         <activity
             android:name="net.lab0.kotlinexplorer.framework.presentation.activity.welcome.home.HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.JetpackComposeExplorer.NoActionBar">
+            android:theme="@style/Theme.JetpackComposeExplorer.NoActionBar"
+            android:windowSoftInputMode="adjustResize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,6 @@
 package net.lab0.kotlinexplorer.business.course.data.kotlin.pocketcalculator
 
-import kotlin.math.min
+import kotlin.math.sqrt
 
 /**
  * Requirements
@@ -18,15 +18,15 @@ fun square(a: Int): Int {
   return a * a
 }
 
-fun squareRoot(a: Int): Int {
+fun squareRoot(a: Int): Double {
   val aAsDouble = a.toDouble()
-  return kotlin.math.sqrt(aAsDouble).toInt()
+  return sqrt(aAsDouble)
 }
 
 fun main() {
   val a = 3
   val b = 1
-  kotlin.io.println(square(a))
-  println(squareRoot(square(a)))
-  println(min(a,b))
+  println(square(a))
+  println(squareRoot(a))
+  println(kotlin.math.min(a, b))
 }

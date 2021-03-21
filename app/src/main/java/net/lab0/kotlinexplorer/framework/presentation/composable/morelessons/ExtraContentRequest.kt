@@ -2,9 +2,12 @@ package net.lab0.kotlinexplorer.framework.presentation.composable.morelessons
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -28,12 +31,16 @@ import net.lab0.kotlinexplorer.framework.presentation.composable.form.RadioSelec
 import net.lab0.kotlinexplorer.framework.presentation.composable.form.rememberRadioState
 
 @Composable
-fun MoreLessonsUi(
+fun ExtraContentRequest(
   onValidate: (liking: String?, whyMoreLessons: String?, comment: String?) -> Unit,
 ) {
+  val scrollState = rememberScrollState()
+
   Column(
-    modifier = Modifier.fillMaxWidth(),
-    verticalArrangement = Arrangement.SpaceBetween,
+    modifier = Modifier
+      .fillMaxSize()
+      .verticalScroll(scrollState),
+    verticalArrangement = Arrangement.Top,
   ) {
     val likings = listOf("\uD83D\uDE04", "\uD83D\uDE42", "\uD83D\uDE11", "\uD83E\uDD2E")
     val likingState = rememberRadioState()
@@ -62,7 +69,7 @@ fun MoreLessonsUi(
         modifier = Modifier
           .fillMaxWidth()
           .align(Alignment.CenterHorizontally),
-        textStyle = MaterialTheme.typography.h4,
+        textStyle = MaterialTheme.typography.h5,
         radioState = likingState,
       )
     }
@@ -94,7 +101,7 @@ fun MoreLessonsUi(
       modifier = Modifier.fillMaxWidth(),
     ) {
       Text(
-        text = "Any word for the author?",
+        text = "Any word for the developer?",
         style = MaterialTheme.typography.h5
       )
 
@@ -138,7 +145,7 @@ fun MoreLessonsUiPreview() {
         Surface(
           color = MaterialTheme.colors.background
         ) {
-          MoreLessonsUi { _, _, _ -> }
+          ExtraContentRequest { _, _, _ -> }
         }
       }
     }
